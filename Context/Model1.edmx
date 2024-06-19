@@ -1,0 +1,3082 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="AuditSystemModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="__EFMigrationsHistory">
+          <Key>
+            <PropertyRef Name="MigrationId" />
+          </Key>
+          <Property Name="MigrationId" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="ProductVersion" Type="nvarchar" MaxLength="32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TblCustomers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Fk_WorkGroupId" Type="int" Nullable="false" />
+          <Property Name="VatType" Type="nvarchar(max)" />
+          <Property Name="Address" Type="nvarchar(max)" />
+          <Property Name="TaxNo" Type="nvarchar(max)" />
+          <Property Name="VatNo" Type="nvarchar(max)" />
+          <Property Name="SVatNo" Type="nvarchar(max)" />
+          <Property Name="Fax" Type="nvarchar(max)" />
+          <Property Name="TelOne" Type="nvarchar(max)" />
+          <Property Name="TelSecond" Type="nvarchar(max)" />
+          <Property Name="Fk_GradeMasterId" Type="int" Nullable="false" />
+          <Property Name="Email" Type="nvarchar(max)" />
+          <Property Name="ContactPersonOne" Type="nvarchar(max)" />
+          <Property Name="ContactPersonSecond" Type="nvarchar(max)" />
+          <Property Name="Fk_PartnerId" Type="int" Nullable="false" />
+          <Property Name="Fk_ManagerId" Type="int" Nullable="false" />
+          <Property Name="Fk_LegalStatusMasterId" Type="int" Nullable="false" />
+          <Property Name="Fk_SectorMasterId" Type="int" Nullable="false" />
+          <Property Name="Fk_IntroductionId" Type="int" Nullable="false" />
+          <Property Name="Fk_InternationslReferalId" Type="int" Nullable="false" />
+          <Property Name="DateOfJoined" Type="datetime2" Precision="7" />
+          <Property Name="Code" Type="nvarchar(max)" />
+          <Property Name="Name" Type="nvarchar(max)" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="IsDelete" Type="bit" Nullable="false" />
+          <Property Name="Create_By" Type="nvarchar(max)" />
+          <Property Name="Create_Date" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="Edit_By" Type="nvarchar(max)" />
+          <Property Name="Edit_Date" Type="datetime2" Precision="7" />
+          <Property Name="Delete_By" Type="nvarchar(max)" />
+          <Property Name="Delete_Date" Type="datetime2" Precision="7" />
+        </EntityType>
+        <EntityType Name="TblDepartment">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Code" Type="nvarchar(max)" />
+          <Property Name="Narration" Type="nvarchar(max)" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="IsDelete" Type="bit" Nullable="false" />
+          <Property Name="Create_By" Type="nvarchar(max)" />
+          <Property Name="Create_Date" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="Edit_By" Type="nvarchar(max)" />
+          <Property Name="Edit_Date" Type="datetime2" Precision="7" />
+          <Property Name="Delete_By" Type="nvarchar(max)" />
+          <Property Name="Delete_Date" Type="datetime2" Precision="7" />
+        </EntityType>
+        <EntityType Name="TblDesignation">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Code" Type="nvarchar(max)" />
+          <Property Name="Narration" Type="nvarchar(max)" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="IsDelete" Type="bit" Nullable="false" />
+          <Property Name="Create_By" Type="nvarchar(max)" />
+          <Property Name="Create_Date" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="Edit_By" Type="nvarchar(max)" />
+          <Property Name="Edit_Date" Type="datetime2" Precision="7" />
+          <Property Name="Delete_By" Type="nvarchar(max)" />
+          <Property Name="Delete_Date" Type="datetime2" Precision="7" />
+        </EntityType>
+        <EntityType Name="TblEmployee">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Code" Type="nvarchar(max)" />
+          <Property Name="Name" Type="nvarchar(max)" />
+          <Property Name="BirthDay" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="Nic" Type="nvarchar(max)" />
+          <Property Name="Email" Type="nvarchar(max)" />
+          <Property Name="IdManager" Type="bit" Nullable="false" />
+          <Property Name="Fk_TitleId" Type="int" Nullable="false" />
+          <Property Name="Fk_DesginationId" Type="int" Nullable="false" />
+          <Property Name="Fk_DepartmentId" Type="int" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="IsDelete" Type="bit" Nullable="false" />
+          <Property Name="Create_By" Type="nvarchar(max)" />
+          <Property Name="Create_Date" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="Edit_By" Type="nvarchar(max)" />
+          <Property Name="Edit_Date" Type="datetime2" Precision="7" />
+          <Property Name="Delete_By" Type="nvarchar(max)" />
+          <Property Name="Delete_Date" Type="datetime2" Precision="7" />
+          <Property Name="DateOfJoin" Type="datetime2" Precision="7" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TblEmployeeHourlyRate">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Rate" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="FromDate" Type="datetime2" Precision="7" />
+          <Property Name="ToDate" Type="datetime2" Precision="7" />
+          <Property Name="Fk_EmployeeId" Type="int" Nullable="false" />
+          <Property Name="IsDelete" Type="bit" Nullable="false" />
+          <Property Name="Create_By" Type="nvarchar(max)" />
+          <Property Name="Create_Date" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="Edit_By" Type="nvarchar(max)" />
+          <Property Name="Edit_Date" Type="datetime2" Precision="7" />
+          <Property Name="Delete_By" Type="nvarchar(max)" />
+          <Property Name="Delete_Date" Type="datetime2" Precision="7" />
+        </EntityType>
+        <EntityType Name="TblGradeMaster">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Code" Type="nvarchar(max)" />
+          <Property Name="Narration" Type="nvarchar(max)" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="IsDelete" Type="bit" Nullable="false" />
+          <Property Name="Create_By" Type="nvarchar(max)" />
+          <Property Name="Create_Date" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="Edit_By" Type="nvarchar(max)" />
+          <Property Name="Edit_Date" Type="datetime2" Precision="7" />
+          <Property Name="Delete_By" Type="nvarchar(max)" />
+          <Property Name="Delete_Date" Type="datetime2" Precision="7" />
+        </EntityType>
+        <EntityType Name="TblInternationalReferalMaster">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Code" Type="nvarchar(max)" />
+          <Property Name="Narration" Type="nvarchar(max)" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="IsDelete" Type="bit" Nullable="false" />
+          <Property Name="Create_By" Type="nvarchar(max)" />
+          <Property Name="Create_Date" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="Edit_By" Type="nvarchar(max)" />
+          <Property Name="Edit_Date" Type="datetime2" Precision="7" />
+          <Property Name="Delete_By" Type="nvarchar(max)" />
+          <Property Name="Delete_Date" Type="datetime2" Precision="7" />
+        </EntityType>
+        <EntityType Name="TblIntroductionMaster">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Code" Type="nvarchar(max)" />
+          <Property Name="Narration" Type="nvarchar(max)" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="IsDelete" Type="bit" Nullable="false" />
+          <Property Name="Create_By" Type="nvarchar(max)" />
+          <Property Name="Create_Date" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="Edit_By" Type="nvarchar(max)" />
+          <Property Name="Edit_Date" Type="datetime2" Precision="7" />
+          <Property Name="Delete_By" Type="nvarchar(max)" />
+          <Property Name="Delete_Date" Type="datetime2" Precision="7" />
+        </EntityType>
+        <EntityType Name="TblInvoiceNarrationMaster">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Code" Type="nvarchar(max)" />
+          <Property Name="Narration" Type="nvarchar(max)" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="IsDelete" Type="bit" Nullable="false" />
+          <Property Name="Create_By" Type="nvarchar(max)" />
+          <Property Name="Create_Date" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="Edit_By" Type="nvarchar(max)" />
+          <Property Name="Edit_Date" Type="datetime2" Precision="7" />
+          <Property Name="Delete_By" Type="nvarchar(max)" />
+          <Property Name="Delete_Date" Type="datetime2" Precision="7" />
+        </EntityType>
+        <EntityType Name="TblInvoiceShortNarrationMaster">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Code" Type="nvarchar(max)" />
+          <Property Name="Narration" Type="nvarchar(max)" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="IsDelete" Type="bit" Nullable="false" />
+          <Property Name="Create_By" Type="nvarchar(max)" />
+          <Property Name="Create_Date" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="Edit_By" Type="nvarchar(max)" />
+          <Property Name="Edit_Date" Type="datetime2" Precision="7" />
+          <Property Name="Delete_By" Type="nvarchar(max)" />
+          <Property Name="Delete_Date" Type="datetime2" Precision="7" />
+        </EntityType>
+        <EntityType Name="TblJob">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Code" Type="nvarchar(max)" />
+          <Property Name="Narration" Type="nvarchar(max)" />
+          <Property Name="PreViewvalue" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="StartDate" Type="datetime2" Precision="7" />
+          <Property Name="DueDate" Type="datetime2" Precision="7" />
+          <Property Name="Fk_PartnerId" Type="int" Nullable="false" />
+          <Property Name="Fk_CustomerId" Type="int" Nullable="false" />
+          <Property Name="Fk_EmployeeId" Type="int" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="IsDelete" Type="bit" Nullable="false" />
+          <Property Name="Create_By" Type="nvarchar(max)" />
+          <Property Name="Create_Date" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="Edit_By" Type="nvarchar(max)" />
+          <Property Name="Edit_Date" Type="datetime2" Precision="7" />
+          <Property Name="Delete_By" Type="nvarchar(max)" />
+          <Property Name="Delete_Date" Type="datetime2" Precision="7" />
+        </EntityType>
+        <EntityType Name="TblLegalStatusMaster">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Code" Type="nvarchar(max)" />
+          <Property Name="Narration" Type="nvarchar(max)" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="IsDelete" Type="bit" Nullable="false" />
+          <Property Name="Create_By" Type="nvarchar(max)" />
+          <Property Name="Create_Date" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="Edit_By" Type="nvarchar(max)" />
+          <Property Name="Edit_Date" Type="datetime2" Precision="7" />
+          <Property Name="Delete_By" Type="nvarchar(max)" />
+          <Property Name="Delete_Date" Type="datetime2" Precision="7" />
+        </EntityType>
+        <EntityType Name="TblLocation">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Code" Type="nvarchar(max)" />
+          <Property Name="Narration" Type="nvarchar(max)" />
+          <Property Name="Rate" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Fk_CustomerId" Type="int" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="IsDelete" Type="bit" Nullable="false" />
+          <Property Name="Create_By" Type="nvarchar(max)" />
+          <Property Name="Create_Date" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="Edit_By" Type="nvarchar(max)" />
+          <Property Name="Edit_Date" Type="datetime2" Precision="7" />
+          <Property Name="Delete_By" Type="nvarchar(max)" />
+          <Property Name="Delete_Date" Type="datetime2" Precision="7" />
+        </EntityType>
+        <EntityType Name="TblManager">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Code" Type="nvarchar(max)" />
+          <Property Name="Name" Type="nvarchar(max)" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="IsDelete" Type="bit" Nullable="false" />
+          <Property Name="Create_By" Type="nvarchar(max)" />
+          <Property Name="Create_Date" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="Edit_By" Type="nvarchar(max)" />
+          <Property Name="Edit_Date" Type="datetime2" Precision="7" />
+          <Property Name="Delete_By" Type="nvarchar(max)" />
+          <Property Name="Delete_Date" Type="datetime2" Precision="7" />
+        </EntityType>
+        <EntityType Name="TblNatureMaster">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Code" Type="nvarchar(max)" />
+          <Property Name="Narration" Type="nvarchar(max)" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="IsDelete" Type="bit" Nullable="false" />
+          <Property Name="Create_By" Type="nvarchar(max)" />
+          <Property Name="Create_Date" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="Edit_By" Type="nvarchar(max)" />
+          <Property Name="Edit_Date" Type="datetime2" Precision="7" />
+          <Property Name="Delete_By" Type="nvarchar(max)" />
+          <Property Name="Delete_Date" Type="datetime2" Precision="7" />
+        </EntityType>
+        <EntityType Name="TblNonEffectiveEmployee">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Fk_EmployeeId" Type="int" Nullable="false" />
+          <Property Name="NowEffective" Type="bit" Nullable="false" />
+          <Property Name="IsDelete" Type="bit" Nullable="false" />
+          <Property Name="Create_By" Type="nvarchar(max)" />
+          <Property Name="Create_Date" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="Edit_By" Type="nvarchar(max)" />
+          <Property Name="Edit_Date" Type="datetime2" Precision="7" />
+          <Property Name="Delete_By" Type="nvarchar(max)" />
+          <Property Name="Delete_Date" Type="datetime2" Precision="7" />
+        </EntityType>
+        <EntityType Name="TblOpeningBalances">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Fk_CustomerId" Type="int" Nullable="false" />
+          <Property Name="Narration" Type="nvarchar(max)" />
+          <Property Name="Date" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="Amount" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="SalesRep" Type="nvarchar(max)" />
+          <Property Name="IsDelete" Type="bit" Nullable="false" />
+          <Property Name="Create_By" Type="nvarchar(max)" />
+          <Property Name="Create_Date" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="Edit_By" Type="nvarchar(max)" />
+          <Property Name="Edit_Date" Type="datetime2" Precision="7" />
+          <Property Name="Delete_By" Type="nvarchar(max)" />
+          <Property Name="Delete_Date" Type="datetime2" Precision="7" />
+        </EntityType>
+        <EntityType Name="TblPartner">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Code" Type="nvarchar(max)" />
+          <Property Name="Narration" Type="nvarchar(max)" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="IsDelete" Type="bit" Nullable="false" />
+          <Property Name="Create_By" Type="nvarchar(max)" />
+          <Property Name="Create_Date" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="Edit_By" Type="nvarchar(max)" />
+          <Property Name="Edit_Date" Type="datetime2" Precision="7" />
+          <Property Name="Delete_By" Type="nvarchar(max)" />
+          <Property Name="Delete_Date" Type="datetime2" Precision="7" />
+        </EntityType>
+        <EntityType Name="TblSectorMaster">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Code" Type="nvarchar(max)" />
+          <Property Name="Narration" Type="nvarchar(max)" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="IsDelete" Type="bit" Nullable="false" />
+          <Property Name="Create_By" Type="nvarchar(max)" />
+          <Property Name="Create_Date" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="Edit_By" Type="nvarchar(max)" />
+          <Property Name="Edit_Date" Type="datetime2" Precision="7" />
+          <Property Name="Delete_By" Type="nvarchar(max)" />
+          <Property Name="Delete_Date" Type="datetime2" Precision="7" />
+        </EntityType>
+        <EntityType Name="TblSiteSetting">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Code" Type="nvarchar(max)" />
+          <Property Name="Value" Type="nvarchar(max)" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="IsDelete" Type="bit" Nullable="false" />
+          <Property Name="Create_By" Type="nvarchar(max)" />
+          <Property Name="Create_Date" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="Edit_By" Type="nvarchar(max)" />
+          <Property Name="Edit_Date" Type="datetime2" Precision="7" />
+          <Property Name="Delete_By" Type="nvarchar(max)" />
+          <Property Name="Delete_Date" Type="datetime2" Precision="7" />
+        </EntityType>
+        <EntityType Name="TblTitle">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Code" Type="nvarchar(max)" />
+          <Property Name="Narration" Type="nvarchar(max)" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="IsDelete" Type="bit" Nullable="false" />
+          <Property Name="Create_By" Type="nvarchar(max)" />
+          <Property Name="Create_Date" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="Edit_By" Type="nvarchar(max)" />
+          <Property Name="Edit_Date" Type="datetime2" Precision="7" />
+          <Property Name="Delete_By" Type="nvarchar(max)" />
+          <Property Name="Delete_Date" Type="datetime2" Precision="7" />
+        </EntityType>
+        <EntityType Name="TblWorkGroup">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Code" Type="nvarchar(max)" />
+          <Property Name="Narration" Type="nvarchar(max)" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="IsDelete" Type="bit" Nullable="false" />
+          <Property Name="Create_By" Type="nvarchar(max)" />
+          <Property Name="Create_Date" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="Edit_By" Type="nvarchar(max)" />
+          <Property Name="Edit_Date" Type="datetime2" Precision="7" />
+          <Property Name="Delete_By" Type="nvarchar(max)" />
+          <Property Name="Delete_Date" Type="datetime2" Precision="7" />
+        </EntityType>
+        <EntityType Name="TblWorkType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Code" Type="nvarchar(max)" />
+          <Property Name="Narration" Type="nvarchar(max)" />
+          <Property Name="Billable" Type="bit" Nullable="false" />
+          <Property Name="Fk_WorkGroupId" Type="int" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="IsDelete" Type="bit" Nullable="false" />
+          <Property Name="Create_By" Type="nvarchar(max)" />
+          <Property Name="Create_Date" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="Edit_By" Type="nvarchar(max)" />
+          <Property Name="Edit_Date" Type="datetime2" Precision="7" />
+          <Property Name="Delete_By" Type="nvarchar(max)" />
+          <Property Name="Delete_Date" Type="datetime2" Precision="7" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'AuditSystem.dbo.VW_Customer' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="VW_Customer">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="Fk_WorkGroupId" />
+            <PropertyRef Name="Fk_GradeMasterId" />
+            <PropertyRef Name="Fk_PartnerId" />
+            <PropertyRef Name="Fk_ManagerId" />
+            <PropertyRef Name="Fk_LegalStatusMasterId" />
+            <PropertyRef Name="Fk_SectorMasterId" />
+            <PropertyRef Name="Fk_IntroductionId" />
+            <PropertyRef Name="Fk_InternationslReferalId" />
+            <PropertyRef Name="IsActive" />
+            <PropertyRef Name="IsDelete" />
+            <PropertyRef Name="Create_Date" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Fk_WorkGroupId" Type="int" Nullable="false" />
+          <Property Name="VatType" Type="nvarchar(max)" />
+          <Property Name="Address" Type="nvarchar(max)" />
+          <Property Name="TaxNo" Type="nvarchar(max)" />
+          <Property Name="VatNo" Type="nvarchar(max)" />
+          <Property Name="SVatNo" Type="nvarchar(max)" />
+          <Property Name="Fax" Type="nvarchar(max)" />
+          <Property Name="TelOne" Type="nvarchar(max)" />
+          <Property Name="TelSecond" Type="nvarchar(max)" />
+          <Property Name="Fk_GradeMasterId" Type="int" Nullable="false" />
+          <Property Name="Email" Type="nvarchar(max)" />
+          <Property Name="ContactPersonOne" Type="nvarchar(max)" />
+          <Property Name="ContactPersonSecond" Type="nvarchar(max)" />
+          <Property Name="Fk_PartnerId" Type="int" Nullable="false" />
+          <Property Name="Fk_ManagerId" Type="int" Nullable="false" />
+          <Property Name="Fk_LegalStatusMasterId" Type="int" Nullable="false" />
+          <Property Name="Fk_SectorMasterId" Type="int" Nullable="false" />
+          <Property Name="Fk_IntroductionId" Type="int" Nullable="false" />
+          <Property Name="Fk_InternationslReferalId" Type="int" Nullable="false" />
+          <Property Name="DateOfJoined" Type="datetime2" Precision="7" />
+          <Property Name="Code" Type="nvarchar(max)" />
+          <Property Name="Name" Type="nvarchar(max)" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="IsDelete" Type="bit" Nullable="false" />
+          <Property Name="Create_By" Type="nvarchar(max)" />
+          <Property Name="Create_Date" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="Edit_By" Type="nvarchar(max)" />
+          <Property Name="Edit_Date" Type="datetime2" Precision="7" />
+          <Property Name="Delete_By" Type="nvarchar(max)" />
+          <Property Name="Delete_Date" Type="datetime2" Precision="7" />
+          <Property Name="WorkGroupCode" Type="nvarchar(max)" />
+          <Property Name="GradeMasterCode" Type="nvarchar(max)" />
+          <Property Name="Partner" Type="nvarchar(max)" />
+          <Property Name="ManagerName" Type="nvarchar(max)" />
+          <Property Name="LegalStatusMasterCode" Type="nvarchar(max)" />
+          <Property Name="SectorMasterCode" Type="nvarchar(max)" />
+          <Property Name="IntroductionCode" Type="nvarchar(max)" />
+          <Property Name="InternationslReferalCode" Type="nvarchar(max)" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'AuditSystem.dbo.VW_Employee' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="VW_Employee">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="BirthDay" />
+            <PropertyRef Name="IdManager" />
+            <PropertyRef Name="Fk_TitleId" />
+            <PropertyRef Name="Fk_DesginationId" />
+            <PropertyRef Name="Fk_DepartmentId" />
+            <PropertyRef Name="IsActive" />
+            <PropertyRef Name="IsDelete" />
+            <PropertyRef Name="Create_Date" />
+            <PropertyRef Name="DateOfJoin" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Code" Type="nvarchar(max)" />
+          <Property Name="Name" Type="nvarchar(max)" />
+          <Property Name="BirthDay" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="Nic" Type="nvarchar(max)" />
+          <Property Name="Email" Type="nvarchar(max)" />
+          <Property Name="IdManager" Type="bit" Nullable="false" />
+          <Property Name="Fk_TitleId" Type="int" Nullable="false" />
+          <Property Name="Fk_DesginationId" Type="int" Nullable="false" />
+          <Property Name="Fk_DepartmentId" Type="int" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="IsDelete" Type="bit" Nullable="false" />
+          <Property Name="Create_By" Type="nvarchar(max)" />
+          <Property Name="Create_Date" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="Edit_By" Type="nvarchar(max)" />
+          <Property Name="Edit_Date" Type="datetime2" Precision="7" />
+          <Property Name="Delete_By" Type="nvarchar(max)" />
+          <Property Name="Delete_Date" Type="datetime2" Precision="7" />
+          <Property Name="DateOfJoin" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="DepartmentCode" Type="nvarchar(max)" />
+          <Property Name="DesignationCode" Type="nvarchar(max)" />
+          <Property Name="titleCode" Type="nvarchar(max)" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'AuditSystem.dbo.VW_GradeMaster' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="VW_GradeMaster">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="IsActive" />
+            <PropertyRef Name="IsDelete" />
+            <PropertyRef Name="Create_Date" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Code" Type="nvarchar(max)" />
+          <Property Name="Narration" Type="nvarchar(max)" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="IsDelete" Type="bit" Nullable="false" />
+          <Property Name="Create_By" Type="nvarchar(max)" />
+          <Property Name="Create_Date" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="Edit_By" Type="nvarchar(max)" />
+          <Property Name="Edit_Date" Type="datetime2" Precision="7" />
+          <Property Name="Delete_By" Type="nvarchar(max)" />
+          <Property Name="Delete_Date" Type="datetime2" Precision="7" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'AuditSystem.dbo.VW_InternationalReferalMaster' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="VW_InternationalReferalMaster">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="IsActive" />
+            <PropertyRef Name="IsDelete" />
+            <PropertyRef Name="Create_Date" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Code" Type="nvarchar(max)" />
+          <Property Name="Narration" Type="nvarchar(max)" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="IsDelete" Type="bit" Nullable="false" />
+          <Property Name="Create_By" Type="nvarchar(max)" />
+          <Property Name="Create_Date" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="Edit_By" Type="nvarchar(max)" />
+          <Property Name="Edit_Date" Type="datetime2" Precision="7" />
+          <Property Name="Delete_By" Type="nvarchar(max)" />
+          <Property Name="Delete_Date" Type="datetime2" Precision="7" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'AuditSystem.dbo.VW_IntroductionMaster' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="VW_IntroductionMaster">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="IsActive" />
+            <PropertyRef Name="IsDelete" />
+            <PropertyRef Name="Create_Date" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Code" Type="nvarchar(max)" />
+          <Property Name="Narration" Type="nvarchar(max)" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="IsDelete" Type="bit" Nullable="false" />
+          <Property Name="Create_By" Type="nvarchar(max)" />
+          <Property Name="Create_Date" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="Edit_By" Type="nvarchar(max)" />
+          <Property Name="Edit_Date" Type="datetime2" Precision="7" />
+          <Property Name="Delete_By" Type="nvarchar(max)" />
+          <Property Name="Delete_Date" Type="datetime2" Precision="7" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'AuditSystem.dbo.VW_InvoiceNarrationMaster' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="VW_InvoiceNarrationMaster">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="IsActive" />
+            <PropertyRef Name="IsDelete" />
+            <PropertyRef Name="Create_Date" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Code" Type="nvarchar(max)" />
+          <Property Name="Narration" Type="nvarchar(max)" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="IsDelete" Type="bit" Nullable="false" />
+          <Property Name="Create_By" Type="nvarchar(max)" />
+          <Property Name="Create_Date" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="Edit_By" Type="nvarchar(max)" />
+          <Property Name="Edit_Date" Type="datetime2" Precision="7" />
+          <Property Name="Delete_By" Type="nvarchar(max)" />
+          <Property Name="Delete_Date" Type="datetime2" Precision="7" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'AuditSystem.dbo.VW_InvoiceShortNarrationMaster' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="VW_InvoiceShortNarrationMaster">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="IsActive" />
+            <PropertyRef Name="IsDelete" />
+            <PropertyRef Name="Create_Date" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Code" Type="nvarchar(max)" />
+          <Property Name="Narration" Type="nvarchar(max)" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="IsDelete" Type="bit" Nullable="false" />
+          <Property Name="Create_By" Type="nvarchar(max)" />
+          <Property Name="Create_Date" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="Edit_By" Type="nvarchar(max)" />
+          <Property Name="Edit_Date" Type="datetime2" Precision="7" />
+          <Property Name="Delete_By" Type="nvarchar(max)" />
+          <Property Name="Delete_Date" Type="datetime2" Precision="7" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'AuditSystem.dbo.VW_LegalStatusMaster' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="VW_LegalStatusMaster">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="IsActive" />
+            <PropertyRef Name="IsDelete" />
+            <PropertyRef Name="Create_Date" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Code" Type="nvarchar(max)" />
+          <Property Name="Narration" Type="nvarchar(max)" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="IsDelete" Type="bit" Nullable="false" />
+          <Property Name="Create_By" Type="nvarchar(max)" />
+          <Property Name="Create_Date" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="Edit_By" Type="nvarchar(max)" />
+          <Property Name="Edit_Date" Type="datetime2" Precision="7" />
+          <Property Name="Delete_By" Type="nvarchar(max)" />
+          <Property Name="Delete_Date" Type="datetime2" Precision="7" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'AuditSystem.dbo.VW_NatureMaster' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="VW_NatureMaster">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="IsActive" />
+            <PropertyRef Name="IsDelete" />
+            <PropertyRef Name="Create_Date" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Code" Type="nvarchar(max)" />
+          <Property Name="Narration" Type="nvarchar(max)" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="IsDelete" Type="bit" Nullable="false" />
+          <Property Name="Create_By" Type="nvarchar(max)" />
+          <Property Name="Create_Date" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="Edit_By" Type="nvarchar(max)" />
+          <Property Name="Edit_Date" Type="datetime2" Precision="7" />
+          <Property Name="Delete_By" Type="nvarchar(max)" />
+          <Property Name="Delete_Date" Type="datetime2" Precision="7" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'AuditSystem.dbo.VW_OpeningBalance' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="VW_OpeningBalance">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="Date" />
+            <PropertyRef Name="Fk_CustomerId" />
+            <PropertyRef Name="IsDelete" />
+            <PropertyRef Name="Create_Date" />
+          </Key>
+          <Property Name="Name" Type="nvarchar(max)" />
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Date" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="Fk_CustomerId" Type="int" Nullable="false" />
+          <Property Name="Amount" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="SalesRep" Type="nvarchar(max)" />
+          <Property Name="Narration" Type="nvarchar(max)" />
+          <Property Name="IsDelete" Type="bit" Nullable="false" />
+          <Property Name="Create_By" Type="nvarchar(max)" />
+          <Property Name="Create_Date" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="Edit_By" Type="nvarchar(max)" />
+          <Property Name="Edit_Date" Type="datetime2" Precision="7" />
+          <Property Name="Delete_By" Type="nvarchar(max)" />
+          <Property Name="Delete_Date" Type="datetime2" Precision="7" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'AuditSystem.dbo.VW_SectorMaster' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="VW_SectorMaster">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="IsActive" />
+            <PropertyRef Name="IsDelete" />
+            <PropertyRef Name="Create_Date" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Code" Type="nvarchar(max)" />
+          <Property Name="Narration" Type="nvarchar(max)" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="IsDelete" Type="bit" Nullable="false" />
+          <Property Name="Create_By" Type="nvarchar(max)" />
+          <Property Name="Create_Date" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="Edit_By" Type="nvarchar(max)" />
+          <Property Name="Edit_Date" Type="datetime2" Precision="7" />
+          <Property Name="Delete_By" Type="nvarchar(max)" />
+          <Property Name="Delete_Date" Type="datetime2" Precision="7" />
+        </EntityType>
+        <Association Name="FK_TblCustomers_TblGradeMaster_Fk_GradeMasterId">
+          <End Role="TblGradeMaster" Type="Self.TblGradeMaster" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="TblCustomers" Type="Self.TblCustomers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblGradeMaster">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TblCustomers">
+              <PropertyRef Name="Fk_GradeMasterId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TblCustomers_TblInternationalReferalMaster_Fk_InternationslReferalId">
+          <End Role="TblInternationalReferalMaster" Type="Self.TblInternationalReferalMaster" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="TblCustomers" Type="Self.TblCustomers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblInternationalReferalMaster">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TblCustomers">
+              <PropertyRef Name="Fk_InternationslReferalId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TblCustomers_TblIntroductionMaster_Fk_IntroductionId">
+          <End Role="TblIntroductionMaster" Type="Self.TblIntroductionMaster" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="TblCustomers" Type="Self.TblCustomers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblIntroductionMaster">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TblCustomers">
+              <PropertyRef Name="Fk_IntroductionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TblCustomers_TblLegalStatusMaster_Fk_LegalStatusMasterId">
+          <End Role="TblLegalStatusMaster" Type="Self.TblLegalStatusMaster" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="TblCustomers" Type="Self.TblCustomers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblLegalStatusMaster">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TblCustomers">
+              <PropertyRef Name="Fk_LegalStatusMasterId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TblCustomers_TblManager_Fk_ManagerId">
+          <End Role="TblManager" Type="Self.TblManager" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="TblCustomers" Type="Self.TblCustomers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblManager">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TblCustomers">
+              <PropertyRef Name="Fk_ManagerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TblCustomers_TblPartner_Fk_PartnerId">
+          <End Role="TblPartner" Type="Self.TblPartner" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="TblCustomers" Type="Self.TblCustomers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblPartner">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TblCustomers">
+              <PropertyRef Name="Fk_PartnerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TblCustomers_TblSectorMaster_Fk_SectorMasterId">
+          <End Role="TblSectorMaster" Type="Self.TblSectorMaster" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="TblCustomers" Type="Self.TblCustomers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblSectorMaster">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TblCustomers">
+              <PropertyRef Name="Fk_SectorMasterId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TblCustomers_TblWorkGroup_Fk_WorkGroupId">
+          <End Role="TblWorkGroup" Type="Self.TblWorkGroup" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="TblCustomers" Type="Self.TblCustomers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblWorkGroup">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TblCustomers">
+              <PropertyRef Name="Fk_WorkGroupId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TblEmployee_TblDepartment_Fk_DepartmentId">
+          <End Role="TblDepartment" Type="Self.TblDepartment" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="TblEmployee" Type="Self.TblEmployee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblDepartment">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TblEmployee">
+              <PropertyRef Name="Fk_DepartmentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TblEmployee_TblDesignation_Fk_DesginationId">
+          <End Role="TblDesignation" Type="Self.TblDesignation" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="TblEmployee" Type="Self.TblEmployee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblDesignation">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TblEmployee">
+              <PropertyRef Name="Fk_DesginationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TblEmployee_TblTitle_Fk_TitleId">
+          <End Role="TblTitle" Type="Self.TblTitle" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="TblEmployee" Type="Self.TblEmployee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblTitle">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TblEmployee">
+              <PropertyRef Name="Fk_TitleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TblEmployeeHourlyRate_TblEmployee_Fk_EmployeeId">
+          <End Role="TblEmployee" Type="Self.TblEmployee" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="TblEmployeeHourlyRate" Type="Self.TblEmployeeHourlyRate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblEmployee">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TblEmployeeHourlyRate">
+              <PropertyRef Name="Fk_EmployeeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TblJob_TblCustomers_Fk_CustomerId">
+          <End Role="TblCustomers" Type="Self.TblCustomers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="TblJob" Type="Self.TblJob" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblCustomers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TblJob">
+              <PropertyRef Name="Fk_CustomerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TblJob_TblEmployee_Fk_EmployeeId">
+          <End Role="TblEmployee" Type="Self.TblEmployee" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="TblJob" Type="Self.TblJob" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblEmployee">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TblJob">
+              <PropertyRef Name="Fk_EmployeeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TblJob_TblPartner_Fk_PartnerId">
+          <End Role="TblPartner" Type="Self.TblPartner" Multiplicity="1" />
+          <End Role="TblJob" Type="Self.TblJob" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblPartner">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TblJob">
+              <PropertyRef Name="Fk_PartnerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TblLocation_TblCustomers_Fk_CustomerId">
+          <End Role="TblCustomers" Type="Self.TblCustomers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="TblLocation" Type="Self.TblLocation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblCustomers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TblLocation">
+              <PropertyRef Name="Fk_CustomerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TblNonEffectiveEmployee_TblEmployee_Fk_EmployeeId">
+          <End Role="TblEmployee" Type="Self.TblEmployee" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="TblNonEffectiveEmployee" Type="Self.TblNonEffectiveEmployee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblEmployee">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TblNonEffectiveEmployee">
+              <PropertyRef Name="Fk_EmployeeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TblOpeningBalances_TblCustomers_Fk_CustomerId">
+          <End Role="TblCustomers" Type="Self.TblCustomers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="TblOpeningBalances" Type="Self.TblOpeningBalances" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblCustomers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TblOpeningBalances">
+              <PropertyRef Name="Fk_CustomerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TblWorkType_TblWorkGroup_Fk_WorkGroupId">
+          <End Role="TblWorkGroup" Type="Self.TblWorkGroup" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="TblWorkType" Type="Self.TblWorkType" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblWorkGroup">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TblWorkType">
+              <PropertyRef Name="Fk_WorkGroupId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="AuditSystemModelStoreContainer">
+          <EntitySet Name="__EFMigrationsHistory" EntityType="Self.__EFMigrationsHistory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TblCustomers" EntityType="Self.TblCustomers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TblDepartment" EntityType="Self.TblDepartment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TblDesignation" EntityType="Self.TblDesignation" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TblEmployee" EntityType="Self.TblEmployee" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TblEmployeeHourlyRate" EntityType="Self.TblEmployeeHourlyRate" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TblGradeMaster" EntityType="Self.TblGradeMaster" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TblInternationalReferalMaster" EntityType="Self.TblInternationalReferalMaster" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TblIntroductionMaster" EntityType="Self.TblIntroductionMaster" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TblInvoiceNarrationMaster" EntityType="Self.TblInvoiceNarrationMaster" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TblInvoiceShortNarrationMaster" EntityType="Self.TblInvoiceShortNarrationMaster" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TblJob" EntityType="Self.TblJob" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TblLegalStatusMaster" EntityType="Self.TblLegalStatusMaster" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TblLocation" EntityType="Self.TblLocation" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TblManager" EntityType="Self.TblManager" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TblNatureMaster" EntityType="Self.TblNatureMaster" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TblNonEffectiveEmployee" EntityType="Self.TblNonEffectiveEmployee" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TblOpeningBalances" EntityType="Self.TblOpeningBalances" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TblPartner" EntityType="Self.TblPartner" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TblSectorMaster" EntityType="Self.TblSectorMaster" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TblSiteSetting" EntityType="Self.TblSiteSetting" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TblTitle" EntityType="Self.TblTitle" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TblWorkGroup" EntityType="Self.TblWorkGroup" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TblWorkType" EntityType="Self.TblWorkType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="VW_Customer" EntityType="Self.VW_Customer" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+[VW_Customer].[Id] AS [Id], 
+[VW_Customer].[Fk_WorkGroupId] AS [Fk_WorkGroupId], 
+[VW_Customer].[VatType] AS [VatType], 
+[VW_Customer].[Address] AS [Address], 
+[VW_Customer].[TaxNo] AS [TaxNo], 
+[VW_Customer].[VatNo] AS [VatNo], 
+[VW_Customer].[SVatNo] AS [SVatNo], 
+[VW_Customer].[Fax] AS [Fax], 
+[VW_Customer].[TelOne] AS [TelOne], 
+[VW_Customer].[TelSecond] AS [TelSecond], 
+[VW_Customer].[Fk_GradeMasterId] AS [Fk_GradeMasterId], 
+[VW_Customer].[Email] AS [Email], 
+[VW_Customer].[ContactPersonOne] AS [ContactPersonOne], 
+[VW_Customer].[ContactPersonSecond] AS [ContactPersonSecond], 
+[VW_Customer].[Fk_PartnerId] AS [Fk_PartnerId], 
+[VW_Customer].[Fk_ManagerId] AS [Fk_ManagerId], 
+[VW_Customer].[Fk_LegalStatusMasterId] AS [Fk_LegalStatusMasterId], 
+[VW_Customer].[Fk_SectorMasterId] AS [Fk_SectorMasterId], 
+[VW_Customer].[Fk_IntroductionId] AS [Fk_IntroductionId], 
+[VW_Customer].[Fk_InternationslReferalId] AS [Fk_InternationslReferalId], 
+[VW_Customer].[DateOfJoined] AS [DateOfJoined], 
+[VW_Customer].[Code] AS [Code], 
+[VW_Customer].[Name] AS [Name], 
+[VW_Customer].[IsActive] AS [IsActive], 
+[VW_Customer].[IsDelete] AS [IsDelete], 
+[VW_Customer].[Create_By] AS [Create_By], 
+[VW_Customer].[Create_Date] AS [Create_Date], 
+[VW_Customer].[Edit_By] AS [Edit_By], 
+[VW_Customer].[Edit_Date] AS [Edit_Date], 
+[VW_Customer].[Delete_By] AS [Delete_By], 
+[VW_Customer].[Delete_Date] AS [Delete_Date], 
+[VW_Customer].[WorkGroupCode] AS [WorkGroupCode], 
+[VW_Customer].[GradeMasterCode] AS [GradeMasterCode], 
+[VW_Customer].[Partner] AS [Partner], 
+[VW_Customer].[ManagerName] AS [ManagerName], 
+[VW_Customer].[LegalStatusMasterCode] AS [LegalStatusMasterCode], 
+[VW_Customer].[SectorMasterCode] AS [SectorMasterCode], 
+[VW_Customer].[IntroductionCode] AS [IntroductionCode], 
+[VW_Customer].[InternationslReferalCode] AS [InternationslReferalCode]
+FROM [dbo].[VW_Customer] AS [VW_Customer]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="VW_Employee" EntityType="Self.VW_Employee" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+[VW_Employee].[Id] AS [Id], 
+[VW_Employee].[Code] AS [Code], 
+[VW_Employee].[Name] AS [Name], 
+[VW_Employee].[BirthDay] AS [BirthDay], 
+[VW_Employee].[Nic] AS [Nic], 
+[VW_Employee].[Email] AS [Email], 
+[VW_Employee].[IdManager] AS [IdManager], 
+[VW_Employee].[Fk_TitleId] AS [Fk_TitleId], 
+[VW_Employee].[Fk_DesginationId] AS [Fk_DesginationId], 
+[VW_Employee].[Fk_DepartmentId] AS [Fk_DepartmentId], 
+[VW_Employee].[IsActive] AS [IsActive], 
+[VW_Employee].[IsDelete] AS [IsDelete], 
+[VW_Employee].[Create_By] AS [Create_By], 
+[VW_Employee].[Create_Date] AS [Create_Date], 
+[VW_Employee].[Edit_By] AS [Edit_By], 
+[VW_Employee].[Edit_Date] AS [Edit_Date], 
+[VW_Employee].[Delete_By] AS [Delete_By], 
+[VW_Employee].[Delete_Date] AS [Delete_Date], 
+[VW_Employee].[DateOfJoin] AS [DateOfJoin], 
+[VW_Employee].[DepartmentCode] AS [DepartmentCode], 
+[VW_Employee].[DesignationCode] AS [DesignationCode], 
+[VW_Employee].[titleCode] AS [titleCode]
+FROM [dbo].[VW_Employee] AS [VW_Employee]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="VW_GradeMaster" EntityType="Self.VW_GradeMaster" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+[VW_GradeMaster].[Id] AS [Id], 
+[VW_GradeMaster].[Code] AS [Code], 
+[VW_GradeMaster].[Narration] AS [Narration], 
+[VW_GradeMaster].[IsActive] AS [IsActive], 
+[VW_GradeMaster].[IsDelete] AS [IsDelete], 
+[VW_GradeMaster].[Create_By] AS [Create_By], 
+[VW_GradeMaster].[Create_Date] AS [Create_Date], 
+[VW_GradeMaster].[Edit_By] AS [Edit_By], 
+[VW_GradeMaster].[Edit_Date] AS [Edit_Date], 
+[VW_GradeMaster].[Delete_By] AS [Delete_By], 
+[VW_GradeMaster].[Delete_Date] AS [Delete_Date]
+FROM [dbo].[VW_GradeMaster] AS [VW_GradeMaster]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="VW_InternationalReferalMaster" EntityType="Self.VW_InternationalReferalMaster" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+[VW_InternationalReferalMaster].[Id] AS [Id], 
+[VW_InternationalReferalMaster].[Code] AS [Code], 
+[VW_InternationalReferalMaster].[Narration] AS [Narration], 
+[VW_InternationalReferalMaster].[IsActive] AS [IsActive], 
+[VW_InternationalReferalMaster].[IsDelete] AS [IsDelete], 
+[VW_InternationalReferalMaster].[Create_By] AS [Create_By], 
+[VW_InternationalReferalMaster].[Create_Date] AS [Create_Date], 
+[VW_InternationalReferalMaster].[Edit_By] AS [Edit_By], 
+[VW_InternationalReferalMaster].[Edit_Date] AS [Edit_Date], 
+[VW_InternationalReferalMaster].[Delete_By] AS [Delete_By], 
+[VW_InternationalReferalMaster].[Delete_Date] AS [Delete_Date]
+FROM [dbo].[VW_InternationalReferalMaster] AS [VW_InternationalReferalMaster]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="VW_IntroductionMaster" EntityType="Self.VW_IntroductionMaster" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+[VW_IntroductionMaster].[Id] AS [Id], 
+[VW_IntroductionMaster].[Code] AS [Code], 
+[VW_IntroductionMaster].[Narration] AS [Narration], 
+[VW_IntroductionMaster].[IsActive] AS [IsActive], 
+[VW_IntroductionMaster].[IsDelete] AS [IsDelete], 
+[VW_IntroductionMaster].[Create_By] AS [Create_By], 
+[VW_IntroductionMaster].[Create_Date] AS [Create_Date], 
+[VW_IntroductionMaster].[Edit_By] AS [Edit_By], 
+[VW_IntroductionMaster].[Edit_Date] AS [Edit_Date], 
+[VW_IntroductionMaster].[Delete_By] AS [Delete_By], 
+[VW_IntroductionMaster].[Delete_Date] AS [Delete_Date]
+FROM [dbo].[VW_IntroductionMaster] AS [VW_IntroductionMaster]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="VW_InvoiceNarrationMaster" EntityType="Self.VW_InvoiceNarrationMaster" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+[VW_InvoiceNarrationMaster].[Id] AS [Id], 
+[VW_InvoiceNarrationMaster].[Code] AS [Code], 
+[VW_InvoiceNarrationMaster].[Narration] AS [Narration], 
+[VW_InvoiceNarrationMaster].[IsActive] AS [IsActive], 
+[VW_InvoiceNarrationMaster].[IsDelete] AS [IsDelete], 
+[VW_InvoiceNarrationMaster].[Create_By] AS [Create_By], 
+[VW_InvoiceNarrationMaster].[Create_Date] AS [Create_Date], 
+[VW_InvoiceNarrationMaster].[Edit_By] AS [Edit_By], 
+[VW_InvoiceNarrationMaster].[Edit_Date] AS [Edit_Date], 
+[VW_InvoiceNarrationMaster].[Delete_By] AS [Delete_By], 
+[VW_InvoiceNarrationMaster].[Delete_Date] AS [Delete_Date]
+FROM [dbo].[VW_InvoiceNarrationMaster] AS [VW_InvoiceNarrationMaster]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="VW_InvoiceShortNarrationMaster" EntityType="Self.VW_InvoiceShortNarrationMaster" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+[VW_InvoiceShortNarrationMaster].[Id] AS [Id], 
+[VW_InvoiceShortNarrationMaster].[Code] AS [Code], 
+[VW_InvoiceShortNarrationMaster].[Narration] AS [Narration], 
+[VW_InvoiceShortNarrationMaster].[IsActive] AS [IsActive], 
+[VW_InvoiceShortNarrationMaster].[IsDelete] AS [IsDelete], 
+[VW_InvoiceShortNarrationMaster].[Create_By] AS [Create_By], 
+[VW_InvoiceShortNarrationMaster].[Create_Date] AS [Create_Date], 
+[VW_InvoiceShortNarrationMaster].[Edit_By] AS [Edit_By], 
+[VW_InvoiceShortNarrationMaster].[Edit_Date] AS [Edit_Date], 
+[VW_InvoiceShortNarrationMaster].[Delete_By] AS [Delete_By], 
+[VW_InvoiceShortNarrationMaster].[Delete_Date] AS [Delete_Date]
+FROM [dbo].[VW_InvoiceShortNarrationMaster] AS [VW_InvoiceShortNarrationMaster]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="VW_LegalStatusMaster" EntityType="Self.VW_LegalStatusMaster" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+[VW_LegalStatusMaster].[Id] AS [Id], 
+[VW_LegalStatusMaster].[Code] AS [Code], 
+[VW_LegalStatusMaster].[Narration] AS [Narration], 
+[VW_LegalStatusMaster].[IsActive] AS [IsActive], 
+[VW_LegalStatusMaster].[IsDelete] AS [IsDelete], 
+[VW_LegalStatusMaster].[Create_By] AS [Create_By], 
+[VW_LegalStatusMaster].[Create_Date] AS [Create_Date], 
+[VW_LegalStatusMaster].[Edit_By] AS [Edit_By], 
+[VW_LegalStatusMaster].[Edit_Date] AS [Edit_Date], 
+[VW_LegalStatusMaster].[Delete_By] AS [Delete_By], 
+[VW_LegalStatusMaster].[Delete_Date] AS [Delete_Date]
+FROM [dbo].[VW_LegalStatusMaster] AS [VW_LegalStatusMaster]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="VW_NatureMaster" EntityType="Self.VW_NatureMaster" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+[VW_NatureMaster].[Id] AS [Id], 
+[VW_NatureMaster].[Code] AS [Code], 
+[VW_NatureMaster].[Narration] AS [Narration], 
+[VW_NatureMaster].[IsActive] AS [IsActive], 
+[VW_NatureMaster].[IsDelete] AS [IsDelete], 
+[VW_NatureMaster].[Create_By] AS [Create_By], 
+[VW_NatureMaster].[Create_Date] AS [Create_Date], 
+[VW_NatureMaster].[Edit_By] AS [Edit_By], 
+[VW_NatureMaster].[Edit_Date] AS [Edit_Date], 
+[VW_NatureMaster].[Delete_By] AS [Delete_By], 
+[VW_NatureMaster].[Delete_Date] AS [Delete_Date]
+FROM [dbo].[VW_NatureMaster] AS [VW_NatureMaster]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="VW_OpeningBalance" EntityType="Self.VW_OpeningBalance" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+[VW_OpeningBalance].[Name] AS [Name], 
+[VW_OpeningBalance].[Id] AS [Id], 
+[VW_OpeningBalance].[Date] AS [Date], 
+[VW_OpeningBalance].[Fk_CustomerId] AS [Fk_CustomerId], 
+[VW_OpeningBalance].[Amount] AS [Amount], 
+[VW_OpeningBalance].[SalesRep] AS [SalesRep], 
+[VW_OpeningBalance].[Narration] AS [Narration], 
+[VW_OpeningBalance].[IsDelete] AS [IsDelete], 
+[VW_OpeningBalance].[Create_By] AS [Create_By], 
+[VW_OpeningBalance].[Create_Date] AS [Create_Date], 
+[VW_OpeningBalance].[Edit_By] AS [Edit_By], 
+[VW_OpeningBalance].[Edit_Date] AS [Edit_Date], 
+[VW_OpeningBalance].[Delete_By] AS [Delete_By], 
+[VW_OpeningBalance].[Delete_Date] AS [Delete_Date]
+FROM [dbo].[VW_OpeningBalance] AS [VW_OpeningBalance]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="VW_SectorMaster" EntityType="Self.VW_SectorMaster" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+[VW_SectorMaster].[Id] AS [Id], 
+[VW_SectorMaster].[Code] AS [Code], 
+[VW_SectorMaster].[Narration] AS [Narration], 
+[VW_SectorMaster].[IsActive] AS [IsActive], 
+[VW_SectorMaster].[IsDelete] AS [IsDelete], 
+[VW_SectorMaster].[Create_By] AS [Create_By], 
+[VW_SectorMaster].[Create_Date] AS [Create_Date], 
+[VW_SectorMaster].[Edit_By] AS [Edit_By], 
+[VW_SectorMaster].[Edit_Date] AS [Edit_Date], 
+[VW_SectorMaster].[Delete_By] AS [Delete_By], 
+[VW_SectorMaster].[Delete_Date] AS [Delete_Date]
+FROM [dbo].[VW_SectorMaster] AS [VW_SectorMaster]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_TblCustomers_TblGradeMaster_Fk_GradeMasterId" Association="Self.FK_TblCustomers_TblGradeMaster_Fk_GradeMasterId">
+            <End Role="TblGradeMaster" EntitySet="TblGradeMaster" />
+            <End Role="TblCustomers" EntitySet="TblCustomers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TblCustomers_TblInternationalReferalMaster_Fk_InternationslReferalId" Association="Self.FK_TblCustomers_TblInternationalReferalMaster_Fk_InternationslReferalId">
+            <End Role="TblInternationalReferalMaster" EntitySet="TblInternationalReferalMaster" />
+            <End Role="TblCustomers" EntitySet="TblCustomers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TblCustomers_TblIntroductionMaster_Fk_IntroductionId" Association="Self.FK_TblCustomers_TblIntroductionMaster_Fk_IntroductionId">
+            <End Role="TblIntroductionMaster" EntitySet="TblIntroductionMaster" />
+            <End Role="TblCustomers" EntitySet="TblCustomers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TblCustomers_TblLegalStatusMaster_Fk_LegalStatusMasterId" Association="Self.FK_TblCustomers_TblLegalStatusMaster_Fk_LegalStatusMasterId">
+            <End Role="TblLegalStatusMaster" EntitySet="TblLegalStatusMaster" />
+            <End Role="TblCustomers" EntitySet="TblCustomers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TblCustomers_TblManager_Fk_ManagerId" Association="Self.FK_TblCustomers_TblManager_Fk_ManagerId">
+            <End Role="TblManager" EntitySet="TblManager" />
+            <End Role="TblCustomers" EntitySet="TblCustomers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TblCustomers_TblPartner_Fk_PartnerId" Association="Self.FK_TblCustomers_TblPartner_Fk_PartnerId">
+            <End Role="TblPartner" EntitySet="TblPartner" />
+            <End Role="TblCustomers" EntitySet="TblCustomers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TblCustomers_TblSectorMaster_Fk_SectorMasterId" Association="Self.FK_TblCustomers_TblSectorMaster_Fk_SectorMasterId">
+            <End Role="TblSectorMaster" EntitySet="TblSectorMaster" />
+            <End Role="TblCustomers" EntitySet="TblCustomers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TblCustomers_TblWorkGroup_Fk_WorkGroupId" Association="Self.FK_TblCustomers_TblWorkGroup_Fk_WorkGroupId">
+            <End Role="TblWorkGroup" EntitySet="TblWorkGroup" />
+            <End Role="TblCustomers" EntitySet="TblCustomers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TblEmployee_TblDepartment_Fk_DepartmentId" Association="Self.FK_TblEmployee_TblDepartment_Fk_DepartmentId">
+            <End Role="TblDepartment" EntitySet="TblDepartment" />
+            <End Role="TblEmployee" EntitySet="TblEmployee" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TblEmployee_TblDesignation_Fk_DesginationId" Association="Self.FK_TblEmployee_TblDesignation_Fk_DesginationId">
+            <End Role="TblDesignation" EntitySet="TblDesignation" />
+            <End Role="TblEmployee" EntitySet="TblEmployee" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TblEmployee_TblTitle_Fk_TitleId" Association="Self.FK_TblEmployee_TblTitle_Fk_TitleId">
+            <End Role="TblTitle" EntitySet="TblTitle" />
+            <End Role="TblEmployee" EntitySet="TblEmployee" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TblEmployeeHourlyRate_TblEmployee_Fk_EmployeeId" Association="Self.FK_TblEmployeeHourlyRate_TblEmployee_Fk_EmployeeId">
+            <End Role="TblEmployee" EntitySet="TblEmployee" />
+            <End Role="TblEmployeeHourlyRate" EntitySet="TblEmployeeHourlyRate" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TblJob_TblCustomers_Fk_CustomerId" Association="Self.FK_TblJob_TblCustomers_Fk_CustomerId">
+            <End Role="TblCustomers" EntitySet="TblCustomers" />
+            <End Role="TblJob" EntitySet="TblJob" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TblJob_TblEmployee_Fk_EmployeeId" Association="Self.FK_TblJob_TblEmployee_Fk_EmployeeId">
+            <End Role="TblEmployee" EntitySet="TblEmployee" />
+            <End Role="TblJob" EntitySet="TblJob" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TblJob_TblPartner_Fk_PartnerId" Association="Self.FK_TblJob_TblPartner_Fk_PartnerId">
+            <End Role="TblPartner" EntitySet="TblPartner" />
+            <End Role="TblJob" EntitySet="TblJob" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TblLocation_TblCustomers_Fk_CustomerId" Association="Self.FK_TblLocation_TblCustomers_Fk_CustomerId">
+            <End Role="TblCustomers" EntitySet="TblCustomers" />
+            <End Role="TblLocation" EntitySet="TblLocation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TblNonEffectiveEmployee_TblEmployee_Fk_EmployeeId" Association="Self.FK_TblNonEffectiveEmployee_TblEmployee_Fk_EmployeeId">
+            <End Role="TblEmployee" EntitySet="TblEmployee" />
+            <End Role="TblNonEffectiveEmployee" EntitySet="TblNonEffectiveEmployee" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TblOpeningBalances_TblCustomers_Fk_CustomerId" Association="Self.FK_TblOpeningBalances_TblCustomers_Fk_CustomerId">
+            <End Role="TblCustomers" EntitySet="TblCustomers" />
+            <End Role="TblOpeningBalances" EntitySet="TblOpeningBalances" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TblWorkType_TblWorkGroup_Fk_WorkGroupId" Association="Self.FK_TblWorkType_TblWorkGroup_Fk_WorkGroupId">
+            <End Role="TblWorkGroup" EntitySet="TblWorkGroup" />
+            <End Role="TblWorkType" EntitySet="TblWorkType" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="AuditSystemModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="C__EFMigrationsHistory">
+          <Key>
+            <PropertyRef Name="MigrationId" />
+          </Key>
+          <Property Name="MigrationId" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ProductVersion" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TblCustomer">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Fk_WorkGroupId" Type="Int32" Nullable="false" />
+          <Property Name="VatType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="TaxNo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="VatNo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SVatNo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Fax" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="TelOne" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="TelSecond" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Fk_GradeMasterId" Type="Int32" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ContactPersonOne" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ContactPersonSecond" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Fk_PartnerId" Type="Int32" Nullable="false" />
+          <Property Name="Fk_ManagerId" Type="Int32" Nullable="false" />
+          <Property Name="Fk_LegalStatusMasterId" Type="Int32" Nullable="false" />
+          <Property Name="Fk_SectorMasterId" Type="Int32" Nullable="false" />
+          <Property Name="Fk_IntroductionId" Type="Int32" Nullable="false" />
+          <Property Name="Fk_InternationslReferalId" Type="Int32" Nullable="false" />
+          <Property Name="DateOfJoined" Type="DateTime" Precision="7" />
+          <Property Name="Code" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="IsDelete" Type="Boolean" Nullable="false" />
+          <Property Name="Create_By" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Create_Date" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="Edit_By" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Edit_Date" Type="DateTime" Precision="7" />
+          <Property Name="Delete_By" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Delete_Date" Type="DateTime" Precision="7" />
+          <NavigationProperty Name="TblGradeMaster" Relationship="Self.FK_TblCustomers_TblGradeMaster_Fk_GradeMasterId" FromRole="TblCustomers" ToRole="TblGradeMaster" />
+          <NavigationProperty Name="TblInternationalReferalMaster" Relationship="Self.FK_TblCustomers_TblInternationalReferalMaster_Fk_InternationslReferalId" FromRole="TblCustomers" ToRole="TblInternationalReferalMaster" />
+          <NavigationProperty Name="TblIntroductionMaster" Relationship="Self.FK_TblCustomers_TblIntroductionMaster_Fk_IntroductionId" FromRole="TblCustomers" ToRole="TblIntroductionMaster" />
+          <NavigationProperty Name="TblLegalStatusMaster" Relationship="Self.FK_TblCustomers_TblLegalStatusMaster_Fk_LegalStatusMasterId" FromRole="TblCustomers" ToRole="TblLegalStatusMaster" />
+          <NavigationProperty Name="TblManager" Relationship="Self.FK_TblCustomers_TblManager_Fk_ManagerId" FromRole="TblCustomers" ToRole="TblManager" />
+          <NavigationProperty Name="TblPartner" Relationship="Self.FK_TblCustomers_TblPartner_Fk_PartnerId" FromRole="TblCustomers" ToRole="TblPartner" />
+          <NavigationProperty Name="TblSectorMaster" Relationship="Self.FK_TblCustomers_TblSectorMaster_Fk_SectorMasterId" FromRole="TblCustomers" ToRole="TblSectorMaster" />
+          <NavigationProperty Name="TblWorkGroup" Relationship="Self.FK_TblCustomers_TblWorkGroup_Fk_WorkGroupId" FromRole="TblCustomers" ToRole="TblWorkGroup" />
+          <NavigationProperty Name="TblJobs" Relationship="Self.FK_TblJob_TblCustomers_Fk_CustomerId" FromRole="TblCustomers" ToRole="TblJob" />
+          <NavigationProperty Name="TblLocations" Relationship="Self.FK_TblLocation_TblCustomers_Fk_CustomerId" FromRole="TblCustomers" ToRole="TblLocation" />
+          <NavigationProperty Name="TblOpeningBalances" Relationship="Self.FK_TblOpeningBalances_TblCustomers_Fk_CustomerId" FromRole="TblCustomers" ToRole="TblOpeningBalances" />
+        </EntityType>
+        <EntityType Name="TblDepartment">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Code" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Narration" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="IsDelete" Type="Boolean" Nullable="false" />
+          <Property Name="Create_By" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Create_Date" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="Edit_By" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Edit_Date" Type="DateTime" Precision="7" />
+          <Property Name="Delete_By" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Delete_Date" Type="DateTime" Precision="7" />
+          <NavigationProperty Name="TblEmployees" Relationship="Self.FK_TblEmployee_TblDepartment_Fk_DepartmentId" FromRole="TblDepartment" ToRole="TblEmployee" />
+        </EntityType>
+        <EntityType Name="TblDesignation">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Code" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Narration" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="IsDelete" Type="Boolean" Nullable="false" />
+          <Property Name="Create_By" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Create_Date" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="Edit_By" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Edit_Date" Type="DateTime" Precision="7" />
+          <Property Name="Delete_By" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Delete_Date" Type="DateTime" Precision="7" />
+          <NavigationProperty Name="TblEmployees" Relationship="Self.FK_TblEmployee_TblDesignation_Fk_DesginationId" FromRole="TblDesignation" ToRole="TblEmployee" />
+        </EntityType>
+        <EntityType Name="TblEmployee">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Code" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="BirthDay" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="Nic" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IdManager" Type="Boolean" Nullable="false" />
+          <Property Name="Fk_TitleId" Type="Int32" Nullable="false" />
+          <Property Name="Fk_DesginationId" Type="Int32" Nullable="false" />
+          <Property Name="Fk_DepartmentId" Type="Int32" Nullable="false" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="IsDelete" Type="Boolean" Nullable="false" />
+          <Property Name="Create_By" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Create_Date" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="Edit_By" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Edit_Date" Type="DateTime" Precision="7" />
+          <Property Name="Delete_By" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Delete_Date" Type="DateTime" Precision="7" />
+          <Property Name="DateOfJoin" Type="DateTime" Nullable="false" Precision="7" />
+          <NavigationProperty Name="TblDepartment" Relationship="Self.FK_TblEmployee_TblDepartment_Fk_DepartmentId" FromRole="TblEmployee" ToRole="TblDepartment" />
+          <NavigationProperty Name="TblDesignation" Relationship="Self.FK_TblEmployee_TblDesignation_Fk_DesginationId" FromRole="TblEmployee" ToRole="TblDesignation" />
+          <NavigationProperty Name="TblTitle" Relationship="Self.FK_TblEmployee_TblTitle_Fk_TitleId" FromRole="TblEmployee" ToRole="TblTitle" />
+          <NavigationProperty Name="TblEmployeeHourlyRates" Relationship="Self.FK_TblEmployeeHourlyRate_TblEmployee_Fk_EmployeeId" FromRole="TblEmployee" ToRole="TblEmployeeHourlyRate" />
+          <NavigationProperty Name="TblJobs" Relationship="Self.FK_TblJob_TblEmployee_Fk_EmployeeId" FromRole="TblEmployee" ToRole="TblJob" />
+          <NavigationProperty Name="TblNonEffectiveEmployees" Relationship="Self.FK_TblNonEffectiveEmployee_TblEmployee_Fk_EmployeeId" FromRole="TblEmployee" ToRole="TblNonEffectiveEmployee" />
+        </EntityType>
+        <EntityType Name="TblEmployeeHourlyRate">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Rate" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="FromDate" Type="DateTime" Precision="7" />
+          <Property Name="ToDate" Type="DateTime" Precision="7" />
+          <Property Name="Fk_EmployeeId" Type="Int32" Nullable="false" />
+          <Property Name="IsDelete" Type="Boolean" Nullable="false" />
+          <Property Name="Create_By" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Create_Date" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="Edit_By" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Edit_Date" Type="DateTime" Precision="7" />
+          <Property Name="Delete_By" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Delete_Date" Type="DateTime" Precision="7" />
+          <NavigationProperty Name="TblEmployee" Relationship="Self.FK_TblEmployeeHourlyRate_TblEmployee_Fk_EmployeeId" FromRole="TblEmployeeHourlyRate" ToRole="TblEmployee" />
+        </EntityType>
+        <EntityType Name="TblGradeMaster">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Code" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Narration" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="IsDelete" Type="Boolean" Nullable="false" />
+          <Property Name="Create_By" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Create_Date" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="Edit_By" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Edit_Date" Type="DateTime" Precision="7" />
+          <Property Name="Delete_By" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Delete_Date" Type="DateTime" Precision="7" />
+          <NavigationProperty Name="TblCustomers" Relationship="Self.FK_TblCustomers_TblGradeMaster_Fk_GradeMasterId" FromRole="TblGradeMaster" ToRole="TblCustomers" />
+        </EntityType>
+        <EntityType Name="TblInternationalReferalMaster">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Code" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Narration" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="IsDelete" Type="Boolean" Nullable="false" />
+          <Property Name="Create_By" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Create_Date" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="Edit_By" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Edit_Date" Type="DateTime" Precision="7" />
+          <Property Name="Delete_By" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Delete_Date" Type="DateTime" Precision="7" />
+          <NavigationProperty Name="TblCustomers" Relationship="Self.FK_TblCustomers_TblInternationalReferalMaster_Fk_InternationslReferalId" FromRole="TblInternationalReferalMaster" ToRole="TblCustomers" />
+        </EntityType>
+        <EntityType Name="TblIntroductionMaster">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Code" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Narration" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="IsDelete" Type="Boolean" Nullable="false" />
+          <Property Name="Create_By" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Create_Date" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="Edit_By" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Edit_Date" Type="DateTime" Precision="7" />
+          <Property Name="Delete_By" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Delete_Date" Type="DateTime" Precision="7" />
+          <NavigationProperty Name="TblCustomers" Relationship="Self.FK_TblCustomers_TblIntroductionMaster_Fk_IntroductionId" FromRole="TblIntroductionMaster" ToRole="TblCustomers" />
+        </EntityType>
+        <EntityType Name="TblInvoiceNarrationMaster">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Code" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Narration" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="IsDelete" Type="Boolean" Nullable="false" />
+          <Property Name="Create_By" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Create_Date" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="Edit_By" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Edit_Date" Type="DateTime" Precision="7" />
+          <Property Name="Delete_By" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Delete_Date" Type="DateTime" Precision="7" />
+        </EntityType>
+        <EntityType Name="TblInvoiceShortNarrationMaster">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Code" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Narration" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="IsDelete" Type="Boolean" Nullable="false" />
+          <Property Name="Create_By" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Create_Date" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="Edit_By" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Edit_Date" Type="DateTime" Precision="7" />
+          <Property Name="Delete_By" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Delete_Date" Type="DateTime" Precision="7" />
+        </EntityType>
+        <EntityType Name="TblJob">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Code" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Narration" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PreViewvalue" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="StartDate" Type="DateTime" Precision="7" />
+          <Property Name="DueDate" Type="DateTime" Precision="7" />
+          <Property Name="Fk_PartnerId" Type="Int32" Nullable="false" />
+          <Property Name="Fk_CustomerId" Type="Int32" Nullable="false" />
+          <Property Name="Fk_EmployeeId" Type="Int32" Nullable="false" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="IsDelete" Type="Boolean" Nullable="false" />
+          <Property Name="Create_By" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Create_Date" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="Edit_By" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Edit_Date" Type="DateTime" Precision="7" />
+          <Property Name="Delete_By" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Delete_Date" Type="DateTime" Precision="7" />
+          <NavigationProperty Name="TblCustomer" Relationship="Self.FK_TblJob_TblCustomers_Fk_CustomerId" FromRole="TblJob" ToRole="TblCustomers" />
+          <NavigationProperty Name="TblEmployee" Relationship="Self.FK_TblJob_TblEmployee_Fk_EmployeeId" FromRole="TblJob" ToRole="TblEmployee" />
+          <NavigationProperty Name="TblPartner" Relationship="Self.FK_TblJob_TblPartner_Fk_PartnerId" FromRole="TblJob" ToRole="TblPartner" />
+        </EntityType>
+        <EntityType Name="TblLegalStatusMaster">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Code" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Narration" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="IsDelete" Type="Boolean" Nullable="false" />
+          <Property Name="Create_By" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Create_Date" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="Edit_By" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Edit_Date" Type="DateTime" Precision="7" />
+          <Property Name="Delete_By" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Delete_Date" Type="DateTime" Precision="7" />
+          <NavigationProperty Name="TblCustomers" Relationship="Self.FK_TblCustomers_TblLegalStatusMaster_Fk_LegalStatusMasterId" FromRole="TblLegalStatusMaster" ToRole="TblCustomers" />
+        </EntityType>
+        <EntityType Name="TblLocation">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Code" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Narration" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Rate" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Fk_CustomerId" Type="Int32" Nullable="false" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="IsDelete" Type="Boolean" Nullable="false" />
+          <Property Name="Create_By" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Create_Date" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="Edit_By" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Edit_Date" Type="DateTime" Precision="7" />
+          <Property Name="Delete_By" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Delete_Date" Type="DateTime" Precision="7" />
+          <NavigationProperty Name="TblCustomer" Relationship="Self.FK_TblLocation_TblCustomers_Fk_CustomerId" FromRole="TblLocation" ToRole="TblCustomers" />
+        </EntityType>
+        <EntityType Name="TblManager">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Code" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="IsDelete" Type="Boolean" Nullable="false" />
+          <Property Name="Create_By" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Create_Date" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="Edit_By" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Edit_Date" Type="DateTime" Precision="7" />
+          <Property Name="Delete_By" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Delete_Date" Type="DateTime" Precision="7" />
+          <NavigationProperty Name="TblCustomers" Relationship="Self.FK_TblCustomers_TblManager_Fk_ManagerId" FromRole="TblManager" ToRole="TblCustomers" />
+        </EntityType>
+        <EntityType Name="TblNatureMaster">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Code" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Narration" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="IsDelete" Type="Boolean" Nullable="false" />
+          <Property Name="Create_By" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Create_Date" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="Edit_By" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Edit_Date" Type="DateTime" Precision="7" />
+          <Property Name="Delete_By" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Delete_Date" Type="DateTime" Precision="7" />
+        </EntityType>
+        <EntityType Name="TblNonEffectiveEmployee">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Fk_EmployeeId" Type="Int32" Nullable="false" />
+          <Property Name="NowEffective" Type="Boolean" Nullable="false" />
+          <Property Name="IsDelete" Type="Boolean" Nullable="false" />
+          <Property Name="Create_By" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Create_Date" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="Edit_By" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Edit_Date" Type="DateTime" Precision="7" />
+          <Property Name="Delete_By" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Delete_Date" Type="DateTime" Precision="7" />
+          <NavigationProperty Name="TblEmployee" Relationship="Self.FK_TblNonEffectiveEmployee_TblEmployee_Fk_EmployeeId" FromRole="TblNonEffectiveEmployee" ToRole="TblEmployee" />
+        </EntityType>
+        <EntityType Name="TblOpeningBalance">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Fk_CustomerId" Type="Int32" Nullable="false" />
+          <Property Name="Narration" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="Amount" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="SalesRep" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsDelete" Type="Boolean" Nullable="false" />
+          <Property Name="Create_By" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Create_Date" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="Edit_By" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Edit_Date" Type="DateTime" Precision="7" />
+          <Property Name="Delete_By" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Delete_Date" Type="DateTime" Precision="7" />
+          <NavigationProperty Name="TblCustomer" Relationship="Self.FK_TblOpeningBalances_TblCustomers_Fk_CustomerId" FromRole="TblOpeningBalances" ToRole="TblCustomers" />
+        </EntityType>
+        <EntityType Name="TblPartner">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Code" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Narration" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="IsDelete" Type="Boolean" Nullable="false" />
+          <Property Name="Create_By" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Create_Date" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="Edit_By" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Edit_Date" Type="DateTime" Precision="7" />
+          <Property Name="Delete_By" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Delete_Date" Type="DateTime" Precision="7" />
+          <NavigationProperty Name="TblCustomers" Relationship="Self.FK_TblCustomers_TblPartner_Fk_PartnerId" FromRole="TblPartner" ToRole="TblCustomers" />
+          <NavigationProperty Name="TblJobs" Relationship="Self.FK_TblJob_TblPartner_Fk_PartnerId" FromRole="TblPartner" ToRole="TblJob" />
+        </EntityType>
+        <EntityType Name="TblSectorMaster">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Code" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Narration" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="IsDelete" Type="Boolean" Nullable="false" />
+          <Property Name="Create_By" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Create_Date" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="Edit_By" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Edit_Date" Type="DateTime" Precision="7" />
+          <Property Name="Delete_By" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Delete_Date" Type="DateTime" Precision="7" />
+          <NavigationProperty Name="TblCustomers" Relationship="Self.FK_TblCustomers_TblSectorMaster_Fk_SectorMasterId" FromRole="TblSectorMaster" ToRole="TblCustomers" />
+        </EntityType>
+        <EntityType Name="TblSiteSetting">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Code" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Value" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="IsDelete" Type="Boolean" Nullable="false" />
+          <Property Name="Create_By" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Create_Date" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="Edit_By" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Edit_Date" Type="DateTime" Precision="7" />
+          <Property Name="Delete_By" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Delete_Date" Type="DateTime" Precision="7" />
+        </EntityType>
+        <EntityType Name="TblTitle">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Code" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Narration" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="IsDelete" Type="Boolean" Nullable="false" />
+          <Property Name="Create_By" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Create_Date" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="Edit_By" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Edit_Date" Type="DateTime" Precision="7" />
+          <Property Name="Delete_By" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Delete_Date" Type="DateTime" Precision="7" />
+          <NavigationProperty Name="TblEmployees" Relationship="Self.FK_TblEmployee_TblTitle_Fk_TitleId" FromRole="TblTitle" ToRole="TblEmployee" />
+        </EntityType>
+        <EntityType Name="TblWorkGroup">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Code" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Narration" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="IsDelete" Type="Boolean" Nullable="false" />
+          <Property Name="Create_By" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Create_Date" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="Edit_By" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Edit_Date" Type="DateTime" Precision="7" />
+          <Property Name="Delete_By" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Delete_Date" Type="DateTime" Precision="7" />
+          <NavigationProperty Name="TblCustomers" Relationship="Self.FK_TblCustomers_TblWorkGroup_Fk_WorkGroupId" FromRole="TblWorkGroup" ToRole="TblCustomers" />
+          <NavigationProperty Name="TblWorkTypes" Relationship="Self.FK_TblWorkType_TblWorkGroup_Fk_WorkGroupId" FromRole="TblWorkGroup" ToRole="TblWorkType" />
+        </EntityType>
+        <EntityType Name="TblWorkType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Code" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Narration" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Billable" Type="Boolean" Nullable="false" />
+          <Property Name="Fk_WorkGroupId" Type="Int32" Nullable="false" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="IsDelete" Type="Boolean" Nullable="false" />
+          <Property Name="Create_By" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Create_Date" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="Edit_By" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Edit_Date" Type="DateTime" Precision="7" />
+          <Property Name="Delete_By" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Delete_Date" Type="DateTime" Precision="7" />
+          <NavigationProperty Name="TblWorkGroup" Relationship="Self.FK_TblWorkType_TblWorkGroup_Fk_WorkGroupId" FromRole="TblWorkType" ToRole="TblWorkGroup" />
+        </EntityType>
+        <EntityType Name="VW_Customer">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="Fk_WorkGroupId" />
+            <PropertyRef Name="Fk_GradeMasterId" />
+            <PropertyRef Name="Fk_PartnerId" />
+            <PropertyRef Name="Fk_ManagerId" />
+            <PropertyRef Name="Fk_LegalStatusMasterId" />
+            <PropertyRef Name="Fk_SectorMasterId" />
+            <PropertyRef Name="Fk_IntroductionId" />
+            <PropertyRef Name="Fk_InternationslReferalId" />
+            <PropertyRef Name="IsActive" />
+            <PropertyRef Name="IsDelete" />
+            <PropertyRef Name="Create_Date" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Fk_WorkGroupId" Type="Int32" Nullable="false" />
+          <Property Name="VatType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="TaxNo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="VatNo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SVatNo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Fax" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="TelOne" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="TelSecond" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Fk_GradeMasterId" Type="Int32" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ContactPersonOne" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ContactPersonSecond" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Fk_PartnerId" Type="Int32" Nullable="false" />
+          <Property Name="Fk_ManagerId" Type="Int32" Nullable="false" />
+          <Property Name="Fk_LegalStatusMasterId" Type="Int32" Nullable="false" />
+          <Property Name="Fk_SectorMasterId" Type="Int32" Nullable="false" />
+          <Property Name="Fk_IntroductionId" Type="Int32" Nullable="false" />
+          <Property Name="Fk_InternationslReferalId" Type="Int32" Nullable="false" />
+          <Property Name="DateOfJoined" Type="DateTime" Precision="7" />
+          <Property Name="Code" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="IsDelete" Type="Boolean" Nullable="false" />
+          <Property Name="Create_By" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Create_Date" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="Edit_By" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Edit_Date" Type="DateTime" Precision="7" />
+          <Property Name="Delete_By" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Delete_Date" Type="DateTime" Precision="7" />
+          <Property Name="WorkGroupCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="GradeMasterCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Partner" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ManagerName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="LegalStatusMasterCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SectorMasterCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IntroductionCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="InternationslReferalCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="VW_Employee">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="BirthDay" />
+            <PropertyRef Name="IdManager" />
+            <PropertyRef Name="Fk_TitleId" />
+            <PropertyRef Name="Fk_DesginationId" />
+            <PropertyRef Name="Fk_DepartmentId" />
+            <PropertyRef Name="IsActive" />
+            <PropertyRef Name="IsDelete" />
+            <PropertyRef Name="Create_Date" />
+            <PropertyRef Name="DateOfJoin" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Code" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="BirthDay" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="Nic" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IdManager" Type="Boolean" Nullable="false" />
+          <Property Name="Fk_TitleId" Type="Int32" Nullable="false" />
+          <Property Name="Fk_DesginationId" Type="Int32" Nullable="false" />
+          <Property Name="Fk_DepartmentId" Type="Int32" Nullable="false" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="IsDelete" Type="Boolean" Nullable="false" />
+          <Property Name="Create_By" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Create_Date" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="Edit_By" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Edit_Date" Type="DateTime" Precision="7" />
+          <Property Name="Delete_By" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Delete_Date" Type="DateTime" Precision="7" />
+          <Property Name="DateOfJoin" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="DepartmentCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DesignationCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="titleCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="VW_GradeMaster">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="IsActive" />
+            <PropertyRef Name="IsDelete" />
+            <PropertyRef Name="Create_Date" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Code" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Narration" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="IsDelete" Type="Boolean" Nullable="false" />
+          <Property Name="Create_By" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Create_Date" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="Edit_By" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Edit_Date" Type="DateTime" Precision="7" />
+          <Property Name="Delete_By" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Delete_Date" Type="DateTime" Precision="7" />
+        </EntityType>
+        <EntityType Name="VW_InternationalReferalMaster">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="IsActive" />
+            <PropertyRef Name="IsDelete" />
+            <PropertyRef Name="Create_Date" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Code" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Narration" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="IsDelete" Type="Boolean" Nullable="false" />
+          <Property Name="Create_By" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Create_Date" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="Edit_By" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Edit_Date" Type="DateTime" Precision="7" />
+          <Property Name="Delete_By" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Delete_Date" Type="DateTime" Precision="7" />
+        </EntityType>
+        <EntityType Name="VW_IntroductionMaster">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="IsActive" />
+            <PropertyRef Name="IsDelete" />
+            <PropertyRef Name="Create_Date" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Code" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Narration" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="IsDelete" Type="Boolean" Nullable="false" />
+          <Property Name="Create_By" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Create_Date" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="Edit_By" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Edit_Date" Type="DateTime" Precision="7" />
+          <Property Name="Delete_By" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Delete_Date" Type="DateTime" Precision="7" />
+        </EntityType>
+        <EntityType Name="VW_InvoiceNarrationMaster">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="IsActive" />
+            <PropertyRef Name="IsDelete" />
+            <PropertyRef Name="Create_Date" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Code" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Narration" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="IsDelete" Type="Boolean" Nullable="false" />
+          <Property Name="Create_By" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Create_Date" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="Edit_By" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Edit_Date" Type="DateTime" Precision="7" />
+          <Property Name="Delete_By" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Delete_Date" Type="DateTime" Precision="7" />
+        </EntityType>
+        <EntityType Name="VW_InvoiceShortNarrationMaster">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="IsActive" />
+            <PropertyRef Name="IsDelete" />
+            <PropertyRef Name="Create_Date" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Code" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Narration" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="IsDelete" Type="Boolean" Nullable="false" />
+          <Property Name="Create_By" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Create_Date" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="Edit_By" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Edit_Date" Type="DateTime" Precision="7" />
+          <Property Name="Delete_By" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Delete_Date" Type="DateTime" Precision="7" />
+        </EntityType>
+        <EntityType Name="VW_LegalStatusMaster">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="IsActive" />
+            <PropertyRef Name="IsDelete" />
+            <PropertyRef Name="Create_Date" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Code" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Narration" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="IsDelete" Type="Boolean" Nullable="false" />
+          <Property Name="Create_By" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Create_Date" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="Edit_By" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Edit_Date" Type="DateTime" Precision="7" />
+          <Property Name="Delete_By" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Delete_Date" Type="DateTime" Precision="7" />
+        </EntityType>
+        <EntityType Name="VW_NatureMaster">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="IsActive" />
+            <PropertyRef Name="IsDelete" />
+            <PropertyRef Name="Create_Date" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Code" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Narration" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="IsDelete" Type="Boolean" Nullable="false" />
+          <Property Name="Create_By" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Create_Date" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="Edit_By" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Edit_Date" Type="DateTime" Precision="7" />
+          <Property Name="Delete_By" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Delete_Date" Type="DateTime" Precision="7" />
+        </EntityType>
+        <EntityType Name="VW_OpeningBalance">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="Date" />
+            <PropertyRef Name="Fk_CustomerId" />
+            <PropertyRef Name="IsDelete" />
+            <PropertyRef Name="Create_Date" />
+          </Key>
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="Fk_CustomerId" Type="Int32" Nullable="false" />
+          <Property Name="Amount" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="SalesRep" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Narration" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsDelete" Type="Boolean" Nullable="false" />
+          <Property Name="Create_By" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Create_Date" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="Edit_By" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Edit_Date" Type="DateTime" Precision="7" />
+          <Property Name="Delete_By" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Delete_Date" Type="DateTime" Precision="7" />
+        </EntityType>
+        <EntityType Name="VW_SectorMaster">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="IsActive" />
+            <PropertyRef Name="IsDelete" />
+            <PropertyRef Name="Create_Date" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Code" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Narration" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="IsDelete" Type="Boolean" Nullable="false" />
+          <Property Name="Create_By" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Create_Date" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="Edit_By" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Edit_Date" Type="DateTime" Precision="7" />
+          <Property Name="Delete_By" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Delete_Date" Type="DateTime" Precision="7" />
+        </EntityType>
+        <Association Name="FK_TblCustomers_TblGradeMaster_Fk_GradeMasterId">
+          <End Role="TblGradeMaster" Type="Self.TblGradeMaster" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="TblCustomers" Type="Self.TblCustomer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblGradeMaster">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TblCustomers">
+              <PropertyRef Name="Fk_GradeMasterId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TblCustomers_TblInternationalReferalMaster_Fk_InternationslReferalId">
+          <End Role="TblInternationalReferalMaster" Type="Self.TblInternationalReferalMaster" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="TblCustomers" Type="Self.TblCustomer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblInternationalReferalMaster">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TblCustomers">
+              <PropertyRef Name="Fk_InternationslReferalId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TblCustomers_TblIntroductionMaster_Fk_IntroductionId">
+          <End Role="TblIntroductionMaster" Type="Self.TblIntroductionMaster" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="TblCustomers" Type="Self.TblCustomer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblIntroductionMaster">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TblCustomers">
+              <PropertyRef Name="Fk_IntroductionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TblCustomers_TblLegalStatusMaster_Fk_LegalStatusMasterId">
+          <End Role="TblLegalStatusMaster" Type="Self.TblLegalStatusMaster" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="TblCustomers" Type="Self.TblCustomer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblLegalStatusMaster">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TblCustomers">
+              <PropertyRef Name="Fk_LegalStatusMasterId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TblCustomers_TblManager_Fk_ManagerId">
+          <End Role="TblManager" Type="Self.TblManager" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="TblCustomers" Type="Self.TblCustomer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblManager">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TblCustomers">
+              <PropertyRef Name="Fk_ManagerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TblCustomers_TblPartner_Fk_PartnerId">
+          <End Role="TblPartner" Type="Self.TblPartner" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="TblCustomers" Type="Self.TblCustomer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblPartner">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TblCustomers">
+              <PropertyRef Name="Fk_PartnerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TblCustomers_TblSectorMaster_Fk_SectorMasterId">
+          <End Role="TblSectorMaster" Type="Self.TblSectorMaster" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="TblCustomers" Type="Self.TblCustomer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblSectorMaster">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TblCustomers">
+              <PropertyRef Name="Fk_SectorMasterId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TblCustomers_TblWorkGroup_Fk_WorkGroupId">
+          <End Role="TblWorkGroup" Type="Self.TblWorkGroup" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="TblCustomers" Type="Self.TblCustomer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblWorkGroup">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TblCustomers">
+              <PropertyRef Name="Fk_WorkGroupId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TblJob_TblCustomers_Fk_CustomerId">
+          <End Role="TblCustomers" Type="Self.TblCustomer" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="TblJob" Type="Self.TblJob" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblCustomers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TblJob">
+              <PropertyRef Name="Fk_CustomerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TblLocation_TblCustomers_Fk_CustomerId">
+          <End Role="TblCustomers" Type="Self.TblCustomer" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="TblLocation" Type="Self.TblLocation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblCustomers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TblLocation">
+              <PropertyRef Name="Fk_CustomerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TblOpeningBalances_TblCustomers_Fk_CustomerId">
+          <End Role="TblCustomers" Type="Self.TblCustomer" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="TblOpeningBalances" Type="Self.TblOpeningBalance" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblCustomers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TblOpeningBalances">
+              <PropertyRef Name="Fk_CustomerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TblEmployee_TblDepartment_Fk_DepartmentId">
+          <End Role="TblDepartment" Type="Self.TblDepartment" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="TblEmployee" Type="Self.TblEmployee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblDepartment">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TblEmployee">
+              <PropertyRef Name="Fk_DepartmentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TblEmployee_TblDesignation_Fk_DesginationId">
+          <End Role="TblDesignation" Type="Self.TblDesignation" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="TblEmployee" Type="Self.TblEmployee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblDesignation">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TblEmployee">
+              <PropertyRef Name="Fk_DesginationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TblEmployee_TblTitle_Fk_TitleId">
+          <End Role="TblTitle" Type="Self.TblTitle" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="TblEmployee" Type="Self.TblEmployee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblTitle">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TblEmployee">
+              <PropertyRef Name="Fk_TitleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TblEmployeeHourlyRate_TblEmployee_Fk_EmployeeId">
+          <End Role="TblEmployee" Type="Self.TblEmployee" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="TblEmployeeHourlyRate" Type="Self.TblEmployeeHourlyRate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblEmployee">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TblEmployeeHourlyRate">
+              <PropertyRef Name="Fk_EmployeeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TblJob_TblEmployee_Fk_EmployeeId">
+          <End Role="TblEmployee" Type="Self.TblEmployee" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="TblJob" Type="Self.TblJob" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblEmployee">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TblJob">
+              <PropertyRef Name="Fk_EmployeeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TblNonEffectiveEmployee_TblEmployee_Fk_EmployeeId">
+          <End Role="TblEmployee" Type="Self.TblEmployee" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="TblNonEffectiveEmployee" Type="Self.TblNonEffectiveEmployee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblEmployee">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TblNonEffectiveEmployee">
+              <PropertyRef Name="Fk_EmployeeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TblJob_TblPartner_Fk_PartnerId">
+          <End Role="TblPartner" Type="Self.TblPartner" Multiplicity="1" />
+          <End Role="TblJob" Type="Self.TblJob" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblPartner">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TblJob">
+              <PropertyRef Name="Fk_PartnerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TblWorkType_TblWorkGroup_Fk_WorkGroupId">
+          <End Role="TblWorkGroup" Type="Self.TblWorkGroup" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="TblWorkType" Type="Self.TblWorkType" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblWorkGroup">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TblWorkType">
+              <PropertyRef Name="Fk_WorkGroupId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="AuditSystemEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="C__EFMigrationsHistory" EntityType="Self.C__EFMigrationsHistory" />
+          <EntitySet Name="TblCustomers" EntityType="Self.TblCustomer" />
+          <EntitySet Name="TblDepartments" EntityType="Self.TblDepartment" />
+          <EntitySet Name="TblDesignations" EntityType="Self.TblDesignation" />
+          <EntitySet Name="TblEmployees" EntityType="Self.TblEmployee" />
+          <EntitySet Name="TblEmployeeHourlyRates" EntityType="Self.TblEmployeeHourlyRate" />
+          <EntitySet Name="TblGradeMasters" EntityType="Self.TblGradeMaster" />
+          <EntitySet Name="TblInternationalReferalMasters" EntityType="Self.TblInternationalReferalMaster" />
+          <EntitySet Name="TblIntroductionMasters" EntityType="Self.TblIntroductionMaster" />
+          <EntitySet Name="TblInvoiceNarrationMasters" EntityType="Self.TblInvoiceNarrationMaster" />
+          <EntitySet Name="TblInvoiceShortNarrationMasters" EntityType="Self.TblInvoiceShortNarrationMaster" />
+          <EntitySet Name="TblJobs" EntityType="Self.TblJob" />
+          <EntitySet Name="TblLegalStatusMasters" EntityType="Self.TblLegalStatusMaster" />
+          <EntitySet Name="TblLocations" EntityType="Self.TblLocation" />
+          <EntitySet Name="TblManagers" EntityType="Self.TblManager" />
+          <EntitySet Name="TblNatureMasters" EntityType="Self.TblNatureMaster" />
+          <EntitySet Name="TblNonEffectiveEmployees" EntityType="Self.TblNonEffectiveEmployee" />
+          <EntitySet Name="TblOpeningBalances" EntityType="Self.TblOpeningBalance" />
+          <EntitySet Name="TblPartners" EntityType="Self.TblPartner" />
+          <EntitySet Name="TblSectorMasters" EntityType="Self.TblSectorMaster" />
+          <EntitySet Name="TblSiteSettings" EntityType="Self.TblSiteSetting" />
+          <EntitySet Name="TblTitles" EntityType="Self.TblTitle" />
+          <EntitySet Name="TblWorkGroups" EntityType="Self.TblWorkGroup" />
+          <EntitySet Name="TblWorkTypes" EntityType="Self.TblWorkType" />
+          <EntitySet Name="VW_Customer" EntityType="Self.VW_Customer" />
+          <EntitySet Name="VW_Employee" EntityType="Self.VW_Employee" />
+          <EntitySet Name="VW_GradeMaster" EntityType="Self.VW_GradeMaster" />
+          <EntitySet Name="VW_InternationalReferalMaster" EntityType="Self.VW_InternationalReferalMaster" />
+          <EntitySet Name="VW_IntroductionMaster" EntityType="Self.VW_IntroductionMaster" />
+          <EntitySet Name="VW_InvoiceNarrationMaster" EntityType="Self.VW_InvoiceNarrationMaster" />
+          <EntitySet Name="VW_InvoiceShortNarrationMaster" EntityType="Self.VW_InvoiceShortNarrationMaster" />
+          <EntitySet Name="VW_LegalStatusMaster" EntityType="Self.VW_LegalStatusMaster" />
+          <EntitySet Name="VW_NatureMaster" EntityType="Self.VW_NatureMaster" />
+          <EntitySet Name="VW_OpeningBalance" EntityType="Self.VW_OpeningBalance" />
+          <EntitySet Name="VW_SectorMaster" EntityType="Self.VW_SectorMaster" />
+          <AssociationSet Name="FK_TblCustomers_TblGradeMaster_Fk_GradeMasterId" Association="Self.FK_TblCustomers_TblGradeMaster_Fk_GradeMasterId">
+            <End Role="TblGradeMaster" EntitySet="TblGradeMasters" />
+            <End Role="TblCustomers" EntitySet="TblCustomers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TblCustomers_TblInternationalReferalMaster_Fk_InternationslReferalId" Association="Self.FK_TblCustomers_TblInternationalReferalMaster_Fk_InternationslReferalId">
+            <End Role="TblInternationalReferalMaster" EntitySet="TblInternationalReferalMasters" />
+            <End Role="TblCustomers" EntitySet="TblCustomers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TblCustomers_TblIntroductionMaster_Fk_IntroductionId" Association="Self.FK_TblCustomers_TblIntroductionMaster_Fk_IntroductionId">
+            <End Role="TblIntroductionMaster" EntitySet="TblIntroductionMasters" />
+            <End Role="TblCustomers" EntitySet="TblCustomers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TblCustomers_TblLegalStatusMaster_Fk_LegalStatusMasterId" Association="Self.FK_TblCustomers_TblLegalStatusMaster_Fk_LegalStatusMasterId">
+            <End Role="TblLegalStatusMaster" EntitySet="TblLegalStatusMasters" />
+            <End Role="TblCustomers" EntitySet="TblCustomers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TblCustomers_TblManager_Fk_ManagerId" Association="Self.FK_TblCustomers_TblManager_Fk_ManagerId">
+            <End Role="TblManager" EntitySet="TblManagers" />
+            <End Role="TblCustomers" EntitySet="TblCustomers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TblCustomers_TblPartner_Fk_PartnerId" Association="Self.FK_TblCustomers_TblPartner_Fk_PartnerId">
+            <End Role="TblPartner" EntitySet="TblPartners" />
+            <End Role="TblCustomers" EntitySet="TblCustomers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TblCustomers_TblSectorMaster_Fk_SectorMasterId" Association="Self.FK_TblCustomers_TblSectorMaster_Fk_SectorMasterId">
+            <End Role="TblSectorMaster" EntitySet="TblSectorMasters" />
+            <End Role="TblCustomers" EntitySet="TblCustomers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TblCustomers_TblWorkGroup_Fk_WorkGroupId" Association="Self.FK_TblCustomers_TblWorkGroup_Fk_WorkGroupId">
+            <End Role="TblWorkGroup" EntitySet="TblWorkGroups" />
+            <End Role="TblCustomers" EntitySet="TblCustomers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TblJob_TblCustomers_Fk_CustomerId" Association="Self.FK_TblJob_TblCustomers_Fk_CustomerId">
+            <End Role="TblCustomers" EntitySet="TblCustomers" />
+            <End Role="TblJob" EntitySet="TblJobs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TblLocation_TblCustomers_Fk_CustomerId" Association="Self.FK_TblLocation_TblCustomers_Fk_CustomerId">
+            <End Role="TblCustomers" EntitySet="TblCustomers" />
+            <End Role="TblLocation" EntitySet="TblLocations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TblOpeningBalances_TblCustomers_Fk_CustomerId" Association="Self.FK_TblOpeningBalances_TblCustomers_Fk_CustomerId">
+            <End Role="TblCustomers" EntitySet="TblCustomers" />
+            <End Role="TblOpeningBalances" EntitySet="TblOpeningBalances" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TblEmployee_TblDepartment_Fk_DepartmentId" Association="Self.FK_TblEmployee_TblDepartment_Fk_DepartmentId">
+            <End Role="TblDepartment" EntitySet="TblDepartments" />
+            <End Role="TblEmployee" EntitySet="TblEmployees" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TblEmployee_TblDesignation_Fk_DesginationId" Association="Self.FK_TblEmployee_TblDesignation_Fk_DesginationId">
+            <End Role="TblDesignation" EntitySet="TblDesignations" />
+            <End Role="TblEmployee" EntitySet="TblEmployees" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TblEmployee_TblTitle_Fk_TitleId" Association="Self.FK_TblEmployee_TblTitle_Fk_TitleId">
+            <End Role="TblTitle" EntitySet="TblTitles" />
+            <End Role="TblEmployee" EntitySet="TblEmployees" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TblEmployeeHourlyRate_TblEmployee_Fk_EmployeeId" Association="Self.FK_TblEmployeeHourlyRate_TblEmployee_Fk_EmployeeId">
+            <End Role="TblEmployee" EntitySet="TblEmployees" />
+            <End Role="TblEmployeeHourlyRate" EntitySet="TblEmployeeHourlyRates" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TblJob_TblEmployee_Fk_EmployeeId" Association="Self.FK_TblJob_TblEmployee_Fk_EmployeeId">
+            <End Role="TblEmployee" EntitySet="TblEmployees" />
+            <End Role="TblJob" EntitySet="TblJobs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TblNonEffectiveEmployee_TblEmployee_Fk_EmployeeId" Association="Self.FK_TblNonEffectiveEmployee_TblEmployee_Fk_EmployeeId">
+            <End Role="TblEmployee" EntitySet="TblEmployees" />
+            <End Role="TblNonEffectiveEmployee" EntitySet="TblNonEffectiveEmployees" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TblJob_TblPartner_Fk_PartnerId" Association="Self.FK_TblJob_TblPartner_Fk_PartnerId">
+            <End Role="TblPartner" EntitySet="TblPartners" />
+            <End Role="TblJob" EntitySet="TblJobs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TblWorkType_TblWorkGroup_Fk_WorkGroupId" Association="Self.FK_TblWorkType_TblWorkGroup_Fk_WorkGroupId">
+            <End Role="TblWorkGroup" EntitySet="TblWorkGroups" />
+            <End Role="TblWorkType" EntitySet="TblWorkTypes" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="AuditSystemModelStoreContainer" CdmEntityContainer="AuditSystemEntities">
+          <EntitySetMapping Name="C__EFMigrationsHistory">
+            <EntityTypeMapping TypeName="AuditSystemModel.C__EFMigrationsHistory">
+              <MappingFragment StoreEntitySet="__EFMigrationsHistory">
+                <ScalarProperty Name="MigrationId" ColumnName="MigrationId" />
+                <ScalarProperty Name="ProductVersion" ColumnName="ProductVersion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TblCustomers">
+            <EntityTypeMapping TypeName="AuditSystemModel.TblCustomer">
+              <MappingFragment StoreEntitySet="TblCustomers">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Fk_WorkGroupId" ColumnName="Fk_WorkGroupId" />
+                <ScalarProperty Name="VatType" ColumnName="VatType" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="TaxNo" ColumnName="TaxNo" />
+                <ScalarProperty Name="VatNo" ColumnName="VatNo" />
+                <ScalarProperty Name="SVatNo" ColumnName="SVatNo" />
+                <ScalarProperty Name="Fax" ColumnName="Fax" />
+                <ScalarProperty Name="TelOne" ColumnName="TelOne" />
+                <ScalarProperty Name="TelSecond" ColumnName="TelSecond" />
+                <ScalarProperty Name="Fk_GradeMasterId" ColumnName="Fk_GradeMasterId" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="ContactPersonOne" ColumnName="ContactPersonOne" />
+                <ScalarProperty Name="ContactPersonSecond" ColumnName="ContactPersonSecond" />
+                <ScalarProperty Name="Fk_PartnerId" ColumnName="Fk_PartnerId" />
+                <ScalarProperty Name="Fk_ManagerId" ColumnName="Fk_ManagerId" />
+                <ScalarProperty Name="Fk_LegalStatusMasterId" ColumnName="Fk_LegalStatusMasterId" />
+                <ScalarProperty Name="Fk_SectorMasterId" ColumnName="Fk_SectorMasterId" />
+                <ScalarProperty Name="Fk_IntroductionId" ColumnName="Fk_IntroductionId" />
+                <ScalarProperty Name="Fk_InternationslReferalId" ColumnName="Fk_InternationslReferalId" />
+                <ScalarProperty Name="DateOfJoined" ColumnName="DateOfJoined" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+                <ScalarProperty Name="Create_By" ColumnName="Create_By" />
+                <ScalarProperty Name="Create_Date" ColumnName="Create_Date" />
+                <ScalarProperty Name="Edit_By" ColumnName="Edit_By" />
+                <ScalarProperty Name="Edit_Date" ColumnName="Edit_Date" />
+                <ScalarProperty Name="Delete_By" ColumnName="Delete_By" />
+                <ScalarProperty Name="Delete_Date" ColumnName="Delete_Date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TblDepartments">
+            <EntityTypeMapping TypeName="AuditSystemModel.TblDepartment">
+              <MappingFragment StoreEntitySet="TblDepartment">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Narration" ColumnName="Narration" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+                <ScalarProperty Name="Create_By" ColumnName="Create_By" />
+                <ScalarProperty Name="Create_Date" ColumnName="Create_Date" />
+                <ScalarProperty Name="Edit_By" ColumnName="Edit_By" />
+                <ScalarProperty Name="Edit_Date" ColumnName="Edit_Date" />
+                <ScalarProperty Name="Delete_By" ColumnName="Delete_By" />
+                <ScalarProperty Name="Delete_Date" ColumnName="Delete_Date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TblDesignations">
+            <EntityTypeMapping TypeName="AuditSystemModel.TblDesignation">
+              <MappingFragment StoreEntitySet="TblDesignation">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Narration" ColumnName="Narration" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+                <ScalarProperty Name="Create_By" ColumnName="Create_By" />
+                <ScalarProperty Name="Create_Date" ColumnName="Create_Date" />
+                <ScalarProperty Name="Edit_By" ColumnName="Edit_By" />
+                <ScalarProperty Name="Edit_Date" ColumnName="Edit_Date" />
+                <ScalarProperty Name="Delete_By" ColumnName="Delete_By" />
+                <ScalarProperty Name="Delete_Date" ColumnName="Delete_Date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TblEmployees">
+            <EntityTypeMapping TypeName="AuditSystemModel.TblEmployee">
+              <MappingFragment StoreEntitySet="TblEmployee">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="BirthDay" ColumnName="BirthDay" />
+                <ScalarProperty Name="Nic" ColumnName="Nic" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="IdManager" ColumnName="IdManager" />
+                <ScalarProperty Name="Fk_TitleId" ColumnName="Fk_TitleId" />
+                <ScalarProperty Name="Fk_DesginationId" ColumnName="Fk_DesginationId" />
+                <ScalarProperty Name="Fk_DepartmentId" ColumnName="Fk_DepartmentId" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+                <ScalarProperty Name="Create_By" ColumnName="Create_By" />
+                <ScalarProperty Name="Create_Date" ColumnName="Create_Date" />
+                <ScalarProperty Name="Edit_By" ColumnName="Edit_By" />
+                <ScalarProperty Name="Edit_Date" ColumnName="Edit_Date" />
+                <ScalarProperty Name="Delete_By" ColumnName="Delete_By" />
+                <ScalarProperty Name="Delete_Date" ColumnName="Delete_Date" />
+                <ScalarProperty Name="DateOfJoin" ColumnName="DateOfJoin" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TblEmployeeHourlyRates">
+            <EntityTypeMapping TypeName="AuditSystemModel.TblEmployeeHourlyRate">
+              <MappingFragment StoreEntitySet="TblEmployeeHourlyRate">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Rate" ColumnName="Rate" />
+                <ScalarProperty Name="FromDate" ColumnName="FromDate" />
+                <ScalarProperty Name="ToDate" ColumnName="ToDate" />
+                <ScalarProperty Name="Fk_EmployeeId" ColumnName="Fk_EmployeeId" />
+                <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+                <ScalarProperty Name="Create_By" ColumnName="Create_By" />
+                <ScalarProperty Name="Create_Date" ColumnName="Create_Date" />
+                <ScalarProperty Name="Edit_By" ColumnName="Edit_By" />
+                <ScalarProperty Name="Edit_Date" ColumnName="Edit_Date" />
+                <ScalarProperty Name="Delete_By" ColumnName="Delete_By" />
+                <ScalarProperty Name="Delete_Date" ColumnName="Delete_Date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TblGradeMasters">
+            <EntityTypeMapping TypeName="AuditSystemModel.TblGradeMaster">
+              <MappingFragment StoreEntitySet="TblGradeMaster">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Narration" ColumnName="Narration" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+                <ScalarProperty Name="Create_By" ColumnName="Create_By" />
+                <ScalarProperty Name="Create_Date" ColumnName="Create_Date" />
+                <ScalarProperty Name="Edit_By" ColumnName="Edit_By" />
+                <ScalarProperty Name="Edit_Date" ColumnName="Edit_Date" />
+                <ScalarProperty Name="Delete_By" ColumnName="Delete_By" />
+                <ScalarProperty Name="Delete_Date" ColumnName="Delete_Date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TblInternationalReferalMasters">
+            <EntityTypeMapping TypeName="AuditSystemModel.TblInternationalReferalMaster">
+              <MappingFragment StoreEntitySet="TblInternationalReferalMaster">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Narration" ColumnName="Narration" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+                <ScalarProperty Name="Create_By" ColumnName="Create_By" />
+                <ScalarProperty Name="Create_Date" ColumnName="Create_Date" />
+                <ScalarProperty Name="Edit_By" ColumnName="Edit_By" />
+                <ScalarProperty Name="Edit_Date" ColumnName="Edit_Date" />
+                <ScalarProperty Name="Delete_By" ColumnName="Delete_By" />
+                <ScalarProperty Name="Delete_Date" ColumnName="Delete_Date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TblIntroductionMasters">
+            <EntityTypeMapping TypeName="AuditSystemModel.TblIntroductionMaster">
+              <MappingFragment StoreEntitySet="TblIntroductionMaster">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Narration" ColumnName="Narration" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+                <ScalarProperty Name="Create_By" ColumnName="Create_By" />
+                <ScalarProperty Name="Create_Date" ColumnName="Create_Date" />
+                <ScalarProperty Name="Edit_By" ColumnName="Edit_By" />
+                <ScalarProperty Name="Edit_Date" ColumnName="Edit_Date" />
+                <ScalarProperty Name="Delete_By" ColumnName="Delete_By" />
+                <ScalarProperty Name="Delete_Date" ColumnName="Delete_Date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TblInvoiceNarrationMasters">
+            <EntityTypeMapping TypeName="AuditSystemModel.TblInvoiceNarrationMaster">
+              <MappingFragment StoreEntitySet="TblInvoiceNarrationMaster">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Narration" ColumnName="Narration" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+                <ScalarProperty Name="Create_By" ColumnName="Create_By" />
+                <ScalarProperty Name="Create_Date" ColumnName="Create_Date" />
+                <ScalarProperty Name="Edit_By" ColumnName="Edit_By" />
+                <ScalarProperty Name="Edit_Date" ColumnName="Edit_Date" />
+                <ScalarProperty Name="Delete_By" ColumnName="Delete_By" />
+                <ScalarProperty Name="Delete_Date" ColumnName="Delete_Date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TblInvoiceShortNarrationMasters">
+            <EntityTypeMapping TypeName="AuditSystemModel.TblInvoiceShortNarrationMaster">
+              <MappingFragment StoreEntitySet="TblInvoiceShortNarrationMaster">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Narration" ColumnName="Narration" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+                <ScalarProperty Name="Create_By" ColumnName="Create_By" />
+                <ScalarProperty Name="Create_Date" ColumnName="Create_Date" />
+                <ScalarProperty Name="Edit_By" ColumnName="Edit_By" />
+                <ScalarProperty Name="Edit_Date" ColumnName="Edit_Date" />
+                <ScalarProperty Name="Delete_By" ColumnName="Delete_By" />
+                <ScalarProperty Name="Delete_Date" ColumnName="Delete_Date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TblJobs">
+            <EntityTypeMapping TypeName="AuditSystemModel.TblJob">
+              <MappingFragment StoreEntitySet="TblJob">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Narration" ColumnName="Narration" />
+                <ScalarProperty Name="PreViewvalue" ColumnName="PreViewvalue" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="DueDate" ColumnName="DueDate" />
+                <ScalarProperty Name="Fk_PartnerId" ColumnName="Fk_PartnerId" />
+                <ScalarProperty Name="Fk_CustomerId" ColumnName="Fk_CustomerId" />
+                <ScalarProperty Name="Fk_EmployeeId" ColumnName="Fk_EmployeeId" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+                <ScalarProperty Name="Create_By" ColumnName="Create_By" />
+                <ScalarProperty Name="Create_Date" ColumnName="Create_Date" />
+                <ScalarProperty Name="Edit_By" ColumnName="Edit_By" />
+                <ScalarProperty Name="Edit_Date" ColumnName="Edit_Date" />
+                <ScalarProperty Name="Delete_By" ColumnName="Delete_By" />
+                <ScalarProperty Name="Delete_Date" ColumnName="Delete_Date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TblLegalStatusMasters">
+            <EntityTypeMapping TypeName="AuditSystemModel.TblLegalStatusMaster">
+              <MappingFragment StoreEntitySet="TblLegalStatusMaster">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Narration" ColumnName="Narration" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+                <ScalarProperty Name="Create_By" ColumnName="Create_By" />
+                <ScalarProperty Name="Create_Date" ColumnName="Create_Date" />
+                <ScalarProperty Name="Edit_By" ColumnName="Edit_By" />
+                <ScalarProperty Name="Edit_Date" ColumnName="Edit_Date" />
+                <ScalarProperty Name="Delete_By" ColumnName="Delete_By" />
+                <ScalarProperty Name="Delete_Date" ColumnName="Delete_Date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TblLocations">
+            <EntityTypeMapping TypeName="AuditSystemModel.TblLocation">
+              <MappingFragment StoreEntitySet="TblLocation">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Narration" ColumnName="Narration" />
+                <ScalarProperty Name="Rate" ColumnName="Rate" />
+                <ScalarProperty Name="Fk_CustomerId" ColumnName="Fk_CustomerId" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+                <ScalarProperty Name="Create_By" ColumnName="Create_By" />
+                <ScalarProperty Name="Create_Date" ColumnName="Create_Date" />
+                <ScalarProperty Name="Edit_By" ColumnName="Edit_By" />
+                <ScalarProperty Name="Edit_Date" ColumnName="Edit_Date" />
+                <ScalarProperty Name="Delete_By" ColumnName="Delete_By" />
+                <ScalarProperty Name="Delete_Date" ColumnName="Delete_Date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TblManagers">
+            <EntityTypeMapping TypeName="AuditSystemModel.TblManager">
+              <MappingFragment StoreEntitySet="TblManager">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+                <ScalarProperty Name="Create_By" ColumnName="Create_By" />
+                <ScalarProperty Name="Create_Date" ColumnName="Create_Date" />
+                <ScalarProperty Name="Edit_By" ColumnName="Edit_By" />
+                <ScalarProperty Name="Edit_Date" ColumnName="Edit_Date" />
+                <ScalarProperty Name="Delete_By" ColumnName="Delete_By" />
+                <ScalarProperty Name="Delete_Date" ColumnName="Delete_Date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TblNatureMasters">
+            <EntityTypeMapping TypeName="AuditSystemModel.TblNatureMaster">
+              <MappingFragment StoreEntitySet="TblNatureMaster">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Narration" ColumnName="Narration" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+                <ScalarProperty Name="Create_By" ColumnName="Create_By" />
+                <ScalarProperty Name="Create_Date" ColumnName="Create_Date" />
+                <ScalarProperty Name="Edit_By" ColumnName="Edit_By" />
+                <ScalarProperty Name="Edit_Date" ColumnName="Edit_Date" />
+                <ScalarProperty Name="Delete_By" ColumnName="Delete_By" />
+                <ScalarProperty Name="Delete_Date" ColumnName="Delete_Date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TblNonEffectiveEmployees">
+            <EntityTypeMapping TypeName="AuditSystemModel.TblNonEffectiveEmployee">
+              <MappingFragment StoreEntitySet="TblNonEffectiveEmployee">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Fk_EmployeeId" ColumnName="Fk_EmployeeId" />
+                <ScalarProperty Name="NowEffective" ColumnName="NowEffective" />
+                <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+                <ScalarProperty Name="Create_By" ColumnName="Create_By" />
+                <ScalarProperty Name="Create_Date" ColumnName="Create_Date" />
+                <ScalarProperty Name="Edit_By" ColumnName="Edit_By" />
+                <ScalarProperty Name="Edit_Date" ColumnName="Edit_Date" />
+                <ScalarProperty Name="Delete_By" ColumnName="Delete_By" />
+                <ScalarProperty Name="Delete_Date" ColumnName="Delete_Date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TblOpeningBalances">
+            <EntityTypeMapping TypeName="AuditSystemModel.TblOpeningBalance">
+              <MappingFragment StoreEntitySet="TblOpeningBalances">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Fk_CustomerId" ColumnName="Fk_CustomerId" />
+                <ScalarProperty Name="Narration" ColumnName="Narration" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="SalesRep" ColumnName="SalesRep" />
+                <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+                <ScalarProperty Name="Create_By" ColumnName="Create_By" />
+                <ScalarProperty Name="Create_Date" ColumnName="Create_Date" />
+                <ScalarProperty Name="Edit_By" ColumnName="Edit_By" />
+                <ScalarProperty Name="Edit_Date" ColumnName="Edit_Date" />
+                <ScalarProperty Name="Delete_By" ColumnName="Delete_By" />
+                <ScalarProperty Name="Delete_Date" ColumnName="Delete_Date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TblPartners">
+            <EntityTypeMapping TypeName="AuditSystemModel.TblPartner">
+              <MappingFragment StoreEntitySet="TblPartner">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Narration" ColumnName="Narration" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+                <ScalarProperty Name="Create_By" ColumnName="Create_By" />
+                <ScalarProperty Name="Create_Date" ColumnName="Create_Date" />
+                <ScalarProperty Name="Edit_By" ColumnName="Edit_By" />
+                <ScalarProperty Name="Edit_Date" ColumnName="Edit_Date" />
+                <ScalarProperty Name="Delete_By" ColumnName="Delete_By" />
+                <ScalarProperty Name="Delete_Date" ColumnName="Delete_Date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TblSectorMasters">
+            <EntityTypeMapping TypeName="AuditSystemModel.TblSectorMaster">
+              <MappingFragment StoreEntitySet="TblSectorMaster">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Narration" ColumnName="Narration" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+                <ScalarProperty Name="Create_By" ColumnName="Create_By" />
+                <ScalarProperty Name="Create_Date" ColumnName="Create_Date" />
+                <ScalarProperty Name="Edit_By" ColumnName="Edit_By" />
+                <ScalarProperty Name="Edit_Date" ColumnName="Edit_Date" />
+                <ScalarProperty Name="Delete_By" ColumnName="Delete_By" />
+                <ScalarProperty Name="Delete_Date" ColumnName="Delete_Date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TblSiteSettings">
+            <EntityTypeMapping TypeName="AuditSystemModel.TblSiteSetting">
+              <MappingFragment StoreEntitySet="TblSiteSetting">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Value" ColumnName="Value" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+                <ScalarProperty Name="Create_By" ColumnName="Create_By" />
+                <ScalarProperty Name="Create_Date" ColumnName="Create_Date" />
+                <ScalarProperty Name="Edit_By" ColumnName="Edit_By" />
+                <ScalarProperty Name="Edit_Date" ColumnName="Edit_Date" />
+                <ScalarProperty Name="Delete_By" ColumnName="Delete_By" />
+                <ScalarProperty Name="Delete_Date" ColumnName="Delete_Date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TblTitles">
+            <EntityTypeMapping TypeName="AuditSystemModel.TblTitle">
+              <MappingFragment StoreEntitySet="TblTitle">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Narration" ColumnName="Narration" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+                <ScalarProperty Name="Create_By" ColumnName="Create_By" />
+                <ScalarProperty Name="Create_Date" ColumnName="Create_Date" />
+                <ScalarProperty Name="Edit_By" ColumnName="Edit_By" />
+                <ScalarProperty Name="Edit_Date" ColumnName="Edit_Date" />
+                <ScalarProperty Name="Delete_By" ColumnName="Delete_By" />
+                <ScalarProperty Name="Delete_Date" ColumnName="Delete_Date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TblWorkGroups">
+            <EntityTypeMapping TypeName="AuditSystemModel.TblWorkGroup">
+              <MappingFragment StoreEntitySet="TblWorkGroup">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Narration" ColumnName="Narration" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+                <ScalarProperty Name="Create_By" ColumnName="Create_By" />
+                <ScalarProperty Name="Create_Date" ColumnName="Create_Date" />
+                <ScalarProperty Name="Edit_By" ColumnName="Edit_By" />
+                <ScalarProperty Name="Edit_Date" ColumnName="Edit_Date" />
+                <ScalarProperty Name="Delete_By" ColumnName="Delete_By" />
+                <ScalarProperty Name="Delete_Date" ColumnName="Delete_Date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TblWorkTypes">
+            <EntityTypeMapping TypeName="AuditSystemModel.TblWorkType">
+              <MappingFragment StoreEntitySet="TblWorkType">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Narration" ColumnName="Narration" />
+                <ScalarProperty Name="Billable" ColumnName="Billable" />
+                <ScalarProperty Name="Fk_WorkGroupId" ColumnName="Fk_WorkGroupId" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+                <ScalarProperty Name="Create_By" ColumnName="Create_By" />
+                <ScalarProperty Name="Create_Date" ColumnName="Create_Date" />
+                <ScalarProperty Name="Edit_By" ColumnName="Edit_By" />
+                <ScalarProperty Name="Edit_Date" ColumnName="Edit_Date" />
+                <ScalarProperty Name="Delete_By" ColumnName="Delete_By" />
+                <ScalarProperty Name="Delete_Date" ColumnName="Delete_Date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VW_Customer">
+            <EntityTypeMapping TypeName="AuditSystemModel.VW_Customer">
+              <MappingFragment StoreEntitySet="VW_Customer">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Fk_WorkGroupId" ColumnName="Fk_WorkGroupId" />
+                <ScalarProperty Name="VatType" ColumnName="VatType" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="TaxNo" ColumnName="TaxNo" />
+                <ScalarProperty Name="VatNo" ColumnName="VatNo" />
+                <ScalarProperty Name="SVatNo" ColumnName="SVatNo" />
+                <ScalarProperty Name="Fax" ColumnName="Fax" />
+                <ScalarProperty Name="TelOne" ColumnName="TelOne" />
+                <ScalarProperty Name="TelSecond" ColumnName="TelSecond" />
+                <ScalarProperty Name="Fk_GradeMasterId" ColumnName="Fk_GradeMasterId" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="ContactPersonOne" ColumnName="ContactPersonOne" />
+                <ScalarProperty Name="ContactPersonSecond" ColumnName="ContactPersonSecond" />
+                <ScalarProperty Name="Fk_PartnerId" ColumnName="Fk_PartnerId" />
+                <ScalarProperty Name="Fk_ManagerId" ColumnName="Fk_ManagerId" />
+                <ScalarProperty Name="Fk_LegalStatusMasterId" ColumnName="Fk_LegalStatusMasterId" />
+                <ScalarProperty Name="Fk_SectorMasterId" ColumnName="Fk_SectorMasterId" />
+                <ScalarProperty Name="Fk_IntroductionId" ColumnName="Fk_IntroductionId" />
+                <ScalarProperty Name="Fk_InternationslReferalId" ColumnName="Fk_InternationslReferalId" />
+                <ScalarProperty Name="DateOfJoined" ColumnName="DateOfJoined" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+                <ScalarProperty Name="Create_By" ColumnName="Create_By" />
+                <ScalarProperty Name="Create_Date" ColumnName="Create_Date" />
+                <ScalarProperty Name="Edit_By" ColumnName="Edit_By" />
+                <ScalarProperty Name="Edit_Date" ColumnName="Edit_Date" />
+                <ScalarProperty Name="Delete_By" ColumnName="Delete_By" />
+                <ScalarProperty Name="Delete_Date" ColumnName="Delete_Date" />
+                <ScalarProperty Name="WorkGroupCode" ColumnName="WorkGroupCode" />
+                <ScalarProperty Name="GradeMasterCode" ColumnName="GradeMasterCode" />
+                <ScalarProperty Name="Partner" ColumnName="Partner" />
+                <ScalarProperty Name="ManagerName" ColumnName="ManagerName" />
+                <ScalarProperty Name="LegalStatusMasterCode" ColumnName="LegalStatusMasterCode" />
+                <ScalarProperty Name="SectorMasterCode" ColumnName="SectorMasterCode" />
+                <ScalarProperty Name="IntroductionCode" ColumnName="IntroductionCode" />
+                <ScalarProperty Name="InternationslReferalCode" ColumnName="InternationslReferalCode" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VW_Employee">
+            <EntityTypeMapping TypeName="AuditSystemModel.VW_Employee">
+              <MappingFragment StoreEntitySet="VW_Employee">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="BirthDay" ColumnName="BirthDay" />
+                <ScalarProperty Name="Nic" ColumnName="Nic" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="IdManager" ColumnName="IdManager" />
+                <ScalarProperty Name="Fk_TitleId" ColumnName="Fk_TitleId" />
+                <ScalarProperty Name="Fk_DesginationId" ColumnName="Fk_DesginationId" />
+                <ScalarProperty Name="Fk_DepartmentId" ColumnName="Fk_DepartmentId" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+                <ScalarProperty Name="Create_By" ColumnName="Create_By" />
+                <ScalarProperty Name="Create_Date" ColumnName="Create_Date" />
+                <ScalarProperty Name="Edit_By" ColumnName="Edit_By" />
+                <ScalarProperty Name="Edit_Date" ColumnName="Edit_Date" />
+                <ScalarProperty Name="Delete_By" ColumnName="Delete_By" />
+                <ScalarProperty Name="Delete_Date" ColumnName="Delete_Date" />
+                <ScalarProperty Name="DateOfJoin" ColumnName="DateOfJoin" />
+                <ScalarProperty Name="DepartmentCode" ColumnName="DepartmentCode" />
+                <ScalarProperty Name="DesignationCode" ColumnName="DesignationCode" />
+                <ScalarProperty Name="titleCode" ColumnName="titleCode" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VW_GradeMaster">
+            <EntityTypeMapping TypeName="AuditSystemModel.VW_GradeMaster">
+              <MappingFragment StoreEntitySet="VW_GradeMaster">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Narration" ColumnName="Narration" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+                <ScalarProperty Name="Create_By" ColumnName="Create_By" />
+                <ScalarProperty Name="Create_Date" ColumnName="Create_Date" />
+                <ScalarProperty Name="Edit_By" ColumnName="Edit_By" />
+                <ScalarProperty Name="Edit_Date" ColumnName="Edit_Date" />
+                <ScalarProperty Name="Delete_By" ColumnName="Delete_By" />
+                <ScalarProperty Name="Delete_Date" ColumnName="Delete_Date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VW_InternationalReferalMaster">
+            <EntityTypeMapping TypeName="AuditSystemModel.VW_InternationalReferalMaster">
+              <MappingFragment StoreEntitySet="VW_InternationalReferalMaster">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Narration" ColumnName="Narration" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+                <ScalarProperty Name="Create_By" ColumnName="Create_By" />
+                <ScalarProperty Name="Create_Date" ColumnName="Create_Date" />
+                <ScalarProperty Name="Edit_By" ColumnName="Edit_By" />
+                <ScalarProperty Name="Edit_Date" ColumnName="Edit_Date" />
+                <ScalarProperty Name="Delete_By" ColumnName="Delete_By" />
+                <ScalarProperty Name="Delete_Date" ColumnName="Delete_Date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VW_IntroductionMaster">
+            <EntityTypeMapping TypeName="AuditSystemModel.VW_IntroductionMaster">
+              <MappingFragment StoreEntitySet="VW_IntroductionMaster">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Narration" ColumnName="Narration" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+                <ScalarProperty Name="Create_By" ColumnName="Create_By" />
+                <ScalarProperty Name="Create_Date" ColumnName="Create_Date" />
+                <ScalarProperty Name="Edit_By" ColumnName="Edit_By" />
+                <ScalarProperty Name="Edit_Date" ColumnName="Edit_Date" />
+                <ScalarProperty Name="Delete_By" ColumnName="Delete_By" />
+                <ScalarProperty Name="Delete_Date" ColumnName="Delete_Date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VW_InvoiceNarrationMaster">
+            <EntityTypeMapping TypeName="AuditSystemModel.VW_InvoiceNarrationMaster">
+              <MappingFragment StoreEntitySet="VW_InvoiceNarrationMaster">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Narration" ColumnName="Narration" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+                <ScalarProperty Name="Create_By" ColumnName="Create_By" />
+                <ScalarProperty Name="Create_Date" ColumnName="Create_Date" />
+                <ScalarProperty Name="Edit_By" ColumnName="Edit_By" />
+                <ScalarProperty Name="Edit_Date" ColumnName="Edit_Date" />
+                <ScalarProperty Name="Delete_By" ColumnName="Delete_By" />
+                <ScalarProperty Name="Delete_Date" ColumnName="Delete_Date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VW_InvoiceShortNarrationMaster">
+            <EntityTypeMapping TypeName="AuditSystemModel.VW_InvoiceShortNarrationMaster">
+              <MappingFragment StoreEntitySet="VW_InvoiceShortNarrationMaster">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Narration" ColumnName="Narration" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+                <ScalarProperty Name="Create_By" ColumnName="Create_By" />
+                <ScalarProperty Name="Create_Date" ColumnName="Create_Date" />
+                <ScalarProperty Name="Edit_By" ColumnName="Edit_By" />
+                <ScalarProperty Name="Edit_Date" ColumnName="Edit_Date" />
+                <ScalarProperty Name="Delete_By" ColumnName="Delete_By" />
+                <ScalarProperty Name="Delete_Date" ColumnName="Delete_Date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VW_LegalStatusMaster">
+            <EntityTypeMapping TypeName="AuditSystemModel.VW_LegalStatusMaster">
+              <MappingFragment StoreEntitySet="VW_LegalStatusMaster">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Narration" ColumnName="Narration" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+                <ScalarProperty Name="Create_By" ColumnName="Create_By" />
+                <ScalarProperty Name="Create_Date" ColumnName="Create_Date" />
+                <ScalarProperty Name="Edit_By" ColumnName="Edit_By" />
+                <ScalarProperty Name="Edit_Date" ColumnName="Edit_Date" />
+                <ScalarProperty Name="Delete_By" ColumnName="Delete_By" />
+                <ScalarProperty Name="Delete_Date" ColumnName="Delete_Date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VW_NatureMaster">
+            <EntityTypeMapping TypeName="AuditSystemModel.VW_NatureMaster">
+              <MappingFragment StoreEntitySet="VW_NatureMaster">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Narration" ColumnName="Narration" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+                <ScalarProperty Name="Create_By" ColumnName="Create_By" />
+                <ScalarProperty Name="Create_Date" ColumnName="Create_Date" />
+                <ScalarProperty Name="Edit_By" ColumnName="Edit_By" />
+                <ScalarProperty Name="Edit_Date" ColumnName="Edit_Date" />
+                <ScalarProperty Name="Delete_By" ColumnName="Delete_By" />
+                <ScalarProperty Name="Delete_Date" ColumnName="Delete_Date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VW_OpeningBalance">
+            <EntityTypeMapping TypeName="AuditSystemModel.VW_OpeningBalance">
+              <MappingFragment StoreEntitySet="VW_OpeningBalance">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Fk_CustomerId" ColumnName="Fk_CustomerId" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="SalesRep" ColumnName="SalesRep" />
+                <ScalarProperty Name="Narration" ColumnName="Narration" />
+                <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+                <ScalarProperty Name="Create_By" ColumnName="Create_By" />
+                <ScalarProperty Name="Create_Date" ColumnName="Create_Date" />
+                <ScalarProperty Name="Edit_By" ColumnName="Edit_By" />
+                <ScalarProperty Name="Edit_Date" ColumnName="Edit_Date" />
+                <ScalarProperty Name="Delete_By" ColumnName="Delete_By" />
+                <ScalarProperty Name="Delete_Date" ColumnName="Delete_Date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VW_SectorMaster">
+            <EntityTypeMapping TypeName="AuditSystemModel.VW_SectorMaster">
+              <MappingFragment StoreEntitySet="VW_SectorMaster">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Narration" ColumnName="Narration" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+                <ScalarProperty Name="Create_By" ColumnName="Create_By" />
+                <ScalarProperty Name="Create_Date" ColumnName="Create_Date" />
+                <ScalarProperty Name="Edit_By" ColumnName="Edit_By" />
+                <ScalarProperty Name="Edit_Date" ColumnName="Edit_Date" />
+                <ScalarProperty Name="Delete_By" ColumnName="Delete_By" />
+                <ScalarProperty Name="Delete_Date" ColumnName="Delete_Date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

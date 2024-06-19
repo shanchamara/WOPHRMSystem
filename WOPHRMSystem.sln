@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34330.188
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WOPHRMSystem", "WOPHRMSystem.csproj", "{AB94AB58-CA94-4BEC-8A20-86C6CC89C21A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{AB94AB58-CA94-4BEC-8A20-86C6CC89C21A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AB94AB58-CA94-4BEC-8A20-86C6CC89C21A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AB94AB58-CA94-4BEC-8A20-86C6CC89C21A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AB94AB58-CA94-4BEC-8A20-86C6CC89C21A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {45B86ACF-357D-4771-A777-DB50F1EB8C15}
+	EndGlobalSection
+EndGlobal

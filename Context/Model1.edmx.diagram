@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="4ede8ecf0848459b8dd1b2e4a9f6f189" Name="Diagram1">
+        <EntityTypeShape EntityType="AuditSystemModel.C__EFMigrationsHistory" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="AuditSystemModel.TblCustomer" Width="1.5" PointX="3" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="AuditSystemModel.TblDepartment" Width="1.5" PointX="0.75" PointY="42" IsExpanded="true" />
+        <EntityTypeShape EntityType="AuditSystemModel.TblDesignation" Width="1.5" PointX="0.75" PointY="46" IsExpanded="true" />
+        <EntityTypeShape EntityType="AuditSystemModel.TblEmployee" Width="1.5" PointX="3" PointY="44.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="AuditSystemModel.TblEmployeeHourlyRate" Width="1.5" PointX="5.25" PointY="44" IsExpanded="true" />
+        <EntityTypeShape EntityType="AuditSystemModel.TblGradeMaster" Width="1.5" PointX="0.75" PointY="12.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="AuditSystemModel.TblInternationalReferalMaster" Width="1.5" PointX="0.75" PointY="16.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="AuditSystemModel.TblIntroductionMaster" Width="1.5" PointX="0.75" PointY="20.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="AuditSystemModel.TblInvoiceNarrationMaster" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="AuditSystemModel.TblInvoiceShortNarrationMaster" Width="1.5" PointX="7.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="AuditSystemModel.TblJob" Width="1.5" PointX="5.25" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="AuditSystemModel.TblLegalStatusMaster" Width="1.5" PointX="0.75" PointY="24.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="AuditSystemModel.TblLocation" Width="1.5" PointX="5.25" PointY="9.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="AuditSystemModel.TblManager" Width="1.5" PointX="0.75" PointY="28.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="AuditSystemModel.TblNatureMaster" Width="1.5" PointX="7.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="AuditSystemModel.TblNonEffectiveEmployee" Width="1.5" PointX="5.25" PointY="48.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="AuditSystemModel.TblOpeningBalance" Width="1.5" PointX="5.25" PointY="14.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="AuditSystemModel.TblPartner" Width="1.5" PointX="0.75" PointY="6.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="AuditSystemModel.TblSectorMaster" Width="1.5" PointX="0.75" PointY="32.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="AuditSystemModel.TblSiteSetting" Width="1.5" PointX="9.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="AuditSystemModel.TblTitle" Width="1.5" PointX="0.75" PointY="50.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="AuditSystemModel.TblWorkGroup" Width="1.5" PointX="0.75" PointY="37" IsExpanded="true" />
+        <EntityTypeShape EntityType="AuditSystemModel.TblWorkType" Width="1.5" PointX="3" PointY="36.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="AuditSystemModel.VW_Customer" Width="1.5" PointX="9.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="AuditSystemModel.VW_Employee" Width="1.5" PointX="11.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="AuditSystemModel.VW_GradeMaster" Width="1.5" PointX="11.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="AuditSystemModel.VW_InternationalReferalMaster" Width="1.5" PointX="11.75" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="AuditSystemModel.VW_IntroductionMaster" Width="1.5" PointX="13.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="AuditSystemModel.VW_InvoiceNarrationMaster" Width="1.5" PointX="13.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="AuditSystemModel.VW_InvoiceShortNarrationMaster" Width="1.5" PointX="13.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="AuditSystemModel.VW_LegalStatusMaster" Width="1.5" PointX="13.75" PointY="12.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="AuditSystemModel.VW_NatureMaster" Width="1.5" PointX="7.75" PointY="14.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="AuditSystemModel.VW_OpeningBalance" Width="1.5" PointX="9.75" PointY="14.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="AuditSystemModel.VW_SectorMaster" Width="1.5" PointX="15.75" PointY="0.75" IsExpanded="true" />
+        <AssociationConnector Association="AuditSystemModel.FK_TblCustomers_TblGradeMaster_Fk_GradeMasterId" ManuallyRouted="false" />
+        <AssociationConnector Association="AuditSystemModel.FK_TblCustomers_TblInternationalReferalMaster_Fk_InternationslReferalId" ManuallyRouted="false" />
+        <AssociationConnector Association="AuditSystemModel.FK_TblCustomers_TblIntroductionMaster_Fk_IntroductionId" ManuallyRouted="false" />
+        <AssociationConnector Association="AuditSystemModel.FK_TblCustomers_TblLegalStatusMaster_Fk_LegalStatusMasterId" ManuallyRouted="false" />
+        <AssociationConnector Association="AuditSystemModel.FK_TblCustomers_TblManager_Fk_ManagerId" ManuallyRouted="false" />
+        <AssociationConnector Association="AuditSystemModel.FK_TblCustomers_TblPartner_Fk_PartnerId" ManuallyRouted="false" />
+        <AssociationConnector Association="AuditSystemModel.FK_TblCustomers_TblSectorMaster_Fk_SectorMasterId" ManuallyRouted="false" />
+        <AssociationConnector Association="AuditSystemModel.FK_TblCustomers_TblWorkGroup_Fk_WorkGroupId" ManuallyRouted="false" />
+        <AssociationConnector Association="AuditSystemModel.FK_TblJob_TblCustomers_Fk_CustomerId" ManuallyRouted="false" />
+        <AssociationConnector Association="AuditSystemModel.FK_TblLocation_TblCustomers_Fk_CustomerId" ManuallyRouted="false" />
+        <AssociationConnector Association="AuditSystemModel.FK_TblOpeningBalances_TblCustomers_Fk_CustomerId" ManuallyRouted="false" />
+        <AssociationConnector Association="AuditSystemModel.FK_TblEmployee_TblDepartment_Fk_DepartmentId" ManuallyRouted="false" />
+        <AssociationConnector Association="AuditSystemModel.FK_TblEmployee_TblDesignation_Fk_DesginationId" ManuallyRouted="false" />
+        <AssociationConnector Association="AuditSystemModel.FK_TblEmployee_TblTitle_Fk_TitleId" ManuallyRouted="false" />
+        <AssociationConnector Association="AuditSystemModel.FK_TblEmployeeHourlyRate_TblEmployee_Fk_EmployeeId" ManuallyRouted="false" />
+        <AssociationConnector Association="AuditSystemModel.FK_TblJob_TblEmployee_Fk_EmployeeId" ManuallyRouted="false" />
+        <AssociationConnector Association="AuditSystemModel.FK_TblNonEffectiveEmployee_TblEmployee_Fk_EmployeeId" ManuallyRouted="false" />
+        <AssociationConnector Association="AuditSystemModel.FK_TblJob_TblPartner_Fk_PartnerId" ManuallyRouted="false" />
+        <AssociationConnector Association="AuditSystemModel.FK_TblWorkType_TblWorkGroup_Fk_WorkGroupId" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
