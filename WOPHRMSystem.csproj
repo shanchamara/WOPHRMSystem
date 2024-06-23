@@ -293,6 +293,7 @@
     <Compile Include="Controllers\DesignationController.cs" />
     <Compile Include="Controllers\EmployeeController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\JobTransactionController.cs" />
     <Compile Include="Controllers\LocationController.cs" />
     <Compile Include="Controllers\ManagerController.cs" />
     <Compile Include="Controllers\NonEffectiveEmployeeController.cs" />
@@ -309,7 +310,7 @@
     <Compile Include="Models\DepartmentModel.cs" />
     <Compile Include="Models\DesignationModel.cs" />
     <Compile Include="Models\EmployeeHourlyRateModel.cs" />
-    <Compile Include="Models\EmployeeJobTransaction.cs" />
+    <Compile Include="Models\EmployeeJobTransactionModel.cs" />
     <Compile Include="Models\EmployeeModel.cs" />
     <Compile Include="Models\GradeMasterModel.cs" />
     <Compile Include="Models\InternationalReferalMasterModel.cs" />
@@ -331,6 +332,7 @@
     <Compile Include="Models\WorkTypeModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\CustomerServices.cs" />
+    <Compile Include="Services\EmployeeJobTransactionServices.cs" />
     <Compile Include="Services\JobMasterAssignTempServices.cs" />
     <Compile Include="Services\JobMasterServices.cs" />
     <Compile Include="Services\DepartmentServices.cs" />
@@ -2521,6 +2523,8 @@
     <Content Include="Views\JobMaster\CompltedIndex.cshtml" />
     <Content Include="Views\JobMaster\ReactivateIndex.cshtml" />
     <Content Include="Views\JobMaster\Reactivate.cshtml" />
+    <Content Include="Views\JobTransaction\Index.cshtml" />
+    <Content Include="Views\JobTransaction\WorkingHoursViewByEmployee.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

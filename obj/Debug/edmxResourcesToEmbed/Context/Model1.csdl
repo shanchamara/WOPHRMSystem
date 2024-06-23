@@ -137,7 +137,7 @@
       <End Role="TblLocation" EntitySet="TblLocations" />
       <End Role="TblJobTransaction" EntitySet="TblJobTransactions" />
     </AssociationSet>
-    <AssociationSet Name="FK_TblJobTransaction_TblWorkGroup_Fk_WorkGroupId" Association="AuditSystemModel.FK_TblJobTransaction_TblWorkGroup_Fk_WorkGroupId">
+    <AssociationSet Name="FK_TblJobTransaction_TblWorkGroup_TblWorkGroupId" Association="AuditSystemModel.FK_TblJobTransaction_TblWorkGroup_TblWorkGroupId">
       <End Role="TblWorkGroup" EntitySet="TblWorkGroups" />
       <End Role="TblJobTransaction" EntitySet="TblJobTransactions" />
     </AssociationSet>
@@ -482,7 +482,6 @@
     <Property Name="Fk_LocationId" Type="Int32" Nullable="false" />
     <Property Name="Hours" Type="Decimal" Precision="18" Scale="2" />
     <Property Name="Fk_WorkTypeId" Type="Int32" Nullable="false" />
-    <Property Name="Fk_WorkGroupId" Type="Int32" Nullable="false" />
     <Property Name="Fk_CustomerId" Type="Int32" Nullable="false" />
     <Property Name="IsDelete" Type="Boolean" Nullable="false" />
     <Property Name="Create_By" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
@@ -491,11 +490,12 @@
     <Property Name="Edit_Date" Type="DateTime" Precision="7" />
     <Property Name="Delete_By" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="Delete_Date" Type="DateTime" Precision="7" />
+    <Property Name="TblWorkGroupId" Type="Int32" />
     <NavigationProperty Name="TblCustomer" Relationship="AuditSystemModel.FK_TblJobTransaction_TblCustomers_Fk_CustomerId" FromRole="TblJobTransaction" ToRole="TblCustomer" />
     <NavigationProperty Name="TblEmployee" Relationship="AuditSystemModel.FK_TblJobTransaction_TblEmployee_Fk_EmployeeId" FromRole="TblJobTransaction" ToRole="TblEmployee" />
     <NavigationProperty Name="TblJobMaster" Relationship="AuditSystemModel.FK_TblJobTransaction_TblJobMaster_Fk_JobMasterId" FromRole="TblJobTransaction" ToRole="TblJobMaster" />
     <NavigationProperty Name="TblLocation" Relationship="AuditSystemModel.FK_TblJobTransaction_TblLocation_Fk_LocationId" FromRole="TblJobTransaction" ToRole="TblLocation" />
-    <NavigationProperty Name="TblWorkGroup" Relationship="AuditSystemModel.FK_TblJobTransaction_TblWorkGroup_Fk_WorkGroupId" FromRole="TblJobTransaction" ToRole="TblWorkGroup" />
+    <NavigationProperty Name="TblWorkGroup" Relationship="AuditSystemModel.FK_TblJobTransaction_TblWorkGroup_TblWorkGroupId" FromRole="TblJobTransaction" ToRole="TblWorkGroup" />
     <NavigationProperty Name="TblWorkType" Relationship="AuditSystemModel.FK_TblJobTransaction_TblWorkType_Fk_WorkTypeId" FromRole="TblJobTransaction" ToRole="TblWorkType" />
   </EntityType>
   <EntityType Name="TblLegalStatusMaster">
@@ -687,7 +687,7 @@
     <Property Name="Delete_By" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="Delete_Date" Type="DateTime" Precision="7" />
     <NavigationProperty Name="TblCustomers" Relationship="AuditSystemModel.FK_TblCustomers_TblWorkGroup_Fk_WorkGroupId" FromRole="TblWorkGroup" ToRole="TblCustomer" />
-    <NavigationProperty Name="TblJobTransactions" Relationship="AuditSystemModel.FK_TblJobTransaction_TblWorkGroup_Fk_WorkGroupId" FromRole="TblWorkGroup" ToRole="TblJobTransaction" />
+    <NavigationProperty Name="TblJobTransactions" Relationship="AuditSystemModel.FK_TblJobTransaction_TblWorkGroup_TblWorkGroupId" FromRole="TblWorkGroup" ToRole="TblJobTransaction" />
     <NavigationProperty Name="TblWorkTypes" Relationship="AuditSystemModel.FK_TblWorkType_TblWorkGroup_Fk_WorkGroupId" FromRole="TblWorkGroup" ToRole="TblWorkType" />
   </EntityType>
   <EntityType Name="TblWorkType">
@@ -835,7 +835,6 @@
       <PropertyRef Name="EmployeeName" />
       <PropertyRef Name="Fk_LocationId" />
       <PropertyRef Name="Fk_WorkTypeId" />
-      <PropertyRef Name="Fk_WorkGroupId" />
       <PropertyRef Name="Fk_CustomerId" />
       <PropertyRef Name="IsDelete" />
       <PropertyRef Name="Create_Date" />
@@ -846,7 +845,6 @@
     <Property Name="Fk_EmployeeId" Type="Int32" Nullable="false" />
     <Property Name="JobCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="CustomerCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="GroupCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="EmployeeName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="LocationCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="WorkTypeCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
@@ -855,7 +853,6 @@
     <Property Name="Fk_LocationId" Type="Int32" Nullable="false" />
     <Property Name="Hours" Type="Decimal" Precision="18" Scale="2" />
     <Property Name="Fk_WorkTypeId" Type="Int32" Nullable="false" />
-    <Property Name="Fk_WorkGroupId" Type="Int32" Nullable="false" />
     <Property Name="Fk_CustomerId" Type="Int32" Nullable="false" />
     <Property Name="IsDelete" Type="Boolean" Nullable="false" />
     <Property Name="Create_By" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
@@ -1383,15 +1380,15 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_TblJobTransaction_TblWorkGroup_Fk_WorkGroupId">
-    <End Type="AuditSystemModel.TblWorkGroup" Role="TblWorkGroup" Multiplicity="1" />
+  <Association Name="FK_TblJobTransaction_TblWorkGroup_TblWorkGroupId">
+    <End Type="AuditSystemModel.TblWorkGroup" Role="TblWorkGroup" Multiplicity="0..1" />
     <End Type="AuditSystemModel.TblJobTransaction" Role="TblJobTransaction" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="TblWorkGroup">
         <PropertyRef Name="Id" />
       </Principal>
       <Dependent Role="TblJobTransaction">
-        <PropertyRef Name="Fk_WorkGroupId" />
+        <PropertyRef Name="TblWorkGroupId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

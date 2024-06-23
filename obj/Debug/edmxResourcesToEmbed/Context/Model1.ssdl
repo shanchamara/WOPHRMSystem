@@ -301,7 +301,6 @@
     <Property Name="Fk_LocationId" Type="int" Nullable="false" />
     <Property Name="Hours" Type="decimal" Precision="18" Scale="2" />
     <Property Name="Fk_WorkTypeId" Type="int" Nullable="false" />
-    <Property Name="Fk_WorkGroupId" Type="int" Nullable="false" />
     <Property Name="Fk_CustomerId" Type="int" Nullable="false" />
     <Property Name="IsDelete" Type="bit" Nullable="false" />
     <Property Name="Create_By" Type="nvarchar(max)" />
@@ -310,6 +309,7 @@
     <Property Name="Edit_Date" Type="datetime2" Precision="7" />
     <Property Name="Delete_By" Type="nvarchar(max)" />
     <Property Name="Delete_Date" Type="datetime2" Precision="7" />
+    <Property Name="TblWorkGroupId" Type="int" />
   </EntityType>
   <EntityType Name="TblLegalStatusMaster">
     <Key>
@@ -641,7 +641,6 @@ warning 6002: The table/view 'AuditSystem.dbo.VW_EmployeeJobTransaction' does no
       <PropertyRef Name="EmployeeName" />
       <PropertyRef Name="Fk_LocationId" />
       <PropertyRef Name="Fk_WorkTypeId" />
-      <PropertyRef Name="Fk_WorkGroupId" />
       <PropertyRef Name="Fk_CustomerId" />
       <PropertyRef Name="IsDelete" />
       <PropertyRef Name="Create_Date" />
@@ -652,7 +651,6 @@ warning 6002: The table/view 'AuditSystem.dbo.VW_EmployeeJobTransaction' does no
     <Property Name="Fk_EmployeeId" Type="int" Nullable="false" />
     <Property Name="JobCode" Type="nvarchar(max)" />
     <Property Name="CustomerCode" Type="nvarchar(max)" />
-    <Property Name="GroupCode" Type="nvarchar(max)" />
     <Property Name="EmployeeName" Type="nvarchar(max)" Nullable="false" />
     <Property Name="LocationCode" Type="nvarchar(max)" />
     <Property Name="WorkTypeCode" Type="nvarchar(max)" />
@@ -661,7 +659,6 @@ warning 6002: The table/view 'AuditSystem.dbo.VW_EmployeeJobTransaction' does no
     <Property Name="Fk_LocationId" Type="int" Nullable="false" />
     <Property Name="Hours" Type="decimal" Precision="18" Scale="2" />
     <Property Name="Fk_WorkTypeId" Type="int" Nullable="false" />
-    <Property Name="Fk_WorkGroupId" Type="int" Nullable="false" />
     <Property Name="Fk_CustomerId" Type="int" Nullable="false" />
     <Property Name="IsDelete" Type="bit" Nullable="false" />
     <Property Name="Create_By" Type="nvarchar(max)" />
@@ -1167,15 +1164,15 @@ warning 6002: The table/view 'AuditSystem.dbo.VW_SectorMaster' does not have a p
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_TblJobTransaction_TblWorkGroup_Fk_WorkGroupId">
-    <End Role="TblWorkGroup" Type="Self.TblWorkGroup" Multiplicity="1" />
+  <Association Name="FK_TblJobTransaction_TblWorkGroup_TblWorkGroupId">
+    <End Role="TblWorkGroup" Type="Self.TblWorkGroup" Multiplicity="0..1" />
     <End Role="TblJobTransaction" Type="Self.TblJobTransaction" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="TblWorkGroup">
         <PropertyRef Name="Id" />
       </Principal>
       <Dependent Role="TblJobTransaction">
-        <PropertyRef Name="Fk_WorkGroupId" />
+        <PropertyRef Name="TblWorkGroupId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -1375,7 +1372,6 @@ FROM [dbo].[VW_Employee] AS [VW_Employee]</DefiningQuery>
 [VW_EmployeeJobTransaction].[Fk_EmployeeId] AS [Fk_EmployeeId], 
 [VW_EmployeeJobTransaction].[JobCode] AS [JobCode], 
 [VW_EmployeeJobTransaction].[CustomerCode] AS [CustomerCode], 
-[VW_EmployeeJobTransaction].[GroupCode] AS [GroupCode], 
 [VW_EmployeeJobTransaction].[EmployeeName] AS [EmployeeName], 
 [VW_EmployeeJobTransaction].[LocationCode] AS [LocationCode], 
 [VW_EmployeeJobTransaction].[WorkTypeCode] AS [WorkTypeCode], 
@@ -1384,7 +1380,6 @@ FROM [dbo].[VW_Employee] AS [VW_Employee]</DefiningQuery>
 [VW_EmployeeJobTransaction].[Fk_LocationId] AS [Fk_LocationId], 
 [VW_EmployeeJobTransaction].[Hours] AS [Hours], 
 [VW_EmployeeJobTransaction].[Fk_WorkTypeId] AS [Fk_WorkTypeId], 
-[VW_EmployeeJobTransaction].[Fk_WorkGroupId] AS [Fk_WorkGroupId], 
 [VW_EmployeeJobTransaction].[Fk_CustomerId] AS [Fk_CustomerId], 
 [VW_EmployeeJobTransaction].[IsDelete] AS [IsDelete], 
 [VW_EmployeeJobTransaction].[Create_By] AS [Create_By], 
@@ -1637,7 +1632,7 @@ FROM [dbo].[VW_SectorMaster] AS [VW_SectorMaster]</DefiningQuery>
       <End Role="TblLocation" EntitySet="TblLocation" />
       <End Role="TblJobTransaction" EntitySet="TblJobTransaction" />
     </AssociationSet>
-    <AssociationSet Name="FK_TblJobTransaction_TblWorkGroup_Fk_WorkGroupId" Association="Self.FK_TblJobTransaction_TblWorkGroup_Fk_WorkGroupId">
+    <AssociationSet Name="FK_TblJobTransaction_TblWorkGroup_TblWorkGroupId" Association="Self.FK_TblJobTransaction_TblWorkGroup_TblWorkGroupId">
       <End Role="TblWorkGroup" EntitySet="TblWorkGroup" />
       <End Role="TblJobTransaction" EntitySet="TblJobTransaction" />
     </AssociationSet>
