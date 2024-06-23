@@ -727,7 +727,7 @@
 
     $.validator.addMethod("faxPattern", function(value, element) {
     return this.optional(element) || /^[+]?[0-9\s-]+$/.test(value);
-}, "Please enter a valid fax number.");
+    }, "Please enter a valid fax number.");
     var PostCustomerInsert = function (model) {
 
         $.ajax({

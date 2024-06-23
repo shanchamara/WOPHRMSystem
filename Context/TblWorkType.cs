@@ -14,6 +14,11 @@ namespace WOPHRMSystem.Context
     
     public partial class TblWorkType
     {
+        public TblWorkType()
+        {
+            this.TblJobTransactions = new HashSet<TblJobTransaction>();
+        }
+    
         public int Id { get; set; }
         public string Code { get; set; }
         public string Narration { get; set; }
@@ -28,6 +33,7 @@ namespace WOPHRMSystem.Context
         public string Delete_By { get; set; }
         public Nullable<System.DateTime> Delete_Date { get; set; }
     
+        public virtual ICollection<TblJobTransaction> TblJobTransactions { get; set; }
         public virtual TblWorkGroup TblWorkGroup { get; set; }
     }
 }

@@ -75,6 +75,15 @@
     <Property Name="Delete_By" Type="nvarchar(max)" />
     <Property Name="Delete_Date" Type="datetime2" Precision="7" />
   </EntityType>
+  <EntityType Name="TblDocument">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TypeOfTable" Type="nvarchar(max)" />
+    <Property Name="Pattern" Type="nvarchar(max)" />
+    <Property Name="Number" Type="int" Nullable="false" />
+  </EntityType>
   <EntityType Name="TblEmployee">
     <Key>
       <PropertyRef Name="Id" />
@@ -83,6 +92,7 @@
     <Property Name="Code" Type="nvarchar(max)" />
     <Property Name="Name" Type="nvarchar(max)" />
     <Property Name="BirthDay" Type="datetime2" Precision="7" Nullable="false" />
+    <Property Name="DateOfJoin" Type="datetime2" Precision="7" Nullable="false" />
     <Property Name="Nic" Type="nvarchar(max)" />
     <Property Name="Email" Type="nvarchar(max)" />
     <Property Name="IdManager" Type="bit" Nullable="false" />
@@ -97,7 +107,6 @@
     <Property Name="Edit_Date" Type="datetime2" Precision="7" />
     <Property Name="Delete_By" Type="nvarchar(max)" />
     <Property Name="Delete_Date" Type="datetime2" Precision="7" />
-    <Property Name="DateOfJoin" Type="datetime2" Precision="7" Nullable="false" />
   </EntityType>
   <EntityType Name="TblEmployeeHourlyRate">
     <Key>
@@ -196,20 +205,104 @@
     <Property Name="Delete_By" Type="nvarchar(max)" />
     <Property Name="Delete_Date" Type="datetime2" Precision="7" />
   </EntityType>
-  <EntityType Name="TblJob">
+  <EntityType Name="TblJobMaster">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Code" Type="nvarchar(max)" />
+    <Property Name="JobCode" Type="nvarchar(max)" />
     <Property Name="Narration" Type="nvarchar(max)" />
     <Property Name="PreViewvalue" Type="decimal" Precision="18" Scale="2" />
     <Property Name="StartDate" Type="datetime2" Precision="7" />
     <Property Name="DueDate" Type="datetime2" Precision="7" />
-    <Property Name="Fk_PartnerId" Type="int" Nullable="false" />
     <Property Name="Fk_CustomerId" Type="int" Nullable="false" />
-    <Property Name="Fk_EmployeeId" Type="int" Nullable="false" />
     <Property Name="IsActive" Type="bit" Nullable="false" />
+    <Property Name="IsDelete" Type="bit" Nullable="false" />
+    <Property Name="Create_By" Type="nvarchar(max)" />
+    <Property Name="Create_Date" Type="datetime2" Precision="7" Nullable="false" />
+    <Property Name="Edit_By" Type="nvarchar(max)" />
+    <Property Name="Edit_Date" Type="datetime2" Precision="7" />
+    <Property Name="Delete_By" Type="nvarchar(max)" />
+    <Property Name="Delete_Date" Type="datetime2" Precision="7" />
+    <Property Name="CompletedDate" Type="datetime2" Precision="7" />
+    <Property Name="IsCompleted" Type="bit" Nullable="false" />
+    <Property Name="IsReActivate" Type="bit" Nullable="false" />
+    <Property Name="ReActivateDate" Type="datetime2" Precision="7" />
+  </EntityType>
+  <EntityType Name="TblJobMasterAssignTemp">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TypeOftable" Type="nvarchar(max)" />
+    <Property Name="TypeOftableId" Type="int" Nullable="false" />
+    <Property Name="Code" Type="nvarchar(max)" />
+    <Property Name="Name" Type="nvarchar(max)" />
+    <Property Name="BudgetedHours" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="Designation" Type="nvarchar(max)" />
+    <Property Name="CustomerId" Type="int" Nullable="false" />
+    <Property Name="Create_By" Type="nvarchar(max)" />
+    <Property Name="RowId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TblJobMasterLocation">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Fk_JobMasterId" Type="int" Nullable="false" />
+    <Property Name="FK_LocationId" Type="int" Nullable="false" />
+    <Property Name="Fk_CustomerId" Type="int" Nullable="false" />
+    <Property Name="IsDelete" Type="bit" Nullable="false" />
+    <Property Name="Create_By" Type="nvarchar(max)" />
+    <Property Name="Create_Date" Type="datetime2" Precision="7" Nullable="false" />
+    <Property Name="Edit_By" Type="nvarchar(max)" />
+    <Property Name="Edit_Date" Type="datetime2" Precision="7" />
+    <Property Name="Delete_By" Type="nvarchar(max)" />
+    <Property Name="Delete_Date" Type="datetime2" Precision="7" />
+  </EntityType>
+  <EntityType Name="TblJobMasterLocationTemp">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FK_LocationId" Type="int" Nullable="false" />
+    <Property Name="Code" Type="nvarchar(max)" />
+    <Property Name="Narration" Type="nvarchar(max)" />
+    <Property Name="CustomerId" Type="int" Nullable="false" />
+    <Property Name="Create_By" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="TblJobMasterPartner">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Fk_JobMasterId" Type="int" Nullable="false" />
+    <Property Name="BudgetedHours" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="Fk_CustomerId" Type="int" Nullable="false" />
+    <Property Name="TypeOfTable" Type="nvarchar(max)" />
+    <Property Name="TypeOfTableId" Type="int" Nullable="false" />
+    <Property Name="IsDelete" Type="bit" Nullable="false" />
+    <Property Name="Create_By" Type="nvarchar(max)" />
+    <Property Name="Create_Date" Type="datetime2" Precision="7" Nullable="false" />
+    <Property Name="Edit_By" Type="nvarchar(max)" />
+    <Property Name="Edit_Date" Type="datetime2" Precision="7" />
+    <Property Name="Delete_By" Type="nvarchar(max)" />
+    <Property Name="Delete_Date" Type="datetime2" Precision="7" />
+  </EntityType>
+  <EntityType Name="TblJobTransaction">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TrDate" Type="datetime2" Precision="7" />
+    <Property Name="Fk_JobMasterId" Type="int" Nullable="false" />
+    <Property Name="Fk_EmployeeId" Type="int" Nullable="false" />
+    <Property Name="Narration" Type="nvarchar(max)" />
+    <Property Name="Fk_LocationId" Type="int" Nullable="false" />
+    <Property Name="Hours" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="Fk_WorkTypeId" Type="int" Nullable="false" />
+    <Property Name="Fk_WorkGroupId" Type="int" Nullable="false" />
+    <Property Name="Fk_CustomerId" Type="int" Nullable="false" />
     <Property Name="IsDelete" Type="bit" Nullable="false" />
     <Property Name="Create_By" Type="nvarchar(max)" />
     <Property Name="Create_Date" Type="datetime2" Precision="7" Nullable="false" />
@@ -416,6 +509,34 @@
     <Property Name="Delete_Date" Type="datetime2" Precision="7" />
   </EntityType>
   <!--Errors Found During Generation:
+warning 6002: The table/view 'AuditSystem.dbo.VW_CurrentlyGetJobAssignee' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="VW_CurrentlyGetJobAssignee">
+    <Key>
+      <PropertyRef Name="Id" />
+      <PropertyRef Name="Fk_JobMasterId" />
+      <PropertyRef Name="Fk_CustomerId" />
+      <PropertyRef Name="TypeOfTableId" />
+      <PropertyRef Name="IsDelete" />
+      <PropertyRef Name="Create_Date" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="Fk_JobMasterId" Type="int" Nullable="false" />
+    <Property Name="Fk_CustomerId" Type="int" Nullable="false" />
+    <Property Name="TypeOfTable" Type="nvarchar(max)" />
+    <Property Name="TypeOfTableId" Type="int" Nullable="false" />
+    <Property Name="IsDelete" Type="bit" Nullable="false" />
+    <Property Name="BudgetedHours" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="Create_By" Type="nvarchar(max)" />
+    <Property Name="Create_Date" Type="datetime2" Precision="7" Nullable="false" />
+    <Property Name="Edit_By" Type="nvarchar(max)" />
+    <Property Name="Edit_Date" Type="datetime2" Precision="7" />
+    <Property Name="Delete_By" Type="nvarchar(max)" />
+    <Property Name="Delete_Date" Type="datetime2" Precision="7" />
+    <Property Name="CombinedName" Type="nvarchar(max)" />
+    <Property Name="CombinedCode" Type="nvarchar(max)" />
+    <Property Name="DesignationCode" Type="nvarchar(max)" />
+  </EntityType>
+  <!--Errors Found During Generation:
 warning 6002: The table/view 'AuditSystem.dbo.VW_Customer' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
   <EntityType Name="VW_Customer">
     <Key>
@@ -509,6 +630,46 @@ warning 6002: The table/view 'AuditSystem.dbo.VW_Employee' does not have a prima
     <Property Name="DepartmentCode" Type="nvarchar(max)" />
     <Property Name="DesignationCode" Type="nvarchar(max)" />
     <Property Name="titleCode" Type="nvarchar(max)" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'AuditSystem.dbo.VW_EmployeeJobTransaction' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="VW_EmployeeJobTransaction">
+    <Key>
+      <PropertyRef Name="Id" />
+      <PropertyRef Name="Fk_JobMasterId" />
+      <PropertyRef Name="Fk_EmployeeId" />
+      <PropertyRef Name="EmployeeName" />
+      <PropertyRef Name="Fk_LocationId" />
+      <PropertyRef Name="Fk_WorkTypeId" />
+      <PropertyRef Name="Fk_WorkGroupId" />
+      <PropertyRef Name="Fk_CustomerId" />
+      <PropertyRef Name="IsDelete" />
+      <PropertyRef Name="Create_Date" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="TrDate" Type="datetime2" Precision="7" />
+    <Property Name="Fk_JobMasterId" Type="int" Nullable="false" />
+    <Property Name="Fk_EmployeeId" Type="int" Nullable="false" />
+    <Property Name="JobCode" Type="nvarchar(max)" />
+    <Property Name="CustomerCode" Type="nvarchar(max)" />
+    <Property Name="GroupCode" Type="nvarchar(max)" />
+    <Property Name="EmployeeName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="LocationCode" Type="nvarchar(max)" />
+    <Property Name="WorkTypeCode" Type="nvarchar(max)" />
+    <Property Name="LocationName" Type="nvarchar(max)" />
+    <Property Name="Narration" Type="nvarchar(max)" />
+    <Property Name="Fk_LocationId" Type="int" Nullable="false" />
+    <Property Name="Hours" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="Fk_WorkTypeId" Type="int" Nullable="false" />
+    <Property Name="Fk_WorkGroupId" Type="int" Nullable="false" />
+    <Property Name="Fk_CustomerId" Type="int" Nullable="false" />
+    <Property Name="IsDelete" Type="bit" Nullable="false" />
+    <Property Name="Create_By" Type="nvarchar(max)" />
+    <Property Name="Create_Date" Type="datetime2" Precision="7" Nullable="false" />
+    <Property Name="Edit_By" Type="nvarchar(max)" />
+    <Property Name="Edit_Date" Type="datetime2" Precision="7" />
+    <Property Name="Delete_By" Type="nvarchar(max)" />
+    <Property Name="Delete_Date" Type="datetime2" Precision="7" />
   </EntityType>
   <!--Errors Found During Generation:
 warning 6002: The table/view 'AuditSystem.dbo.VW_GradeMaster' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -614,6 +775,39 @@ warning 6002: The table/view 'AuditSystem.dbo.VW_InvoiceShortNarrationMaster' do
     <Property Name="Edit_Date" Type="datetime2" Precision="7" />
     <Property Name="Delete_By" Type="nvarchar(max)" />
     <Property Name="Delete_Date" Type="datetime2" Precision="7" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'AuditSystem.dbo.VW_JobMaster' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="VW_JobMaster">
+    <Key>
+      <PropertyRef Name="Id" />
+      <PropertyRef Name="Fk_CustomerId" />
+      <PropertyRef Name="IsCompleted" />
+      <PropertyRef Name="IsReActivate" />
+      <PropertyRef Name="IsActive" />
+      <PropertyRef Name="IsDelete" />
+      <PropertyRef Name="Create_Date" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="JobCode" Type="nvarchar(max)" />
+    <Property Name="Narration" Type="nvarchar(max)" />
+    <Property Name="PreViewvalue" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="StartDate" Type="datetime2" Precision="7" />
+    <Property Name="DueDate" Type="datetime2" Precision="7" />
+    <Property Name="Fk_CustomerId" Type="int" Nullable="false" />
+    <Property Name="IsCompleted" Type="bit" Nullable="false" />
+    <Property Name="IsReActivate" Type="bit" Nullable="false" />
+    <Property Name="ReActivateDate" Type="datetime2" Precision="7" />
+    <Property Name="CompletedDate" Type="datetime2" Precision="7" />
+    <Property Name="IsActive" Type="bit" Nullable="false" />
+    <Property Name="IsDelete" Type="bit" Nullable="false" />
+    <Property Name="Create_By" Type="nvarchar(max)" />
+    <Property Name="Create_Date" Type="datetime2" Precision="7" Nullable="false" />
+    <Property Name="Edit_By" Type="nvarchar(max)" />
+    <Property Name="Edit_Date" Type="datetime2" Precision="7" />
+    <Property Name="Delete_By" Type="nvarchar(max)" />
+    <Property Name="Delete_Date" Type="datetime2" Precision="7" />
+    <Property Name="Name" Type="nvarchar(max)" />
   </EntityType>
   <!--Errors Found During Generation:
 warning 6002: The table/view 'AuditSystem.dbo.VW_LegalStatusMaster' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -871,43 +1065,129 @@ warning 6002: The table/view 'AuditSystem.dbo.VW_SectorMaster' does not have a p
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_TblJob_TblCustomers_Fk_CustomerId">
+  <Association Name="FK_TblJobMaster_TblCustomers_Fk_CustomerId">
     <End Role="TblCustomers" Type="Self.TblCustomers" Multiplicity="1">
       <OnDelete Action="Cascade" />
     </End>
-    <End Role="TblJob" Type="Self.TblJob" Multiplicity="*" />
+    <End Role="TblJobMaster" Type="Self.TblJobMaster" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="TblCustomers">
         <PropertyRef Name="Id" />
       </Principal>
-      <Dependent Role="TblJob">
+      <Dependent Role="TblJobMaster">
         <PropertyRef Name="Fk_CustomerId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_TblJob_TblEmployee_Fk_EmployeeId">
-    <End Role="TblEmployee" Type="Self.TblEmployee" Multiplicity="1">
+  <Association Name="FK_TblJobMasterLocation_TblJobMaster_Fk_JobMasterId">
+    <End Role="TblJobMaster" Type="Self.TblJobMaster" Multiplicity="1">
       <OnDelete Action="Cascade" />
     </End>
-    <End Role="TblJob" Type="Self.TblJob" Multiplicity="*" />
+    <End Role="TblJobMasterLocation" Type="Self.TblJobMasterLocation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TblJobMaster">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TblJobMasterLocation">
+        <PropertyRef Name="Fk_JobMasterId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TblJobMasterLocation_TblLocation_FK_LocationId">
+    <End Role="TblLocation" Type="Self.TblLocation" Multiplicity="1" />
+    <End Role="TblJobMasterLocation" Type="Self.TblJobMasterLocation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TblLocation">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TblJobMasterLocation">
+        <PropertyRef Name="FK_LocationId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TblJobMasterPartner_TblJobMaster_Fk_JobMasterId">
+    <End Role="TblJobMaster" Type="Self.TblJobMaster" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="TblJobMasterPartner" Type="Self.TblJobMasterPartner" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TblJobMaster">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TblJobMasterPartner">
+        <PropertyRef Name="Fk_JobMasterId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TblJobTransaction_TblCustomers_Fk_CustomerId">
+    <End Role="TblCustomers" Type="Self.TblCustomers" Multiplicity="1" />
+    <End Role="TblJobTransaction" Type="Self.TblJobTransaction" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TblCustomers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TblJobTransaction">
+        <PropertyRef Name="Fk_CustomerId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TblJobTransaction_TblEmployee_Fk_EmployeeId">
+    <End Role="TblEmployee" Type="Self.TblEmployee" Multiplicity="1" />
+    <End Role="TblJobTransaction" Type="Self.TblJobTransaction" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="TblEmployee">
         <PropertyRef Name="Id" />
       </Principal>
-      <Dependent Role="TblJob">
+      <Dependent Role="TblJobTransaction">
         <PropertyRef Name="Fk_EmployeeId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_TblJob_TblPartner_Fk_PartnerId">
-    <End Role="TblPartner" Type="Self.TblPartner" Multiplicity="1" />
-    <End Role="TblJob" Type="Self.TblJob" Multiplicity="*" />
+  <Association Name="FK_TblJobTransaction_TblJobMaster_Fk_JobMasterId">
+    <End Role="TblJobMaster" Type="Self.TblJobMaster" Multiplicity="1" />
+    <End Role="TblJobTransaction" Type="Self.TblJobTransaction" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="TblPartner">
+      <Principal Role="TblJobMaster">
         <PropertyRef Name="Id" />
       </Principal>
-      <Dependent Role="TblJob">
-        <PropertyRef Name="Fk_PartnerId" />
+      <Dependent Role="TblJobTransaction">
+        <PropertyRef Name="Fk_JobMasterId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TblJobTransaction_TblLocation_Fk_LocationId">
+    <End Role="TblLocation" Type="Self.TblLocation" Multiplicity="1" />
+    <End Role="TblJobTransaction" Type="Self.TblJobTransaction" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TblLocation">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TblJobTransaction">
+        <PropertyRef Name="Fk_LocationId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TblJobTransaction_TblWorkGroup_Fk_WorkGroupId">
+    <End Role="TblWorkGroup" Type="Self.TblWorkGroup" Multiplicity="1" />
+    <End Role="TblJobTransaction" Type="Self.TblJobTransaction" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TblWorkGroup">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TblJobTransaction">
+        <PropertyRef Name="Fk_WorkGroupId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TblJobTransaction_TblWorkType_Fk_WorkTypeId">
+    <End Role="TblWorkType" Type="Self.TblWorkType" Multiplicity="1" />
+    <End Role="TblJobTransaction" Type="Self.TblJobTransaction" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TblWorkType">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TblJobTransaction">
+        <PropertyRef Name="Fk_WorkTypeId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -972,6 +1252,7 @@ warning 6002: The table/view 'AuditSystem.dbo.VW_SectorMaster' does not have a p
     <EntitySet Name="TblCustomers" EntityType="Self.TblCustomers" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TblDepartment" EntityType="Self.TblDepartment" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TblDesignation" EntityType="Self.TblDesignation" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TblDocument" EntityType="Self.TblDocument" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TblEmployee" EntityType="Self.TblEmployee" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TblEmployeeHourlyRate" EntityType="Self.TblEmployeeHourlyRate" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TblGradeMaster" EntityType="Self.TblGradeMaster" Schema="dbo" store:Type="Tables" />
@@ -979,7 +1260,12 @@ warning 6002: The table/view 'AuditSystem.dbo.VW_SectorMaster' does not have a p
     <EntitySet Name="TblIntroductionMaster" EntityType="Self.TblIntroductionMaster" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TblInvoiceNarrationMaster" EntityType="Self.TblInvoiceNarrationMaster" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TblInvoiceShortNarrationMaster" EntityType="Self.TblInvoiceShortNarrationMaster" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="TblJob" EntityType="Self.TblJob" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TblJobMaster" EntityType="Self.TblJobMaster" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TblJobMasterAssignTemp" EntityType="Self.TblJobMasterAssignTemp" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TblJobMasterLocation" EntityType="Self.TblJobMasterLocation" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TblJobMasterLocationTemp" EntityType="Self.TblJobMasterLocationTemp" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TblJobMasterPartner" EntityType="Self.TblJobMasterPartner" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TblJobTransaction" EntityType="Self.TblJobTransaction" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TblLegalStatusMaster" EntityType="Self.TblLegalStatusMaster" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TblLocation" EntityType="Self.TblLocation" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TblManager" EntityType="Self.TblManager" Schema="dbo" store:Type="Tables" />
@@ -992,6 +1278,26 @@ warning 6002: The table/view 'AuditSystem.dbo.VW_SectorMaster' does not have a p
     <EntitySet Name="TblTitle" EntityType="Self.TblTitle" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TblWorkGroup" EntityType="Self.TblWorkGroup" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TblWorkType" EntityType="Self.TblWorkType" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="VW_CurrentlyGetJobAssignee" EntityType="Self.VW_CurrentlyGetJobAssignee" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+[VW_CurrentlyGetJobAssignee].[Id] AS [Id], 
+[VW_CurrentlyGetJobAssignee].[Fk_JobMasterId] AS [Fk_JobMasterId], 
+[VW_CurrentlyGetJobAssignee].[Fk_CustomerId] AS [Fk_CustomerId], 
+[VW_CurrentlyGetJobAssignee].[TypeOfTable] AS [TypeOfTable], 
+[VW_CurrentlyGetJobAssignee].[TypeOfTableId] AS [TypeOfTableId], 
+[VW_CurrentlyGetJobAssignee].[IsDelete] AS [IsDelete], 
+[VW_CurrentlyGetJobAssignee].[BudgetedHours] AS [BudgetedHours], 
+[VW_CurrentlyGetJobAssignee].[Create_By] AS [Create_By], 
+[VW_CurrentlyGetJobAssignee].[Create_Date] AS [Create_Date], 
+[VW_CurrentlyGetJobAssignee].[Edit_By] AS [Edit_By], 
+[VW_CurrentlyGetJobAssignee].[Edit_Date] AS [Edit_Date], 
+[VW_CurrentlyGetJobAssignee].[Delete_By] AS [Delete_By], 
+[VW_CurrentlyGetJobAssignee].[Delete_Date] AS [Delete_Date], 
+[VW_CurrentlyGetJobAssignee].[CombinedName] AS [CombinedName], 
+[VW_CurrentlyGetJobAssignee].[CombinedCode] AS [CombinedCode], 
+[VW_CurrentlyGetJobAssignee].[DesignationCode] AS [DesignationCode]
+FROM [dbo].[VW_CurrentlyGetJobAssignee] AS [VW_CurrentlyGetJobAssignee]</DefiningQuery>
+    </EntitySet>
     <EntitySet Name="VW_Customer" EntityType="Self.VW_Customer" store:Type="Views" store:Schema="dbo">
       <DefiningQuery>SELECT 
 [VW_Customer].[Id] AS [Id], 
@@ -1060,6 +1366,34 @@ FROM [dbo].[VW_Customer] AS [VW_Customer]</DefiningQuery>
 [VW_Employee].[DesignationCode] AS [DesignationCode], 
 [VW_Employee].[titleCode] AS [titleCode]
 FROM [dbo].[VW_Employee] AS [VW_Employee]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="VW_EmployeeJobTransaction" EntityType="Self.VW_EmployeeJobTransaction" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+[VW_EmployeeJobTransaction].[Id] AS [Id], 
+[VW_EmployeeJobTransaction].[TrDate] AS [TrDate], 
+[VW_EmployeeJobTransaction].[Fk_JobMasterId] AS [Fk_JobMasterId], 
+[VW_EmployeeJobTransaction].[Fk_EmployeeId] AS [Fk_EmployeeId], 
+[VW_EmployeeJobTransaction].[JobCode] AS [JobCode], 
+[VW_EmployeeJobTransaction].[CustomerCode] AS [CustomerCode], 
+[VW_EmployeeJobTransaction].[GroupCode] AS [GroupCode], 
+[VW_EmployeeJobTransaction].[EmployeeName] AS [EmployeeName], 
+[VW_EmployeeJobTransaction].[LocationCode] AS [LocationCode], 
+[VW_EmployeeJobTransaction].[WorkTypeCode] AS [WorkTypeCode], 
+[VW_EmployeeJobTransaction].[LocationName] AS [LocationName], 
+[VW_EmployeeJobTransaction].[Narration] AS [Narration], 
+[VW_EmployeeJobTransaction].[Fk_LocationId] AS [Fk_LocationId], 
+[VW_EmployeeJobTransaction].[Hours] AS [Hours], 
+[VW_EmployeeJobTransaction].[Fk_WorkTypeId] AS [Fk_WorkTypeId], 
+[VW_EmployeeJobTransaction].[Fk_WorkGroupId] AS [Fk_WorkGroupId], 
+[VW_EmployeeJobTransaction].[Fk_CustomerId] AS [Fk_CustomerId], 
+[VW_EmployeeJobTransaction].[IsDelete] AS [IsDelete], 
+[VW_EmployeeJobTransaction].[Create_By] AS [Create_By], 
+[VW_EmployeeJobTransaction].[Create_Date] AS [Create_Date], 
+[VW_EmployeeJobTransaction].[Edit_By] AS [Edit_By], 
+[VW_EmployeeJobTransaction].[Edit_Date] AS [Edit_Date], 
+[VW_EmployeeJobTransaction].[Delete_By] AS [Delete_By], 
+[VW_EmployeeJobTransaction].[Delete_Date] AS [Delete_Date]
+FROM [dbo].[VW_EmployeeJobTransaction] AS [VW_EmployeeJobTransaction]</DefiningQuery>
     </EntitySet>
     <EntitySet Name="VW_GradeMaster" EntityType="Self.VW_GradeMaster" store:Type="Views" store:Schema="dbo">
       <DefiningQuery>SELECT 
@@ -1135,6 +1469,30 @@ FROM [dbo].[VW_InvoiceNarrationMaster] AS [VW_InvoiceNarrationMaster]</DefiningQ
 [VW_InvoiceShortNarrationMaster].[Delete_By] AS [Delete_By], 
 [VW_InvoiceShortNarrationMaster].[Delete_Date] AS [Delete_Date]
 FROM [dbo].[VW_InvoiceShortNarrationMaster] AS [VW_InvoiceShortNarrationMaster]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="VW_JobMaster" EntityType="Self.VW_JobMaster" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+[VW_JobMaster].[Id] AS [Id], 
+[VW_JobMaster].[JobCode] AS [JobCode], 
+[VW_JobMaster].[Narration] AS [Narration], 
+[VW_JobMaster].[PreViewvalue] AS [PreViewvalue], 
+[VW_JobMaster].[StartDate] AS [StartDate], 
+[VW_JobMaster].[DueDate] AS [DueDate], 
+[VW_JobMaster].[Fk_CustomerId] AS [Fk_CustomerId], 
+[VW_JobMaster].[IsCompleted] AS [IsCompleted], 
+[VW_JobMaster].[IsReActivate] AS [IsReActivate], 
+[VW_JobMaster].[ReActivateDate] AS [ReActivateDate], 
+[VW_JobMaster].[CompletedDate] AS [CompletedDate], 
+[VW_JobMaster].[IsActive] AS [IsActive], 
+[VW_JobMaster].[IsDelete] AS [IsDelete], 
+[VW_JobMaster].[Create_By] AS [Create_By], 
+[VW_JobMaster].[Create_Date] AS [Create_Date], 
+[VW_JobMaster].[Edit_By] AS [Edit_By], 
+[VW_JobMaster].[Edit_Date] AS [Edit_Date], 
+[VW_JobMaster].[Delete_By] AS [Delete_By], 
+[VW_JobMaster].[Delete_Date] AS [Delete_Date], 
+[VW_JobMaster].[Name] AS [Name]
+FROM [dbo].[VW_JobMaster] AS [VW_JobMaster]</DefiningQuery>
     </EntitySet>
     <EntitySet Name="VW_LegalStatusMaster" EntityType="Self.VW_LegalStatusMaster" store:Type="Views" store:Schema="dbo">
       <DefiningQuery>SELECT 
@@ -1247,17 +1605,45 @@ FROM [dbo].[VW_SectorMaster] AS [VW_SectorMaster]</DefiningQuery>
       <End Role="TblEmployee" EntitySet="TblEmployee" />
       <End Role="TblEmployeeHourlyRate" EntitySet="TblEmployeeHourlyRate" />
     </AssociationSet>
-    <AssociationSet Name="FK_TblJob_TblCustomers_Fk_CustomerId" Association="Self.FK_TblJob_TblCustomers_Fk_CustomerId">
+    <AssociationSet Name="FK_TblJobMaster_TblCustomers_Fk_CustomerId" Association="Self.FK_TblJobMaster_TblCustomers_Fk_CustomerId">
       <End Role="TblCustomers" EntitySet="TblCustomers" />
-      <End Role="TblJob" EntitySet="TblJob" />
+      <End Role="TblJobMaster" EntitySet="TblJobMaster" />
     </AssociationSet>
-    <AssociationSet Name="FK_TblJob_TblEmployee_Fk_EmployeeId" Association="Self.FK_TblJob_TblEmployee_Fk_EmployeeId">
+    <AssociationSet Name="FK_TblJobMasterLocation_TblJobMaster_Fk_JobMasterId" Association="Self.FK_TblJobMasterLocation_TblJobMaster_Fk_JobMasterId">
+      <End Role="TblJobMaster" EntitySet="TblJobMaster" />
+      <End Role="TblJobMasterLocation" EntitySet="TblJobMasterLocation" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TblJobMasterLocation_TblLocation_FK_LocationId" Association="Self.FK_TblJobMasterLocation_TblLocation_FK_LocationId">
+      <End Role="TblLocation" EntitySet="TblLocation" />
+      <End Role="TblJobMasterLocation" EntitySet="TblJobMasterLocation" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TblJobMasterPartner_TblJobMaster_Fk_JobMasterId" Association="Self.FK_TblJobMasterPartner_TblJobMaster_Fk_JobMasterId">
+      <End Role="TblJobMaster" EntitySet="TblJobMaster" />
+      <End Role="TblJobMasterPartner" EntitySet="TblJobMasterPartner" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TblJobTransaction_TblCustomers_Fk_CustomerId" Association="Self.FK_TblJobTransaction_TblCustomers_Fk_CustomerId">
+      <End Role="TblCustomers" EntitySet="TblCustomers" />
+      <End Role="TblJobTransaction" EntitySet="TblJobTransaction" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TblJobTransaction_TblEmployee_Fk_EmployeeId" Association="Self.FK_TblJobTransaction_TblEmployee_Fk_EmployeeId">
       <End Role="TblEmployee" EntitySet="TblEmployee" />
-      <End Role="TblJob" EntitySet="TblJob" />
+      <End Role="TblJobTransaction" EntitySet="TblJobTransaction" />
     </AssociationSet>
-    <AssociationSet Name="FK_TblJob_TblPartner_Fk_PartnerId" Association="Self.FK_TblJob_TblPartner_Fk_PartnerId">
-      <End Role="TblPartner" EntitySet="TblPartner" />
-      <End Role="TblJob" EntitySet="TblJob" />
+    <AssociationSet Name="FK_TblJobTransaction_TblJobMaster_Fk_JobMasterId" Association="Self.FK_TblJobTransaction_TblJobMaster_Fk_JobMasterId">
+      <End Role="TblJobMaster" EntitySet="TblJobMaster" />
+      <End Role="TblJobTransaction" EntitySet="TblJobTransaction" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TblJobTransaction_TblLocation_Fk_LocationId" Association="Self.FK_TblJobTransaction_TblLocation_Fk_LocationId">
+      <End Role="TblLocation" EntitySet="TblLocation" />
+      <End Role="TblJobTransaction" EntitySet="TblJobTransaction" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TblJobTransaction_TblWorkGroup_Fk_WorkGroupId" Association="Self.FK_TblJobTransaction_TblWorkGroup_Fk_WorkGroupId">
+      <End Role="TblWorkGroup" EntitySet="TblWorkGroup" />
+      <End Role="TblJobTransaction" EntitySet="TblJobTransaction" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TblJobTransaction_TblWorkType_Fk_WorkTypeId" Association="Self.FK_TblJobTransaction_TblWorkType_Fk_WorkTypeId">
+      <End Role="TblWorkType" EntitySet="TblWorkType" />
+      <End Role="TblJobTransaction" EntitySet="TblJobTransaction" />
     </AssociationSet>
     <AssociationSet Name="FK_TblLocation_TblCustomers_Fk_CustomerId" Association="Self.FK_TblLocation_TblCustomers_Fk_CustomerId">
       <End Role="TblCustomers" EntitySet="TblCustomers" />

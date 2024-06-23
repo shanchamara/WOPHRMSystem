@@ -29,6 +29,7 @@ namespace WOPHRMSystem.Context
         public DbSet<TblCustomer> TblCustomers { get; set; }
         public DbSet<TblDepartment> TblDepartments { get; set; }
         public DbSet<TblDesignation> TblDesignations { get; set; }
+        public DbSet<TblDocument> TblDocuments { get; set; }
         public DbSet<TblEmployee> TblEmployees { get; set; }
         public DbSet<TblEmployeeHourlyRate> TblEmployeeHourlyRates { get; set; }
         public DbSet<TblGradeMaster> TblGradeMasters { get; set; }
@@ -36,7 +37,12 @@ namespace WOPHRMSystem.Context
         public DbSet<TblIntroductionMaster> TblIntroductionMasters { get; set; }
         public DbSet<TblInvoiceNarrationMaster> TblInvoiceNarrationMasters { get; set; }
         public DbSet<TblInvoiceShortNarrationMaster> TblInvoiceShortNarrationMasters { get; set; }
-        public DbSet<TblJob> TblJobs { get; set; }
+        public DbSet<TblJobMaster> TblJobMasters { get; set; }
+        public DbSet<TblJobMasterAssignTemp> TblJobMasterAssignTemps { get; set; }
+        public DbSet<TblJobMasterLocation> TblJobMasterLocations { get; set; }
+        public DbSet<TblJobMasterLocationTemp> TblJobMasterLocationTemps { get; set; }
+        public DbSet<TblJobMasterPartner> TblJobMasterPartners { get; set; }
+        public DbSet<TblJobTransaction> TblJobTransactions { get; set; }
         public DbSet<TblLegalStatusMaster> TblLegalStatusMasters { get; set; }
         public DbSet<TblLocation> TblLocations { get; set; }
         public DbSet<TblManager> TblManagers { get; set; }
@@ -49,13 +55,16 @@ namespace WOPHRMSystem.Context
         public DbSet<TblTitle> TblTitles { get; set; }
         public DbSet<TblWorkGroup> TblWorkGroups { get; set; }
         public DbSet<TblWorkType> TblWorkTypes { get; set; }
+        public DbSet<VW_CurrentlyGetJobAssignee> VW_CurrentlyGetJobAssignee { get; set; }
         public DbSet<VW_Customer> VW_Customer { get; set; }
         public DbSet<VW_Employee> VW_Employee { get; set; }
+        public DbSet<VW_EmployeeJobTransaction> VW_EmployeeJobTransaction { get; set; }
         public DbSet<VW_GradeMaster> VW_GradeMaster { get; set; }
         public DbSet<VW_InternationalReferalMaster> VW_InternationalReferalMaster { get; set; }
         public DbSet<VW_IntroductionMaster> VW_IntroductionMaster { get; set; }
         public DbSet<VW_InvoiceNarrationMaster> VW_InvoiceNarrationMaster { get; set; }
         public DbSet<VW_InvoiceShortNarrationMaster> VW_InvoiceShortNarrationMaster { get; set; }
+        public DbSet<VW_JobMaster> VW_JobMaster { get; set; }
         public DbSet<VW_LegalStatusMaster> VW_LegalStatusMaster { get; set; }
         public DbSet<VW_NatureMaster> VW_NatureMaster { get; set; }
         public DbSet<VW_OpeningBalance> VW_OpeningBalance { get; set; }

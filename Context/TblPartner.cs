@@ -17,7 +17,6 @@ namespace WOPHRMSystem.Context
         public TblPartner()
         {
             this.TblCustomers = new HashSet<TblCustomer>();
-            this.TblJobs = new HashSet<TblJob>();
         }
     
         public int Id { get; set; }
@@ -33,6 +32,5 @@ namespace WOPHRMSystem.Context
         public Nullable<System.DateTime> Delete_Date { get; set; }
     
         public virtual ICollection<TblCustomer> TblCustomers { get; set; }
-        public virtual ICollection<TblJob> TblJobs { get; set; }
     }
 }

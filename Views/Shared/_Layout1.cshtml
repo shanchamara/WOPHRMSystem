@@ -201,6 +201,26 @@
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
+                                    <a href="@Url.Action("Index","JobMaster")" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>JobMaster</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="@Url.Action("CompltedIndex","JobMaster")" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Completed Job</p>
+                                    </a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a href="@Url.Action("ReactivateIndex","JobMaster")" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Reactivate Job</p>
+                                    </a>
+                                </li>
+
+                                <li class="nav-item">
                                     <a href="@Url.Action("Index","Department")" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Department</p>
@@ -829,11 +849,9 @@
     <!-- jQuery -->
     <script src="~/plugins/jquery/jquery.min.js"></script>
     <!-- jQuery UI 1.11.4 -->
-    <script src="~/plugins/jquery-ui/jquery-ui.min.js"></script>
+    @*<script src="~/plugins/jquery-ui/jquery-ui.min.js"></script>*@
     <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
-    <script>
-        //$.widget.bridge('uibutton', $.ui.button)
-    </script>
+   
     <!-- Bootstrap 4 -->
     <script src="~/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
     <!-- overlayScrollbars -->

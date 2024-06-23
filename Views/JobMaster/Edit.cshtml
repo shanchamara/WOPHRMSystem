@@ -1,0 +1,824 @@
+﻿@model  WOPHRMSystem.Models.JobMasterModel
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout1.cshtml";
+}
+
+<!-- daterange picker -->
+<link rel="stylesheet" href="~/plugins/daterangepicker/daterangepicker.css">
+<!-- iCheck for checkboxes and radio inputs -->
+<link rel="stylesheet" href="~/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+<!-- Bootstrap Color Picker -->
+<link rel="stylesheet" href="~/plugins/bootstrap-colorpicker/css/bootstrap-colorpicker.min.css">
+<!-- Tempusdominus Bootstrap 4 -->
+<link rel="stylesheet" href="~/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
+<!-- Select2 -->
+<link rel="stylesheet" href="~/plugins/select2/css/select2.min.css">
+<link rel="stylesheet" href="~/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
+<!-- Bootstrap4 Duallistbox -->
+<link rel="stylesheet" href="~/plugins/bootstrap4-duallistbox/bootstrap-duallistbox.min.css">
+<!-- BS Stepper -->
+<link rel="stylesheet" href="~/plugins/bs-stepper/css/bs-stepper.min.css">
+<!-- dropzonejs -->
+@*<link rel="stylesheet" href="~/plugins/dropzone/min/dropzone.min.css">*@
+
+
+<style>
+</style>
+
+<div class="content-wrapper disable-height">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>Edit Job Master</h1>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item">Home</li>
+                        <li class="breadcrumb-item active"><a href="@Url.Action("Index","JobMaster")">List Of JobMasters </a></li>
+                    </ol>
+                </div>
+            </div>
+        </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+
+                <!-- /.col -->
+            </div>
+            <!-- /.row -->
+        </div>
+        <!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+
+                    <!-- /.card -->
+                    <div class="card">
+                        @*<div class="card-header">
+                                <h3 class="card-title"></h3>
+                            </div>*@
+                        <!-- /.card-header -->
+                        <div class="card-body">
+                            <div class="card card-info">
+                                <div class="card-header">
+                                    <h3 class="card-title">Details</h3>
+                                </div>
+
+
+                                <div class="row">
+
+
+
+
+                                    <div class="col-md-12">
+                                        <div class="card card-default">
+
+                                            <div class="card-header">
+                                                <h3 class="card-title"></h3>
+                                            </div>
+
+
+                                            <div>
+
+                                                <div class="bs-stepper">
+                                                    <div class="bs-stepper-header" role="tablist">
+                                                        <!-- your steps here -->
+                                                        <div class="step" data-target="#logins-part">
+                                                            <button type="button" class="step-trigger" role="tab" aria-controls="logins-part" id="logins-part-trigger">
+                                                                <span class="bs-stepper-circle">1</span>
+                                                                <span class="bs-stepper-label"> Select the Customer</span>
+                                                            </button>
+                                                        </div>
+                                                        <div class="step" data-target="#dd-part">
+                                                            <button type="button" class="step-trigger" role="tab" aria-controls="dd-part" id="dd-part-trigger">
+                                                                <span class="bs-stepper-circle">2</span>
+                                                                <span class="bs-stepper-label"> Assign Employees</span>
+                                                            </button>
+                                                        </div>
+                                                        <div class="step" data-target="#information-part">
+                                                            <button type="button" class="step-trigger" role="tab" aria-controls="information-part" id="information-part-trigger">
+                                                                <span class="bs-stepper-circle">3</span>
+                                                                <span class="bs-stepper-label">Finalize Job Master</span>
+                                                            </button>
+                                                        </div>
+                                                    </div>
+
+
+                                                    <div class="bs-stepper-content">
+                                                        <!-- your steps content here -->
+                                                        @using (Html.BeginForm("", "", FormMethod.Post, new { role = "form", enctype = "multipart/form-data", id = "quickForm", @autocomplete = "off" }))
+                                                        {
+                                                            @Html.HiddenFor(model => Model.Id)
+                                                            @Html.HiddenFor(model => Model.Fk_CustomerId)
+                                                            <div id="logins-part" class="content active dstepper-block" role="tabpanel" aria-labelledby="logins-part-trigger">
+                                                                <div class="card-body">
+
+                                                                    <div class="row">
+
+                                                                        <div class="col-lg-6">
+                                                                            <div class="mb-3">
+                                                                                <div class="form-group">
+                                                                                    <label for="exampleInputEmail1">Customer Name</label>
+                                                                                    @Html.DropDownListFor(model => model.Fk_CustomerId, Model.CustomerSelectListItems, "Select", htmlAttributes: new { @class = "form-control", id = "selectUnit", @disabled = "disabled" })
+
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-lg-6">
+                                                                            <div class="form-group">
+                                                                                <div @*style="display:none"*@>
+                                                                                    @Html.ValidationSummary(false, "", new { @class = "text-danger", id = "errorname" })
+                                                                                    @* @Html.EditorFor(model => model.Fk_LocationId, new { htmlAttributes = new { @class = "form-control", placeholder = "", id = "Fk_LocationId" } })*@
+                                                                                </div>
+                                                                                @*@Html.HiddenFor(model => model.Fk_LocationId, new { htmlAttributes = new { @class = "form-control", placeholder = "" } })*@
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+
+
+                                                                    <div class="modal-body" id="staticBackdropBody">
+                                                                        <!-- Content loaded via AJAX will appear here -->
+                                                                    </div>
+
+
+                                                                </div>
+                                                                <button class="btn btn-primary" type="button" onclick="nextStep()">Next</button>
+                                                            </div>
+
+
+
+
+
+
+                                                        }
+
+
+
+
+
+
+
+
+
+
+                                                        <div id="dd-part" class="content" role="tabpanel" aria-labelledby="dd-part-trigger">
+                                                            <div class="card-body">
+                                                                <div class="row">
+
+                                                                    <div class="col-lg-6">
+                                                                        <div class="mb-3">
+                                                                            <div class="form-group">
+                                                                                <label for="exampleInputEmail1">Assignee Employees / Partners / Managers</label>
+
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-lg-8">
+                                                                        @Html.ValidationSummary(false, "", new { @class = "text-danger", id = "errorAssignee" })
+
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="modal-body" id="staticEmployee">
+
+                                                                    <!-- Content loaded via AJAX will appear here -->
+                                                                </div>
+                                                            </div>
+
+
+
+                                                            <button class="btn btn-primary" type="button" onclick="prevStep()">Previous</button>
+                                                            <button class="btn btn-primary" type="button" onclick="nextStep()">Next</button>
+
+                                                        </div>
+                                                        @using (Html.BeginForm("", "", FormMethod.Post, new { role = "form", enctype = "multipart/form-data", id = "quickForm2", @autocomplete = "off" }))
+                                                        {
+                                                            @Html.HiddenFor(model => Model.Id)
+                                                            @Html.HiddenFor(model => Model.Fk_CustomerId)
+                                                            <div id="information-part" class="content" role="tabpanel" aria-labelledby="information-part-trigger">
+
+                                                                <div class="card-body">
+
+                                                                    <div class="row">
+
+                                                                        <div class="col-lg-4">
+                                                                            <div class="mb-3">
+                                                                                <div class="form-group">
+                                                                                    <label for="exampleInputEmail1">Job Code</label>
+
+                                                                                    @Html.EditorFor(model => model.JobCode, new { htmlAttributes = new { @class = "form-control", placeholder = "", @ReadOnly = "ReadOnly" } })
+
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-lg-8">
+
+                                                                            <div class="mb-4">
+                                                                                <div class="form-group">
+                                                                                    <label for="basicpill-address-input">Description</label>
+                                                                                    @Html.EditorFor(model => model.Narration, new { htmlAttributes = new { @class = "form-control", placeholder = "" } })
+                                                                                    @Html.ValidationSummary(false, "", new { @class = "error invalid-feedback", id = "errorDescription" })
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="row">
+
+                                                                        <div class="col-lg-4">
+
+                                                                            <div class="mb-4">
+                                                                                <div class="form-group">
+                                                                                    <label for="exampleInputEmail1">Strat Date</label>
+                                                                                    <div class="input-group date" id="reservationdate" data-target-input="nearest">
+                                                                                        @Html.EditorFor(model => model.StartDate, new { htmlAttributes = new { @class = "form-control datetimepicker-input", data_target = "#reservationdate" } })
+
+                                                                                        @*<input type="text" name="Date" class="form-control datetimepicker-input" data-target="#reservationdate" />*@
+                                                                                        <div class="input-group-append" data-target="#reservationdate" data-toggle="datetimepicker">
+                                                                                            <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <div class="col-lg-4">
+
+                                                                            <div class="mb-4">
+                                                                                <div class="form-group">
+                                                                                    <label for="exampleInputEmail1">End Date</label>
+                                                                                    <div class="input-group date" id="reservationdate1" data-target-input="nearest">
+                                                                                        @Html.EditorFor(model => model.DueDate, new { htmlAttributes = new { @class = "form-control datetimepicker-input", data_target = "#reservationdate" } })
+
+                                                                                        @*<input type="text" name="Date" class="form-control datetimepicker-input" data-target="#reservationdate" />*@
+                                                                                        <div class="input-group-append" data-target="#reservationdate1" data-toggle="datetimepicker">
+                                                                                            <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-lg-4">
+
+                                                                            <div class="mb-4">
+                                                                                <div class="form-group">
+                                                                                    <label for="basicpill-address-input">Previews Value </label>
+                                                                                    @Html.EditorFor(model => model.PreViewvalue, new { htmlAttributes = new { @class = "form-control", placeholder = "", @type = "number", @min = "0" } })
+
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="col-lg-6">
+
+                                                                        <div class="mb-4">
+                                                                            <div class="form-group mb-0">
+                                                                                <div class="custom-control custom-checkbox">
+                                                                                    @Html.CheckBoxFor(model => model.IsActive, new { @class = "form-check-input", id = "exampleCheck2" })
+                                                                                    <label for="exampleCheck2">Is Active.</label>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+                                                                <button class="btn btn-primary" type="button" onclick="prevStep()">Previous</button>
+                                                                <button type="button" onclick="Finalize()" class="btn btn-primary">Submit</button>
+                                                            </div>
+                                                        }
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- /.card-body -->
+                                            <div class="card-footer">
+                                            </div>
+                                        </div>
+                                        <!-- /.card -->
+                                    </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+                        <!-- /.card-body -->
+                    </div>
+
+                    <!-- /.card -->
+                </div>
+                <!-- /.col -->
+            </div>
+            <!-- /.row -->
+        </div>
+        <!-- /.container-fluid -->
+    </section>
+</div>
+
+@section scripts {
+
+
+    <!-- jQuery -->
+    <script src="~/plugins/jquery/jquery.min.js"></script>
+    <!-- Bootstrap 4 -->
+    <script src="~/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- Select2 -->
+    <script src="~/plugins/select2/js/select2.full.min.js"></script>
+    <!-- Bootstrap4 Duallistbox -->
+    <script src="~/plugins/bootstrap4-duallistbox/jquery.bootstrap-duallistbox.min.js"></script>
+    <!-- InputMask -->
+    <script src="~/plugins/moment/moment.min.js"></script>
+    <script src="~/plugins/inputmask/jquery.inputmask.min.js"></script>
+    <!-- date-range-picker -->
+    <script src="~/plugins/daterangepicker/daterangepicker.js"></script>
+    <!-- jquery-validation -->
+    <script src="~/plugins/jquery-validation/jquery.validate.min.js"></script>
+    <script src="~/plugins/jquery-validation/additional-methods.min.js"></script>
+    <!-- bootstrap color picker -->
+    <script src="~/plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js"></script>
+    <!-- Tempusdominus Bootstrap 4 -->
+    <script src="~/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
+    <!-- Bootstrap Switch -->
+    <script src="~/plugins/bootstrap-switch/js/bootstrap-switch.min.js"></script>
+    <!-- BS-Stepper -->
+    <script src="~/plugins/bs-stepper/js/bs-stepper.min.js"></script>
+    <!-- dropzonejs -->
+    <script src="~/plugins/dropzone/min/dropzone.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src="~/dist/js/adminlte.min.js"></script>
+    <!-- AdminLTE for demo purposes -->
+    <script src="~/dist/js/demo.js"></script>
+
+    <script>
+        $(function () {
+            //Initialize Select2 Elements
+            $('.select2').select2()
+
+            //Initialize Select2 Elements
+            $('.select2bs4').select2({
+                theme: 'bootstrap4'
+            })
+
+            //Datemask dd/mm/yyyy
+            $('#datemask').inputmask('dd/mm/yyyy', { 'placeholder': 'dd/mm/yyyy' })
+            //Datemask2 mm/dd/yyyy
+            $('#datemask2').inputmask('mm/dd/yyyy', { 'placeholder': 'mm/dd/yyyy' })
+            //Money Euro
+            $('[data-mask]').inputmask()
+
+            //Date picker
+            $('#reservationdate').datetimepicker({
+                format: 'L',
+                maxDate: moment() // Disable future dates
+            });
+            $('#reservationdate1').datetimepicker({
+                format: 'L',
+                minDate: moment()
+            });
+
+            //Date and time picker
+            $('#reservationdatetime').datetimepicker({ icons: { time: 'far fa-clock' } });
+
+            //Date range picker
+            $('#reservation').daterangepicker()
+            //Date range picker with time picker
+            $('#reservationtime').daterangepicker({
+                timePicker: true,
+                timePickerIncrement: 30,
+                locale: {
+                    format: 'MM/DD/YYYY hh:mm A'
+                }
+            })
+            //Date range as a button
+            $('#daterange-btn').daterangepicker(
+                {
+                    ranges: {
+                        'Today': [moment(), moment()],
+                        'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+                        'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+                        'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+                        'This Month': [moment().startOf('month'), moment().endOf('month')],
+                        'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+                    },
+                    startDate: moment().subtract(29, 'days'),
+                    endDate: moment()
+                },
+                function (start, end) {
+                    $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'))
+                }
+            )
+
+            //Timepicker
+            $('#timepicker').datetimepicker({
+                format: 'LT'
+            })
+
+            //Bootstrap Duallistbox
+            $('.duallistbox').bootstrapDualListbox()
+
+            //Colorpicker
+            $('.my-colorpicker1').colorpicker()
+            //color picker with addon
+            $('.my-colorpicker2').colorpicker()
+
+            $('.my-colorpicker2').on('colorpickerChange', function (event) {
+                $('.my-colorpicker2 .fa-square').css('color', event.color.toString());
+            })
+
+            $("input[data-bootstrap-switch]").each(function () {
+                $(this).bootstrapSwitch('state', $(this).prop('checked'));
+            })
+
+        })
+
+    </script>
+
+    <script>
+
+        var IsLocation = false;
+        var IsAssignee = false;
+
+
+        // Function to get the selected value from the dropdown
+        function getSelectedValue() {
+            // Get the dropdown element by its ID
+            var selectElement = document.getElementById("selectUnit");
+            debugger
+            // Get the selected value
+            var selectedValue = selectElement.value;
+
+            GetDefaultLocaion()
+            // Log or use the selected value
+            //console.log("Selected value:", selectedValue);
+
+            // You can return the value if needed
+            return selectedValue;
+        }
+
+        // Attach the function to the dropdown change event
+        document.getElementById("selectUnit").addEventListener("change", function () {
+            var selectedValue = getSelectedValue();
+            // alert("The selected value is: " + selectedValue);
+        });
+
+        var GetCurrently_HaveLocation = function () {
+
+            //$("#loaderbody").removeClass('hide');
+            var selectElement = document.getElementById("selectUnit").value;
+            $.ajax({
+                type: "GET",
+                url: "/JobMaster/ViewCustomerCurrentlyLocation",
+                data: { customerId: selectElement },
+
+                success: function (result) {
+                    debugger
+                    $("#staticBackdropBody").html(result);
+
+                },
+            })
+        }
+
+        var GetDefaultLocaion = function () {
+
+            //$("#loaderbody").removeClass('hide');
+            var selectElement = document.getElementById("selectUnit").value;
+            $.ajax({
+                type: "GET",
+                url: "/JobMaster/ViewCustomerSelectedLocation",
+                data: { customerId: selectElement, Createby: 'User' },
+
+                success: function (result) {
+                    debugger
+                    $("#staticBackdropBody").html(result);
+
+                },
+            })
+        }
+
+        var AddLocation = function (narration, code, locationId) {
+            var selectElement = document.getElementById("selectUnit").value;
+            //$("#loaderbody").removeClass('hide');
+            $.ajax({
+                type: "Post",
+                url: "/JobMaster/InsertSelectedLocation",
+                data: { Narration: narration, code: code, locationId: locationId, customerId: selectElement },
+
+                success: function (result) {
+                    Swal.fire({
+
+                        icon: result.Status,
+                        title: result.Status,
+                        text: result.Text
+                    }).then((result) => {
+                        IsLocation = true;
+                        $('#errorname').html("");
+                        if (result.isConfirmed) {
+
+                            var selectElement = document.getElementById("selectUnit").value;
+                            $.ajax({
+                                type: "GET",
+                                url: "/JobMaster/ViewCustomerSelectedLocation",
+                                data: { customerId: selectElement, Createby: 'User' },
+
+                                success: function (result) {
+                                    debugger
+                                    $("#staticBackdropBody").html(result);
+
+                                },
+                            })
+                        }
+                        else {
+                            var selectElement = document.getElementById("selectUnit").value;
+                            $.ajax({
+                                type: "GET",
+                                url: "/JobMaster/ViewCustomerSelectedLocation",
+                                data: { customerId: selectElement, Createby: 'User' },
+
+                                success: function (result) {
+                                    debugger
+                                    $("#staticBackdropBody").html(result);
+
+                                },
+                            })
+                        }
+                    })
+                },
+            })
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            window.stepper = new Stepper(document.querySelector('.bs-stepper'));
+            debugger
+
+
+            GetDefaultLocaion()
+            IsLocation = true;
+
+            document.querySelector('.bs-stepper').addEventListener('shown.bs-stepper', function (event) {
+                console.log("Current index: " + event.detail.indexStep);
+
+                if (event.detail.indexStep === 1) {
+                    GetDefaultAssignees();
+                    IsAssignee= true
+                }
+            });
+
+            // Validation setup
+            $('#quickForm').validate({
+                ignore: [],
+                rules: {
+                    Fk_CustomerId: {
+                        required: true,
+                    },
+                    //PreViewvalue: {
+                    //    required: true,
+                    //},
+                    //Narration: {
+                    //    required: true,
+                    //},
+                    //StartDate: {
+                    //    required: true,
+                    //    date: true
+                    //},
+                    //DueDate: {
+                    //    required: true,
+                    //    date: true
+                    //},
+                },
+                messages: {
+                    Fk_CustomerId: {
+                        required: "Please Select the Customer",
+                    },
+                    //PreViewvalue: {
+                    //    required: "Please provide a Previews Value",
+                    //},
+                    //Narration: {
+                    //    required: "Please provide a Narration",
+                    //},
+                    //StartDate: {
+                    //    required: "Please provide a Start Date",
+                    //},
+                    //DueDate: {
+                    //    required: "Please provide a Due Date",
+                    //}
+                },
+                errorElement: 'span',
+                errorPlacement: function (error, element) {
+                    error.addClass('invalid-feedback');
+                    element.closest('.form-group').append(error);
+                },
+                highlight: function (element, errorClass, validClass) {
+                    $(element).addClass('is-invalid');
+                },
+                unhighlight: function (element, errorClass, validClass) {
+                    $(element).removeClass('is-invalid');
+                }
+            });
+
+
+
+        });
+
+        function nextStep() {
+            debugger;
+            var currentStep = stepper._currentIndex;
+            var isFormValid = $('#quickForm').valid();
+
+            if (isFormValid) {
+                // Step-specific validation
+                if (currentStep === 0) {
+                    handleStepZero();
+                } else if (currentStep === 1) {
+                    handleStepOne();
+                }
+
+                // Check if it's the last step
+               
+                
+            }
+        }
+
+        function Finalize() {
+            
+            var currentStep = stepper._currentIndex;
+            var isFormValid = $('#quickForm').valid();
+
+            if (isFormValid) {
+                // Step-specific validation
+                if (currentStep === 0) {
+                    handleStepZero();
+                } else if (currentStep === 1) {
+                    handleStepOne();
+                }
+
+                // Check if it's the last step
+                if (stepper._currentIndex === 2) {
+
+                    var isFormValid = $('#quickForm2').valid();
+
+                    var data1 = $('#quickForm').serialize();
+                    var data2 = $('#quickForm2').serialize();
+
+                    if (isFormValid == true) {
+
+                        var concatenatedData = data1 + '&' + data2;
+
+                        PostInsert(concatenatedData);
+                    }
+                }
+
+            }
+        }
+
+        $('#quickForm2').validate({
+            rules: {
+                PreViewvalue: {
+                    required: true,
+                },
+                Narration: {
+                    required: true,
+                },
+                StartDate: {
+                    required: true,
+                    date: true
+                },
+                DueDate: {
+                    required: true,
+                    date: true
+                },
+                IsActive : {
+                     required: true,
+                }
+            },
+            messages: {
+                PreViewvalue: {
+                    required: "Please provide a Previews Value",
+                },
+                Narration: {
+                    required: "Please provide a Narration",
+                },
+                StartDate: {
+                    required: "Please provide a Start Date",
+                },
+                DueDate: {
+                    required: "Please provide a Due Date",
+                },
+                IsActive: {
+                    required: "Please Select the Status",
+                }
+            },
+            errorElement: 'span',
+            errorPlacement: function (error, element) {
+                error.addClass('invalid-feedback');
+                element.closest('.form-group').append(error);
+            },
+            highlight: function (element, errorClass, validClass) {
+                $(element).addClass('is-invalid');
+            },
+            unhighlight: function (element, errorClass, validClass) {
+                $(element).removeClass('is-invalid');
+            }
+        });
+
+        function handleStepZero() {
+            if (IsLocation === false) {
+                $('#errorname').html("Please add the Location");
+            } else {
+                $('#errorname').html("");
+                stepper.next();
+            }
+        }
+
+        function handleStepOne() {
+            if (IsAssignee === false) {
+                $('#errorAssignee').html("Please add the Assignees");
+            } else {
+                $('#errorAssignee').html("");
+                stepper.next();
+            }
+        }
+
+
+
+        function prevStep() {
+            stepper.previous();
+        }
+
+
+
+
+        /// Second step
+
+        var GetDefaultAssignees = function () {
+
+            //$("#loaderbody").removeClass('hide');
+            var selectElement = document.getElementById("selectUnit").value;
+            $.ajax({
+                type: "GET",
+                url: "/JobMaster/ViewAssignees",
+                data: { customerId: selectElement, Createby: 'User' },
+
+                success: function (result) {
+                    debugger
+                    $("#staticEmployee").html(result);
+                },
+            })
+        }
+
+        var GetAllEmployeePartnerManager = function () {
+
+            var selectElement = document.getElementById("selectUnit").value;
+            $.ajax({
+                type: "GET",
+                url: "/JobMaster/ViewAssigneeByManagerPartnerEmployee",
+                data: { customerId: selectElement },
+
+                success: function (result) {
+                    debugger
+                    $("#staticEmployee").html(result);
+                },
+            })
+        }
+
+
+
+
+
+
+         var PostInsert = function (model) {
+
+             $.ajax({
+                 type: "Post",
+                 url: "/JobMaster/Edit",
+                 data: model,
+
+                 success: function (result) {
+                     Swal.fire({
+
+                         icon: result.Status,
+                         title: result.Status,
+                         text: result.Text
+                     }).then((result) => {
+                         if (result.isConfirmed) {
+                             window.location.href = "@Url.Action("Index", "JobMaster")"
+                         }
+                         else {
+                             window.location.href = "@Url.Action("Index", "JobMaster")"
+                         }
+                     })
+                 },
+             })
+
+         }
+    </script>
+}
+

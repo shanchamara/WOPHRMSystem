@@ -16,7 +16,8 @@ namespace WOPHRMSystem.Context
     {
         public TblCustomer()
         {
-            this.TblJobs = new HashSet<TblJob>();
+            this.TblJobMasters = new HashSet<TblJobMaster>();
+            this.TblJobTransactions = new HashSet<TblJobTransaction>();
             this.TblLocations = new HashSet<TblLocation>();
             this.TblOpeningBalances = new HashSet<TblOpeningBalance>();
         }
@@ -61,7 +62,8 @@ namespace WOPHRMSystem.Context
         public virtual TblPartner TblPartner { get; set; }
         public virtual TblSectorMaster TblSectorMaster { get; set; }
         public virtual TblWorkGroup TblWorkGroup { get; set; }
-        public virtual ICollection<TblJob> TblJobs { get; set; }
+        public virtual ICollection<TblJobMaster> TblJobMasters { get; set; }
+        public virtual ICollection<TblJobTransaction> TblJobTransactions { get; set; }
         public virtual ICollection<TblLocation> TblLocations { get; set; }
         public virtual ICollection<TblOpeningBalance> TblOpeningBalances { get; set; }
     }

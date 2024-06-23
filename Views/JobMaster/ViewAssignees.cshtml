@@ -1,0 +1,222 @@
+﻿@model WOPHRMSystem.Models.ListViewCurrentlyAssignees
+
+<!-- DataTables -->
+<link rel="stylesheet" href="~/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+<link rel="stylesheet" href="~/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+<link rel="stylesheet" href="~/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
+
+<style>
+    .disable-height {
+        height: auto !important;
+    }
+</style>
+@{
+    int Rows = 1;
+}
+
+
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+
+            <!-- /.card -->
+            <div class="card">
+
+                <!-- /.card-header -->
+                <div class="card-body">
+                    <div class="row no-print">
+                        <div class="col-12">
+
+                            <a onclick="GetAllEmployeePartnerManager()" class="btn btn-primary float-right">
+                                <i class="fas fa-plus"></i>
+                                Add Assigne
+                            </a>
+
+                        </div>
+                    </div>
+                </div>
+                <!-- /.card-body -->
+            </div>
+
+            <!-- /.card -->
+        </div>
+        <!-- /.col -->
+    </div>
+    <!-- /.row -->
+</div>
+
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+
+            <!-- /.card -->
+            <div class="card">
+                <!--<div class="card-header">-->
+                @*<h3 class="card-title">DataTable with default features</h3>*@
+                <!--</div>-->
+                <!-- /.card-header -->
+                <div class="card-body">
+                    <table id="example1" class="table table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th style="display:none;">Id</th> <!-- Hidden Id column -->
+                                <th>Code</th>
+                                <th>Name</th>
+                                <th>Type</th>
+                                <th>Budgeted Hours</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var s in Model.JobMasterAssignTempModels)
+                            {
+                                <tr>
+                                    <td style="display:none;">@s.Id</td> <!-- Hidden Id column -->
+                                    <td>@s.Code</td>
+                                    <td>@s.Name</td>
+                                    <td>@s.TypeOftable</td>
+                                    <td>
+                                        <input type="text" class="form-control budgeted-hours" value="@s.BudgetedHours" />
+                                    </td>
+
+
+                                    <td class="project-actions text-right">
+                                        <a class="btn btn-info btn-sm" onclick="getInputValue1(this,'@s.TypeOftableId','@s.TypeOftable','@s.Name','@s.Code','@s.Id','@s.Designation')">
+                                            <i class="fas fa-pencil-alt"></i> Update
+                                        </a>
+                                        <a class="btn btn-danger btn-sm" onclick="PostDelete('@s.Id')">
+                                            <i class="fas fa-trash"></i> Remove
+                                        </a>
+                                    </td>
+                                </tr>
+                                Rows++;
+                            }
+                        </tbody>
+                    </table>
+                </div>
+                <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+        </div>
+        <!-- /.col -->
+    </div>
+    <!-- /.row -->
+</div>
+
+<script>
+
+    function getInputValue1(button, typeOftableId, typeOftable, name, code, id, Designation) {
+        debugger
+        var row = button.closest('tr');
+        var budgetedHours = row.querySelector('.budgeted-hours').value || 0;
+
+        // Call your AddAssign function or handle the values as needed
+        UpdateBudget(typeOftableId, typeOftable, name, code, Designation, id, budgetedHours);
+    }
+
+    var UpdateBudget = function (TypeOftableId, TypeOftable, Name, Code, Designation, id, BudgetedHours) {
+        var selectElement = document.getElementById("selectUnit").value;
+        //$("#loaderbody").removeClass('hide');
+
+        debugger
+        $.ajax({
+            type: "Post",
+            url: "/JobMaster/UpdateBudgeet",
+            data: { TypeOftableId: TypeOftableId, TypeOftable: TypeOftable, Name: Name, Code: Code, Designation: Designation, CustomerId: selectElement, Id: id, BudgetedHours: BudgetedHours },
+
+            success: function (result) {
+                Swal.fire({
+
+                    icon: result.Status,
+                    title: result.Status,
+                    text: result.Text
+                }).then((result) => {
+                    IsAssignee = true;
+                    $('#errorAssignee').html("");
+                    if (result.isConfirmed) {
+                        var selectElement = document.getElementById("selectUnit").value;
+                        $.ajax({
+                            type: "GET",
+                            url: "/JobMaster/ViewAssignees",
+                            data: { customerId: selectElement, Createby: 'User' },
+
+                            success: function (result) {
+                                debugger
+                                $("#staticEmployee").html(result);
+                            },
+                        })
+                    }
+                    else {
+                        var selectElement = document.getElementById("selectUnit").value;
+                        $.ajax({
+                            type: "GET",
+                            url: "/JobMaster/ViewAssignees",
+                            data: { customerId: selectElement, Createby: 'User' },
+
+                            success: function (result) {
+                                debugger
+                                $("#staticEmployee").html(result);
+                            },
+                        })
+                    }
+                })
+            },
+        })
+    }
+
+    $(document).ready(function () {
+        $('.budgeted-hours').keydown(function (event) {
+            if (event.keyCode == 13) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+
+
+    var PostDelete = function (Id) {
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "Do you really want to Remove this Record?",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    type: "DELETE",
+                    url: "/JobMaster/RemoveAssignee",
+                    data: { ID: Id },
+
+                    success: function (result) {
+                        Swal.fire({
+                            icon: result.Status,
+                            title: result.Status,
+                            text: result.Text
+                        }).then((result) => {
+                            var selectElement = document.getElementById("selectUnit").value;
+                            $.ajax({
+                                type: "GET",
+                                url: "/JobMaster/ViewCustomerSelectedLocation",
+                                data: { customerId: selectElement, Createby: 'User' },
+
+                                success: function (result) {
+                                    debugger
+                                    $("#staticBackdropBody").html(result);
+
+                                },
+                            })
+                        });
+                    }
+                });
+            }
+        });
+    }
+
+
+</script>

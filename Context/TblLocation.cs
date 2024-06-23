@@ -14,6 +14,12 @@ namespace WOPHRMSystem.Context
     
     public partial class TblLocation
     {
+        public TblLocation()
+        {
+            this.TblJobMasterLocations = new HashSet<TblJobMasterLocation>();
+            this.TblJobTransactions = new HashSet<TblJobTransaction>();
+        }
+    
         public int Id { get; set; }
         public string Code { get; set; }
         public string Narration { get; set; }
@@ -29,5 +35,7 @@ namespace WOPHRMSystem.Context
         public Nullable<System.DateTime> Delete_Date { get; set; }
     
         public virtual TblCustomer TblCustomer { get; set; }
+        public virtual ICollection<TblJobMasterLocation> TblJobMasterLocations { get; set; }
+        public virtual ICollection<TblJobTransaction> TblJobTransactions { get; set; }
     }
 }
