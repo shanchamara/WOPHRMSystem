@@ -290,7 +290,7 @@
                                                     <div class="form-group">
                                                         <label for="exampleInputEmail1">Group</label>
 
-                                                        @Html.DropDownListFor(model => model.Fk_WorkGroupId, Model.WorkGroupLists, "Select", htmlAttributes: new { @class = "form-control", id = "selectUnit", required = "required" })
+                                                        @Html.DropDownListFor(model => model.Fk_CustomerGroupId, Model.WorkGroupLists, "Select", htmlAttributes: new { @class = "form-control", id = "selectUnit", required = "required" })
 
                                                     </div>
                                                 </div>
@@ -629,7 +629,7 @@
                 SVatNo: { required: true },
                 TaxNo: { required: true },
                 Fk_GradeMasterId: { required: true },
-                Fk_WorkGroupId: { required: true },
+                Fk_CustomerGroupId: { required: true },
                 Fk_PartnerId: { required: true },
                 Fk_ManagerId: { required: true },
                 Fk_SectorMasterId: { required: true },
@@ -680,8 +680,8 @@
                 Fk_GradeMasterId: {
                     required: "Please Select the GradeMaster",
                 },
-                Fk_WorkGroupId: {
-                    required: "Please Select the WorkGroup",
+                Fk_CustomerGroupId: {
+                    required: "Please Select the Customer Group",
                 },
                 Fk_PartnerId: {
                     required: "Please Select the Partner",

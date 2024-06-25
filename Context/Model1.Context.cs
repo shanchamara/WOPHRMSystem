@@ -26,6 +26,7 @@ namespace WOPHRMSystem.Context
         }
     
         public DbSet<C__EFMigrationsHistory> C__EFMigrationsHistory { get; set; }
+        public DbSet<TblCustomerGroup> TblCustomerGroups { get; set; }
         public DbSet<TblCustomer> TblCustomers { get; set; }
         public DbSet<TblDepartment> TblDepartments { get; set; }
         public DbSet<TblDesignation> TblDesignations { get; set; }
@@ -45,11 +46,9 @@ namespace WOPHRMSystem.Context
         public DbSet<TblJobTransaction> TblJobTransactions { get; set; }
         public DbSet<TblLegalStatusMaster> TblLegalStatusMasters { get; set; }
         public DbSet<TblLocation> TblLocations { get; set; }
-        public DbSet<TblManager> TblManagers { get; set; }
         public DbSet<TblNatureMaster> TblNatureMasters { get; set; }
         public DbSet<TblNonEffectiveEmployee> TblNonEffectiveEmployees { get; set; }
         public DbSet<TblOpeningBalance> TblOpeningBalances { get; set; }
-        public DbSet<TblPartner> TblPartners { get; set; }
         public DbSet<TblSectorMaster> TblSectorMasters { get; set; }
         public DbSet<TblSiteSetting> TblSiteSettings { get; set; }
         public DbSet<TblTitle> TblTitles { get; set; }

@@ -143,6 +143,7 @@ namespace WOPHRMSystem.Services
             {
                 var dr = (from a in _context.TblEmployees
                           join d in _context.TblDesignations on a.Fk_DesginationId equals d.Id
+                          where a.IsManager == false && a.IsPartner == false
                           orderby a.Id descending
                           select new JobMasterAssignTempModel()
                           {
@@ -158,14 +159,14 @@ namespace WOPHRMSystem.Services
 
                           }).ToList();
 
-                var partner = (from a in _context.TblPartners
+                var partner = (from a in _context.TblEmployees
+                               where a.IsPartner == true
                                select new JobMasterAssignTempModel()
                                {
 
                                    Code = a.Code,
-                                   Name = a.Narration,
+                                   Name = a.Name,
                                    TypeOftable = "Partners",
-
                                    TypeOftableId = a.Id,
                                    Id = a.Id,
 
@@ -173,7 +174,8 @@ namespace WOPHRMSystem.Services
 
                                }).ToList();
 
-                var manager = (from a in _context.TblManagers
+                var manager = (from a in _context.TblEmployees
+                               where a.IsManager == true
                                select new JobMasterAssignTempModel()
                                {
 

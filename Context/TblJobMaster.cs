@@ -28,6 +28,10 @@ namespace WOPHRMSystem.Context
         public Nullable<System.DateTime> StartDate { get; set; }
         public Nullable<System.DateTime> DueDate { get; set; }
         public int Fk_CustomerId { get; set; }
+        public bool IsCompleted { get; set; }
+        public bool IsReActivate { get; set; }
+        public Nullable<System.DateTime> CompletedDate { get; set; }
+        public Nullable<System.DateTime> ReActivateDate { get; set; }
         public bool IsActive { get; set; }
         public bool IsDelete { get; set; }
         public string Create_By { get; set; }
@@ -36,10 +40,6 @@ namespace WOPHRMSystem.Context
         public Nullable<System.DateTime> Edit_Date { get; set; }
         public string Delete_By { get; set; }
         public Nullable<System.DateTime> Delete_Date { get; set; }
-        public Nullable<System.DateTime> CompletedDate { get; set; }
-        public bool IsCompleted { get; set; }
-        public bool IsReActivate { get; set; }
-        public Nullable<System.DateTime> ReActivateDate { get; set; }
     
         public virtual TblCustomer TblCustomer { get; set; }
         public virtual ICollection<TblJobMasterLocation> TblJobMasterLocations { get; set; }

@@ -15,7 +15,7 @@ namespace WOPHRMSystem.Context
     public partial class VW_Customer
     {
         public int Id { get; set; }
-        public int Fk_WorkGroupId { get; set; }
+        public int Fk_CustomerGroupId { get; set; }
         public string VatType { get; set; }
         public string Address { get; set; }
         public string TaxNo { get; set; }

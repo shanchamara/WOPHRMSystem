@@ -23,7 +23,7 @@ namespace WOPHRMSystem.Context
         }
     
         public int Id { get; set; }
-        public int Fk_WorkGroupId { get; set; }
+        public int Fk_CustomerGroupId { get; set; }
         public string VatType { get; set; }
         public string Address { get; set; }
         public string TaxNo { get; set; }
@@ -54,14 +54,12 @@ namespace WOPHRMSystem.Context
         public string Delete_By { get; set; }
         public Nullable<System.DateTime> Delete_Date { get; set; }
     
+        public virtual TblCustomerGroup TblCustomerGroup { get; set; }
         public virtual TblGradeMaster TblGradeMaster { get; set; }
         public virtual TblInternationalReferalMaster TblInternationalReferalMaster { get; set; }
         public virtual TblIntroductionMaster TblIntroductionMaster { get; set; }
         public virtual TblLegalStatusMaster TblLegalStatusMaster { get; set; }
-        public virtual TblManager TblManager { get; set; }
-        public virtual TblPartner TblPartner { get; set; }
         public virtual TblSectorMaster TblSectorMaster { get; set; }
-        public virtual TblWorkGroup TblWorkGroup { get; set; }
         public virtual ICollection<TblJobMaster> TblJobMasters { get; set; }
         public virtual ICollection<TblJobTransaction> TblJobTransactions { get; set; }
         public virtual ICollection<TblLocation> TblLocations { get; set; }

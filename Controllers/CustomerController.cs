@@ -10,14 +10,16 @@ namespace WOPHRMSystem.Controllers
     public class CustomerController : Controller
     {
         readonly CustomerServices _ClientService = new CustomerServices();
-        readonly PartnerServices partnerServices = new PartnerServices();
-        readonly WorkGroupServices workGroupServices = new WorkGroupServices();
+        
+        readonly CustomerGroupServices workGroupServices = new CustomerGroupServices();
         readonly IntroductionMasterServices introductionMasterServices = new IntroductionMasterServices();
         readonly SectorMasterServices sector = new SectorMasterServices();
         readonly InternationalReferalMasterServices internationalReferalMasterServices = new InternationalReferalMasterServices();
         readonly LegalStatusMasterServices legalStatusMasterServices = new LegalStatusMasterServices();
         readonly GradeMasterServices gradeMasterServices = new GradeMasterServices();
-        readonly ManagerServices manager = new ManagerServices();
+        readonly EmployeeServices employee = new EmployeeServices();
+
+       
 
         [HttpGet]
         public ActionResult Index()
@@ -32,13 +34,13 @@ namespace WOPHRMSystem.Controllers
             var model = new CustomerModel()
             {
                 WorkGroupLists = new SelectList(workGroupServices.GetAll(), "Id", "CodeAndNarration"),
-                PartnerLists = new SelectList(partnerServices.GetAll(), "Id", "CodeAndNarration"),
+                PartnerLists = new SelectList(employee.GetAllIsPartner(), "Id", "Name"),
                 IntroductionLists = new SelectList(introductionMasterServices.GetAll(), "Id", "CodeAndNarration"),
                 SectorMasterLists = new SelectList(sector.GetAll(), "Id", "CodeAndNarration"),
                 InternationslReferalLists = new SelectList(internationalReferalMasterServices.GetAll(), "Id", "CodeAndNarration"),
                 LegalStatusMasterLists = new SelectList(legalStatusMasterServices.GetAll(), "Id", "CodeAndNarration"),
                 GradeMasterLists = new SelectList(gradeMasterServices.GetAll(), "Id", "CodeAndNarration"),
-                MangerLists = new SelectList(manager.GetAll(), "Id", "Name"),
+                MangerLists = new SelectList(employee.GetAllIsManager(), "Id", "Name"),
             };
             return View(model);
         }
@@ -66,7 +68,7 @@ namespace WOPHRMSystem.Controllers
                         Fk_IntroductionId = masterModel.Fk_IntroductionId,
                         Fk_LegalStatusMasterId = masterModel.Fk_LegalStatusMasterId,
                         Fk_SectorMasterId = masterModel.Fk_SectorMasterId,
-                        Fk_WorkGroupId = masterModel.Fk_WorkGroupId,
+                        Fk_CustomerGroupId = masterModel.Fk_CustomerGroupId,
                         Fk_PartnerId = masterModel.Fk_PartnerId,
                         SVatNo = masterModel.SVatNo,
                         TaxNo = masterModel.TaxNo,
@@ -119,7 +121,7 @@ namespace WOPHRMSystem.Controllers
                 TaxNo = dt.TaxNo,
                 SVatNo = dt.SVatNo,
                 Fk_PartnerId = dt.Fk_PartnerId,
-                Fk_WorkGroupId = dt.Fk_WorkGroupId,
+                Fk_CustomerGroupId = dt.Fk_CustomerGroupId,
                 Fk_SectorMasterId = dt.Fk_SectorMasterId,
                 Address = dt.Address,
                 ContactPersonOne = dt.ContactPersonOne,
@@ -133,13 +135,13 @@ namespace WOPHRMSystem.Controllers
                 Fk_LegalStatusMasterId = dt.Fk_LegalStatusMasterId,
                 Fk_ManagerId = dt.Fk_ManagerId,
                 WorkGroupLists = new SelectList(workGroupServices.GetAll(), "Id", "CodeAndNarration"),
-                PartnerLists = new SelectList(partnerServices.GetAll(), "Id", "CodeAndNarration"),
+                PartnerLists = new SelectList(employee.GetAllIsPartner(), "Id", "Name"),
                 IntroductionLists = new SelectList(introductionMasterServices.GetAll(), "Id", "CodeAndNarration"),
                 SectorMasterLists = new SelectList(sector.GetAll(), "Id", "CodeAndNarration"),
                 InternationslReferalLists = new SelectList(internationalReferalMasterServices.GetAll(), "Id", "CodeAndNarration"),
                 LegalStatusMasterLists = new SelectList(legalStatusMasterServices.GetAll(), "Id", "CodeAndNarration"),
                 GradeMasterLists = new SelectList(gradeMasterServices.GetAll(), "Id", "CodeAndNarration"),
-                MangerLists = new SelectList(manager.GetAll(), "Id", "Name"),
+                MangerLists = new SelectList(employee.GetAllIsManager(), "Id", "Name"),
             };
             return View(model);
         }
@@ -167,7 +169,7 @@ namespace WOPHRMSystem.Controllers
                         Fk_IntroductionId = masterModel.Fk_IntroductionId,
                         Fk_LegalStatusMasterId = masterModel.Fk_LegalStatusMasterId,
                         Fk_SectorMasterId = masterModel.Fk_SectorMasterId,
-                        Fk_WorkGroupId = masterModel.Fk_WorkGroupId,
+                        Fk_CustomerGroupId = masterModel.Fk_CustomerGroupId,
                         Fk_PartnerId = masterModel.Fk_PartnerId,
                         SVatNo = masterModel.SVatNo,
                         TaxNo = masterModel.TaxNo,

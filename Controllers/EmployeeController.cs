@@ -14,6 +14,8 @@ namespace WOPHRMSystem.Controllers
         readonly DesignationServices designationServices = new DesignationServices();
         readonly TitleServices titleServices = new TitleServices();
 
+        #region Head
+
         [HttpGet]
         public ActionResult Index()
         {
@@ -46,7 +48,8 @@ namespace WOPHRMSystem.Controllers
                         tbl.Name = masterModel.Name;
                         tbl.Email = masterModel.Email;
                         tbl.Nic = masterModel.Nic;
-                        tbl.IdManager = masterModel.IdManager;
+                        tbl.IsManager = masterModel.IsManager;
+                        tbl.IsPartner = masterModel.IsPartner;
                         tbl.BirthDay = (DateTime)masterModel.BirthDay;
                         tbl.Fk_DesginationId = masterModel.Fk_DesginationId;
                         tbl.Fk_DepartmentId = masterModel.Fk_DepartmentId;
@@ -91,7 +94,8 @@ namespace WOPHRMSystem.Controllers
                 Fk_DepartmentId = dt.Fk_DepartmentId,
                 Fk_DesginationId = dt.Fk_DesginationId,
                 BirthDay = dt.BirthDay,
-                IdManager = dt.IdManager,
+                IsManager = dt.IsManager,
+                IsPartner = dt.IsPartner,
                 Name = dt.Name,
                 Nic = dt.Nic,
                 DateOfJoin = dt.DateOfJoin,
@@ -113,13 +117,13 @@ namespace WOPHRMSystem.Controllers
                     {
                         tbl.Name = masterModel.Name;
                         tbl.Email = masterModel.Email;
-                        tbl.IdManager = masterModel.IdManager;
+                        tbl.IsPartner = masterModel.IsPartner;
                         tbl.BirthDay = (DateTime)masterModel.BirthDay;
                         tbl.Nic = masterModel.Nic;
                         tbl.Fk_DepartmentId = masterModel.Fk_DepartmentId;
                         tbl.Fk_TitleId = masterModel.Fk_TitleId;
                         tbl.Fk_DesginationId = masterModel.Fk_DesginationId;
-                        tbl.IdManager = masterModel.IdManager;
+                        tbl.IsManager = masterModel.IsManager;
                         tbl.Code = masterModel.Code;
                         tbl.DateOfJoin = (DateTime)masterModel.DateOfJoin;
                         tbl.Edit_By = "User";
@@ -167,5 +171,80 @@ namespace WOPHRMSystem.Controllers
             }
 
         }
+
+        #endregion
+
+
+        #region Body Add Hourly Rate 
+
+        [HttpGet]
+        public ActionResult ViewEmployeeHourlyRate(int Fk_employeeId)
+        {
+            var data = _ClientService.GetAllEmployeeWiseRateList(Fk_employeeId);
+            var model = new ListEmployeeRate() { EmployeeHourlyRateModels = data };
+            return PartialView("ViewEmployeeHourlyRate", model);
+        }
+
+
+        [HttpDelete]
+        public ActionResult DeleteHourlyRate(int ID)
+        {
+            try
+            {
+                TblEmployeeHourlyRate tbl = new TblEmployeeHourlyRate();
+                {
+                    tbl.Id = ID;
+                    tbl.Delete_By = "User";
+                };
+                return Json(_ClientService.DeleteHourlyRate(tbl));
+            }
+            catch (Exception)
+            {
+                return Json(new MessageModel()
+                {
+                    Status = "warning",
+                    Text = $"There was a error with retrieving data. Please try again",
+                });
+            }
+
+        }
+
+        [HttpPost]
+        public ActionResult PostEmployeeRate(int Fk_EmployeeId, string ToDate, string FromDate, decimal Rate)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    TblEmployeeHourlyRate tbl = new TblEmployeeHourlyRate
+                    {
+
+                        Rate = Rate,
+                        FromDate = Convert.ToDateTime(FromDate),
+                        ToDate = Convert.ToDateTime(ToDate),
+                        Fk_EmployeeId = Fk_EmployeeId,
+                        Create_By = "User",
+                        Create_Date = new CommonResources().LocalDatetime().Date,
+                    };
+
+                    return Json(_ClientService.InsertRate(tbl));
+                }
+            }
+            catch (Exception)
+            {
+                return Json(new MessageModel()
+                {
+                    Status = "warning",
+                    Text = $"There was a error with retrieving data. Please try again",
+                });
+            }
+            return Json(new MessageModel()
+            {
+                Status = "warning",
+                Text = $"There was a error with retrieving data. Please try again",
+            });
+        }
+
+        #endregion
     }
 }

@@ -16,7 +16,6 @@ namespace WOPHRMSystem.Context
     {
         public TblWorkGroup()
         {
-            this.TblCustomers = new HashSet<TblCustomer>();
             this.TblJobTransactions = new HashSet<TblJobTransaction>();
             this.TblWorkTypes = new HashSet<TblWorkType>();
         }
@@ -33,7 +32,6 @@ namespace WOPHRMSystem.Context
         public string Delete_By { get; set; }
         public Nullable<System.DateTime> Delete_Date { get; set; }
     
-        public virtual ICollection<TblCustomer> TblCustomers { get; set; }
         public virtual ICollection<TblJobTransaction> TblJobTransactions { get; set; }
         public virtual ICollection<TblWorkType> TblWorkTypes { get; set; }
     }

@@ -15,6 +15,7 @@ namespace WOPHRMSystem.Context
     public partial class TblJobMasterAssignTemp
     {
         public int Id { get; set; }
+        public int RowId { get; set; }
         public string TypeOftable { get; set; }
         public int TypeOftableId { get; set; }
         public string Code { get; set; }
@@ -23,6 +24,5 @@ namespace WOPHRMSystem.Context
         public string Designation { get; set; }
         public int CustomerId { get; set; }
         public string Create_By { get; set; }
-        public int RowId { get; set; }
     }
 }

@@ -2,6 +2,7 @@
 <Schema Namespace="AuditSystemModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
   <EntityContainer Name="AuditSystemEntities" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="C__EFMigrationsHistory" EntityType="AuditSystemModel.C__EFMigrationsHistory" />
+    <EntitySet Name="TblCustomerGroups" EntityType="AuditSystemModel.TblCustomerGroup" />
     <EntitySet Name="TblCustomers" EntityType="AuditSystemModel.TblCustomer" />
     <EntitySet Name="TblDepartments" EntityType="AuditSystemModel.TblDepartment" />
     <EntitySet Name="TblDesignations" EntityType="AuditSystemModel.TblDesignation" />
@@ -21,11 +22,9 @@
     <EntitySet Name="TblJobTransactions" EntityType="AuditSystemModel.TblJobTransaction" />
     <EntitySet Name="TblLegalStatusMasters" EntityType="AuditSystemModel.TblLegalStatusMaster" />
     <EntitySet Name="TblLocations" EntityType="AuditSystemModel.TblLocation" />
-    <EntitySet Name="TblManagers" EntityType="AuditSystemModel.TblManager" />
     <EntitySet Name="TblNatureMasters" EntityType="AuditSystemModel.TblNatureMaster" />
     <EntitySet Name="TblNonEffectiveEmployees" EntityType="AuditSystemModel.TblNonEffectiveEmployee" />
     <EntitySet Name="TblOpeningBalances" EntityType="AuditSystemModel.TblOpeningBalance" />
-    <EntitySet Name="TblPartners" EntityType="AuditSystemModel.TblPartner" />
     <EntitySet Name="TblSectorMasters" EntityType="AuditSystemModel.TblSectorMaster" />
     <EntitySet Name="TblSiteSettings" EntityType="AuditSystemModel.TblSiteSetting" />
     <EntitySet Name="TblTitles" EntityType="AuditSystemModel.TblTitle" />
@@ -45,6 +44,10 @@
     <EntitySet Name="VW_NatureMaster" EntityType="AuditSystemModel.VW_NatureMaster" />
     <EntitySet Name="VW_OpeningBalance" EntityType="AuditSystemModel.VW_OpeningBalance" />
     <EntitySet Name="VW_SectorMaster" EntityType="AuditSystemModel.VW_SectorMaster" />
+    <AssociationSet Name="FK_TblCustomers_TblCustomerGroup_Fk_CustomerGroupId" Association="AuditSystemModel.FK_TblCustomers_TblCustomerGroup_Fk_CustomerGroupId">
+      <End Role="TblCustomerGroup" EntitySet="TblCustomerGroups" />
+      <End Role="TblCustomer" EntitySet="TblCustomers" />
+    </AssociationSet>
     <AssociationSet Name="FK_TblCustomers_TblGradeMaster_Fk_GradeMasterId" Association="AuditSystemModel.FK_TblCustomers_TblGradeMaster_Fk_GradeMasterId">
       <End Role="TblGradeMaster" EntitySet="TblGradeMasters" />
       <End Role="TblCustomer" EntitySet="TblCustomers" />
@@ -61,20 +64,8 @@
       <End Role="TblLegalStatusMaster" EntitySet="TblLegalStatusMasters" />
       <End Role="TblCustomer" EntitySet="TblCustomers" />
     </AssociationSet>
-    <AssociationSet Name="FK_TblCustomers_TblManager_Fk_ManagerId" Association="AuditSystemModel.FK_TblCustomers_TblManager_Fk_ManagerId">
-      <End Role="TblManager" EntitySet="TblManagers" />
-      <End Role="TblCustomer" EntitySet="TblCustomers" />
-    </AssociationSet>
-    <AssociationSet Name="FK_TblCustomers_TblPartner_Fk_PartnerId" Association="AuditSystemModel.FK_TblCustomers_TblPartner_Fk_PartnerId">
-      <End Role="TblPartner" EntitySet="TblPartners" />
-      <End Role="TblCustomer" EntitySet="TblCustomers" />
-    </AssociationSet>
     <AssociationSet Name="FK_TblCustomers_TblSectorMaster_Fk_SectorMasterId" Association="AuditSystemModel.FK_TblCustomers_TblSectorMaster_Fk_SectorMasterId">
       <End Role="TblSectorMaster" EntitySet="TblSectorMasters" />
-      <End Role="TblCustomer" EntitySet="TblCustomers" />
-    </AssociationSet>
-    <AssociationSet Name="FK_TblCustomers_TblWorkGroup_Fk_WorkGroupId" Association="AuditSystemModel.FK_TblCustomers_TblWorkGroup_Fk_WorkGroupId">
-      <End Role="TblWorkGroup" EntitySet="TblWorkGroups" />
       <End Role="TblCustomer" EntitySet="TblCustomers" />
     </AssociationSet>
     <AssociationSet Name="FK_TblJobMaster_TblCustomers_Fk_CustomerId" Association="AuditSystemModel.FK_TblJobMaster_TblCustomers_Fk_CustomerId">
@@ -157,12 +148,29 @@
     <Property Name="MigrationId" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
     <Property Name="ProductVersion" Type="String" Nullable="false" MaxLength="32" FixedLength="false" Unicode="true" />
   </EntityType>
+  <EntityType Name="TblCustomerGroup">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Code" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Narration" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="IsActive" Type="Boolean" Nullable="false" />
+    <Property Name="IsDelete" Type="Boolean" Nullable="false" />
+    <Property Name="Create_By" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Create_Date" Type="DateTime" Nullable="false" Precision="7" />
+    <Property Name="Edit_By" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Edit_Date" Type="DateTime" Precision="7" />
+    <Property Name="Delete_By" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Delete_Date" Type="DateTime" Precision="7" />
+    <NavigationProperty Name="TblCustomers" Relationship="AuditSystemModel.FK_TblCustomers_TblCustomerGroup_Fk_CustomerGroupId" FromRole="TblCustomerGroup" ToRole="TblCustomer" />
+  </EntityType>
   <EntityType Name="TblCustomer">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Fk_WorkGroupId" Type="Int32" Nullable="false" />
+    <Property Name="Fk_CustomerGroupId" Type="Int32" Nullable="false" />
     <Property Name="VatType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="TaxNo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
@@ -192,14 +200,12 @@
     <Property Name="Edit_Date" Type="DateTime" Precision="7" />
     <Property Name="Delete_By" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="Delete_Date" Type="DateTime" Precision="7" />
+    <NavigationProperty Name="TblCustomerGroup" Relationship="AuditSystemModel.FK_TblCustomers_TblCustomerGroup_Fk_CustomerGroupId" FromRole="TblCustomer" ToRole="TblCustomerGroup" />
     <NavigationProperty Name="TblGradeMaster" Relationship="AuditSystemModel.FK_TblCustomers_TblGradeMaster_Fk_GradeMasterId" FromRole="TblCustomer" ToRole="TblGradeMaster" />
     <NavigationProperty Name="TblInternationalReferalMaster" Relationship="AuditSystemModel.FK_TblCustomers_TblInternationalReferalMaster_Fk_InternationslReferalId" FromRole="TblCustomer" ToRole="TblInternationalReferalMaster" />
     <NavigationProperty Name="TblIntroductionMaster" Relationship="AuditSystemModel.FK_TblCustomers_TblIntroductionMaster_Fk_IntroductionId" FromRole="TblCustomer" ToRole="TblIntroductionMaster" />
     <NavigationProperty Name="TblLegalStatusMaster" Relationship="AuditSystemModel.FK_TblCustomers_TblLegalStatusMaster_Fk_LegalStatusMasterId" FromRole="TblCustomer" ToRole="TblLegalStatusMaster" />
-    <NavigationProperty Name="TblManager" Relationship="AuditSystemModel.FK_TblCustomers_TblManager_Fk_ManagerId" FromRole="TblCustomer" ToRole="TblManager" />
-    <NavigationProperty Name="TblPartner" Relationship="AuditSystemModel.FK_TblCustomers_TblPartner_Fk_PartnerId" FromRole="TblCustomer" ToRole="TblPartner" />
     <NavigationProperty Name="TblSectorMaster" Relationship="AuditSystemModel.FK_TblCustomers_TblSectorMaster_Fk_SectorMasterId" FromRole="TblCustomer" ToRole="TblSectorMaster" />
-    <NavigationProperty Name="TblWorkGroup" Relationship="AuditSystemModel.FK_TblCustomers_TblWorkGroup_Fk_WorkGroupId" FromRole="TblCustomer" ToRole="TblWorkGroup" />
     <NavigationProperty Name="TblJobMasters" Relationship="AuditSystemModel.FK_TblJobMaster_TblCustomers_Fk_CustomerId" FromRole="TblCustomer" ToRole="TblJobMaster" />
     <NavigationProperty Name="TblJobTransactions" Relationship="AuditSystemModel.FK_TblJobTransaction_TblCustomers_Fk_CustomerId" FromRole="TblCustomer" ToRole="TblJobTransaction" />
     <NavigationProperty Name="TblLocations" Relationship="AuditSystemModel.FK_TblLocation_TblCustomers_Fk_CustomerId" FromRole="TblCustomer" ToRole="TblLocation" />
@@ -259,7 +265,8 @@
     <Property Name="DateOfJoin" Type="DateTime" Nullable="false" Precision="7" />
     <Property Name="Nic" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="IdManager" Type="Boolean" Nullable="false" />
+    <Property Name="IsManager" Type="Boolean" Nullable="false" />
+    <Property Name="IsPartner" Type="Boolean" Nullable="false" />
     <Property Name="Fk_TitleId" Type="Int32" Nullable="false" />
     <Property Name="Fk_DesginationId" Type="Int32" Nullable="false" />
     <Property Name="Fk_DepartmentId" Type="Int32" Nullable="false" />
@@ -390,6 +397,10 @@
     <Property Name="StartDate" Type="DateTime" Precision="7" />
     <Property Name="DueDate" Type="DateTime" Precision="7" />
     <Property Name="Fk_CustomerId" Type="Int32" Nullable="false" />
+    <Property Name="IsCompleted" Type="Boolean" Nullable="false" />
+    <Property Name="IsReActivate" Type="Boolean" Nullable="false" />
+    <Property Name="CompletedDate" Type="DateTime" Precision="7" />
+    <Property Name="ReActivateDate" Type="DateTime" Precision="7" />
     <Property Name="IsActive" Type="Boolean" Nullable="false" />
     <Property Name="IsDelete" Type="Boolean" Nullable="false" />
     <Property Name="Create_By" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
@@ -398,10 +409,6 @@
     <Property Name="Edit_Date" Type="DateTime" Precision="7" />
     <Property Name="Delete_By" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="Delete_Date" Type="DateTime" Precision="7" />
-    <Property Name="CompletedDate" Type="DateTime" Precision="7" />
-    <Property Name="IsCompleted" Type="Boolean" Nullable="false" />
-    <Property Name="IsReActivate" Type="Boolean" Nullable="false" />
-    <Property Name="ReActivateDate" Type="DateTime" Precision="7" />
     <NavigationProperty Name="TblCustomer" Relationship="AuditSystemModel.FK_TblJobMaster_TblCustomers_Fk_CustomerId" FromRole="TblJobMaster" ToRole="TblCustomer" />
     <NavigationProperty Name="TblJobMasterLocations" Relationship="AuditSystemModel.FK_TblJobMasterLocation_TblJobMaster_Fk_JobMasterId" FromRole="TblJobMaster" ToRole="TblJobMasterLocation" />
     <NavigationProperty Name="TblJobMasterPartners" Relationship="AuditSystemModel.FK_TblJobMasterPartner_TblJobMaster_Fk_JobMasterId" FromRole="TblJobMaster" ToRole="TblJobMasterPartner" />
@@ -412,6 +419,7 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="RowId" Type="Int32" Nullable="false" />
     <Property Name="TypeOftable" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="TypeOftableId" Type="Int32" Nullable="false" />
     <Property Name="Code" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
@@ -420,7 +428,6 @@
     <Property Name="Designation" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="CustomerId" Type="Int32" Nullable="false" />
     <Property Name="Create_By" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="RowId" Type="Int32" Nullable="false" />
   </EntityType>
   <EntityType Name="TblJobMasterLocation">
     <Key>
@@ -536,23 +543,6 @@
     <NavigationProperty Name="TblJobMasterLocations" Relationship="AuditSystemModel.FK_TblJobMasterLocation_TblLocation_FK_LocationId" FromRole="TblLocation" ToRole="TblJobMasterLocation" />
     <NavigationProperty Name="TblJobTransactions" Relationship="AuditSystemModel.FK_TblJobTransaction_TblLocation_Fk_LocationId" FromRole="TblLocation" ToRole="TblJobTransaction" />
   </EntityType>
-  <EntityType Name="TblManager">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Code" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="IsActive" Type="Boolean" Nullable="false" />
-    <Property Name="IsDelete" Type="Boolean" Nullable="false" />
-    <Property Name="Create_By" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="Create_Date" Type="DateTime" Nullable="false" Precision="7" />
-    <Property Name="Edit_By" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="Edit_Date" Type="DateTime" Precision="7" />
-    <Property Name="Delete_By" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="Delete_Date" Type="DateTime" Precision="7" />
-    <NavigationProperty Name="TblCustomers" Relationship="AuditSystemModel.FK_TblCustomers_TblManager_Fk_ManagerId" FromRole="TblManager" ToRole="TblCustomer" />
-  </EntityType>
   <EntityType Name="TblNatureMaster">
     <Key>
       <PropertyRef Name="Id" />
@@ -603,23 +593,6 @@
     <Property Name="Delete_By" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="Delete_Date" Type="DateTime" Precision="7" />
     <NavigationProperty Name="TblCustomer" Relationship="AuditSystemModel.FK_TblOpeningBalances_TblCustomers_Fk_CustomerId" FromRole="TblOpeningBalance" ToRole="TblCustomer" />
-  </EntityType>
-  <EntityType Name="TblPartner">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Code" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="Narration" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="IsActive" Type="Boolean" Nullable="false" />
-    <Property Name="IsDelete" Type="Boolean" Nullable="false" />
-    <Property Name="Create_By" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="Create_Date" Type="DateTime" Nullable="false" Precision="7" />
-    <Property Name="Edit_By" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="Edit_Date" Type="DateTime" Precision="7" />
-    <Property Name="Delete_By" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="Delete_Date" Type="DateTime" Precision="7" />
-    <NavigationProperty Name="TblCustomers" Relationship="AuditSystemModel.FK_TblCustomers_TblPartner_Fk_PartnerId" FromRole="TblPartner" ToRole="TblCustomer" />
   </EntityType>
   <EntityType Name="TblSectorMaster">
     <Key>
@@ -686,7 +659,6 @@
     <Property Name="Edit_Date" Type="DateTime" Precision="7" />
     <Property Name="Delete_By" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="Delete_Date" Type="DateTime" Precision="7" />
-    <NavigationProperty Name="TblCustomers" Relationship="AuditSystemModel.FK_TblCustomers_TblWorkGroup_Fk_WorkGroupId" FromRole="TblWorkGroup" ToRole="TblCustomer" />
     <NavigationProperty Name="TblJobTransactions" Relationship="AuditSystemModel.FK_TblJobTransaction_TblWorkGroup_TblWorkGroupId" FromRole="TblWorkGroup" ToRole="TblJobTransaction" />
     <NavigationProperty Name="TblWorkTypes" Relationship="AuditSystemModel.FK_TblWorkType_TblWorkGroup_Fk_WorkGroupId" FromRole="TblWorkGroup" ToRole="TblWorkType" />
   </EntityType>
@@ -739,7 +711,7 @@
   <EntityType Name="VW_Customer">
     <Key>
       <PropertyRef Name="Id" />
-      <PropertyRef Name="Fk_WorkGroupId" />
+      <PropertyRef Name="Fk_CustomerGroupId" />
       <PropertyRef Name="Fk_GradeMasterId" />
       <PropertyRef Name="Fk_PartnerId" />
       <PropertyRef Name="Fk_ManagerId" />
@@ -752,7 +724,7 @@
       <PropertyRef Name="Create_Date" />
     </Key>
     <Property Name="Id" Type="Int32" Nullable="false" />
-    <Property Name="Fk_WorkGroupId" Type="Int32" Nullable="false" />
+    <Property Name="Fk_CustomerGroupId" Type="Int32" Nullable="false" />
     <Property Name="VatType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="TaxNo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
@@ -795,7 +767,8 @@
     <Key>
       <PropertyRef Name="Id" />
       <PropertyRef Name="BirthDay" />
-      <PropertyRef Name="IdManager" />
+      <PropertyRef Name="IsManager" />
+      <PropertyRef Name="IsPartner" />
       <PropertyRef Name="Fk_TitleId" />
       <PropertyRef Name="Fk_DesginationId" />
       <PropertyRef Name="Fk_DepartmentId" />
@@ -810,7 +783,8 @@
     <Property Name="BirthDay" Type="DateTime" Nullable="false" Precision="7" />
     <Property Name="Nic" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="IdManager" Type="Boolean" Nullable="false" />
+    <Property Name="IsManager" Type="Boolean" Nullable="false" />
+    <Property Name="IsPartner" Type="Boolean" Nullable="false" />
     <Property Name="Fk_TitleId" Type="Int32" Nullable="false" />
     <Property Name="Fk_DesginationId" Type="Int32" Nullable="false" />
     <Property Name="Fk_DepartmentId" Type="Int32" Nullable="false" />
@@ -1068,6 +1042,18 @@
     <Property Name="Delete_By" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="Delete_Date" Type="DateTime" Precision="7" />
   </EntityType>
+  <Association Name="FK_TblCustomers_TblCustomerGroup_Fk_CustomerGroupId">
+    <End Type="AuditSystemModel.TblCustomerGroup" Role="TblCustomerGroup" Multiplicity="1" />
+    <End Type="AuditSystemModel.TblCustomer" Role="TblCustomer" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TblCustomerGroup">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TblCustomer">
+        <PropertyRef Name="Fk_CustomerGroupId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_TblCustomers_TblGradeMaster_Fk_GradeMasterId">
     <End Type="AuditSystemModel.TblGradeMaster" Role="TblGradeMaster" Multiplicity="1">
       <OnDelete Action="Cascade" />
@@ -1124,34 +1110,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_TblCustomers_TblManager_Fk_ManagerId">
-    <End Type="AuditSystemModel.TblManager" Role="TblManager" Multiplicity="1">
-      <OnDelete Action="Cascade" />
-    </End>
-    <End Type="AuditSystemModel.TblCustomer" Role="TblCustomer" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="TblManager">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="TblCustomer">
-        <PropertyRef Name="Fk_ManagerId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_TblCustomers_TblPartner_Fk_PartnerId">
-    <End Type="AuditSystemModel.TblPartner" Role="TblPartner" Multiplicity="1">
-      <OnDelete Action="Cascade" />
-    </End>
-    <End Type="AuditSystemModel.TblCustomer" Role="TblCustomer" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="TblPartner">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="TblCustomer">
-        <PropertyRef Name="Fk_PartnerId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_TblCustomers_TblSectorMaster_Fk_SectorMasterId">
     <End Type="AuditSystemModel.TblSectorMaster" Role="TblSectorMaster" Multiplicity="1">
       <OnDelete Action="Cascade" />
@@ -1163,20 +1121,6 @@
       </Principal>
       <Dependent Role="TblCustomer">
         <PropertyRef Name="Fk_SectorMasterId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_TblCustomers_TblWorkGroup_Fk_WorkGroupId">
-    <End Type="AuditSystemModel.TblWorkGroup" Role="TblWorkGroup" Multiplicity="1">
-      <OnDelete Action="Cascade" />
-    </End>
-    <End Type="AuditSystemModel.TblCustomer" Role="TblCustomer" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="TblWorkGroup">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="TblCustomer">
-        <PropertyRef Name="Fk_WorkGroupId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

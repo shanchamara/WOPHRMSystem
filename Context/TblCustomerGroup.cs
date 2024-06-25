@@ -12,9 +12,9 @@ namespace WOPHRMSystem.Context
     using System;
     using System.Collections.Generic;
     
-    public partial class TblPartner
+    public partial class TblCustomerGroup
     {
-        public TblPartner()
+        public TblCustomerGroup()
         {
             this.TblCustomers = new HashSet<TblCustomer>();
         }

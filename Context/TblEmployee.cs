@@ -28,7 +28,8 @@ namespace WOPHRMSystem.Context
         public System.DateTime DateOfJoin { get; set; }
         public string Nic { get; set; }
         public string Email { get; set; }
-        public bool IdManager { get; set; }
+        public bool IsManager { get; set; }
+        public bool IsPartner { get; set; }
         public int Fk_TitleId { get; set; }
         public int Fk_DesginationId { get; set; }
         public int Fk_DepartmentId { get; set; }

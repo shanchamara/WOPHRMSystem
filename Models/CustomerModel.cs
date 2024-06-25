@@ -6,7 +6,7 @@ namespace WOPHRMSystem.Models
     public class CustomerModel
     {
         public int Id { get; set; }
-        public int Fk_WorkGroupId { get; set; }
+        public int Fk_CustomerGroupId { get; set; }
         public string WorkGroupCode { get; set; }
         public SelectList WorkGroupLists { get; set; }
 

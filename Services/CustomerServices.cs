@@ -80,7 +80,7 @@ namespace WOPHRMSystem.Services
                 dbobj.Fk_LegalStatusMasterId = obj.Fk_LegalStatusMasterId;
                 dbobj.Fk_ManagerId = obj.Fk_ManagerId;
                 dbobj.Fk_PartnerId = obj.Fk_PartnerId;
-                dbobj.Fk_WorkGroupId = obj.Fk_WorkGroupId;
+                dbobj.Fk_CustomerGroupId = obj.Fk_CustomerGroupId;
                 dbobj.Fk_SectorMasterId = obj.Fk_SectorMasterId;
                 dbobj.TelOne = obj.TelOne;
                 dbobj.TelSecond = obj.TelSecond;
@@ -166,7 +166,7 @@ namespace WOPHRMSystem.Services
                               Fk_LegalStatusMasterId = a.Fk_LegalStatusMasterId,
                               Fk_ManagerId = a.Fk_ManagerId,
                               Fk_PartnerId = a.Fk_PartnerId,
-                              Fk_WorkGroupId = a.Fk_WorkGroupId,
+                              Fk_CustomerGroupId = a.Fk_CustomerGroupId,
                               GradeMasterCode = a.GradeMasterCode,
                               InternationslReferalCode = a.InternationslReferalCode,
                               IntroductionCode = a.IntroductionCode,
