@@ -799,6 +799,52 @@ warning 6002: The table/view 'AuditSystem.dbo.VW_JobMaster' does not have a prim
           <Property Name="Name" Type="nvarchar(max)" />
         </EntityType>
         <!--Errors Found During Generation:
+warning 6002: The table/view 'AuditSystem.dbo.VW_JobMasterViewforReport' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="VW_JobMasterViewforReport">
+          <Key>
+            <PropertyRef Name="PartnerTableId" />
+            <PropertyRef Name="Fk_JobMasterId" />
+            <PropertyRef Name="Fk_CustomerId" />
+            <PropertyRef Name="TypeOfTableId" />
+            <PropertyRef Name="PartnersIsDelete" />
+            <PropertyRef Name="JobmasterId" />
+            <PropertyRef Name="IsCompleted" />
+            <PropertyRef Name="IsReActivate" />
+            <PropertyRef Name="IsActive" />
+            <PropertyRef Name="JobmasterIsDelete" />
+            <PropertyRef Name="Create_Date" />
+          </Key>
+          <Property Name="PartnerTableId" Type="int" Nullable="false" />
+          <Property Name="Fk_JobMasterId" Type="int" Nullable="false" />
+          <Property Name="BudgetedHours" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Fk_CustomerId" Type="int" Nullable="false" />
+          <Property Name="TypeOfTable" Type="nvarchar(max)" />
+          <Property Name="TypeOfTableId" Type="int" Nullable="false" />
+          <Property Name="PartnersIsDelete" Type="bit" Nullable="false" />
+          <Property Name="CustomerName" Type="nvarchar(max)" />
+          <Property Name="CustomerCode" Type="nvarchar(max)" />
+          <Property Name="JobmasterId" Type="int" Nullable="false" />
+          <Property Name="JobCode" Type="nvarchar(max)" />
+          <Property Name="Narration" Type="nvarchar(max)" />
+          <Property Name="PreViewvalue" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="StartDate" Type="datetime2" Precision="7" />
+          <Property Name="DueDate" Type="datetime2" Precision="7" />
+          <Property Name="IsCompleted" Type="bit" Nullable="false" />
+          <Property Name="IsReActivate" Type="bit" Nullable="false" />
+          <Property Name="CompletedDate" Type="datetime2" Precision="7" />
+          <Property Name="ReActivateDate" Type="datetime2" Precision="7" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="JobmasterIsDelete" Type="bit" Nullable="false" />
+          <Property Name="Create_By" Type="nvarchar(max)" />
+          <Property Name="Create_Date" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="Edit_By" Type="nvarchar(max)" />
+          <Property Name="Edit_Date" Type="datetime2" Precision="7" />
+          <Property Name="Delete_By" Type="nvarchar(max)" />
+          <Property Name="Delete_Date" Type="datetime2" Precision="7" />
+          <Property Name="CombinedName" Type="nvarchar(max)" />
+          <Property Name="CombinedCode" Type="nvarchar(max)" />
+        </EntityType>
+        <!--Errors Found During Generation:
 warning 6002: The table/view 'AuditSystem.dbo.VW_LegalStatusMaster' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="VW_LegalStatusMaster">
           <Key>
@@ -1451,6 +1497,39 @@ FROM [dbo].[VW_InvoiceShortNarrationMaster] AS [VW_InvoiceShortNarrationMaster]<
 [VW_JobMaster].[Name] AS [Name]
 FROM [dbo].[VW_JobMaster] AS [VW_JobMaster]</DefiningQuery>
           </EntitySet>
+          <EntitySet Name="VW_JobMasterViewforReport" EntityType="Self.VW_JobMasterViewforReport" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+[VW_JobMasterViewforReport].[PartnerTableId] AS [PartnerTableId], 
+[VW_JobMasterViewforReport].[Fk_JobMasterId] AS [Fk_JobMasterId], 
+[VW_JobMasterViewforReport].[BudgetedHours] AS [BudgetedHours], 
+[VW_JobMasterViewforReport].[Fk_CustomerId] AS [Fk_CustomerId], 
+[VW_JobMasterViewforReport].[TypeOfTable] AS [TypeOfTable], 
+[VW_JobMasterViewforReport].[TypeOfTableId] AS [TypeOfTableId], 
+[VW_JobMasterViewforReport].[PartnersIsDelete] AS [PartnersIsDelete], 
+[VW_JobMasterViewforReport].[CustomerName] AS [CustomerName], 
+[VW_JobMasterViewforReport].[CustomerCode] AS [CustomerCode], 
+[VW_JobMasterViewforReport].[JobmasterId] AS [JobmasterId], 
+[VW_JobMasterViewforReport].[JobCode] AS [JobCode], 
+[VW_JobMasterViewforReport].[Narration] AS [Narration], 
+[VW_JobMasterViewforReport].[PreViewvalue] AS [PreViewvalue], 
+[VW_JobMasterViewforReport].[StartDate] AS [StartDate], 
+[VW_JobMasterViewforReport].[DueDate] AS [DueDate], 
+[VW_JobMasterViewforReport].[IsCompleted] AS [IsCompleted], 
+[VW_JobMasterViewforReport].[IsReActivate] AS [IsReActivate], 
+[VW_JobMasterViewforReport].[CompletedDate] AS [CompletedDate], 
+[VW_JobMasterViewforReport].[ReActivateDate] AS [ReActivateDate], 
+[VW_JobMasterViewforReport].[IsActive] AS [IsActive], 
+[VW_JobMasterViewforReport].[JobmasterIsDelete] AS [JobmasterIsDelete], 
+[VW_JobMasterViewforReport].[Create_By] AS [Create_By], 
+[VW_JobMasterViewforReport].[Create_Date] AS [Create_Date], 
+[VW_JobMasterViewforReport].[Edit_By] AS [Edit_By], 
+[VW_JobMasterViewforReport].[Edit_Date] AS [Edit_Date], 
+[VW_JobMasterViewforReport].[Delete_By] AS [Delete_By], 
+[VW_JobMasterViewforReport].[Delete_Date] AS [Delete_Date], 
+[VW_JobMasterViewforReport].[CombinedName] AS [CombinedName], 
+[VW_JobMasterViewforReport].[CombinedCode] AS [CombinedCode]
+FROM [dbo].[VW_JobMasterViewforReport] AS [VW_JobMasterViewforReport]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="VW_LegalStatusMaster" EntityType="Self.VW_LegalStatusMaster" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
 [VW_LegalStatusMaster].[Id] AS [Id], 
@@ -1655,6 +1734,7 @@ FROM [dbo].[VW_SectorMaster] AS [VW_SectorMaster]</DefiningQuery>
           <EntitySet Name="VW_InvoiceNarrationMaster" EntityType="AuditSystemModel.VW_InvoiceNarrationMaster" />
           <EntitySet Name="VW_InvoiceShortNarrationMaster" EntityType="AuditSystemModel.VW_InvoiceShortNarrationMaster" />
           <EntitySet Name="VW_JobMaster" EntityType="AuditSystemModel.VW_JobMaster" />
+          <EntitySet Name="VW_JobMasterViewforReport" EntityType="AuditSystemModel.VW_JobMasterViewforReport" />
           <EntitySet Name="VW_LegalStatusMaster" EntityType="AuditSystemModel.VW_LegalStatusMaster" />
           <EntitySet Name="VW_NatureMaster" EntityType="AuditSystemModel.VW_NatureMaster" />
           <EntitySet Name="VW_OpeningBalance" EntityType="AuditSystemModel.VW_OpeningBalance" />
@@ -2576,6 +2656,50 @@ FROM [dbo].[VW_SectorMaster] AS [VW_SectorMaster]</DefiningQuery>
           <Property Name="Delete_By" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Delete_Date" Type="DateTime" Precision="7" />
           <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="VW_JobMasterViewforReport">
+          <Key>
+            <PropertyRef Name="PartnerTableId" />
+            <PropertyRef Name="Fk_JobMasterId" />
+            <PropertyRef Name="Fk_CustomerId" />
+            <PropertyRef Name="TypeOfTableId" />
+            <PropertyRef Name="PartnersIsDelete" />
+            <PropertyRef Name="JobmasterId" />
+            <PropertyRef Name="IsCompleted" />
+            <PropertyRef Name="IsReActivate" />
+            <PropertyRef Name="IsActive" />
+            <PropertyRef Name="JobmasterIsDelete" />
+            <PropertyRef Name="Create_Date" />
+          </Key>
+          <Property Name="PartnerTableId" Type="Int32" Nullable="false" />
+          <Property Name="Fk_JobMasterId" Type="Int32" Nullable="false" />
+          <Property Name="BudgetedHours" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Fk_CustomerId" Type="Int32" Nullable="false" />
+          <Property Name="TypeOfTable" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="TypeOfTableId" Type="Int32" Nullable="false" />
+          <Property Name="PartnersIsDelete" Type="Boolean" Nullable="false" />
+          <Property Name="CustomerName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CustomerCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="JobmasterId" Type="Int32" Nullable="false" />
+          <Property Name="JobCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Narration" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PreViewvalue" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="StartDate" Type="DateTime" Precision="7" />
+          <Property Name="DueDate" Type="DateTime" Precision="7" />
+          <Property Name="IsCompleted" Type="Boolean" Nullable="false" />
+          <Property Name="IsReActivate" Type="Boolean" Nullable="false" />
+          <Property Name="CompletedDate" Type="DateTime" Precision="7" />
+          <Property Name="ReActivateDate" Type="DateTime" Precision="7" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="JobmasterIsDelete" Type="Boolean" Nullable="false" />
+          <Property Name="Create_By" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Create_Date" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="Edit_By" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Edit_Date" Type="DateTime" Precision="7" />
+          <Property Name="Delete_By" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Delete_Date" Type="DateTime" Precision="7" />
+          <Property Name="CombinedName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CombinedCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="VW_LegalStatusMaster">
           <Key>
@@ -3737,6 +3861,41 @@ FROM [dbo].[VW_SectorMaster] AS [VW_SectorMaster]</DefiningQuery>
                 <ScalarProperty Name="Narration" ColumnName="Narration" />
                 <ScalarProperty Name="JobCode" ColumnName="JobCode" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VW_JobMasterViewforReport">
+            <EntityTypeMapping TypeName="AuditSystemModel.VW_JobMasterViewforReport">
+              <MappingFragment StoreEntitySet="VW_JobMasterViewforReport">
+                <ScalarProperty Name="CombinedCode" ColumnName="CombinedCode" />
+                <ScalarProperty Name="CombinedName" ColumnName="CombinedName" />
+                <ScalarProperty Name="Delete_Date" ColumnName="Delete_Date" />
+                <ScalarProperty Name="Delete_By" ColumnName="Delete_By" />
+                <ScalarProperty Name="Edit_Date" ColumnName="Edit_Date" />
+                <ScalarProperty Name="Edit_By" ColumnName="Edit_By" />
+                <ScalarProperty Name="Create_Date" ColumnName="Create_Date" />
+                <ScalarProperty Name="Create_By" ColumnName="Create_By" />
+                <ScalarProperty Name="JobmasterIsDelete" ColumnName="JobmasterIsDelete" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="ReActivateDate" ColumnName="ReActivateDate" />
+                <ScalarProperty Name="CompletedDate" ColumnName="CompletedDate" />
+                <ScalarProperty Name="IsReActivate" ColumnName="IsReActivate" />
+                <ScalarProperty Name="IsCompleted" ColumnName="IsCompleted" />
+                <ScalarProperty Name="DueDate" ColumnName="DueDate" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="PreViewvalue" ColumnName="PreViewvalue" />
+                <ScalarProperty Name="Narration" ColumnName="Narration" />
+                <ScalarProperty Name="JobCode" ColumnName="JobCode" />
+                <ScalarProperty Name="JobmasterId" ColumnName="JobmasterId" />
+                <ScalarProperty Name="CustomerCode" ColumnName="CustomerCode" />
+                <ScalarProperty Name="CustomerName" ColumnName="CustomerName" />
+                <ScalarProperty Name="PartnersIsDelete" ColumnName="PartnersIsDelete" />
+                <ScalarProperty Name="TypeOfTableId" ColumnName="TypeOfTableId" />
+                <ScalarProperty Name="TypeOfTable" ColumnName="TypeOfTable" />
+                <ScalarProperty Name="Fk_CustomerId" ColumnName="Fk_CustomerId" />
+                <ScalarProperty Name="BudgetedHours" ColumnName="BudgetedHours" />
+                <ScalarProperty Name="Fk_JobMasterId" ColumnName="Fk_JobMasterId" />
+                <ScalarProperty Name="PartnerTableId" ColumnName="PartnerTableId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
