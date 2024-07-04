@@ -15,6 +15,8 @@ namespace WOPHRMSystem.Controllers
     public class ReportController : Controller
     {
 
+
+
         readonly JobReportServices _ClientService = new JobReportServices();
         readonly EmployeeServices employeeServices = new EmployeeServices();
 
