@@ -73,6 +73,7 @@
         <AssociationConnector Association="AuditSystemModel.FK_TblJobTransaction_TblWorkGroup_TblWorkGroupId" />
         <AssociationConnector Association="AuditSystemModel.FK_TblJobTransaction_TblWorkType_Fk_WorkTypeId" />
         <AssociationConnector Association="AuditSystemModel.FK_TblWorkType_TblWorkGroup_Fk_WorkGroupId" />
+        <EntityTypeShape EntityType="AuditSystemModel.VW_JobMasterViewforCalculatorJobCostReport" Width="1.5" PointX="21.375" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

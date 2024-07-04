@@ -362,6 +362,9 @@
     <Compile Include="Context\VW_JobMaster.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Context\VW_JobMasterViewforCalculatorJobCostReport.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Context\VW_JobMasterViewforReport.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -408,6 +411,7 @@
     <Compile Include="Models\IntroductionMasterModel.cs" />
     <Compile Include="Models\JobMasterAssignTempModel.cs" />
     <Compile Include="Models\JobMasterCompletedModel.cs" />
+    <Compile Include="Models\JobMasterForCalculatorJobCostModel.cs" />
     <Compile Include="Models\JobMasterForReportModel.cs" />
     <Compile Include="Models\JobMasterLocationTempModel.cs" />
     <Compile Include="Models\JobMasterModel.cs" />
@@ -2622,6 +2626,8 @@
     <Content Include="Views\CustomerGroup\Index.cshtml" />
     <Content Include="Views\Report\JObDetailsReportView.cshtml" />
     <Content Include="Views\Report\JObDetailsReportModel.cshtml" />
+    <Content Include="Views\Report\JObCalculatorCostReportModel.cshtml" />
+    <Content Include="Views\Report\JObCalculatorCostReportView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

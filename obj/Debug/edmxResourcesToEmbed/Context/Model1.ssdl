@@ -794,6 +794,58 @@ warning 6002: The table/view 'AuditSystem.dbo.VW_JobMaster' does not have a prim
     <Property Name="Name" Type="nvarchar(max)" />
   </EntityType>
   <!--Errors Found During Generation:
+warning 6002: The table/view 'AuditSystem.dbo.VW_JobMasterViewforCalculatorJobCostReport' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="VW_JobMasterViewforCalculatorJobCostReport">
+    <Key>
+      <PropertyRef Name="PartnerTableId" />
+      <PropertyRef Name="Fk_JobMasterId" />
+      <PropertyRef Name="Fk_CustomerId" />
+      <PropertyRef Name="TypeOfTableId" />
+      <PropertyRef Name="PartnersIsDelete" />
+      <PropertyRef Name="JobmasterId" />
+      <PropertyRef Name="IsCompleted" />
+      <PropertyRef Name="IsReActivate" />
+      <PropertyRef Name="IsActive" />
+      <PropertyRef Name="JobmasterIsDelete" />
+      <PropertyRef Name="Create_Date" />
+      <PropertyRef Name="ActualValue" />
+      <PropertyRef Name="BudgetValue" />
+      <PropertyRef Name="VarianceValue" />
+    </Key>
+    <Property Name="PartnerTableId" Type="int" Nullable="false" />
+    <Property Name="Fk_JobMasterId" Type="int" Nullable="false" />
+    <Property Name="BudgetedHours" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="Fk_CustomerId" Type="int" Nullable="false" />
+    <Property Name="TypeOfTable" Type="nvarchar(max)" />
+    <Property Name="TypeOfTableId" Type="int" Nullable="false" />
+    <Property Name="PartnersIsDelete" Type="bit" Nullable="false" />
+    <Property Name="CustomerName" Type="nvarchar(max)" />
+    <Property Name="CustomerCode" Type="nvarchar(max)" />
+    <Property Name="JobmasterId" Type="int" Nullable="false" />
+    <Property Name="JobCode" Type="nvarchar(max)" />
+    <Property Name="Narration" Type="nvarchar(max)" />
+    <Property Name="PreViewvalue" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="StartDate" Type="datetime2" Precision="7" />
+    <Property Name="DueDate" Type="datetime2" Precision="7" />
+    <Property Name="IsCompleted" Type="bit" Nullable="false" />
+    <Property Name="IsReActivate" Type="bit" Nullable="false" />
+    <Property Name="CompletedDate" Type="datetime2" Precision="7" />
+    <Property Name="ReActivateDate" Type="datetime2" Precision="7" />
+    <Property Name="IsActive" Type="bit" Nullable="false" />
+    <Property Name="JobmasterIsDelete" Type="bit" Nullable="false" />
+    <Property Name="Create_By" Type="nvarchar(max)" />
+    <Property Name="Create_Date" Type="datetime2" Precision="7" Nullable="false" />
+    <Property Name="Edit_By" Type="nvarchar(max)" />
+    <Property Name="Edit_Date" Type="datetime2" Precision="7" />
+    <Property Name="Delete_By" Type="nvarchar(max)" />
+    <Property Name="Delete_Date" Type="datetime2" Precision="7" />
+    <Property Name="CombinedName" Type="nvarchar(max)" />
+    <Property Name="CombinedCode" Type="nvarchar(max)" />
+    <Property Name="ActualValue" Type="int" Nullable="false" />
+    <Property Name="BudgetValue" Type="int" Nullable="false" />
+    <Property Name="VarianceValue" Type="int" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
 warning 6002: The table/view 'AuditSystem.dbo.VW_JobMasterViewforReport' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
   <EntityType Name="VW_JobMasterViewforReport">
     <Key>
@@ -1491,6 +1543,42 @@ FROM [dbo].[VW_InvoiceShortNarrationMaster] AS [VW_InvoiceShortNarrationMaster]<
 [VW_JobMaster].[Delete_Date] AS [Delete_Date], 
 [VW_JobMaster].[Name] AS [Name]
 FROM [dbo].[VW_JobMaster] AS [VW_JobMaster]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="VW_JobMasterViewforCalculatorJobCostReport" EntityType="Self.VW_JobMasterViewforCalculatorJobCostReport" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+[VW_JobMasterViewforCalculatorJobCostReport].[PartnerTableId] AS [PartnerTableId], 
+[VW_JobMasterViewforCalculatorJobCostReport].[Fk_JobMasterId] AS [Fk_JobMasterId], 
+[VW_JobMasterViewforCalculatorJobCostReport].[BudgetedHours] AS [BudgetedHours], 
+[VW_JobMasterViewforCalculatorJobCostReport].[Fk_CustomerId] AS [Fk_CustomerId], 
+[VW_JobMasterViewforCalculatorJobCostReport].[TypeOfTable] AS [TypeOfTable], 
+[VW_JobMasterViewforCalculatorJobCostReport].[TypeOfTableId] AS [TypeOfTableId], 
+[VW_JobMasterViewforCalculatorJobCostReport].[PartnersIsDelete] AS [PartnersIsDelete], 
+[VW_JobMasterViewforCalculatorJobCostReport].[CustomerName] AS [CustomerName], 
+[VW_JobMasterViewforCalculatorJobCostReport].[CustomerCode] AS [CustomerCode], 
+[VW_JobMasterViewforCalculatorJobCostReport].[JobmasterId] AS [JobmasterId], 
+[VW_JobMasterViewforCalculatorJobCostReport].[JobCode] AS [JobCode], 
+[VW_JobMasterViewforCalculatorJobCostReport].[Narration] AS [Narration], 
+[VW_JobMasterViewforCalculatorJobCostReport].[PreViewvalue] AS [PreViewvalue], 
+[VW_JobMasterViewforCalculatorJobCostReport].[StartDate] AS [StartDate], 
+[VW_JobMasterViewforCalculatorJobCostReport].[DueDate] AS [DueDate], 
+[VW_JobMasterViewforCalculatorJobCostReport].[IsCompleted] AS [IsCompleted], 
+[VW_JobMasterViewforCalculatorJobCostReport].[IsReActivate] AS [IsReActivate], 
+[VW_JobMasterViewforCalculatorJobCostReport].[CompletedDate] AS [CompletedDate], 
+[VW_JobMasterViewforCalculatorJobCostReport].[ReActivateDate] AS [ReActivateDate], 
+[VW_JobMasterViewforCalculatorJobCostReport].[IsActive] AS [IsActive], 
+[VW_JobMasterViewforCalculatorJobCostReport].[JobmasterIsDelete] AS [JobmasterIsDelete], 
+[VW_JobMasterViewforCalculatorJobCostReport].[Create_By] AS [Create_By], 
+[VW_JobMasterViewforCalculatorJobCostReport].[Create_Date] AS [Create_Date], 
+[VW_JobMasterViewforCalculatorJobCostReport].[Edit_By] AS [Edit_By], 
+[VW_JobMasterViewforCalculatorJobCostReport].[Edit_Date] AS [Edit_Date], 
+[VW_JobMasterViewforCalculatorJobCostReport].[Delete_By] AS [Delete_By], 
+[VW_JobMasterViewforCalculatorJobCostReport].[Delete_Date] AS [Delete_Date], 
+[VW_JobMasterViewforCalculatorJobCostReport].[CombinedName] AS [CombinedName], 
+[VW_JobMasterViewforCalculatorJobCostReport].[CombinedCode] AS [CombinedCode], 
+[VW_JobMasterViewforCalculatorJobCostReport].[ActualValue] AS [ActualValue], 
+[VW_JobMasterViewforCalculatorJobCostReport].[BudgetValue] AS [BudgetValue], 
+[VW_JobMasterViewforCalculatorJobCostReport].[VarianceValue] AS [VarianceValue]
+FROM [dbo].[VW_JobMasterViewforCalculatorJobCostReport] AS [VW_JobMasterViewforCalculatorJobCostReport]</DefiningQuery>
     </EntitySet>
     <EntitySet Name="VW_JobMasterViewforReport" EntityType="Self.VW_JobMasterViewforReport" store:Type="Views" store:Schema="dbo">
       <DefiningQuery>SELECT 

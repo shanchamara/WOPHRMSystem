@@ -11,6 +11,8 @@ namespace WOPHRMSystem.Services
     {
         readonly AuditSystemEntities _context = new AuditSystemEntities();
 
+
+        #region Job Details 
         /// <summary>
         /// Get All Job Partners wise
         /// Manager wise 
@@ -60,6 +62,68 @@ namespace WOPHRMSystem.Services
                                        TypeOfTable = a.TypeOfTable,
                                        CustomerCode = a.CustomerCode,
                                        TypeOfTableId = a.TypeOfTableId,
+                                   } by a.CombinedName into grouped
+                                   select grouped).ToList();
+
+
+
+                return groupedData;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        #endregion
+
+
+
+        public List<IGrouping<string, JobMasterForCalculatorJobCostModel>> GetAllJobCalculatorJobCost(string FromDate, string Todate, string PartnerFrom, string PartnerTo, bool IsJobContinuous)
+        {
+            try
+            {
+                DateTime todate = DateTime.Parse(Todate);
+                DateTime fromDate = DateTime.Parse(FromDate);
+
+                var groupedData = (from a in _context.VW_JobMasterViewforCalculatorJobCostReport
+
+                                   orderby a.JobmasterId descending
+                                   group new JobMasterForCalculatorJobCostModel
+                                   {
+                                       BudgetedHours = a.BudgetedHours,
+                                       CombinedCode = a.CombinedCode,
+                                       CombinedName = a.CombinedName,
+                                       CompletedDate = a.CompletedDate,
+                                       Create_By = a.Create_By,
+                                       Create_Date = a.Create_Date,
+                                       CustomerName = a.CustomerName,
+                                       Delete_By = a.Delete_By,
+                                       Delete_Date = a.Delete_Date,
+                                       DueDate = a.DueDate,
+                                       Edit_By = a.Edit_By,
+                                       Edit_Date = a.Edit_Date,
+                                       Fk_CustomerId = a.Fk_CustomerId,
+                                       Fk_JobMasterId = a.Fk_JobMasterId,
+                                       JobmasterId = a.JobmasterId,
+                                       IsActive = a.IsActive,
+                                       IsCompleted = a.IsCompleted,
+                                       IsReActivate = a.IsReActivate,
+                                       JobCode = a.JobCode,
+                                       JobmasterIsDelete = a.JobmasterIsDelete,
+                                       Narration = a.Narration,
+                                       PartnersIsDelete = a.PartnersIsDelete,
+                                       PartnerTableId = a.PartnerTableId,
+                                       PreViewvalue = a.PreViewvalue,
+                                       ReActivateDate = a.ReActivateDate,
+                                       StartDate = a.StartDate,
+                                       TypeOfTable = a.TypeOfTable,
+                                       CustomerCode = a.CustomerCode,
+                                       TypeOfTableId = a.TypeOfTableId,
+                                       ActualValue = a.ActualValue,
+                                       BudgetValue = a.BudgetValue,
+                                       VarianceValue = a.VarianceValue
                                    } by a.CombinedName into grouped
                                    select grouped).ToList();
 

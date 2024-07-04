@@ -69,5 +69,6 @@ namespace WOPHRMSystem.Context
         public DbSet<VW_NatureMaster> VW_NatureMaster { get; set; }
         public DbSet<VW_OpeningBalance> VW_OpeningBalance { get; set; }
         public DbSet<VW_SectorMaster> VW_SectorMaster { get; set; }
+        public DbSet<VW_JobMasterViewforCalculatorJobCostReport> VW_JobMasterViewforCalculatorJobCostReport { get; set; }
     }
 }
