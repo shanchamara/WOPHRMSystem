@@ -86,7 +86,7 @@
                                         <a class="btn btn-info btn-sm" onclick="getInputValue1(this,'@s.TypeOftableId','@s.TypeOftable','@s.Name','@s.Code','@s.Id','@s.Designation')">
                                             <i class="fas fa-pencil-alt"></i> Update
                                         </a>
-                                        <a class="btn btn-danger btn-sm" onclick="PostDelete('@s.Id')">
+                                        <a class="btn btn-danger btn-sm" onclick="PostDelete1('@s.Id')">
                                             <i class="fas fa-trash"></i> Remove
                                         </a>
                                     </td>
@@ -177,7 +177,7 @@
 
 
 
-    var PostDelete = function (Id) {
+    var PostDelete1 = function (Id) {
         Swal.fire({
             title: 'Are you sure?',
             text: "Do you really want to Remove this Record?",
@@ -202,12 +202,12 @@
                             var selectElement = document.getElementById("selectUnit").value;
                             $.ajax({
                                 type: "GET",
-                                url: "/JobMaster/ViewCustomerSelectedLocation",
+                                url: "/JobMaster/ViewAssignees",
                                 data: { customerId: selectElement, Createby: 'User' },
 
                                 success: function (result) {
-                                    debugger
-                                    $("#staticBackdropBody").html(result);
+                                  
+                                    $("#staticEmployee").html(result);
 
                                 },
                             })

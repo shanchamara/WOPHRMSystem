@@ -120,12 +120,13 @@ namespace WOPHRMSystem.Controllers
         }
 
         [HttpGet]
-        public ActionResult JObCalculatorCostReportViewPDF(JobMasterForReportModel jobMasterForReportModel)
+        public ActionResult JObCalculatorCostReportViewPDF(JobMasterForCalculatorJobCostModel jobMasterForReportModel)
         {
-            var dt = _ClientService.GetAllJobDetails(jobMasterForReportModel.IsPartner, jobMasterForReportModel.IsManager, jobMasterForReportModel.IsCompleted, jobMasterForReportModel.ISPending, jobMasterForReportModel.ReportGenaratedDate.Value.ToString("yyyy/MM/dd"));
+            var dt = _ClientService.GetAllJobCalculatorJobCost(jobMasterForReportModel.StartDate.Value.ToString("yyyy/MM/dd"), jobMasterForReportModel.DueDate.Value.ToString("yyyy/MM/dd"), jobMasterForReportModel.PartnerFrom, jobMasterForReportModel.PartnerTo, jobMasterForReportModel.IsReActivate);
 
-            ViewBag.IsManger = jobMasterForReportModel.IsManager == true ? "Managers" : "Partners";
-            ViewBag.StartDate = jobMasterForReportModel.ReportGenaratedDate.Value.ToShortDateString();
+            ViewBag.FromDate = jobMasterForReportModel.StartDate.Value.ToShortDateString();
+            ViewBag.ToDate = jobMasterForReportModel.DueDate.Value.ToShortDateString();
+
             return new ViewAsPdf("JObCalculatorCostReportView", dt)
             {
                 CustomSwitches = "--orientation Landscape", // Note: "Landscape" should be uppercase
@@ -136,15 +137,14 @@ namespace WOPHRMSystem.Controllers
 
 
         [HttpGet]
-        public ActionResult JObCalculatorCostReportExport(JobMasterForReportModel jobMasterForReportModel)
+        public ActionResult JObCalculatorCostReportExport(JobMasterForCalculatorJobCostModel jobMasterForReportModel)
         {
             // Simulated grouped data (replace with your actual grouped data retrieval)
-            var dt = _ClientService.GetAllJobDetails(jobMasterForReportModel.IsPartner, jobMasterForReportModel.IsManager, jobMasterForReportModel.IsCompleted, jobMasterForReportModel.ISPending, jobMasterForReportModel.ReportGenaratedDate.Value.ToString("yyyy/MM/dd"));
+            var dt = _ClientService.GetAllJobCalculatorJobCost(jobMasterForReportModel.StartDate.Value.ToString("yyyy/MM/dd"), jobMasterForReportModel.DueDate.Value.ToString("yyyy/MM/dd"), jobMasterForReportModel.PartnerFrom, jobMasterForReportModel.PartnerTo, jobMasterForReportModel.IsReActivate);
 
-            var IsManger = jobMasterForReportModel.IsManager == true ? "Managers" : "Partners";
 
             var workbook = new XLWorkbook();
-            var worksheet = workbook.Worksheets.Add(IsManger);
+            var worksheet = workbook.Worksheets.Add("Sheet");
 
             // Headers
             worksheet.Cell(1, 1).Value = "Job No";

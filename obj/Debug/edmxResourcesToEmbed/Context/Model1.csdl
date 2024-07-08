@@ -40,6 +40,7 @@
     <EntitySet Name="VW_InvoiceNarrationMaster" EntityType="AuditSystemModel.VW_InvoiceNarrationMaster" />
     <EntitySet Name="VW_InvoiceShortNarrationMaster" EntityType="AuditSystemModel.VW_InvoiceShortNarrationMaster" />
     <EntitySet Name="VW_JobMaster" EntityType="AuditSystemModel.VW_JobMaster" />
+    <EntitySet Name="VW_JobMasterViewforCalculatorJobCostReport" EntityType="AuditSystemModel.VW_JobMasterViewforCalculatorJobCostReport" />
     <EntitySet Name="VW_JobMasterViewforReport" EntityType="AuditSystemModel.VW_JobMasterViewforReport" />
     <EntitySet Name="VW_LegalStatusMaster" EntityType="AuditSystemModel.VW_LegalStatusMaster" />
     <EntitySet Name="VW_NatureMaster" EntityType="AuditSystemModel.VW_NatureMaster" />
@@ -141,7 +142,6 @@
       <End Role="TblWorkGroup" EntitySet="TblWorkGroups" />
       <End Role="TblWorkType" EntitySet="TblWorkTypes" />
     </AssociationSet>
-    <EntitySet Name="VW_JobMasterViewforCalculatorJobCostReport" EntityType="AuditSystemModel.VW_JobMasterViewforCalculatorJobCostReport" />
   </EntityContainer>
   <EntityType Name="C__EFMigrationsHistory">
     <Key>
@@ -964,6 +964,56 @@
     <Property Name="Delete_Date" Type="DateTime" Precision="7" />
     <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
   </EntityType>
+  <EntityType Name="VW_JobMasterViewforCalculatorJobCostReport">
+    <Key>
+      <PropertyRef Name="PartnerTableId" />
+      <PropertyRef Name="Fk_JobMasterId" />
+      <PropertyRef Name="Fk_CustomerId" />
+      <PropertyRef Name="TypeOfTableId" />
+      <PropertyRef Name="PartnersIsDelete" />
+      <PropertyRef Name="JobmasterId" />
+      <PropertyRef Name="IsCompleted" />
+      <PropertyRef Name="IsReActivate" />
+      <PropertyRef Name="IsActive" />
+      <PropertyRef Name="JobmasterIsDelete" />
+      <PropertyRef Name="Create_Date" />
+      <PropertyRef Name="ActualValue" />
+      <PropertyRef Name="BudgetValue" />
+      <PropertyRef Name="VarianceValue" />
+    </Key>
+    <Property Name="PartnerTableId" Type="Int32" Nullable="false" />
+    <Property Name="Fk_JobMasterId" Type="Int32" Nullable="false" />
+    <Property Name="BudgetedHours" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Fk_CustomerId" Type="Int32" Nullable="false" />
+    <Property Name="TypeOfTable" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="TypeOfTableId" Type="Int32" Nullable="false" />
+    <Property Name="PartnersIsDelete" Type="Boolean" Nullable="false" />
+    <Property Name="CustomerName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="CustomerCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="JobmasterId" Type="Int32" Nullable="false" />
+    <Property Name="JobCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Narration" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="PreViewvalue" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="StartDate" Type="DateTime" Precision="7" />
+    <Property Name="DueDate" Type="DateTime" Precision="7" />
+    <Property Name="IsCompleted" Type="Boolean" Nullable="false" />
+    <Property Name="IsReActivate" Type="Boolean" Nullable="false" />
+    <Property Name="CompletedDate" Type="DateTime" Precision="7" />
+    <Property Name="ReActivateDate" Type="DateTime" Precision="7" />
+    <Property Name="IsActive" Type="Boolean" Nullable="false" />
+    <Property Name="JobmasterIsDelete" Type="Boolean" Nullable="false" />
+    <Property Name="Create_By" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Create_Date" Type="DateTime" Nullable="false" Precision="7" />
+    <Property Name="Edit_By" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Edit_Date" Type="DateTime" Precision="7" />
+    <Property Name="Delete_By" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Delete_Date" Type="DateTime" Precision="7" />
+    <Property Name="CombinedName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="CombinedCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ActualValue" Type="Int32" Nullable="false" />
+    <Property Name="BudgetValue" Type="Int32" Nullable="false" />
+    <Property Name="VarianceValue" Type="Int32" Nullable="false" />
+  </EntityType>
   <EntityType Name="VW_JobMasterViewforReport">
     <Key>
       <PropertyRef Name="PartnerTableId" />
@@ -1408,54 +1458,4 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <EntityType Name="VW_JobMasterViewforCalculatorJobCostReport">
-    <Key>
-      <PropertyRef Name="PartnerTableId" />
-      <PropertyRef Name="Fk_JobMasterId" />
-      <PropertyRef Name="Fk_CustomerId" />
-      <PropertyRef Name="TypeOfTableId" />
-      <PropertyRef Name="PartnersIsDelete" />
-      <PropertyRef Name="JobmasterId" />
-      <PropertyRef Name="IsCompleted" />
-      <PropertyRef Name="IsReActivate" />
-      <PropertyRef Name="IsActive" />
-      <PropertyRef Name="JobmasterIsDelete" />
-      <PropertyRef Name="Create_Date" />
-      <PropertyRef Name="ActualValue" />
-      <PropertyRef Name="BudgetValue" />
-      <PropertyRef Name="VarianceValue" />
-    </Key>
-    <Property Name="PartnerTableId" Type="Int32" Nullable="false" />
-    <Property Name="Fk_JobMasterId" Type="Int32" Nullable="false" />
-    <Property Name="BudgetedHours" Type="Decimal" Precision="18" Scale="2" />
-    <Property Name="Fk_CustomerId" Type="Int32" Nullable="false" />
-    <Property Name="TypeOfTable" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="TypeOfTableId" Type="Int32" Nullable="false" />
-    <Property Name="PartnersIsDelete" Type="Boolean" Nullable="false" />
-    <Property Name="CustomerName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="CustomerCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="JobmasterId" Type="Int32" Nullable="false" />
-    <Property Name="JobCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="Narration" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="PreViewvalue" Type="Decimal" Precision="18" Scale="2" />
-    <Property Name="StartDate" Type="DateTime" Precision="7" />
-    <Property Name="DueDate" Type="DateTime" Precision="7" />
-    <Property Name="IsCompleted" Type="Boolean" Nullable="false" />
-    <Property Name="IsReActivate" Type="Boolean" Nullable="false" />
-    <Property Name="CompletedDate" Type="DateTime" Precision="7" />
-    <Property Name="ReActivateDate" Type="DateTime" Precision="7" />
-    <Property Name="IsActive" Type="Boolean" Nullable="false" />
-    <Property Name="JobmasterIsDelete" Type="Boolean" Nullable="false" />
-    <Property Name="Create_By" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="Create_Date" Type="DateTime" Nullable="false" Precision="7" />
-    <Property Name="Edit_By" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="Edit_Date" Type="DateTime" Precision="7" />
-    <Property Name="Delete_By" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="Delete_Date" Type="DateTime" Precision="7" />
-    <Property Name="CombinedName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="CombinedCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="ActualValue" Type="Int32" Nullable="false" />
-    <Property Name="BudgetValue" Type="Int32" Nullable="false" />
-    <Property Name="VarianceValue" Type="Int32" Nullable="false" />
-  </EntityType>
 </Schema>

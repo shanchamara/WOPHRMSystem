@@ -64,11 +64,11 @@ namespace WOPHRMSystem.Context
         public DbSet<VW_InvoiceNarrationMaster> VW_InvoiceNarrationMaster { get; set; }
         public DbSet<VW_InvoiceShortNarrationMaster> VW_InvoiceShortNarrationMaster { get; set; }
         public DbSet<VW_JobMaster> VW_JobMaster { get; set; }
+        public DbSet<VW_JobMasterViewforCalculatorJobCostReport> VW_JobMasterViewforCalculatorJobCostReport { get; set; }
         public DbSet<VW_JobMasterViewforReport> VW_JobMasterViewforReport { get; set; }
         public DbSet<VW_LegalStatusMaster> VW_LegalStatusMaster { get; set; }
         public DbSet<VW_NatureMaster> VW_NatureMaster { get; set; }
         public DbSet<VW_OpeningBalance> VW_OpeningBalance { get; set; }
         public DbSet<VW_SectorMaster> VW_SectorMaster { get; set; }
-        public DbSet<VW_JobMasterViewforCalculatorJobCostReport> VW_JobMasterViewforCalculatorJobCostReport { get; set; }
     }
 }

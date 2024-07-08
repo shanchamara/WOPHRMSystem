@@ -4,6 +4,7 @@ using WOPHRMSystem.Models;
 using WOPHRMSystem.Services;
 using System;
 using System.Web.Mvc;
+using System.Threading.Tasks;
 
 namespace WOPHRMSystem.Controllers
 {
@@ -39,7 +40,7 @@ namespace WOPHRMSystem.Controllers
         }
 
         [HttpPost]
-        public ActionResult Create(JobMasterModel masterModel)
+        public async Task<ActionResult> Create(JobMasterModel masterModel)
         {
             try
             {
@@ -178,7 +179,7 @@ namespace WOPHRMSystem.Controllers
         [HttpGet]
         public ActionResult Complted()
         {
-            
+
             var model = new JobMasterCompletedModel()
             {
                 JobList = new SelectList(_ClientService.GetAllDropdown(), "Id", "JobCode"),

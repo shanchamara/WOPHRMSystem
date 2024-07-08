@@ -176,7 +176,7 @@ namespace WOPHRMSystem.Services
                               Narration = l.Narration,
                               Create_By = a.Create_By,
                               CustomerId = a.Fk_CustomerId,
-                              
+                              Fk_locationId = a.FK_LocationId
 
 
                           }).ToList();
@@ -196,8 +196,10 @@ namespace WOPHRMSystem.Services
                         CustomerId = d.CustomerId,
                         Create_By = Create_By,
                         Code = d.Code,
-                        FK_LocationId = d.Id,
-                        Narration = d.Narration
+                        FK_LocationId = d.Fk_locationId,
+                        Narration = d.Narration,
+                        Id = d.Id
+
                     };
                     _context.TblJobMasterLocationTemps.Add(tblJobMasterLocationTemp);
                     _context.SaveChanges();

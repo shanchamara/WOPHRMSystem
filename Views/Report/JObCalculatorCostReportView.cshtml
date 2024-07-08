@@ -123,13 +123,14 @@
             <img src="https://via.placeholder.com/100" alt="Logo" class="logo">
             <div class="details">
                 <h1>Job Costing Calculator</h1>
-                <div class="invoice-number">Date: @ViewBag.StartDate</div>
+                <div class="invoice-number">From Date: @ViewBag.FromDate</div>
+                <div class="invoice-number">To Date: @ViewBag.ToDate</div>
             </div>
         </div>
         <div class="invoice-body">
             <div class="invoice-info">
                 <div>
-                    <strong>From: @ViewBag.IsManger</strong>
+                    @*<strong>From: @ViewBag.IsManger</strong>*@
                 </div>
                 <div>
                     <!-- Include 'To' information if needed -->

@@ -177,7 +177,7 @@ namespace WOPHRMSystem.Services
                     _context.TblJobMasters.AddOrUpdate(obj);
                     _context.SaveChanges();
 
-                    var location = _context.TblJobMasterLocationTemps.Where(d => d.CustomerId.Equals(obj.Fk_CustomerId) && d.Create_By.Equals(obj.Create_By)).ToList();
+                    var location = _context.TblJobMasterLocationTemps.Where(d => d.CustomerId.Equals(obj.Fk_CustomerId) && d.Create_By.Equals(obj.Create_By) ).ToList();
                     foreach (var s in location)
                     {
                         var Editlocation = _context.TblJobMasterLocations.SingleOrDefault(d => d.FK_LocationId.Equals(s.FK_LocationId) && d.Fk_JobMasterId.Equals(obj.Id));

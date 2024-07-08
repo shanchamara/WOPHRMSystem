@@ -150,7 +150,7 @@
                                                     <div class="form-group">
                                                         <div class="form-group mb-5">
                                                             <div class="custom-control custom-checkbox">
-                                                                @Html.CheckBoxFor(model => model.IsReActivate, new { @class = "form-check-input", id = "IsManagerCheckbox" })
+                                                                @Html.CheckBoxFor(model => model.IsReActivate, new { @class = "form-check-input", id = "IsCompletedCheckbox" })
                                                                 <label for="exampleCheck1">Continuous Job</label>
                                                             </div>
                                                         </div>
@@ -327,7 +327,7 @@
             if ($('#quickForm').valid()) {
                 // Form is valid, proceed with your action
                 var data = $('#quickForm').serialize();
-                var url = '/Report/JObDetailsReportViewPDF?' + data;
+                var url = '/Report/JObCalculatorCostReportViewPDF?' + data;
                 window.open(url, '_blank');
             }
         });
@@ -338,7 +338,7 @@
             if ($('#quickForm').valid()) {
                 // Form is valid, proceed with your action
                 var data = $('#quickForm').serialize();
-                var url = '/Report/JObDetailsReportViewExport?' + data;
+                var url = '/Report/JObCalculatorCostReportExport?' + data;
                 window.open(url, '_blank');
             }
         });
@@ -356,13 +356,13 @@
 
             $('#quickForm').validate({
                 rules: {
-                    ISPending: {
-                        required: {
-                            depends: function (element) {
-                                return !$('#IsCompletedCheckbox').is(':checked');
-                            }
-                        }
-                    },
+                    //IsReActivate: {
+                    //    required: {
+                    //        depends: function (element) {
+                    //            return !$('#IsCompletedCheckbox').is(':checked');
+                    //        }
+                    //    }
+                    //},
                     StartDate: {
                         required: true,
                         date: true
@@ -377,48 +377,21 @@
                     PartnerFrom: {
                         required: true,
                     },
-                    IsCompleted: {
-                        required: {
-                            depends: function (element) {
-                                return !$('#ISPendingCheckbox').is(':checked');
-                            }
-                        }
-                    },
-                    IsManager: {
-                        required: {
-                            depends: function (element) {
-                                return !$('#IsPartnerCheckbox').is(':checked');
-                            }
-                        }
-                    },
-                    IsPartner: {
-                        required: {
-                            depends: function (element) {
-                                return !$('#IsManagerCheckbox').is(':checked');
-                            }
-                        }
-                    }
+                    
                 },
                 messages: {
-                    IsCompleted: {
+                    IsReActivate: {
                         required: "Please select an option",
                     },
-                    IsManager: {
-                        required: "Please select an option",
-                    },
-
+                    
                     PartnerTo: {
                         required: "Please select Partner To",
                     },
                     PartnerFrom: {
                         required: "Please select Partner From",
                     },
-                    IsPartner: {
-                        required: "Please select an option",
-                    },
-                    ISPending: {
-                        required: "Please select an option",
-                    },
+                   
+                   
                     StartDate: "Please select the Date",
                     
                     DueDate: "Please select the Date"
@@ -443,59 +416,7 @@
 
         });
 
-        document.addEventListener("DOMContentLoaded", function () {
-            var isManagerCheckbox = document.getElementById("IsManagerCheckbox");
-            var isPartnerCheckbox = document.getElementById("IsPartnerCheckbox");
-
-            isPartnerCheckbox.addEventListener("change", function () {
-                if (isPartnerCheckbox.checked) {
-                    isManagerCheckbox.checked = false;
-                }
-            });
-
-            isManagerCheckbox.addEventListener("change", function () {
-                if (isManagerCheckbox.checked) {
-                    isPartnerCheckbox.checked = false;
-                }
-            });
-        });
-
-        document.addEventListener("DOMContentLoaded", function () {
-            var IsCompletedCheckbox = document.getElementById("IsCompletedCheckbox");
-            var ISPendingCheckbox = document.getElementById("ISPendingCheckbox");
-
-            ISPendingCheckbox.addEventListener("change", function () {
-                if (ISPendingCheckbox.checked) {
-                    IsCompletedCheckbox.checked = false;
-                }
-            });
-
-            IsCompletedCheckbox.addEventListener("change", function () {
-                if (IsCompletedCheckbox.checked) {
-                    ISPendingCheckbox.checked = false;
-                }
-            });
-        });
-
-
-        var PostCustomerInsert = function (model) {
-            $.ajax({
-                type: "Post",
-                url: "/Report/Index1",
-                data: model,
-                success: function (result) {
-                    Swal.fire({
-                        icon: result.Status,
-                        title: result.Status,
-                        text: result.Text
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                        } else {
-                        }
-                    });
-                },
-            });
-        };
+       
     </script>
 
 

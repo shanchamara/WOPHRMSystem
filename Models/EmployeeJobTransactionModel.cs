@@ -9,10 +9,10 @@ namespace WOPHRMSystem.Models
 {
     public class EmployeeJobTransactionModel
     {
-        public int Id { get; set; }
+        public Nullable<int> Id { get; set; }
         public Nullable<System.DateTime> TrDate { get; set; }
-        public int Fk_JobMasterId { get; set; }
-        public int Fk_EmployeeId { get; set; }
+        public Nullable<int> Fk_JobMasterId { get; set; }
+        public Nullable<int> Fk_EmployeeId { get; set; }
         public string JobCode { get; set; }
         public string CustomerCode { get; set; }
         public string EmployeeName { get; set; }
@@ -20,11 +20,18 @@ namespace WOPHRMSystem.Models
         public string WorkTypeCode { get; set; }
         public string LocationName { get; set; }
         public string Narration { get; set; }
-        public int Fk_LocationId { get; set; }
+        public Nullable<int> Fk_LocationId { get; set; }
         public Nullable<decimal> Hours { get; set; }
-        public int Fk_WorkTypeId { get; set; }
-        public int Fk_CustomerId { get; set; }
-        public bool IsDelete { get; set; }
+        public Nullable<int> Fk_WorkTypeId { get; set; }
+        public Nullable<int> Fk_CustomerId { get; set; }
+        public Nullable<bool> IsDelete { get; set; }
+        public string Create_By { get; set; }
+        public Nullable<System.DateTime> Create_Date { get; set; }
+        public string Edit_By { get; set; }
+        public Nullable<System.DateTime> Edit_Date { get; set; }
+        public string Delete_By { get; set; }
+        public Nullable<System.DateTime> Delete_Date { get; set; }
+     
 
         public SelectList EmployeeList { get; set; }
     }

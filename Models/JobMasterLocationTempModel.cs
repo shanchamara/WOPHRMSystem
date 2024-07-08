@@ -8,6 +8,7 @@ namespace WOPHRMSystem.Models
     public class JobMasterLocationTempModel
     {
         public int Id { get; set; }
+        public int Fk_locationId { get; set; }
         public string Code { get; set; }
         public string Narration { get; set; }
         public string Create_By { get; set; }

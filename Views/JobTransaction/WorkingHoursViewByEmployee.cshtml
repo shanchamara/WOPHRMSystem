@@ -19,7 +19,7 @@
     .list-group {
         max-height: 200px;
         margin-bottom: 10px;
-        overflow-y: hidden;
+        overflow-x: hidden;
         -webkit-overflow-scrolling: touch;
     }
 </style>
@@ -51,14 +51,15 @@
                                     <tr>
                                         <td style="display:none;">@s.Id</td> <!-- Hidden Id column -->
                                         <td>@s.JobCode</td>
-                                        <td>@s.TrDate.Value.ToShortDateString()</td>
+                                        <td>@(s.TrDate.HasValue ? s.TrDate.Value.ToShortDateString() : "N/A")</td>
+
                                         <td>@s.Narration</td>
                                         <td>@s.LocationCode</td>
                                         <td>@s.LocationName</td>
                                         <td>@s.Hours</td>
                                         <td>@s.WorkTypeCode</td>
                                         <td>@s.CustomerCode</td>
-                                       
+
                                     </tr>
                                     Rows++;
                                 }

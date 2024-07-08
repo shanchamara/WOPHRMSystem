@@ -87,9 +87,9 @@ namespace WOPHRMSystem.Services
             try
             {
                 var dr = (from a in _context.VW_EmployeeJobTransaction
-                          where a.Fk_EmployeeId == empid
+                          where a.Fk_EmployeeId == empid && !a.IsDelete
                           orderby a.Id descending
-                          select new EmployeeJobTransactionModel()
+                          select new EmployeeJobTransactionModel
                           {
                               Id = a.Id,
                               JobCode = a.JobCode,
@@ -106,9 +106,9 @@ namespace WOPHRMSystem.Services
                               LocationCode = a.LocationCode,
                               LocationName = a.LocationName,
                               TrDate = a.TrDate,
-                              WorkTypeCode = a.WorkTypeCode,
+                              WorkTypeCode = a.WorkTypeCode
+                          }).ToList();
 
-                          }).Where(d => d.IsDelete.Equals(false)).ToList();
 
 
                 return dr;
