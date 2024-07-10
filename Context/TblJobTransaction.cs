@@ -30,13 +30,11 @@ namespace WOPHRMSystem.Context
         public Nullable<System.DateTime> Edit_Date { get; set; }
         public string Delete_By { get; set; }
         public Nullable<System.DateTime> Delete_Date { get; set; }
-        public Nullable<int> TblWorkGroupId { get; set; }
     
         public virtual TblCustomer TblCustomer { get; set; }
         public virtual TblEmployee TblEmployee { get; set; }
         public virtual TblJobMaster TblJobMaster { get; set; }
         public virtual TblLocation TblLocation { get; set; }
-        public virtual TblWorkGroup TblWorkGroup { get; set; }
         public virtual TblWorkType TblWorkType { get; set; }
     }
 }

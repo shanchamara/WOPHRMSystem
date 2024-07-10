@@ -80,7 +80,7 @@ namespace WOPHRMSystem.Services
 
 
 
-        public List<IGrouping<string, JobMasterForCalculatorJobCostModel>> GetAllJobCalculatorJobCost(string FromDate, string Todate, int PartnerFrom, int PartnerTo, bool IsJobContinuous)
+        public List<IGrouping<string, JobMasterForCalculatorJobCostModel>> GetAllJobCalculatorJobCost(string FromDate, string Todate, int PartnerOne, int PartnerTwo, bool IsJobContinuous)
         {
             try
             {
@@ -89,7 +89,8 @@ namespace WOPHRMSystem.Services
 
                 var groupedData = (from a in _context.VW_JobMasterViewforCalculatorJobCostReport
                                    where a.StartDate >= fromDate && a.StartDate <= todate &&
-                                        (a.TypeOfTableId >= PartnerFrom && a.TypeOfTableId <= PartnerTo) &&
+                                          //(a.TypeOfTableId >= PartnerOne && a.TypeOfTableId <= PartnerTwo) &&
+                                          (a.TypeOfTableId == PartnerOne || a.TypeOfTableId == PartnerTwo) &&
                                        a.IsReActivate == IsJobContinuous
                                    orderby a.JobmasterId descending
                                    group new JobMasterForCalculatorJobCostModel
@@ -123,8 +124,8 @@ namespace WOPHRMSystem.Services
                                        TypeOfTable = a.TypeOfTable,
                                        CustomerCode = a.CustomerCode,
                                        TypeOfTableId = a.TypeOfTableId,
-                                       ActualValue = a.ActualValue,
-                                       BudgetValue = a.BudgetValue,
+                                       ActualValue = (decimal)a.ActualValue,
+                                       BudgetValue = (decimal)a.BudgetValue,
                                        VarianceValue = a.VarianceValue
                                    } by a.CombinedName into grouped
                                    select grouped).ToList();

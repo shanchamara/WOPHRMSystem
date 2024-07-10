@@ -43,8 +43,10 @@ namespace WOPHRMSystem.Context
         public Nullable<System.DateTime> Delete_Date { get; set; }
         public string CombinedName { get; set; }
         public string CombinedCode { get; set; }
-        public int ActualValue { get; set; }
-        public int BudgetValue { get; set; }
+        public Nullable<decimal> ActualHours { get; set; }
+        public Nullable<decimal> TotalBudgetedHours { get; set; }
+        public Nullable<decimal> ActualValue { get; set; }
+        public Nullable<decimal> BudgetValue { get; set; }
         public int VarianceValue { get; set; }
     }
 }

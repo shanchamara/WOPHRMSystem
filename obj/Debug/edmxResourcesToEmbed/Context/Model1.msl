@@ -328,7 +328,6 @@
     <EntitySetMapping Name="TblJobTransactions">
       <EntityTypeMapping TypeName="AuditSystemModel.TblJobTransaction">
         <MappingFragment StoreEntitySet="TblJobTransaction">
-          <ScalarProperty Name="TblWorkGroupId" ColumnName="TblWorkGroupId" />
           <ScalarProperty Name="Delete_Date" ColumnName="Delete_Date" />
           <ScalarProperty Name="Delete_By" ColumnName="Delete_By" />
           <ScalarProperty Name="Edit_Date" ColumnName="Edit_Date" />
@@ -764,6 +763,8 @@
           <ScalarProperty Name="VarianceValue" ColumnName="VarianceValue" />
           <ScalarProperty Name="BudgetValue" ColumnName="BudgetValue" />
           <ScalarProperty Name="ActualValue" ColumnName="ActualValue" />
+          <ScalarProperty Name="TotalBudgetedHours" ColumnName="TotalBudgetedHours" />
+          <ScalarProperty Name="ActualHours" ColumnName="ActualHours" />
           <ScalarProperty Name="CombinedCode" ColumnName="CombinedCode" />
           <ScalarProperty Name="CombinedName" ColumnName="CombinedName" />
           <ScalarProperty Name="Delete_Date" ColumnName="Delete_Date" />

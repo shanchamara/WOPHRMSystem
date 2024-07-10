@@ -326,7 +326,6 @@
     <Property Name="Edit_Date" Type="datetime2" Precision="7" />
     <Property Name="Delete_By" Type="nvarchar(max)" />
     <Property Name="Delete_Date" Type="datetime2" Precision="7" />
-    <Property Name="TblWorkGroupId" Type="int" />
   </EntityType>
   <EntityType Name="TblLegalStatusMaster">
     <Key>
@@ -808,8 +807,6 @@ warning 6002: The table/view 'AuditSystem.dbo.VW_JobMasterViewforCalculatorJobCo
       <PropertyRef Name="IsActive" />
       <PropertyRef Name="JobmasterIsDelete" />
       <PropertyRef Name="Create_Date" />
-      <PropertyRef Name="ActualValue" />
-      <PropertyRef Name="BudgetValue" />
       <PropertyRef Name="VarianceValue" />
     </Key>
     <Property Name="PartnerTableId" Type="int" Nullable="false" />
@@ -841,8 +838,10 @@ warning 6002: The table/view 'AuditSystem.dbo.VW_JobMasterViewforCalculatorJobCo
     <Property Name="Delete_Date" Type="datetime2" Precision="7" />
     <Property Name="CombinedName" Type="nvarchar(max)" />
     <Property Name="CombinedCode" Type="nvarchar(max)" />
-    <Property Name="ActualValue" Type="int" Nullable="false" />
-    <Property Name="BudgetValue" Type="int" Nullable="false" />
+    <Property Name="ActualHours" Type="decimal" Precision="38" Scale="2" />
+    <Property Name="TotalBudgetedHours" Type="decimal" Precision="38" Scale="2" />
+    <Property Name="ActualValue" Type="decimal" Precision="38" Scale="4" />
+    <Property Name="BudgetValue" Type="decimal" Precision="38" Scale="4" />
     <Property Name="VarianceValue" Type="int" Nullable="false" />
   </EntityType>
   <!--Errors Found During Generation:
@@ -1219,18 +1218,6 @@ warning 6002: The table/view 'AuditSystem.dbo.VW_SectorMaster' does not have a p
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_TblJobTransaction_TblWorkGroup_TblWorkGroupId">
-    <End Role="TblWorkGroup" Type="Self.TblWorkGroup" Multiplicity="0..1" />
-    <End Role="TblJobTransaction" Type="Self.TblJobTransaction" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="TblWorkGroup">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="TblJobTransaction">
-        <PropertyRef Name="TblWorkGroupId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_TblJobTransaction_TblWorkType_Fk_WorkTypeId">
     <End Role="TblWorkType" Type="Self.TblWorkType" Multiplicity="1" />
     <End Role="TblJobTransaction" Type="Self.TblJobTransaction" Multiplicity="*" />
@@ -1575,6 +1562,8 @@ FROM [dbo].[VW_JobMaster] AS [VW_JobMaster]</DefiningQuery>
 [VW_JobMasterViewforCalculatorJobCostReport].[Delete_Date] AS [Delete_Date], 
 [VW_JobMasterViewforCalculatorJobCostReport].[CombinedName] AS [CombinedName], 
 [VW_JobMasterViewforCalculatorJobCostReport].[CombinedCode] AS [CombinedCode], 
+[VW_JobMasterViewforCalculatorJobCostReport].[ActualHours] AS [ActualHours], 
+[VW_JobMasterViewforCalculatorJobCostReport].[TotalBudgetedHours] AS [TotalBudgetedHours], 
 [VW_JobMasterViewforCalculatorJobCostReport].[ActualValue] AS [ActualValue], 
 [VW_JobMasterViewforCalculatorJobCostReport].[BudgetValue] AS [BudgetValue], 
 [VW_JobMasterViewforCalculatorJobCostReport].[VarianceValue] AS [VarianceValue]
@@ -1746,10 +1735,6 @@ FROM [dbo].[VW_SectorMaster] AS [VW_SectorMaster]</DefiningQuery>
     </AssociationSet>
     <AssociationSet Name="FK_TblJobTransaction_TblLocation_Fk_LocationId" Association="Self.FK_TblJobTransaction_TblLocation_Fk_LocationId">
       <End Role="TblLocation" EntitySet="TblLocation" />
-      <End Role="TblJobTransaction" EntitySet="TblJobTransaction" />
-    </AssociationSet>
-    <AssociationSet Name="FK_TblJobTransaction_TblWorkGroup_TblWorkGroupId" Association="Self.FK_TblJobTransaction_TblWorkGroup_TblWorkGroupId">
-      <End Role="TblWorkGroup" EntitySet="TblWorkGroup" />
       <End Role="TblJobTransaction" EntitySet="TblJobTransaction" />
     </AssociationSet>
     <AssociationSet Name="FK_TblJobTransaction_TblWorkType_Fk_WorkTypeId" Association="Self.FK_TblJobTransaction_TblWorkType_Fk_WorkTypeId">

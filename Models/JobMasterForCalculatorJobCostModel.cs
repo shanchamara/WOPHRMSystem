@@ -37,13 +37,14 @@ namespace WOPHRMSystem.Models
         public Nullable<System.DateTime> Delete_Date { get; set; }
         public string CombinedName { get; set; }
         public string CombinedCode { get; set; }
-        public int ActualValue { get; set; }
-        public int BudgetValue { get; set; }
+        public Nullable<decimal> ActualValue { get; set; }
+        public Nullable<decimal> BudgetValue { get; set; }
         public int VarianceValue { get; set; }
         public Nullable<System.DateTime> ReportGenaratedDate { get; set; }
 
         public int PartnerFrom { get; set; } // ToView
         public int PartnerTo { get; set; } // ToView
+        public string PartnerName { get; set; } // ToView
         public SelectList PartnerList { get; set; }
     }
 }

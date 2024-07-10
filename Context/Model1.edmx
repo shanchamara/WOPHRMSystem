@@ -331,7 +331,6 @@
           <Property Name="Edit_Date" Type="datetime2" Precision="7" />
           <Property Name="Delete_By" Type="nvarchar(max)" />
           <Property Name="Delete_Date" Type="datetime2" Precision="7" />
-          <Property Name="TblWorkGroupId" Type="int" />
         </EntityType>
         <EntityType Name="TblLegalStatusMaster">
           <Key>
@@ -813,8 +812,6 @@ warning 6002: The table/view 'AuditSystem.dbo.VW_JobMasterViewforCalculatorJobCo
             <PropertyRef Name="IsActive" />
             <PropertyRef Name="JobmasterIsDelete" />
             <PropertyRef Name="Create_Date" />
-            <PropertyRef Name="ActualValue" />
-            <PropertyRef Name="BudgetValue" />
             <PropertyRef Name="VarianceValue" />
           </Key>
           <Property Name="PartnerTableId" Type="int" Nullable="false" />
@@ -846,8 +843,10 @@ warning 6002: The table/view 'AuditSystem.dbo.VW_JobMasterViewforCalculatorJobCo
           <Property Name="Delete_Date" Type="datetime2" Precision="7" />
           <Property Name="CombinedName" Type="nvarchar(max)" />
           <Property Name="CombinedCode" Type="nvarchar(max)" />
-          <Property Name="ActualValue" Type="int" Nullable="false" />
-          <Property Name="BudgetValue" Type="int" Nullable="false" />
+          <Property Name="ActualHours" Type="decimal" Precision="38" Scale="2" />
+          <Property Name="TotalBudgetedHours" Type="decimal" Precision="38" Scale="2" />
+          <Property Name="ActualValue" Type="decimal" Precision="38" Scale="4" />
+          <Property Name="BudgetValue" Type="decimal" Precision="38" Scale="4" />
           <Property Name="VarianceValue" Type="int" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
@@ -1224,18 +1223,6 @@ warning 6002: The table/view 'AuditSystem.dbo.VW_SectorMaster' does not have a p
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_TblJobTransaction_TblWorkGroup_TblWorkGroupId">
-          <End Role="TblWorkGroup" Type="Self.TblWorkGroup" Multiplicity="0..1" />
-          <End Role="TblJobTransaction" Type="Self.TblJobTransaction" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TblWorkGroup">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="TblJobTransaction">
-              <PropertyRef Name="TblWorkGroupId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_TblJobTransaction_TblWorkType_Fk_WorkTypeId">
           <End Role="TblWorkType" Type="Self.TblWorkType" Multiplicity="1" />
           <End Role="TblJobTransaction" Type="Self.TblJobTransaction" Multiplicity="*" />
@@ -1580,6 +1567,8 @@ FROM [dbo].[VW_JobMaster] AS [VW_JobMaster]</DefiningQuery>
 [VW_JobMasterViewforCalculatorJobCostReport].[Delete_Date] AS [Delete_Date], 
 [VW_JobMasterViewforCalculatorJobCostReport].[CombinedName] AS [CombinedName], 
 [VW_JobMasterViewforCalculatorJobCostReport].[CombinedCode] AS [CombinedCode], 
+[VW_JobMasterViewforCalculatorJobCostReport].[ActualHours] AS [ActualHours], 
+[VW_JobMasterViewforCalculatorJobCostReport].[TotalBudgetedHours] AS [TotalBudgetedHours], 
 [VW_JobMasterViewforCalculatorJobCostReport].[ActualValue] AS [ActualValue], 
 [VW_JobMasterViewforCalculatorJobCostReport].[BudgetValue] AS [BudgetValue], 
 [VW_JobMasterViewforCalculatorJobCostReport].[VarianceValue] AS [VarianceValue]
@@ -1753,10 +1742,6 @@ FROM [dbo].[VW_SectorMaster] AS [VW_SectorMaster]</DefiningQuery>
             <End Role="TblLocation" EntitySet="TblLocation" />
             <End Role="TblJobTransaction" EntitySet="TblJobTransaction" />
           </AssociationSet>
-          <AssociationSet Name="FK_TblJobTransaction_TblWorkGroup_TblWorkGroupId" Association="Self.FK_TblJobTransaction_TblWorkGroup_TblWorkGroupId">
-            <End Role="TblWorkGroup" EntitySet="TblWorkGroup" />
-            <End Role="TblJobTransaction" EntitySet="TblJobTransaction" />
-          </AssociationSet>
           <AssociationSet Name="FK_TblJobTransaction_TblWorkType_Fk_WorkTypeId" Association="Self.FK_TblJobTransaction_TblWorkType_Fk_WorkTypeId">
             <End Role="TblWorkType" EntitySet="TblWorkType" />
             <End Role="TblJobTransaction" EntitySet="TblJobTransaction" />
@@ -1910,10 +1895,6 @@ FROM [dbo].[VW_SectorMaster] AS [VW_SectorMaster]</DefiningQuery>
           </AssociationSet>
           <AssociationSet Name="FK_TblJobTransaction_TblLocation_Fk_LocationId" Association="AuditSystemModel.FK_TblJobTransaction_TblLocation_Fk_LocationId">
             <End Role="TblLocation" EntitySet="TblLocations" />
-            <End Role="TblJobTransaction" EntitySet="TblJobTransactions" />
-          </AssociationSet>
-          <AssociationSet Name="FK_TblJobTransaction_TblWorkGroup_TblWorkGroupId" Association="AuditSystemModel.FK_TblJobTransaction_TblWorkGroup_TblWorkGroupId">
-            <End Role="TblWorkGroup" EntitySet="TblWorkGroups" />
             <End Role="TblJobTransaction" EntitySet="TblJobTransactions" />
           </AssociationSet>
           <AssociationSet Name="FK_TblJobTransaction_TblWorkType_Fk_WorkTypeId" Association="AuditSystemModel.FK_TblJobTransaction_TblWorkType_Fk_WorkTypeId">
@@ -2281,12 +2262,10 @@ FROM [dbo].[VW_SectorMaster] AS [VW_SectorMaster]</DefiningQuery>
           <Property Name="Edit_Date" Type="DateTime" Precision="7" />
           <Property Name="Delete_By" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Delete_Date" Type="DateTime" Precision="7" />
-          <Property Name="TblWorkGroupId" Type="Int32" />
           <NavigationProperty Name="TblCustomer" Relationship="AuditSystemModel.FK_TblJobTransaction_TblCustomers_Fk_CustomerId" FromRole="TblJobTransaction" ToRole="TblCustomer" />
           <NavigationProperty Name="TblEmployee" Relationship="AuditSystemModel.FK_TblJobTransaction_TblEmployee_Fk_EmployeeId" FromRole="TblJobTransaction" ToRole="TblEmployee" />
           <NavigationProperty Name="TblJobMaster" Relationship="AuditSystemModel.FK_TblJobTransaction_TblJobMaster_Fk_JobMasterId" FromRole="TblJobTransaction" ToRole="TblJobMaster" />
           <NavigationProperty Name="TblLocation" Relationship="AuditSystemModel.FK_TblJobTransaction_TblLocation_Fk_LocationId" FromRole="TblJobTransaction" ToRole="TblLocation" />
-          <NavigationProperty Name="TblWorkGroup" Relationship="AuditSystemModel.FK_TblJobTransaction_TblWorkGroup_TblWorkGroupId" FromRole="TblJobTransaction" ToRole="TblWorkGroup" />
           <NavigationProperty Name="TblWorkType" Relationship="AuditSystemModel.FK_TblJobTransaction_TblWorkType_Fk_WorkTypeId" FromRole="TblJobTransaction" ToRole="TblWorkType" />
         </EntityType>
         <EntityType Name="TblLegalStatusMaster">
@@ -2443,7 +2422,6 @@ FROM [dbo].[VW_SectorMaster] AS [VW_SectorMaster]</DefiningQuery>
           <Property Name="Edit_Date" Type="DateTime" Precision="7" />
           <Property Name="Delete_By" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Delete_Date" Type="DateTime" Precision="7" />
-          <NavigationProperty Name="TblJobTransactions" Relationship="AuditSystemModel.FK_TblJobTransaction_TblWorkGroup_TblWorkGroupId" FromRole="TblWorkGroup" ToRole="TblJobTransaction" />
           <NavigationProperty Name="TblWorkTypes" Relationship="AuditSystemModel.FK_TblWorkType_TblWorkGroup_Fk_WorkGroupId" FromRole="TblWorkGroup" ToRole="TblWorkType" />
         </EntityType>
         <EntityType Name="TblWorkType">
@@ -2759,8 +2737,6 @@ FROM [dbo].[VW_SectorMaster] AS [VW_SectorMaster]</DefiningQuery>
             <PropertyRef Name="IsActive" />
             <PropertyRef Name="JobmasterIsDelete" />
             <PropertyRef Name="Create_Date" />
-            <PropertyRef Name="ActualValue" />
-            <PropertyRef Name="BudgetValue" />
             <PropertyRef Name="VarianceValue" />
           </Key>
           <Property Name="PartnerTableId" Type="Int32" Nullable="false" />
@@ -2792,8 +2768,10 @@ FROM [dbo].[VW_SectorMaster] AS [VW_SectorMaster]</DefiningQuery>
           <Property Name="Delete_Date" Type="DateTime" Precision="7" />
           <Property Name="CombinedName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="CombinedCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="ActualValue" Type="Int32" Nullable="false" />
-          <Property Name="BudgetValue" Type="Int32" Nullable="false" />
+          <Property Name="ActualHours" Type="Decimal" Precision="38" Scale="2" />
+          <Property Name="TotalBudgetedHours" Type="Decimal" Precision="38" Scale="2" />
+          <Property Name="ActualValue" Type="Decimal" Precision="38" Scale="4" />
+          <Property Name="BudgetValue" Type="Decimal" Precision="38" Scale="4" />
           <Property Name="VarianceValue" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="VW_JobMasterViewforReport">
@@ -3202,18 +3180,6 @@ FROM [dbo].[VW_SectorMaster] AS [VW_SectorMaster]</DefiningQuery>
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_TblJobTransaction_TblWorkGroup_TblWorkGroupId">
-          <End Type="AuditSystemModel.TblWorkGroup" Role="TblWorkGroup" Multiplicity="0..1" />
-          <End Type="AuditSystemModel.TblJobTransaction" Role="TblJobTransaction" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TblWorkGroup">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="TblJobTransaction">
-              <PropertyRef Name="TblWorkGroupId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_TblJobTransaction_TblWorkType_Fk_WorkTypeId">
           <End Type="AuditSystemModel.TblWorkType" Role="TblWorkType" Multiplicity="1" />
           <End Type="AuditSystemModel.TblJobTransaction" Role="TblJobTransaction" Multiplicity="*" />
@@ -3573,7 +3539,6 @@ FROM [dbo].[VW_SectorMaster] AS [VW_SectorMaster]</DefiningQuery>
           <EntitySetMapping Name="TblJobTransactions">
             <EntityTypeMapping TypeName="AuditSystemModel.TblJobTransaction">
               <MappingFragment StoreEntitySet="TblJobTransaction">
-                <ScalarProperty Name="TblWorkGroupId" ColumnName="TblWorkGroupId" />
                 <ScalarProperty Name="Delete_Date" ColumnName="Delete_Date" />
                 <ScalarProperty Name="Delete_By" ColumnName="Delete_By" />
                 <ScalarProperty Name="Edit_Date" ColumnName="Edit_Date" />
@@ -4009,6 +3974,8 @@ FROM [dbo].[VW_SectorMaster] AS [VW_SectorMaster]</DefiningQuery>
                 <ScalarProperty Name="VarianceValue" ColumnName="VarianceValue" />
                 <ScalarProperty Name="BudgetValue" ColumnName="BudgetValue" />
                 <ScalarProperty Name="ActualValue" ColumnName="ActualValue" />
+                <ScalarProperty Name="TotalBudgetedHours" ColumnName="TotalBudgetedHours" />
+                <ScalarProperty Name="ActualHours" ColumnName="ActualHours" />
                 <ScalarProperty Name="CombinedCode" ColumnName="CombinedCode" />
                 <ScalarProperty Name="CombinedName" ColumnName="CombinedName" />
                 <ScalarProperty Name="Delete_Date" ColumnName="Delete_Date" />
