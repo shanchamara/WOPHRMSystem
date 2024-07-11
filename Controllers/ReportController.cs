@@ -1,4 +1,5 @@
 ﻿using ClosedXML.Excel;
+using DocumentFormat.OpenXml.VariantTypes;
 using Rotativa;
 using System;
 using System.Collections.Generic;
@@ -141,7 +142,8 @@ namespace WOPHRMSystem.Controllers
         {
             // Simulated grouped data (replace with your actual grouped data retrieval)
             var dt = _ClientService.GetAllJobCalculatorJobCost(jobMasterForReportModel.StartDate.Value.ToString("yyyy/MM/dd"), jobMasterForReportModel.DueDate.Value.ToString("yyyy/MM/dd"), jobMasterForReportModel.PartnerFrom, jobMasterForReportModel.PartnerTo, jobMasterForReportModel.IsReActivate);
-
+            var FromDate = jobMasterForReportModel.StartDate.Value.ToShortDateString();
+            var ToDate = jobMasterForReportModel.DueDate.Value.ToShortDateString();
 
             var workbook = new XLWorkbook();
             var worksheet = workbook.Worksheets.Add("Sheet");
@@ -154,14 +156,29 @@ namespace WOPHRMSystem.Controllers
             worksheet.Cell(1, 5).Value = "Commenced Date";
             worksheet.Cell(1, 6).Value = "Due Date";
             worksheet.Cell(1, 7).Value = "Preview Value";
-            worksheet.Cell(1, 7).Value = "Actual Value";
-            worksheet.Cell(1, 7).Value = "Budget Value";
-            worksheet.Cell(1, 7).Value = "Variance Value";
+            worksheet.Cell(1, 8).Value = "Actual Value";
+            worksheet.Cell(1, 9).Value = "Budget Value";
+            worksheet.Cell(1, 10).Value = "Variance Value";
 
             // Data
             int row = 2;
             foreach (var group in dt)
             {
+                row++;
+
+                
+
+
+                worksheet.Cell(row, 1).Value = "Group Key:";
+                worksheet.Cell(row, 2).Value = group.Key;
+                worksheet.Cell(row, 3).Value = "From Date:";
+                worksheet.Cell(row, 4).Value = FromDate;
+                worksheet.Cell(row, 5).Value = "To Date:";
+                worksheet.Cell(row, 6).Value = ToDate;
+
+                row++;
+                row++;
+
                 foreach (var item in group)
                 {
                     worksheet.Cell(row, 1).Value = item.JobCode;
@@ -171,6 +188,9 @@ namespace WOPHRMSystem.Controllers
                     worksheet.Cell(row, 5).Value = item.StartDate.Value.ToShortDateString();
                     worksheet.Cell(row, 6).Value = item.DueDate.Value.ToShortDateString();
                     worksheet.Cell(row, 7).Value = item.PreViewvalue;
+                    worksheet.Cell(row, 8).Value = item.ActualValue;
+                    worksheet.Cell(row, 9).Value = item.BudgetValue;
+                    worksheet.Cell(row, 10).Value = item.VarianceValue;
                     // Add more columns if needed
                     row++;
                 }

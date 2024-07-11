@@ -52,7 +52,7 @@ namespace WOPHRMSystem.Services
             {
                 var dr = (from a in _context.VW_JobMaster
                           join p in _context.TblJobMasterPartners on a.Id equals p.Fk_JobMasterId
-                          where p.TypeOfTableId == empid && p.TypeOfTable == "Employees"
+                          where p.TypeOfTableId == empid 
                           orderby a.Id descending
                           select new JobMasterCompletedModel()
                           {
