@@ -276,6 +276,7 @@
     <Property Name="Edit_Date" Type="DateTime" Precision="7" />
     <Property Name="Delete_By" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="Delete_Date" Type="DateTime" Precision="7" />
+    <Property Name="JObPrefixCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="TblDepartment" Relationship="AuditSystemModel.FK_TblEmployee_TblDepartment_Fk_DepartmentId" FromRole="TblEmployee" ToRole="TblDepartment" />
     <NavigationProperty Name="TblDesignation" Relationship="AuditSystemModel.FK_TblEmployee_TblDesignation_Fk_DesginationId" FromRole="TblEmployee" ToRole="TblDesignation" />
     <NavigationProperty Name="TblTitle" Relationship="AuditSystemModel.FK_TblEmployee_TblTitle_Fk_TitleId" FromRole="TblEmployee" ToRole="TblTitle" />
@@ -407,6 +408,9 @@
     <Property Name="Edit_Date" Type="DateTime" Precision="7" />
     <Property Name="Delete_By" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="Delete_Date" Type="DateTime" Precision="7" />
+    <Property Name="JObPrefixCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Fk_MangerId" Type="Int32" Nullable="false" />
+    <Property Name="Fk_PartnerId" Type="Int32" Nullable="false" />
     <NavigationProperty Name="TblCustomer" Relationship="AuditSystemModel.FK_TblJobMaster_TblCustomers_Fk_CustomerId" FromRole="TblJobMaster" ToRole="TblCustomer" />
     <NavigationProperty Name="TblJobMasterLocations" Relationship="AuditSystemModel.FK_TblJobMasterLocation_TblJobMaster_Fk_JobMasterId" FromRole="TblJobMaster" ToRole="TblJobMasterLocation" />
     <NavigationProperty Name="TblJobMasterPartners" Relationship="AuditSystemModel.FK_TblJobMasterPartner_TblJobMaster_Fk_JobMasterId" FromRole="TblJobMaster" ToRole="TblJobMasterPartner" />
@@ -424,8 +428,8 @@
     <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="BudgetedHours" Type="Decimal" Precision="18" Scale="2" />
     <Property Name="Designation" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="CustomerId" Type="Int32" Nullable="false" />
     <Property Name="Create_By" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="IsProjectOnwer" Type="Boolean" Nullable="false" />
   </EntityType>
   <EntityType Name="TblJobMasterLocation">
     <Key>
@@ -473,6 +477,7 @@
     <Property Name="Edit_Date" Type="DateTime" Precision="7" />
     <Property Name="Delete_By" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="Delete_Date" Type="DateTime" Precision="7" />
+    <Property Name="IsProjectOnwer" Type="Boolean" Nullable="false" />
     <NavigationProperty Name="TblJobMaster" Relationship="AuditSystemModel.FK_TblJobMasterPartner_TblJobMaster_Fk_JobMasterId" FromRole="TblJobMasterPartner" ToRole="TblJobMaster" />
   </EntityType>
   <EntityType Name="TblJobTransaction">
@@ -495,6 +500,7 @@
     <Property Name="Edit_Date" Type="DateTime" Precision="7" />
     <Property Name="Delete_By" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="Delete_Date" Type="DateTime" Precision="7" />
+    <Property Name="IsApplyTravelingCost" Type="Boolean" Nullable="false" />
     <NavigationProperty Name="TblCustomer" Relationship="AuditSystemModel.FK_TblJobTransaction_TblCustomers_Fk_CustomerId" FromRole="TblJobTransaction" ToRole="TblCustomer" />
     <NavigationProperty Name="TblEmployee" Relationship="AuditSystemModel.FK_TblJobTransaction_TblEmployee_Fk_EmployeeId" FromRole="TblJobTransaction" ToRole="TblEmployee" />
     <NavigationProperty Name="TblJobMaster" Relationship="AuditSystemModel.FK_TblJobTransaction_TblJobMaster_Fk_JobMasterId" FromRole="TblJobTransaction" ToRole="TblJobMaster" />
@@ -791,6 +797,7 @@
     <Property Name="Edit_Date" Type="DateTime" Precision="7" />
     <Property Name="Delete_By" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="Delete_Date" Type="DateTime" Precision="7" />
+    <Property Name="JObPrefixCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="DateOfJoin" Type="DateTime" Nullable="false" Precision="7" />
     <Property Name="DepartmentCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="DesignationCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
@@ -807,6 +814,7 @@
       <PropertyRef Name="Fk_CustomerId" />
       <PropertyRef Name="IsDelete" />
       <PropertyRef Name="Create_Date" />
+      <PropertyRef Name="IsApplyTravelingCost" />
     </Key>
     <Property Name="Id" Type="Int32" Nullable="false" />
     <Property Name="TrDate" Type="DateTime" Precision="7" />
@@ -830,6 +838,7 @@
     <Property Name="Edit_Date" Type="DateTime" Precision="7" />
     <Property Name="Delete_By" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="Delete_Date" Type="DateTime" Precision="7" />
+    <Property Name="IsApplyTravelingCost" Type="Boolean" Nullable="false" />
   </EntityType>
   <EntityType Name="VW_GradeMaster">
     <Key>

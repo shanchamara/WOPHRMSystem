@@ -1,16 +1,16 @@
-﻿using WOPHRMSystem.Context;
+﻿using System;
+using System.Web.Mvc;
+using WOPHRMSystem.Context;
 using WOPHRMSystem.Helps;
 using WOPHRMSystem.Models;
 using WOPHRMSystem.Services;
-using System;
-using System.Web.Mvc;
 
 namespace WOPHRMSystem.Controllers
 {
     public class CustomerController : Controller
     {
         readonly CustomerServices _ClientService = new CustomerServices();
-        
+
         readonly CustomerGroupServices workGroupServices = new CustomerGroupServices();
         readonly IntroductionMasterServices introductionMasterServices = new IntroductionMasterServices();
         readonly SectorMasterServices sector = new SectorMasterServices();
@@ -19,7 +19,7 @@ namespace WOPHRMSystem.Controllers
         readonly GradeMasterServices gradeMasterServices = new GradeMasterServices();
         readonly EmployeeServices employee = new EmployeeServices();
 
-       
+
 
         [HttpGet]
         public ActionResult Index()

@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using WOPHRMSystem.Context;
 using WOPHRMSystem.Helps;
@@ -13,8 +10,8 @@ namespace WOPHRMSystem.Controllers
     public class JobTransactionController : Controller
     {
         readonly EmployeeJobTransactionServices _ClientService = new EmployeeJobTransactionServices();
-        readonly LocationServices location = new LocationServices();
         readonly WorkTypeServices workTypeServices = new WorkTypeServices();
+
         // GET: JobTransaction
         [HttpGet]
         public ActionResult Index()
@@ -35,7 +32,7 @@ namespace WOPHRMSystem.Controllers
             {
                 EmployeeJobTransactionModels = data,
                 JobList = new SelectList(JobList, "Id", "JobCode"),
-                LocationList = new SelectList(location.GetAll(), "Id", "Code"),
+                //LocationList = new SelectList(location.GetAll(), "Id", "Code"),
                 WorkTypeList = new SelectList(workTypeServices.GetAll(), "Id", "Code"),
             };
             return PartialView("WorkingHoursViewByEmployee", model);
@@ -79,7 +76,8 @@ namespace WOPHRMSystem.Controllers
                         TrDate = masterModel.TrDate,
                         Fk_CustomerId = masterModel.Fk_CustomerId,
                         Create_By = "User",
-                        Create_Date = new CommonResources().LocalDatetime().Date
+                        Create_Date = new CommonResources().LocalDatetime().Date,
+                        IsApplyTravelingCost = masterModel.IsApplyTravelingCost,
                     };
                     return Json(_ClientService.Insert(tbl));
                 };

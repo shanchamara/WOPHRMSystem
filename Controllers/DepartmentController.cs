@@ -1,9 +1,9 @@
-﻿using WOPHRMSystem.Context;
+﻿using System;
+using System.Web.Mvc;
+using WOPHRMSystem.Context;
 using WOPHRMSystem.Helps;
 using WOPHRMSystem.Models;
 using WOPHRMSystem.Services;
-using System;
-using System.Web.Mvc;
 
 namespace WOPHRMSystem.Controllers
 {

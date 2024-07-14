@@ -30,6 +30,7 @@ namespace WOPHRMSystem.Context
         public Nullable<System.DateTime> Edit_Date { get; set; }
         public string Delete_By { get; set; }
         public Nullable<System.DateTime> Delete_Date { get; set; }
+        public bool IsApplyTravelingCost { get; set; }
     
         public virtual TblCustomer TblCustomer { get; set; }
         public virtual TblEmployee TblEmployee { get; set; }

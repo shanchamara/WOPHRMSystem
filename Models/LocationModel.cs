@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace WOPHRMSystem.Models
@@ -16,7 +13,7 @@ namespace WOPHRMSystem.Models
         public int Fk_CustomerId { get; set; }
         public bool IsActive { get; set; }
         public bool IsDelete { get; set; }
-
+        public string CodeAndNarration { get; set; }
         public SelectList CustomerLists { get; set; }
     }
 }

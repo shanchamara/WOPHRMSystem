@@ -27,6 +27,7 @@ namespace WOPHRMSystem.Context
         public Nullable<System.DateTime> Edit_Date { get; set; }
         public string Delete_By { get; set; }
         public Nullable<System.DateTime> Delete_Date { get; set; }
+        public bool IsProjectOnwer { get; set; }
     
         public virtual TblJobMaster TblJobMaster { get; set; }
     }

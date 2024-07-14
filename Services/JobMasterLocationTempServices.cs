@@ -1,9 +1,8 @@
-﻿using WOPHRMSystem.Context;
-using WOPHRMSystem.Helps;
-using WOPHRMSystem.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using WOPHRMSystem.Context;
+using WOPHRMSystem.Models;
 
 namespace WOPHRMSystem.Services
 {
@@ -22,9 +21,14 @@ namespace WOPHRMSystem.Services
 
             try
             {
+                var getLocationdetails = _context.TblLocations.SingleOrDefault(d => d.Id == obj.FK_LocationId);
+                obj.Narration = getLocationdetails.Narration;
+                obj.Code = getLocationdetails.Code;
                 var data = GetByName(obj.Code);
                 if (data == null)
                 {
+                    
+                   
                     _context.TblJobMasterLocationTemps.Add(obj);
                     _context.SaveChanges();
 
@@ -151,6 +155,35 @@ namespace WOPHRMSystem.Services
 
                           }).ToList();
                 return dr;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public List<LocationModel> GetCutomerIdLocation(int CustomerId)
+        {
+            try
+            {
+                var CustomerHaveLocation = (from a in _context.TblLocations
+                                            join c in _context.TblCustomers on a.Fk_CustomerId equals c.Id
+                                            where a.Fk_CustomerId == CustomerId && !_context.TblJobMasterLocationTemps.Any(b => b.FK_LocationId == a.Id)
+                                            orderby a.Id descending
+                                            select new LocationModel()
+                                            {
+                                                Id = a.Id,
+                                                Code = a.Code,
+                                                Narration = a.Narration,
+                                                IsActive = a.IsActive,
+                                                CodeAndNarration = a.Code + " " + a.Narration,
+                                                Fk_CustomerId = a.Fk_CustomerId,
+                                                Rate = a.Rate,
+                                                CustomerName = c.Name,
+                                                IsDelete = a.IsDelete,
+                                            }).Where(d => d.IsDelete.Equals(false)).ToList();
+                return CustomerHaveLocation;
             }
             catch (Exception)
             {

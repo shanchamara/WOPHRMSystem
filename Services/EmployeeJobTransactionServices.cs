@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using WOPHRMSystem.Context;
 using WOPHRMSystem.Models;
 
@@ -52,7 +51,7 @@ namespace WOPHRMSystem.Services
             {
                 var dr = (from a in _context.VW_JobMaster
                           join p in _context.TblJobMasterPartners on a.Id equals p.Fk_JobMasterId
-                          where p.TypeOfTableId == empid 
+                          where p.TypeOfTableId == empid
                           orderby a.Id descending
                           select new JobMasterCompletedModel()
                           {
@@ -106,7 +105,8 @@ namespace WOPHRMSystem.Services
                               LocationCode = a.LocationCode,
                               LocationName = a.LocationName,
                               TrDate = a.TrDate,
-                              WorkTypeCode = a.WorkTypeCode
+                              WorkTypeCode = a.WorkTypeCode,
+                              IsApplyTravelingCost = a.IsApplyTravelingCost
                           }).ToList();
 
 
@@ -120,7 +120,7 @@ namespace WOPHRMSystem.Services
             }
         }
 
-        public MessageModel GetCustomerCode(int jobId)
+        public MessageModelWithData<List<LocationModel>> GetCustomerCode(int jobId)
         {
             try
             {
@@ -135,10 +135,28 @@ namespace WOPHRMSystem.Services
                           }).SingleOrDefault();
 
 
-                return new MessageModel()
+                var CustomerHaveLocation = (from a in _context.TblLocations
+                                            join c in _context.TblCustomers on a.Fk_CustomerId equals c.Id
+                                            where a.Fk_CustomerId == dr.Id
+                                            orderby a.Id descending
+                                            select new LocationModel()
+                                            {
+                                                Id = a.Id,
+                                                Code = a.Code,
+                                                Narration = a.Narration,
+                                                IsActive = a.IsActive,
+                                                CodeAndNarration = a.Code + " " + a.Narration,
+                                                Fk_CustomerId = a.Fk_CustomerId,
+                                                Rate = a.Rate,
+                                                CustomerName = c.Name,
+                                                IsDelete = a.IsDelete,
+                                            }).Where(d => d.IsDelete.Equals(false)).ToList();
+
+                return new MessageModelWithData<List<LocationModel>>()
                 {
                     Status = dr.CustomerName,
                     Text = Convert.ToString(dr.Id),
+                    DataList = CustomerHaveLocation
                 };
             }
             catch (Exception)
@@ -180,26 +198,26 @@ namespace WOPHRMSystem.Services
 
             try
             {
-                var data = GetByName(obj.Fk_CustomerId, obj.Fk_JobMasterId, obj.Fk_EmployeeId);
-                if (data == null)
-                {
-                    _context.TblJobTransactions.Add(obj);
-                    _context.SaveChanges();
+                //var data = GetByName(obj.Fk_CustomerId, obj.Fk_JobMasterId, obj.Fk_EmployeeId);
+                //if (data == null)
+                //{
+                _context.TblJobTransactions.Add(obj);
+                _context.SaveChanges();
 
-                    return new MessageModel()
-                    {
-                        Status = "success",
-                        Text = $"This Record has been registered",
-                    };
-                }
-                else
+                return new MessageModel()
                 {
-                    return new MessageModel()
-                    {
-                        Status = "warning",
-                        Text = $"This Record has been already registered",
-                    };
-                }
+                    Status = "success",
+                    Text = $"This Record has been registered",
+                };
+                //}
+                //else
+                //{
+                //    return new MessageModel()
+                //    {
+                //        Status = "warning",
+                //        Text = $"This Record has been already registered",
+                //    };
+                //}
             }
             catch (Exception)
             {
@@ -210,5 +228,8 @@ namespace WOPHRMSystem.Services
                 };
             }
         }
+
+
+     
     }
 }

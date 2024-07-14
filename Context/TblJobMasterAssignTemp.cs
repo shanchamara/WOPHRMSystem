@@ -22,7 +22,7 @@ namespace WOPHRMSystem.Context
         public string Name { get; set; }
         public Nullable<decimal> BudgetedHours { get; set; }
         public string Designation { get; set; }
-        public int CustomerId { get; set; }
         public string Create_By { get; set; }
+        public bool IsProjectOnwer { get; set; }
     }
 }

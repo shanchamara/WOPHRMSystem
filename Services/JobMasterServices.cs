@@ -1,11 +1,11 @@
-﻿using WOPHRMSystem.Context;
-using WOPHRMSystem.Helps;
-using WOPHRMSystem.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Transactions;
-using System.Data.Entity.Migrations;
+using WOPHRMSystem.Context;
+using WOPHRMSystem.Helps;
+using WOPHRMSystem.Models;
 
 namespace WOPHRMSystem.Services
 {
@@ -31,7 +31,7 @@ namespace WOPHRMSystem.Services
                     {
                         var getJobCodeNumber = _context.TblDocuments.SingleOrDefault(d => d.TypeOfTable.Equals("TblJobMaster"));
 
-                        obj.JobCode = getJobCodeNumber.Pattern + (getJobCodeNumber.Number + 1);
+                        obj.JobCode = obj.JObPrefixCode + "000" + (getJobCodeNumber.Number + 1);
 
                         getJobCodeNumber.Number++;
                         _context.TblJobMasters.AddOrUpdate(obj);
@@ -54,7 +54,7 @@ namespace WOPHRMSystem.Services
 
                         }
 
-                        var partners = _context.TblJobMasterAssignTemps.Where(d => d.CustomerId.Equals(obj.Fk_CustomerId) && d.Create_By.Equals(obj.Create_By)).ToList();
+                        var partners = _context.TblJobMasterAssignTemps.Where(d => d.Create_By.Equals(obj.Create_By)).ToList();
                         foreach (var s in partners)
                         {
                             TblJobMasterPartner tblJobMasterPartner = new TblJobMasterPartner
@@ -67,6 +67,7 @@ namespace WOPHRMSystem.Services
                                 TypeOfTableId = s.TypeOftableId,
                                 Fk_CustomerId = obj.Fk_CustomerId,
                                 BudgetedHours = s.BudgetedHours,
+                                IsProjectOnwer = s.IsProjectOnwer,
                             };
                             _context.TblJobMasterPartners.AddOrUpdate(tblJobMasterPartner);
 
@@ -177,7 +178,7 @@ namespace WOPHRMSystem.Services
                     _context.TblJobMasters.AddOrUpdate(obj);
                     _context.SaveChanges();
 
-                    var location = _context.TblJobMasterLocationTemps.Where(d => d.CustomerId.Equals(obj.Fk_CustomerId) && d.Create_By.Equals(obj.Create_By) ).ToList();
+                    var location = _context.TblJobMasterLocationTemps.Where(d => d.CustomerId.Equals(obj.Fk_CustomerId) && d.Create_By.Equals(obj.Create_By)).ToList();
                     foreach (var s in location)
                     {
                         var Editlocation = _context.TblJobMasterLocations.SingleOrDefault(d => d.FK_LocationId.Equals(s.FK_LocationId) && d.Fk_JobMasterId.Equals(obj.Id));
@@ -198,7 +199,7 @@ namespace WOPHRMSystem.Services
 
                     }
 
-                    var partners = _context.TblJobMasterAssignTemps.Where(d => d.CustomerId.Equals(obj.Fk_CustomerId) && d.Create_By.Equals(obj.Create_By)).ToList();
+                    var partners = _context.TblJobMasterAssignTemps.Where(d => d.Create_By.Equals(obj.Create_By)).ToList();
                     foreach (var s in partners)
                     {
                         var editpartners = _context.TblJobMasterPartners.SingleOrDefault(d => d.Fk_JobMasterId.Equals(obj.Id) && d.Id.Equals(s.RowId));
@@ -302,7 +303,7 @@ namespace WOPHRMSystem.Services
             try
             {
                 var JobCodePattern = _context.TblDocuments.SingleOrDefault(d => d.TypeOfTable.Equals("TblJobMaster"));
-                var makeJobCode = JobCodePattern.Pattern + (JobCodePattern.Number + 1);
+                var makeJobCode = "000" + Convert.ToString(JobCodePattern.Number + 1);
                 return makeJobCode;
 
             }

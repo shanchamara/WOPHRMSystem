@@ -129,6 +129,7 @@
           <Property Name="Edit_Date" Type="datetime2" Precision="7" />
           <Property Name="Delete_By" Type="nvarchar(max)" />
           <Property Name="Delete_Date" Type="datetime2" Precision="7" />
+          <Property Name="JObPrefixCode" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="TblEmployeeHourlyRate">
           <Key>
@@ -250,6 +251,9 @@
           <Property Name="Edit_Date" Type="datetime2" Precision="7" />
           <Property Name="Delete_By" Type="nvarchar(max)" />
           <Property Name="Delete_Date" Type="datetime2" Precision="7" />
+          <Property Name="JObPrefixCode" Type="nvarchar(max)" />
+          <Property Name="Fk_MangerId" Type="int" Nullable="false" />
+          <Property Name="Fk_PartnerId" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="TblJobMasterAssignTemp">
           <Key>
@@ -263,8 +267,8 @@
           <Property Name="Name" Type="nvarchar(max)" />
           <Property Name="BudgetedHours" Type="decimal" Precision="18" Scale="2" />
           <Property Name="Designation" Type="nvarchar(max)" />
-          <Property Name="CustomerId" Type="int" Nullable="false" />
           <Property Name="Create_By" Type="nvarchar(max)" />
+          <Property Name="IsProjectOnwer" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="TblJobMasterLocation">
           <Key>
@@ -310,6 +314,7 @@
           <Property Name="Edit_Date" Type="datetime2" Precision="7" />
           <Property Name="Delete_By" Type="nvarchar(max)" />
           <Property Name="Delete_Date" Type="datetime2" Precision="7" />
+          <Property Name="IsProjectOnwer" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="TblJobTransaction">
           <Key>
@@ -331,6 +336,7 @@
           <Property Name="Edit_Date" Type="datetime2" Precision="7" />
           <Property Name="Delete_By" Type="nvarchar(max)" />
           <Property Name="Delete_Date" Type="datetime2" Precision="7" />
+          <Property Name="IsApplyTravelingCost" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="TblLegalStatusMaster">
           <Key>
@@ -617,6 +623,7 @@ warning 6002: The table/view 'AuditSystem.dbo.VW_Employee' does not have a prima
           <Property Name="Edit_Date" Type="datetime2" Precision="7" />
           <Property Name="Delete_By" Type="nvarchar(max)" />
           <Property Name="Delete_Date" Type="datetime2" Precision="7" />
+          <Property Name="JObPrefixCode" Type="nvarchar(max)" />
           <Property Name="DateOfJoin" Type="datetime2" Precision="7" Nullable="false" />
           <Property Name="DepartmentCode" Type="nvarchar(max)" />
           <Property Name="DesignationCode" Type="nvarchar(max)" />
@@ -635,6 +642,7 @@ warning 6002: The table/view 'AuditSystem.dbo.VW_EmployeeJobTransaction' does no
             <PropertyRef Name="Fk_CustomerId" />
             <PropertyRef Name="IsDelete" />
             <PropertyRef Name="Create_Date" />
+            <PropertyRef Name="IsApplyTravelingCost" />
           </Key>
           <Property Name="Id" Type="int" Nullable="false" />
           <Property Name="TrDate" Type="datetime2" Precision="7" />
@@ -658,6 +666,7 @@ warning 6002: The table/view 'AuditSystem.dbo.VW_EmployeeJobTransaction' does no
           <Property Name="Edit_Date" Type="datetime2" Precision="7" />
           <Property Name="Delete_By" Type="nvarchar(max)" />
           <Property Name="Delete_Date" Type="datetime2" Precision="7" />
+          <Property Name="IsApplyTravelingCost" Type="bit" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'AuditSystem.dbo.VW_GradeMaster' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -1405,6 +1414,7 @@ FROM [dbo].[VW_Customer] AS [VW_Customer]</DefiningQuery>
 [VW_Employee].[Edit_Date] AS [Edit_Date], 
 [VW_Employee].[Delete_By] AS [Delete_By], 
 [VW_Employee].[Delete_Date] AS [Delete_Date], 
+[VW_Employee].[JObPrefixCode] AS [JObPrefixCode], 
 [VW_Employee].[DateOfJoin] AS [DateOfJoin], 
 [VW_Employee].[DepartmentCode] AS [DepartmentCode], 
 [VW_Employee].[DesignationCode] AS [DesignationCode], 
@@ -1434,7 +1444,8 @@ FROM [dbo].[VW_Employee] AS [VW_Employee]</DefiningQuery>
 [VW_EmployeeJobTransaction].[Edit_By] AS [Edit_By], 
 [VW_EmployeeJobTransaction].[Edit_Date] AS [Edit_Date], 
 [VW_EmployeeJobTransaction].[Delete_By] AS [Delete_By], 
-[VW_EmployeeJobTransaction].[Delete_Date] AS [Delete_Date]
+[VW_EmployeeJobTransaction].[Delete_Date] AS [Delete_Date], 
+[VW_EmployeeJobTransaction].[IsApplyTravelingCost] AS [IsApplyTravelingCost]
 FROM [dbo].[VW_EmployeeJobTransaction] AS [VW_EmployeeJobTransaction]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="VW_GradeMaster" EntityType="Self.VW_GradeMaster" store:Type="Views" store:Schema="dbo">
@@ -2043,6 +2054,7 @@ FROM [dbo].[VW_SectorMaster] AS [VW_SectorMaster]</DefiningQuery>
           <Property Name="Edit_Date" Type="DateTime" Precision="7" />
           <Property Name="Delete_By" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Delete_Date" Type="DateTime" Precision="7" />
+          <Property Name="JObPrefixCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="TblDepartment" Relationship="AuditSystemModel.FK_TblEmployee_TblDepartment_Fk_DepartmentId" FromRole="TblEmployee" ToRole="TblDepartment" />
           <NavigationProperty Name="TblDesignation" Relationship="AuditSystemModel.FK_TblEmployee_TblDesignation_Fk_DesginationId" FromRole="TblEmployee" ToRole="TblDesignation" />
           <NavigationProperty Name="TblTitle" Relationship="AuditSystemModel.FK_TblEmployee_TblTitle_Fk_TitleId" FromRole="TblEmployee" ToRole="TblTitle" />
@@ -2174,6 +2186,9 @@ FROM [dbo].[VW_SectorMaster] AS [VW_SectorMaster]</DefiningQuery>
           <Property Name="Edit_Date" Type="DateTime" Precision="7" />
           <Property Name="Delete_By" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Delete_Date" Type="DateTime" Precision="7" />
+          <Property Name="JObPrefixCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Fk_MangerId" Type="Int32" Nullable="false" />
+          <Property Name="Fk_PartnerId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="TblCustomer" Relationship="AuditSystemModel.FK_TblJobMaster_TblCustomers_Fk_CustomerId" FromRole="TblJobMaster" ToRole="TblCustomer" />
           <NavigationProperty Name="TblJobMasterLocations" Relationship="AuditSystemModel.FK_TblJobMasterLocation_TblJobMaster_Fk_JobMasterId" FromRole="TblJobMaster" ToRole="TblJobMasterLocation" />
           <NavigationProperty Name="TblJobMasterPartners" Relationship="AuditSystemModel.FK_TblJobMasterPartner_TblJobMaster_Fk_JobMasterId" FromRole="TblJobMaster" ToRole="TblJobMasterPartner" />
@@ -2191,8 +2206,8 @@ FROM [dbo].[VW_SectorMaster] AS [VW_SectorMaster]</DefiningQuery>
           <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="BudgetedHours" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="Designation" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="CustomerId" Type="Int32" Nullable="false" />
           <Property Name="Create_By" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsProjectOnwer" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="TblJobMasterLocation">
           <Key>
@@ -2240,6 +2255,7 @@ FROM [dbo].[VW_SectorMaster] AS [VW_SectorMaster]</DefiningQuery>
           <Property Name="Edit_Date" Type="DateTime" Precision="7" />
           <Property Name="Delete_By" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Delete_Date" Type="DateTime" Precision="7" />
+          <Property Name="IsProjectOnwer" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="TblJobMaster" Relationship="AuditSystemModel.FK_TblJobMasterPartner_TblJobMaster_Fk_JobMasterId" FromRole="TblJobMasterPartner" ToRole="TblJobMaster" />
         </EntityType>
         <EntityType Name="TblJobTransaction">
@@ -2262,6 +2278,7 @@ FROM [dbo].[VW_SectorMaster] AS [VW_SectorMaster]</DefiningQuery>
           <Property Name="Edit_Date" Type="DateTime" Precision="7" />
           <Property Name="Delete_By" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Delete_Date" Type="DateTime" Precision="7" />
+          <Property Name="IsApplyTravelingCost" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="TblCustomer" Relationship="AuditSystemModel.FK_TblJobTransaction_TblCustomers_Fk_CustomerId" FromRole="TblJobTransaction" ToRole="TblCustomer" />
           <NavigationProperty Name="TblEmployee" Relationship="AuditSystemModel.FK_TblJobTransaction_TblEmployee_Fk_EmployeeId" FromRole="TblJobTransaction" ToRole="TblEmployee" />
           <NavigationProperty Name="TblJobMaster" Relationship="AuditSystemModel.FK_TblJobTransaction_TblJobMaster_Fk_JobMasterId" FromRole="TblJobTransaction" ToRole="TblJobMaster" />
@@ -2558,6 +2575,7 @@ FROM [dbo].[VW_SectorMaster] AS [VW_SectorMaster]</DefiningQuery>
           <Property Name="Edit_Date" Type="DateTime" Precision="7" />
           <Property Name="Delete_By" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Delete_Date" Type="DateTime" Precision="7" />
+          <Property Name="JObPrefixCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="DateOfJoin" Type="DateTime" Nullable="false" Precision="7" />
           <Property Name="DepartmentCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="DesignationCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
@@ -2574,6 +2592,7 @@ FROM [dbo].[VW_SectorMaster] AS [VW_SectorMaster]</DefiningQuery>
             <PropertyRef Name="Fk_CustomerId" />
             <PropertyRef Name="IsDelete" />
             <PropertyRef Name="Create_Date" />
+            <PropertyRef Name="IsApplyTravelingCost" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" />
           <Property Name="TrDate" Type="DateTime" Precision="7" />
@@ -2597,6 +2616,7 @@ FROM [dbo].[VW_SectorMaster] AS [VW_SectorMaster]</DefiningQuery>
           <Property Name="Edit_Date" Type="DateTime" Precision="7" />
           <Property Name="Delete_By" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Delete_Date" Type="DateTime" Precision="7" />
+          <Property Name="IsApplyTravelingCost" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="VW_GradeMaster">
           <Key>
@@ -3321,6 +3341,7 @@ FROM [dbo].[VW_SectorMaster] AS [VW_SectorMaster]</DefiningQuery>
           <EntitySetMapping Name="TblEmployees">
             <EntityTypeMapping TypeName="AuditSystemModel.TblEmployee">
               <MappingFragment StoreEntitySet="TblEmployee">
+                <ScalarProperty Name="JObPrefixCode" ColumnName="JObPrefixCode" />
                 <ScalarProperty Name="Delete_Date" ColumnName="Delete_Date" />
                 <ScalarProperty Name="Delete_By" ColumnName="Delete_By" />
                 <ScalarProperty Name="Edit_Date" ColumnName="Edit_Date" />
@@ -3450,6 +3471,9 @@ FROM [dbo].[VW_SectorMaster] AS [VW_SectorMaster]</DefiningQuery>
           <EntitySetMapping Name="TblJobMasters">
             <EntityTypeMapping TypeName="AuditSystemModel.TblJobMaster">
               <MappingFragment StoreEntitySet="TblJobMaster">
+                <ScalarProperty Name="Fk_PartnerId" ColumnName="Fk_PartnerId" />
+                <ScalarProperty Name="Fk_MangerId" ColumnName="Fk_MangerId" />
+                <ScalarProperty Name="JObPrefixCode" ColumnName="JObPrefixCode" />
                 <ScalarProperty Name="Delete_Date" ColumnName="Delete_Date" />
                 <ScalarProperty Name="Delete_By" ColumnName="Delete_By" />
                 <ScalarProperty Name="Edit_Date" ColumnName="Edit_Date" />
@@ -3475,8 +3499,8 @@ FROM [dbo].[VW_SectorMaster] AS [VW_SectorMaster]</DefiningQuery>
           <EntitySetMapping Name="TblJobMasterAssignTemps">
             <EntityTypeMapping TypeName="AuditSystemModel.TblJobMasterAssignTemp">
               <MappingFragment StoreEntitySet="TblJobMasterAssignTemp">
+                <ScalarProperty Name="IsProjectOnwer" ColumnName="IsProjectOnwer" />
                 <ScalarProperty Name="Create_By" ColumnName="Create_By" />
-                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
                 <ScalarProperty Name="Designation" ColumnName="Designation" />
                 <ScalarProperty Name="BudgetedHours" ColumnName="BudgetedHours" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
@@ -3520,6 +3544,7 @@ FROM [dbo].[VW_SectorMaster] AS [VW_SectorMaster]</DefiningQuery>
           <EntitySetMapping Name="TblJobMasterPartners">
             <EntityTypeMapping TypeName="AuditSystemModel.TblJobMasterPartner">
               <MappingFragment StoreEntitySet="TblJobMasterPartner">
+                <ScalarProperty Name="IsProjectOnwer" ColumnName="IsProjectOnwer" />
                 <ScalarProperty Name="Delete_Date" ColumnName="Delete_Date" />
                 <ScalarProperty Name="Delete_By" ColumnName="Delete_By" />
                 <ScalarProperty Name="Edit_Date" ColumnName="Edit_Date" />
@@ -3539,6 +3564,7 @@ FROM [dbo].[VW_SectorMaster] AS [VW_SectorMaster]</DefiningQuery>
           <EntitySetMapping Name="TblJobTransactions">
             <EntityTypeMapping TypeName="AuditSystemModel.TblJobTransaction">
               <MappingFragment StoreEntitySet="TblJobTransaction">
+                <ScalarProperty Name="IsApplyTravelingCost" ColumnName="IsApplyTravelingCost" />
                 <ScalarProperty Name="Delete_Date" ColumnName="Delete_Date" />
                 <ScalarProperty Name="Delete_By" ColumnName="Delete_By" />
                 <ScalarProperty Name="Edit_Date" ColumnName="Edit_Date" />
@@ -3807,6 +3833,7 @@ FROM [dbo].[VW_SectorMaster] AS [VW_SectorMaster]</DefiningQuery>
                 <ScalarProperty Name="DesignationCode" ColumnName="DesignationCode" />
                 <ScalarProperty Name="DepartmentCode" ColumnName="DepartmentCode" />
                 <ScalarProperty Name="DateOfJoin" ColumnName="DateOfJoin" />
+                <ScalarProperty Name="JObPrefixCode" ColumnName="JObPrefixCode" />
                 <ScalarProperty Name="Delete_Date" ColumnName="Delete_Date" />
                 <ScalarProperty Name="Delete_By" ColumnName="Delete_By" />
                 <ScalarProperty Name="Edit_Date" ColumnName="Edit_Date" />
@@ -3832,6 +3859,7 @@ FROM [dbo].[VW_SectorMaster] AS [VW_SectorMaster]</DefiningQuery>
           <EntitySetMapping Name="VW_EmployeeJobTransaction">
             <EntityTypeMapping TypeName="AuditSystemModel.VW_EmployeeJobTransaction">
               <MappingFragment StoreEntitySet="VW_EmployeeJobTransaction">
+                <ScalarProperty Name="IsApplyTravelingCost" ColumnName="IsApplyTravelingCost" />
                 <ScalarProperty Name="Delete_Date" ColumnName="Delete_Date" />
                 <ScalarProperty Name="Delete_By" ColumnName="Delete_By" />
                 <ScalarProperty Name="Edit_Date" ColumnName="Edit_Date" />

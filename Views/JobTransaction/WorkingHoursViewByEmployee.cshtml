@@ -22,6 +22,26 @@
         overflow-x: hidden;
         -webkit-overflow-scrolling: touch;
     }
+
+    /*.table-auto {
+        table-layout: auto;
+    }
+
+    .table-container {
+        max-height: 200px;
+        overflow-y: auto;
+    }
+
+        .table-container thead th {
+            position: sticky;
+            top: 0;
+            background-color: #fff;*/ /* Adjust as needed */
+            /*z-index: 1;
+        }
+
+        .table-container tbody td {
+            white-space: nowrap;
+        }*/
 </style>
 
 <div class="container-fluid">
@@ -30,79 +50,110 @@
             <div class="card">
                 <div class="card-body">
                     <div class="list-group">
-                        <table id="example1" class="table table-bordered table-striped">
-                            <thead>
-                                <tr>
-                                    <th style="display:none;">Id</th> <!-- Hidden Id column -->
-                                    <th style="width: 200px;">Job Code</th>
-                                    <th>Date</th>
-                                    <th style="width: 250px;">Description</th>
-                                    <th style="width: 150px;">Location Code</th>
-                                    <th style="width: 150px;">Location Name</th>
-                                    <th style="width: 150px;">Hours</th>
-                                    <th style="width: 250px;">Work Type Code</th>
-                                    <th style="width: 150px;">Customer Code</th>
-                                    <th>Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach (var s in Model.EmployeeJobTransactionModels)
-                                {
+                        <div class="table-container">
+                            <table id="example1" class="table table-bordered table-striped table-auto">
+                                <thead>
                                     <tr>
-                                        <td style="display:none;">@s.Id</td> <!-- Hidden Id column -->
-                                        <td>@s.JobCode</td>
-                                        <td>@(s.TrDate.HasValue ? s.TrDate.Value.ToShortDateString() : "N/A")</td>
-
-                                        <td>@s.Narration</td>
-                                        <td>@s.LocationCode</td>
-                                        <td>@s.LocationName</td>
-                                        <td>@s.Hours</td>
-                                        <td>@s.WorkTypeCode</td>
-                                        <td>@s.CustomerCode</td>
-
+                                        <th style="display:none;">Id</th> <!-- Hidden Id column -->
+                                        <th style="width: 200px;">Job Code</th>
+                                        <th>Date</th>
+                                        <th style="width: 250px;">Description</th>
+                                        <th style="width: 150px;">Location Code</th>
+                                        <th style="width: 150px;">Location Name</th>
+                                        <th style="width: 200px;">Hours</th>
+                                        <th style="width: 250px;">Work Type Code</th>
+                                        <th style="width: 150px;">Customer Code</th>
+                                        <th>Apply Traveling Cost</th>
+                                        <th>Action</th>
                                     </tr>
-                                    Rows++;
-                                }
+                                </thead>
+                                <tbody>
+                                    @foreach (var s in Model.EmployeeJobTransactionModels)
+                                    {
+                                        <tr>
+                                            <td style="display:none;">@s.Id</td> <!-- Hidden Id column -->
+                                            <td>@s.JobCode</td>
+                                            <td>@(s.TrDate.HasValue ? s.TrDate.Value.ToShortDateString() : "N/A")</td>
 
-                                @using (Html.BeginForm("", "", FormMethod.Post, new { role = "form", enctype = "multipart/form-data", id = "quickForm", @autocomplete = "off" }))
-                                {
-                                    @Html.HiddenFor(model=>model.Fk_CustomerId)
-                                    <tr>
-                                        <td style="display:none;"></td> <!-- Hidden Id column -->
-                                        <td>
-                                            @Html.DropDownListFor(model => model.Fk_JobMasterId, Model.JobList, "Select", htmlAttributes: new { @class = "form-control", id = "selectJob", required = "required" })
-                                        </td>
-                                        <td>
-                                            @Html.EditorFor(model => model.TrDate, new { htmlAttributes = new { @class = "form-control", placeholder = "",required = "required" } })
-                                        </td>
-                                        <td>
-                                            @Html.EditorFor(model => model.Narration, new { htmlAttributes = new { @class = "form-control", placeholder = "", required = "required" } })
-                                        </td>
-                                        <td>
-                                            @Html.DropDownListFor(model => model.Fk_LocationId, Model.LocationList, "Select", htmlAttributes: new { @class = "form-control",id="locationcode", required = "required" })
-                                        </td>
-                                        <td>
-                                            @Html.EditorFor(model => model.LocationName, new { htmlAttributes = new { @class = "form-control", placeholder = "", required = "required", @disabled = "disabled" } })
-                                        </td>
-                                        <td>
-                                            @Html.EditorFor(model => model.Hours, new { htmlAttributes = new { @class = "form-control", placeholder = "", required = "required" , @type = "number", @min = "0" } })
-                                        </td>
-                                        <td>
-                                            @Html.DropDownListFor(model => model.Fk_WorkTypeId, Model.WorkTypeList, "Select", htmlAttributes: new { @class = "form-control", id = "selectJob", required = "required" })
-                                        </td>
-                                        <td>
-                                            @Html.EditorFor(model => model.CustomerCode, new { htmlAttributes = new { @class = "form-control", placeholder = "", required = "required", @disabled = "disabled" } })
-                                        </td>
-                                        <td class="project-actions text-right">
-                                            <button class="btn btn-info btn-sm" type="submit">
-                                                <i class="fas fa-pencil-alt"></i> Add
-                                            </button>
-                                        </td>
-                                    </tr>
-                                }
-                            </tbody>
-                        </table>
+                                            <td>@s.Narration</td>
+                                            <td>@s.LocationCode</td>
+                                            <td>@s.LocationName</td>
+                                            <td>@s.Hours</td>
+                                            <td>@s.WorkTypeCode</td>
+                                            <td>@s.CustomerCode</td>
+                                            <td>
+                                                @if (s.IsApplyTravelingCost)
+                                                {
+                                                    <span class="badge bg-primary">Active</span>
+                                                }
+                                                else
+                                                {
+                                                    <span class="badge bg-danger">Not Active</span>
+                                                }
+                                            </td>
 
+                                        </tr>
+                                        Rows++;
+                                    }
+
+                                    @using (Html.BeginForm("", "", FormMethod.Post, new { role = "form", enctype = "multipart/form-data", id = "quickForm", @autocomplete = "off" }))
+                                    {
+                                        @Html.HiddenFor(model => model.Fk_CustomerId)
+                                        <tr>
+                                            <td style="display:none;"></td> <!-- Hidden Id column -->
+                                            <td>
+                                                @Html.DropDownListFor(model => model.Fk_JobMasterId, Model.JobList, "Select", htmlAttributes: new { @class = "form-control form-control-sm", id = "selectJob", required = "required" })
+
+                                            </td>
+                                            <td>
+                                                @Html.EditorFor(model => model.TrDate, new { htmlAttributes = new { @class = "form-control form-control-sm", placeholder = "", required = "required" } })
+                                            </td>
+                                            <td>
+                                                @Html.EditorFor(model => model.Narration, new { htmlAttributes = new { @class = "form-control form-control-sm", placeholder = "", required = "required" } })
+                                            </td>
+                                            <td>
+                                                @Html.DropDownListFor(
+                                                        model => model.Fk_LocationId,
+                                                        new SelectList(new List<SelectListItem>()),
+                                                        "Select",
+                                                        htmlAttributes: new { @class = "form-control form-control-sm", id = "locationcode", required = "required" }
+                                                    )
+                                                @* @Html.DropDownListFor(model => model.Fk_LocationId, Model.LocationList, "Select", htmlAttributes: new { @class = "form-control form-control-sm", id = "locationcode", required = "required" })*@
+                                            </td>
+                                            <td>
+                                                @Html.EditorFor(model => model.LocationName, new { htmlAttributes = new { @class = "form-control form-control-sm", placeholder = "", required = "required", @disabled = "disabled" } })
+                                            </td>
+                                            <td>
+                                                @Html.EditorFor(model => model.Hours, new { htmlAttributes = new { @class = "form-control form-control-sm", placeholder = "", required = "required", @type = "number", @min = "0" } })
+                                            </td>
+                                            <td>
+                                                @Html.DropDownListFor(model => model.Fk_WorkTypeId, Model.WorkTypeList, "Select", htmlAttributes: new { @class = "form-control form-control-sm", id = "selectJob", required = "required" })
+                                            </td>
+                                            <td>
+                                                @Html.EditorFor(model => model.CustomerCode, new { htmlAttributes = new { @class = "form-control form-control-sm", placeholder = "", required = "required", @disabled = "disabled" } })
+                                            </td>
+                                            <td>
+                                                <div class="form-group clearfix">
+
+                                                    <div class="icheck-primary d-inline">
+                                                        @Html.CheckBoxFor(model => model.IsApplyTravelingCost, new { @class = "form-check-input  form-control-sm", id = "exampleCheck1" })
+                                                        <label for="exampleCheck1">
+                                                            @*  Apply Traveling Cost*@
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td class="project-actions text-right">
+                                                <button class="btn btn-info btn-sm" type="submit">
+                                                    <i class="fas fa-plus"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+
+                        </div>
                     </div>
                 </div>
             </div>
@@ -116,7 +167,7 @@
     function getSelectedValue() {
         // Get the dropdown element by its ID
         var selectElement = document.getElementById("selectJob");
-    debugger
+        debugger
         // Get the selected value
         var selectedValue = selectElement.value;
 
@@ -156,6 +207,12 @@
                 document.getElementById("CustomerCode").value = result.Status;
                 document.getElementById("Fk_CustomerId").value = result.Text;
 
+                var dropdown = $('#locationcode');
+                dropdown.empty();
+                dropdown.append('<option value="">Select</option>');
+                $.each(result.DataList, function (index, item) {
+                    dropdown.append('<option value="' + item.Id + '">' + item.CodeAndNarration + '</option>');
+                });
 
             },
         })
@@ -181,75 +238,75 @@
 
 
 
-         $(function () {
-         $.validator.setDefaults({
-             submitHandler: function () {
-                 //alert("Form successful submitted!");
-                 var data = $('#quickForm').serialize();
-                 debugger;
+    $(function () {
+        $.validator.setDefaults({
+            submitHandler: function () {
+                //alert("Form successful submitted!");
+                var data = $('#quickForm').serialize();
+                debugger;
 
-                 PostCustomerInsert(data);
-             }
-         });
-         $('#quickForm').validate({
-             rules: {
-                 Fk_WorkTypeId: {
-                     required: true,
-                 },
-                 TrDate: {
-                     required: true,
-                     date: true
-                 },
-             },
-             messages: {
-                 Fk_WorkTypeId: {
-                     required: "Please Select the Work type",
-                 },
-                 TrDate: {
-                     required: "Please enter a Date",
-                 }
+                PostCustomerInsert(data);
+            }
+        });
+        $('#quickForm').validate({
+            rules: {
+                Fk_WorkTypeId: {
+                    required: true,
+                },
+                TrDate: {
+                    required: true,
+                    date: true
+                },
+            },
+            messages: {
+                Fk_WorkTypeId: {
+                    required: "Please Select the Work type",
+                },
+                TrDate: {
+                    required: "Please enter a Date",
+                }
 
-             },
-             errorElement: 'span',
-             errorPlacement: function (error, element) {
-                 error.addClass('invalid-feedback');
-                 element.closest('.form-group').append(error);
-             },
-             highlight: function (element, errorClass, validClass) {
-                 $(element).addClass('is-invalid');
-             },
-             unhighlight: function (element, errorClass, validClass) {
-                 $(element).removeClass('is-invalid');
-             }
-         });
-     });
+            },
+            errorElement: 'span',
+            errorPlacement: function (error, element) {
+                error.addClass('invalid-feedback');
+                element.closest('.form-group').append(error);
+            },
+            highlight: function (element, errorClass, validClass) {
+                $(element).addClass('is-invalid');
+            },
+            unhighlight: function (element, errorClass, validClass) {
+                $(element).removeClass('is-invalid');
+            }
+        });
+    });
 
 
-     var PostCustomerInsert = function (model) {
+    var PostCustomerInsert = function (model) {
 
-         $.ajax({
-             type: "Post",
-             url: "/JobTransaction/PostData",
-             data: model,
+        $.ajax({
+            type: "Post",
+            url: "/JobTransaction/PostData",
+            data: model,
 
-             success: function (result) {
-                 Swal.fire({
+            success: function (result) {
+                Swal.fire({
 
-                     icon: result.Status,
-                     title: result.Status,
-                     text: result.Text
-                 }).then((result) => {
-                     if (result.isConfirmed) {
-                         GetEmplyeeJobTransaction();
-                     }
-                     else {
-                         GetEmplyeeJobTransaction();
-                     }
-                 })
-             },
-         })
+                    icon: result.Status,
+                    title: result.Status,
+                    text: result.Text
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        GetEmplyeeJobTransaction();
+                    }
+                    else {
+                        GetEmplyeeJobTransaction();
+                    }
+                })
+            },
+        })
 
-        }
+    }
 
 </script>
 

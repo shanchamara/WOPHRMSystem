@@ -9,42 +9,19 @@
     .disable-height {
         height: auto !important;
     }
+
+    .list-group {
+        max-height: 200px;
+        margin-bottom: 10px;
+        overflow-x: hidden;
+        -webkit-overflow-scrolling: touch;
+    }
 </style>
 @{
     int Rows = 1;
 }
 
 
-
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-12">
-
-            <!-- /.card -->
-            <div class="card">
-
-                <!-- /.card-header -->
-                <div class="card-body">
-                    <div class="row no-print">
-                        <div class="col-12">
-
-                            <a onclick="GetAllEmployeePartnerManager()" class="btn btn-primary float-right">
-                                <i class="fas fa-plus"></i>
-                                Add Assigne
-                            </a>
-
-                        </div>
-                    </div>
-                </div>
-                <!-- /.card-body -->
-            </div>
-
-            <!-- /.card -->
-        </div>
-        <!-- /.col -->
-    </div>
-    <!-- /.row -->
-</div>
 
 
 <div class="container-fluid">
@@ -57,16 +34,16 @@
                 @*<h3 class="card-title">DataTable with default features</h3>*@
                 <!--</div>-->
                 <!-- /.card-header -->
-                <div class="card-body">
+                <div class="list-group">
                     <table id="example1" class="table table-bordered table-striped">
                         <thead>
                             <tr>
                                 <th style="display:none;">Id</th> <!-- Hidden Id column -->
-                                <th>Code</th>
-                                <th>Name</th>
-                                <th>Type</th>
-                                <th>Budgeted Hours</th>
-                                <th>Action</th>
+                                <th class="col-1 form-control-sm">Code</th>
+                                <th class="col-3 form-control-sm">Name</th>
+                                <th class="col-2 form-control-sm">Type</th>
+                                <th class="col-3 form-control-sm">Budgeted Hours</th>
+                                <th class="col-3 form-control-sm">Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -74,24 +51,41 @@
                             {
                                 <tr>
                                     <td style="display:none;">@s.Id</td> <!-- Hidden Id column -->
-                                    <td>@s.Code</td>
-                                    <td>@s.Name</td>
-                                    <td>@s.TypeOftable</td>
-                                    <td>
-                                        <input type="text" class="form-control budgeted-hours" value="@s.BudgetedHours" />
+                                    <td class="col-1 form-control-sm">@s.Code</td>
+                                    <td class="col-3 form-control-sm">@s.Name</td>
+                                    <td class="col-2 form-control-sm">@s.TypeOftable</td>
+                                    <td class="col-3">
+                                        <input type="text" class="form-control budgeted-hours form-control-sm" value="@s.BudgetedHours" />
                                     </td>
-
-
-                                    <td class="project-actions text-right">
+                                    <td class="col-3 project-actions text-right">
                                         <a class="btn btn-info btn-sm" onclick="getInputValue1(this,'@s.TypeOftableId','@s.TypeOftable','@s.Name','@s.Code','@s.Id','@s.Designation')">
-                                            <i class="fas fa-pencil-alt"></i> Update
+                                            <i class="fas fa-pencil-alt"></i>
                                         </a>
                                         <a class="btn btn-danger btn-sm" onclick="PostDelete1('@s.Id')">
-                                            <i class="fas fa-trash"></i> Remove
+                                            <i class="fas fa-trash"></i>
                                         </a>
                                     </td>
                                 </tr>
                                 Rows++;
+                            }
+                            @using (Html.BeginForm("", "", FormMethod.Post, new { role = "form", enctype = "multipart/form-data", id = "quickForm1", @autocomplete = "off" }))
+                            {
+
+                                <tr>
+
+                                    <td colspan="3">
+                                        @Html.DropDownListFor(model => model.EmployeeId, Model.PartnerList, "Select", htmlAttributes: new { @class = "form-control form-control-sm", id = "addpartners", required = "required" })
+                                    </td>
+                                    <td>
+                                        @Html.EditorFor(model => model.BudgetedHours1, new { htmlAttributes = new { @class = "form-control form-control-sm", placeholder = "", required = "required", @type = "number", @min = "0" } })
+
+                                    </td>
+                                    <td class="project-actions text-right">
+                                        <button class="btn btn-info btn-sm" type="submit" onclick="AddAssign(event)">
+                                            <i class="fas fa-plus"></i>
+                                        </button>
+                                    </td>
+                                </tr>
                             }
                         </tbody>
                     </table>
@@ -108,7 +102,6 @@
 <script>
 
     function getInputValue1(button, typeOftableId, typeOftable, name, code, id, Designation) {
-        debugger
         var row = button.closest('tr');
         var budgetedHours = row.querySelector('.budgeted-hours').value || 0;
 
@@ -117,14 +110,13 @@
     }
 
     var UpdateBudget = function (TypeOftableId, TypeOftable, Name, Code, Designation, id, BudgetedHours) {
-        var selectElement = document.getElementById("selectUnit").value;
         //$("#loaderbody").removeClass('hide');
 
         debugger
         $.ajax({
             type: "Post",
             url: "/JobMaster/UpdateBudgeet",
-            data: { TypeOftableId: TypeOftableId, TypeOftable: TypeOftable, Name: Name, Code: Code, Designation: Designation, CustomerId: selectElement, Id: id, BudgetedHours: BudgetedHours },
+            data: { TypeOftableId: TypeOftableId, TypeOftable: TypeOftable, Name: Name, Code: Code, Designation: Designation, Id: id, BudgetedHours: BudgetedHours },
 
             success: function (result) {
                 Swal.fire({
@@ -136,11 +128,10 @@
                     IsAssignee = true;
                     $('#errorAssignee').html("");
                     if (result.isConfirmed) {
-                        var selectElement = document.getElementById("selectUnit").value;
                         $.ajax({
                             type: "GET",
                             url: "/JobMaster/ViewAssignees",
-                            data: { customerId: selectElement, Createby: 'User' },
+                            data: { Createby: 'User' },
 
                             success: function (result) {
                                 debugger
@@ -149,11 +140,10 @@
                         })
                     }
                     else {
-                        var selectElement = document.getElementById("selectUnit").value;
                         $.ajax({
                             type: "GET",
                             url: "/JobMaster/ViewAssignees",
-                            data: { customerId: selectElement, Createby: 'User' },
+                            data: { Createby: 'User' },
 
                             success: function (result) {
                                 debugger
@@ -199,14 +189,13 @@
                             title: result.Status,
                             text: result.Text
                         }).then((result) => {
-                            var selectElement = document.getElementById("selectUnit").value;
                             $.ajax({
                                 type: "GET",
                                 url: "/JobMaster/ViewAssignees",
-                                data: { customerId: selectElement, Createby: 'User' },
+                                data: { Createby: 'User' },
 
                                 success: function (result) {
-                                  
+
                                     $("#staticEmployee").html(result);
 
                                 },
@@ -217,6 +206,58 @@
             }
         });
     }
+
+
+
+    var AddAssign = function (e) {
+        e.preventDefault();  // Prevent the default form submission
+        //debugger
+        //var data = $('#quickForm1').serialize();
+        var selectElement = document.getElementById("addpartners").value;
+        var Elements = document.getElementById("BudgetedHours1").value;
+
+        debugger;
+        $.ajax({
+            type: "POST",
+            url: "/JobMaster/InsertSelectedAssign",
+            data: { id: selectElement, Hours: Elements},
+            success: function (result) {
+                Swal.fire({
+                    icon: result.Status,
+                    title: result.Status,
+                    text: result.Text
+                }).then((result) => {
+                    IsAssignee = true;
+                    if (result.isConfirmed) {
+                        $.ajax({
+                            type: "GET",
+                            url: "/JobMaster/ViewAssignees",
+                            data: { Createby: 'User' },
+                            success: function (result) {
+                                debugger;
+                                $("#staticEmployee").html(result);
+                            }
+                        });
+                    } else {
+                        $.ajax({
+                            type: "GET",
+                            url: "/JobMaster/ViewAssignees",
+                            data: { Createby: 'User' },
+                            success: function (result) {
+                                debugger;
+                                $("#staticEmployee").html(result);
+                            }
+                        });
+                    }
+                });
+            }
+        });
+    };
+
+
+
+
+
 
 
 </script>

@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace WOPHRMSystem.Models
@@ -31,7 +29,7 @@ namespace WOPHRMSystem.Models
         public Nullable<System.DateTime> Edit_Date { get; set; }
         public string Delete_By { get; set; }
         public Nullable<System.DateTime> Delete_Date { get; set; }
-     
+        public bool IsApplyTravelingCost { get; set; }
 
         public SelectList EmployeeList { get; set; }
     }
@@ -57,6 +55,8 @@ namespace WOPHRMSystem.Models
         public string LocationName { get; set; }
         public int Fk_EmployeeId { get; set; }
         public int Fk_CustomerId { get; set; }
+
+        public bool IsApplyTravelingCost { get; set; }
     }
 
 }

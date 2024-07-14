@@ -41,6 +41,7 @@ namespace WOPHRMSystem.Context
         public Nullable<System.DateTime> Edit_Date { get; set; }
         public string Delete_By { get; set; }
         public Nullable<System.DateTime> Delete_Date { get; set; }
+        public string JObPrefixCode { get; set; }
     
         public virtual TblDepartment TblDepartment { get; set; }
         public virtual TblDesignation TblDesignation { get; set; }

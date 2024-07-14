@@ -40,6 +40,9 @@ namespace WOPHRMSystem.Context
         public Nullable<System.DateTime> Edit_Date { get; set; }
         public string Delete_By { get; set; }
         public Nullable<System.DateTime> Delete_Date { get; set; }
+        public string JObPrefixCode { get; set; }
+        public int Fk_MangerId { get; set; }
+        public int Fk_PartnerId { get; set; }
     
         public virtual TblCustomer TblCustomer { get; set; }
         public virtual ICollection<TblJobMasterLocation> TblJobMasterLocations { get; set; }

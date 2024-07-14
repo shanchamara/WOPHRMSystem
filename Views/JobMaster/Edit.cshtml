@@ -4,27 +4,15 @@
     ViewBag.Title = "Create";
     Layout = "~/Views/Shared/_Layout1.cshtml";
 }
-
-<!-- daterange picker -->
-<link rel="stylesheet" href="~/plugins/daterangepicker/daterangepicker.css">
-<!-- iCheck for checkboxes and radio inputs -->
-<link rel="stylesheet" href="~/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
-<!-- Bootstrap Color Picker -->
-<link rel="stylesheet" href="~/plugins/bootstrap-colorpicker/css/bootstrap-colorpicker.min.css">
-<!-- Tempusdominus Bootstrap 4 -->
-<link rel="stylesheet" href="~/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
-<!-- Select2 -->
-<link rel="stylesheet" href="~/plugins/select2/css/select2.min.css">
-<link rel="stylesheet" href="~/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
-<!-- Bootstrap4 Duallistbox -->
-<link rel="stylesheet" href="~/plugins/bootstrap4-duallistbox/bootstrap-duallistbox.min.css">
-<!-- BS Stepper -->
-<link rel="stylesheet" href="~/plugins/bs-stepper/css/bs-stepper.min.css">
-<!-- dropzonejs -->
-@*<link rel="stylesheet" href="~/plugins/dropzone/min/dropzone.min.css">*@
-
-
 <style>
+    .card-body1 {
+        height: 300px; /* Set your desired default height */
+        overflow-y: auto; /* Add a scrollbar if content exceeds the height */
+    }
+
+    .body1 {
+        height: 900px;
+    }
 </style>
 
 <div class="content-wrapper disable-height">
@@ -33,12 +21,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Edit Job Master</h1>
+                    <h1>Update Job Master</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item">Home</li>
-                        <li class="breadcrumb-item active"><a href="@Url.Action("Index","JobMaster")">List Of JobMasters </a></li>
+                        <li class="breadcrumb-item active"><a href="@Url.Action("Index","JobMaster")">List Of Job Masters </a></li>
                     </ol>
                 </div>
             </div>
@@ -60,260 +48,220 @@
     <section class="content">
         <div class="container-fluid">
             <div class="row">
-                <div class="col-12">
-
-                    <!-- /.card -->
-                    <div class="card">
-                        @*<div class="card-header">
-                                <h3 class="card-title"></h3>
-                            </div>*@
-                        <!-- /.card-header -->
-                        <div class="card-body">
-                            <div class="card card-info">
-                                <div class="card-header">
-                                    <h3 class="card-title">Details</h3>
-                                </div>
-
-
-                                <div class="row">
-
-
-
-
-                                    <div class="col-md-12">
-                                        <div class="card card-default">
-
-                                            <div class="card-header">
-                                                <h3 class="card-title"></h3>
-                                            </div>
-
-
-                                            <div>
-
-                                                <div class="bs-stepper">
-                                                    <div class="bs-stepper-header" role="tablist">
-                                                        <!-- your steps here -->
-                                                        <div class="step" data-target="#logins-part">
-                                                            <button type="button" class="step-trigger" role="tab" aria-controls="logins-part" id="logins-part-trigger">
-                                                                <span class="bs-stepper-circle">1</span>
-                                                                <span class="bs-stepper-label"> Select the Customer</span>
-                                                            </button>
-                                                        </div>
-                                                        <div class="step" data-target="#dd-part">
-                                                            <button type="button" class="step-trigger" role="tab" aria-controls="dd-part" id="dd-part-trigger">
-                                                                <span class="bs-stepper-circle">2</span>
-                                                                <span class="bs-stepper-label"> Assign Employees</span>
-                                                            </button>
-                                                        </div>
-                                                        <div class="step" data-target="#information-part">
-                                                            <button type="button" class="step-trigger" role="tab" aria-controls="information-part" id="information-part-trigger">
-                                                                <span class="bs-stepper-circle">3</span>
-                                                                <span class="bs-stepper-label">Finalize Job Master</span>
-                                                            </button>
-                                                        </div>
-                                                    </div>
-
-
-                                                    <div class="bs-stepper-content">
-                                                        <!-- your steps content here -->
-                                                        @using (Html.BeginForm("", "", FormMethod.Post, new { role = "form", enctype = "multipart/form-data", id = "quickForm", @autocomplete = "off" }))
-                                                        {
-                                                            @Html.HiddenFor(model => Model.Id)
-                                                            @Html.HiddenFor(model => Model.Fk_CustomerId)
-                                                            <div id="logins-part" class="content active dstepper-block" role="tabpanel" aria-labelledby="logins-part-trigger">
-                                                                <div class="card-body">
-
-                                                                    <div class="row">
-
-                                                                        <div class="col-lg-6">
-                                                                            <div class="mb-3">
-                                                                                <div class="form-group">
-                                                                                    <label for="exampleInputEmail1">Customer Name</label>
-                                                                                    @Html.DropDownListFor(model => model.Fk_CustomerId, Model.CustomerSelectListItems, "Select", htmlAttributes: new { @class = "form-control", id = "selectUnit", @disabled = "disabled" })
-
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="col-lg-6">
-                                                                            <div class="form-group">
-                                                                                <div @*style="display:none"*@>
-                                                                                    @Html.ValidationSummary(false, "", new { @class = "text-danger", id = "errorname" })
-                                                                                    @* @Html.EditorFor(model => model.Fk_LocationId, new { htmlAttributes = new { @class = "form-control", placeholder = "", id = "Fk_LocationId" } })*@
-                                                                                </div>
-                                                                                @*@Html.HiddenFor(model => model.Fk_LocationId, new { htmlAttributes = new { @class = "form-control", placeholder = "" } })*@
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-
-
-                                                                    <div class="modal-body" id="staticBackdropBody">
-                                                                        <!-- Content loaded via AJAX will appear here -->
-                                                                    </div>
-
-
-                                                                </div>
-                                                                <button class="btn btn-primary" type="button" onclick="nextStep()">Next</button>
-                                                            </div>
+                <div class="col-12 body1">
 
 
 
 
 
+                    <div class="row">
+                        <div class="col-md-6">
+                            @using (Html.BeginForm("", "", FormMethod.Post, new { role = "form", enctype = "multipart/form-data", id = "quickForm", @autocomplete = "off" }))
+                            {
+                                @Html.HiddenFor(model => model.DefaultJobCode)
+                                @Html.HiddenFor(model => model.Id)
+                                <div class="card card-danger">
+                                    <div class="card-header">
+                                        <h3 class="card-title">Job Details</h3>
+                                    </div>
+                                    <div class="card-body">
+                                        <!-- Date dd/mm/yyyy -->
 
-                                                        }
-
-
-
-
-
-
-
-
-
-
-                                                        <div id="dd-part" class="content" role="tabpanel" aria-labelledby="dd-part-trigger">
-                                                            <div class="card-body">
-                                                                <div class="row">
-
-                                                                    <div class="col-lg-6">
-                                                                        <div class="mb-3">
-                                                                            <div class="form-group">
-                                                                                <label for="exampleInputEmail1">Assignee Employees / Partners / Managers</label>
-
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="col-lg-8">
-                                                                        @Html.ValidationSummary(false, "", new { @class = "text-danger", id = "errorAssignee" })
-
-                                                                    </div>
-                                                                </div>
-
-                                                                <div class="modal-body" id="staticEmployee">
-
-                                                                    <!-- Content loaded via AJAX will appear here -->
-                                                                </div>
-                                                            </div>
-
-
-
-                                                            <button class="btn btn-primary" type="button" onclick="prevStep()">Previous</button>
-                                                            <button class="btn btn-primary" type="button" onclick="nextStep()">Next</button>
-
-                                                        </div>
-                                                        @using (Html.BeginForm("", "", FormMethod.Post, new { role = "form", enctype = "multipart/form-data", id = "quickForm2", @autocomplete = "off" }))
-                                                        {
-                                                            @Html.HiddenFor(model => Model.Id)
-                                                            @Html.HiddenFor(model => Model.Fk_CustomerId)
-                                                            <div id="information-part" class="content" role="tabpanel" aria-labelledby="information-part-trigger">
-
-                                                                <div class="card-body">
-
-                                                                    <div class="row">
-
-                                                                        <div class="col-lg-4">
-                                                                            <div class="mb-3">
-                                                                                <div class="form-group">
-                                                                                    <label for="exampleInputEmail1">Job Code</label>
-
-                                                                                    @Html.EditorFor(model => model.JobCode, new { htmlAttributes = new { @class = "form-control", placeholder = "", @ReadOnly = "ReadOnly" } })
-
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="col-lg-8">
-
-                                                                            <div class="mb-4">
-                                                                                <div class="form-group">
-                                                                                    <label for="basicpill-address-input">Description</label>
-                                                                                    @Html.EditorFor(model => model.Narration, new { htmlAttributes = new { @class = "form-control", placeholder = "" } })
-                                                                                    @Html.ValidationSummary(false, "", new { @class = "error invalid-feedback", id = "errorDescription" })
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-
-                                                                    <div class="row">
-
-                                                                        <div class="col-lg-4">
-
-                                                                            <div class="mb-4">
-                                                                                <div class="form-group">
-                                                                                    <label for="exampleInputEmail1">Strat Date</label>
-                                                                                    <div class="input-group date" id="reservationdate" data-target-input="nearest">
-                                                                                        @Html.EditorFor(model => model.StartDate, new { htmlAttributes = new { @class = "form-control datetimepicker-input", data_target = "#reservationdate" } })
-
-                                                                                        @*<input type="text" name="Date" class="form-control datetimepicker-input" data-target="#reservationdate" />*@
-                                                                                        <div class="input-group-append" data-target="#reservationdate" data-toggle="datetimepicker">
-                                                                                            <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-
-                                                                        <div class="col-lg-4">
-
-                                                                            <div class="mb-4">
-                                                                                <div class="form-group">
-                                                                                    <label for="exampleInputEmail1">End Date</label>
-                                                                                    <div class="input-group date" id="reservationdate1" data-target-input="nearest">
-                                                                                        @Html.EditorFor(model => model.DueDate, new { htmlAttributes = new { @class = "form-control datetimepicker-input", data_target = "#reservationdate" } })
-
-                                                                                        @*<input type="text" name="Date" class="form-control datetimepicker-input" data-target="#reservationdate" />*@
-                                                                                        <div class="input-group-append" data-target="#reservationdate1" data-toggle="datetimepicker">
-                                                                                            <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="col-lg-4">
-
-                                                                            <div class="mb-4">
-                                                                                <div class="form-group">
-                                                                                    <label for="basicpill-address-input">Previews Value </label>
-                                                                                    @Html.EditorFor(model => model.PreViewvalue, new { htmlAttributes = new { @class = "form-control", placeholder = "", @type = "number", @min = "0" } })
-
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-
-                                                                    <div class="col-lg-6">
-
-                                                                        <div class="mb-4">
-                                                                            <div class="form-group mb-0">
-                                                                                <div class="custom-control custom-checkbox">
-                                                                                    @Html.CheckBoxFor(model => model.IsActive, new { @class = "form-check-input", id = "exampleCheck2" })
-                                                                                    <label for="exampleCheck2">Is Active.</label>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-
-                                                                <button class="btn btn-primary" type="button" onclick="prevStep()">Previous</button>
-                                                                <button type="button" onclick="Finalize()" class="btn btn-primary">Submit</button>
-                                                            </div>
-                                                        }
+                                        <div class="row">
+                                            <div class="col-lg-6">
+                                                <div class="mb-2">
+                                                    <!-- Adjusted margin bottom here -->
+                                                    <div class="form-group">
+                                                        <label for="exampleInputEmail1" class="form-control-sm">Partner</label>
+                                                        @Html.DropDownListFor(model => model.PartnerId, Model.PartnerSelectListItems, "Select", htmlAttributes: new { @class = "form-control form-control-sm", id = "selectPartner", required = "required", @ReadOnly = "ReadOnly" })
                                                     </div>
                                                 </div>
                                             </div>
-                                            <!-- /.card-body -->
-                                            <div class="card-footer">
+                                            <div class="col-lg-3">
+                                                <div class="mb-2">
+                                                    <!-- Adjusted margin bottom here -->
+                                                    <div class="form-group">
+                                                        <label for="basicpill-address-input" class="form-control-sm">Job Prefix Code</label>
+                                                        @Html.EditorFor(model => model.JObPrefixCode, new { htmlAttributes = new { @class = "form-control form-control-sm", placeholder = "", @ReadOnly = "ReadOnly" } })
+                                                        @Html.ValidationSummary(false, "", new { @class = "error invalid-feedback", id = "errorDescription" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3">
+                                                <div class="mb-2">
+                                                    <!-- Adjusted margin bottom here -->
+                                                    <div class="form-group">
+                                                        <label for="exampleInputEmail1" class="form-control-sm">Job Code</label>
+                                                        @Html.EditorFor(model => model.JobCode, new { htmlAttributes = new { @class = "form-control form-control-sm", placeholder = "", @ReadOnly = "ReadOnly" } })
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
-                                        <!-- /.card -->
+
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                <div class="mb-2">
+                                                    <!-- Adjusted margin bottom here -->
+                                                    <div class="form-group">
+                                                        <label for="basicpill-address-input" class="form-control-sm">Description</label>
+                                                        @Html.EditorFor(model => model.Narration, new { htmlAttributes = new { @class = "form-control form-control-sm", placeholder = "" } })
+                                                        @Html.ValidationSummary(false, "", new { @class = "error invalid-feedback", id = "errorDescription" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                        <div class="row">
+                                            <div class="col-lg-6">
+                                                <div class="mb-2">
+                                                    <!-- Adjusted margin bottom here -->
+                                                    <div class="form-group">
+                                                        <label for="exampleInputEmail1" class="form-control-sm">Customer Name </label>
+                                                        @Html.DropDownListFor(model => model.Fk_CustomerId, Model.CustomerSelectListItems, "Select", htmlAttributes: new { @class = "form-control form-control-sm", id = "selectUnit", @ReadOnly = "ReadOnly" })
+                                                        @* @Html.ValidationSummary(false, "", new { @class = "text-danger form-control-sm", id = "errorLocation" })*@
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div class="mb-2">
+                                                    <!-- Adjusted margin bottom here -->
+                                                    <div class="form-group">
+                                                        <label for="exampleInputEmail1" class="form-control-sm">Manager  </label>
+                                                        @Html.DropDownListFor(model => model.ManagerId, Model.ManagerSelectListItems, "Select", htmlAttributes: new { @class = "form-control form-control-sm", id = "selectManager", @ReadOnly = "ReadOnly" })
+
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+
+                                        <div class="row">
+                                            <div class="col-lg-6">
+                                                <div class="mb-2">
+                                                    <div class="form-group">
+                                                        <label for="exampleInputEmail1" class="form-control-sm">Strat Date</label>
+                                                        <div class="input-group date" id="reservationdate" data-target-input="nearest">
+                                                            @Html.EditorFor(model => model.StartDate, new { htmlAttributes = new { @class = "form-control datetimepicker-input form-control-sm", data_target = "#reservationdate" } })
+
+                                                            @*<input type="text" name="Date" class="form-control datetimepicker-input" data-target="#reservationdate" />*@
+                                                            <div class="input-group-append" data-target="#reservationdate" data-toggle="datetimepicker">
+                                                                <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div class="mb-4">
+                                                    <div class="form-group">
+                                                        <label for="exampleInputEmail1" class="form-control-sm">End Date</label>
+                                                        <div class="input-group date" id="reservationdate1" data-target-input="nearest">
+                                                            @Html.EditorFor(model => model.DueDate, new { htmlAttributes = new { @class = "form-control datetimepicker-input form-control-sm", data_target = "#reservationdate" } })
+
+                                                            @*<input type="text" name="Date" class="form-control datetimepicker-input" data-target="#reservationdate" />*@
+                                                            <div class="input-group-append" data-target="#reservationdate1" data-toggle="datetimepicker">
+                                                                <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-lg-6">
+                                                <div class="form-group mb-2">
+                                                    <label for="exampleInputEmail1" class="form-control-sm">Previews Value</label>
+                                                    @Html.EditorFor(model => model.PreViewvalue, new { htmlAttributes = new { @class = "form-control form-control-sm", placeholder = "", @type = "number", @min = "0" } })
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6 d-flex align-items-center">
+                                                <div class="form-group mb-0">
+                                                    <div class="custom-control custom-checkbox d-flex align-items-center">
+                                                        @Html.CheckBoxFor(model => model.IsActive, new { @class = "form-check-input form-control-sm", id = "exampleCheck2" })
+                                                        <label for="exampleCheck2" class="form-control-sm mb-0 ml-2">Is Active.</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+
+
+
                                     </div>
+                                    <div class="card-footer">
+                                        <div class="col-12">
+
+                                            <button type="submit" class="btn btn-primary float-right">Submit</button>
+
+                                        </div>
+
+                                    </div>
+                                    <!-- /.card-body -->
+                                </div>
+                                <!-- /.card -->
+
+
+                            }
+
+
+                        </div>
+                        <!-- /.col (left) -->
+                        <div class="col-md-6">
+                            <div class="card card-primary">
+                                <div class="card-header">
+                                    <h3 class="card-title">Locations</h3>
+                                </div>
+                                <div class="card-body1">
+
+                                    <div class="row">
+                                        <div class="modal-body" id="staticBackdropBody">
+                                            <!-- Content loaded via AJAX will appear here -->
+                                        </div>
+
+                                    </div>
+                                    <span id="errorLocation" class="text-danger sm"></span>
+
                                 </div>
 
-
+                                <!-- /.card-body -->
                             </div>
+                            <!-- /.card -->
+                            <!-- iCheck -->
+                            <div class="card card-success">
+                                <div class="card-header">
+                                    <h3 class="card-title">Project Assignes</h3>
+                                </div>
+                                <div class="card-body1">
+
+                                    <div class="row">
+                                        <div class="modal-body" id="staticEmployee">
+                                            <!-- Content loaded via AJAX will appear here -->
+                                        </div>
+
+                                    </div>
+
+
+                                </div>
+
+                                <!-- /.card-body -->
+                                @*<div class="card-footer">
+                                        Many more skins available. <a href="https://bantikyan.github.io/icheck-bootstrap/">Documentation</a>
+                                    </div>*@
+                            </div>
+                            <!-- /.card -->
+
                         </div>
-                        <!-- /.card-body -->
+                        <!-- /.col (right) -->
                     </div>
 
+
+
+                    <!-- /.card-body -->
                     <!-- /.card -->
                 </div>
                 <!-- /.col -->
@@ -323,6 +271,7 @@
         <!-- /.container-fluid -->
     </section>
 </div>
+
 
 @section scripts {
 
@@ -444,9 +393,187 @@
 
     <script>
 
-        var IsLocation = false;
-        var IsAssignee = false;
 
+        // Function to get the selected value from the dropdown
+        function getSelectedValue1() {
+            // Get the dropdown element by its ID
+            var selectElement = document.getElementById("selectPartner");
+            debugger
+            // Get the selected value
+            var selectedValue = selectElement.value;
+
+            GetPartnerCode(selectedValue)
+            // Log or use the selected value
+            //console.log("Selected value:", selectedValue);
+
+            // You can return the value if needed
+            return selectedValue;
+        }
+
+        document.getElementById("selectPartner").addEventListener("change", function () {
+            var selectedValue = getSelectedValue1();
+            // alert("The selected value is: " + selectedValue);
+        });
+
+
+        var GetPartnerCode = function (id) {
+
+            //$("#loaderbody").removeClass('hide');
+            $.ajax({
+                type: "GET",
+                url: "/JobMaster/GetPartnerCode",
+                data: { id: id },
+
+                success: function (result) {
+                    debugger
+                    document.getElementById("JObPrefixCode").value = result.Value;
+
+                    // take the JobCode value
+                    var JobCodevalue = document.getElementById("DefaultJobCode").value;
+
+                    document.getElementById("JobCode").value = result.Value + JobCodevalue;
+                    Swal.fire({
+
+                            icon: result.Status,
+                            title: result.Status,
+                            text: result.Text
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                   $.ajax({
+                                         type: "GET",
+                                         url: "/JobMaster/ViewAssignees",
+                                         data: { Createby: 'User' },
+
+                                         success: function (result) {
+                                             debugger
+                                             $("#staticEmployee").html(result);
+                                         },
+                                     })
+                            }
+                            else {
+                                $.ajax({
+                                     type: "GET",
+                                     url: "/JobMaster/ViewAssignees",
+                                     data: { Createby: 'User' },
+
+                                     success: function (result) {
+                                         debugger
+                                         $("#staticEmployee").html(result);
+                                     },
+                                 })
+                            }
+                        })
+
+                },
+            })
+        }
+
+
+        function getSelectedValue2() {
+            // Get the dropdown element by its ID
+            var selectElement = document.getElementById("selectManager");
+            debugger
+            // Get the selected value
+            var selectedValue = selectElement.value;
+
+            postmanagerDetails(selectedValue)
+            // Log or use the selected value
+            //console.log("Selected value:", selectedValue);
+
+            // You can return the value if needed
+            return selectedValue;
+        }
+
+        document.getElementById("selectManager").addEventListener("change", function () {
+            var selectedValue = getSelectedValue2();
+            // alert("The selected value is: " + selectedValue);
+        });
+
+
+        var postmanagerDetails = function (id) {
+
+            //$("#loaderbody").removeClass('hide');
+            $.ajax({
+                type: "GET",
+                url: "/JobMaster/GetManagerCode",
+                data: { id: id },
+
+                success: function (result) {
+
+                    Swal.fire({
+
+                        icon: result.Status,
+                        title: result.Status,
+                        text: result.Text
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            $.ajax({
+                                type: "GET",
+                                url: "/JobMaster/ViewAssignees",
+                                data: { Createby: 'User' },
+
+                                success: function (result) {
+
+                                    $("#staticEmployee").html(result);
+                                },
+                            })
+                        }
+                        else {
+                            $.ajax({
+                                type: "GET",
+                                url: "/JobMaster/ViewAssignees",
+                                data: { Createby: 'User' },
+
+                                success: function (result) {
+                                    debugger
+                                    $("#staticEmployee").html(result);
+                                },
+                            })
+                        }
+                    })
+
+                },
+            })
+        }
+
+        window.addEventListener('load', function () {
+
+            GetDefaultLocaion();
+            GetDefaultAssignes();
+        });
+
+
+        var GetDefaultLocaion = function () {
+
+            //$("#loaderbody").removeClass('hide');
+             $.ajax({
+                type: "GET",
+                url: "/JobMaster/ViewCustomerSelectedLocation",
+                data: { Createby: 'User' },
+
+                success: function (result) {
+                    debugger
+                    $("#staticBackdropBody").html(result);
+
+                },
+            })
+        }
+
+        var GetDefaultAssignes = function () {
+
+            //$("#loaderbody").removeClass('hide');
+            $.ajax({
+                type: "GET",
+                url: "/JobMaster/ViewAssignees",
+                data: { Createby: 'User' },
+
+                success: function (result) {
+                    debugger
+                    $("#staticEmployee").html(result);
+
+                },
+            })
+        }
 
         // Function to get the selected value from the dropdown
         function getSelectedValue() {
@@ -470,22 +597,6 @@
             // alert("The selected value is: " + selectedValue);
         });
 
-        var GetCurrently_HaveLocation = function () {
-
-            //$("#loaderbody").removeClass('hide');
-            var selectElement = document.getElementById("selectUnit").value;
-            $.ajax({
-                type: "GET",
-                url: "/JobMaster/ViewCustomerCurrentlyLocation",
-                data: { customerId: selectElement },
-
-                success: function (result) {
-                    debugger
-                    $("#staticBackdropBody").html(result);
-
-                },
-            })
-        }
 
         var GetDefaultLocaion = function () {
 
@@ -504,13 +615,14 @@
             })
         }
 
-        var AddLocation = function (narration, code, locationId) {
-            var selectElement = document.getElementById("selectUnit").value;
+        var AddLocation = function () {
+            var selectElement = document.getElementById("selectlocation").value;
+            var selectCustomerElement = document.getElementById("selectUnit").value;
             //$("#loaderbody").removeClass('hide');
             $.ajax({
                 type: "Post",
                 url: "/JobMaster/InsertSelectedLocation",
-                data: { Narration: narration, code: code, locationId: locationId, customerId: selectElement },
+                data: { locationId: selectElement, customerId: selectCustomerElement },
 
                 success: function (result) {
                     Swal.fire({
@@ -520,7 +632,7 @@
                         text: result.Text
                     }).then((result) => {
                         IsLocation = true;
-                        $('#errorname').html("");
+                        $('#errorLocation').html("");
                         if (result.isConfirmed) {
 
                             var selectElement = document.getElementById("selectUnit").value;
@@ -555,61 +667,115 @@
             })
         }
 
-        document.addEventListener('DOMContentLoaded', function () {
-            window.stepper = new Stepper(document.querySelector('.bs-stepper'));
-            debugger
 
+         var PostInsert = function (model) {
 
-            GetDefaultLocaion()
-            IsLocation = true;
+             $.ajax({
+                 type: "Post",
+                 url: "/JobMaster/Create",
+                 data: model,
 
-            document.querySelector('.bs-stepper').addEventListener('shown.bs-stepper', function (event) {
-                console.log("Current index: " + event.detail.indexStep);
+                 success: function (result) {
+                     Swal.fire({
 
-                if (event.detail.indexStep === 1) {
-                    GetDefaultAssignees();
-                    IsAssignee= true
+                         icon: result.Status,
+                         title: result.Status,
+                         text: result.Text
+                     }).then((result) => {
+                         if (result.isConfirmed) {
+                             window.location.href = "@Url.Action("Index", "JobMaster")"
+                         }
+                         else {
+                             window.location.href = "@Url.Action("Index", "JobMaster")"
+                         }
+                     })
+                 },
+             })
+
+         }
+
+        var IsLocation = true;
+        var IsAssignee = false;
+
+        $(function () {
+            $.validator.setDefaults({
+                submitHandler: function () {
+                    //alert("Form successful submitted!");
+                    var data = $('#quickForm').serialize();
+                    debugger;
+                    if (IsLocation === false) {
+                        $('#errorLocation').html("Please add the Location");
+                    } else {
+                        $('#errorLocation').html("");
+                        PostInsert(data);
+                    }
+
                 }
             });
 
-            // Validation setup
+            $.validator.addMethod("checkIsLocation", function (value, element) {
+                var isValid = IsLocation === true;
+                if (!isValid) {
+                    $('#errorLocation').html("Please add the Location");
+                }
+                return isValid;
+            }, "Location must be selected.");
+
             $('#quickForm').validate({
-                ignore: [],
                 rules: {
-                    Fk_CustomerId: {
+                    PreViewvalue: {
                         required: true,
                     },
-                    //PreViewvalue: {
-                    //    required: true,
-                    //},
-                    //Narration: {
-                    //    required: true,
-                    //},
-                    //StartDate: {
-                    //    required: true,
-                    //    date: true
-                    //},
-                    //DueDate: {
-                    //    required: true,
-                    //    date: true
-                    //},
+                    Narration: {
+                        required: true,
+                    },
+                    StartDate: {
+                        required: true,
+                        date: true
+                    },
+                    DueDate: {
+                        required: true,
+                        date: true
+                    },
+                    Fk_CustomerId: {
+                      required: true,
+                    },
+                    ManagerId: {
+                        required: true,
+                    },
+                    PartnerId: {
+                        required: true,
+                    },
+                    IsActive: {
+                        required: true
+                    },
+
                 },
                 messages: {
-                    Fk_CustomerId: {
-                        required: "Please Select the Customer",
+
+                    PreViewvalue: {
+                        required: "Please provide a Previews Value",
                     },
-                    //PreViewvalue: {
-                    //    required: "Please provide a Previews Value",
-                    //},
-                    //Narration: {
-                    //    required: "Please provide a Narration",
-                    //},
-                    //StartDate: {
-                    //    required: "Please provide a Start Date",
-                    //},
-                    //DueDate: {
-                    //    required: "Please provide a Due Date",
-                    //}
+                    Narration: {
+                        required: "Please provide a Narration",
+                    },
+                    Fk_CustomerId: {
+                        required: "Please provide a Customer",
+                    },
+                    ManagerId: {
+                        required: "Please provide a Manager",
+                    },
+                    PartnerId: {
+                        required: "Please provide a Manager",
+                    },
+                    StartDate: {
+                        required: "Please provide a Start Date",
+                    },
+                    DueDate: {
+                        required: "Please provide a Due Date",
+                    },
+                    IsActive: "Please Select the Status"
+
                 },
                 errorElement: 'span',
                 errorPlacement: function (error, element) {
@@ -623,171 +789,14 @@
                     $(element).removeClass('is-invalid');
                 }
             });
-
-
-
         });
-
-        function nextStep() {
-            debugger;
-            var currentStep = stepper._currentIndex;
-            var isFormValid = $('#quickForm').valid();
-
-            if (isFormValid) {
-                // Step-specific validation
-                if (currentStep === 0) {
-                    handleStepZero();
-                } else if (currentStep === 1) {
-                    handleStepOne();
-                }
-
-                // Check if it's the last step
-               
-                
-            }
-        }
-
-        function Finalize() {
-            
-            var currentStep = stepper._currentIndex;
-            var isFormValid = $('#quickForm').valid();
-
-            if (isFormValid) {
-                // Step-specific validation
-                if (currentStep === 0) {
-                    handleStepZero();
-                } else if (currentStep === 1) {
-                    handleStepOne();
-                }
-
-                // Check if it's the last step
-                if (stepper._currentIndex === 2) {
-
-                    var isFormValid = $('#quickForm2').valid();
-
-                    var data1 = $('#quickForm').serialize();
-                    var data2 = $('#quickForm2').serialize();
-
-                    if (isFormValid == true) {
-
-                        var concatenatedData = data1 + '&' + data2;
-
-                        PostInsert(concatenatedData);
-                    }
-                }
-
-            }
-        }
-
-        $('#quickForm2').validate({
-            rules: {
-                PreViewvalue: {
-                    required: true,
-                },
-                Narration: {
-                    required: true,
-                },
-                StartDate: {
-                    required: true,
-                    date: true
-                },
-                DueDate: {
-                    required: true,
-                    date: true
-                },
-                IsActive : {
-                     required: true,
-                }
-            },
-            messages: {
-                PreViewvalue: {
-                    required: "Please provide a Previews Value",
-                },
-                Narration: {
-                    required: "Please provide a Narration",
-                },
-                StartDate: {
-                    required: "Please provide a Start Date",
-                },
-                DueDate: {
-                    required: "Please provide a Due Date",
-                },
-                IsActive: {
-                    required: "Please Select the Status",
-                }
-            },
-            errorElement: 'span',
-            errorPlacement: function (error, element) {
-                error.addClass('invalid-feedback');
-                element.closest('.form-group').append(error);
-            },
-            highlight: function (element, errorClass, validClass) {
-                $(element).addClass('is-invalid');
-            },
-            unhighlight: function (element, errorClass, validClass) {
-                $(element).removeClass('is-invalid');
-            }
-        });
-
-        function handleStepZero() {
-            if (IsLocation === false) {
-                $('#errorname').html("Please add the Location");
-            } else {
-                $('#errorname').html("");
-                stepper.next();
-            }
-        }
-
-        function handleStepOne() {
-            if (IsAssignee === false) {
-                $('#errorAssignee').html("Please add the Assignees");
-            } else {
-                $('#errorAssignee').html("");
-                stepper.next();
-            }
-        }
-
-
-
-        function prevStep() {
-            stepper.previous();
-        }
-
 
 
 
         /// Second step
 
-        var GetDefaultAssignees = function () {
 
-            //$("#loaderbody").removeClass('hide');
-            var selectElement = document.getElementById("selectUnit").value;
-            $.ajax({
-                type: "GET",
-                url: "/JobMaster/ViewAssignees",
-                data: { customerId: selectElement, Createby: 'User' },
 
-                success: function (result) {
-                    debugger
-                    $("#staticEmployee").html(result);
-                },
-            })
-        }
-
-        var GetAllEmployeePartnerManager = function () {
-
-            var selectElement = document.getElementById("selectUnit").value;
-            $.ajax({
-                type: "GET",
-                url: "/JobMaster/ViewAssigneeByManagerPartnerEmployee",
-                data: { customerId: selectElement },
-
-                success: function (result) {
-                    debugger
-                    $("#staticEmployee").html(result);
-                },
-            })
-        }
 
 
 
@@ -818,7 +827,9 @@
                  },
              })
 
-         }
+        }
+
+
+
     </script>
 }
-

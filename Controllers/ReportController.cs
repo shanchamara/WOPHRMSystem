@@ -1,13 +1,8 @@
 ﻿using ClosedXML.Excel;
-using DocumentFormat.OpenXml.VariantTypes;
 using Rotativa;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
-using WOPHRMSystem.Helps;
 using WOPHRMSystem.Models;
 using WOPHRMSystem.Services;
 
@@ -166,7 +161,7 @@ namespace WOPHRMSystem.Controllers
             {
                 row++;
 
-                
+
 
 
                 worksheet.Cell(row, 1).Value = "Group Key:";

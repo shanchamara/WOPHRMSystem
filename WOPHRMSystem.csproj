@@ -2607,13 +2607,10 @@
     <Content Include="Views\WorkType\Create.cshtml" />
     <Content Include="Views\WorkType\Edit.cshtml" />
     <Content Include="Views\WorkType\Index.cshtml" />
-    <Content Include="Views\JobMaster\Create.cshtml" />
     <Content Include="Views\JobMaster\Edit.cshtml" />
     <Content Include="Views\JobMaster\Index.cshtml" />
     <Content Include="Views\JobMaster\ViewCustomerSelectedLocation.cshtml" />
-    <Content Include="Views\JobMaster\ViewCustomerCurrentlyLocation.cshtml" />
     <Content Include="Views\JobMaster\ViewAssignees.cshtml" />
-    <Content Include="Views\JobMaster\ViewAssigneeByManagerPartnerEmployee.cshtml" />
     <Content Include="Views\JobMaster\Complted.cshtml" />
     <Content Include="Views\JobMaster\CompltedIndex.cshtml" />
     <Content Include="Views\JobMaster\ReactivateIndex.cshtml" />
@@ -2628,6 +2625,7 @@
     <Content Include="Views\Report\JObDetailsReportModel.cshtml" />
     <Content Include="Views\Report\JObCalculatorCostReportModel.cshtml" />
     <Content Include="Views\Report\JObCalculatorCostReportView.cshtml" />
+    <Content Include="Views\JobMaster\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

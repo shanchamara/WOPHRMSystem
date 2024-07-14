@@ -110,6 +110,7 @@
     <EntitySetMapping Name="TblEmployees">
       <EntityTypeMapping TypeName="AuditSystemModel.TblEmployee">
         <MappingFragment StoreEntitySet="TblEmployee">
+          <ScalarProperty Name="JObPrefixCode" ColumnName="JObPrefixCode" />
           <ScalarProperty Name="Delete_Date" ColumnName="Delete_Date" />
           <ScalarProperty Name="Delete_By" ColumnName="Delete_By" />
           <ScalarProperty Name="Edit_Date" ColumnName="Edit_Date" />
@@ -239,6 +240,9 @@
     <EntitySetMapping Name="TblJobMasters">
       <EntityTypeMapping TypeName="AuditSystemModel.TblJobMaster">
         <MappingFragment StoreEntitySet="TblJobMaster">
+          <ScalarProperty Name="Fk_PartnerId" ColumnName="Fk_PartnerId" />
+          <ScalarProperty Name="Fk_MangerId" ColumnName="Fk_MangerId" />
+          <ScalarProperty Name="JObPrefixCode" ColumnName="JObPrefixCode" />
           <ScalarProperty Name="Delete_Date" ColumnName="Delete_Date" />
           <ScalarProperty Name="Delete_By" ColumnName="Delete_By" />
           <ScalarProperty Name="Edit_Date" ColumnName="Edit_Date" />
@@ -264,8 +268,8 @@
     <EntitySetMapping Name="TblJobMasterAssignTemps">
       <EntityTypeMapping TypeName="AuditSystemModel.TblJobMasterAssignTemp">
         <MappingFragment StoreEntitySet="TblJobMasterAssignTemp">
+          <ScalarProperty Name="IsProjectOnwer" ColumnName="IsProjectOnwer" />
           <ScalarProperty Name="Create_By" ColumnName="Create_By" />
-          <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
           <ScalarProperty Name="Designation" ColumnName="Designation" />
           <ScalarProperty Name="BudgetedHours" ColumnName="BudgetedHours" />
           <ScalarProperty Name="Name" ColumnName="Name" />
@@ -309,6 +313,7 @@
     <EntitySetMapping Name="TblJobMasterPartners">
       <EntityTypeMapping TypeName="AuditSystemModel.TblJobMasterPartner">
         <MappingFragment StoreEntitySet="TblJobMasterPartner">
+          <ScalarProperty Name="IsProjectOnwer" ColumnName="IsProjectOnwer" />
           <ScalarProperty Name="Delete_Date" ColumnName="Delete_Date" />
           <ScalarProperty Name="Delete_By" ColumnName="Delete_By" />
           <ScalarProperty Name="Edit_Date" ColumnName="Edit_Date" />
@@ -328,6 +333,7 @@
     <EntitySetMapping Name="TblJobTransactions">
       <EntityTypeMapping TypeName="AuditSystemModel.TblJobTransaction">
         <MappingFragment StoreEntitySet="TblJobTransaction">
+          <ScalarProperty Name="IsApplyTravelingCost" ColumnName="IsApplyTravelingCost" />
           <ScalarProperty Name="Delete_Date" ColumnName="Delete_Date" />
           <ScalarProperty Name="Delete_By" ColumnName="Delete_By" />
           <ScalarProperty Name="Edit_Date" ColumnName="Edit_Date" />
@@ -596,6 +602,7 @@
           <ScalarProperty Name="DesignationCode" ColumnName="DesignationCode" />
           <ScalarProperty Name="DepartmentCode" ColumnName="DepartmentCode" />
           <ScalarProperty Name="DateOfJoin" ColumnName="DateOfJoin" />
+          <ScalarProperty Name="JObPrefixCode" ColumnName="JObPrefixCode" />
           <ScalarProperty Name="Delete_Date" ColumnName="Delete_Date" />
           <ScalarProperty Name="Delete_By" ColumnName="Delete_By" />
           <ScalarProperty Name="Edit_Date" ColumnName="Edit_Date" />
@@ -621,6 +628,7 @@
     <EntitySetMapping Name="VW_EmployeeJobTransaction">
       <EntityTypeMapping TypeName="AuditSystemModel.VW_EmployeeJobTransaction">
         <MappingFragment StoreEntitySet="VW_EmployeeJobTransaction">
+          <ScalarProperty Name="IsApplyTravelingCost" ColumnName="IsApplyTravelingCost" />
           <ScalarProperty Name="Delete_Date" ColumnName="Delete_Date" />
           <ScalarProperty Name="Delete_By" ColumnName="Delete_By" />
           <ScalarProperty Name="Edit_Date" ColumnName="Edit_Date" />

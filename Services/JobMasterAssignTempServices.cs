@@ -1,18 +1,174 @@
-﻿using WOPHRMSystem.Context;
-using WOPHRMSystem.Helps;
-using WOPHRMSystem.Models;
+﻿using DocumentFormat.OpenXml.EMMA;
+using DocumentFormat.OpenXml.Office2010.Excel;
+using DocumentFormat.OpenXml.Wordprocessing;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Data.Entity.Migrations;
-using Antlr.Runtime;
-using Microsoft.Ajax.Utilities;
+using System.Transactions;
+using System.Xml.Linq;
+using WOPHRMSystem.Context;
+using WOPHRMSystem.Models;
 
 namespace WOPHRMSystem.Services
 {
     public class JobMasterAssignTempServices
     {
         readonly AuditSystemEntities _context = new AuditSystemEntities();
+
+
+
+        public MessageModelTwo GetPartnerCodeDetails(int id)
+        {
+            try
+            {
+                var Prifixcode = "";
+                using (TransactionScope scope = new TransactionScope())
+                {
+
+                    var checkOldPartners = _context.TblJobMasterAssignTemps.Where(d => d.TypeOftable.Equals("Partners")).ToList();
+
+                    foreach (var d in checkOldPartners)
+                    {
+                        if (d.IsProjectOnwer == true)
+                        {
+                            _context.TblJobMasterAssignTemps.Remove(d);
+                        }
+                        else
+                        {
+                            d.IsProjectOnwer = false;
+                        }
+                        _context.SaveChanges();
+                    }
+
+
+                    var dr = (from a in _context.TblEmployees
+                              join d in _context.TblDesignations on a.Fk_DesginationId equals d.Id
+                              where a.Id == id
+                              orderby a.Id descending
+                              select new JobMasterAssignTempModel()
+                              {
+                                  Name = a.Name,
+                                  Code = a.Code,
+                                  TypeOftable = "Partners",
+                                  TypeOftableId = id,
+                                  Designation = d.Code,
+                                  Create_By = a.JObPrefixCode
+
+                              }).SingleOrDefault();
+
+                    Prifixcode = dr.Create_By;
+
+                    TblJobMasterAssignTemp tbl = new TblJobMasterAssignTemp()
+                    {
+                        Create_By = "User",
+                        TypeOftableId = dr.TypeOftableId,
+                        TypeOftable = dr.TypeOftable,
+                        Name = dr.Name,
+                        Code = dr.Code,
+                        Designation = dr.Designation,
+                        IsProjectOnwer = true
+                    };
+                    _context.TblJobMasterAssignTemps.Add(tbl);
+
+
+                    scope.Complete();
+
+
+                }
+                _context.SaveChanges();
+
+                return new MessageModelTwo()
+                {
+                    Status = "success",
+                    Text = $"This Record has been registered",
+                    Value = Prifixcode
+                };
+            }
+            catch (Exception)
+            {
+                return new MessageModelTwo()
+                {
+                    Status = "warning",
+                    Text = $"There was a error with retrieving data. Please try again",
+                };
+            }
+        }
+
+        public MessageModel PostManagerDetails(int id)
+        {
+            try
+            {
+               
+                using (TransactionScope scope = new TransactionScope())
+                {
+
+                    var checkOldPartners = _context.TblJobMasterAssignTemps.Where(d => d.TypeOftable.Equals("Manager")).ToList();
+
+                    foreach (var d in checkOldPartners)
+                    {
+                        if (d.IsProjectOnwer == true)
+                        {
+                            _context.TblJobMasterAssignTemps.Remove(d);
+                        }
+                        else
+                        {
+                            d.IsProjectOnwer = false;
+                        }
+                        _context.SaveChanges();
+                    }
+
+
+                    var dr = (from a in _context.TblEmployees
+                              join d in _context.TblDesignations on a.Fk_DesginationId equals d.Id
+                              where a.Id == id
+                              orderby a.Id descending
+                              select new JobMasterAssignTempModel()
+                              {
+                                  Name = a.Name,
+                                  Code = a.Code,
+                                  TypeOftable = "Manager",
+                                  TypeOftableId = id,
+                                  Designation = d.Code,
+                                  Create_By = a.JObPrefixCode
+
+                              }).SingleOrDefault();
+
+
+                    TblJobMasterAssignTemp tbl = new TblJobMasterAssignTemp()
+                    {
+                        Create_By = "User",
+                        TypeOftableId = dr.TypeOftableId,
+                        TypeOftable = dr.TypeOftable,
+                        Name = dr.Name,
+                        Code = dr.Code,
+                        Designation = dr.Designation,
+                        IsProjectOnwer = true
+                    };
+                    _context.TblJobMasterAssignTemps.Add(tbl);
+
+
+                    scope.Complete();
+
+
+                }
+                _context.SaveChanges();
+
+                return new MessageModel()
+                {
+                    Status = "success",
+                    Text = $"This Record has been registered",
+                };
+            }
+            catch (Exception)
+            {
+                return new MessageModel()
+                {
+                    Status = "warning",
+                    Text = $"There was a error with retrieving data. Please try again",
+                };
+            }
+        }
+
 
 
         public TblJobMasterAssignTemp GetByName(string code)
@@ -25,6 +181,29 @@ namespace WOPHRMSystem.Services
 
             try
             {
+
+                var dr = (from a in _context.TblEmployees
+                          join d in _context.TblDesignations on a.Fk_DesginationId equals d.Id
+                          where a.Id == obj.TypeOftableId
+                          orderby a.Id descending
+                          select new JobMasterAssignTempModel()
+                          {
+                              Name = a.Name,
+                              Code = a.Code,
+                              TypeOftableId = obj.TypeOftableId,
+                              Designation = d.Code,
+                              Create_By = a.JObPrefixCode,
+                              IsPartner = a.IsPartner,
+                              IsManager = a.IsManager,
+
+                          }).SingleOrDefault();
+
+                obj.TypeOftable = dr.IsManager == true ? "Manager" : dr.IsPartner == true ? "Partners" : "Employees";
+                obj.Name = dr.Name;
+                obj.Code = dr.Code;
+                obj.Designation = dr.Designation;
+                obj.IsProjectOnwer = false;
+
                 var data = GetByName(obj.Code);
                 if (data == null)
                 {
@@ -45,6 +224,7 @@ namespace WOPHRMSystem.Services
                         Text = $"This Record has been already registered",
                     };
                 }
+
             }
             catch (Exception)
             {
@@ -143,8 +323,9 @@ namespace WOPHRMSystem.Services
             {
                 var dr = (from a in _context.TblEmployees
                           join d in _context.TblDesignations on a.Fk_DesginationId equals d.Id
-                          where a.IsManager == false && a.IsPartner == false
-                          orderby a.Id descending
+
+                          where !_context.TblJobMasterAssignTemps.Any(b => b.TypeOftableId == a.Id) && a.IsManager == false && a.IsPartner == false
+                          //.Where(a => !_context.YourEntityB.Any(b => b.SomeProperty == a.SomeProperty))
                           select new JobMasterAssignTempModel()
                           {
 
@@ -154,13 +335,14 @@ namespace WOPHRMSystem.Services
                               Designation = d.Code,
                               TypeOftableId = a.Id,
                               Id = a.Id,
-
+                              CombineName = "Employee Name :" + a.Name + " , " + a.Code + " , " + "  Designation " + d.Code
 
 
                           }).ToList();
 
                 var partner = (from a in _context.TblEmployees
-                               where a.IsPartner == true
+                               join d in _context.TblDesignations on a.Fk_DesginationId equals d.Id
+                               where a.IsPartner == true && !_context.TblJobMasterAssignTemps.Any(b => b.TypeOftableId == a.Id)
                                select new JobMasterAssignTempModel()
                                {
 
@@ -169,23 +351,23 @@ namespace WOPHRMSystem.Services
                                    TypeOftable = "Partners",
                                    TypeOftableId = a.Id,
                                    Id = a.Id,
-
+                                   CombineName = "Partner Name :" + a.Name + " , " + a.Code + " , " + "  Designation " + d.Code
 
 
                                }).ToList();
 
                 var manager = (from a in _context.TblEmployees
-                               where a.IsManager == true
+                               join d in _context.TblDesignations on a.Fk_DesginationId equals d.Id
+                               where !_context.TblJobMasterAssignTemps.Any(b => b.TypeOftableId == a.Id) && a.IsManager == true
                                select new JobMasterAssignTempModel()
                                {
 
                                    Code = a.Code,
                                    Name = a.Name,
                                    TypeOftable = "Manager",
-
                                    TypeOftableId = a.Id,
-                                   Id = a.Id
-
+                                   Id = a.Id,
+                                   CombineName = "Manager Name :" + a.Name + " , " + a.Code + " , " + "  Designation " + d.Code
 
 
                                }).ToList();
@@ -204,12 +386,12 @@ namespace WOPHRMSystem.Services
         }
 
 
-        public List<JobMasterAssignTempModel> GetAllCurrentlySelectedAssignees(int CustomerId, string Createby)
+        public List<JobMasterAssignTempModel> GetAllCurrentlySelectedAssignees(string Createby)
         {
             try
             {
                 var dr = (from a in _context.TblJobMasterAssignTemps
-                          where a.Create_By == Createby && a.CustomerId == CustomerId
+                          where a.Create_By == Createby
                           orderby a.Id descending
                           select new JobMasterAssignTempModel()
                           {
@@ -222,7 +404,6 @@ namespace WOPHRMSystem.Services
                               TypeOftableId = a.TypeOftableId,
                               Id = a.Id,
                               Create_By = a.Create_By,
-                              CustomerId = CustomerId,
 
                           }).ToList();
                 return dr;
@@ -256,7 +437,6 @@ namespace WOPHRMSystem.Services
                         Code = member.CombinedCode,
                         Create_By = Create_By,
                         BudgetedHours = member.BudgetedHours,
-                        CustomerId = member.Fk_CustomerId,
                         Designation = member.DesignationCode,
                         Name = member.CombinedName,
                         TypeOftable = member.TypeOfTable,

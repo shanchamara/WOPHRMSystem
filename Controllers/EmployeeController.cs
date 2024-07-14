@@ -1,9 +1,9 @@
-﻿using WOPHRMSystem.Context;
+﻿using System;
+using System.Web.Mvc;
+using WOPHRMSystem.Context;
 using WOPHRMSystem.Helps;
 using WOPHRMSystem.Models;
 using WOPHRMSystem.Services;
-using System;
-using System.Web.Mvc;
 
 namespace WOPHRMSystem.Controllers
 {
@@ -59,6 +59,7 @@ namespace WOPHRMSystem.Controllers
                         tbl.Create_By = "User";
                         tbl.IsActive = masterModel.IsActive;
                         tbl.Create_Date = new CommonResources().LocalDatetime().Date;
+                        tbl.JObPrefixCode = masterModel.JObPrefixCode;
                     };
 
                     return Json(_ClientService.Insert(tbl));
@@ -98,6 +99,7 @@ namespace WOPHRMSystem.Controllers
                 IsPartner = dt.IsPartner,
                 Name = dt.Name,
                 Nic = dt.Nic,
+                JObPrefixCode = dt.JObPrefixCode,
                 DateOfJoin = dt.DateOfJoin,
                 DepartmentLists = new SelectList(departmentServices.GetAll(), "Id", "CodeAndNarration"),
                 Designationlists = new SelectList(designationServices.GetAll(), "Id", "CodeAndNarration"),
@@ -129,6 +131,7 @@ namespace WOPHRMSystem.Controllers
                         tbl.Edit_By = "User";
                         tbl.Id = masterModel.Id;
                         tbl.IsActive = masterModel.IsActive;
+                        tbl.JObPrefixCode = masterModel.JObPrefixCode;
                     };
 
                     return Json(_ClientService.Update(tbl));

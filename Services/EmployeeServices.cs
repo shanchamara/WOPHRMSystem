@@ -1,12 +1,10 @@
-﻿using WOPHRMSystem.Context;
+﻿using System;
+using System.Collections.Generic;
+using System.Data.Common.CommandTrees.ExpressionBuilder;
+using System.Linq;
+using WOPHRMSystem.Context;
 using WOPHRMSystem.Helps;
 using WOPHRMSystem.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Data.Common.CommandTrees.ExpressionBuilder;
-using System.Data.Entity;
-using System.Runtime.Remoting.Metadata.W3cXsd2001;
 
 namespace WOPHRMSystem.Services
 {
@@ -15,9 +13,9 @@ namespace WOPHRMSystem.Services
         readonly AuditSystemEntities _context = new AuditSystemEntities();
 
 
-        public TblEmployee GetByName(string code)
+        public TblEmployee GetByName(string code, string jobPrefixcode)
         {
-            return _context.TblEmployees.SingleOrDefault(d => d.Code.Equals(code));
+            return _context.TblEmployees.SingleOrDefault(d => d.Code.Equals(code) || d.JObPrefixCode.Equals(jobPrefixcode));
         }
 
         public MessageModel Insert(TblEmployee obj)
@@ -25,7 +23,7 @@ namespace WOPHRMSystem.Services
 
             try
             {
-                var data = GetByName(obj.Code);
+                var data = GetByName(obj.Code, obj.JObPrefixCode);
                 if (data == null)
                 {
                     _context.TblEmployees.Add(obj);
@@ -66,29 +64,43 @@ namespace WOPHRMSystem.Services
         {
             try
             {
-                var dbobj = GetById(obj.Id);
-                dbobj.Fk_DepartmentId = obj.Fk_DepartmentId;
-                dbobj.Fk_DesginationId = obj.Fk_DesginationId;
-                dbobj.Nic = obj.Nic;
-                dbobj.Email = obj.Email;
-                dbobj.Fk_TitleId = obj.Fk_TitleId;
-                dbobj.BirthDay = obj.BirthDay;
-                dbobj.IsPartner = obj.IsPartner;
-                dbobj.IsManager = obj.IsManager;
-                dbobj.DateOfJoin = obj.DateOfJoin;
-                dbobj.Name = obj.Name;
-                dbobj.Code = obj.Code;
-                dbobj.Edit_By = obj.Edit_By;
-                dbobj.IsActive = obj.IsActive;
-                dbobj.Edit_Date = new CommonResources().LocalDatetime().Date;
-
-                _context.SaveChanges();
-
-                return new MessageModel()
+                var data = GetByName(obj.Code, obj.JObPrefixCode);
+                if (data == null)
                 {
-                    Status = "success",
-                    Text = $"This Record has been Updated",
-                };
+                    var dbobj = GetById(obj.Id);
+                    dbobj.Fk_DepartmentId = obj.Fk_DepartmentId;
+                    dbobj.Fk_DesginationId = obj.Fk_DesginationId;
+                    dbobj.Nic = obj.Nic;
+                    dbobj.Email = obj.Email;
+                    dbobj.Fk_TitleId = obj.Fk_TitleId;
+                    dbobj.BirthDay = obj.BirthDay;
+                    dbobj.IsPartner = obj.IsPartner;
+                    dbobj.IsManager = obj.IsManager;
+                    dbobj.DateOfJoin = obj.DateOfJoin;
+                    dbobj.Name = obj.Name;
+                    dbobj.Code = obj.Code;
+                    dbobj.Edit_By = obj.Edit_By;
+                    dbobj.IsActive = obj.IsActive;
+                    dbobj.JObPrefixCode = obj.JObPrefixCode;
+                    dbobj.Edit_Date = new CommonResources().LocalDatetime().Date;
+
+                    _context.SaveChanges();
+
+                    return new MessageModel()
+                    {
+                        Status = "success",
+                        Text = $"This Record has been Updated",
+                    };
+                }
+
+                else
+                {
+                    return new MessageModel()
+                    {
+                        Status = "warning",
+                        Text = $"This Record has been already registered",
+                    };
+                }
             }
             catch (Exception)
             {
@@ -153,6 +165,7 @@ namespace WOPHRMSystem.Services
                               titleCode = a.titleCode,
                               IsActive = a.IsActive,
                               IsDelete = a.IsDelete,
+                              JObPrefixCode = a.JObPrefixCode,
                           }).Where(d => d.IsDelete.Equals(false)).ToList();
                 return dr;
             }

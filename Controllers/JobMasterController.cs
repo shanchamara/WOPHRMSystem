@@ -1,10 +1,10 @@
-﻿using WOPHRMSystem.Context;
+﻿using System;
+using System.Threading.Tasks;
+using System.Web.Mvc;
+using WOPHRMSystem.Context;
 using WOPHRMSystem.Helps;
 using WOPHRMSystem.Models;
 using WOPHRMSystem.Services;
-using System;
-using System.Web.Mvc;
-using System.Threading.Tasks;
 
 namespace WOPHRMSystem.Controllers
 {
@@ -12,6 +12,7 @@ namespace WOPHRMSystem.Controllers
     {
         readonly JobMasterServices _ClientService = new JobMasterServices();
         readonly CustomerServices _ClientService2 = new CustomerServices();
+        readonly EmployeeServices _employeeServices = new EmployeeServices();
         readonly JobMasterLocationTempServices jobMasterLocationTemp = new JobMasterLocationTempServices();
         readonly JobMasterAssignTempServices jobMasterAssignTempServices = new JobMasterAssignTempServices();
 
@@ -24,6 +25,7 @@ namespace WOPHRMSystem.Controllers
             return View(dt);
         }
 
+     
         [HttpGet]
         public ActionResult Create()
         {
@@ -33,7 +35,9 @@ namespace WOPHRMSystem.Controllers
             var model = new JobMasterModel()
             {
                 CustomerSelectListItems = new SelectList(_ClientService2.GetAll(), "Id", "Name"),
-                JobCode = _ClientService.GetJoBCode()
+                DefaultJobCode = _ClientService.GetJoBCode(),
+                PartnerSelectListItems = new SelectList(_employeeServices.GetAllIsPartner(), "Id", "Name"),
+                ManagerSelectListItems = new SelectList(_employeeServices.GetAllIsManager(), "Id", "Name"),
 
             };
             return View(model);
@@ -56,6 +60,9 @@ namespace WOPHRMSystem.Controllers
                         JobCode = masterModel.JobCode,
                         Create_By = "User",
                         IsActive = masterModel.IsActive,
+                        JObPrefixCode = masterModel.JObPrefixCode,
+                        Fk_PartnerId = masterModel.PartnerId,
+                        Fk_MangerId = masterModel.ManagerId,
                         Create_Date = new CommonResources().LocalDatetime().Date,
                     };
 
@@ -93,6 +100,11 @@ namespace WOPHRMSystem.Controllers
                 IsActive = dt.IsActive,
                 Narration = dt.Narration,
                 CustomerSelectListItems = new SelectList(_ClientService2.GetAll(), "Id", "Name"),
+                PartnerSelectListItems = new SelectList(_employeeServices.GetAllIsPartner(), "Id", "Name"),
+                ManagerSelectListItems = new SelectList(_employeeServices.GetAllIsManager(), "Id", "Name"),
+                PartnerId = dt.Fk_PartnerId,
+                ManagerId = dt.Fk_MangerId,
+                JObPrefixCode = dt.JObPrefixCode
             };
             jobMasterLocationTemp.GetLocationForEdit(Id, "User");
             jobMasterAssignTempServices.GetPartnerForEdit(Id, "User");
@@ -118,6 +130,9 @@ namespace WOPHRMSystem.Controllers
                         IsActive = masterModel.IsActive,
                         Create_Date = new CommonResources().LocalDatetime().Date,
                         Id = masterModel.Id,
+                        JObPrefixCode = masterModel.JObPrefixCode,
+                        Fk_PartnerId = masterModel.PartnerId,
+                        Fk_MangerId = masterModel.ManagerId
                     };
 
 
@@ -283,20 +298,18 @@ namespace WOPHRMSystem.Controllers
         public ActionResult ViewCustomerSelectedLocation(int customerId, string Createby)
         {
             var data = jobMasterLocationTemp.GetAllCurrentlySelectedCustomerWiseLocation(customerId, Createby);
-            var model = new ListLocationCustomerWise() { JobMasterLocationTempModels = data };
+            var model = new ListLocationCustomerWise()
+            {
+                JobMasterLocationTempModels = data,
+                LocationSelectListItems = new SelectList(jobMasterLocationTemp.GetCutomerIdLocation(customerId), "Id", "CodeAndNarration"),
+            };
             return PartialView("ViewCustomerSelectedLocation", model);
         }
 
-        [HttpGet]
-        public ActionResult ViewCustomerCurrentlyLocation(int customerId)
-        {
-            var data = jobMasterLocationTemp.GetAllCurrentlyCustomerWiseLocation(customerId);
-            var model = new ListCurrentlyCustomerLocation() { LocationModels = data };
-            return PartialView("ViewCustomerCurrentlyLocation", model);
-        }
+
 
         [HttpPost]
-        public ActionResult InsertSelectedLocation(string Narration, string code, int locationId, int customerId)
+        public ActionResult InsertSelectedLocation(int locationId, int customerId)
         {
             try
             {
@@ -305,8 +318,6 @@ namespace WOPHRMSystem.Controllers
                     TblJobMasterLocationTemp tbl = new TblJobMasterLocationTemp()
                     {
                         Create_By = "User",
-                        Narration = Narration,
-                        Code = code,
                         FK_LocationId = locationId,
                         CustomerId = customerId
                     };
@@ -360,23 +371,21 @@ namespace WOPHRMSystem.Controllers
         #region AssignEmployee 
 
         [HttpGet]
-        public ActionResult ViewAssignees(int customerId, string Createby)
+        public ActionResult ViewAssignees(string Createby)
         {
-            var data = jobMasterAssignTempServices.GetAllCurrentlySelectedAssignees(customerId, Createby);
-            var model = new ListViewCurrentlyAssignees() { JobMasterAssignTempModels = data };
+            var data = jobMasterAssignTempServices.GetAllCurrentlySelectedAssignees(Createby);
+            var model = new ListViewCurrentlyAssignees()
+            {
+                JobMasterAssignTempModels = data,
+                PartnerList = new SelectList(jobMasterAssignTempServices.GetAllCurrentlyMangers_Partners_Employee(), "Id", "CombineName"),
+            };
             return PartialView("ViewAssignees", model);
         }
 
-        [HttpGet]
-        public ActionResult ViewAssigneeByManagerPartnerEmployee(int customerId)
-        {
-            var data = jobMasterAssignTempServices.GetAllCurrentlyMangers_Partners_Employee();
-            var model = new ListViewCurrentlyAssignees() { JobMasterAssignTempModels = data };
-            return PartialView("ViewAssigneeByManagerPartnerEmployee", model);
-        }
+
 
         [HttpPost]
-        public ActionResult InsertSelectedAssign(int TypeOftableId, string TypeOftable, string Name, string Code, string Designation, int CustomerId, decimal BudgetedHours)
+        public ActionResult InsertSelectedAssign(int id, decimal? Hours = 0)
         {
             try
             {
@@ -385,13 +394,8 @@ namespace WOPHRMSystem.Controllers
                     TblJobMasterAssignTemp tbl = new TblJobMasterAssignTemp()
                     {
                         Create_By = "User",
-                        TypeOftableId = TypeOftableId,
-                        TypeOftable = TypeOftable,
-                        Name = Name,
-                        Code = Code,
-                        Designation = Designation,
-                        CustomerId = CustomerId,
-                        BudgetedHours = BudgetedHours,
+                        TypeOftableId = id,
+                        BudgetedHours = Hours,
                     };
 
                     return Json(jobMasterAssignTempServices.Insert(tbl));
@@ -438,7 +442,7 @@ namespace WOPHRMSystem.Controllers
 
 
         [HttpPost]
-        public ActionResult UpdateBudgeet(int TypeOftableId, string TypeOftable, string Name, string Code, string Designation, int CustomerId, int Id, decimal BudgetedHours)
+        public ActionResult UpdateBudgeet(int TypeOftableId, string TypeOftable, string Name, string Code, string Designation, int Id, decimal BudgetedHours)
         {
             try
             {
@@ -452,7 +456,6 @@ namespace WOPHRMSystem.Controllers
                         Name = Name,
                         Code = Code,
                         Designation = Designation,
-                        CustomerId = CustomerId,
                         BudgetedHours = BudgetedHours,
                         Id = Id,
                     };
@@ -476,6 +479,28 @@ namespace WOPHRMSystem.Controllers
                 Text = $"There was a error with retrieving data. Please try again",
             });
         }
+
+
+        // New Mothod 
+
+        [HttpGet]
+        public ActionResult GetPartnerCode(int id)
+        {
+            var customerCode = jobMasterAssignTempServices.GetPartnerCodeDetails(id);  // Your logic to get the customer code
+
+            return Json(customerCode, JsonRequestBehavior.AllowGet);
+
+        }
+
+        [HttpGet]
+        public ActionResult GetManagerCode(int id)
+        {
+            var customerCode = jobMasterAssignTempServices.PostManagerDetails(id);  // Your logic to get the customer code
+
+            return Json(customerCode, JsonRequestBehavior.AllowGet);
+
+        }
+
         #endregion
     }
 }

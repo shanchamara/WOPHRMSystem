@@ -87,7 +87,16 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                            <div class="col-lg-3">
+                                                <div class="mb-3">
+                                                    <div class="form-group">
+                                                        <label for="exampleInputEmail1">JOb Prefix Code</label>
 
+                                                        @Html.EditorFor(model => model.JObPrefixCode, new { htmlAttributes = new { @class = "form-control", placeholder = "", required = "required" , maxlength = 2 } })
+
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
 
                                         <div class="row">
@@ -414,6 +423,10 @@
                     required: true,
 
                 },
+                JObPrefixCode: {
+                    required: true,
+
+                },
                 Name: {
                     required: true,
 
@@ -439,6 +452,9 @@
             messages: {
                 Code: {
                     required: "Please enter a code",
+                },
+                JObPrefixCode: {
+                    required: "Please enter a JOb Prefix Code",
                 },
                 Nic: {
                     required: "Please enter a Nic Number",

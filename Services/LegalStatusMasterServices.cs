@@ -1,9 +1,8 @@
-﻿using WOPHRMSystem.Context;
-using WOPHRMSystem.Helps;
-using WOPHRMSystem.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using WOPHRMSystem.Context;
+using WOPHRMSystem.Models;
 
 namespace WOPHRMSystem.Services
 {
@@ -12,7 +11,7 @@ namespace WOPHRMSystem.Services
         readonly AuditSystemEntities _context = new AuditSystemEntities();
 
 
-       
+
         public List<LegalStatusMasterModel> GetAll()
         {
             try
