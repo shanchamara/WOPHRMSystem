@@ -29,6 +29,8 @@ namespace WOPHRMSystem.Context
         public DbSet<TblCustomerGroup> TblCustomerGroups { get; set; }
         public DbSet<TblCustomer> TblCustomers { get; set; }
         public DbSet<TblDepartment> TblDepartments { get; set; }
+        public DbSet<TblDepartmentSecond> TblDepartmentSeconds { get; set; }
+        public DbSet<TblDepartmentThird> TblDepartmentThirds { get; set; }
         public DbSet<TblDesignation> TblDesignations { get; set; }
         public DbSet<TblDocument> TblDocuments { get; set; }
         public DbSet<TblEmployee> TblEmployees { get; set; }
@@ -49,6 +51,7 @@ namespace WOPHRMSystem.Context
         public DbSet<TblNatureMaster> TblNatureMasters { get; set; }
         public DbSet<TblNonEffectiveEmployee> TblNonEffectiveEmployees { get; set; }
         public DbSet<TblOpeningBalance> TblOpeningBalances { get; set; }
+        public DbSet<TblProformaInvoiceHead> TblProformaInvoiceHeads { get; set; }
         public DbSet<TblSectorMaster> TblSectorMasters { get; set; }
         public DbSet<TblSiteSetting> TblSiteSettings { get; set; }
         public DbSet<TblTitle> TblTitles { get; set; }

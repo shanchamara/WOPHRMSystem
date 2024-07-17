@@ -19,6 +19,7 @@ namespace WOPHRMSystem.Context
             this.TblJobMasterLocations = new HashSet<TblJobMasterLocation>();
             this.TblJobMasterPartners = new HashSet<TblJobMasterPartner>();
             this.TblJobTransactions = new HashSet<TblJobTransaction>();
+            this.TblProformaInvoiceHeads = new HashSet<TblProformaInvoiceHead>();
         }
     
         public int Id { get; set; }
@@ -48,5 +49,6 @@ namespace WOPHRMSystem.Context
         public virtual ICollection<TblJobMasterLocation> TblJobMasterLocations { get; set; }
         public virtual ICollection<TblJobMasterPartner> TblJobMasterPartners { get; set; }
         public virtual ICollection<TblJobTransaction> TblJobTransactions { get; set; }
+        public virtual ICollection<TblProformaInvoiceHead> TblProformaInvoiceHeads { get; set; }
     }
 }

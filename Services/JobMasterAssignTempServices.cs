@@ -442,6 +442,7 @@ namespace WOPHRMSystem.Services
                         TypeOftable = member.TypeOfTable,
                         TypeOftableId = member.TypeOfTableId,
                         RowId = member.Id,
+                        IsProjectOnwer= member.IsProjectOnwer
                     };
                     _context.TblJobMasterAssignTemps.Add(tblJobMasterAssignTemp);
                     _context.SaveChanges();

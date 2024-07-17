@@ -80,6 +80,41 @@
           <Property Name="Delete_By" Type="nvarchar(max)" />
           <Property Name="Delete_Date" Type="datetime2" Precision="7" />
         </EntityType>
+        <EntityType Name="TblDepartmentSecond">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Code" Type="nvarchar(max)" />
+          <Property Name="Narration" Type="nvarchar(max)" />
+          <Property Name="Fk_DepartmentIdFirst" Type="int" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="IsDelete" Type="bit" Nullable="false" />
+          <Property Name="Create_By" Type="nvarchar(max)" />
+          <Property Name="Create_Date" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="Edit_By" Type="nvarchar(max)" />
+          <Property Name="Edit_Date" Type="datetime2" Precision="7" />
+          <Property Name="Delete_By" Type="nvarchar(max)" />
+          <Property Name="Delete_Date" Type="datetime2" Precision="7" />
+        </EntityType>
+        <EntityType Name="TblDepartmentThird">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Code" Type="nvarchar(max)" />
+          <Property Name="Narration" Type="nvarchar(max)" />
+          <Property Name="Fk_DepartmentIdFirst" Type="int" Nullable="false" />
+          <Property Name="Fk_DepartmentIdSecond" Type="int" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="IsDelete" Type="bit" Nullable="false" />
+          <Property Name="Create_By" Type="nvarchar(max)" />
+          <Property Name="Create_Date" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="Edit_By" Type="nvarchar(max)" />
+          <Property Name="Edit_Date" Type="datetime2" Precision="7" />
+          <Property Name="Delete_By" Type="nvarchar(max)" />
+          <Property Name="Delete_Date" Type="datetime2" Precision="7" />
+        </EntityType>
         <EntityType Name="TblDesignation">
           <Key>
             <PropertyRef Name="Id" />
@@ -421,6 +456,49 @@
           <Property Name="Delete_By" Type="nvarchar(max)" />
           <Property Name="Delete_Date" Type="datetime2" Precision="7" />
         </EntityType>
+        <EntityType Name="TblProformaInvoiceHead">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="InvoiceNoProforma" Type="nvarchar(max)" />
+          <Property Name="Fk_DepartmentIdOne" Type="int" Nullable="false" />
+          <Property Name="Fk_DepartmentIdTwo" Type="int" Nullable="false" />
+          <Property Name="Fk_DepartmentIdThird" Type="int" Nullable="false" />
+          <Property Name="DocNo" Type="nvarchar(max)" />
+          <Property Name="Date" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="OurReferance" Type="nvarchar(max)" />
+          <Property Name="YourReferance" Type="nvarchar(max)" />
+          <Property Name="Fk_WorkGroupId" Type="int" Nullable="false" />
+          <Property Name="Fk_CustomerId" Type="int" Nullable="false" />
+          <Property Name="Fk_PartnerOne" Type="int" Nullable="false" />
+          <Property Name="Fk_PartnerSecond" Type="int" Nullable="false" />
+          <Property Name="Fk_PartnerThird" Type="int" Nullable="false" />
+          <Property Name="Fk_ManagerOne" Type="int" Nullable="false" />
+          <Property Name="Fk_ManagerSecond" Type="int" Nullable="false" />
+          <Property Name="Fk_ManagerThird" Type="int" Nullable="false" />
+          <Property Name="TaxType" Type="nvarchar(max)" />
+          <Property Name="Fk_NatureId" Type="int" Nullable="false" />
+          <Property Name="NoNVat" Type="nvarchar(max)" />
+          <Property Name="NoNVatPrecentage" Type="nvarchar(max)" />
+          <Property Name="VatPercentage" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="NBTPercentage" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="NarrationOne" Type="nvarchar(max)" />
+          <Property Name="NarrationTwo" Type="nvarchar(max)" />
+          <Property Name="Fk_InvoiceShortNarrationId" Type="int" Nullable="false" />
+          <Property Name="Fk_JobMasterId" Type="int" Nullable="false" />
+          <Property Name="LastYearAmount" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="PostingDate" Type="datetime2" Precision="7" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="IsActiveDate" Type="datetime2" Precision="7" />
+          <Property Name="IsDelete" Type="bit" Nullable="false" />
+          <Property Name="Create_By" Type="nvarchar(max)" />
+          <Property Name="Create_Date" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="Edit_By" Type="nvarchar(max)" />
+          <Property Name="Edit_Date" Type="datetime2" Precision="7" />
+          <Property Name="Delete_By" Type="nvarchar(max)" />
+          <Property Name="Delete_Date" Type="datetime2" Precision="7" />
+        </EntityType>
         <EntityType Name="TblSectorMaster">
           <Key>
             <PropertyRef Name="Id" />
@@ -509,6 +587,7 @@ warning 6002: The table/view 'AuditSystem.dbo.VW_CurrentlyGetJobAssignee' does n
           <Key>
             <PropertyRef Name="Id" />
             <PropertyRef Name="Fk_JobMasterId" />
+            <PropertyRef Name="IsProjectOnwer" />
             <PropertyRef Name="Fk_CustomerId" />
             <PropertyRef Name="TypeOfTableId" />
             <PropertyRef Name="IsDelete" />
@@ -516,6 +595,7 @@ warning 6002: The table/view 'AuditSystem.dbo.VW_CurrentlyGetJobAssignee' does n
           </Key>
           <Property Name="Id" Type="int" Nullable="false" />
           <Property Name="Fk_JobMasterId" Type="int" Nullable="false" />
+          <Property Name="IsProjectOnwer" Type="bit" Nullable="false" />
           <Property Name="Fk_CustomerId" Type="int" Nullable="false" />
           <Property Name="TypeOfTable" Type="nvarchar(max)" />
           <Property Name="TypeOfTableId" Type="int" Nullable="false" />
@@ -781,6 +861,8 @@ warning 6002: The table/view 'AuditSystem.dbo.VW_JobMaster' does not have a prim
             <PropertyRef Name="Fk_CustomerId" />
             <PropertyRef Name="IsCompleted" />
             <PropertyRef Name="IsReActivate" />
+            <PropertyRef Name="Fk_MangerId" />
+            <PropertyRef Name="Fk_PartnerId" />
             <PropertyRef Name="IsActive" />
             <PropertyRef Name="IsDelete" />
             <PropertyRef Name="Create_Date" />
@@ -796,6 +878,9 @@ warning 6002: The table/view 'AuditSystem.dbo.VW_JobMaster' does not have a prim
           <Property Name="IsReActivate" Type="bit" Nullable="false" />
           <Property Name="ReActivateDate" Type="datetime2" Precision="7" />
           <Property Name="CompletedDate" Type="datetime2" Precision="7" />
+          <Property Name="JObPrefixCode" Type="nvarchar(max)" />
+          <Property Name="Fk_MangerId" Type="int" Nullable="false" />
+          <Property Name="Fk_PartnerId" Type="int" Nullable="false" />
           <Property Name="IsActive" Type="bit" Nullable="false" />
           <Property Name="IsDelete" Type="bit" Nullable="false" />
           <Property Name="Create_By" Type="nvarchar(max)" />
@@ -854,7 +939,7 @@ warning 6002: The table/view 'AuditSystem.dbo.VW_JobMasterViewforCalculatorJobCo
           <Property Name="CombinedCode" Type="nvarchar(max)" />
           <Property Name="ActualHours" Type="decimal" Precision="38" Scale="2" />
           <Property Name="TotalBudgetedHours" Type="decimal" Precision="38" Scale="2" />
-          <Property Name="ActualValue" Type="decimal" Precision="38" Scale="4" />
+          <Property Name="ActualValue" Type="decimal" Precision="38" Scale="2" />
           <Property Name="BudgetValue" Type="decimal" Precision="38" Scale="4" />
           <Property Name="VarianceValue" Type="int" Nullable="false" />
         </EntityType>
@@ -1074,6 +1159,44 @@ warning 6002: The table/view 'AuditSystem.dbo.VW_SectorMaster' does not have a p
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_TblDepartmentSecond_TblDepartment_Fk_DepartmentIdFirst">
+          <End Role="TblDepartment" Type="Self.TblDepartment" Multiplicity="1" />
+          <End Role="TblDepartmentSecond" Type="Self.TblDepartmentSecond" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblDepartment">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TblDepartmentSecond">
+              <PropertyRef Name="Fk_DepartmentIdFirst" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TblDepartmentThird_TblDepartment_Fk_DepartmentIdFirst">
+          <End Role="TblDepartment" Type="Self.TblDepartment" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="TblDepartmentThird" Type="Self.TblDepartmentThird" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblDepartment">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TblDepartmentThird">
+              <PropertyRef Name="Fk_DepartmentIdFirst" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TblDepartmentThird_TblDepartmentSecond_Fk_DepartmentIdSecond">
+          <End Role="TblDepartmentSecond" Type="Self.TblDepartmentSecond" Multiplicity="1" />
+          <End Role="TblDepartmentThird" Type="Self.TblDepartmentThird" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblDepartmentSecond">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TblDepartmentThird">
+              <PropertyRef Name="Fk_DepartmentIdSecond" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_TblEmployee_TblDepartment_Fk_DepartmentId">
           <End Role="TblDepartment" Type="Self.TblDepartment" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -1286,6 +1409,102 @@ warning 6002: The table/view 'AuditSystem.dbo.VW_SectorMaster' does not have a p
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_TblProformaInvoiceHead_TblCustomers_Fk_CustomerId">
+          <End Role="TblCustomers" Type="Self.TblCustomers" Multiplicity="1" />
+          <End Role="TblProformaInvoiceHead" Type="Self.TblProformaInvoiceHead" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblCustomers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TblProformaInvoiceHead">
+              <PropertyRef Name="Fk_CustomerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TblProformaInvoiceHead_TblDepartment_Fk_DepartmentIdOne">
+          <End Role="TblDepartment" Type="Self.TblDepartment" Multiplicity="1" />
+          <End Role="TblProformaInvoiceHead" Type="Self.TblProformaInvoiceHead" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblDepartment">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TblProformaInvoiceHead">
+              <PropertyRef Name="Fk_DepartmentIdOne" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TblProformaInvoiceHead_TblDepartmentSecond_Fk_DepartmentIdTwo">
+          <End Role="TblDepartmentSecond" Type="Self.TblDepartmentSecond" Multiplicity="1" />
+          <End Role="TblProformaInvoiceHead" Type="Self.TblProformaInvoiceHead" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblDepartmentSecond">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TblProformaInvoiceHead">
+              <PropertyRef Name="Fk_DepartmentIdTwo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TblProformaInvoiceHead_TblDepartmentThird_Fk_DepartmentIdThird">
+          <End Role="TblDepartmentThird" Type="Self.TblDepartmentThird" Multiplicity="1" />
+          <End Role="TblProformaInvoiceHead" Type="Self.TblProformaInvoiceHead" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblDepartmentThird">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TblProformaInvoiceHead">
+              <PropertyRef Name="Fk_DepartmentIdThird" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TblProformaInvoiceHead_TblInvoiceShortNarrationMaster_Fk_InvoiceShortNarrationId">
+          <End Role="TblInvoiceShortNarrationMaster" Type="Self.TblInvoiceShortNarrationMaster" Multiplicity="1" />
+          <End Role="TblProformaInvoiceHead" Type="Self.TblProformaInvoiceHead" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblInvoiceShortNarrationMaster">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TblProformaInvoiceHead">
+              <PropertyRef Name="Fk_InvoiceShortNarrationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TblProformaInvoiceHead_TblJobMaster_Fk_JobMasterId">
+          <End Role="TblJobMaster" Type="Self.TblJobMaster" Multiplicity="1" />
+          <End Role="TblProformaInvoiceHead" Type="Self.TblProformaInvoiceHead" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblJobMaster">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TblProformaInvoiceHead">
+              <PropertyRef Name="Fk_JobMasterId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TblProformaInvoiceHead_TblNatureMaster_Fk_NatureId">
+          <End Role="TblNatureMaster" Type="Self.TblNatureMaster" Multiplicity="1" />
+          <End Role="TblProformaInvoiceHead" Type="Self.TblProformaInvoiceHead" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblNatureMaster">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TblProformaInvoiceHead">
+              <PropertyRef Name="Fk_NatureId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TblProformaInvoiceHead_TblWorkGroup_Fk_WorkGroupId">
+          <End Role="TblWorkGroup" Type="Self.TblWorkGroup" Multiplicity="1" />
+          <End Role="TblProformaInvoiceHead" Type="Self.TblProformaInvoiceHead" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblWorkGroup">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TblProformaInvoiceHead">
+              <PropertyRef Name="Fk_WorkGroupId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_TblWorkType_TblWorkGroup_Fk_WorkGroupId">
           <End Role="TblWorkGroup" Type="Self.TblWorkGroup" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -1305,6 +1524,8 @@ warning 6002: The table/view 'AuditSystem.dbo.VW_SectorMaster' does not have a p
           <EntitySet Name="TblCustomerGroup" EntityType="Self.TblCustomerGroup" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TblCustomers" EntityType="Self.TblCustomers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TblDepartment" EntityType="Self.TblDepartment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TblDepartmentSecond" EntityType="Self.TblDepartmentSecond" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TblDepartmentThird" EntityType="Self.TblDepartmentThird" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TblDesignation" EntityType="Self.TblDesignation" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TblDocument" EntityType="Self.TblDocument" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TblEmployee" EntityType="Self.TblEmployee" Schema="dbo" store:Type="Tables" />
@@ -1325,6 +1546,7 @@ warning 6002: The table/view 'AuditSystem.dbo.VW_SectorMaster' does not have a p
           <EntitySet Name="TblNatureMaster" EntityType="Self.TblNatureMaster" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TblNonEffectiveEmployee" EntityType="Self.TblNonEffectiveEmployee" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TblOpeningBalances" EntityType="Self.TblOpeningBalances" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TblProformaInvoiceHead" EntityType="Self.TblProformaInvoiceHead" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TblSectorMaster" EntityType="Self.TblSectorMaster" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TblSiteSetting" EntityType="Self.TblSiteSetting" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TblTitle" EntityType="Self.TblTitle" Schema="dbo" store:Type="Tables" />
@@ -1334,6 +1556,7 @@ warning 6002: The table/view 'AuditSystem.dbo.VW_SectorMaster' does not have a p
             <DefiningQuery>SELECT 
 [VW_CurrentlyGetJobAssignee].[Id] AS [Id], 
 [VW_CurrentlyGetJobAssignee].[Fk_JobMasterId] AS [Fk_JobMasterId], 
+[VW_CurrentlyGetJobAssignee].[IsProjectOnwer] AS [IsProjectOnwer], 
 [VW_CurrentlyGetJobAssignee].[Fk_CustomerId] AS [Fk_CustomerId], 
 [VW_CurrentlyGetJobAssignee].[TypeOfTable] AS [TypeOfTable], 
 [VW_CurrentlyGetJobAssignee].[TypeOfTableId] AS [TypeOfTableId], 
@@ -1536,6 +1759,9 @@ FROM [dbo].[VW_InvoiceShortNarrationMaster] AS [VW_InvoiceShortNarrationMaster]<
 [VW_JobMaster].[IsReActivate] AS [IsReActivate], 
 [VW_JobMaster].[ReActivateDate] AS [ReActivateDate], 
 [VW_JobMaster].[CompletedDate] AS [CompletedDate], 
+[VW_JobMaster].[JObPrefixCode] AS [JObPrefixCode], 
+[VW_JobMaster].[Fk_MangerId] AS [Fk_MangerId], 
+[VW_JobMaster].[Fk_PartnerId] AS [Fk_PartnerId], 
 [VW_JobMaster].[IsActive] AS [IsActive], 
 [VW_JobMaster].[IsDelete] AS [IsDelete], 
 [VW_JobMaster].[Create_By] AS [Create_By], 
@@ -1705,6 +1931,18 @@ FROM [dbo].[VW_SectorMaster] AS [VW_SectorMaster]</DefiningQuery>
             <End Role="TblSectorMaster" EntitySet="TblSectorMaster" />
             <End Role="TblCustomers" EntitySet="TblCustomers" />
           </AssociationSet>
+          <AssociationSet Name="FK_TblDepartmentSecond_TblDepartment_Fk_DepartmentIdFirst" Association="Self.FK_TblDepartmentSecond_TblDepartment_Fk_DepartmentIdFirst">
+            <End Role="TblDepartment" EntitySet="TblDepartment" />
+            <End Role="TblDepartmentSecond" EntitySet="TblDepartmentSecond" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TblDepartmentThird_TblDepartment_Fk_DepartmentIdFirst" Association="Self.FK_TblDepartmentThird_TblDepartment_Fk_DepartmentIdFirst">
+            <End Role="TblDepartment" EntitySet="TblDepartment" />
+            <End Role="TblDepartmentThird" EntitySet="TblDepartmentThird" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TblDepartmentThird_TblDepartmentSecond_Fk_DepartmentIdSecond" Association="Self.FK_TblDepartmentThird_TblDepartmentSecond_Fk_DepartmentIdSecond">
+            <End Role="TblDepartmentSecond" EntitySet="TblDepartmentSecond" />
+            <End Role="TblDepartmentThird" EntitySet="TblDepartmentThird" />
+          </AssociationSet>
           <AssociationSet Name="FK_TblEmployee_TblDepartment_Fk_DepartmentId" Association="Self.FK_TblEmployee_TblDepartment_Fk_DepartmentId">
             <End Role="TblDepartment" EntitySet="TblDepartment" />
             <End Role="TblEmployee" EntitySet="TblEmployee" />
@@ -1769,6 +2007,38 @@ FROM [dbo].[VW_SectorMaster] AS [VW_SectorMaster]</DefiningQuery>
             <End Role="TblCustomers" EntitySet="TblCustomers" />
             <End Role="TblOpeningBalances" EntitySet="TblOpeningBalances" />
           </AssociationSet>
+          <AssociationSet Name="FK_TblProformaInvoiceHead_TblCustomers_Fk_CustomerId" Association="Self.FK_TblProformaInvoiceHead_TblCustomers_Fk_CustomerId">
+            <End Role="TblCustomers" EntitySet="TblCustomers" />
+            <End Role="TblProformaInvoiceHead" EntitySet="TblProformaInvoiceHead" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TblProformaInvoiceHead_TblDepartment_Fk_DepartmentIdOne" Association="Self.FK_TblProformaInvoiceHead_TblDepartment_Fk_DepartmentIdOne">
+            <End Role="TblDepartment" EntitySet="TblDepartment" />
+            <End Role="TblProformaInvoiceHead" EntitySet="TblProformaInvoiceHead" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TblProformaInvoiceHead_TblDepartmentSecond_Fk_DepartmentIdTwo" Association="Self.FK_TblProformaInvoiceHead_TblDepartmentSecond_Fk_DepartmentIdTwo">
+            <End Role="TblDepartmentSecond" EntitySet="TblDepartmentSecond" />
+            <End Role="TblProformaInvoiceHead" EntitySet="TblProformaInvoiceHead" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TblProformaInvoiceHead_TblDepartmentThird_Fk_DepartmentIdThird" Association="Self.FK_TblProformaInvoiceHead_TblDepartmentThird_Fk_DepartmentIdThird">
+            <End Role="TblDepartmentThird" EntitySet="TblDepartmentThird" />
+            <End Role="TblProformaInvoiceHead" EntitySet="TblProformaInvoiceHead" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TblProformaInvoiceHead_TblInvoiceShortNarrationMaster_Fk_InvoiceShortNarrationId" Association="Self.FK_TblProformaInvoiceHead_TblInvoiceShortNarrationMaster_Fk_InvoiceShortNarrationId">
+            <End Role="TblInvoiceShortNarrationMaster" EntitySet="TblInvoiceShortNarrationMaster" />
+            <End Role="TblProformaInvoiceHead" EntitySet="TblProformaInvoiceHead" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TblProformaInvoiceHead_TblJobMaster_Fk_JobMasterId" Association="Self.FK_TblProformaInvoiceHead_TblJobMaster_Fk_JobMasterId">
+            <End Role="TblJobMaster" EntitySet="TblJobMaster" />
+            <End Role="TblProformaInvoiceHead" EntitySet="TblProformaInvoiceHead" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TblProformaInvoiceHead_TblNatureMaster_Fk_NatureId" Association="Self.FK_TblProformaInvoiceHead_TblNatureMaster_Fk_NatureId">
+            <End Role="TblNatureMaster" EntitySet="TblNatureMaster" />
+            <End Role="TblProformaInvoiceHead" EntitySet="TblProformaInvoiceHead" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TblProformaInvoiceHead_TblWorkGroup_Fk_WorkGroupId" Association="Self.FK_TblProformaInvoiceHead_TblWorkGroup_Fk_WorkGroupId">
+            <End Role="TblWorkGroup" EntitySet="TblWorkGroup" />
+            <End Role="TblProformaInvoiceHead" EntitySet="TblProformaInvoiceHead" />
+          </AssociationSet>
           <AssociationSet Name="FK_TblWorkType_TblWorkGroup_Fk_WorkGroupId" Association="Self.FK_TblWorkType_TblWorkGroup_Fk_WorkGroupId">
             <End Role="TblWorkGroup" EntitySet="TblWorkGroup" />
             <End Role="TblWorkType" EntitySet="TblWorkType" />
@@ -1783,6 +2053,8 @@ FROM [dbo].[VW_SectorMaster] AS [VW_SectorMaster]</DefiningQuery>
           <EntitySet Name="TblCustomerGroups" EntityType="AuditSystemModel.TblCustomerGroup" />
           <EntitySet Name="TblCustomers" EntityType="AuditSystemModel.TblCustomer" />
           <EntitySet Name="TblDepartments" EntityType="AuditSystemModel.TblDepartment" />
+          <EntitySet Name="TblDepartmentSeconds" EntityType="AuditSystemModel.TblDepartmentSecond" />
+          <EntitySet Name="TblDepartmentThirds" EntityType="AuditSystemModel.TblDepartmentThird" />
           <EntitySet Name="TblDesignations" EntityType="AuditSystemModel.TblDesignation" />
           <EntitySet Name="TblDocuments" EntityType="AuditSystemModel.TblDocument" />
           <EntitySet Name="TblEmployees" EntityType="AuditSystemModel.TblEmployee" />
@@ -1803,6 +2075,7 @@ FROM [dbo].[VW_SectorMaster] AS [VW_SectorMaster]</DefiningQuery>
           <EntitySet Name="TblNatureMasters" EntityType="AuditSystemModel.TblNatureMaster" />
           <EntitySet Name="TblNonEffectiveEmployees" EntityType="AuditSystemModel.TblNonEffectiveEmployee" />
           <EntitySet Name="TblOpeningBalances" EntityType="AuditSystemModel.TblOpeningBalance" />
+          <EntitySet Name="TblProformaInvoiceHeads" EntityType="AuditSystemModel.TblProformaInvoiceHead" />
           <EntitySet Name="TblSectorMasters" EntityType="AuditSystemModel.TblSectorMaster" />
           <EntitySet Name="TblSiteSettings" EntityType="AuditSystemModel.TblSiteSetting" />
           <EntitySet Name="TblTitles" EntityType="AuditSystemModel.TblTitle" />
@@ -1864,9 +2137,37 @@ FROM [dbo].[VW_SectorMaster] AS [VW_SectorMaster]</DefiningQuery>
             <End Role="TblCustomer" EntitySet="TblCustomers" />
             <End Role="TblOpeningBalance" EntitySet="TblOpeningBalances" />
           </AssociationSet>
+          <AssociationSet Name="FK_TblProformaInvoiceHead_TblCustomers_Fk_CustomerId" Association="AuditSystemModel.FK_TblProformaInvoiceHead_TblCustomers_Fk_CustomerId">
+            <End Role="TblCustomer" EntitySet="TblCustomers" />
+            <End Role="TblProformaInvoiceHead" EntitySet="TblProformaInvoiceHeads" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TblDepartmentSecond_TblDepartment_Fk_DepartmentIdFirst" Association="AuditSystemModel.FK_TblDepartmentSecond_TblDepartment_Fk_DepartmentIdFirst">
+            <End Role="TblDepartment" EntitySet="TblDepartments" />
+            <End Role="TblDepartmentSecond" EntitySet="TblDepartmentSeconds" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TblDepartmentThird_TblDepartment_Fk_DepartmentIdFirst" Association="AuditSystemModel.FK_TblDepartmentThird_TblDepartment_Fk_DepartmentIdFirst">
+            <End Role="TblDepartment" EntitySet="TblDepartments" />
+            <End Role="TblDepartmentThird" EntitySet="TblDepartmentThirds" />
+          </AssociationSet>
           <AssociationSet Name="FK_TblEmployee_TblDepartment_Fk_DepartmentId" Association="AuditSystemModel.FK_TblEmployee_TblDepartment_Fk_DepartmentId">
             <End Role="TblDepartment" EntitySet="TblDepartments" />
             <End Role="TblEmployee" EntitySet="TblEmployees" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TblProformaInvoiceHead_TblDepartment_Fk_DepartmentIdOne" Association="AuditSystemModel.FK_TblProformaInvoiceHead_TblDepartment_Fk_DepartmentIdOne">
+            <End Role="TblDepartment" EntitySet="TblDepartments" />
+            <End Role="TblProformaInvoiceHead" EntitySet="TblProformaInvoiceHeads" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TblDepartmentThird_TblDepartmentSecond_Fk_DepartmentIdSecond" Association="AuditSystemModel.FK_TblDepartmentThird_TblDepartmentSecond_Fk_DepartmentIdSecond">
+            <End Role="TblDepartmentSecond" EntitySet="TblDepartmentSeconds" />
+            <End Role="TblDepartmentThird" EntitySet="TblDepartmentThirds" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TblProformaInvoiceHead_TblDepartmentSecond_Fk_DepartmentIdTwo" Association="AuditSystemModel.FK_TblProformaInvoiceHead_TblDepartmentSecond_Fk_DepartmentIdTwo">
+            <End Role="TblDepartmentSecond" EntitySet="TblDepartmentSeconds" />
+            <End Role="TblProformaInvoiceHead" EntitySet="TblProformaInvoiceHeads" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TblProformaInvoiceHead_TblDepartmentThird_Fk_DepartmentIdThird" Association="AuditSystemModel.FK_TblProformaInvoiceHead_TblDepartmentThird_Fk_DepartmentIdThird">
+            <End Role="TblDepartmentThird" EntitySet="TblDepartmentThirds" />
+            <End Role="TblProformaInvoiceHead" EntitySet="TblProformaInvoiceHeads" />
           </AssociationSet>
           <AssociationSet Name="FK_TblEmployee_TblDesignation_Fk_DesginationId" Association="AuditSystemModel.FK_TblEmployee_TblDesignation_Fk_DesginationId">
             <End Role="TblDesignation" EntitySet="TblDesignations" />
@@ -1888,6 +2189,10 @@ FROM [dbo].[VW_SectorMaster] AS [VW_SectorMaster]</DefiningQuery>
             <End Role="TblEmployee" EntitySet="TblEmployees" />
             <End Role="TblNonEffectiveEmployee" EntitySet="TblNonEffectiveEmployees" />
           </AssociationSet>
+          <AssociationSet Name="FK_TblProformaInvoiceHead_TblInvoiceShortNarrationMaster_Fk_InvoiceShortNarrationId" Association="AuditSystemModel.FK_TblProformaInvoiceHead_TblInvoiceShortNarrationMaster_Fk_InvoiceShortNarrationId">
+            <End Role="TblInvoiceShortNarrationMaster" EntitySet="TblInvoiceShortNarrationMasters" />
+            <End Role="TblProformaInvoiceHead" EntitySet="TblProformaInvoiceHeads" />
+          </AssociationSet>
           <AssociationSet Name="FK_TblJobMasterLocation_TblJobMaster_Fk_JobMasterId" Association="AuditSystemModel.FK_TblJobMasterLocation_TblJobMaster_Fk_JobMasterId">
             <End Role="TblJobMaster" EntitySet="TblJobMasters" />
             <End Role="TblJobMasterLocation" EntitySet="TblJobMasterLocations" />
@@ -1900,6 +2205,10 @@ FROM [dbo].[VW_SectorMaster] AS [VW_SectorMaster]</DefiningQuery>
             <End Role="TblJobMaster" EntitySet="TblJobMasters" />
             <End Role="TblJobTransaction" EntitySet="TblJobTransactions" />
           </AssociationSet>
+          <AssociationSet Name="FK_TblProformaInvoiceHead_TblJobMaster_Fk_JobMasterId" Association="AuditSystemModel.FK_TblProformaInvoiceHead_TblJobMaster_Fk_JobMasterId">
+            <End Role="TblJobMaster" EntitySet="TblJobMasters" />
+            <End Role="TblProformaInvoiceHead" EntitySet="TblProformaInvoiceHeads" />
+          </AssociationSet>
           <AssociationSet Name="FK_TblJobMasterLocation_TblLocation_FK_LocationId" Association="AuditSystemModel.FK_TblJobMasterLocation_TblLocation_FK_LocationId">
             <End Role="TblLocation" EntitySet="TblLocations" />
             <End Role="TblJobMasterLocation" EntitySet="TblJobMasterLocations" />
@@ -1911,6 +2220,14 @@ FROM [dbo].[VW_SectorMaster] AS [VW_SectorMaster]</DefiningQuery>
           <AssociationSet Name="FK_TblJobTransaction_TblWorkType_Fk_WorkTypeId" Association="AuditSystemModel.FK_TblJobTransaction_TblWorkType_Fk_WorkTypeId">
             <End Role="TblWorkType" EntitySet="TblWorkTypes" />
             <End Role="TblJobTransaction" EntitySet="TblJobTransactions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TblProformaInvoiceHead_TblNatureMaster_Fk_NatureId" Association="AuditSystemModel.FK_TblProformaInvoiceHead_TblNatureMaster_Fk_NatureId">
+            <End Role="TblNatureMaster" EntitySet="TblNatureMasters" />
+            <End Role="TblProformaInvoiceHead" EntitySet="TblProformaInvoiceHeads" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TblProformaInvoiceHead_TblWorkGroup_Fk_WorkGroupId" Association="AuditSystemModel.FK_TblProformaInvoiceHead_TblWorkGroup_Fk_WorkGroupId">
+            <End Role="TblWorkGroup" EntitySet="TblWorkGroups" />
+            <End Role="TblProformaInvoiceHead" EntitySet="TblProformaInvoiceHeads" />
           </AssociationSet>
           <AssociationSet Name="FK_TblWorkType_TblWorkGroup_Fk_WorkGroupId" Association="AuditSystemModel.FK_TblWorkType_TblWorkGroup_Fk_WorkGroupId">
             <End Role="TblWorkGroup" EntitySet="TblWorkGroups" />
@@ -1986,6 +2303,7 @@ FROM [dbo].[VW_SectorMaster] AS [VW_SectorMaster]</DefiningQuery>
           <NavigationProperty Name="TblJobTransactions" Relationship="AuditSystemModel.FK_TblJobTransaction_TblCustomers_Fk_CustomerId" FromRole="TblCustomer" ToRole="TblJobTransaction" />
           <NavigationProperty Name="TblLocations" Relationship="AuditSystemModel.FK_TblLocation_TblCustomers_Fk_CustomerId" FromRole="TblCustomer" ToRole="TblLocation" />
           <NavigationProperty Name="TblOpeningBalances" Relationship="AuditSystemModel.FK_TblOpeningBalances_TblCustomers_Fk_CustomerId" FromRole="TblCustomer" ToRole="TblOpeningBalance" />
+          <NavigationProperty Name="TblProformaInvoiceHeads" Relationship="AuditSystemModel.FK_TblProformaInvoiceHead_TblCustomers_Fk_CustomerId" FromRole="TblCustomer" ToRole="TblProformaInvoiceHead" />
         </EntityType>
         <EntityType Name="TblDepartment">
           <Key>
@@ -2002,7 +2320,51 @@ FROM [dbo].[VW_SectorMaster] AS [VW_SectorMaster]</DefiningQuery>
           <Property Name="Edit_Date" Type="DateTime" Precision="7" />
           <Property Name="Delete_By" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Delete_Date" Type="DateTime" Precision="7" />
+          <NavigationProperty Name="TblDepartmentSeconds" Relationship="AuditSystemModel.FK_TblDepartmentSecond_TblDepartment_Fk_DepartmentIdFirst" FromRole="TblDepartment" ToRole="TblDepartmentSecond" />
+          <NavigationProperty Name="TblDepartmentThirds" Relationship="AuditSystemModel.FK_TblDepartmentThird_TblDepartment_Fk_DepartmentIdFirst" FromRole="TblDepartment" ToRole="TblDepartmentThird" />
           <NavigationProperty Name="TblEmployees" Relationship="AuditSystemModel.FK_TblEmployee_TblDepartment_Fk_DepartmentId" FromRole="TblDepartment" ToRole="TblEmployee" />
+          <NavigationProperty Name="TblProformaInvoiceHeads" Relationship="AuditSystemModel.FK_TblProformaInvoiceHead_TblDepartment_Fk_DepartmentIdOne" FromRole="TblDepartment" ToRole="TblProformaInvoiceHead" />
+        </EntityType>
+        <EntityType Name="TblDepartmentSecond">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Code" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Narration" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Fk_DepartmentIdFirst" Type="Int32" Nullable="false" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="IsDelete" Type="Boolean" Nullable="false" />
+          <Property Name="Create_By" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Create_Date" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="Edit_By" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Edit_Date" Type="DateTime" Precision="7" />
+          <Property Name="Delete_By" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Delete_Date" Type="DateTime" Precision="7" />
+          <NavigationProperty Name="TblDepartment" Relationship="AuditSystemModel.FK_TblDepartmentSecond_TblDepartment_Fk_DepartmentIdFirst" FromRole="TblDepartmentSecond" ToRole="TblDepartment" />
+          <NavigationProperty Name="TblDepartmentThirds" Relationship="AuditSystemModel.FK_TblDepartmentThird_TblDepartmentSecond_Fk_DepartmentIdSecond" FromRole="TblDepartmentSecond" ToRole="TblDepartmentThird" />
+          <NavigationProperty Name="TblProformaInvoiceHeads" Relationship="AuditSystemModel.FK_TblProformaInvoiceHead_TblDepartmentSecond_Fk_DepartmentIdTwo" FromRole="TblDepartmentSecond" ToRole="TblProformaInvoiceHead" />
+        </EntityType>
+        <EntityType Name="TblDepartmentThird">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Code" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Narration" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Fk_DepartmentIdFirst" Type="Int32" Nullable="false" />
+          <Property Name="Fk_DepartmentIdSecond" Type="Int32" Nullable="false" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="IsDelete" Type="Boolean" Nullable="false" />
+          <Property Name="Create_By" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Create_Date" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="Edit_By" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Edit_Date" Type="DateTime" Precision="7" />
+          <Property Name="Delete_By" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Delete_Date" Type="DateTime" Precision="7" />
+          <NavigationProperty Name="TblDepartment" Relationship="AuditSystemModel.FK_TblDepartmentThird_TblDepartment_Fk_DepartmentIdFirst" FromRole="TblDepartmentThird" ToRole="TblDepartment" />
+          <NavigationProperty Name="TblDepartmentSecond" Relationship="AuditSystemModel.FK_TblDepartmentThird_TblDepartmentSecond_Fk_DepartmentIdSecond" FromRole="TblDepartmentThird" ToRole="TblDepartmentSecond" />
+          <NavigationProperty Name="TblProformaInvoiceHeads" Relationship="AuditSystemModel.FK_TblProformaInvoiceHead_TblDepartmentThird_Fk_DepartmentIdThird" FromRole="TblDepartmentThird" ToRole="TblProformaInvoiceHead" />
         </EntityType>
         <EntityType Name="TblDesignation">
           <Key>
@@ -2162,6 +2524,7 @@ FROM [dbo].[VW_SectorMaster] AS [VW_SectorMaster]</DefiningQuery>
           <Property Name="Edit_Date" Type="DateTime" Precision="7" />
           <Property Name="Delete_By" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Delete_Date" Type="DateTime" Precision="7" />
+          <NavigationProperty Name="TblProformaInvoiceHeads" Relationship="AuditSystemModel.FK_TblProformaInvoiceHead_TblInvoiceShortNarrationMaster_Fk_InvoiceShortNarrationId" FromRole="TblInvoiceShortNarrationMaster" ToRole="TblProformaInvoiceHead" />
         </EntityType>
         <EntityType Name="TblJobMaster">
           <Key>
@@ -2193,6 +2556,7 @@ FROM [dbo].[VW_SectorMaster] AS [VW_SectorMaster]</DefiningQuery>
           <NavigationProperty Name="TblJobMasterLocations" Relationship="AuditSystemModel.FK_TblJobMasterLocation_TblJobMaster_Fk_JobMasterId" FromRole="TblJobMaster" ToRole="TblJobMasterLocation" />
           <NavigationProperty Name="TblJobMasterPartners" Relationship="AuditSystemModel.FK_TblJobMasterPartner_TblJobMaster_Fk_JobMasterId" FromRole="TblJobMaster" ToRole="TblJobMasterPartner" />
           <NavigationProperty Name="TblJobTransactions" Relationship="AuditSystemModel.FK_TblJobTransaction_TblJobMaster_Fk_JobMasterId" FromRole="TblJobMaster" ToRole="TblJobTransaction" />
+          <NavigationProperty Name="TblProformaInvoiceHeads" Relationship="AuditSystemModel.FK_TblProformaInvoiceHead_TblJobMaster_Fk_JobMasterId" FromRole="TblJobMaster" ToRole="TblProformaInvoiceHead" />
         </EntityType>
         <EntityType Name="TblJobMasterAssignTemp">
           <Key>
@@ -2338,6 +2702,7 @@ FROM [dbo].[VW_SectorMaster] AS [VW_SectorMaster]</DefiningQuery>
           <Property Name="Edit_Date" Type="DateTime" Precision="7" />
           <Property Name="Delete_By" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Delete_Date" Type="DateTime" Precision="7" />
+          <NavigationProperty Name="TblProformaInvoiceHeads" Relationship="AuditSystemModel.FK_TblProformaInvoiceHead_TblNatureMaster_Fk_NatureId" FromRole="TblNatureMaster" ToRole="TblProformaInvoiceHead" />
         </EntityType>
         <EntityType Name="TblNonEffectiveEmployee">
           <Key>
@@ -2373,6 +2738,57 @@ FROM [dbo].[VW_SectorMaster] AS [VW_SectorMaster]</DefiningQuery>
           <Property Name="Delete_By" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Delete_Date" Type="DateTime" Precision="7" />
           <NavigationProperty Name="TblCustomer" Relationship="AuditSystemModel.FK_TblOpeningBalances_TblCustomers_Fk_CustomerId" FromRole="TblOpeningBalance" ToRole="TblCustomer" />
+        </EntityType>
+        <EntityType Name="TblProformaInvoiceHead">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="InvoiceNoProforma" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Fk_DepartmentIdOne" Type="Int32" Nullable="false" />
+          <Property Name="Fk_DepartmentIdTwo" Type="Int32" Nullable="false" />
+          <Property Name="Fk_DepartmentIdThird" Type="Int32" Nullable="false" />
+          <Property Name="DocNo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="OurReferance" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="YourReferance" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Fk_WorkGroupId" Type="Int32" Nullable="false" />
+          <Property Name="Fk_CustomerId" Type="Int32" Nullable="false" />
+          <Property Name="Fk_PartnerOne" Type="Int32" Nullable="false" />
+          <Property Name="Fk_PartnerSecond" Type="Int32" Nullable="false" />
+          <Property Name="Fk_PartnerThird" Type="Int32" Nullable="false" />
+          <Property Name="Fk_ManagerOne" Type="Int32" Nullable="false" />
+          <Property Name="Fk_ManagerSecond" Type="Int32" Nullable="false" />
+          <Property Name="Fk_ManagerThird" Type="Int32" Nullable="false" />
+          <Property Name="TaxType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Fk_NatureId" Type="Int32" Nullable="false" />
+          <Property Name="NoNVat" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="NoNVatPrecentage" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="VatPercentage" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="NBTPercentage" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="NarrationOne" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="NarrationTwo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Fk_InvoiceShortNarrationId" Type="Int32" Nullable="false" />
+          <Property Name="Fk_JobMasterId" Type="Int32" Nullable="false" />
+          <Property Name="LastYearAmount" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="PostingDate" Type="DateTime" Precision="7" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="IsActiveDate" Type="DateTime" Precision="7" />
+          <Property Name="IsDelete" Type="Boolean" Nullable="false" />
+          <Property Name="Create_By" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Create_Date" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="Edit_By" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Edit_Date" Type="DateTime" Precision="7" />
+          <Property Name="Delete_By" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Delete_Date" Type="DateTime" Precision="7" />
+          <NavigationProperty Name="TblCustomer" Relationship="AuditSystemModel.FK_TblProformaInvoiceHead_TblCustomers_Fk_CustomerId" FromRole="TblProformaInvoiceHead" ToRole="TblCustomer" />
+          <NavigationProperty Name="TblDepartment" Relationship="AuditSystemModel.FK_TblProformaInvoiceHead_TblDepartment_Fk_DepartmentIdOne" FromRole="TblProformaInvoiceHead" ToRole="TblDepartment" />
+          <NavigationProperty Name="TblDepartmentSecond" Relationship="AuditSystemModel.FK_TblProformaInvoiceHead_TblDepartmentSecond_Fk_DepartmentIdTwo" FromRole="TblProformaInvoiceHead" ToRole="TblDepartmentSecond" />
+          <NavigationProperty Name="TblDepartmentThird" Relationship="AuditSystemModel.FK_TblProformaInvoiceHead_TblDepartmentThird_Fk_DepartmentIdThird" FromRole="TblProformaInvoiceHead" ToRole="TblDepartmentThird" />
+          <NavigationProperty Name="TblInvoiceShortNarrationMaster" Relationship="AuditSystemModel.FK_TblProformaInvoiceHead_TblInvoiceShortNarrationMaster_Fk_InvoiceShortNarrationId" FromRole="TblProformaInvoiceHead" ToRole="TblInvoiceShortNarrationMaster" />
+          <NavigationProperty Name="TblJobMaster" Relationship="AuditSystemModel.FK_TblProformaInvoiceHead_TblJobMaster_Fk_JobMasterId" FromRole="TblProformaInvoiceHead" ToRole="TblJobMaster" />
+          <NavigationProperty Name="TblNatureMaster" Relationship="AuditSystemModel.FK_TblProformaInvoiceHead_TblNatureMaster_Fk_NatureId" FromRole="TblProformaInvoiceHead" ToRole="TblNatureMaster" />
+          <NavigationProperty Name="TblWorkGroup" Relationship="AuditSystemModel.FK_TblProformaInvoiceHead_TblWorkGroup_Fk_WorkGroupId" FromRole="TblProformaInvoiceHead" ToRole="TblWorkGroup" />
         </EntityType>
         <EntityType Name="TblSectorMaster">
           <Key>
@@ -2439,6 +2855,7 @@ FROM [dbo].[VW_SectorMaster] AS [VW_SectorMaster]</DefiningQuery>
           <Property Name="Edit_Date" Type="DateTime" Precision="7" />
           <Property Name="Delete_By" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Delete_Date" Type="DateTime" Precision="7" />
+          <NavigationProperty Name="TblProformaInvoiceHeads" Relationship="AuditSystemModel.FK_TblProformaInvoiceHead_TblWorkGroup_Fk_WorkGroupId" FromRole="TblWorkGroup" ToRole="TblProformaInvoiceHead" />
           <NavigationProperty Name="TblWorkTypes" Relationship="AuditSystemModel.FK_TblWorkType_TblWorkGroup_Fk_WorkGroupId" FromRole="TblWorkGroup" ToRole="TblWorkType" />
         </EntityType>
         <EntityType Name="TblWorkType">
@@ -2465,6 +2882,7 @@ FROM [dbo].[VW_SectorMaster] AS [VW_SectorMaster]</DefiningQuery>
           <Key>
             <PropertyRef Name="Id" />
             <PropertyRef Name="Fk_JobMasterId" />
+            <PropertyRef Name="IsProjectOnwer" />
             <PropertyRef Name="Fk_CustomerId" />
             <PropertyRef Name="TypeOfTableId" />
             <PropertyRef Name="IsDelete" />
@@ -2472,6 +2890,7 @@ FROM [dbo].[VW_SectorMaster] AS [VW_SectorMaster]</DefiningQuery>
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" />
           <Property Name="Fk_JobMasterId" Type="Int32" Nullable="false" />
+          <Property Name="IsProjectOnwer" Type="Boolean" Nullable="false" />
           <Property Name="Fk_CustomerId" Type="Int32" Nullable="false" />
           <Property Name="TypeOfTable" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="TypeOfTableId" Type="Int32" Nullable="false" />
@@ -2719,6 +3138,8 @@ FROM [dbo].[VW_SectorMaster] AS [VW_SectorMaster]</DefiningQuery>
             <PropertyRef Name="Fk_CustomerId" />
             <PropertyRef Name="IsCompleted" />
             <PropertyRef Name="IsReActivate" />
+            <PropertyRef Name="Fk_MangerId" />
+            <PropertyRef Name="Fk_PartnerId" />
             <PropertyRef Name="IsActive" />
             <PropertyRef Name="IsDelete" />
             <PropertyRef Name="Create_Date" />
@@ -2734,6 +3155,9 @@ FROM [dbo].[VW_SectorMaster] AS [VW_SectorMaster]</DefiningQuery>
           <Property Name="IsReActivate" Type="Boolean" Nullable="false" />
           <Property Name="ReActivateDate" Type="DateTime" Precision="7" />
           <Property Name="CompletedDate" Type="DateTime" Precision="7" />
+          <Property Name="JObPrefixCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Fk_MangerId" Type="Int32" Nullable="false" />
+          <Property Name="Fk_PartnerId" Type="Int32" Nullable="false" />
           <Property Name="IsActive" Type="Boolean" Nullable="false" />
           <Property Name="IsDelete" Type="Boolean" Nullable="false" />
           <Property Name="Create_By" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
@@ -2790,7 +3214,7 @@ FROM [dbo].[VW_SectorMaster] AS [VW_SectorMaster]</DefiningQuery>
           <Property Name="CombinedCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="ActualHours" Type="Decimal" Precision="38" Scale="2" />
           <Property Name="TotalBudgetedHours" Type="Decimal" Precision="38" Scale="2" />
-          <Property Name="ActualValue" Type="Decimal" Precision="38" Scale="4" />
+          <Property Name="ActualValue" Type="Decimal" Precision="38" Scale="2" />
           <Property Name="BudgetValue" Type="Decimal" Precision="38" Scale="4" />
           <Property Name="VarianceValue" Type="Int32" Nullable="false" />
         </EntityType>
@@ -3054,6 +3478,44 @@ FROM [dbo].[VW_SectorMaster] AS [VW_SectorMaster]</DefiningQuery>
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_TblProformaInvoiceHead_TblCustomers_Fk_CustomerId">
+          <End Type="AuditSystemModel.TblCustomer" Role="TblCustomer" Multiplicity="1" />
+          <End Type="AuditSystemModel.TblProformaInvoiceHead" Role="TblProformaInvoiceHead" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblCustomer">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TblProformaInvoiceHead">
+              <PropertyRef Name="Fk_CustomerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TblDepartmentSecond_TblDepartment_Fk_DepartmentIdFirst">
+          <End Type="AuditSystemModel.TblDepartment" Role="TblDepartment" Multiplicity="1" />
+          <End Type="AuditSystemModel.TblDepartmentSecond" Role="TblDepartmentSecond" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblDepartment">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TblDepartmentSecond">
+              <PropertyRef Name="Fk_DepartmentIdFirst" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TblDepartmentThird_TblDepartment_Fk_DepartmentIdFirst">
+          <End Type="AuditSystemModel.TblDepartment" Role="TblDepartment" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="AuditSystemModel.TblDepartmentThird" Role="TblDepartmentThird" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblDepartment">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TblDepartmentThird">
+              <PropertyRef Name="Fk_DepartmentIdFirst" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_TblEmployee_TblDepartment_Fk_DepartmentId">
           <End Type="AuditSystemModel.TblDepartment" Role="TblDepartment" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -3065,6 +3527,54 @@ FROM [dbo].[VW_SectorMaster] AS [VW_SectorMaster]</DefiningQuery>
             </Principal>
             <Dependent Role="TblEmployee">
               <PropertyRef Name="Fk_DepartmentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TblProformaInvoiceHead_TblDepartment_Fk_DepartmentIdOne">
+          <End Type="AuditSystemModel.TblDepartment" Role="TblDepartment" Multiplicity="1" />
+          <End Type="AuditSystemModel.TblProformaInvoiceHead" Role="TblProformaInvoiceHead" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblDepartment">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TblProformaInvoiceHead">
+              <PropertyRef Name="Fk_DepartmentIdOne" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TblDepartmentThird_TblDepartmentSecond_Fk_DepartmentIdSecond">
+          <End Type="AuditSystemModel.TblDepartmentSecond" Role="TblDepartmentSecond" Multiplicity="1" />
+          <End Type="AuditSystemModel.TblDepartmentThird" Role="TblDepartmentThird" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblDepartmentSecond">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TblDepartmentThird">
+              <PropertyRef Name="Fk_DepartmentIdSecond" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TblProformaInvoiceHead_TblDepartmentSecond_Fk_DepartmentIdTwo">
+          <End Type="AuditSystemModel.TblDepartmentSecond" Role="TblDepartmentSecond" Multiplicity="1" />
+          <End Type="AuditSystemModel.TblProformaInvoiceHead" Role="TblProformaInvoiceHead" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblDepartmentSecond">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TblProformaInvoiceHead">
+              <PropertyRef Name="Fk_DepartmentIdTwo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TblProformaInvoiceHead_TblDepartmentThird_Fk_DepartmentIdThird">
+          <End Type="AuditSystemModel.TblDepartmentThird" Role="TblDepartmentThird" Multiplicity="1" />
+          <End Type="AuditSystemModel.TblProformaInvoiceHead" Role="TblProformaInvoiceHead" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblDepartmentThird">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TblProformaInvoiceHead">
+              <PropertyRef Name="Fk_DepartmentIdThird" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -3136,6 +3646,18 @@ FROM [dbo].[VW_SectorMaster] AS [VW_SectorMaster]</DefiningQuery>
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_TblProformaInvoiceHead_TblInvoiceShortNarrationMaster_Fk_InvoiceShortNarrationId">
+          <End Type="AuditSystemModel.TblInvoiceShortNarrationMaster" Role="TblInvoiceShortNarrationMaster" Multiplicity="1" />
+          <End Type="AuditSystemModel.TblProformaInvoiceHead" Role="TblProformaInvoiceHead" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblInvoiceShortNarrationMaster">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TblProformaInvoiceHead">
+              <PropertyRef Name="Fk_InvoiceShortNarrationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_TblJobMasterLocation_TblJobMaster_Fk_JobMasterId">
           <End Type="AuditSystemModel.TblJobMaster" Role="TblJobMaster" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -3176,6 +3698,18 @@ FROM [dbo].[VW_SectorMaster] AS [VW_SectorMaster]</DefiningQuery>
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_TblProformaInvoiceHead_TblJobMaster_Fk_JobMasterId">
+          <End Type="AuditSystemModel.TblJobMaster" Role="TblJobMaster" Multiplicity="1" />
+          <End Type="AuditSystemModel.TblProformaInvoiceHead" Role="TblProformaInvoiceHead" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblJobMaster">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TblProformaInvoiceHead">
+              <PropertyRef Name="Fk_JobMasterId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_TblJobMasterLocation_TblLocation_FK_LocationId">
           <End Type="AuditSystemModel.TblLocation" Role="TblLocation" Multiplicity="1" />
           <End Type="AuditSystemModel.TblJobMasterLocation" Role="TblJobMasterLocation" Multiplicity="*" />
@@ -3209,6 +3743,30 @@ FROM [dbo].[VW_SectorMaster] AS [VW_SectorMaster]</DefiningQuery>
             </Principal>
             <Dependent Role="TblJobTransaction">
               <PropertyRef Name="Fk_WorkTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TblProformaInvoiceHead_TblNatureMaster_Fk_NatureId">
+          <End Type="AuditSystemModel.TblNatureMaster" Role="TblNatureMaster" Multiplicity="1" />
+          <End Type="AuditSystemModel.TblProformaInvoiceHead" Role="TblProformaInvoiceHead" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblNatureMaster">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TblProformaInvoiceHead">
+              <PropertyRef Name="Fk_NatureId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TblProformaInvoiceHead_TblWorkGroup_Fk_WorkGroupId">
+          <End Type="AuditSystemModel.TblWorkGroup" Role="TblWorkGroup" Multiplicity="1" />
+          <End Type="AuditSystemModel.TblProformaInvoiceHead" Role="TblProformaInvoiceHead" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblWorkGroup">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TblProformaInvoiceHead">
+              <PropertyRef Name="Fk_WorkGroupId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -3305,6 +3863,43 @@ FROM [dbo].[VW_SectorMaster] AS [VW_SectorMaster]</DefiningQuery>
                 <ScalarProperty Name="Create_By" ColumnName="Create_By" />
                 <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
                 <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="Narration" ColumnName="Narration" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TblDepartmentSeconds">
+            <EntityTypeMapping TypeName="AuditSystemModel.TblDepartmentSecond">
+              <MappingFragment StoreEntitySet="TblDepartmentSecond">
+                <ScalarProperty Name="Delete_Date" ColumnName="Delete_Date" />
+                <ScalarProperty Name="Delete_By" ColumnName="Delete_By" />
+                <ScalarProperty Name="Edit_Date" ColumnName="Edit_Date" />
+                <ScalarProperty Name="Edit_By" ColumnName="Edit_By" />
+                <ScalarProperty Name="Create_Date" ColumnName="Create_Date" />
+                <ScalarProperty Name="Create_By" ColumnName="Create_By" />
+                <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="Fk_DepartmentIdFirst" ColumnName="Fk_DepartmentIdFirst" />
+                <ScalarProperty Name="Narration" ColumnName="Narration" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TblDepartmentThirds">
+            <EntityTypeMapping TypeName="AuditSystemModel.TblDepartmentThird">
+              <MappingFragment StoreEntitySet="TblDepartmentThird">
+                <ScalarProperty Name="Delete_Date" ColumnName="Delete_Date" />
+                <ScalarProperty Name="Delete_By" ColumnName="Delete_By" />
+                <ScalarProperty Name="Edit_Date" ColumnName="Edit_Date" />
+                <ScalarProperty Name="Edit_By" ColumnName="Edit_By" />
+                <ScalarProperty Name="Create_Date" ColumnName="Create_Date" />
+                <ScalarProperty Name="Create_By" ColumnName="Create_By" />
+                <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="Fk_DepartmentIdSecond" ColumnName="Fk_DepartmentIdSecond" />
+                <ScalarProperty Name="Fk_DepartmentIdFirst" ColumnName="Fk_DepartmentIdFirst" />
                 <ScalarProperty Name="Narration" ColumnName="Narration" />
                 <ScalarProperty Name="Code" ColumnName="Code" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
@@ -3672,6 +4267,50 @@ FROM [dbo].[VW_SectorMaster] AS [VW_SectorMaster]</DefiningQuery>
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="TblProformaInvoiceHeads">
+            <EntityTypeMapping TypeName="AuditSystemModel.TblProformaInvoiceHead">
+              <MappingFragment StoreEntitySet="TblProformaInvoiceHead">
+                <ScalarProperty Name="Delete_Date" ColumnName="Delete_Date" />
+                <ScalarProperty Name="Delete_By" ColumnName="Delete_By" />
+                <ScalarProperty Name="Edit_Date" ColumnName="Edit_Date" />
+                <ScalarProperty Name="Edit_By" ColumnName="Edit_By" />
+                <ScalarProperty Name="Create_Date" ColumnName="Create_Date" />
+                <ScalarProperty Name="Create_By" ColumnName="Create_By" />
+                <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+                <ScalarProperty Name="IsActiveDate" ColumnName="IsActiveDate" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="PostingDate" ColumnName="PostingDate" />
+                <ScalarProperty Name="LastYearAmount" ColumnName="LastYearAmount" />
+                <ScalarProperty Name="Fk_JobMasterId" ColumnName="Fk_JobMasterId" />
+                <ScalarProperty Name="Fk_InvoiceShortNarrationId" ColumnName="Fk_InvoiceShortNarrationId" />
+                <ScalarProperty Name="NarrationTwo" ColumnName="NarrationTwo" />
+                <ScalarProperty Name="NarrationOne" ColumnName="NarrationOne" />
+                <ScalarProperty Name="NBTPercentage" ColumnName="NBTPercentage" />
+                <ScalarProperty Name="VatPercentage" ColumnName="VatPercentage" />
+                <ScalarProperty Name="NoNVatPrecentage" ColumnName="NoNVatPrecentage" />
+                <ScalarProperty Name="NoNVat" ColumnName="NoNVat" />
+                <ScalarProperty Name="Fk_NatureId" ColumnName="Fk_NatureId" />
+                <ScalarProperty Name="TaxType" ColumnName="TaxType" />
+                <ScalarProperty Name="Fk_ManagerThird" ColumnName="Fk_ManagerThird" />
+                <ScalarProperty Name="Fk_ManagerSecond" ColumnName="Fk_ManagerSecond" />
+                <ScalarProperty Name="Fk_ManagerOne" ColumnName="Fk_ManagerOne" />
+                <ScalarProperty Name="Fk_PartnerThird" ColumnName="Fk_PartnerThird" />
+                <ScalarProperty Name="Fk_PartnerSecond" ColumnName="Fk_PartnerSecond" />
+                <ScalarProperty Name="Fk_PartnerOne" ColumnName="Fk_PartnerOne" />
+                <ScalarProperty Name="Fk_CustomerId" ColumnName="Fk_CustomerId" />
+                <ScalarProperty Name="Fk_WorkGroupId" ColumnName="Fk_WorkGroupId" />
+                <ScalarProperty Name="YourReferance" ColumnName="YourReferance" />
+                <ScalarProperty Name="OurReferance" ColumnName="OurReferance" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="DocNo" ColumnName="DocNo" />
+                <ScalarProperty Name="Fk_DepartmentIdThird" ColumnName="Fk_DepartmentIdThird" />
+                <ScalarProperty Name="Fk_DepartmentIdTwo" ColumnName="Fk_DepartmentIdTwo" />
+                <ScalarProperty Name="Fk_DepartmentIdOne" ColumnName="Fk_DepartmentIdOne" />
+                <ScalarProperty Name="InvoiceNoProforma" ColumnName="InvoiceNoProforma" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="TblSectorMasters">
             <EntityTypeMapping TypeName="AuditSystemModel.TblSectorMaster">
               <MappingFragment StoreEntitySet="TblSectorMaster">
@@ -3776,6 +4415,7 @@ FROM [dbo].[VW_SectorMaster] AS [VW_SectorMaster]</DefiningQuery>
                 <ScalarProperty Name="TypeOfTableId" ColumnName="TypeOfTableId" />
                 <ScalarProperty Name="TypeOfTable" ColumnName="TypeOfTable" />
                 <ScalarProperty Name="Fk_CustomerId" ColumnName="Fk_CustomerId" />
+                <ScalarProperty Name="IsProjectOnwer" ColumnName="IsProjectOnwer" />
                 <ScalarProperty Name="Fk_JobMasterId" ColumnName="Fk_JobMasterId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
@@ -3982,6 +4622,9 @@ FROM [dbo].[VW_SectorMaster] AS [VW_SectorMaster]</DefiningQuery>
                 <ScalarProperty Name="Create_By" ColumnName="Create_By" />
                 <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
                 <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="Fk_PartnerId" ColumnName="Fk_PartnerId" />
+                <ScalarProperty Name="Fk_MangerId" ColumnName="Fk_MangerId" />
+                <ScalarProperty Name="JObPrefixCode" ColumnName="JObPrefixCode" />
                 <ScalarProperty Name="CompletedDate" ColumnName="CompletedDate" />
                 <ScalarProperty Name="ReActivateDate" ColumnName="ReActivateDate" />
                 <ScalarProperty Name="IsReActivate" ColumnName="IsReActivate" />

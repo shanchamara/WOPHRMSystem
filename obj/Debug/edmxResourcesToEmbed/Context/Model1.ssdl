@@ -75,6 +75,41 @@
     <Property Name="Delete_By" Type="nvarchar(max)" />
     <Property Name="Delete_Date" Type="datetime2" Precision="7" />
   </EntityType>
+  <EntityType Name="TblDepartmentSecond">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Code" Type="nvarchar(max)" />
+    <Property Name="Narration" Type="nvarchar(max)" />
+    <Property Name="Fk_DepartmentIdFirst" Type="int" Nullable="false" />
+    <Property Name="IsActive" Type="bit" Nullable="false" />
+    <Property Name="IsDelete" Type="bit" Nullable="false" />
+    <Property Name="Create_By" Type="nvarchar(max)" />
+    <Property Name="Create_Date" Type="datetime2" Precision="7" Nullable="false" />
+    <Property Name="Edit_By" Type="nvarchar(max)" />
+    <Property Name="Edit_Date" Type="datetime2" Precision="7" />
+    <Property Name="Delete_By" Type="nvarchar(max)" />
+    <Property Name="Delete_Date" Type="datetime2" Precision="7" />
+  </EntityType>
+  <EntityType Name="TblDepartmentThird">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Code" Type="nvarchar(max)" />
+    <Property Name="Narration" Type="nvarchar(max)" />
+    <Property Name="Fk_DepartmentIdFirst" Type="int" Nullable="false" />
+    <Property Name="Fk_DepartmentIdSecond" Type="int" Nullable="false" />
+    <Property Name="IsActive" Type="bit" Nullable="false" />
+    <Property Name="IsDelete" Type="bit" Nullable="false" />
+    <Property Name="Create_By" Type="nvarchar(max)" />
+    <Property Name="Create_Date" Type="datetime2" Precision="7" Nullable="false" />
+    <Property Name="Edit_By" Type="nvarchar(max)" />
+    <Property Name="Edit_Date" Type="datetime2" Precision="7" />
+    <Property Name="Delete_By" Type="nvarchar(max)" />
+    <Property Name="Delete_Date" Type="datetime2" Precision="7" />
+  </EntityType>
   <EntityType Name="TblDesignation">
     <Key>
       <PropertyRef Name="Id" />
@@ -504,6 +539,7 @@ warning 6002: The table/view 'AuditSystem.dbo.VW_CurrentlyGetJobAssignee' does n
     <Key>
       <PropertyRef Name="Id" />
       <PropertyRef Name="Fk_JobMasterId" />
+      <PropertyRef Name="IsProjectOnwer" />
       <PropertyRef Name="Fk_CustomerId" />
       <PropertyRef Name="TypeOfTableId" />
       <PropertyRef Name="IsDelete" />
@@ -511,6 +547,7 @@ warning 6002: The table/view 'AuditSystem.dbo.VW_CurrentlyGetJobAssignee' does n
     </Key>
     <Property Name="Id" Type="int" Nullable="false" />
     <Property Name="Fk_JobMasterId" Type="int" Nullable="false" />
+    <Property Name="IsProjectOnwer" Type="bit" Nullable="false" />
     <Property Name="Fk_CustomerId" Type="int" Nullable="false" />
     <Property Name="TypeOfTable" Type="nvarchar(max)" />
     <Property Name="TypeOfTableId" Type="int" Nullable="false" />
@@ -776,6 +813,8 @@ warning 6002: The table/view 'AuditSystem.dbo.VW_JobMaster' does not have a prim
       <PropertyRef Name="Fk_CustomerId" />
       <PropertyRef Name="IsCompleted" />
       <PropertyRef Name="IsReActivate" />
+      <PropertyRef Name="Fk_MangerId" />
+      <PropertyRef Name="Fk_PartnerId" />
       <PropertyRef Name="IsActive" />
       <PropertyRef Name="IsDelete" />
       <PropertyRef Name="Create_Date" />
@@ -791,6 +830,9 @@ warning 6002: The table/view 'AuditSystem.dbo.VW_JobMaster' does not have a prim
     <Property Name="IsReActivate" Type="bit" Nullable="false" />
     <Property Name="ReActivateDate" Type="datetime2" Precision="7" />
     <Property Name="CompletedDate" Type="datetime2" Precision="7" />
+    <Property Name="JObPrefixCode" Type="nvarchar(max)" />
+    <Property Name="Fk_MangerId" Type="int" Nullable="false" />
+    <Property Name="Fk_PartnerId" Type="int" Nullable="false" />
     <Property Name="IsActive" Type="bit" Nullable="false" />
     <Property Name="IsDelete" Type="bit" Nullable="false" />
     <Property Name="Create_By" Type="nvarchar(max)" />
@@ -1069,6 +1111,44 @@ warning 6002: The table/view 'AuditSystem.dbo.VW_SectorMaster' does not have a p
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_TblDepartmentSecond_TblDepartment_Fk_DepartmentIdFirst">
+    <End Role="TblDepartment" Type="Self.TblDepartment" Multiplicity="1" />
+    <End Role="TblDepartmentSecond" Type="Self.TblDepartmentSecond" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TblDepartment">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TblDepartmentSecond">
+        <PropertyRef Name="Fk_DepartmentIdFirst" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TblDepartmentThird_TblDepartment_Fk_DepartmentIdFirst">
+    <End Role="TblDepartment" Type="Self.TblDepartment" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="TblDepartmentThird" Type="Self.TblDepartmentThird" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TblDepartment">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TblDepartmentThird">
+        <PropertyRef Name="Fk_DepartmentIdFirst" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TblDepartmentThird_TblDepartmentSecond_Fk_DepartmentIdSecond">
+    <End Role="TblDepartmentSecond" Type="Self.TblDepartmentSecond" Multiplicity="1" />
+    <End Role="TblDepartmentThird" Type="Self.TblDepartmentThird" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TblDepartmentSecond">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TblDepartmentThird">
+        <PropertyRef Name="Fk_DepartmentIdSecond" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_TblEmployee_TblDepartment_Fk_DepartmentId">
     <End Role="TblDepartment" Type="Self.TblDepartment" Multiplicity="1">
       <OnDelete Action="Cascade" />
@@ -1300,6 +1380,8 @@ warning 6002: The table/view 'AuditSystem.dbo.VW_SectorMaster' does not have a p
     <EntitySet Name="TblCustomerGroup" EntityType="Self.TblCustomerGroup" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TblCustomers" EntityType="Self.TblCustomers" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TblDepartment" EntityType="Self.TblDepartment" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TblDepartmentSecond" EntityType="Self.TblDepartmentSecond" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TblDepartmentThird" EntityType="Self.TblDepartmentThird" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TblDesignation" EntityType="Self.TblDesignation" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TblDocument" EntityType="Self.TblDocument" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TblEmployee" EntityType="Self.TblEmployee" Schema="dbo" store:Type="Tables" />
@@ -1329,6 +1411,7 @@ warning 6002: The table/view 'AuditSystem.dbo.VW_SectorMaster' does not have a p
       <DefiningQuery>SELECT 
 [VW_CurrentlyGetJobAssignee].[Id] AS [Id], 
 [VW_CurrentlyGetJobAssignee].[Fk_JobMasterId] AS [Fk_JobMasterId], 
+[VW_CurrentlyGetJobAssignee].[IsProjectOnwer] AS [IsProjectOnwer], 
 [VW_CurrentlyGetJobAssignee].[Fk_CustomerId] AS [Fk_CustomerId], 
 [VW_CurrentlyGetJobAssignee].[TypeOfTable] AS [TypeOfTable], 
 [VW_CurrentlyGetJobAssignee].[TypeOfTableId] AS [TypeOfTableId], 
@@ -1531,6 +1614,9 @@ FROM [dbo].[VW_InvoiceShortNarrationMaster] AS [VW_InvoiceShortNarrationMaster]<
 [VW_JobMaster].[IsReActivate] AS [IsReActivate], 
 [VW_JobMaster].[ReActivateDate] AS [ReActivateDate], 
 [VW_JobMaster].[CompletedDate] AS [CompletedDate], 
+[VW_JobMaster].[JObPrefixCode] AS [JObPrefixCode], 
+[VW_JobMaster].[Fk_MangerId] AS [Fk_MangerId], 
+[VW_JobMaster].[Fk_PartnerId] AS [Fk_PartnerId], 
 [VW_JobMaster].[IsActive] AS [IsActive], 
 [VW_JobMaster].[IsDelete] AS [IsDelete], 
 [VW_JobMaster].[Create_By] AS [Create_By], 
@@ -1699,6 +1785,18 @@ FROM [dbo].[VW_SectorMaster] AS [VW_SectorMaster]</DefiningQuery>
     <AssociationSet Name="FK_TblCustomers_TblSectorMaster_Fk_SectorMasterId" Association="Self.FK_TblCustomers_TblSectorMaster_Fk_SectorMasterId">
       <End Role="TblSectorMaster" EntitySet="TblSectorMaster" />
       <End Role="TblCustomers" EntitySet="TblCustomers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TblDepartmentSecond_TblDepartment_Fk_DepartmentIdFirst" Association="Self.FK_TblDepartmentSecond_TblDepartment_Fk_DepartmentIdFirst">
+      <End Role="TblDepartment" EntitySet="TblDepartment" />
+      <End Role="TblDepartmentSecond" EntitySet="TblDepartmentSecond" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TblDepartmentThird_TblDepartment_Fk_DepartmentIdFirst" Association="Self.FK_TblDepartmentThird_TblDepartment_Fk_DepartmentIdFirst">
+      <End Role="TblDepartment" EntitySet="TblDepartment" />
+      <End Role="TblDepartmentThird" EntitySet="TblDepartmentThird" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TblDepartmentThird_TblDepartmentSecond_Fk_DepartmentIdSecond" Association="Self.FK_TblDepartmentThird_TblDepartmentSecond_Fk_DepartmentIdSecond">
+      <End Role="TblDepartmentSecond" EntitySet="TblDepartmentSecond" />
+      <End Role="TblDepartmentThird" EntitySet="TblDepartmentThird" />
     </AssociationSet>
     <AssociationSet Name="FK_TblEmployee_TblDepartment_Fk_DepartmentId" Association="Self.FK_TblEmployee_TblDepartment_Fk_DepartmentId">
       <End Role="TblDepartment" EntitySet="TblDepartment" />

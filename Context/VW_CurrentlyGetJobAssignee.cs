@@ -16,6 +16,7 @@ namespace WOPHRMSystem.Context
     {
         public int Id { get; set; }
         public int Fk_JobMasterId { get; set; }
+        public bool IsProjectOnwer { get; set; }
         public int Fk_CustomerId { get; set; }
         public string TypeOfTable { get; set; }
         public int TypeOfTableId { get; set; }

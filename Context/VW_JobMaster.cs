@@ -25,6 +25,9 @@ namespace WOPHRMSystem.Context
         public bool IsReActivate { get; set; }
         public Nullable<System.DateTime> ReActivateDate { get; set; }
         public Nullable<System.DateTime> CompletedDate { get; set; }
+        public string JObPrefixCode { get; set; }
+        public int Fk_MangerId { get; set; }
+        public int Fk_PartnerId { get; set; }
         public bool IsActive { get; set; }
         public bool IsDelete { get; set; }
         public string Create_By { get; set; }

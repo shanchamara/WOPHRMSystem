@@ -5,6 +5,8 @@
     <EntitySet Name="TblCustomerGroups" EntityType="AuditSystemModel.TblCustomerGroup" />
     <EntitySet Name="TblCustomers" EntityType="AuditSystemModel.TblCustomer" />
     <EntitySet Name="TblDepartments" EntityType="AuditSystemModel.TblDepartment" />
+    <EntitySet Name="TblDepartmentSeconds" EntityType="AuditSystemModel.TblDepartmentSecond" />
+    <EntitySet Name="TblDepartmentThirds" EntityType="AuditSystemModel.TblDepartmentThird" />
     <EntitySet Name="TblDesignations" EntityType="AuditSystemModel.TblDesignation" />
     <EntitySet Name="TblDocuments" EntityType="AuditSystemModel.TblDocument" />
     <EntitySet Name="TblEmployees" EntityType="AuditSystemModel.TblEmployee" />
@@ -86,9 +88,21 @@
       <End Role="TblCustomer" EntitySet="TblCustomers" />
       <End Role="TblOpeningBalance" EntitySet="TblOpeningBalances" />
     </AssociationSet>
+    <AssociationSet Name="FK_TblDepartmentSecond_TblDepartment_Fk_DepartmentIdFirst" Association="AuditSystemModel.FK_TblDepartmentSecond_TblDepartment_Fk_DepartmentIdFirst">
+      <End Role="TblDepartment" EntitySet="TblDepartments" />
+      <End Role="TblDepartmentSecond" EntitySet="TblDepartmentSeconds" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TblDepartmentThird_TblDepartment_Fk_DepartmentIdFirst" Association="AuditSystemModel.FK_TblDepartmentThird_TblDepartment_Fk_DepartmentIdFirst">
+      <End Role="TblDepartment" EntitySet="TblDepartments" />
+      <End Role="TblDepartmentThird" EntitySet="TblDepartmentThirds" />
+    </AssociationSet>
     <AssociationSet Name="FK_TblEmployee_TblDepartment_Fk_DepartmentId" Association="AuditSystemModel.FK_TblEmployee_TblDepartment_Fk_DepartmentId">
       <End Role="TblDepartment" EntitySet="TblDepartments" />
       <End Role="TblEmployee" EntitySet="TblEmployees" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TblDepartmentThird_TblDepartmentSecond_Fk_DepartmentIdSecond" Association="AuditSystemModel.FK_TblDepartmentThird_TblDepartmentSecond_Fk_DepartmentIdSecond">
+      <End Role="TblDepartmentSecond" EntitySet="TblDepartmentSeconds" />
+      <End Role="TblDepartmentThird" EntitySet="TblDepartmentThirds" />
     </AssociationSet>
     <AssociationSet Name="FK_TblEmployee_TblDesignation_Fk_DesginationId" Association="AuditSystemModel.FK_TblEmployee_TblDesignation_Fk_DesginationId">
       <End Role="TblDesignation" EntitySet="TblDesignations" />
@@ -224,7 +238,48 @@
     <Property Name="Edit_Date" Type="DateTime" Precision="7" />
     <Property Name="Delete_By" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="Delete_Date" Type="DateTime" Precision="7" />
+    <NavigationProperty Name="TblDepartmentSeconds" Relationship="AuditSystemModel.FK_TblDepartmentSecond_TblDepartment_Fk_DepartmentIdFirst" FromRole="TblDepartment" ToRole="TblDepartmentSecond" />
+    <NavigationProperty Name="TblDepartmentThirds" Relationship="AuditSystemModel.FK_TblDepartmentThird_TblDepartment_Fk_DepartmentIdFirst" FromRole="TblDepartment" ToRole="TblDepartmentThird" />
     <NavigationProperty Name="TblEmployees" Relationship="AuditSystemModel.FK_TblEmployee_TblDepartment_Fk_DepartmentId" FromRole="TblDepartment" ToRole="TblEmployee" />
+  </EntityType>
+  <EntityType Name="TblDepartmentSecond">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Code" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Narration" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Fk_DepartmentIdFirst" Type="Int32" Nullable="false" />
+    <Property Name="IsActive" Type="Boolean" Nullable="false" />
+    <Property Name="IsDelete" Type="Boolean" Nullable="false" />
+    <Property Name="Create_By" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Create_Date" Type="DateTime" Nullable="false" Precision="7" />
+    <Property Name="Edit_By" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Edit_Date" Type="DateTime" Precision="7" />
+    <Property Name="Delete_By" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Delete_Date" Type="DateTime" Precision="7" />
+    <NavigationProperty Name="TblDepartment" Relationship="AuditSystemModel.FK_TblDepartmentSecond_TblDepartment_Fk_DepartmentIdFirst" FromRole="TblDepartmentSecond" ToRole="TblDepartment" />
+    <NavigationProperty Name="TblDepartmentThirds" Relationship="AuditSystemModel.FK_TblDepartmentThird_TblDepartmentSecond_Fk_DepartmentIdSecond" FromRole="TblDepartmentSecond" ToRole="TblDepartmentThird" />
+  </EntityType>
+  <EntityType Name="TblDepartmentThird">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Code" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Narration" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Fk_DepartmentIdFirst" Type="Int32" Nullable="false" />
+    <Property Name="Fk_DepartmentIdSecond" Type="Int32" Nullable="false" />
+    <Property Name="IsActive" Type="Boolean" Nullable="false" />
+    <Property Name="IsDelete" Type="Boolean" Nullable="false" />
+    <Property Name="Create_By" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Create_Date" Type="DateTime" Nullable="false" Precision="7" />
+    <Property Name="Edit_By" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Edit_Date" Type="DateTime" Precision="7" />
+    <Property Name="Delete_By" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Delete_Date" Type="DateTime" Precision="7" />
+    <NavigationProperty Name="TblDepartment" Relationship="AuditSystemModel.FK_TblDepartmentThird_TblDepartment_Fk_DepartmentIdFirst" FromRole="TblDepartmentThird" ToRole="TblDepartment" />
+    <NavigationProperty Name="TblDepartmentSecond" Relationship="AuditSystemModel.FK_TblDepartmentThird_TblDepartmentSecond_Fk_DepartmentIdSecond" FromRole="TblDepartmentThird" ToRole="TblDepartmentSecond" />
   </EntityType>
   <EntityType Name="TblDesignation">
     <Key>
@@ -687,6 +742,7 @@
     <Key>
       <PropertyRef Name="Id" />
       <PropertyRef Name="Fk_JobMasterId" />
+      <PropertyRef Name="IsProjectOnwer" />
       <PropertyRef Name="Fk_CustomerId" />
       <PropertyRef Name="TypeOfTableId" />
       <PropertyRef Name="IsDelete" />
@@ -694,6 +750,7 @@
     </Key>
     <Property Name="Id" Type="Int32" Nullable="false" />
     <Property Name="Fk_JobMasterId" Type="Int32" Nullable="false" />
+    <Property Name="IsProjectOnwer" Type="Boolean" Nullable="false" />
     <Property Name="Fk_CustomerId" Type="Int32" Nullable="false" />
     <Property Name="TypeOfTable" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="TypeOfTableId" Type="Int32" Nullable="false" />
@@ -941,6 +998,8 @@
       <PropertyRef Name="Fk_CustomerId" />
       <PropertyRef Name="IsCompleted" />
       <PropertyRef Name="IsReActivate" />
+      <PropertyRef Name="Fk_MangerId" />
+      <PropertyRef Name="Fk_PartnerId" />
       <PropertyRef Name="IsActive" />
       <PropertyRef Name="IsDelete" />
       <PropertyRef Name="Create_Date" />
@@ -956,6 +1015,9 @@
     <Property Name="IsReActivate" Type="Boolean" Nullable="false" />
     <Property Name="ReActivateDate" Type="DateTime" Precision="7" />
     <Property Name="CompletedDate" Type="DateTime" Precision="7" />
+    <Property Name="JObPrefixCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Fk_MangerId" Type="Int32" Nullable="false" />
+    <Property Name="Fk_PartnerId" Type="Int32" Nullable="false" />
     <Property Name="IsActive" Type="Boolean" Nullable="false" />
     <Property Name="IsDelete" Type="Boolean" Nullable="false" />
     <Property Name="Create_By" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
@@ -1276,6 +1338,32 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_TblDepartmentSecond_TblDepartment_Fk_DepartmentIdFirst">
+    <End Type="AuditSystemModel.TblDepartment" Role="TblDepartment" Multiplicity="1" />
+    <End Type="AuditSystemModel.TblDepartmentSecond" Role="TblDepartmentSecond" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TblDepartment">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TblDepartmentSecond">
+        <PropertyRef Name="Fk_DepartmentIdFirst" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TblDepartmentThird_TblDepartment_Fk_DepartmentIdFirst">
+    <End Type="AuditSystemModel.TblDepartment" Role="TblDepartment" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="AuditSystemModel.TblDepartmentThird" Role="TblDepartmentThird" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TblDepartment">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TblDepartmentThird">
+        <PropertyRef Name="Fk_DepartmentIdFirst" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_TblEmployee_TblDepartment_Fk_DepartmentId">
     <End Type="AuditSystemModel.TblDepartment" Role="TblDepartment" Multiplicity="1">
       <OnDelete Action="Cascade" />
@@ -1287,6 +1375,18 @@
       </Principal>
       <Dependent Role="TblEmployee">
         <PropertyRef Name="Fk_DepartmentId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TblDepartmentThird_TblDepartmentSecond_Fk_DepartmentIdSecond">
+    <End Type="AuditSystemModel.TblDepartmentSecond" Role="TblDepartmentSecond" Multiplicity="1" />
+    <End Type="AuditSystemModel.TblDepartmentThird" Role="TblDepartmentThird" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TblDepartmentSecond">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TblDepartmentThird">
+        <PropertyRef Name="Fk_DepartmentIdSecond" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

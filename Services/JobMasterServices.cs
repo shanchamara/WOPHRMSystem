@@ -202,22 +202,24 @@ namespace WOPHRMSystem.Services
                     var partners = _context.TblJobMasterAssignTemps.Where(d => d.Create_By.Equals(obj.Create_By)).ToList();
                     foreach (var s in partners)
                     {
-                        var editpartners = _context.TblJobMasterPartners.SingleOrDefault(d => d.Fk_JobMasterId.Equals(obj.Id) && d.Id.Equals(s.RowId));
-                        if (editpartners == null)
+                        //var editpartners = _context.TblJobMasterPartners.SingleOrDefault(d => d.Fk_JobMasterId.Equals(obj.Id) && d.Id.Equals(s.RowId));
+                        //if (editpartners == null)
+                        //{
+                        TblJobMasterPartner tblJobMasterPartner = new TblJobMasterPartner
                         {
-                            TblJobMasterPartner tblJobMasterPartner = new TblJobMasterPartner
-                            {
-                                Create_By = obj.Create_By,
-                                Create_Date = obj.Create_Date,
-                                Fk_JobMasterId = obj.Id,
-                                IsDelete = false,
-                                TypeOfTable = s.TypeOftable,
-                                TypeOfTableId = s.TypeOftableId,
-                                Fk_CustomerId = obj.Fk_CustomerId,
-                                BudgetedHours = s.BudgetedHours,
-                            };
-                            _context.TblJobMasterPartners.AddOrUpdate(tblJobMasterPartner);
-                        }
+                            Create_By = obj.Create_By,
+                            Create_Date = obj.Create_Date,
+                            Fk_JobMasterId = obj.Id,
+                            IsDelete = false,
+                            TypeOfTable = s.TypeOftable,
+                            TypeOfTableId = s.TypeOftableId,
+                            Fk_CustomerId = obj.Fk_CustomerId,
+                            BudgetedHours = s.BudgetedHours,
+                            Id = s.RowId,
+                            IsProjectOnwer = s.IsProjectOnwer
+                        };
+                        _context.TblJobMasterPartners.AddOrUpdate(tblJobMasterPartner);
+                        //}
 
                     }
 
