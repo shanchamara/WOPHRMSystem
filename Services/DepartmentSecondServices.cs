@@ -65,7 +65,7 @@ namespace WOPHRMSystem.Services
             {
                 var dbobj = GetById(obj.Id);
                 dbobj.Narration = obj.Narration;
-                dbobj.Fk_DepartmentIdFirst = obj.Fk_DepartmentIdFirst;  
+                dbobj.Fk_DepartmentIdFirst = obj.Fk_DepartmentIdFirst;
                 dbobj.Code = obj.Code;
                 dbobj.Edit_By = obj.Edit_By;
                 dbobj.IsActive = obj.IsActive;
@@ -136,6 +136,38 @@ namespace WOPHRMSystem.Services
                               IsDelete = a.IsDelete,
                           }).Where(d => d.IsDelete.Equals(false)).ToList();
                 return dr;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+
+        public List<DepartmentModel> GetDepartmentSecondByDepartmentOneId(int Id)
+        {
+            try
+            {
+
+
+
+                var department = (from a in _context.TblDepartmentSeconds
+                                            where a.Fk_DepartmentIdFirst == Id
+                                            orderby a.Id descending
+                                            select new DepartmentModel()
+                                            {
+                                                Id = a.Id,
+                                                Code = a.Code,
+                                                Narration = a.Narration,
+                                                IsActive = a.IsActive,
+                                                CodeAndNarration = a.Code + " " + a.Narration,
+                                                IsDelete = a.IsDelete,
+                                            }).Where(d => d.IsDelete.Equals(false)).ToList();
+
+                return department;
+
+
             }
             catch (Exception)
             {

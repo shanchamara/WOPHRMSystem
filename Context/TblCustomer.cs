@@ -20,6 +20,7 @@ namespace WOPHRMSystem.Context
             this.TblJobTransactions = new HashSet<TblJobTransaction>();
             this.TblLocations = new HashSet<TblLocation>();
             this.TblOpeningBalances = new HashSet<TblOpeningBalance>();
+            this.TblProformaInvoiceBodies = new HashSet<TblProformaInvoiceBody>();
             this.TblProformaInvoiceHeads = new HashSet<TblProformaInvoiceHead>();
         }
     
@@ -65,6 +66,7 @@ namespace WOPHRMSystem.Context
         public virtual ICollection<TblJobTransaction> TblJobTransactions { get; set; }
         public virtual ICollection<TblLocation> TblLocations { get; set; }
         public virtual ICollection<TblOpeningBalance> TblOpeningBalances { get; set; }
+        public virtual ICollection<TblProformaInvoiceBody> TblProformaInvoiceBodies { get; set; }
         public virtual ICollection<TblProformaInvoiceHead> TblProformaInvoiceHeads { get; set; }
     }
 }

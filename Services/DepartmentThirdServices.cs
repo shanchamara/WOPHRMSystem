@@ -150,5 +150,38 @@ namespace WOPHRMSystem.Services
             }
         }
 
+
+
+        public List<DepartmentModel> GetDepartmentThirdByDepartmentOneId(int FirstId, int SecondId)
+        {
+            try
+            {
+
+
+
+                var department = (from a in _context.TblDepartmentThirds
+                                  where a.Fk_DepartmentIdFirst == FirstId && a.Fk_DepartmentIdSecond.Equals(SecondId)  
+                                  orderby a.Id descending
+                                  select new DepartmentModel()
+                                  {
+                                      Id = a.Id,
+                                      Code = a.Code,
+                                      Narration = a.Narration,
+                                      IsActive = a.IsActive,
+                                      CodeAndNarration = a.Code + " " + a.Narration,
+                                      IsDelete = a.IsDelete,
+                                  }).Where(d => d.IsDelete.Equals(false)).ToList();
+
+                return department;
+
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
     }
 }

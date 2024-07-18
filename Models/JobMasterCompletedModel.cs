@@ -8,6 +8,7 @@ namespace WOPHRMSystem.Models
         public int Id { get; set; }
         public string JobCode { get; set; }
         public string Narration { get; set; }
+        public string FullDetails { get; set; }
         public Nullable<decimal> PreViewvalue { get; set; }
         public Nullable<System.DateTime> StartDate { get; set; }
         public Nullable<System.DateTime> DueDate { get; set; }

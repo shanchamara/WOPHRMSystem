@@ -1,11 +1,7 @@
-﻿using DocumentFormat.OpenXml.EMMA;
-using DocumentFormat.OpenXml.Office2010.Excel;
-using DocumentFormat.OpenXml.Wordprocessing;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Transactions;
-using System.Xml.Linq;
 using WOPHRMSystem.Context;
 using WOPHRMSystem.Models;
 
@@ -98,7 +94,7 @@ namespace WOPHRMSystem.Services
         {
             try
             {
-               
+
                 using (TransactionScope scope = new TransactionScope())
                 {
 
@@ -442,7 +438,7 @@ namespace WOPHRMSystem.Services
                         TypeOftable = member.TypeOfTable,
                         TypeOftableId = member.TypeOfTableId,
                         RowId = member.Id,
-                        IsProjectOnwer= member.IsProjectOnwer
+                        IsProjectOnwer = member.IsProjectOnwer
                     };
                     _context.TblJobMasterAssignTemps.Add(tblJobMasterAssignTemp);
                     _context.SaveChanges();

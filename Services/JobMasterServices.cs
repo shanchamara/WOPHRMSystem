@@ -350,6 +350,35 @@ namespace WOPHRMSystem.Services
             }
         }
 
+        public List<VW_GetJObActualValue> GetAllJObsForIsReadytoInvoice(int cid)
+        {
+            try
+            {
+                var dr = _context.VW_GetJObActualValue.Where(d => d.Fk_CustomerId.Equals(cid)).ToList();
+                return dr;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public List<VW_GetJObActualValue> GetAllJObsForIsReadytoInvoiceById(int cid, int jobId)
+        {
+            try
+            {
+                var dr = _context.VW_GetJObActualValue.Where(d => d.Fk_CustomerId.Equals(cid) && d.Fk_JobMasterId.Equals(jobId)).ToList();
+                return dr;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+
         public List<JobMasterCompletedModel> GetAllDropdownForReactivated()
         {
             try

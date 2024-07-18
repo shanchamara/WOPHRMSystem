@@ -24,8 +24,8 @@ namespace WOPHRMSystem.Models
 
         public SelectList PartnerSelectListItems { get; set; }
 
-        public int ManagerId {  get; set; } 
-        public SelectList ManagerSelectListItems { get; set; } 
+        public int ManagerId { get; set; }
+        public SelectList ManagerSelectListItems { get; set; }
 
     }
 }

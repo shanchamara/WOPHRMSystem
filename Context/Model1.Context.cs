@@ -26,6 +26,7 @@ namespace WOPHRMSystem.Context
         }
     
         public DbSet<C__EFMigrationsHistory> C__EFMigrationsHistory { get; set; }
+        public DbSet<TblCompany> TblCompanies { get; set; }
         public DbSet<TblCustomerGroup> TblCustomerGroups { get; set; }
         public DbSet<TblCustomer> TblCustomers { get; set; }
         public DbSet<TblDepartment> TblDepartments { get; set; }
@@ -51,6 +52,8 @@ namespace WOPHRMSystem.Context
         public DbSet<TblNatureMaster> TblNatureMasters { get; set; }
         public DbSet<TblNonEffectiveEmployee> TblNonEffectiveEmployees { get; set; }
         public DbSet<TblOpeningBalance> TblOpeningBalances { get; set; }
+        public DbSet<TblProformaInvoiceBody> TblProformaInvoiceBodies { get; set; }
+        public DbSet<TblProformaInvoiceBodyTemp> TblProformaInvoiceBodyTemps { get; set; }
         public DbSet<TblProformaInvoiceHead> TblProformaInvoiceHeads { get; set; }
         public DbSet<TblSectorMaster> TblSectorMasters { get; set; }
         public DbSet<TblSiteSetting> TblSiteSettings { get; set; }
@@ -61,6 +64,7 @@ namespace WOPHRMSystem.Context
         public DbSet<VW_Customer> VW_Customer { get; set; }
         public DbSet<VW_Employee> VW_Employee { get; set; }
         public DbSet<VW_EmployeeJobTransaction> VW_EmployeeJobTransaction { get; set; }
+        public DbSet<VW_GetJObActualValue> VW_GetJObActualValue { get; set; }
         public DbSet<VW_GradeMaster> VW_GradeMaster { get; set; }
         public DbSet<VW_InternationalReferalMaster> VW_InternationalReferalMaster { get; set; }
         public DbSet<VW_IntroductionMaster> VW_IntroductionMaster { get; set; }
@@ -72,6 +76,7 @@ namespace WOPHRMSystem.Context
         public DbSet<VW_LegalStatusMaster> VW_LegalStatusMaster { get; set; }
         public DbSet<VW_NatureMaster> VW_NatureMaster { get; set; }
         public DbSet<VW_OpeningBalance> VW_OpeningBalance { get; set; }
+        public DbSet<VW_ProformaInvoiceHead> VW_ProformaInvoiceHead { get; set; }
         public DbSet<VW_SectorMaster> VW_SectorMaster { get; set; }
     }
 }

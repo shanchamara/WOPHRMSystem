@@ -34,7 +34,7 @@ namespace WOPHRMSystem.Context
         public string TaxType { get; set; }
         public int Fk_NatureId { get; set; }
         public string NoNVat { get; set; }
-        public string NoNVatPrecentage { get; set; }
+        public Nullable<decimal> NoNVatPrecentage { get; set; }
         public Nullable<decimal> VatPercentage { get; set; }
         public Nullable<decimal> NBTPercentage { get; set; }
         public string NarrationOne { get; set; }
@@ -52,7 +52,13 @@ namespace WOPHRMSystem.Context
         public Nullable<System.DateTime> Edit_Date { get; set; }
         public string Delete_By { get; set; }
         public Nullable<System.DateTime> Delete_Date { get; set; }
+        public int Fk_CompanyId { get; set; }
+        public Nullable<decimal> TotalAmount { get; set; }
+        public Nullable<decimal> TotalReceivedAmount { get; set; }
+        public Nullable<decimal> ValueNBT { get; set; }
+        public Nullable<decimal> ValueVAT { get; set; }
     
+        public virtual TblCompany TblCompany { get; set; }
         public virtual TblCustomer TblCustomer { get; set; }
         public virtual TblDepartment TblDepartment { get; set; }
         public virtual TblDepartmentSecond TblDepartmentSecond { get; set; }

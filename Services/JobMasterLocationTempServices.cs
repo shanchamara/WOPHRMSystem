@@ -27,8 +27,8 @@ namespace WOPHRMSystem.Services
                 var data = GetByName(obj.Code);
                 if (data == null)
                 {
-                    
-                   
+
+
                     _context.TblJobMasterLocationTemps.Add(obj);
                     _context.SaveChanges();
 
