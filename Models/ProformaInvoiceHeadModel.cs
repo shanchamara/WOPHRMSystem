@@ -11,6 +11,7 @@ namespace WOPHRMSystem.Models
         public int Fk_DepartmentIdTwo { get; set; }
         public int Fk_DepartmentIdThird { get; set; }
         public string DocNo { get; set; }
+        public string JobCode { get; set; }
         public Nullable<System.DateTime> Date { get; set; }
         public string OurReferance { get; set; }
         public string YourReferance { get; set; }
@@ -63,6 +64,8 @@ namespace WOPHRMSystem.Models
         public SelectList CustomerLists { get; set; }
         public SelectList InvoiceShrotNarration { get; set; }
         public SelectList DepartmentListOne { get; set; }
+        public SelectList DepartmentListsecond { get; set; }
+        public SelectList DepartmentListThird { get; set; }
         public SelectList NatureList { get; set; }
         public SelectList JobList { get; set; }
     }

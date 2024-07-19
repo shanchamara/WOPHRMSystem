@@ -178,11 +178,29 @@ namespace WOPHRMSystem.Services
                     _context.TblJobMasters.AddOrUpdate(obj);
                     _context.SaveChanges();
 
+
+                    var CurrentDatalocation = _context.TblJobMasterLocations.Where(d => d.IsDelete.Equals(false) && d.Fk_JobMasterId.Equals(obj.Id)).ToList();
+                    foreach (var s in CurrentDatalocation)
+                    {
+                        s.IsDelete = true;
+                        s.Delete_Date = new CommonResources().LocalDatetime().Date;
+                    }
+                    _context.SaveChanges();
+
+                    var CurrentDataPartners = _context.TblJobMasterPartners.Where(d => d.IsDelete.Equals(false) && d.Fk_JobMasterId.Equals(obj.Id)).ToList();
+                    foreach (var s in CurrentDataPartners)
+                    {
+                        s.IsDelete = true;
+                        s.Delete_Date = new CommonResources().LocalDatetime().Date;
+                    }
+                    _context.SaveChanges();
+
+
                     var location = _context.TblJobMasterLocationTemps.Where(d => d.CustomerId.Equals(obj.Fk_CustomerId) && d.Create_By.Equals(obj.Create_By)).ToList();
                     foreach (var s in location)
                     {
                         var Editlocation = _context.TblJobMasterLocations.SingleOrDefault(d => d.FK_LocationId.Equals(s.FK_LocationId) && d.Fk_JobMasterId.Equals(obj.Id));
-                        if (Editlocation == null)
+                        if (Editlocation != null)
                         {
                             TblJobMasterLocation tblJobMasterLocation = new TblJobMasterLocation
                             {
@@ -192,7 +210,20 @@ namespace WOPHRMSystem.Services
                                 IsDelete = false,
                                 FK_LocationId = s.FK_LocationId,
                                 Fk_CustomerId = obj.Fk_CustomerId,
-
+                                Id = Editlocation.Id
+                            };
+                            _context.TblJobMasterLocations.AddOrUpdate(tblJobMasterLocation);
+                        }
+                        else
+                        {
+                            TblJobMasterLocation tblJobMasterLocation = new TblJobMasterLocation
+                            {
+                                Create_By = obj.Create_By,
+                                Create_Date = obj.Create_Date,
+                                Fk_JobMasterId = obj.Id,
+                                IsDelete = false,
+                                FK_LocationId = s.FK_LocationId,
+                                Fk_CustomerId = obj.Fk_CustomerId,
                             };
                             _context.TblJobMasterLocations.AddOrUpdate(tblJobMasterLocation);
                         }
@@ -251,7 +282,7 @@ namespace WOPHRMSystem.Services
                 var dbobj = GetById(obj.Id);
                 dbobj.IsDelete = true;
                 dbobj.Delete_By = obj.Delete_By;
-                dbobj.Edit_Date = new CommonResources().LocalDatetime().Date;
+                dbobj.Delete_Date = new CommonResources().LocalDatetime().Date;
 
                 _context.SaveChanges();
                 return new MessageModel()

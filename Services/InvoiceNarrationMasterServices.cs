@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data.Entity.Migrations;
 using System.Linq;
+using System.Transactions;
 using WOPHRMSystem.Context;
 using WOPHRMSystem.Helps;
 using WOPHRMSystem.Models;
@@ -135,7 +136,7 @@ namespace AuditSystem.Services
             try
             {
                 var data = GetById(obj.Fk_InvoiceNarrttionId);
-
+                obj.BodyRowId = data.BodyRowId;
                 _context.TblProformaInvoiceBodyTemps.AddOrUpdate(obj);
                 _context.SaveChanges();
 
@@ -190,6 +191,46 @@ namespace AuditSystem.Services
                 foreach (var record in recordsToDelete)
                 {
                     _context.TblProformaInvoiceBodyTemps.Remove(record);
+                }
+                _context.SaveChanges();
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+
+        public void DeleteCurrentlyTempAndInsertDataForUpdate(string Create_By, int pInvoiceId)
+        {
+            try
+            {
+                using (TransactionScope scope = new TransactionScope())
+                {
+                    var recordsToDelete = _context.TblProformaInvoiceBodyTemps.Where(d => d.Create_By == Create_By).ToList();
+                    foreach (var record in recordsToDelete)
+                    {
+                        _context.TblProformaInvoiceBodyTemps.Remove(record);
+                    }
+
+                    var get = _context.TblProformaInvoiceBodies.Where(d => d.Fk_ProformaInvoiceHeadId == pInvoiceId && d.IsDelete.Equals(false)).ToList();
+                    foreach (var record in get)
+                    {
+                        TblProformaInvoiceBodyTemp tbl = new TblProformaInvoiceBodyTemp
+                        {
+                            Create_By = Create_By,
+                            BodyRowId = record.Id,
+                            FK_JobMasterId = record.Fk_JobMasterId,
+                            Amount = record.Amount,
+                            FK_CustomerId = record.Fk_CustomerId,
+                            Fk_InvoiceNarrttionId = record.Fk_InvoiceNarrttionId
+                        };
+                        _context.TblProformaInvoiceBodyTemps.Add(tbl);
+                    }
+
+                    scope.Complete();
                 }
                 _context.SaveChanges();
 

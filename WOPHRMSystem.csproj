@@ -2675,6 +2675,11 @@
     <Content Include="Views\DepartmentThird\Index.cshtml" />
     <Content Include="Views\ProformaInvoiceHead\Create.cshtml" />
     <Content Include="Views\ProformaInvoiceHead\InvoiceNarrationList.cshtml" />
+    <Content Include="Views\ProformaInvoiceHead\Index.cshtml" />
+    <Content Include="Views\ProformaInvoiceHead\Edit.cshtml" />
+    <Content Include="Views\ProformaInvoiceHead\PendingPartnerConfirm.cshtml" />
+    <Content Include="Views\ProformaInvoiceHead\PartnerConfirmed.cshtml" />
+    <Content Include="Views\ProformaInvoiceHead\PartnerEdit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

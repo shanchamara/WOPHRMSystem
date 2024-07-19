@@ -148,6 +148,7 @@
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Code" Type="nvarchar(max)" />
+    <Property Name="JObPrefixCode" Type="nvarchar(max)" />
     <Property Name="Name" Type="nvarchar(max)" />
     <Property Name="BirthDay" Type="datetime2" Precision="7" Nullable="false" />
     <Property Name="DateOfJoin" Type="datetime2" Precision="7" Nullable="false" />
@@ -166,7 +167,6 @@
     <Property Name="Edit_Date" Type="datetime2" Precision="7" />
     <Property Name="Delete_By" Type="nvarchar(max)" />
     <Property Name="Delete_Date" Type="datetime2" Precision="7" />
-    <Property Name="JObPrefixCode" Type="nvarchar(max)" />
   </EntityType>
   <EntityType Name="TblEmployeeHourlyRate">
     <Key>
@@ -271,10 +271,13 @@
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="JobCode" Type="nvarchar(max)" />
+    <Property Name="JObPrefixCode" Type="nvarchar(max)" />
     <Property Name="Narration" Type="nvarchar(max)" />
     <Property Name="PreViewvalue" Type="decimal" Precision="18" Scale="2" />
     <Property Name="StartDate" Type="datetime2" Precision="7" />
     <Property Name="DueDate" Type="datetime2" Precision="7" />
+    <Property Name="Fk_PartnerId" Type="int" Nullable="false" />
+    <Property Name="Fk_MangerId" Type="int" Nullable="false" />
     <Property Name="Fk_CustomerId" Type="int" Nullable="false" />
     <Property Name="IsCompleted" Type="bit" Nullable="false" />
     <Property Name="IsReActivate" Type="bit" Nullable="false" />
@@ -288,9 +291,6 @@
     <Property Name="Edit_Date" Type="datetime2" Precision="7" />
     <Property Name="Delete_By" Type="nvarchar(max)" />
     <Property Name="Delete_Date" Type="datetime2" Precision="7" />
-    <Property Name="JObPrefixCode" Type="nvarchar(max)" />
-    <Property Name="Fk_MangerId" Type="int" Nullable="false" />
-    <Property Name="Fk_PartnerId" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="TblJobMasterAssignTemp">
     <Key>
@@ -298,6 +298,7 @@
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="RowId" Type="int" Nullable="false" />
+    <Property Name="IsProjectOnwer" Type="bit" Nullable="false" />
     <Property Name="TypeOftable" Type="nvarchar(max)" />
     <Property Name="TypeOftableId" Type="int" Nullable="false" />
     <Property Name="Code" Type="nvarchar(max)" />
@@ -305,7 +306,6 @@
     <Property Name="BudgetedHours" Type="decimal" Precision="18" Scale="2" />
     <Property Name="Designation" Type="nvarchar(max)" />
     <Property Name="Create_By" Type="nvarchar(max)" />
-    <Property Name="IsProjectOnwer" Type="bit" Nullable="false" />
   </EntityType>
   <EntityType Name="TblJobMasterLocation">
     <Key>
@@ -344,6 +344,7 @@
     <Property Name="Fk_CustomerId" Type="int" Nullable="false" />
     <Property Name="TypeOfTable" Type="nvarchar(max)" />
     <Property Name="TypeOfTableId" Type="int" Nullable="false" />
+    <Property Name="IsProjectOnwer" Type="bit" Nullable="false" />
     <Property Name="IsDelete" Type="bit" Nullable="false" />
     <Property Name="Create_By" Type="nvarchar(max)" />
     <Property Name="Create_Date" Type="datetime2" Precision="7" Nullable="false" />
@@ -351,7 +352,6 @@
     <Property Name="Edit_Date" Type="datetime2" Precision="7" />
     <Property Name="Delete_By" Type="nvarchar(max)" />
     <Property Name="Delete_Date" Type="datetime2" Precision="7" />
-    <Property Name="IsProjectOnwer" Type="bit" Nullable="false" />
   </EntityType>
   <EntityType Name="TblJobTransaction">
     <Key>
@@ -362,6 +362,7 @@
     <Property Name="Fk_JobMasterId" Type="int" Nullable="false" />
     <Property Name="Fk_EmployeeId" Type="int" Nullable="false" />
     <Property Name="Narration" Type="nvarchar(max)" />
+    <Property Name="IsApplyTravelingCost" Type="bit" Nullable="false" />
     <Property Name="Fk_LocationId" Type="int" Nullable="false" />
     <Property Name="Hours" Type="decimal" Precision="18" Scale="2" />
     <Property Name="Fk_WorkTypeId" Type="int" Nullable="false" />
@@ -373,7 +374,6 @@
     <Property Name="Edit_Date" Type="datetime2" Precision="7" />
     <Property Name="Delete_By" Type="nvarchar(max)" />
     <Property Name="Delete_Date" Type="datetime2" Precision="7" />
-    <Property Name="IsApplyTravelingCost" Type="bit" Nullable="false" />
   </EntityType>
   <EntityType Name="TblLegalStatusMaster">
     <Key>
@@ -467,6 +467,7 @@
     <Property Name="Amount" Type="decimal" Precision="18" Scale="2" />
     <Property Name="Fk_CustomerId" Type="int" Nullable="false" />
     <Property Name="Fk_JobMasterId" Type="int" Nullable="false" />
+    <Property Name="Fk_ProformaInvoiceHeadId" Type="int" Nullable="false" />
     <Property Name="IsDelete" Type="bit" Nullable="false" />
     <Property Name="Create_By" Type="nvarchar(max)" />
     <Property Name="Create_Date" Type="datetime2" Precision="7" Nullable="false" />
@@ -492,6 +493,7 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Fk_CompanyId" Type="int" Nullable="false" />
     <Property Name="InvoiceNoProforma" Type="nvarchar(max)" />
     <Property Name="Fk_DepartmentIdOne" Type="int" Nullable="false" />
     <Property Name="Fk_DepartmentIdTwo" Type="int" Nullable="false" />
@@ -520,8 +522,14 @@
     <Property Name="Fk_JobMasterId" Type="int" Nullable="false" />
     <Property Name="LastYearAmount" Type="decimal" Precision="18" Scale="2" />
     <Property Name="PostingDate" Type="datetime2" Precision="7" />
+    <Property Name="TotalAmount" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="ValueNBT" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="ValueVAT" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="TotalReceivedAmount" Type="decimal" Precision="18" Scale="2" />
     <Property Name="IsActive" Type="bit" Nullable="false" />
     <Property Name="IsActiveDate" Type="datetime2" Precision="7" />
+    <Property Name="IsPartnerOneComfirm" Type="bit" Nullable="false" />
+    <Property Name="PartnerOneComfirmDate" Type="datetime2" Precision="7" />
     <Property Name="IsDelete" Type="bit" Nullable="false" />
     <Property Name="Create_By" Type="nvarchar(max)" />
     <Property Name="Create_Date" Type="datetime2" Precision="7" Nullable="false" />
@@ -529,11 +537,6 @@
     <Property Name="Edit_Date" Type="datetime2" Precision="7" />
     <Property Name="Delete_By" Type="nvarchar(max)" />
     <Property Name="Delete_Date" Type="datetime2" Precision="7" />
-    <Property Name="Fk_CompanyId" Type="int" Nullable="false" />
-    <Property Name="TotalAmount" Type="decimal" Precision="18" Scale="2" />
-    <Property Name="TotalReceivedAmount" Type="decimal" Precision="18" Scale="2" />
-    <Property Name="ValueNBT" Type="decimal" Precision="18" Scale="2" />
-    <Property Name="ValueVAT" Type="decimal" Precision="18" Scale="2" />
   </EntityType>
   <EntityType Name="TblSectorMaster">
     <Key>
@@ -1145,6 +1148,7 @@ warning 6002: The table/view 'AuditSystem.dbo.VW_ProformaInvoiceHead' does not h
       <PropertyRef Name="IsDelete" />
       <PropertyRef Name="Create_Date" />
       <PropertyRef Name="Fk_CompanyId" />
+      <PropertyRef Name="IsPartnerOneComfirm" />
       <PropertyRef Name="DepartmentOneName" />
       <PropertyRef Name="DepartmentTwoName" />
       <PropertyRef Name="DepartmentThreeName" />
@@ -1176,6 +1180,10 @@ warning 6002: The table/view 'AuditSystem.dbo.VW_ProformaInvoiceHead' does not h
     <Property Name="TaxType" Type="nvarchar(max)" />
     <Property Name="Fk_NatureId" Type="int" Nullable="false" />
     <Property Name="NoNVat" Type="nvarchar(max)" />
+    <Property Name="TotalAmount" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="ValueNBT" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="ValueVAT" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="TotalReceivedAmount" Type="decimal" Precision="18" Scale="2" />
     <Property Name="NoNVatPrecentage" Type="decimal" Precision="18" Scale="2" />
     <Property Name="VatPercentage" Type="decimal" Precision="18" Scale="2" />
     <Property Name="NBTPercentage" Type="decimal" Precision="18" Scale="2" />
@@ -1195,7 +1203,10 @@ warning 6002: The table/view 'AuditSystem.dbo.VW_ProformaInvoiceHead' does not h
     <Property Name="Delete_By" Type="nvarchar(max)" />
     <Property Name="Delete_Date" Type="datetime2" Precision="7" />
     <Property Name="Fk_CompanyId" Type="int" Nullable="false" />
+    <Property Name="IsPartnerOneComfirm" Type="bit" Nullable="false" />
+    <Property Name="PartnerOneComfirmDate" Type="datetime2" Precision="7" />
     <Property Name="CompanyName" Type="nvarchar(max)" />
+    <Property Name="JobCode" Type="nvarchar(max)" />
     <Property Name="DepartmentOneName" Type="nvarchar(max)" Nullable="false" />
     <Property Name="DepartmentTwoName" Type="nvarchar(max)" Nullable="false" />
     <Property Name="DepartmentThreeName" Type="nvarchar(max)" Nullable="false" />
@@ -1594,6 +1605,18 @@ warning 6002: The table/view 'AuditSystem.dbo.VW_SectorMaster' does not have a p
       </Principal>
       <Dependent Role="TblProformaInvoiceBody">
         <PropertyRef Name="Fk_JobMasterId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TblProformaInvoiceBody_TblProformaInvoiceHead_Fk_ProformaInvoiceHeadId">
+    <End Role="TblProformaInvoiceHead" Type="Self.TblProformaInvoiceHead" Multiplicity="1" />
+    <End Role="TblProformaInvoiceBody" Type="Self.TblProformaInvoiceBody" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TblProformaInvoiceHead">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TblProformaInvoiceBody">
+        <PropertyRef Name="Fk_ProformaInvoiceHeadId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -2138,6 +2161,10 @@ FROM [dbo].[VW_OpeningBalance] AS [VW_OpeningBalance]</DefiningQuery>
 [VW_ProformaInvoiceHead].[TaxType] AS [TaxType], 
 [VW_ProformaInvoiceHead].[Fk_NatureId] AS [Fk_NatureId], 
 [VW_ProformaInvoiceHead].[NoNVat] AS [NoNVat], 
+[VW_ProformaInvoiceHead].[TotalAmount] AS [TotalAmount], 
+[VW_ProformaInvoiceHead].[ValueNBT] AS [ValueNBT], 
+[VW_ProformaInvoiceHead].[ValueVAT] AS [ValueVAT], 
+[VW_ProformaInvoiceHead].[TotalReceivedAmount] AS [TotalReceivedAmount], 
 [VW_ProformaInvoiceHead].[NoNVatPrecentage] AS [NoNVatPrecentage], 
 [VW_ProformaInvoiceHead].[VatPercentage] AS [VatPercentage], 
 [VW_ProformaInvoiceHead].[NBTPercentage] AS [NBTPercentage], 
@@ -2157,7 +2184,10 @@ FROM [dbo].[VW_OpeningBalance] AS [VW_OpeningBalance]</DefiningQuery>
 [VW_ProformaInvoiceHead].[Delete_By] AS [Delete_By], 
 [VW_ProformaInvoiceHead].[Delete_Date] AS [Delete_Date], 
 [VW_ProformaInvoiceHead].[Fk_CompanyId] AS [Fk_CompanyId], 
+[VW_ProformaInvoiceHead].[IsPartnerOneComfirm] AS [IsPartnerOneComfirm], 
+[VW_ProformaInvoiceHead].[PartnerOneComfirmDate] AS [PartnerOneComfirmDate], 
 [VW_ProformaInvoiceHead].[CompanyName] AS [CompanyName], 
+[VW_ProformaInvoiceHead].[JobCode] AS [JobCode], 
 [VW_ProformaInvoiceHead].[DepartmentOneName] AS [DepartmentOneName], 
 [VW_ProformaInvoiceHead].[DepartmentTwoName] AS [DepartmentTwoName], 
 [VW_ProformaInvoiceHead].[DepartmentThreeName] AS [DepartmentThreeName], 
@@ -2296,6 +2326,10 @@ FROM [dbo].[VW_SectorMaster] AS [VW_SectorMaster]</DefiningQuery>
     </AssociationSet>
     <AssociationSet Name="FK_TblProformaInvoiceBody_TblJobMaster_Fk_JobMasterId" Association="Self.FK_TblProformaInvoiceBody_TblJobMaster_Fk_JobMasterId">
       <End Role="TblJobMaster" EntitySet="TblJobMaster" />
+      <End Role="TblProformaInvoiceBody" EntitySet="TblProformaInvoiceBody" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TblProformaInvoiceBody_TblProformaInvoiceHead_Fk_ProformaInvoiceHeadId" Association="Self.FK_TblProformaInvoiceBody_TblProformaInvoiceHead_Fk_ProformaInvoiceHeadId">
+      <End Role="TblProformaInvoiceHead" EntitySet="TblProformaInvoiceHead" />
       <End Role="TblProformaInvoiceBody" EntitySet="TblProformaInvoiceBody" />
     </AssociationSet>
     <AssociationSet Name="FK_TblProformaInvoiceHead_TblCompany_Fk_CompanyId" Association="Self.FK_TblProformaInvoiceHead_TblCompany_Fk_CompanyId">

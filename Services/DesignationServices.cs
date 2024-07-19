@@ -95,7 +95,7 @@ namespace WOPHRMSystem.Services
                 var dbobj = GetById(obj.Id);
                 dbobj.IsDelete = true;
                 dbobj.Delete_By = obj.Delete_By;
-                dbobj.Edit_Date = new CommonResources().LocalDatetime().Date;
+                dbobj.Delete_Date = new CommonResources().LocalDatetime().Date;
 
                 _context.SaveChanges();
                 return new MessageModel()

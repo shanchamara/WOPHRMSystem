@@ -19,6 +19,7 @@ namespace WOPHRMSystem.Context
         public Nullable<decimal> Amount { get; set; }
         public int Fk_CustomerId { get; set; }
         public int Fk_JobMasterId { get; set; }
+        public int Fk_ProformaInvoiceHeadId { get; set; }
         public bool IsDelete { get; set; }
         public string Create_By { get; set; }
         public System.DateTime Create_Date { get; set; }
@@ -30,5 +31,6 @@ namespace WOPHRMSystem.Context
         public virtual TblCustomer TblCustomer { get; set; }
         public virtual TblInvoiceNarrationMaster TblInvoiceNarrationMaster { get; set; }
         public virtual TblJobMaster TblJobMaster { get; set; }
+        public virtual TblProformaInvoiceHead TblProformaInvoiceHead { get; set; }
     }
 }

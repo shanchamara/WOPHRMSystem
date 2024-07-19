@@ -34,6 +34,10 @@ namespace WOPHRMSystem.Context
         public string TaxType { get; set; }
         public int Fk_NatureId { get; set; }
         public string NoNVat { get; set; }
+        public Nullable<decimal> TotalAmount { get; set; }
+        public Nullable<decimal> ValueNBT { get; set; }
+        public Nullable<decimal> ValueVAT { get; set; }
+        public Nullable<decimal> TotalReceivedAmount { get; set; }
         public Nullable<decimal> NoNVatPrecentage { get; set; }
         public Nullable<decimal> VatPercentage { get; set; }
         public Nullable<decimal> NBTPercentage { get; set; }
@@ -53,7 +57,10 @@ namespace WOPHRMSystem.Context
         public string Delete_By { get; set; }
         public Nullable<System.DateTime> Delete_Date { get; set; }
         public int Fk_CompanyId { get; set; }
+        public bool IsPartnerOneComfirm { get; set; }
+        public Nullable<System.DateTime> PartnerOneComfirmDate { get; set; }
         public string CompanyName { get; set; }
+        public string JobCode { get; set; }
         public string DepartmentOneName { get; set; }
         public string DepartmentTwoName { get; set; }
         public string DepartmentThreeName { get; set; }

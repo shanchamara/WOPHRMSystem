@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DocumentFormat.OpenXml.Office2010.Excel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Transactions;
@@ -263,7 +264,7 @@ namespace WOPHRMSystem.Services
 
         public TblJobMasterAssignTemp GetById(int Id)
         {
-            return _context.TblJobMasterAssignTemps.SingleOrDefault(i => i.Id == Id);
+            return _context.TblJobMasterAssignTemps.SingleOrDefault(i => i.Id == Id && i.IsProjectOnwer.Equals(true));
         }
 
         public void DeleteCurrentlyTemp(string Create_By)
@@ -291,15 +292,28 @@ namespace WOPHRMSystem.Services
         {
             try
             {
-                var dbobj = GetById(obj.Id);
-                _context.TblJobMasterAssignTemps.Remove(dbobj);
+                var dbobj = _context.TblJobMasterAssignTemps.SingleOrDefault(i => i.Id == obj.Id && i.IsProjectOnwer.Equals(false));
 
-                _context.SaveChanges();
-                return new MessageModel()
+                if (dbobj != null)
                 {
-                    Status = "success",
-                    Text = $"This Record have been deleted Successfully",
-                };
+                    _context.TblJobMasterAssignTemps.Remove(dbobj);
+
+                    _context.SaveChanges();
+                    return new MessageModel()
+                    {
+                        Status = "success",
+                        Text = $"This Record have been deleted Successfully",
+                    };
+                }
+                else
+                {
+                    return new MessageModel()
+                    {
+                        Status = "warning",
+                        Text = $"Can't delete that partner",
+                    };
+                }
+               
             }
             catch (Exception)
             {

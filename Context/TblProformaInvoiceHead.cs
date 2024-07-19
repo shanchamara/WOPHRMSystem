@@ -14,7 +14,13 @@ namespace WOPHRMSystem.Context
     
     public partial class TblProformaInvoiceHead
     {
+        public TblProformaInvoiceHead()
+        {
+            this.TblProformaInvoiceBodies = new HashSet<TblProformaInvoiceBody>();
+        }
+    
         public int Id { get; set; }
+        public int Fk_CompanyId { get; set; }
         public string InvoiceNoProforma { get; set; }
         public int Fk_DepartmentIdOne { get; set; }
         public int Fk_DepartmentIdTwo { get; set; }
@@ -43,8 +49,14 @@ namespace WOPHRMSystem.Context
         public int Fk_JobMasterId { get; set; }
         public Nullable<decimal> LastYearAmount { get; set; }
         public Nullable<System.DateTime> PostingDate { get; set; }
+        public Nullable<decimal> TotalAmount { get; set; }
+        public Nullable<decimal> ValueNBT { get; set; }
+        public Nullable<decimal> ValueVAT { get; set; }
+        public Nullable<decimal> TotalReceivedAmount { get; set; }
         public bool IsActive { get; set; }
         public Nullable<System.DateTime> IsActiveDate { get; set; }
+        public bool IsPartnerOneComfirm { get; set; }
+        public Nullable<System.DateTime> PartnerOneComfirmDate { get; set; }
         public bool IsDelete { get; set; }
         public string Create_By { get; set; }
         public System.DateTime Create_Date { get; set; }
@@ -52,11 +64,6 @@ namespace WOPHRMSystem.Context
         public Nullable<System.DateTime> Edit_Date { get; set; }
         public string Delete_By { get; set; }
         public Nullable<System.DateTime> Delete_Date { get; set; }
-        public int Fk_CompanyId { get; set; }
-        public Nullable<decimal> TotalAmount { get; set; }
-        public Nullable<decimal> TotalReceivedAmount { get; set; }
-        public Nullable<decimal> ValueNBT { get; set; }
-        public Nullable<decimal> ValueVAT { get; set; }
     
         public virtual TblCompany TblCompany { get; set; }
         public virtual TblCustomer TblCustomer { get; set; }
@@ -66,6 +73,7 @@ namespace WOPHRMSystem.Context
         public virtual TblInvoiceShortNarrationMaster TblInvoiceShortNarrationMaster { get; set; }
         public virtual TblJobMaster TblJobMaster { get; set; }
         public virtual TblNatureMaster TblNatureMaster { get; set; }
+        public virtual ICollection<TblProformaInvoiceBody> TblProformaInvoiceBodies { get; set; }
         public virtual TblWorkGroup TblWorkGroup { get; set; }
     }
 }

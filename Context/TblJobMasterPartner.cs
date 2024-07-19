@@ -20,6 +20,7 @@ namespace WOPHRMSystem.Context
         public int Fk_CustomerId { get; set; }
         public string TypeOfTable { get; set; }
         public int TypeOfTableId { get; set; }
+        public bool IsProjectOnwer { get; set; }
         public bool IsDelete { get; set; }
         public string Create_By { get; set; }
         public System.DateTime Create_Date { get; set; }
@@ -27,7 +28,6 @@ namespace WOPHRMSystem.Context
         public Nullable<System.DateTime> Edit_Date { get; set; }
         public string Delete_By { get; set; }
         public Nullable<System.DateTime> Delete_Date { get; set; }
-        public bool IsProjectOnwer { get; set; }
     
         public virtual TblJobMaster TblJobMaster { get; set; }
     }

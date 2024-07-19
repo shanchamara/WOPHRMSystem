@@ -203,7 +203,7 @@
             $.ajax({
                 type: "DELETE",
                 url: "/Customer/Delete",
-                data: { ID: 1 },
+                data: { ID: Id },
                 success: function(result) {
                     Swal.fire({
                         icon: result.Status,

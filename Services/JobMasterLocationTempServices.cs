@@ -199,7 +199,7 @@ namespace WOPHRMSystem.Services
             {
                 var dr = (from a in _context.TblJobMasterLocations
                           join l in _context.TblLocations on a.FK_LocationId equals l.Id
-                          where a.Fk_JobMasterId == JobId
+                          where a.Fk_JobMasterId == JobId && a.IsDelete == false
                           orderby a.Id descending
                           select new JobMasterLocationTempModel()
                           {

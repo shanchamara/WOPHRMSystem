@@ -19,6 +19,7 @@ namespace WOPHRMSystem.Context
         public int Fk_JobMasterId { get; set; }
         public int Fk_EmployeeId { get; set; }
         public string Narration { get; set; }
+        public bool IsApplyTravelingCost { get; set; }
         public int Fk_LocationId { get; set; }
         public Nullable<decimal> Hours { get; set; }
         public int Fk_WorkTypeId { get; set; }
@@ -30,7 +31,6 @@ namespace WOPHRMSystem.Context
         public Nullable<System.DateTime> Edit_Date { get; set; }
         public string Delete_By { get; set; }
         public Nullable<System.DateTime> Delete_Date { get; set; }
-        public bool IsApplyTravelingCost { get; set; }
     
         public virtual TblCustomer TblCustomer { get; set; }
         public virtual TblEmployee TblEmployee { get; set; }

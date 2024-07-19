@@ -200,6 +200,8 @@
                                 </p>
                             </a>
                             <ul class="nav nav-treeview">
+
+
                                 <li class="nav-item">
                                     <a href="@Url.Action("Index","JobMaster")" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
@@ -315,40 +317,32 @@
                             </ul>
                         </li>
 
-                        <li class="nav-item">
-                            <a href="pages/widgets.html" class="nav-link">
-                                <i class="nav-icon fas fa-th"></i>
-                                <p>
-                                    Widgets
-                                    <span class="right badge badge-danger">New</span>
-                                </p>
-                            </a>
-                        </li>
+
                         <li class="nav-item">
                             <a href="#" class="nav-link">
                                 <i class="nav-icon fas fa-chart-pie"></i>
                                 <p>
-                                    Charts
+                                    Proforma Invoice
                                     <i class="right fas fa-angle-left"></i>
                                 </p>
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="pages/charts/chartjs.html" class="nav-link">
+                                    <a href="@Url.Action("Index","ProformaInvoiceHead")" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>ChartJS</p>
+                                        <p>Proforma Invoice</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="pages/charts/flot.html" class="nav-link">
+                                    <a href="@Url.Action("PendingPartnerConfirm","ProformaInvoiceHead")" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>Flot</p>
+                                        <p>Pending Proforma Invoice Confirm by Partner</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="pages/charts/inline.html" class="nav-link">
+                                    <a href="@Url.Action("PartnerConfirmed","ProformaInvoiceHead")" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>Inline</p>
+                                        <p>Proforma Invoice Confirmed by Partner</p>
                                     </a>
                                 </li>
                             </ul>

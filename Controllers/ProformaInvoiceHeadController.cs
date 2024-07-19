@@ -22,7 +22,8 @@ namespace WOPHRMSystem.Controllers
         readonly JobMasterServices jobMasterServices = new JobMasterServices();
         readonly CompanyServices companyServices = new CompanyServices();
         readonly InvoiceNarrationMasterServices narrationMasterServices = new InvoiceNarrationMasterServices();
-
+        readonly DepartmentSecondServices secondServices = new DepartmentSecondServices();
+        readonly DepartmentThirdServices thirdServices = new DepartmentThirdServices();
 
         #region InvoiceHead
 
@@ -85,7 +86,6 @@ namespace WOPHRMSystem.Controllers
                         Fk_CustomerId = masterModel.Fk_CustomerId,
                         Fk_DepartmentIdTwo = masterModel.Fk_DepartmentIdTwo,
                         Fk_ManagerOne = masterModel.Fk_ManagerOne,
-                        IsActiveDate = masterModel.IsActiveDate,
                         LastYearAmount = masterModel.LastYearAmount,
                         NoNVat = masterModel.NoNVat,
                         NBTPercentage = masterModel.NBTPercentage,
@@ -101,7 +101,8 @@ namespace WOPHRMSystem.Controllers
                         PostingDate = masterModel.PostingDate,
                         NarrationOne = masterModel.NarrationOne,
                         NarrationTwo = masterModel.NarrationTwo,
-                        Create_Date = new CommonResources().LocalDatetime().Date
+                        Create_Date = new CommonResources().LocalDatetime().Date,
+                        
                     };
                     return Json(_ClientService.Insert(tbl));
                 };
@@ -128,9 +129,61 @@ namespace WOPHRMSystem.Controllers
         [HttpGet]
         public ActionResult Edit(int Id)
         {
+            narrationMasterServices.DeleteCurrentlyTempAndInsertDataForUpdate("User", Id);
             var dt = _ClientService.GetById(Id);
+
             var model = new ProformaInvoiceHeadModel()
             {
+                Id = Id,
+                TotalReceivedAmount = dt.TotalReceivedAmount,
+                ValueVAT = dt.ValueVAT,
+                TotalAmount = dt.TotalAmount,
+                ValueNBT = dt.ValueNBT,
+                TaxType = dt.TaxType,
+                WorkGroupLists = new SelectList(workGroup.GetAll(), "Id", "CodeAndNarration"),
+                PartnerLists = new SelectList(employee.GetAllIsPartner(), "Id", "Name"),
+                CompanyLists = new SelectList(companyServices.GetAll(), "Id", "Name"),
+                MangerLists = new SelectList(employee.GetAllIsManager(), "Id", "Name"),
+                CustomerLists = new SelectList(customer.GetAll(), "Id", "Name"),
+                NarrationOne = " To Profressional Services render re - ",
+                InvoiceShrotNarration = new SelectList(invoiceShortNarrationMasterServices.GetAll(), "Id", "CodeAndNarration"),
+                DepartmentListOne = new SelectList(department.GetAll(), "Id", "CodeAndNarration"),
+                DepartmentListThird = new SelectList(thirdServices.GetDepartmentThirdByDepartmentOneId(dt.Fk_DepartmentIdOne, dt.Fk_DepartmentIdTwo), "Id", "CodeAndNarration"),
+                DepartmentListsecond = new SelectList(secondServices.GetDepartmentSecondByDepartmentOneId(dt.Fk_DepartmentIdOne), "Id", "CodeAndNarration"),
+                NatureList = new SelectList(natureMasterServices.GetAll(), "Id", "CodeAndNarration"),
+                JobList = new SelectList(jobMasterServices.GetAllJObsForIsReadytoInvoice(dt.Fk_CustomerId), "Fk_JobMasterId", "FullDetails"),
+                Date = dt.Date,
+                DocNo = dt.DocNo,
+                Fk_CompanyId = dt.Fk_CompanyId,
+                Fk_CustomerId = dt.Fk_CustomerId,
+                Fk_DepartmentIdOne = dt.Fk_DepartmentIdOne,
+                Fk_DepartmentIdThird = dt.Fk_DepartmentIdThird,
+                Fk_DepartmentIdTwo = dt.Fk_DepartmentIdTwo,
+                Fk_InvoiceShortNarrationId = dt.Fk_InvoiceShortNarrationId,
+                Fk_JobMasterId = dt.Fk_JobMasterId,
+                Fk_ManagerOne = dt.Fk_ManagerOne,
+                Fk_ManagerSecond = dt.Fk_ManagerSecond,
+                Fk_ManagerThird = dt.Fk_ManagerThird,
+                Fk_NatureId = dt.Fk_NatureId,
+                Fk_PartnerOne = dt.Fk_PartnerOne,
+                Fk_PartnerSecond = dt.Fk_PartnerSecond,
+                Fk_PartnerThird = dt.Fk_PartnerThird,
+                Fk_WorkGroupId = dt.Fk_WorkGroupId,
+                IsActive = dt.IsActive,
+                IsActiveDate = dt.IsActiveDate,
+                InvoiceNoProforma = dt.InvoiceNoProforma,
+                IsDelete = dt.IsDelete,
+                LastYearAmount = dt.LastYearAmount,
+                NBTPercentage = dt.NBTPercentage,
+                NarrationTwo = dt.NarrationTwo,
+                NoNVat = dt.NoNVat,
+                NoNVatPrecentage = dt.NoNVatPrecentage,
+                OurReferance = dt.OurReferance,
+                PostingDate = dt.PostingDate,
+                VatPercentage = dt.VatPercentage,
+                YourReferance = dt.YourReferance,
+
+
 
             };
             return View(model);
@@ -145,7 +198,44 @@ namespace WOPHRMSystem.Controllers
                 {
                     var tbl = new TblProformaInvoiceHead
                     {
-
+                        Create_By = "User",
+                        IsActive = masterModel.IsActive,
+                        Fk_PartnerSecond = masterModel.Fk_PartnerSecond,
+                        Fk_PartnerOne = masterModel.Fk_PartnerOne,
+                        Fk_ManagerSecond = masterModel.Fk_ManagerSecond,
+                        Fk_NatureId = masterModel.Fk_NatureId,
+                        Fk_PartnerThird = masterModel.Fk_PartnerThird,
+                        Fk_ManagerThird = masterModel.Fk_ManagerThird,
+                        Fk_WorkGroupId = masterModel.Fk_WorkGroupId,
+                        Fk_JobMasterId = masterModel.Fk_JobMasterId,
+                        Fk_InvoiceShortNarrationId = masterModel.Fk_InvoiceShortNarrationId,
+                        Fk_DepartmentIdOne = masterModel.Fk_DepartmentIdOne,
+                        Fk_DepartmentIdThird = masterModel.Fk_DepartmentIdThird,
+                        Date = Convert.ToDateTime(masterModel.Date),
+                        DocNo = masterModel.DocNo,
+                        Fk_CompanyId = masterModel.Fk_CompanyId,
+                        Fk_CustomerId = masterModel.Fk_CustomerId,
+                        Fk_DepartmentIdTwo = masterModel.Fk_DepartmentIdTwo,
+                        Fk_ManagerOne = masterModel.Fk_ManagerOne,
+                        IsActiveDate = masterModel.IsActiveDate,
+                        LastYearAmount = masterModel.LastYearAmount,
+                        NoNVat = masterModel.NoNVat,
+                        NBTPercentage = masterModel.NBTPercentage,
+                        NoNVatPrecentage = masterModel.NoNVatPrecentage,
+                        OurReferance = masterModel.OurReferance,
+                        TaxType = masterModel.TaxType,
+                        ValueNBT = masterModel.ValueNBT,
+                        VatPercentage = masterModel.VatPercentage,
+                        YourReferance = masterModel.YourReferance,
+                        ValueVAT = masterModel.ValueVAT,
+                        TotalReceivedAmount = masterModel.TotalReceivedAmount,
+                        TotalAmount = masterModel.TotalAmount,
+                        PostingDate = masterModel.PostingDate,
+                        NarrationOne = masterModel.NarrationOne,
+                        NarrationTwo = masterModel.NarrationTwo,
+                        Create_Date = new CommonResources().LocalDatetime().Date,
+                        Id = masterModel.Id,
+                        
                     };
                     return Json(_ClientService.Update(tbl));
                 }
@@ -304,7 +394,8 @@ namespace WOPHRMSystem.Controllers
                         FK_JobMasterId = JobId,
                         Amount = Amount,
                         Fk_InvoiceNarrttionId = NarratiionId,
-                        Id = Id
+                        Id = Id,
+                        BodyRowId = Id
                     };
 
                     return Json(narrationMasterServices.Update(tbl));
@@ -347,6 +438,90 @@ namespace WOPHRMSystem.Controllers
             }
 
         }
-        #endregion 
+        #endregion
+
+
+        #region Pending Partner Confirm
+
+
+        [HttpGet]
+        public ActionResult PendingPartnerConfirm()
+        {
+            var dt = _ClientService.GetAllIspartnerPendingComfirm();
+            return View(dt);
+        }
+
+
+        [HttpGet]
+        public ActionResult PartnerConfirmed()
+        {
+            var dt = _ClientService.GetAllIspartnerComfirmed();
+            return View(dt);
+        }
+
+        [HttpGet]
+        public ActionResult PartnerEdit(int Id)
+        {
+            narrationMasterServices.DeleteCurrentlyTempAndInsertDataForUpdate("User", Id);
+            var dt = _ClientService.GetById(Id);
+
+            var model = new ProformaInvoiceHeadModel()
+            {
+                Id = Id,
+                TotalReceivedAmount = dt.TotalReceivedAmount,
+                ValueVAT = dt.ValueVAT,
+                TotalAmount = dt.TotalAmount,
+                ValueNBT = dt.ValueNBT,
+                TaxType = dt.TaxType,
+                WorkGroupLists = new SelectList(workGroup.GetAll(), "Id", "CodeAndNarration"),
+                PartnerLists = new SelectList(employee.GetAllIsPartner(), "Id", "Name"),
+                CompanyLists = new SelectList(companyServices.GetAll(), "Id", "Name"),
+                MangerLists = new SelectList(employee.GetAllIsManager(), "Id", "Name"),
+                CustomerLists = new SelectList(customer.GetAll(), "Id", "Name"),
+                NarrationOne = " To Profressional Services render re - ",
+                InvoiceShrotNarration = new SelectList(invoiceShortNarrationMasterServices.GetAll(), "Id", "CodeAndNarration"),
+                DepartmentListOne = new SelectList(department.GetAll(), "Id", "CodeAndNarration"),
+                DepartmentListThird = new SelectList(thirdServices.GetDepartmentThirdByDepartmentOneId(dt.Fk_DepartmentIdOne, dt.Fk_DepartmentIdTwo), "Id", "CodeAndNarration"),
+                DepartmentListsecond = new SelectList(secondServices.GetDepartmentSecondByDepartmentOneId(dt.Fk_DepartmentIdOne), "Id", "CodeAndNarration"),
+                NatureList = new SelectList(natureMasterServices.GetAll(), "Id", "CodeAndNarration"),
+                JobList = new SelectList(jobMasterServices.GetAllJObsForIsReadytoInvoice(dt.Fk_CustomerId), "Fk_JobMasterId", "FullDetails"),
+                Date = dt.Date,
+                DocNo = dt.DocNo,
+                Fk_CompanyId = dt.Fk_CompanyId,
+                Fk_CustomerId = dt.Fk_CustomerId,
+                Fk_DepartmentIdOne = dt.Fk_DepartmentIdOne,
+                Fk_DepartmentIdThird = dt.Fk_DepartmentIdThird,
+                Fk_DepartmentIdTwo = dt.Fk_DepartmentIdTwo,
+                Fk_InvoiceShortNarrationId = dt.Fk_InvoiceShortNarrationId,
+                Fk_JobMasterId = dt.Fk_JobMasterId,
+                Fk_ManagerOne = dt.Fk_ManagerOne,
+                Fk_ManagerSecond = dt.Fk_ManagerSecond,
+                Fk_ManagerThird = dt.Fk_ManagerThird,
+                Fk_NatureId = dt.Fk_NatureId,
+                Fk_PartnerOne = dt.Fk_PartnerOne,
+                Fk_PartnerSecond = dt.Fk_PartnerSecond,
+                Fk_PartnerThird = dt.Fk_PartnerThird,
+                Fk_WorkGroupId = dt.Fk_WorkGroupId,
+                IsActive = dt.IsActive,
+                IsActiveDate = dt.IsActiveDate,
+                InvoiceNoProforma = dt.InvoiceNoProforma,
+                IsDelete = dt.IsDelete,
+                LastYearAmount = dt.LastYearAmount,
+                NBTPercentage = dt.NBTPercentage,
+                NarrationTwo = dt.NarrationTwo,
+                NoNVat = dt.NoNVat,
+                NoNVatPrecentage = dt.NoNVatPrecentage,
+                OurReferance = dt.OurReferance,
+                PostingDate = dt.PostingDate,
+                VatPercentage = dt.VatPercentage,
+                YourReferance = dt.YourReferance,
+
+
+
+            };
+            return View(model);
+        }
+
+        #endregion
     }
 }

@@ -38,12 +38,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Add New Customer</h1>
+                    <h1>Add New Proforma Invoice</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item">Home</li>
-                        <li class="breadcrumb-item active"><a href="@Url.Action("Index","Customer")">List Of Customers </a></li>
+                        <li class="breadcrumb-item active"><a href="@Url.Action("Index","Customer")">List Of Proforma Invoice's </a></li>
                     </ol>
                 </div>
             </div>
@@ -538,10 +538,7 @@
                                                     <div class="col-lg-6">
                                                         <div class="mb-2">
                                                             <!-- Adjusted margin bottom here -->
-                                                            <div class="custom-control custom-checkbox">
-                                                                @Html.CheckBoxFor(model => model.IsActive, new { @class = "form-check-input", id = "exampleCheck1" })
-                                                                <label for="exampleCheck1">Cancelled.</label>
-                                                            </div>
+                                                            
                                                         </div>
                                                     </div>
 
@@ -553,15 +550,7 @@
                                                         <div class="mb-2">
                                                             <!-- Adjusted margin bottom here -->
                                                             <div class="form-group">
-                                                                <label for="exampleInputEmail1" class="form-control-sm">Cancelled Date</label>
-                                                                <div class="input-group date" id="reservationdate" data-target-input="nearest">
-                                                                    @Html.EditorFor(model => model.IsActiveDate, new { htmlAttributes = new { @class = "form-control datetimepicker-input form-control-sm", data_target = "#IsActiveDate" } })
-
-                                                                    @*<input type="text" name="Date" class="form-control datetimepicker-input" data-target="#reservationdate" />*@
-                                                                    <div class="input-group-append" data-target="#IsActiveDate" data-toggle="datetimepicker">
-                                                                        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-                                                                    </div>
-                                                                </div>
+                                                                
                                                             </div>
                                                         </div>
                                                     </div>
@@ -1204,28 +1193,41 @@
                     amountField2.removeAttribute("readonly");
                     debugger
 
-                           // Get the entered values
-                            var vatPercentage = parseFloat($('#vatPercentageInput').val()) || 0;
-                            var nbtPercentage = parseFloat($('#NbtPercentageInput').val()) || 0;
-                            var totalAmount = parseFloat($('#TotalAmount').val()) || 0;
-                            debugger
-                            // Calculate value VAT and value NBT
-                            var valueVAT = totalAmount * (vatPercentage / 100);
-                            var valueNBT = totalAmount * (nbtPercentage / 100);
+                    // Get the entered values
+                    var vatPercentage = parseFloat($('#vatPercentageInput').val()) || 0;
+                    var nbtPercentage = parseFloat($('#NbtPercentageInput').val()) || 0;
+                    var totalAmount = parseFloat($('#TotalAmount').val()) || 0;
+                    debugger
+                    // Calculate value VAT and value NBT
+                    var valueVAT = totalAmount * (vatPercentage / 100);
+                    var valueNBT = totalAmount * (nbtPercentage / 100);
 
-                            // Update the value VAT and value NBT fields
-                            $('#ValueVAT').val(valueVAT.toFixed(2));
-                            $('#ValueNBT').val(valueNBT.toFixed(2));
+                    // Update the value VAT and value NBT fields
+                    $('#ValueVAT').val(valueVAT.toFixed(2));
+                    $('#ValueNBT').val(valueNBT.toFixed(2));
 
-                            // Calculate grand total
-                            var grandTotal = totalAmount + valueVAT + valueNBT;
+                    // Calculate grand total
+                    var grandTotal = totalAmount + valueVAT + valueNBT;
 
-                            // Update the grand total display
+                    // Update the grand total display
 
-                             $('#TotalReceivedAmount').val(grandTotal.toFixed(2));
+                     $('#TotalReceivedAmount').val(grandTotal.toFixed(2));
 
                 },
             })
+
+            $.ajax({
+                type: "GET",
+                url: "/ProformaInvoiceHead/InvoiceNarrationList",
+                //data: { Createby: 'User' },
+
+                success: function (result) {
+                    debugger
+                    $("#staticBackdropBody").html(result);
+
+                },
+            })
+
         }
 
 
