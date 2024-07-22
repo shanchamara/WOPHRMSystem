@@ -102,7 +102,7 @@ namespace WOPHRMSystem.Controllers
                         NarrationOne = masterModel.NarrationOne,
                         NarrationTwo = masterModel.NarrationTwo,
                         Create_Date = new CommonResources().LocalDatetime().Date,
-                        
+
                     };
                     return Json(_ClientService.Insert(tbl));
                 };
@@ -235,6 +235,12 @@ namespace WOPHRMSystem.Controllers
                         NarrationTwo = masterModel.NarrationTwo,
                         Create_Date = new CommonResources().LocalDatetime().Date,
                         Id = masterModel.Id,
+                        IsMangerOneComfirm = masterModel.IsMangerOneComfirm,
+                        IsPostingToInvoice = masterModel.IsPostingToInvoice,
+                        PartnerOneComfirmDate = masterModel.PartnerOneComfirmDate,
+                        IsPartnerOneComfirm = masterModel.IsPartnerOneComfirm,
+                        ManagerOneComfirmDate = masterModel.ManagerOneComfirmDate,
+                        InvoiceNoProforma = masterModel.InvoiceNoProforma,
                         
                     };
                     return Json(_ClientService.Update(tbl));
@@ -502,8 +508,6 @@ namespace WOPHRMSystem.Controllers
                 Fk_PartnerSecond = dt.Fk_PartnerSecond,
                 Fk_PartnerThird = dt.Fk_PartnerThird,
                 Fk_WorkGroupId = dt.Fk_WorkGroupId,
-                IsActive = dt.IsActive,
-                IsActiveDate = dt.IsActiveDate,
                 InvoiceNoProforma = dt.InvoiceNoProforma,
                 IsDelete = dt.IsDelete,
                 LastYearAmount = dt.LastYearAmount,
@@ -515,13 +519,402 @@ namespace WOPHRMSystem.Controllers
                 PostingDate = dt.PostingDate,
                 VatPercentage = dt.VatPercentage,
                 YourReferance = dt.YourReferance,
-
-
+                IsPartnerOneComfirm = dt.IsPartnerOneComfirm,
+                PartnerOneComfirmDate = dt.PartnerOneComfirmDate,
+                IsActive = dt.IsActive,
+                IsActiveDate = dt.IsActiveDate,
+                IsMangerOneComfirm = dt.IsMangerOneComfirm,
+                ManagerOneComfirmDate = dt.ManagerOneComfirmDate
 
             };
             return View(model);
         }
 
+
+        [HttpPost]
+        public ActionResult PartnerEdit(ProformaInvoiceHeadModel masterModel)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    var tbl = new TblProformaInvoiceHead
+                    {
+                        Create_By = "User",
+                        Fk_PartnerSecond = masterModel.Fk_PartnerSecond,
+                        Fk_PartnerOne = masterModel.Fk_PartnerOne,
+                        Fk_ManagerSecond = masterModel.Fk_ManagerSecond,
+                        Fk_NatureId = masterModel.Fk_NatureId,
+                        Fk_PartnerThird = masterModel.Fk_PartnerThird,
+                        Fk_ManagerThird = masterModel.Fk_ManagerThird,
+                        Fk_WorkGroupId = masterModel.Fk_WorkGroupId,
+                        Fk_JobMasterId = masterModel.Fk_JobMasterId,
+                        Fk_InvoiceShortNarrationId = masterModel.Fk_InvoiceShortNarrationId,
+                        Fk_DepartmentIdOne = masterModel.Fk_DepartmentIdOne,
+                        Fk_DepartmentIdThird = masterModel.Fk_DepartmentIdThird,
+                        Date = Convert.ToDateTime(masterModel.Date),
+                        DocNo = masterModel.DocNo,
+                        Fk_CompanyId = masterModel.Fk_CompanyId,
+                        Fk_CustomerId = masterModel.Fk_CustomerId,
+                        Fk_DepartmentIdTwo = masterModel.Fk_DepartmentIdTwo,
+                        Fk_ManagerOne = masterModel.Fk_ManagerOne,
+                        LastYearAmount = masterModel.LastYearAmount,
+                        NoNVat = masterModel.NoNVat,
+                        NBTPercentage = masterModel.NBTPercentage,
+                        NoNVatPrecentage = masterModel.NoNVatPrecentage,
+                        OurReferance = masterModel.OurReferance,
+                        TaxType = masterModel.TaxType,
+                        ValueNBT = masterModel.ValueNBT,
+                        VatPercentage = masterModel.VatPercentage,
+                        YourReferance = masterModel.YourReferance,
+                        ValueVAT = masterModel.ValueVAT,
+                        TotalReceivedAmount = masterModel.TotalReceivedAmount,
+                        TotalAmount = masterModel.TotalAmount,
+                        PostingDate = masterModel.PostingDate,
+                        NarrationOne = masterModel.NarrationOne,
+                        NarrationTwo = masterModel.NarrationTwo,
+                        Create_Date = new CommonResources().LocalDatetime().Date,
+                        Id = masterModel.Id,
+                        IsPartnerOneComfirm = masterModel.IsPartnerOneComfirm,
+                        PartnerOneComfirmDate = masterModel.PartnerOneComfirmDate,
+                        IsActive = masterModel.IsActive,
+                        IsActiveDate = masterModel.IsActiveDate,
+                        InvoiceNoProforma = masterModel.InvoiceNoProforma,
+                        IsMangerOneComfirm = masterModel.IsMangerOneComfirm,
+                        ManagerOneComfirmDate = masterModel.ManagerOneComfirmDate,
+                        IsPostingToInvoice = masterModel.IsPostingToInvoice,
+                    };
+                    return Json(_ClientService.Update(tbl));
+                }
+            }
+            catch (Exception)
+            {
+                return Json(new MessageModel()
+                {
+                    Status = "warning",
+                    Text = $"There was a error with retrieving data. Please try again",
+                });
+            }
+            return Json(new MessageModel()
+            {
+                Status = "warning",
+                Text = $"There was a error with retrieving data. Please try again",
+            });
+        }
+
+
         #endregion
+
+
+        #region Pending Manager Comfirm 
+
+        [HttpGet]
+        public ActionResult PendingMangerConfirm()
+        {
+            var dt = _ClientService.GetAllIsMangerPendingComfirm();
+            return View(dt);
+        }
+
+
+
+        [HttpGet]
+        public ActionResult MangerConfirmed()
+        {
+            var dt = _ClientService.GetAllIsMangerComfirmed();
+            return View(dt);
+        }
+
+
+        [HttpGet]
+        public ActionResult ManagerEdit(int Id)
+        {
+            narrationMasterServices.DeleteCurrentlyTempAndInsertDataForUpdate("User", Id);
+            var dt = _ClientService.GetById(Id);
+
+            var model = new ProformaInvoiceHeadModel()
+            {
+                Id = Id,
+                TotalReceivedAmount = dt.TotalReceivedAmount,
+                ValueVAT = dt.ValueVAT,
+                TotalAmount = dt.TotalAmount,
+                ValueNBT = dt.ValueNBT,
+                TaxType = dt.TaxType,
+                WorkGroupLists = new SelectList(workGroup.GetAll(), "Id", "CodeAndNarration"),
+                PartnerLists = new SelectList(employee.GetAllIsPartner(), "Id", "Name"),
+                CompanyLists = new SelectList(companyServices.GetAll(), "Id", "Name"),
+                MangerLists = new SelectList(employee.GetAllIsManager(), "Id", "Name"),
+                CustomerLists = new SelectList(customer.GetAll(), "Id", "Name"),
+                NarrationOne = " To Profressional Services render re - ",
+                InvoiceShrotNarration = new SelectList(invoiceShortNarrationMasterServices.GetAll(), "Id", "CodeAndNarration"),
+                DepartmentListOne = new SelectList(department.GetAll(), "Id", "CodeAndNarration"),
+                DepartmentListThird = new SelectList(thirdServices.GetDepartmentThirdByDepartmentOneId(dt.Fk_DepartmentIdOne, dt.Fk_DepartmentIdTwo), "Id", "CodeAndNarration"),
+                DepartmentListsecond = new SelectList(secondServices.GetDepartmentSecondByDepartmentOneId(dt.Fk_DepartmentIdOne), "Id", "CodeAndNarration"),
+                NatureList = new SelectList(natureMasterServices.GetAll(), "Id", "CodeAndNarration"),
+                JobList = new SelectList(jobMasterServices.GetAllJObsForIsReadytoInvoice(dt.Fk_CustomerId), "Fk_JobMasterId", "FullDetails"),
+                Date = dt.Date,
+                DocNo = dt.DocNo,
+                Fk_CompanyId = dt.Fk_CompanyId,
+                Fk_CustomerId = dt.Fk_CustomerId,
+                Fk_DepartmentIdOne = dt.Fk_DepartmentIdOne,
+                Fk_DepartmentIdThird = dt.Fk_DepartmentIdThird,
+                Fk_DepartmentIdTwo = dt.Fk_DepartmentIdTwo,
+                Fk_InvoiceShortNarrationId = dt.Fk_InvoiceShortNarrationId,
+                Fk_JobMasterId = dt.Fk_JobMasterId,
+                Fk_ManagerOne = dt.Fk_ManagerOne,
+                Fk_ManagerSecond = dt.Fk_ManagerSecond,
+                Fk_ManagerThird = dt.Fk_ManagerThird,
+                Fk_NatureId = dt.Fk_NatureId,
+                Fk_PartnerOne = dt.Fk_PartnerOne,
+                Fk_PartnerSecond = dt.Fk_PartnerSecond,
+                Fk_PartnerThird = dt.Fk_PartnerThird,
+                Fk_WorkGroupId = dt.Fk_WorkGroupId,
+                InvoiceNoProforma = dt.InvoiceNoProforma,
+                IsDelete = dt.IsDelete,
+                LastYearAmount = dt.LastYearAmount,
+                NBTPercentage = dt.NBTPercentage,
+                NarrationTwo = dt.NarrationTwo,
+                NoNVat = dt.NoNVat,
+                NoNVatPrecentage = dt.NoNVatPrecentage,
+                OurReferance = dt.OurReferance,
+                PostingDate = dt.PostingDate,
+                VatPercentage = dt.VatPercentage,
+                YourReferance = dt.YourReferance,
+                IsMangerOneComfirm = dt.IsMangerOneComfirm,
+                ManagerOneComfirmDate = dt.ManagerOneComfirmDate,
+                IsPartnerOneComfirm = dt.IsPartnerOneComfirm,
+                PartnerOneComfirmDate = dt.PartnerOneComfirmDate,
+                IsActive = dt.IsActive,
+                IsActiveDate = dt.IsActiveDate,
+            };
+            return View(model);
+        }
+
+
+        [HttpPost]
+        public ActionResult ManagerEdit(ProformaInvoiceHeadModel masterModel)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    var tbl = new TblProformaInvoiceHead
+                    {
+                        Create_By = "User",
+                        Fk_PartnerSecond = masterModel.Fk_PartnerSecond,
+                        Fk_PartnerOne = masterModel.Fk_PartnerOne,
+                        Fk_ManagerSecond = masterModel.Fk_ManagerSecond,
+                        Fk_NatureId = masterModel.Fk_NatureId,
+                        Fk_PartnerThird = masterModel.Fk_PartnerThird,
+                        Fk_ManagerThird = masterModel.Fk_ManagerThird,
+                        Fk_WorkGroupId = masterModel.Fk_WorkGroupId,
+                        Fk_JobMasterId = masterModel.Fk_JobMasterId,
+                        Fk_InvoiceShortNarrationId = masterModel.Fk_InvoiceShortNarrationId,
+                        Fk_DepartmentIdOne = masterModel.Fk_DepartmentIdOne,
+                        Fk_DepartmentIdThird = masterModel.Fk_DepartmentIdThird,
+                        Date = Convert.ToDateTime(masterModel.Date),
+                        DocNo = masterModel.DocNo,
+                        Fk_CompanyId = masterModel.Fk_CompanyId,
+                        Fk_CustomerId = masterModel.Fk_CustomerId,
+                        Fk_DepartmentIdTwo = masterModel.Fk_DepartmentIdTwo,
+                        Fk_ManagerOne = masterModel.Fk_ManagerOne,
+                        LastYearAmount = masterModel.LastYearAmount,
+                        NoNVat = masterModel.NoNVat,
+                        NBTPercentage = masterModel.NBTPercentage,
+                        NoNVatPrecentage = masterModel.NoNVatPrecentage,
+                        OurReferance = masterModel.OurReferance,
+                        TaxType = masterModel.TaxType,
+                        ValueNBT = masterModel.ValueNBT,
+                        VatPercentage = masterModel.VatPercentage,
+                        YourReferance = masterModel.YourReferance,
+                        ValueVAT = masterModel.ValueVAT,
+                        TotalReceivedAmount = masterModel.TotalReceivedAmount,
+                        TotalAmount = masterModel.TotalAmount,
+                        PostingDate = masterModel.PostingDate,
+                        NarrationOne = masterModel.NarrationOne,
+                        NarrationTwo = masterModel.NarrationTwo,
+                        Create_Date = new CommonResources().LocalDatetime().Date,
+                        Id = masterModel.Id,
+                        IsMangerOneComfirm = masterModel.IsMangerOneComfirm,
+                        ManagerOneComfirmDate = masterModel.ManagerOneComfirmDate,
+                        IsPartnerOneComfirm = masterModel.IsPartnerOneComfirm,
+                        PartnerOneComfirmDate = masterModel.PartnerOneComfirmDate,
+                    };
+                    return Json(_ClientService.Update(tbl));
+                }
+            }
+            catch (Exception)
+            {
+                return Json(new MessageModel()
+                {
+                    Status = "warning",
+                    Text = $"There was a error with retrieving data. Please try again",
+                });
+            }
+            return Json(new MessageModel()
+            {
+                Status = "warning",
+                Text = $"There was a error with retrieving data. Please try again",
+            });
+        }
+
+
+        #endregion
+
+
+        #region Proforma Invoice Posting 
+
+
+        [HttpGet]
+        public ActionResult ReadyToTransferInvoice()
+        {
+            var dt = _ClientService.GetAllReadyToTransferInvoice();
+            return View(dt);
+        }
+
+        [HttpGet]
+        public ActionResult TransferedInvoice()
+        {
+            var dt = _ClientService.GetAllTransferedInvoice();
+            return View(dt);
+        }
+
+        [HttpGet]
+        public ActionResult ProformaInvoicePosting(int Id)
+        {
+            narrationMasterServices.DeleteCurrentlyTempAndInsertDataForUpdate("User", Id);
+            var dt = _ClientService.GetById(Id);
+
+            var model = new ProformaInvoiceHeadModel()
+            {
+                Id = Id,
+                TotalReceivedAmount = dt.TotalReceivedAmount,
+                ValueVAT = dt.ValueVAT,
+                TotalAmount = dt.TotalAmount,
+                ValueNBT = dt.ValueNBT,
+                TaxType = dt.TaxType,
+                WorkGroupLists = new SelectList(workGroup.GetAll(), "Id", "CodeAndNarration"),
+                PartnerLists = new SelectList(employee.GetAllIsPartner(), "Id", "Name"),
+                CompanyLists = new SelectList(companyServices.GetAll(), "Id", "Name"),
+                MangerLists = new SelectList(employee.GetAllIsManager(), "Id", "Name"),
+                CustomerLists = new SelectList(customer.GetAll(), "Id", "Name"),
+                NarrationOne = " To Profressional Services render re - ",
+                InvoiceShrotNarration = new SelectList(invoiceShortNarrationMasterServices.GetAll(), "Id", "CodeAndNarration"),
+                DepartmentListOne = new SelectList(department.GetAll(), "Id", "CodeAndNarration"),
+                DepartmentListThird = new SelectList(thirdServices.GetDepartmentThirdByDepartmentOneId(dt.Fk_DepartmentIdOne, dt.Fk_DepartmentIdTwo), "Id", "CodeAndNarration"),
+                DepartmentListsecond = new SelectList(secondServices.GetDepartmentSecondByDepartmentOneId(dt.Fk_DepartmentIdOne), "Id", "CodeAndNarration"),
+                NatureList = new SelectList(natureMasterServices.GetAll(), "Id", "CodeAndNarration"),
+                JobList = new SelectList(jobMasterServices.GetAllJObsForIsReadytoInvoice(dt.Fk_CustomerId), "Fk_JobMasterId", "FullDetails"),
+                Date = dt.Date,
+                DocNo = dt.DocNo,
+                Fk_CompanyId = dt.Fk_CompanyId,
+                Fk_CustomerId = dt.Fk_CustomerId,
+                Fk_DepartmentIdOne = dt.Fk_DepartmentIdOne,
+                Fk_DepartmentIdThird = dt.Fk_DepartmentIdThird,
+                Fk_DepartmentIdTwo = dt.Fk_DepartmentIdTwo,
+                Fk_InvoiceShortNarrationId = dt.Fk_InvoiceShortNarrationId,
+                Fk_JobMasterId = dt.Fk_JobMasterId,
+                Fk_ManagerOne = dt.Fk_ManagerOne,
+                Fk_ManagerSecond = dt.Fk_ManagerSecond,
+                Fk_ManagerThird = dt.Fk_ManagerThird,
+                Fk_NatureId = dt.Fk_NatureId,
+                Fk_PartnerOne = dt.Fk_PartnerOne,
+                Fk_PartnerSecond = dt.Fk_PartnerSecond,
+                Fk_PartnerThird = dt.Fk_PartnerThird,
+                Fk_WorkGroupId = dt.Fk_WorkGroupId,
+                InvoiceNoProforma = _ClientService.GetInvoiceNo(),
+                IsDelete = dt.IsDelete,
+                LastYearAmount = dt.LastYearAmount,
+                NBTPercentage = dt.NBTPercentage,
+                NarrationTwo = dt.NarrationTwo,
+                NoNVat = dt.NoNVat,
+                NoNVatPrecentage = dt.NoNVatPrecentage,
+                OurReferance = dt.OurReferance,
+                PostingDate = dt.PostingDate,
+                VatPercentage = dt.VatPercentage,
+                YourReferance = dt.YourReferance,
+                IsMangerOneComfirm = dt.IsMangerOneComfirm,
+                ManagerOneComfirmDate = dt.ManagerOneComfirmDate,
+                IsPartnerOneComfirm = dt.IsPartnerOneComfirm,
+                PartnerOneComfirmDate = dt.PartnerOneComfirmDate,
+                IsActive = dt.IsActive,
+                IsActiveDate = dt.IsActiveDate,
+
+            };
+            return View(model);
+        }
+
+
+        [HttpPost]
+        public ActionResult ProformaInvoicePosting(ProformaInvoiceHeadModel masterModel)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    var tbl = new TblProformaInvoiceHead
+                    {
+                        Create_By = "User",
+                        Fk_PartnerSecond = masterModel.Fk_PartnerSecond,
+                        Fk_PartnerOne = masterModel.Fk_PartnerOne,
+                        Fk_ManagerSecond = masterModel.Fk_ManagerSecond,
+                        Fk_NatureId = masterModel.Fk_NatureId,
+                        Fk_PartnerThird = masterModel.Fk_PartnerThird,
+                        Fk_ManagerThird = masterModel.Fk_ManagerThird,
+                        Fk_WorkGroupId = masterModel.Fk_WorkGroupId,
+                        Fk_JobMasterId = masterModel.Fk_JobMasterId,
+                        Fk_InvoiceShortNarrationId = masterModel.Fk_InvoiceShortNarrationId,
+                        Fk_DepartmentIdOne = masterModel.Fk_DepartmentIdOne,
+                        Fk_DepartmentIdThird = masterModel.Fk_DepartmentIdThird,
+                        Date = Convert.ToDateTime(masterModel.Date),
+                        DocNo = masterModel.DocNo,
+                        Fk_CompanyId = masterModel.Fk_CompanyId,
+                        Fk_CustomerId = masterModel.Fk_CustomerId,
+                        Fk_DepartmentIdTwo = masterModel.Fk_DepartmentIdTwo,
+                        Fk_ManagerOne = masterModel.Fk_ManagerOne,
+                        LastYearAmount = masterModel.LastYearAmount,
+                        NoNVat = masterModel.NoNVat,
+                        NBTPercentage = masterModel.NBTPercentage,
+                        NoNVatPrecentage = masterModel.NoNVatPrecentage,
+                        OurReferance = masterModel.OurReferance,
+                        TaxType = masterModel.TaxType,
+                        ValueNBT = masterModel.ValueNBT,
+                        VatPercentage = masterModel.VatPercentage,
+                        YourReferance = masterModel.YourReferance,
+                        ValueVAT = masterModel.ValueVAT,
+                        TotalReceivedAmount = masterModel.TotalReceivedAmount,
+                        TotalAmount = masterModel.TotalAmount,
+                        PostingDate = masterModel.PostingDate,
+                        NarrationOne = masterModel.NarrationOne,
+                        NarrationTwo = masterModel.NarrationTwo,
+                        Create_Date = new CommonResources().LocalDatetime().Date,
+                        Id = masterModel.Id,
+                        IsMangerOneComfirm = masterModel.IsMangerOneComfirm,
+                        ManagerOneComfirmDate = masterModel.ManagerOneComfirmDate,
+                        IsPostingToInvoice = true,
+                        InvoiceNoProforma = masterModel.InvoiceNoProforma,
+                        PartnerOneComfirmDate = masterModel.PartnerOneComfirmDate,
+                        IsActive = masterModel.IsActive,
+                        IsActiveDate = masterModel.IsActiveDate,
+                        IsPartnerOneComfirm = masterModel.IsPartnerOneComfirm,
+                    };
+                    return Json(_ClientService.UpdatePostingProformaInvoice(tbl));
+                }
+            }
+            catch (Exception)
+            {
+                return Json(new MessageModel()
+                {
+                    Status = "warning",
+                    Text = $"There was a error with retrieving data. Please try again",
+                });
+            }
+            return Json(new MessageModel()
+            {
+                Status = "warning",
+                Text = $"There was a error with retrieving data. Please try again",
+            });
+        }
+
+        #endregion 
     }
 }

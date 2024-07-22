@@ -16,6 +16,8 @@ namespace WOPHRMSystem.Context
     {
         public TblJobMaster()
         {
+            this.TblInvoiceBodies = new HashSet<TblInvoiceBody>();
+            this.TblInvoiceHeads = new HashSet<TblInvoiceHead>();
             this.TblJobMasterLocations = new HashSet<TblJobMasterLocation>();
             this.TblJobMasterPartners = new HashSet<TblJobMasterPartner>();
             this.TblJobTransactions = new HashSet<TblJobTransaction>();
@@ -47,6 +49,8 @@ namespace WOPHRMSystem.Context
         public Nullable<System.DateTime> Delete_Date { get; set; }
     
         public virtual TblCustomer TblCustomer { get; set; }
+        public virtual ICollection<TblInvoiceBody> TblInvoiceBodies { get; set; }
+        public virtual ICollection<TblInvoiceHead> TblInvoiceHeads { get; set; }
         public virtual ICollection<TblJobMasterLocation> TblJobMasterLocations { get; set; }
         public virtual ICollection<TblJobMasterPartner> TblJobMasterPartners { get; set; }
         public virtual ICollection<TblJobTransaction> TblJobTransactions { get; set; }

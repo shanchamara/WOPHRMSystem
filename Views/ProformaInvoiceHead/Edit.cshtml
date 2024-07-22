@@ -82,6 +82,10 @@
                                 @using (Html.BeginForm("", "", FormMethod.Post, new { role = "form", enctype = "multipart/form-data", id = "quickForm", @autocomplete = "off" }))
                                 {
                                     @Html.HiddenFor(Model => Model.Id)
+                                    @Html.HiddenFor(Model => Model.IsPartnerOneComfirm)
+                                    @Html.HiddenFor(Model => Model.PartnerOneComfirmDate)
+                                    @Html.HiddenFor(Model => Model.IsMangerOneComfirm)
+                                    @Html.HiddenFor(Model => Model.ManagerOneComfirmDate)
                                     <div class="row">
                                         <div class="col-md-6">
 
@@ -311,7 +315,7 @@
                                                                 <label for="basicpill-address-input" class="form-control-sm"> Department Two</label>
                                                                 @Html.DropDownListFor(model => model.Fk_DepartmentIdTwo, Model.DepartmentListsecond, "Select", htmlAttributes: new { @class = "form-control form-control-sm", id = "departmentTwo" })
 
-                                                                
+
                                                             </div>
                                                         </div>
                                                     </div>
@@ -324,7 +328,7 @@
                                                                 <label for="basicpill-address-input" class="form-control-sm"> Department Third</label>
                                                                 @Html.DropDownListFor(model => model.Fk_DepartmentIdThird, Model.DepartmentListThird, "Select", htmlAttributes: new { @class = "form-control form-control-sm", id = "departmentThird" })
 
-                                                           
+
                                                             </div>
                                                         </div>
                                                     </div>
@@ -492,7 +496,7 @@
                                                                 @Html.DropDownListFor(model => model.Fk_JobMasterId, Model.JobList, "Select", htmlAttributes: new { @class = "form-control form-control-sm", id = "JobNo" })
 
 
-                                                                
+
                                                             </div>
                                                         </div>
                                                     </div>
@@ -543,7 +547,7 @@
                                                             <!-- Adjusted margin bottom here -->
                                                             <div class="form-group">
                                                                 <label for="exampleInputEmail1" class="form-control-sm">Cancelled Date</label>
-                                                                <div class="input-group date" id="reservationdate" data-target-input="nearest">
+                                                                <div class="input-group date" id="IsActiveDate" data-target-input="nearest">
                                                                     @Html.EditorFor(model => model.IsActiveDate, new { htmlAttributes = new { @class = "form-control datetimepicker-input form-control-sm", data_target = "#IsActiveDate" } })
 
                                                                     @*<input type="text" name="Date" class="form-control datetimepicker-input" data-target="#reservationdate" />*@

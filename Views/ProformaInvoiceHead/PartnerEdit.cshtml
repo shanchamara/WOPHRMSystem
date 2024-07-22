@@ -82,6 +82,10 @@
                                 @using (Html.BeginForm("", "", FormMethod.Post, new { role = "form", enctype = "multipart/form-data", id = "quickForm", @autocomplete = "off" }))
                                 {
                                     @Html.HiddenFor(Model => Model.Id)
+                                    @Html.HiddenFor(Model => Model.IsActive)
+                                    @Html.HiddenFor(Model => Model.IsActiveDate)
+                                    @Html.HiddenFor(Model => Model.IsMangerOneComfirm)
+                                    @Html.HiddenFor(Model => Model.ManagerOneComfirmDate)
                                     <div class="row">
                                         <div class="col-md-6">
 
@@ -528,8 +532,8 @@
                                                         <div class="mb-2">
                                                             <!-- Adjusted margin bottom here -->
                                                             <div class="custom-control custom-checkbox">
-                                                                @Html.CheckBoxFor(model => model.IsActive, new { @class = "form-check-input", id = "exampleCheck1" })
-                                                                <label for="exampleCheck1">Cancelled.</label>
+                                                                @Html.CheckBoxFor(model => model.IsPartnerOneComfirm, new { @class = "form-check-input", id = "exampleCheck1" })
+                                                                <label for="exampleCheck1">Is Partner Comfirm .</label>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -542,12 +546,12 @@
                                                         <div class="mb-2">
                                                             <!-- Adjusted margin bottom here -->
                                                             <div class="form-group">
-                                                                <label for="exampleInputEmail1" class="form-control-sm">Cancelled Date</label>
-                                                                <div class="input-group date" id="reservationdate" data-target-input="nearest">
-                                                                    @Html.EditorFor(model => model.IsActiveDate, new { htmlAttributes = new { @class = "form-control datetimepicker-input form-control-sm", data_target = "#IsActiveDate" } })
+                                                                <label for="exampleInputEmail1" class="form-control-sm">Comfirm Date</label>
+                                                                <div class="input-group date" id="PartnerOneComfirmDate" data-target-input="nearest">
+                                                                    @Html.EditorFor(model => model.PartnerOneComfirmDate, new { htmlAttributes = new { @class = "form-control datetimepicker-input form-control-sm", data_target = "#PartnerOneComfirmDate" } })
 
                                                                     @*<input type="text" name="Date" class="form-control datetimepicker-input" data-target="#reservationdate" />*@
-                                                                    <div class="input-group-append" data-target="#IsActiveDate" data-toggle="datetimepicker">
+                                                                    <div class="input-group-append" data-target="#PartnerOneComfirmDate" data-toggle="datetimepicker">
                                                                         <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                                                                     </div>
                                                                 </div>
@@ -731,7 +735,7 @@
                 maxDate: moment() // Disable future dates
             });
 
-            $('#IsActiveDate').datetimepicker({
+            $('#PartnerOneComfirmDate').datetimepicker({
                 format: 'L',
                 maxDate: moment() // Disable future dates
             });
@@ -953,7 +957,7 @@
 
         $.ajax({
             type: "Post",
-            url: "/ProformaInvoiceHead/Edit",
+            url: "/ProformaInvoiceHead/PartnerEdit",
             data: model,
 
             success: function (result) {
@@ -964,10 +968,10 @@
                     text: result.Text
                 }).then((result) => {
                     if (result.isConfirmed) {
-                        window.location.href = "@Url.Action("Index", "ProformaInvoiceHead")"
+                        window.location.href = "@Url.Action("PendingPartnerConfirm", "ProformaInvoiceHead")"
                     }
                     else {
-                        window.location.href = "@Url.Action("Index", "ProformaInvoiceHead")"
+                        window.location.href = "@Url.Action("PendingPartnerConfirm", "ProformaInvoiceHead")"
                     }
                 })
             },

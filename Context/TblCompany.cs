@@ -16,12 +16,14 @@ namespace WOPHRMSystem.Context
     {
         public TblCompany()
         {
+            this.TblInvoiceHeads = new HashSet<TblInvoiceHead>();
             this.TblProformaInvoiceHeads = new HashSet<TblProformaInvoiceHead>();
         }
     
         public int Id { get; set; }
         public string Name { get; set; }
     
+        public virtual ICollection<TblInvoiceHead> TblInvoiceHeads { get; set; }
         public virtual ICollection<TblProformaInvoiceHead> TblProformaInvoiceHeads { get; set; }
     }
 }

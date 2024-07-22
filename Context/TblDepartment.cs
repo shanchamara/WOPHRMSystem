@@ -19,6 +19,7 @@ namespace WOPHRMSystem.Context
             this.TblDepartmentSeconds = new HashSet<TblDepartmentSecond>();
             this.TblDepartmentThirds = new HashSet<TblDepartmentThird>();
             this.TblEmployees = new HashSet<TblEmployee>();
+            this.TblInvoiceHeads = new HashSet<TblInvoiceHead>();
             this.TblProformaInvoiceHeads = new HashSet<TblProformaInvoiceHead>();
         }
     
@@ -37,6 +38,7 @@ namespace WOPHRMSystem.Context
         public virtual ICollection<TblDepartmentSecond> TblDepartmentSeconds { get; set; }
         public virtual ICollection<TblDepartmentThird> TblDepartmentThirds { get; set; }
         public virtual ICollection<TblEmployee> TblEmployees { get; set; }
+        public virtual ICollection<TblInvoiceHead> TblInvoiceHeads { get; set; }
         public virtual ICollection<TblProformaInvoiceHead> TblProformaInvoiceHeads { get; set; }
     }
 }

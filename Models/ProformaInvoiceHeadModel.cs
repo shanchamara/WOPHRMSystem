@@ -56,6 +56,12 @@ namespace WOPHRMSystem.Models
 
         public int Fk_CompanyId { get; set; }
         public string CompanyName { get; set; }
+        public bool IsPartnerOneComfirm { get; set; }
+        public Nullable<System.DateTime> PartnerOneComfirmDate { get; set; }
+        public bool IsMangerOneComfirm { get; set; }
+        public bool IsPostingToInvoice { get; set; }
+        public Nullable<System.DateTime> ManagerOneComfirmDate { get; set; }
+
 
         public SelectList WorkGroupLists { get; set; }
         public SelectList PartnerLists { get; set; }

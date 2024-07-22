@@ -39,6 +39,9 @@ namespace WOPHRMSystem.Context
         public DbSet<TblGradeMaster> TblGradeMasters { get; set; }
         public DbSet<TblInternationalReferalMaster> TblInternationalReferalMasters { get; set; }
         public DbSet<TblIntroductionMaster> TblIntroductionMasters { get; set; }
+        public DbSet<TblInvoiceBody> TblInvoiceBodies { get; set; }
+        public DbSet<TblInvoiceBodyTemp> TblInvoiceBodyTemps { get; set; }
+        public DbSet<TblInvoiceHead> TblInvoiceHeads { get; set; }
         public DbSet<TblInvoiceNarrationMaster> TblInvoiceNarrationMasters { get; set; }
         public DbSet<TblInvoiceShortNarrationMaster> TblInvoiceShortNarrationMasters { get; set; }
         public DbSet<TblJobMaster> TblJobMasters { get; set; }
@@ -68,6 +71,7 @@ namespace WOPHRMSystem.Context
         public DbSet<VW_GradeMaster> VW_GradeMaster { get; set; }
         public DbSet<VW_InternationalReferalMaster> VW_InternationalReferalMaster { get; set; }
         public DbSet<VW_IntroductionMaster> VW_IntroductionMaster { get; set; }
+        public DbSet<VW_InvoiceHead> VW_InvoiceHead { get; set; }
         public DbSet<VW_InvoiceNarrationMaster> VW_InvoiceNarrationMaster { get; set; }
         public DbSet<VW_InvoiceShortNarrationMaster> VW_InvoiceShortNarrationMaster { get; set; }
         public DbSet<VW_JobMaster> VW_JobMaster { get; set; }

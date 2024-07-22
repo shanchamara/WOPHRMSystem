@@ -16,6 +16,7 @@ namespace WOPHRMSystem.Context
     {
         public TblInvoiceShortNarrationMaster()
         {
+            this.TblInvoiceHeads = new HashSet<TblInvoiceHead>();
             this.TblProformaInvoiceHeads = new HashSet<TblProformaInvoiceHead>();
         }
     
@@ -31,6 +32,7 @@ namespace WOPHRMSystem.Context
         public string Delete_By { get; set; }
         public Nullable<System.DateTime> Delete_Date { get; set; }
     
+        public virtual ICollection<TblInvoiceHead> TblInvoiceHeads { get; set; }
         public virtual ICollection<TblProformaInvoiceHead> TblProformaInvoiceHeads { get; set; }
     }
 }

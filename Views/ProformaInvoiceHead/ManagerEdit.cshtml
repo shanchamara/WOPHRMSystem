@@ -1,0 +1,1277 @@
+﻿@model  WOPHRMSystem.Models.ProformaInvoiceHeadModel
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout1.cshtml";
+}
+
+<style>
+    .custom-row {
+        margin-bottom: 0.5rem; /* Adjust this value as needed */
+    }
+
+    .text-right {
+        text-align: right;
+    }
+</style>
+<!-- daterange picker -->
+<link rel="stylesheet" href="~/plugins/daterangepicker/daterangepicker.css">
+<!-- iCheck for checkboxes and radio inputs -->
+<link rel="stylesheet" href="~/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+<!-- Bootstrap Color Picker -->
+<link rel="stylesheet" href="~/plugins/bootstrap-colorpicker/css/bootstrap-colorpicker.min.css">
+<!-- Tempusdominus Bootstrap 4 -->
+<link rel="stylesheet" href="~/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
+<!-- Select2 -->
+<link rel="stylesheet" href="~/plugins/select2/css/select2.min.css">
+<link rel="stylesheet" href="~/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
+<!-- Bootstrap4 Duallistbox -->
+<link rel="stylesheet" href="~/plugins/bootstrap4-duallistbox/bootstrap-duallistbox.min.css">
+<!-- BS Stepper -->
+<link rel="stylesheet" href="~/plugins/bs-stepper/css/bs-stepper.min.css">
+<!-- dropzonejs -->
+<link rel="stylesheet" href="~/plugins/dropzone/min/dropzone.min.css">
+
+<div class="content-wrapper disable-height">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>Manager Edit Proforma Invoice</h1>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item">Home</li>
+                        <li class="breadcrumb-item active"><a href="@Url.Action("Index","Customer")">List Of Proforma Invoice's </a></li>
+                    </ol>
+                </div>
+            </div>
+        </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+
+                <!-- /.col -->
+            </div>
+            <!-- /.row -->
+        </div>
+        <!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+
+                    <!-- /.card -->
+                    <div class="card">
+                        @*<div class="card-header">
+                                <h3 class="card-title"></h3>
+                            </div>*@
+                        <!-- /.card-header -->
+                        <div class="card-body">
+                            <div class="card card-info">
+                                <div class="card-header">
+                                    <h3 class="card-title">Details</h3>
+                                </div>
+
+                                @using (Html.BeginForm("", "", FormMethod.Post, new { role = "form", enctype = "multipart/form-data", id = "quickForm", @autocomplete = "off" }))
+                                {
+                                    @Html.HiddenFor(Model => Model.Id)
+                                    @Html.HiddenFor(Model => Model.IsPartnerOneComfirm)
+                                    @Html.HiddenFor(Model => Model.PartnerOneComfirmDate)
+                                    @Html.HiddenFor(Model => Model.IsActive)
+                                    @Html.HiddenFor(Model => Model.IsActiveDate)
+                                    <div class="row">
+                                        <div class="col-md-6">
+
+                                            <div class="card-body">
+                                                <!-- Date dd/mm/yyyy -->
+
+
+                                                <div class="row">
+
+                                                    <div class="col-lg-12">
+                                                        <div class="mb-2">
+                                                            <!-- Adjusted margin bottom here -->
+                                                            <div class="form-group">
+                                                                <label for="exampleInputEmail1" class="form-control-sm">Company  </label>
+                                                                @Html.DropDownListFor(model => model.Fk_CompanyId, Model.CompanyLists, "Select", htmlAttributes: new { @class = "form-control form-control-sm" })
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+
+
+                                                </div>
+
+
+                                                <div class="row">
+                                                    <div class="col-lg-6">
+                                                        <div class="mb-2">
+                                                            <!-- Adjusted margin bottom here -->
+                                                            <div class="form-group">
+                                                                <label for="exampleInputEmail1" class="form-control-sm">Doc No</label>
+                                                                @Html.EditorFor(model => model.DocNo, new { htmlAttributes = new { @class = "form-control form-control-sm", placeholder = "", @ReadOnly = "ReadOnly" } })
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-6">
+                                                        <div class="mb-2">
+                                                            <!-- Adjusted margin bottom here -->
+                                                            <div class="form-group">
+                                                                <label for="exampleInputEmail1" class="form-control-sm"> Date</label>
+                                                                <div class="input-group date" id="reservationdate" data-target-input="nearest">
+                                                                    @Html.EditorFor(model => model.Date, new { htmlAttributes = new { @class = "form-control datetimepicker-input form-control-sm", data_target = "#reservationdate" } })
+
+                                                                    @*<input type="text" name="Date" class="form-control datetimepicker-input" data-target="#reservationdate" />*@
+                                                                    <div class="input-group-append" data-target="#reservationdate" data-toggle="datetimepicker">
+                                                                        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+
+                                                <div class="row">
+                                                    <div class="col-lg-6">
+                                                        <div class="mb-2">
+                                                            <!-- Adjusted margin bottom here -->
+                                                            <div class="form-group">
+                                                                <label for="basicpill-address-input" class="form-control-sm">Your Referance</label>
+                                                                @Html.EditorFor(model => model.YourReferance, new { htmlAttributes = new { @class = "form-control form-control-sm", placeholder = "" } })
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-lg-6">
+                                                        <div class="mb-2">
+                                                            <!-- Adjusted margin bottom here -->
+                                                            <div class="form-group">
+                                                                <label for="basicpill-address-input" class="form-control-sm">Our Referance</label>
+                                                                @Html.EditorFor(model => model.OurReferance, new { htmlAttributes = new { @class = "form-control form-control-sm", placeholder = "" } })
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+
+
+                                                <div class="row">
+
+                                                    <div class="col-lg-6">
+                                                        <div class="mb-2">
+                                                            <!-- Adjusted margin bottom here -->
+                                                            <div class="form-group">
+                                                                <label for="exampleInputEmail1" class="form-control-sm">Group </label>
+                                                                @Html.DropDownListFor(model => model.Fk_WorkGroupId, Model.WorkGroupLists, "Select", htmlAttributes: new { @class = "form-control form-control-sm", id = "selectManager" })
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-lg-6">
+                                                        <div class="mb-2">
+                                                            <!-- Adjusted margin bottom here -->
+                                                            <div class="form-group">
+                                                                <label for="exampleInputEmail1" class="form-control-sm">Customer  </label>
+                                                                @Html.DropDownListFor(model => model.Fk_CustomerId, Model.CustomerLists, "Select", htmlAttributes: new { @class = "form-control form-control-sm", id = "selectCustomer" })
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+
+                                                <div class="row">
+
+                                                    <div class="col-lg-8">
+                                                        <div class="mb-2">
+                                                            <!-- Adjusted margin bottom here -->
+                                                            <div class="form-group">
+                                                                <label for="exampleInputEmail1" class="form-control-sm">Tax Type</label>
+                                                                @Html.DropDownListFor(model => model.TaxType, new SelectList(new List<Object>
+                                                                 {
+
+                                                                 new { value = "" , text = "Select "  },
+                                                                 new { value = "VAT" , text = "VAT"  },
+                                                                 new { value = "SVAT" , text = "SVAT"  },
+
+                                                                 }, "value", "text", "Select VAT Type"), htmlAttributes: new { @class = "form-control form-control-sm", id = "selectGrnType" })
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+
+
+                                                </div>
+
+                                                <div class="row">
+
+                                                    <div class="col-lg-8">
+                                                        <div class="mb-2">
+                                                            <!-- Adjusted margin bottom here -->
+                                                            <div class="form-group">
+                                                                <label for="exampleInputEmail1" class="form-control-sm">Non Vat </label>
+                                                                @Html.EditorFor(model => model.NoNVat, new { htmlAttributes = new { @class = "form-control form-control-sm", placeholder = "" } })
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-4">
+                                                        <div class="mb-2">
+                                                            <!-- Adjusted margin bottom here -->
+                                                            <div class="form-group">
+                                                                <label for="exampleInputEmail1" class="form-control-sm">Non Vat  </label>
+                                                                @Html.EditorFor(model => model.NoNVatPrecentage, new { htmlAttributes = new { @class = "form-control form-control-sm", placeholder = "", @type = "number", @min = "0" } })
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+
+                                                </div>
+
+                                                <div class="row">
+
+                                                    <div class="col-lg-12">
+                                                        <div class="mb-2">
+                                                            <!-- Adjusted margin bottom here -->
+                                                            <div class="form-group">
+                                                                <label for="exampleInputEmail1" class="form-control-sm">Narration One </label>
+                                                                @Html.EditorFor(model => model.NarrationOne, new { htmlAttributes = new { @class = "form-control form-control-sm", placeholder = "" } })
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+
+
+                                                </div>
+
+                                                <div class="row">
+
+                                                    <div class="col-lg-12">
+                                                        <div class="mb-2">
+                                                            <!-- Adjusted margin bottom here -->
+                                                            <div class="form-group">
+                                                                <label for="exampleInputEmail1" class="form-control-sm">Narration Two  </label>
+                                                                @Html.EditorFor(model => model.NarrationTwo, new { htmlAttributes = new { @class = "form-control form-control-sm", placeholder = "" } })
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+
+
+                                                </div>
+
+                                                <div class="row">
+
+                                                    <div class="col-lg-12">
+                                                        <div class="mb-2">
+                                                            <!-- Adjusted margin bottom here -->
+                                                            <div class="form-group">
+                                                                <label for="exampleInputEmail1" class="form-control-sm">Short Narration  </label>
+                                                                @Html.DropDownListFor(model => model.Fk_InvoiceShortNarrationId, Model.InvoiceShrotNarration, "Select", htmlAttributes: new { @class = "form-control form-control-sm", id = "selectManager" })
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+
+                                                </div>
+
+
+                                            </div>
+
+                                        </div>
+
+                                        <div class="col-md-6">
+                                            <div class="card-body">
+                                                <div class="row">
+                                                    <div class="col-lg-4">
+                                                        <div class="mb-2">
+                                                            <!-- Adjusted margin bottom here -->
+                                                            <div class="form-group">
+                                                                <label for="basicpill-address-input" class="form-control-sm">Department One </label>
+                                                                @Html.DropDownListFor(model => model.Fk_DepartmentIdOne, Model.DepartmentListOne, "Select", htmlAttributes: new { @class = "form-control form-control-sm", id = "departmentFirst" })
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-lg-4">
+                                                        <div class="mb-2">
+                                                            <!-- Adjusted margin bottom here -->
+                                                            <div class="form-group">
+                                                                <label for="basicpill-address-input" class="form-control-sm"> Department Two</label>
+                                                                @Html.DropDownListFor(model => model.Fk_DepartmentIdTwo, Model.DepartmentListsecond, "Select", htmlAttributes: new { @class = "form-control form-control-sm", id = "departmentTwo" })
+
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+
+                                                    <div class="col-lg-4">
+                                                        <div class="mb-2">
+                                                            <!-- Adjusted margin bottom here -->
+                                                            <div class="form-group">
+                                                                <label for="basicpill-address-input" class="form-control-sm"> Department Third</label>
+                                                                @Html.DropDownListFor(model => model.Fk_DepartmentIdThird, Model.DepartmentListThird, "Select", htmlAttributes: new { @class = "form-control form-control-sm", id = "departmentThird" })
+
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+
+                                                </div>
+
+
+
+                                                <div class="row">
+                                                    <div class="col-lg-4">
+                                                        <div class="mb-2">
+                                                            <!-- Adjusted margin bottom here -->
+                                                            <div class="form-group">
+                                                                <label for="basicpill-address-input" class="form-control-sm">Partner One </label>
+                                                                @Html.DropDownListFor(model => model.Fk_PartnerOne, Model.PartnerLists, "Select", htmlAttributes: new { @class = "form-control form-control-sm" })
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-lg-4">
+                                                        <div class="mb-2">
+                                                            <!-- Adjusted margin bottom here -->
+                                                            <div class="form-group">
+                                                                <label for="basicpill-address-input" class="form-control-sm"> Partner Two</label>
+
+                                                                @Html.DropDownListFor(model => model.Fk_PartnerSecond, Model.PartnerLists, "Select", htmlAttributes: new { @class = "form-control form-control-sm" })
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+
+                                                    <div class="col-lg-4">
+                                                        <div class="mb-2">
+                                                            <!-- Adjusted margin bottom here -->
+                                                            <div class="form-group">
+                                                                <label for="basicpill-address-input" class="form-control-sm"> Partner Third</label>
+
+                                                                @Html.DropDownListFor(model => model.Fk_PartnerThird, Model.PartnerLists, "Select", htmlAttributes: new { @class = "form-control form-control-sm" })
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+
+                                                </div>
+
+                                                <div class="row">
+                                                    <div class="col-lg-4">
+                                                        <div class="mb-2">
+                                                            <!-- Adjusted margin bottom here -->
+                                                            <div class="form-group">
+                                                                <label for="basicpill-address-input" class="form-control-sm">Manager One </label>
+                                                                @Html.DropDownListFor(model => model.Fk_ManagerOne, Model.MangerLists, "Select", htmlAttributes: new { @class = "form-control form-control-sm" })
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-lg-4">
+                                                        <div class="mb-2">
+                                                            <!-- Adjusted margin bottom here -->
+                                                            <div class="form-group">
+                                                                <label for="basicpill-address-input" class="form-control-sm"> Manger Two</label>
+
+                                                                @Html.DropDownListFor(model => model.Fk_ManagerSecond, Model.MangerLists, "Select", htmlAttributes: new { @class = "form-control form-control-sm" })
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+
+                                                    <div class="col-lg-4">
+                                                        <div class="mb-2">
+                                                            <!-- Adjusted margin bottom here -->
+                                                            <div class="form-group">
+                                                                <label for="basicpill-address-input" class="form-control-sm"> Manger Third</label>
+
+                                                                @Html.DropDownListFor(model => model.Fk_ManagerThird, Model.MangerLists, "Select", htmlAttributes: new { @class = "form-control form-control-sm" })
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+
+                                                </div>
+
+
+                                                <div class="row">
+                                                    <div class="col-lg-4">
+
+                                                    </div>
+
+                                                    <div class="col-lg-4">
+
+                                                    </div>
+
+
+                                                    <div class="col-lg-4">
+                                                        <div class="mb-2">
+                                                            <!-- Adjusted margin bottom here -->
+                                                            <div class="form-group">
+                                                                <label for="basicpill-address-input" class="form-control-sm"> Nature Master</label>
+
+                                                                @Html.DropDownListFor(model => model.Fk_NatureId, Model.NatureList, "Select", htmlAttributes: new { @class = "form-control form-control-sm", id = "selectManager" })
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+
+                                                </div>
+
+
+
+                                                <div class="row">
+                                                    <div class="col-lg-4">
+                                                        <div class="mb-2">
+                                                            <!-- Adjusted margin bottom here -->
+                                                            <div class="form-group">
+                                                                <label for="basicpill-address-input" class="form-control-sm">VAT %  </label>
+                                                                @Html.EditorFor(model => model.VatPercentage, new { htmlAttributes = new { @class = "form-control form-control-sm", placeholder = "", @type = "number", @min = "0", id = "vatPercentageInput" } })
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-lg-4">
+                                                        <div class="mb-2">
+                                                            <!-- Adjusted margin bottom here -->
+
+                                                        </div>
+                                                    </div>
+
+
+                                                    <div class="col-lg-4">
+                                                        <div class="mb-2">
+                                                            <!-- Adjusted margin bottom here -->
+                                                            <div class="form-group">
+                                                                <label for="basicpill-address-input" class="form-control-sm"> NBT % </label>
+
+                                                                @Html.EditorFor(model => model.NBTPercentage, new { htmlAttributes = new { @class = "form-control form-control-sm", placeholder = "", @type = "number", @min = "0", id = "NbtPercentageInput" } })
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+
+                                                </div>
+
+                                                <div class="row">
+                                                    <div class="col-lg-4">
+                                                        <div class="mb-2">
+                                                            <!-- Adjusted margin bottom here -->
+
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-lg-4">
+                                                        <div class="mb-2">
+                                                            <!-- Adjusted margin bottom here -->
+
+                                                        </div>
+                                                    </div>
+
+
+                                                    <div class="col-lg-4">
+                                                        <div class="mb-2">
+                                                            <!-- Adjusted margin bottom here -->
+                                                            <div class="form-group">
+                                                                <label for="basicpill-address-input" class="form-control-sm"> Job No </label>
+                                                                @Html.DropDownListFor(model => model.Fk_JobMasterId, Model.JobList, "Select", htmlAttributes: new { @class = "form-control form-control-sm", id = "JobNo" })
+
+
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+
+                                                </div>
+
+
+
+                                            </div>
+
+
+                                        </div>
+
+
+
+
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div id="staticBackdropBody"></div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+
+                                        <div class="col-md-4">
+                                            <div class="card-body">
+                                                <div class="row">
+
+                                                    <div class="col-lg-6">
+                                                        <div class="mb-2">
+                                                            <!-- Adjusted margin bottom here -->
+                                                            <div class="custom-control custom-checkbox">
+                                                                @Html.CheckBoxFor(model => model.IsMangerOneComfirm, new { @class = "form-check-input", id = "exampleCheck1" })
+                                                                <label for="exampleCheck1">Is manager Comfirm .</label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+
+
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-lg-6">
+                                                        <div class="mb-2">
+                                                            <!-- Adjusted margin bottom here -->
+                                                            <div class="form-group">
+                                                                <label for="exampleInputEmail1" class="form-control-sm">Comfirm Date</label>
+                                                                <div class="input-group date" id="ManagerOneComfirmDate" data-target-input="nearest">
+                                                                    @Html.EditorFor(model => model.ManagerOneComfirmDate, new { htmlAttributes = new { @class = "form-control datetimepicker-input form-control-sm", data_target = "#ManagerOneComfirmDate" } })
+
+                                                                    @*<input type="text" name="Date" class="form-control datetimepicker-input" data-target="#reservationdate" />*@
+                                                                    <div class="input-group-append" data-target="#ManagerOneComfirmDate" data-toggle="datetimepicker">
+                                                                        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+                                        </div>
+
+                                        <div class="col-md-3">
+                                            <div class="card-body">
+                                                <div class="row">
+
+                                                    <div class="col-lg-6">
+                                                        <div class="mb-2">
+                                                            <!-- Adjusted margin bottom here -->
+                                                            <div class="form-group">
+                                                                <label for="exampleInputEmail1" class="form-control-sm">Last Year Amount</label>
+                                                                @Html.EditorFor(model => model.LastYearAmount, new { htmlAttributes = new { @class = "form-control form-control-sm text-right", placeholder = "", @ReadOnly = "ReadOnly" } })
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+
+
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-5">
+                                            <div class="card-body">
+                                                <div class="row custom-row">
+                                                    <div class="col-lg-6">
+                                                        <div class="row mb-2">
+                                                            <label for="horizontal-firstname-input" class="col-sm-12 col-form-label form-control-sm">Total Amount ( RS. )</label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-6">
+                                                        <div class="row mb-2">
+                                                            <div class="col-sm-12">
+                                                                @Html.EditorFor(model => model.TotalAmount, new { htmlAttributes = new { @class = "form-control form-control-sm text-right", placeholder = "", @ReadOnly = "ReadOnly" } })
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="row custom-row">
+                                                    <div class="col-lg-6">
+                                                        <div class="row mb-2">
+                                                            <label for="horizontal-firstname-input" class="col-sm-6 col-form-label form-control-sm">NBT ( RS. )</label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-6">
+                                                        <div class="row mb-2">
+                                                            <div class="col-sm-12">
+                                                                @Html.EditorFor(model => model.ValueNBT, new { htmlAttributes = new { @class = "form-control form-control-sm text-right", placeholder = "", @ReadOnly = "ReadOnly" } })
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="row custom-row">
+                                                    <div class="col-lg-6">
+                                                        <div class="row mb-2">
+                                                            <label for="horizontal-firstname-input" class="col-sm-6 col-form-label form-control-sm">VAT ( RS. )</label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-6">
+                                                        <div class="row mb-2">
+                                                            <div class="col-sm-12">
+                                                                @Html.EditorFor(model => model.ValueVAT, new { htmlAttributes = new { @class = "form-control form-control-sm text-right", placeholder = "", @ReadOnly = "ReadOnly" } })
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="row custom-row">
+                                                    <div class="col-lg-6">
+                                                        <div class="row mb-2">
+                                                            <label for="horizontal-firstname-input" class="col-sm-12 col-form-label form-control-sm">Received Amount ( RS. )</label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-6">
+                                                        <div class="row mb-2">
+                                                            <div class="col-sm-12">
+                                                                @Html.EditorFor(model => model.TotalReceivedAmount, new { htmlAttributes = new { @class = "form-control form-control-sm text-right", placeholder = "", @ReadOnly = "ReadOnly" } })
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                    <!-- /.card-body -->
+                                    <div class="card-footer">
+                                        <div class="col-12">
+
+                                            <button type="submit" class="btn btn-primary float-right">Submit</button>
+
+                                        </div>
+
+                                    </div>
+                                }
+
+
+                            </div>
+                        </div>
+                        <!-- /.card-body -->
+                    </div>
+
+                    <!-- /.card -->
+                </div>
+                <!-- /.col -->
+            </div>
+            <!-- /.row -->
+        </div>
+        <!-- /.container-fluid -->
+    </section>
+</div>
+
+@section scripts {
+
+    <!-- jQuery -->
+    <script src="~/plugins/jquery/jquery.min.js"></script>
+    <!-- Bootstrap 4 -->
+    <script src="~/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- Select2 -->
+    <script src="~/plugins/select2/js/select2.full.min.js"></script>
+    <!-- Bootstrap4 Duallistbox -->
+    <script src="~/plugins/bootstrap4-duallistbox/jquery.bootstrap-duallistbox.min.js"></script>
+    <!-- InputMask -->
+    <script src="~/plugins/moment/moment.min.js"></script>
+    <script src="~/plugins/inputmask/jquery.inputmask.min.js"></script>
+    <!-- date-range-picker -->
+    <script src="~/plugins/daterangepicker/daterangepicker.js"></script>
+    <!-- jquery-validation -->
+    <script src="~/plugins/jquery-validation/jquery.validate.min.js"></script>
+    <script src="~/plugins/jquery-validation/additional-methods.min.js"></script>
+    <!-- bootstrap color picker -->
+    <script src="~/plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js"></script>
+    <!-- Tempusdominus Bootstrap 4 -->
+    <script src="~/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
+    <!-- Bootstrap Switch -->
+    <script src="~/plugins/bootstrap-switch/js/bootstrap-switch.min.js"></script>
+    <!-- BS-Stepper -->
+    <script src="~/plugins/bs-stepper/js/bs-stepper.min.js"></script>
+    <!-- dropzonejs -->
+    <script src="~/plugins/dropzone/min/dropzone.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src="~/dist/js/adminlte.min.js"></script>
+    <!-- AdminLTE for demo purposes -->
+    <script src="~/dist/js/demo.js"></script>
+
+
+    <script>
+        $(function () {
+            //Initialize Select2 Elements
+            $('.select2').select2()
+
+            //Initialize Select2 Elements
+            $('.select2bs4').select2({
+                theme: 'bootstrap4'
+            })
+
+            //Datemask dd/mm/yyyy
+            $('#datemask').inputmask('dd/mm/yyyy', { 'placeholder': 'dd/mm/yyyy' })
+            //Datemask2 mm/dd/yyyy
+            $('#datemask2').inputmask('mm/dd/yyyy', { 'placeholder': 'mm/dd/yyyy' })
+            //Money Euro
+            $('[data-mask]').inputmask()
+
+            //Date picker
+            $('#reservationdate').datetimepicker({
+                format: 'L',
+                maxDate: moment() // Disable future dates
+            });
+
+            $('#ManagerOneComfirmDate').datetimepicker({
+                format: 'L',
+                maxDate: moment() // Disable future dates
+            });
+
+            //Date and time picker
+            $('#reservationdatetime').datetimepicker({ icons: { time: 'far fa-clock' } });
+
+            //Date range picker
+            $('#reservation').daterangepicker()
+            //Date range picker with time picker
+            $('#reservationtime').daterangepicker({
+                timePicker: true,
+                timePickerIncrement: 30,
+                locale: {
+                    format: 'MM/DD/YYYY hh:mm A'
+                }
+            })
+            //Date range as a button
+            $('#daterange-btn').daterangepicker(
+                {
+                    ranges: {
+                        'Today': [moment(), moment()],
+                        'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+                        'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+                        'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+                        'This Month': [moment().startOf('month'), moment().endOf('month')],
+                        'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+                    },
+                    startDate: moment().subtract(29, 'days'),
+                    endDate: moment()
+                },
+                function (start, end) {
+                    $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'))
+                }
+            )
+
+            //Timepicker
+            $('#timepicker').datetimepicker({
+                format: 'LT'
+            })
+
+            //Bootstrap Duallistbox
+            $('.duallistbox').bootstrapDualListbox()
+
+            //Colorpicker
+            $('.my-colorpicker1').colorpicker()
+            //color picker with addon
+            $('.my-colorpicker2').colorpicker()
+
+            $('.my-colorpicker2').on('colorpickerChange', function (event) {
+                $('.my-colorpicker2 .fa-square').css('color', event.color.toString());
+            })
+
+            $("input[data-bootstrap-switch]").each(function () {
+                $(this).bootstrapSwitch('state', $(this).prop('checked'));
+            })
+
+        })
+
+
+        // DropzoneJS Demo Code End
+    </script>
+
+    <script>
+        $(function () {
+            // Custom validation method to compare TotalAmount with RowTotalAmount
+            $.validator.addMethod("totalAmountMatchesRowTotal", function (value, element) {
+                var rowTotalAmount = parseFloat($("[name='RowTotalAmount']").val()); // Adjust based on your actual field name
+                var totalAmount = parseFloat(value);
+                return totalAmount === rowTotalAmount;
+            }, function (params, element) {
+                // Generate the error message dynamically
+                return "Total Amount must match Row Total Amount (" + $("[name='RowTotalAmount']").val() + ").";
+            });
+
+            // Set up validation defaults
+            $.validator.setDefaults({
+                submitHandler: function () {
+                    $("#staticBackdropBody :input").each(function () {
+                        $(this).rules("remove");
+                    });
+
+                    var data = $('#quickForm').serialize();
+                    debugger;
+                    PostCustomerInsert(data);
+                }
+            });
+
+            // Define validation rules and messages
+            $('#quickForm').validate({
+                rules: {
+                    InvoiceNoProforma: { required: false },
+                    Fk_DepartmentIdOne: { required: true },
+                    Fk_DepartmentIdTwo: { required: true },
+                    Fk_DepartmentIdThird: { required: true },
+                    DocNo: { required: true },
+                    Date: { required: true, date: true },
+                    OurReferance: { required: true },
+                    YourReferance: { required: true },
+                    Fk_WorkGroupId: { required: true },
+                    Fk_CustomerId: { required: true },
+                    Fk_PartnerOne: { required: true },
+                    Fk_PartnerSecond: { required: true },
+                    Fk_PartnerThird: { required: true },
+                    Fk_ManagerOne: { required: true },
+                    Fk_ManagerSecond: { required: true },
+                    Fk_ManagerThird: { required: true },
+                    TaxType: { required: true },
+                    Fk_NatureId: { required: true },
+                    NoNVat: { required: false },
+                    NoNVatPrecentage: { required: false, number: true },
+                    VatPercentage: { required: true, number: true },
+                    NBTPercentage: { required: true, number: true },
+                    NarrationOne: { required: true },
+                    NarrationTwo: { required: true },
+                    Fk_InvoiceShortNarrationId: { required: true },
+                    Fk_JobMasterId: { required: true },
+                    LastYearAmount: { required: true, number: true },
+                    PostingDate: { required: true, date: true },
+                    IsActive: { required: false },
+                    IsActiveDate: { required: false, date: true },
+                    IsDelete: { required: false },
+                    TotalAmount: { required: true, number: true },
+                    TotalReceivedAmount: { required: true, number: true },
+                    ValueNBT: { required: true, number: true },
+                    ValueVAT: { required: true, number: true },
+                    Fk_CompanyId: { required: true },
+                    TotalAmount: {
+                        required: true,
+                        number: true,
+                        totalAmountMatchesRowTotal: true // Use the custom method here
+                    },
+
+
+                },
+                messages: {
+                    InvoiceNoProforma: { required: "Please enter an Invoice No Proforma" },
+                    Fk_DepartmentIdOne: { required: "Please select Department One" },
+                    Fk_DepartmentIdTwo: { required: "Please select Department Two" },
+                    Fk_DepartmentIdThird: { required: "Please select Department Third" },
+                    DocNo: { required: "Please enter a Doc No" },
+                    Date: { required: "Please select a Date", date: "Please enter a valid date" },
+                    OurReferance: { required: "Please provide Our Reference" },
+                    YourReferance: { required: "Please provide Your Reference" },
+                    Fk_WorkGroupId: { required: "Please select a Work Group" },
+                    Fk_CustomerId: { required: "Please select a Customer" },
+                    Fk_PartnerOne: { required: "Please select Partner One" },
+                    Fk_PartnerSecond: { required: "Please select Partner Two" },
+                    Fk_PartnerThird: { required: "Please select Partner Three" },
+                    Fk_ManagerOne: { required: "Please select Manager One" },
+                    Fk_ManagerSecond: { required: "Please select Manager Two" },
+                    Fk_ManagerThird: { required: "Please select Manager Three" },
+                    TaxType: { required: "Please enter a Tax Type" },
+                    Fk_NatureId: { required: "Please select a Nature" },
+                    NoNVat: { required: "Please enter Non VAT" },
+                    NoNVatPrecentage: { required: "Please enter Non VAT Percentage", number: "Please enter a valid number" },
+                    VatPercentage: { required: "Please enter VAT Percentage", number: "Please enter a valid number" },
+                    NBTPercentage: { required: "Please enter NBT Percentage", number: "Please enter a valid number" },
+                    NarrationOne: { required: "Please enter Narration One" },
+                    NarrationTwo: { required: "Please enter Narration Two" },
+                    Fk_InvoiceShortNarrationId: { required: "Please select an Invoice Short Narration" },
+                    Fk_JobMasterId: { required: "Please select a Job Master" },
+                    LastYearAmount: { required: "Please enter Last Year Amount", number: "Please enter a valid number" },
+                    PostingDate: { required: "Please select a Posting Date", date: "Please enter a valid date" },
+                    IsActive: { required: "Please select Active status" },
+                    IsActiveDate: { required: "Please select an Active Date", date: "Please enter a valid date" },
+                    IsDelete: { required: "Please select Delete status" },
+                    TotalAmount: { required: "Please enter Total Amount", number: "Please enter a valid number" },
+                    TotalReceivedAmount: { required: "Please enter Total Received Amount", number: "Please enter a valid number" },
+                    ValueNBT: { required: "Please enter Value NBT", number: "Please enter a valid number" },
+                    ValueVAT: { required: "Please enter Value VAT", number: "Please enter a valid number" },
+                    Fk_CompanyId: { required: "Please select a Company" },
+                    TotalAmount: {
+                        required: "Please enter Total Amount",
+                        number: "Please enter a valid number",
+                        totalAmountMatchesRowTotal: function () {
+                            return "Total Amount must match Row Total Amount (" + $("[name='RowTotalAmount']").val() + ").";
+                        }
+                    },
+                },
+                errorElement: 'span',
+                errorPlacement: function (error, element) {
+                    error.addClass('invalid-feedback');
+                    element.closest('.form-group').append(error);
+                },
+                highlight: function (element, errorClass, validClass) {
+                    $(element).addClass('is-invalid');
+                },
+                unhighlight: function (element, errorClass, validClass) {
+                    $(element).removeClass('is-invalid');
+                },
+                invalidHandler: function (event, validator) {
+                    // Handle invalid form submission with Swal alert
+                    var errorMessage = "";
+                    if (!validator.valid() && validator.errorList.length > 0) {
+                        // Check if the error is specifically about Total Amount and Row Total Amount mismatch
+                        var totalAmountError = validator.errorList.find(function (error) {
+                            return error.method === 'totalAmountMatchesRowTotal';
+                        });
+                        if (totalAmountError) {
+                            errorMessage = totalAmountError.message;
+                        }
+                    }
+                    if (errorMessage) {
+                        Swal.fire({
+                            title: 'Validation Error',
+                            text: errorMessage,
+                            icon: 'error',
+                            confirmButtonText: 'OK'
+                        });
+                    }
+                }
+            });
+        });
+
+
+
+        var PostCustomerInsert = function (model) {
+
+        $.ajax({
+            type: "Post",
+            url: "/ProformaInvoiceHead/ManagerEdit",
+            data: model,
+
+            success: function (result) {
+                Swal.fire({
+
+                    icon: result.Status,
+                    title: result.Status,
+                    text: result.Text
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = "@Url.Action("PendingMangerConfirm", "ProformaInvoiceHead")"
+                    }
+                    else {
+                        window.location.href = "@Url.Action("PendingMangerConfirm", "ProformaInvoiceHead")"
+                    }
+                })
+            },
+        })
+
+        }
+
+
+
+
+        // Set Department Two
+
+
+        // Function to get the selected value from the dropdown
+        function getSelectedValue() {
+            // Get the dropdown element by its ID
+            var selectElement = document.getElementById("departmentFirst");
+            debugger
+            // Get the selected value
+            var selectedValue = selectElement.value;
+
+            GetDepartmentTwoByFirstid(selectedValue)
+            // Log or use the selected value
+            //console.log("Selected value:", selectedValue);
+
+            // You can return the value if needed
+            return selectedValue;
+        }
+
+        // Attach the function to the dropdown change event
+        document.getElementById("departmentFirst").addEventListener("change", function () {
+            var selectedValue = getSelectedValue();
+            // alert("The selected value is: " + selectedValue);
+        });
+
+        var GetDepartmentTwoByFirstid = function (id) {
+
+            //$("#loaderbody").removeClass('hide');
+            $.ajax({
+                type: "GET",
+                url: "/ProformaInvoiceHead/GetDepartmentTwo",
+                data: { id: id },
+
+                success: function (result) {
+
+                  debugger
+                    var dropdown = $('#departmentTwo');
+                    dropdown.empty();
+                    dropdown.append('<option value="">Select</option>');
+                    $.each(result, function (index, item) {
+                        dropdown.append('<option value="' + item.Id + '">' + item.CodeAndNarration + '</option>');
+                    });
+
+                },
+            })
+        }
+
+
+
+        // Set Department THird
+
+
+
+        // Function to get the selected value from the dropdown
+        function getSelectedValuethird() {
+            // Get the dropdown element by its ID
+            var selectElementsecond = document.getElementById("departmentTwo");
+            var selectElementFirst = document.getElementById("departmentFirst");
+
+            // Get the selected value
+            var selectedValuefirst = selectElementFirst.value;
+
+            GetDepartmentThirdBytwoid(selectedValuefirst, selectElementsecond.value)
+            // Log or use the selected value
+            //console.log("Selected value:", selectedValue);
+
+            // You can return the value if needed
+            return selectedValue;
+        }
+
+        // Attach the function to the dropdown change event
+        document.getElementById("departmentTwo").addEventListener("change", function () {
+            var selectedValue = getSelectedValuethird();
+            // alert("The selected value is: " + selectedValue);
+        });
+
+        var GetDepartmentThirdBytwoid = function (id,sid) {
+
+            //$("#loaderbody").removeClass('hide');
+
+            $.ajax({
+                type: "GET",
+                url: "/ProformaInvoiceHead/GetDepartmentThird",
+                data: { Firstid: id, Secondid: sid },
+
+                success: function (result) {
+
+                    debugger
+                    var dropdown = $('#departmentThird');
+                    dropdown.empty();
+                    dropdown.append('<option value="">Select</option>');
+                    $.each(result, function (index, item) {
+                        dropdown.append('<option value="' + item.Id + '">' + item.CodeAndNarration + '</option>');
+                    });
+
+                },
+            })
+        }
+
+
+        // Customer Wise Job
+
+        function getSelectedValuejob() {
+            // Get the dropdown element by its ID
+            var selectElementFirst = document.getElementById("selectCustomer");
+
+            // Get the selected value
+            var selectedValuefirst = selectElementFirst.value;
+
+            GetCustomerWisejob(selectedValuefirst)
+            // Log or use the selected value
+            //console.log("Selected value:", selectedValue);
+
+            // You can return the value if needed
+            return selectedValuefirst;
+        }
+
+        // Attach the function to the dropdown change event
+        document.getElementById("selectCustomer").addEventListener("change", function () {
+            var selectedValue = getSelectedValuejob();
+            // alert("The selected value is: " + selectedValue);
+        });
+
+        var GetCustomerWisejob = function (id) {
+
+            //$("#loaderbody").removeClass('hide');
+
+            $.ajax({
+                type: "GET",
+                url: "/ProformaInvoiceHead/GetCustomerWiseJob",
+                data: { CustomerId: id },
+
+                success: function (result) {
+
+                    debugger
+                    var dropdown = $('#JobNo');
+                    dropdown.empty();
+                    dropdown.append('<option value="">Select</option>');
+                    $.each(result, function (index, item) {
+                        dropdown.append('<option value="' + item.Fk_JobMasterId + '">' + item.FullDetails + '</option>');
+                    });
+
+                },
+            })
+        }
+        //
+
+
+
+        window.addEventListener('load', function () {
+
+            GetDefaultInvoiceBody();
+
+        });
+
+
+        var GetDefaultInvoiceBody = function () {
+
+            //$("#loaderbody").removeClass('hide');
+            $.ajax({
+                type: "GET",
+                url: "/ProformaInvoiceHead/InvoiceNarrationList",
+                //data: { Createby: 'User' },
+
+                success: function (result) {
+                    debugger
+                    $("#staticBackdropBody").html(result);
+                    debugger
+                    var amountField = document.getElementById("narrationid");
+                    amountField.removeAttribute("readonly");
+
+                    var amountField2 = document.getElementById("Amount");
+                    amountField2.removeAttribute("readonly");
+                },
+            })
+
+
+
+        }
+
+
+        function getSelectedValueLastAmountTotalAmount() {
+            // Get the dropdown element by its ID
+            var selectElementFirst = document.getElementById("JobNo");
+            var Customerid = document.getElementById("selectCustomer");
+            // Get the selected value
+            var selectedValuefirst = selectElementFirst.value;
+
+            GetLastAmountTotalAmount(Customerid.value, selectedValuefirst)
+            // Log or use the selected value
+            //console.log("Selected value:", selectedValue);
+
+            // You can return the value if needed
+            return selectedValuefirst;
+        }
+
+        // Attach the function to the dropdown change event
+        document.getElementById("JobNo").addEventListener("change", function () {
+            var selectedValue = getSelectedValueLastAmountTotalAmount();
+            // alert("The selected value is: " + selectedValue);
+        });
+
+        var GetLastAmountTotalAmount = function (id,jobid) {
+
+            //$("#loaderbody").removeClass('hide');
+
+            $.ajax({
+                type: "GET",
+                url: "/ProformaInvoiceHead/GetSelectedValueLastAmountTotalAmount",
+                data: { CustomerId: id, JobId: jobid },
+
+                success: function (result) {
+
+
+
+                    document.getElementById("TotalAmount").value = result[0].ActualValue.toFixed(2);
+                    document.getElementById("LastYearAmount").value = result[0].PreViewvalue.toFixed(2);
+
+
+                    var amountField = document.getElementById("narrationid");
+                    amountField.removeAttribute("readonly");
+
+                    var amountField2 = document.getElementById("Amount");
+                    amountField2.removeAttribute("readonly");
+                    debugger
+
+                    // Get the entered values
+                    var vatPercentage = parseFloat($('#vatPercentageInput').val()) || 0;
+                    var nbtPercentage = parseFloat($('#NbtPercentageInput').val()) || 0;
+                    var totalAmount = parseFloat($('#TotalAmount').val()) || 0;
+                    debugger
+                    // Calculate value VAT and value NBT
+                    var valueVAT = totalAmount * (vatPercentage / 100);
+                    var valueNBT = totalAmount * (nbtPercentage / 100);
+
+                    // Update the value VAT and value NBT fields
+                    $('#ValueVAT').val(valueVAT.toFixed(2));
+                    $('#ValueNBT').val(valueNBT.toFixed(2));
+
+                    // Calculate grand total
+                    var grandTotal = totalAmount + valueVAT + valueNBT;
+
+                    // Update the grand total display
+
+                    $('#TotalReceivedAmount').val(grandTotal.toFixed(2));
+
+
+
+                },
+            })
+
+            $.ajax({
+                type: "GET",
+                url: "/ProformaInvoiceHead/InvoiceNarrationList",
+                //data: { Createby: 'User' },
+
+                success: function (result) {
+                    debugger
+                    $("#staticBackdropBody").html(result);
+
+                },
+            })
+
+        }
+
+
+
+        $(document).ready(function () {
+            $('#vatPercentageInput, #NbtPercentageInput, #TotalAmount').on('input', function () {
+                // Get the entered values
+                var vatPercentage = parseFloat($('#vatPercentageInput').val()) || 0;
+                var nbtPercentage = parseFloat($('#NbtPercentageInput').val()) || 0;
+                var totalAmount = parseFloat($('#TotalAmount').val()) || 0;
+                debugger
+                // Calculate value VAT and value NBT
+                var valueVAT = totalAmount * (vatPercentage / 100);
+                var valueNBT = totalAmount * (nbtPercentage / 100);
+
+                // Update the value VAT and value NBT fields
+                $('#ValueVAT').val(valueVAT.toFixed(2));
+                $('#ValueNBT').val(valueNBT.toFixed(2));
+
+                // Calculate grand total
+                var grandTotal = totalAmount + valueVAT + valueNBT;
+
+                // Update the grand total display
+                $('#TotalReceivedAmount').val(grandTotal.toFixed(2));
+            });
+        });
+
+    </script>
+}
+

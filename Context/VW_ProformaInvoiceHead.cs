@@ -15,6 +15,7 @@ namespace WOPHRMSystem.Context
     public partial class VW_ProformaInvoiceHead
     {
         public int Id { get; set; }
+        public int Fk_CompanyId { get; set; }
         public string InvoiceNoProforma { get; set; }
         public int Fk_DepartmentIdOne { get; set; }
         public int Fk_DepartmentIdTwo { get; set; }
@@ -34,10 +35,6 @@ namespace WOPHRMSystem.Context
         public string TaxType { get; set; }
         public int Fk_NatureId { get; set; }
         public string NoNVat { get; set; }
-        public Nullable<decimal> TotalAmount { get; set; }
-        public Nullable<decimal> ValueNBT { get; set; }
-        public Nullable<decimal> ValueVAT { get; set; }
-        public Nullable<decimal> TotalReceivedAmount { get; set; }
         public Nullable<decimal> NoNVatPrecentage { get; set; }
         public Nullable<decimal> VatPercentage { get; set; }
         public Nullable<decimal> NBTPercentage { get; set; }
@@ -47,8 +44,14 @@ namespace WOPHRMSystem.Context
         public int Fk_JobMasterId { get; set; }
         public Nullable<decimal> LastYearAmount { get; set; }
         public Nullable<System.DateTime> PostingDate { get; set; }
+        public Nullable<decimal> TotalAmount { get; set; }
+        public Nullable<decimal> ValueNBT { get; set; }
+        public Nullable<decimal> ValueVAT { get; set; }
+        public Nullable<decimal> TotalReceivedAmount { get; set; }
         public bool IsActive { get; set; }
         public Nullable<System.DateTime> IsActiveDate { get; set; }
+        public bool IsPartnerOneComfirm { get; set; }
+        public Nullable<System.DateTime> PartnerOneComfirmDate { get; set; }
         public bool IsDelete { get; set; }
         public string Create_By { get; set; }
         public System.DateTime Create_Date { get; set; }
@@ -56,9 +59,9 @@ namespace WOPHRMSystem.Context
         public Nullable<System.DateTime> Edit_Date { get; set; }
         public string Delete_By { get; set; }
         public Nullable<System.DateTime> Delete_Date { get; set; }
-        public int Fk_CompanyId { get; set; }
-        public bool IsPartnerOneComfirm { get; set; }
-        public Nullable<System.DateTime> PartnerOneComfirmDate { get; set; }
+        public bool IsMangerOneComfirm { get; set; }
+        public Nullable<System.DateTime> ManagerOneComfirmDate { get; set; }
+        public bool IsPostingToInvoice { get; set; }
         public string CompanyName { get; set; }
         public string JobCode { get; set; }
         public string DepartmentOneName { get; set; }

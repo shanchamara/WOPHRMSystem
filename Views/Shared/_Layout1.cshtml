@@ -345,27 +345,42 @@
                                         <p>Proforma Invoice Confirmed by Partner</p>
                                     </a>
                                 </li>
+
+                                <li class="nav-item">
+                                    <a href="@Url.Action("PendingMangerConfirm","ProformaInvoiceHead")" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Pending Proforma Invoice Confirm by Manger</p>
+                                    </a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a href="@Url.Action("MangerConfirmed","ProformaInvoiceHead")" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Proforma Invoice Confirmed by Manger</p>
+                                    </a>
+                                </li>
+
                             </ul>
                         </li>
                         <li class="nav-item">
                             <a href="#" class="nav-link">
                                 <i class="nav-icon fas fa-tree"></i>
                                 <p>
-                                    UI Elements
+                                    Posting Proforma Invoice
                                     <i class="fas fa-angle-left right"></i>
                                 </p>
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="pages/UI/general.html" class="nav-link">
+                                    <a href="@Url.Action("ReadyToTransferInvoice","ProformaInvoiceHead")" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>General</p>
+                                        <p>Ready To Transfer The Proforma Invoice to Invoice </p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="pages/UI/icons.html" class="nav-link">
+                                    <a href="@Url.Action("ReadyToTransferInvoice","ProformaInvoiceHead")" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>Icons</p>
+                                        <p>Transfered Proforma Invoice </p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
