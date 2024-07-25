@@ -416,20 +416,20 @@
     <Compile Include="Context\VW_SectorMaster.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Controllers\InvoiceHeadController.cs" />
-    <Compile Include="Controllers\ProformaInvoiceHeadController.cs" />
     <Compile Include="Controllers\CustomerController.cs" />
     <Compile Include="Controllers\CustomerGroupController.cs" />
-    <Compile Include="Controllers\DepartmentThirdController.cs" />
-    <Compile Include="Controllers\DepartmentSecondController.cs" />
-    <Compile Include="Controllers\JobMasterController.cs" />
     <Compile Include="Controllers\DepartmentController.cs" />
+    <Compile Include="Controllers\DepartmentSecondController.cs" />
+    <Compile Include="Controllers\DepartmentThirdController.cs" />
     <Compile Include="Controllers\DesignationController.cs" />
     <Compile Include="Controllers\EmployeeController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\InvoiceHeadController.cs" />
+    <Compile Include="Controllers\JobMasterController.cs" />
     <Compile Include="Controllers\JobTransactionController.cs" />
     <Compile Include="Controllers\LocationController.cs" />
     <Compile Include="Controllers\NonEffectiveEmployeeController.cs" />
+    <Compile Include="Controllers\ProformaInvoiceHeadController.cs" />
     <Compile Include="Controllers\ReportController.cs" />
     <Compile Include="Controllers\SiteSettingController.cs" />
     <Compile Include="Controllers\TitleController.cs" />
@@ -487,6 +487,7 @@
     <Compile Include="Services\GradeMasterServices.cs" />
     <Compile Include="Services\InternationalReferalMasterServices.cs" />
     <Compile Include="Services\IntroductionMasterServices.cs" />
+    <Compile Include="Services\InvoiceHeadServices.cs" />
     <Compile Include="Services\InvoiceNarrationMasterServices.cs" />
     <Compile Include="Services\InvoiceShortNarrationMasterServices.cs" />
     <Compile Include="Services\JobMasterAssignTempServices.cs" />
@@ -2700,6 +2701,10 @@
     <Content Include="Views\ProformaInvoiceHead\ProformaInvoicePosting.cshtml" />
     <Content Include="Views\ProformaInvoiceHead\ReadyToTransferInvoice.cshtml" />
     <Content Include="Views\ProformaInvoiceHead\TransferedInvoice.cshtml" />
+    <Content Include="Views\InvoiceHead\Index.cshtml" />
+    <Content Include="Views\InvoiceHead\Create.cshtml" />
+    <Content Include="Views\InvoiceHead\InvoiceNarrationList.cshtml" />
+    <Content Include="Views\InvoiceHead\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

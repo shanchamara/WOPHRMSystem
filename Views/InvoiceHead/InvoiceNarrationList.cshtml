@@ -1,0 +1,336 @@
+﻿@model WOPHRMSystem.Models.ListInvoiceBodyModel
+
+<!-- DataTables -->
+<link rel="stylesheet" href="~/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+<link rel="stylesheet" href="~/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+<link rel="stylesheet" href="~/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
+
+<style>
+    .disable-height {
+        height: auto !important;
+    }
+
+    .list-group {
+        max-height: 400px;
+        margin-bottom: 10px;
+        overflow-x: hidden;
+        -webkit-overflow-scrolling: touch;
+    }
+</style>
+@{
+    int Rows = 1;
+}
+
+
+
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+
+            <!-- /.card -->
+            <div class="card">
+                <!--<div class="card-header">-->
+                @*<h3 class="card-title">DataTable with default features</h3>*@
+                <!--</div>-->
+                <!-- /.card-header -->
+                <div class="list-group">
+                    <table id="example1" class="table table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th style="display:none;">Id</th> <!-- Hidden Id column -->
+                                <th class="col-2 form-control-sm">Code</th>
+                                <th class="col-4 form-control-sm">Narration</th>
+                                <th class="col-2 form-control-sm">Amount</th>
+                                <th class="col-2 form-control-sm">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var s in Model.InvoiceBodyModels)
+                            {
+                                <tr>
+                                    <td style="display:none;">@s.Id</td> <!-- Hidden Id column -->
+                                    <td style="display:none;">@s.Fk_InvoiceNarrttionId</td> <!-- Hidden Id column -->
+                                    <td class="col-1 form-control-sm">@s.Code</td>
+                                    <td class="col-4 form-control-sm">@s.Narration</td>
+                                    <td class="col-2">
+                                        <input type="text" class="form-control budgeted-hours form-control-sm text-right" value="@s.Amount" />
+                                    </td>
+                                    <td class="col-2 project-actions text-right">
+                                        <a class="btn btn-info btn-sm" onclick="getInputValue1(this,'@s.Id','@s.Fk_InvoiceNarrttionId')">
+                                            <i class="fas fa-pencil-alt"></i>
+                                        </a>
+                                        <a class="btn btn-danger btn-sm" onclick="PostDelete1('@s.Id')">
+                                            <i class="fas fa-trash"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                                Rows++;
+                            }
+                            @using (Html.BeginForm("", "", FormMethod.Post, new { role = "form", enctype = "multipart/form-data", id = "quickForm1", @autocomplete = "off" }))
+                            {
+
+                                <tr>
+                                    @Html.HiddenFor(model => model.RowTotalAmount)
+                                    <td colspan="2">
+                                        @Html.DropDownListFor(model => model.Fk_InvoiceNarrttionId, Model.SelectListItems, "Select", htmlAttributes: new { @class = "form-control form-control-sm", id = "narrationid", @readonly = "readonly" })
+                                    </td>
+                                    <td>
+                                        @Html.EditorFor(model => model.Amount, new { htmlAttributes = new { @class = "form-control form-control-sm", placeholder = "", @type = "number", @min = "0", @readonly = "readonly" } })
+
+                                    </td>
+                                    <td class="project-actions text-right">
+                                        <button class="btn btn-info btn-sm" type="button" onclick="AddNarrationForInvoiceBody(event)">
+                                            <i class="fas fa-plus"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+                <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+        </div>
+        <!-- /.col -->
+    </div>
+    <!-- /.row -->
+</div>
+
+<script>
+
+
+
+    function getInputValue1(button, Id,narrationid) {
+        var row = button.closest('tr');
+        var budgetedHours = row.querySelector('.budgeted-hours').value || 0;
+
+        // Call your AddAssign function or handle the values as needed
+        UpdateBudget(Id, budgetedHours, narrationid);
+    }
+
+    var UpdateBudget = function (Id, amount, narrationid) {
+        //$("#loaderbody").removeClass('hide');
+        var jobId = document.getElementById("JobNo").value;
+        var Customerid = document.getElementById("selectCustomer").value;
+
+
+        debugger
+        $.ajax({
+            type: "POST",
+            url: "/InvoiceHead/InvoiceBodyTempUpdate",
+            data: { Id: Id, CusId: Customerid, JobId: jobId, NarratiionId: narrationid, Amount: amount },
+            success: function (result) {
+                Swal.fire({
+                    icon: result.Status,
+                    title: result.Status,
+                    text: result.Text
+                }).then((result) => {
+
+                    if (result.isConfirmed) {
+                        $.ajax({
+                            type: "GET",
+                            url: "/InvoiceHead/InvoiceNarrationList",
+                            //data: { Createby: 'User' },
+
+                            success: function (result) {
+                                debugger
+                                $("#staticBackdropBody").html(result);
+
+                                var amountField = document.getElementById("narrationid");
+                                amountField.removeAttribute("readonly");
+
+                                var amountField2 = document.getElementById("Amount");
+                                amountField2.removeAttribute("readonly");
+                            },
+                        })
+                    } else {
+                        $.ajax({
+                            type: "GET",
+                            url: "/InvoiceHead/InvoiceNarrationList",
+                            //data: { Createby: 'User' },
+
+                            success: function (result) {
+
+                                $("#staticBackdropBody").html(result);
+
+                                var amountField = document.getElementById("narrationid");
+                                amountField.removeAttribute("readonly");
+
+                                var amountField2 = document.getElementById("Amount");
+                                amountField2.removeAttribute("readonly");
+                            },
+                        })
+                    }
+                });
+            }
+        });
+    }
+
+
+
+    $(document).ready(function () {
+        $('.budgeted-hours').keydown(function (event) {
+            if (event.keyCode == 13) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+
+
+    var PostDelete1 = function (Id) {
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "Do you really want to Remove this Record?",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    type: "DELETE",
+                    url: "/InvoiceHead/InvoiceBodyDelete",
+                    data: { ID: Id },
+
+                    success: function (result) {
+                        Swal.fire({
+                            icon: result.Status,
+                            title: result.Status,
+                            text: result.Text
+                        }).then((result) => {
+                            $.ajax({
+                                type: "GET",
+                                url: "/InvoiceHead/InvoiceNarrationList",
+                                //data: { Createby: 'User' },
+
+                                success: function (result) {
+                                    debugger
+                                    $("#staticBackdropBody").html(result);
+
+                                    var amountField = document.getElementById("narrationid");
+                                    amountField.removeAttribute("readonly");
+
+                                    var amountField2 = document.getElementById("Amount");
+                                    amountField2.removeAttribute("readonly");
+                                },
+                            })
+                        });
+                    }
+                });
+            }
+        });
+    }
+
+
+
+
+    var IsValid = true;
+
+    var AddNarrationForInvoiceBody = function (e) {
+        e.preventDefault();  // Prevent the default form submission
+        //debugger
+        //var data = $('#quickForm1').serialize();
+        var selectElement = document.getElementById("narrationid").value;
+        var Amount = document.getElementById("Amount").value;
+        var Elements = parseInt(document.getElementById('Amount').value);
+        var RowTotalAmount = parseInt(document.getElementById('RowTotalAmount').value);
+
+        var valueRowTotalAndelements = RowTotalAmount + Elements;
+
+        var TotalAmount = parseInt(document.getElementById('TotalAmount').value);
+        var jobId = document.getElementById("JobNo").value;
+        var Customerid = document.getElementById("selectCustomer").value;
+
+        debugger
+        if (selectElement == "") {
+            IsValid = false;
+
+            document.getElementById("narrationid").className = "form-control form-control-sm is-invalid";
+            return false;
+        }
+
+        if (Amount == "") {
+            IsValid = false;
+
+            document.getElementById("Amount").className = "form-control form-control-sm is-invalid";
+            return false;
+        }
+
+        if (valueRowTotalAndelements > TotalAmount) {
+
+            Swal.fire({
+                icon: 'warning',
+                title: 'warning',
+                text: 'Amount should not be greater than Total Amount.',     // Set the text of the alert
+            }).then((swalResult) => {
+                if (swalResult.isConfirmed) {
+
+                } else {
+
+                }
+            });
+            return false;
+        }
+
+        $.ajax({
+            type: "POST",
+            url: "/InvoiceHead/InvoiceBodyTempInsert",
+            data: { CusId: Customerid, JobId: jobId, NarratiionId: selectElement, Amount: Elements },
+            success: function (result) {
+                Swal.fire({
+                    icon: result.Status,
+                    title: result.Status,
+                    text: result.Text
+                }).then((result) => {
+
+                    if (result.isConfirmed) {
+                        $.ajax({
+                            type: "GET",
+                            url: "/InvoiceHead/InvoiceNarrationList",
+                            //data: { Createby: 'User' },
+
+                            success: function (result) {
+                                debugger
+                                $("#staticBackdropBody").html(result);
+
+                                var amountField = document.getElementById("narrationid");
+                                amountField.removeAttribute("readonly");
+
+                                var amountField2 = document.getElementById("Amount");
+                                amountField2.removeAttribute("readonly");
+                            },
+                        })
+                    } else {
+                        $.ajax({
+                            type: "GET",
+                            url: "/InvoiceHead/InvoiceNarrationList",
+                            //data: { Createby: 'User' },
+
+                            success: function (result) {
+
+                                $("#staticBackdropBody").html(result);
+
+                                var amountField = document.getElementById("narrationid");
+                                amountField.removeAttribute("readonly");
+
+                                var amountField2 = document.getElementById("Amount");
+                                amountField2.removeAttribute("readonly");
+                            },
+                        })
+                    }
+                });
+            }
+        });
+    };
+
+
+    
+
+
+
+</script>

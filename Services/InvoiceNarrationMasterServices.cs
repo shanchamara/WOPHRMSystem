@@ -20,7 +20,7 @@ namespace AuditSystem.Services
             {
                 var dr = (from a in _context.VW_InvoiceNarrationMaster
                           orderby a.Id descending
-                          where !_context.TblProformaInvoiceBodyTemps.Any(b => b.Fk_InvoiceNarrttionId == a.Id)
+                          where !_context.TblInvoiceBodyTemps.Any(b => b.Fk_InvoiceNarrttionId == a.Id)
                           select new InvoiceNarrationMasterModel()
                           {
                               Id = a.Id,
@@ -38,6 +38,217 @@ namespace AuditSystem.Services
                 throw;
             }
         }
+
+
+        #region  Invoice Body
+
+        public List<InvoiceBodyModel> GetAllInvoiceBody(string Create_By)
+        {
+            try
+            {
+                var dr = (from a in _context.TblInvoiceBodyTemps
+                          join n in _context.TblInvoiceNarrationMasters on a.Fk_InvoiceNarrttionId equals n.Id
+                          orderby a.Id descending
+                          where a.Create_By == Create_By
+                          select new InvoiceBodyModel()
+                          {
+                              Id = a.Id,
+                              Code = n.Code,
+                              Narration = n.Narration,
+                              FK_CustomerId = a.FK_CustomerId,
+                              Amount = a.Amount,
+                              BodyRowId = a.BodyRowId,
+                              Create_By = a.Create_By,
+                              Fk_InvoiceNarrttionId = a.Fk_InvoiceNarrttionId,
+                              FK_JobMasterId = a.FK_JobMasterId,
+                          }).ToList();
+                return dr;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public decimal? GetAllInvoiceBodyRowTotalAmount(string Create_By)
+        {
+            try
+            {
+                var sumAmount = _context.TblInvoiceBodyTemps
+                                .Where(row => row.Create_By == Create_By) // Filter by Create_By if needed
+                                .Sum(row => row.Amount); // Summing the Amount property
+
+                return sumAmount;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+
+        public TblInvoiceBodyTemp GetById(int Id)
+        {
+            return _context.TblInvoiceBodyTemps.SingleOrDefault(d => d.Fk_InvoiceNarrttionId.Equals(Id));
+        }
+
+        public MessageModel Insert(TblInvoiceBodyTemp obj)
+        {
+
+            try
+            {
+                var data = GetById(obj.Fk_InvoiceNarrttionId);
+                if (data == null)
+                {
+                    _context.TblInvoiceBodyTemps.Add(obj);
+                    _context.SaveChanges();
+
+                    return new MessageModel()
+                    {
+                        Status = "success",
+                        Text = $"This Record has been registered",
+                    };
+                }
+                else
+                {
+                    return new MessageModel()
+                    {
+                        Status = "warning",
+                        Text = $"This Record has been already registered",
+                    };
+                }
+            }
+            catch (Exception)
+            {
+                return new MessageModel()
+                {
+                    Status = "warning",
+                    Text = $"There was a error with retrieving data. Please try again",
+                };
+            }
+        }
+
+
+        public MessageModel Update(TblInvoiceBodyTemp obj)
+        {
+
+            try
+            {
+                var data = GetById(obj.Fk_InvoiceNarrttionId);
+                obj.BodyRowId = data.BodyRowId;
+                _context.TblInvoiceBodyTemps.AddOrUpdate(obj);
+                _context.SaveChanges();
+
+                return new MessageModel()
+                {
+                    Status = "success",
+                    Text = $"This Record has been Updated",
+                };
+
+            }
+            catch (Exception)
+            {
+                return new MessageModel()
+                {
+                    Status = "warning",
+                    Text = $"There was a error with retrieving data. Please try again",
+                };
+            }
+        }
+
+        public MessageModel Delete(TblInvoiceBodyTemp obj)
+        {
+            try
+            {
+                var dbobj = _context.TblInvoiceBodyTemps.SingleOrDefault(d => d.Id.Equals(obj.Id));
+                _context.TblInvoiceBodyTemps.Remove(dbobj);
+
+                _context.SaveChanges();
+                return new MessageModel()
+                {
+                    Status = "success",
+                    Text = $"This Record have been deleted Successfully",
+                };
+            }
+            catch (Exception)
+            {
+                return new MessageModel()
+                {
+                    Status = "warning",
+                    Text = $"There was a error with retrieving data. Please try again",
+                };
+            }
+
+
+        }
+
+        public void DeleteCurrentlyTemp(string Create_By)
+        {
+            try
+            {
+                var recordsToDelete = _context.TblInvoiceBodyTemps.Where(d => d.Create_By == Create_By).ToList();
+                foreach (var record in recordsToDelete)
+                {
+                    _context.TblInvoiceBodyTemps.Remove(record);
+                }
+                _context.SaveChanges();
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+
+        public void DeleteCurrentlyTempAndInsertDataForUpdate(string Create_By, int pInvoiceId)
+        {
+            try
+            {
+                using (TransactionScope scope = new TransactionScope())
+                {
+                    var recordsToDelete = _context.TblInvoiceBodyTemps.Where(d => d.Create_By == Create_By).ToList();
+                    foreach (var record in recordsToDelete)
+                    {
+                        _context.TblInvoiceBodyTemps.Remove(record);
+                    }
+
+                    var get = _context.TblInvoiceBodies.Where(d => d.Fk_InvoiceHeadId == pInvoiceId && d.IsDelete.Equals(false)).ToList();
+                    foreach (var record in get)
+                    {
+                        TblInvoiceBodyTemp tbl = new TblInvoiceBodyTemp
+                        {
+                            Create_By = Create_By,
+                            BodyRowId = record.Id,
+                            FK_JobMasterId = record.Fk_JobMasterId,
+                            Amount = record.Amount,
+                            FK_CustomerId = record.Fk_CustomerId,
+                            Fk_InvoiceNarrttionId = record.Fk_InvoiceNarrttionId
+                        };
+                        _context.TblInvoiceBodyTemps.Add(tbl);
+                    }
+
+                    scope.Complete();
+                }
+                _context.SaveChanges();
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        #endregion
+
+
+
+
+
 
         #region Proforma Invoice Body
 
@@ -88,7 +299,7 @@ namespace AuditSystem.Services
         }
 
 
-        public TblProformaInvoiceBodyTemp GetById(int Id)
+        public TblProformaInvoiceBodyTemp GetProformaById(int Id)
         {
             return _context.TblProformaInvoiceBodyTemps.SingleOrDefault(d => d.Fk_InvoiceNarrttionId.Equals(Id));
         }
@@ -98,7 +309,7 @@ namespace AuditSystem.Services
 
             try
             {
-                var data = GetById(obj.Fk_InvoiceNarrttionId);
+                var data = GetProformaById(obj.Fk_InvoiceNarrttionId);
                 if (data == null)
                 {
                     _context.TblProformaInvoiceBodyTemps.Add(obj);
@@ -135,7 +346,7 @@ namespace AuditSystem.Services
 
             try
             {
-                var data = GetById(obj.Fk_InvoiceNarrttionId);
+                var data = GetProformaById(obj.Fk_InvoiceNarrttionId);
                 obj.BodyRowId = data.BodyRowId;
                 _context.TblProformaInvoiceBodyTemps.AddOrUpdate(obj);
                 _context.SaveChanges();
@@ -183,7 +394,7 @@ namespace AuditSystem.Services
 
         }
 
-        public void DeleteCurrentlyTemp(string Create_By)
+        public void DeleteProformaCurrentlyTemp(string Create_By)
         {
             try
             {
@@ -203,7 +414,7 @@ namespace AuditSystem.Services
         }
 
 
-        public void DeleteCurrentlyTempAndInsertDataForUpdate(string Create_By, int pInvoiceId)
+        public void DeleteCurrentlyProformaTempAndInsertDataForUpdate(string Create_By, int pInvoiceId)
         {
             try
             {

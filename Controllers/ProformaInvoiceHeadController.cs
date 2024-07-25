@@ -37,7 +37,7 @@ namespace WOPHRMSystem.Controllers
         [HttpGet]
         public ActionResult Create()
         {
-            narrationMasterServices.DeleteCurrentlyTemp("User");
+            narrationMasterServices.DeleteProformaCurrentlyTemp("User");
             var model = new ProformaInvoiceHeadModel()
             {
                 WorkGroupLists = new SelectList(workGroup.GetAll(), "Id", "CodeAndNarration"),
@@ -129,7 +129,7 @@ namespace WOPHRMSystem.Controllers
         [HttpGet]
         public ActionResult Edit(int Id)
         {
-            narrationMasterServices.DeleteCurrentlyTempAndInsertDataForUpdate("User", Id);
+            narrationMasterServices.DeleteCurrentlyProformaTempAndInsertDataForUpdate("User", Id);
             var dt = _ClientService.GetById(Id);
 
             var model = new ProformaInvoiceHeadModel()
@@ -322,7 +322,7 @@ namespace WOPHRMSystem.Controllers
         [HttpGet]
         public ActionResult GetSelectedValueLastAmountTotalAmount(int CustomerId, int JobId)
         {
-            narrationMasterServices.DeleteCurrentlyTemp("User");
+            narrationMasterServices.DeleteProformaCurrentlyTemp("User");
             var customerCode = jobMasterServices.GetAllJObsForIsReadytoInvoiceById(CustomerId, JobId); // Your logic to get the customer code
 
             return Json(customerCode, JsonRequestBehavior.AllowGet);
@@ -468,7 +468,7 @@ namespace WOPHRMSystem.Controllers
         [HttpGet]
         public ActionResult PartnerEdit(int Id)
         {
-            narrationMasterServices.DeleteCurrentlyTempAndInsertDataForUpdate("User", Id);
+            narrationMasterServices.DeleteCurrentlyProformaTempAndInsertDataForUpdate("User", Id);
             var dt = _ClientService.GetById(Id);
 
             var model = new ProformaInvoiceHeadModel()
@@ -628,7 +628,7 @@ namespace WOPHRMSystem.Controllers
         [HttpGet]
         public ActionResult ManagerEdit(int Id)
         {
-            narrationMasterServices.DeleteCurrentlyTempAndInsertDataForUpdate("User", Id);
+            narrationMasterServices.DeleteCurrentlyProformaTempAndInsertDataForUpdate("User", Id);
             var dt = _ClientService.GetById(Id);
 
             var model = new ProformaInvoiceHeadModel()
@@ -781,7 +781,7 @@ namespace WOPHRMSystem.Controllers
         [HttpGet]
         public ActionResult ProformaInvoicePosting(int Id)
         {
-            narrationMasterServices.DeleteCurrentlyTempAndInsertDataForUpdate("User", Id);
+            narrationMasterServices.DeleteCurrentlyProformaTempAndInsertDataForUpdate("User", Id);
             var dt = _ClientService.GetById(Id);
 
             var model = new ProformaInvoiceHeadModel()
