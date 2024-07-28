@@ -1,0 +1,1296 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="AuditSystemModelStoreContainer" CdmEntityContainer="AuditSystemEntities">
+    <EntitySetMapping Name="C__EFMigrationsHistory">
+      <EntityTypeMapping TypeName="AuditSystemModel.C__EFMigrationsHistory">
+        <MappingFragment StoreEntitySet="__EFMigrationsHistory">
+          <ScalarProperty Name="ProductVersion" ColumnName="ProductVersion" />
+          <ScalarProperty Name="MigrationId" ColumnName="MigrationId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TblCompanies">
+      <EntityTypeMapping TypeName="AuditSystemModel.TblCompany">
+        <MappingFragment StoreEntitySet="TblCompany">
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TblCustomerGroups">
+      <EntityTypeMapping TypeName="AuditSystemModel.TblCustomerGroup">
+        <MappingFragment StoreEntitySet="TblCustomerGroup">
+          <ScalarProperty Name="Delete_Date" ColumnName="Delete_Date" />
+          <ScalarProperty Name="Delete_By" ColumnName="Delete_By" />
+          <ScalarProperty Name="Edit_Date" ColumnName="Edit_Date" />
+          <ScalarProperty Name="Edit_By" ColumnName="Edit_By" />
+          <ScalarProperty Name="Create_Date" ColumnName="Create_Date" />
+          <ScalarProperty Name="Create_By" ColumnName="Create_By" />
+          <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="Narration" ColumnName="Narration" />
+          <ScalarProperty Name="Code" ColumnName="Code" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TblCustomers">
+      <EntityTypeMapping TypeName="AuditSystemModel.TblCustomer">
+        <MappingFragment StoreEntitySet="TblCustomers">
+          <ScalarProperty Name="Delete_Date" ColumnName="Delete_Date" />
+          <ScalarProperty Name="Delete_By" ColumnName="Delete_By" />
+          <ScalarProperty Name="Edit_Date" ColumnName="Edit_Date" />
+          <ScalarProperty Name="Edit_By" ColumnName="Edit_By" />
+          <ScalarProperty Name="Create_Date" ColumnName="Create_Date" />
+          <ScalarProperty Name="Create_By" ColumnName="Create_By" />
+          <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Code" ColumnName="Code" />
+          <ScalarProperty Name="DateOfJoined" ColumnName="DateOfJoined" />
+          <ScalarProperty Name="Fk_InternationslReferalId" ColumnName="Fk_InternationslReferalId" />
+          <ScalarProperty Name="Fk_IntroductionId" ColumnName="Fk_IntroductionId" />
+          <ScalarProperty Name="Fk_SectorMasterId" ColumnName="Fk_SectorMasterId" />
+          <ScalarProperty Name="Fk_LegalStatusMasterId" ColumnName="Fk_LegalStatusMasterId" />
+          <ScalarProperty Name="Fk_ManagerId" ColumnName="Fk_ManagerId" />
+          <ScalarProperty Name="Fk_PartnerId" ColumnName="Fk_PartnerId" />
+          <ScalarProperty Name="ContactPersonSecond" ColumnName="ContactPersonSecond" />
+          <ScalarProperty Name="ContactPersonOne" ColumnName="ContactPersonOne" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Fk_GradeMasterId" ColumnName="Fk_GradeMasterId" />
+          <ScalarProperty Name="TelSecond" ColumnName="TelSecond" />
+          <ScalarProperty Name="TelOne" ColumnName="TelOne" />
+          <ScalarProperty Name="Fax" ColumnName="Fax" />
+          <ScalarProperty Name="SVatNo" ColumnName="SVatNo" />
+          <ScalarProperty Name="VatNo" ColumnName="VatNo" />
+          <ScalarProperty Name="TaxNo" ColumnName="TaxNo" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="VatType" ColumnName="VatType" />
+          <ScalarProperty Name="Fk_CustomerGroupId" ColumnName="Fk_CustomerGroupId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TblDepartments">
+      <EntityTypeMapping TypeName="AuditSystemModel.TblDepartment">
+        <MappingFragment StoreEntitySet="TblDepartment">
+          <ScalarProperty Name="Delete_Date" ColumnName="Delete_Date" />
+          <ScalarProperty Name="Delete_By" ColumnName="Delete_By" />
+          <ScalarProperty Name="Edit_Date" ColumnName="Edit_Date" />
+          <ScalarProperty Name="Edit_By" ColumnName="Edit_By" />
+          <ScalarProperty Name="Create_Date" ColumnName="Create_Date" />
+          <ScalarProperty Name="Create_By" ColumnName="Create_By" />
+          <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="Narration" ColumnName="Narration" />
+          <ScalarProperty Name="Code" ColumnName="Code" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TblDepartmentSeconds">
+      <EntityTypeMapping TypeName="AuditSystemModel.TblDepartmentSecond">
+        <MappingFragment StoreEntitySet="TblDepartmentSecond">
+          <ScalarProperty Name="Delete_Date" ColumnName="Delete_Date" />
+          <ScalarProperty Name="Delete_By" ColumnName="Delete_By" />
+          <ScalarProperty Name="Edit_Date" ColumnName="Edit_Date" />
+          <ScalarProperty Name="Edit_By" ColumnName="Edit_By" />
+          <ScalarProperty Name="Create_Date" ColumnName="Create_Date" />
+          <ScalarProperty Name="Create_By" ColumnName="Create_By" />
+          <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="Fk_DepartmentIdFirst" ColumnName="Fk_DepartmentIdFirst" />
+          <ScalarProperty Name="Narration" ColumnName="Narration" />
+          <ScalarProperty Name="Code" ColumnName="Code" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TblDepartmentThirds">
+      <EntityTypeMapping TypeName="AuditSystemModel.TblDepartmentThird">
+        <MappingFragment StoreEntitySet="TblDepartmentThird">
+          <ScalarProperty Name="Delete_Date" ColumnName="Delete_Date" />
+          <ScalarProperty Name="Delete_By" ColumnName="Delete_By" />
+          <ScalarProperty Name="Edit_Date" ColumnName="Edit_Date" />
+          <ScalarProperty Name="Edit_By" ColumnName="Edit_By" />
+          <ScalarProperty Name="Create_Date" ColumnName="Create_Date" />
+          <ScalarProperty Name="Create_By" ColumnName="Create_By" />
+          <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="Fk_DepartmentIdSecond" ColumnName="Fk_DepartmentIdSecond" />
+          <ScalarProperty Name="Fk_DepartmentIdFirst" ColumnName="Fk_DepartmentIdFirst" />
+          <ScalarProperty Name="Narration" ColumnName="Narration" />
+          <ScalarProperty Name="Code" ColumnName="Code" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TblDesignations">
+      <EntityTypeMapping TypeName="AuditSystemModel.TblDesignation">
+        <MappingFragment StoreEntitySet="TblDesignation">
+          <ScalarProperty Name="Delete_Date" ColumnName="Delete_Date" />
+          <ScalarProperty Name="Delete_By" ColumnName="Delete_By" />
+          <ScalarProperty Name="Edit_Date" ColumnName="Edit_Date" />
+          <ScalarProperty Name="Edit_By" ColumnName="Edit_By" />
+          <ScalarProperty Name="Create_Date" ColumnName="Create_Date" />
+          <ScalarProperty Name="Create_By" ColumnName="Create_By" />
+          <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="Narration" ColumnName="Narration" />
+          <ScalarProperty Name="Code" ColumnName="Code" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TblDocuments">
+      <EntityTypeMapping TypeName="AuditSystemModel.TblDocument">
+        <MappingFragment StoreEntitySet="TblDocument">
+          <ScalarProperty Name="Number" ColumnName="Number" />
+          <ScalarProperty Name="Pattern" ColumnName="Pattern" />
+          <ScalarProperty Name="TypeOfTable" ColumnName="TypeOfTable" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TblEmployees">
+      <EntityTypeMapping TypeName="AuditSystemModel.TblEmployee">
+        <MappingFragment StoreEntitySet="TblEmployee">
+          <ScalarProperty Name="Delete_Date" ColumnName="Delete_Date" />
+          <ScalarProperty Name="Delete_By" ColumnName="Delete_By" />
+          <ScalarProperty Name="Edit_Date" ColumnName="Edit_Date" />
+          <ScalarProperty Name="Edit_By" ColumnName="Edit_By" />
+          <ScalarProperty Name="Create_Date" ColumnName="Create_Date" />
+          <ScalarProperty Name="Create_By" ColumnName="Create_By" />
+          <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="Fk_DepartmentId" ColumnName="Fk_DepartmentId" />
+          <ScalarProperty Name="Fk_DesginationId" ColumnName="Fk_DesginationId" />
+          <ScalarProperty Name="Fk_TitleId" ColumnName="Fk_TitleId" />
+          <ScalarProperty Name="IsPartner" ColumnName="IsPartner" />
+          <ScalarProperty Name="IsManager" ColumnName="IsManager" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Nic" ColumnName="Nic" />
+          <ScalarProperty Name="DateOfJoin" ColumnName="DateOfJoin" />
+          <ScalarProperty Name="BirthDay" ColumnName="BirthDay" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="JObPrefixCode" ColumnName="JObPrefixCode" />
+          <ScalarProperty Name="Code" ColumnName="Code" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TblEmployeeHourlyRates">
+      <EntityTypeMapping TypeName="AuditSystemModel.TblEmployeeHourlyRate">
+        <MappingFragment StoreEntitySet="TblEmployeeHourlyRate">
+          <ScalarProperty Name="Delete_Date" ColumnName="Delete_Date" />
+          <ScalarProperty Name="Delete_By" ColumnName="Delete_By" />
+          <ScalarProperty Name="Edit_Date" ColumnName="Edit_Date" />
+          <ScalarProperty Name="Edit_By" ColumnName="Edit_By" />
+          <ScalarProperty Name="Create_Date" ColumnName="Create_Date" />
+          <ScalarProperty Name="Create_By" ColumnName="Create_By" />
+          <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+          <ScalarProperty Name="Fk_EmployeeId" ColumnName="Fk_EmployeeId" />
+          <ScalarProperty Name="ToDate" ColumnName="ToDate" />
+          <ScalarProperty Name="FromDate" ColumnName="FromDate" />
+          <ScalarProperty Name="Rate" ColumnName="Rate" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TblGradeMasters">
+      <EntityTypeMapping TypeName="AuditSystemModel.TblGradeMaster">
+        <MappingFragment StoreEntitySet="TblGradeMaster">
+          <ScalarProperty Name="Delete_Date" ColumnName="Delete_Date" />
+          <ScalarProperty Name="Delete_By" ColumnName="Delete_By" />
+          <ScalarProperty Name="Edit_Date" ColumnName="Edit_Date" />
+          <ScalarProperty Name="Edit_By" ColumnName="Edit_By" />
+          <ScalarProperty Name="Create_Date" ColumnName="Create_Date" />
+          <ScalarProperty Name="Create_By" ColumnName="Create_By" />
+          <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="Narration" ColumnName="Narration" />
+          <ScalarProperty Name="Code" ColumnName="Code" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TblInternationalReferalMasters">
+      <EntityTypeMapping TypeName="AuditSystemModel.TblInternationalReferalMaster">
+        <MappingFragment StoreEntitySet="TblInternationalReferalMaster">
+          <ScalarProperty Name="Delete_Date" ColumnName="Delete_Date" />
+          <ScalarProperty Name="Delete_By" ColumnName="Delete_By" />
+          <ScalarProperty Name="Edit_Date" ColumnName="Edit_Date" />
+          <ScalarProperty Name="Edit_By" ColumnName="Edit_By" />
+          <ScalarProperty Name="Create_Date" ColumnName="Create_Date" />
+          <ScalarProperty Name="Create_By" ColumnName="Create_By" />
+          <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="Narration" ColumnName="Narration" />
+          <ScalarProperty Name="Code" ColumnName="Code" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TblIntroductionMasters">
+      <EntityTypeMapping TypeName="AuditSystemModel.TblIntroductionMaster">
+        <MappingFragment StoreEntitySet="TblIntroductionMaster">
+          <ScalarProperty Name="Delete_Date" ColumnName="Delete_Date" />
+          <ScalarProperty Name="Delete_By" ColumnName="Delete_By" />
+          <ScalarProperty Name="Edit_Date" ColumnName="Edit_Date" />
+          <ScalarProperty Name="Edit_By" ColumnName="Edit_By" />
+          <ScalarProperty Name="Create_Date" ColumnName="Create_Date" />
+          <ScalarProperty Name="Create_By" ColumnName="Create_By" />
+          <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="Narration" ColumnName="Narration" />
+          <ScalarProperty Name="Code" ColumnName="Code" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TblInvoiceBodies">
+      <EntityTypeMapping TypeName="AuditSystemModel.TblInvoiceBody">
+        <MappingFragment StoreEntitySet="TblInvoiceBody">
+          <ScalarProperty Name="Delete_Date" ColumnName="Delete_Date" />
+          <ScalarProperty Name="Delete_By" ColumnName="Delete_By" />
+          <ScalarProperty Name="Edit_Date" ColumnName="Edit_Date" />
+          <ScalarProperty Name="Edit_By" ColumnName="Edit_By" />
+          <ScalarProperty Name="Create_Date" ColumnName="Create_Date" />
+          <ScalarProperty Name="Create_By" ColumnName="Create_By" />
+          <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+          <ScalarProperty Name="Fk_InvoiceHeadId" ColumnName="Fk_InvoiceHeadId" />
+          <ScalarProperty Name="Fk_JobMasterId" ColumnName="Fk_JobMasterId" />
+          <ScalarProperty Name="Fk_CustomerId" ColumnName="Fk_CustomerId" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="Fk_InvoiceNarrttionId" ColumnName="Fk_InvoiceNarrttionId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TblInvoiceBodyTemps">
+      <EntityTypeMapping TypeName="AuditSystemModel.TblInvoiceBodyTemp">
+        <MappingFragment StoreEntitySet="TblInvoiceBodyTemp">
+          <ScalarProperty Name="Create_By" ColumnName="Create_By" />
+          <ScalarProperty Name="FK_JobMasterId" ColumnName="FK_JobMasterId" />
+          <ScalarProperty Name="FK_CustomerId" ColumnName="FK_CustomerId" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="Fk_InvoiceNarrttionId" ColumnName="Fk_InvoiceNarrttionId" />
+          <ScalarProperty Name="BodyRowId" ColumnName="BodyRowId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TblInvoiceHeads">
+      <EntityTypeMapping TypeName="AuditSystemModel.TblInvoiceHead">
+        <MappingFragment StoreEntitySet="TblInvoiceHead">
+          <ScalarProperty Name="Delete_Date" ColumnName="Delete_Date" />
+          <ScalarProperty Name="Delete_By" ColumnName="Delete_By" />
+          <ScalarProperty Name="Edit_Date" ColumnName="Edit_Date" />
+          <ScalarProperty Name="Edit_By" ColumnName="Edit_By" />
+          <ScalarProperty Name="Create_Date" ColumnName="Create_Date" />
+          <ScalarProperty Name="Create_By" ColumnName="Create_By" />
+          <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+          <ScalarProperty Name="ManagerOneComfirmDate" ColumnName="ManagerOneComfirmDate" />
+          <ScalarProperty Name="IsMangerOneComfirm" ColumnName="IsMangerOneComfirm" />
+          <ScalarProperty Name="PartnerOneComfirmDate" ColumnName="PartnerOneComfirmDate" />
+          <ScalarProperty Name="IsPartnerOneComfirm" ColumnName="IsPartnerOneComfirm" />
+          <ScalarProperty Name="IsActiveDate" ColumnName="IsActiveDate" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="TotalReceivedAmount" ColumnName="TotalReceivedAmount" />
+          <ScalarProperty Name="ValueVAT" ColumnName="ValueVAT" />
+          <ScalarProperty Name="ValueNBT" ColumnName="ValueNBT" />
+          <ScalarProperty Name="TotalAmount" ColumnName="TotalAmount" />
+          <ScalarProperty Name="PostingDate" ColumnName="PostingDate" />
+          <ScalarProperty Name="LastYearAmount" ColumnName="LastYearAmount" />
+          <ScalarProperty Name="Fk_JobMasterId" ColumnName="Fk_JobMasterId" />
+          <ScalarProperty Name="Fk_InvoiceShortNarrationId" ColumnName="Fk_InvoiceShortNarrationId" />
+          <ScalarProperty Name="NarrationTwo" ColumnName="NarrationTwo" />
+          <ScalarProperty Name="NarrationOne" ColumnName="NarrationOne" />
+          <ScalarProperty Name="NBTPercentage" ColumnName="NBTPercentage" />
+          <ScalarProperty Name="VatPercentage" ColumnName="VatPercentage" />
+          <ScalarProperty Name="NoNVatPrecentage" ColumnName="NoNVatPrecentage" />
+          <ScalarProperty Name="NoNVat" ColumnName="NoNVat" />
+          <ScalarProperty Name="Fk_NatureId" ColumnName="Fk_NatureId" />
+          <ScalarProperty Name="TaxType" ColumnName="TaxType" />
+          <ScalarProperty Name="Fk_ManagerThird" ColumnName="Fk_ManagerThird" />
+          <ScalarProperty Name="Fk_ManagerSecond" ColumnName="Fk_ManagerSecond" />
+          <ScalarProperty Name="Fk_ManagerOne" ColumnName="Fk_ManagerOne" />
+          <ScalarProperty Name="Fk_PartnerThird" ColumnName="Fk_PartnerThird" />
+          <ScalarProperty Name="Fk_PartnerSecond" ColumnName="Fk_PartnerSecond" />
+          <ScalarProperty Name="Fk_PartnerOne" ColumnName="Fk_PartnerOne" />
+          <ScalarProperty Name="Fk_CustomerId" ColumnName="Fk_CustomerId" />
+          <ScalarProperty Name="Fk_WorkGroupId" ColumnName="Fk_WorkGroupId" />
+          <ScalarProperty Name="YourReferance" ColumnName="YourReferance" />
+          <ScalarProperty Name="OurReferance" ColumnName="OurReferance" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="DocNo" ColumnName="DocNo" />
+          <ScalarProperty Name="Fk_DepartmentIdThird" ColumnName="Fk_DepartmentIdThird" />
+          <ScalarProperty Name="Fk_DepartmentIdTwo" ColumnName="Fk_DepartmentIdTwo" />
+          <ScalarProperty Name="Fk_DepartmentIdOne" ColumnName="Fk_DepartmentIdOne" />
+          <ScalarProperty Name="InvoiceNo" ColumnName="InvoiceNo" />
+          <ScalarProperty Name="Fk_CompanyId" ColumnName="Fk_CompanyId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TblInvoiceNarrationMasters">
+      <EntityTypeMapping TypeName="AuditSystemModel.TblInvoiceNarrationMaster">
+        <MappingFragment StoreEntitySet="TblInvoiceNarrationMaster">
+          <ScalarProperty Name="Delete_Date" ColumnName="Delete_Date" />
+          <ScalarProperty Name="Delete_By" ColumnName="Delete_By" />
+          <ScalarProperty Name="Edit_Date" ColumnName="Edit_Date" />
+          <ScalarProperty Name="Edit_By" ColumnName="Edit_By" />
+          <ScalarProperty Name="Create_Date" ColumnName="Create_Date" />
+          <ScalarProperty Name="Create_By" ColumnName="Create_By" />
+          <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="Narration" ColumnName="Narration" />
+          <ScalarProperty Name="Code" ColumnName="Code" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TblInvoiceShortNarrationMasters">
+      <EntityTypeMapping TypeName="AuditSystemModel.TblInvoiceShortNarrationMaster">
+        <MappingFragment StoreEntitySet="TblInvoiceShortNarrationMaster">
+          <ScalarProperty Name="Delete_Date" ColumnName="Delete_Date" />
+          <ScalarProperty Name="Delete_By" ColumnName="Delete_By" />
+          <ScalarProperty Name="Edit_Date" ColumnName="Edit_Date" />
+          <ScalarProperty Name="Edit_By" ColumnName="Edit_By" />
+          <ScalarProperty Name="Create_Date" ColumnName="Create_Date" />
+          <ScalarProperty Name="Create_By" ColumnName="Create_By" />
+          <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="Narration" ColumnName="Narration" />
+          <ScalarProperty Name="Code" ColumnName="Code" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TblJobMasters">
+      <EntityTypeMapping TypeName="AuditSystemModel.TblJobMaster">
+        <MappingFragment StoreEntitySet="TblJobMaster">
+          <ScalarProperty Name="Delete_Date" ColumnName="Delete_Date" />
+          <ScalarProperty Name="Delete_By" ColumnName="Delete_By" />
+          <ScalarProperty Name="Edit_Date" ColumnName="Edit_Date" />
+          <ScalarProperty Name="Edit_By" ColumnName="Edit_By" />
+          <ScalarProperty Name="Create_Date" ColumnName="Create_Date" />
+          <ScalarProperty Name="Create_By" ColumnName="Create_By" />
+          <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="ReActivateDate" ColumnName="ReActivateDate" />
+          <ScalarProperty Name="CompletedDate" ColumnName="CompletedDate" />
+          <ScalarProperty Name="IsReActivate" ColumnName="IsReActivate" />
+          <ScalarProperty Name="IsCompleted" ColumnName="IsCompleted" />
+          <ScalarProperty Name="Fk_CustomerId" ColumnName="Fk_CustomerId" />
+          <ScalarProperty Name="Fk_MangerId" ColumnName="Fk_MangerId" />
+          <ScalarProperty Name="Fk_PartnerId" ColumnName="Fk_PartnerId" />
+          <ScalarProperty Name="DueDate" ColumnName="DueDate" />
+          <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+          <ScalarProperty Name="PreViewvalue" ColumnName="PreViewvalue" />
+          <ScalarProperty Name="Narration" ColumnName="Narration" />
+          <ScalarProperty Name="JObPrefixCode" ColumnName="JObPrefixCode" />
+          <ScalarProperty Name="JobCode" ColumnName="JobCode" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TblJobMasterAssignTemps">
+      <EntityTypeMapping TypeName="AuditSystemModel.TblJobMasterAssignTemp">
+        <MappingFragment StoreEntitySet="TblJobMasterAssignTemp">
+          <ScalarProperty Name="Create_By" ColumnName="Create_By" />
+          <ScalarProperty Name="Designation" ColumnName="Designation" />
+          <ScalarProperty Name="BudgetedHours" ColumnName="BudgetedHours" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Code" ColumnName="Code" />
+          <ScalarProperty Name="TypeOftableId" ColumnName="TypeOftableId" />
+          <ScalarProperty Name="TypeOftable" ColumnName="TypeOftable" />
+          <ScalarProperty Name="IsProjectOnwer" ColumnName="IsProjectOnwer" />
+          <ScalarProperty Name="RowId" ColumnName="RowId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TblJobMasterLocations">
+      <EntityTypeMapping TypeName="AuditSystemModel.TblJobMasterLocation">
+        <MappingFragment StoreEntitySet="TblJobMasterLocation">
+          <ScalarProperty Name="Delete_Date" ColumnName="Delete_Date" />
+          <ScalarProperty Name="Delete_By" ColumnName="Delete_By" />
+          <ScalarProperty Name="Edit_Date" ColumnName="Edit_Date" />
+          <ScalarProperty Name="Edit_By" ColumnName="Edit_By" />
+          <ScalarProperty Name="Create_Date" ColumnName="Create_Date" />
+          <ScalarProperty Name="Create_By" ColumnName="Create_By" />
+          <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+          <ScalarProperty Name="Fk_CustomerId" ColumnName="Fk_CustomerId" />
+          <ScalarProperty Name="FK_LocationId" ColumnName="FK_LocationId" />
+          <ScalarProperty Name="Fk_JobMasterId" ColumnName="Fk_JobMasterId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TblJobMasterLocationTemps">
+      <EntityTypeMapping TypeName="AuditSystemModel.TblJobMasterLocationTemp">
+        <MappingFragment StoreEntitySet="TblJobMasterLocationTemp">
+          <ScalarProperty Name="Create_By" ColumnName="Create_By" />
+          <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+          <ScalarProperty Name="Narration" ColumnName="Narration" />
+          <ScalarProperty Name="Code" ColumnName="Code" />
+          <ScalarProperty Name="FK_LocationId" ColumnName="FK_LocationId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TblJobMasterPartners">
+      <EntityTypeMapping TypeName="AuditSystemModel.TblJobMasterPartner">
+        <MappingFragment StoreEntitySet="TblJobMasterPartner">
+          <ScalarProperty Name="Delete_Date" ColumnName="Delete_Date" />
+          <ScalarProperty Name="Delete_By" ColumnName="Delete_By" />
+          <ScalarProperty Name="Edit_Date" ColumnName="Edit_Date" />
+          <ScalarProperty Name="Edit_By" ColumnName="Edit_By" />
+          <ScalarProperty Name="Create_Date" ColumnName="Create_Date" />
+          <ScalarProperty Name="Create_By" ColumnName="Create_By" />
+          <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+          <ScalarProperty Name="IsProjectOnwer" ColumnName="IsProjectOnwer" />
+          <ScalarProperty Name="TypeOfTableId" ColumnName="TypeOfTableId" />
+          <ScalarProperty Name="TypeOfTable" ColumnName="TypeOfTable" />
+          <ScalarProperty Name="Fk_CustomerId" ColumnName="Fk_CustomerId" />
+          <ScalarProperty Name="BudgetedHours" ColumnName="BudgetedHours" />
+          <ScalarProperty Name="Fk_JobMasterId" ColumnName="Fk_JobMasterId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TblJobTransactions">
+      <EntityTypeMapping TypeName="AuditSystemModel.TblJobTransaction">
+        <MappingFragment StoreEntitySet="TblJobTransaction">
+          <ScalarProperty Name="Delete_Date" ColumnName="Delete_Date" />
+          <ScalarProperty Name="Delete_By" ColumnName="Delete_By" />
+          <ScalarProperty Name="Edit_Date" ColumnName="Edit_Date" />
+          <ScalarProperty Name="Edit_By" ColumnName="Edit_By" />
+          <ScalarProperty Name="Create_Date" ColumnName="Create_Date" />
+          <ScalarProperty Name="Create_By" ColumnName="Create_By" />
+          <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+          <ScalarProperty Name="Fk_CustomerId" ColumnName="Fk_CustomerId" />
+          <ScalarProperty Name="Fk_WorkTypeId" ColumnName="Fk_WorkTypeId" />
+          <ScalarProperty Name="Hours" ColumnName="Hours" />
+          <ScalarProperty Name="Fk_LocationId" ColumnName="Fk_LocationId" />
+          <ScalarProperty Name="IsApplyTravelingCost" ColumnName="IsApplyTravelingCost" />
+          <ScalarProperty Name="Narration" ColumnName="Narration" />
+          <ScalarProperty Name="Fk_EmployeeId" ColumnName="Fk_EmployeeId" />
+          <ScalarProperty Name="Fk_JobMasterId" ColumnName="Fk_JobMasterId" />
+          <ScalarProperty Name="TrDate" ColumnName="TrDate" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TblLegalStatusMasters">
+      <EntityTypeMapping TypeName="AuditSystemModel.TblLegalStatusMaster">
+        <MappingFragment StoreEntitySet="TblLegalStatusMaster">
+          <ScalarProperty Name="Delete_Date" ColumnName="Delete_Date" />
+          <ScalarProperty Name="Delete_By" ColumnName="Delete_By" />
+          <ScalarProperty Name="Edit_Date" ColumnName="Edit_Date" />
+          <ScalarProperty Name="Edit_By" ColumnName="Edit_By" />
+          <ScalarProperty Name="Create_Date" ColumnName="Create_Date" />
+          <ScalarProperty Name="Create_By" ColumnName="Create_By" />
+          <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="Narration" ColumnName="Narration" />
+          <ScalarProperty Name="Code" ColumnName="Code" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TblLocations">
+      <EntityTypeMapping TypeName="AuditSystemModel.TblLocation">
+        <MappingFragment StoreEntitySet="TblLocation">
+          <ScalarProperty Name="Delete_Date" ColumnName="Delete_Date" />
+          <ScalarProperty Name="Delete_By" ColumnName="Delete_By" />
+          <ScalarProperty Name="Edit_Date" ColumnName="Edit_Date" />
+          <ScalarProperty Name="Edit_By" ColumnName="Edit_By" />
+          <ScalarProperty Name="Create_Date" ColumnName="Create_Date" />
+          <ScalarProperty Name="Create_By" ColumnName="Create_By" />
+          <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="Fk_CustomerId" ColumnName="Fk_CustomerId" />
+          <ScalarProperty Name="Rate" ColumnName="Rate" />
+          <ScalarProperty Name="Narration" ColumnName="Narration" />
+          <ScalarProperty Name="Code" ColumnName="Code" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TblNatureMasters">
+      <EntityTypeMapping TypeName="AuditSystemModel.TblNatureMaster">
+        <MappingFragment StoreEntitySet="TblNatureMaster">
+          <ScalarProperty Name="Delete_Date" ColumnName="Delete_Date" />
+          <ScalarProperty Name="Delete_By" ColumnName="Delete_By" />
+          <ScalarProperty Name="Edit_Date" ColumnName="Edit_Date" />
+          <ScalarProperty Name="Edit_By" ColumnName="Edit_By" />
+          <ScalarProperty Name="Create_Date" ColumnName="Create_Date" />
+          <ScalarProperty Name="Create_By" ColumnName="Create_By" />
+          <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="Narration" ColumnName="Narration" />
+          <ScalarProperty Name="Code" ColumnName="Code" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TblNonEffectiveEmployees">
+      <EntityTypeMapping TypeName="AuditSystemModel.TblNonEffectiveEmployee">
+        <MappingFragment StoreEntitySet="TblNonEffectiveEmployee">
+          <ScalarProperty Name="Delete_Date" ColumnName="Delete_Date" />
+          <ScalarProperty Name="Delete_By" ColumnName="Delete_By" />
+          <ScalarProperty Name="Edit_Date" ColumnName="Edit_Date" />
+          <ScalarProperty Name="Edit_By" ColumnName="Edit_By" />
+          <ScalarProperty Name="Create_Date" ColumnName="Create_Date" />
+          <ScalarProperty Name="Create_By" ColumnName="Create_By" />
+          <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+          <ScalarProperty Name="NowEffective" ColumnName="NowEffective" />
+          <ScalarProperty Name="Fk_EmployeeId" ColumnName="Fk_EmployeeId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TblOpeningBalances">
+      <EntityTypeMapping TypeName="AuditSystemModel.TblOpeningBalance">
+        <MappingFragment StoreEntitySet="TblOpeningBalances">
+          <ScalarProperty Name="Delete_Date" ColumnName="Delete_Date" />
+          <ScalarProperty Name="Delete_By" ColumnName="Delete_By" />
+          <ScalarProperty Name="Edit_Date" ColumnName="Edit_Date" />
+          <ScalarProperty Name="Edit_By" ColumnName="Edit_By" />
+          <ScalarProperty Name="Create_Date" ColumnName="Create_Date" />
+          <ScalarProperty Name="Create_By" ColumnName="Create_By" />
+          <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+          <ScalarProperty Name="SalesRep" ColumnName="SalesRep" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="Narration" ColumnName="Narration" />
+          <ScalarProperty Name="Fk_CustomerId" ColumnName="Fk_CustomerId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TblProformaInvoiceBodies">
+      <EntityTypeMapping TypeName="AuditSystemModel.TblProformaInvoiceBody">
+        <MappingFragment StoreEntitySet="TblProformaInvoiceBody">
+          <ScalarProperty Name="Delete_Date" ColumnName="Delete_Date" />
+          <ScalarProperty Name="Delete_By" ColumnName="Delete_By" />
+          <ScalarProperty Name="Edit_Date" ColumnName="Edit_Date" />
+          <ScalarProperty Name="Edit_By" ColumnName="Edit_By" />
+          <ScalarProperty Name="Create_Date" ColumnName="Create_Date" />
+          <ScalarProperty Name="Create_By" ColumnName="Create_By" />
+          <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+          <ScalarProperty Name="Fk_ProformaInvoiceHeadId" ColumnName="Fk_ProformaInvoiceHeadId" />
+          <ScalarProperty Name="Fk_JobMasterId" ColumnName="Fk_JobMasterId" />
+          <ScalarProperty Name="Fk_CustomerId" ColumnName="Fk_CustomerId" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="Fk_InvoiceNarrttionId" ColumnName="Fk_InvoiceNarrttionId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TblProformaInvoiceBodyTemps">
+      <EntityTypeMapping TypeName="AuditSystemModel.TblProformaInvoiceBodyTemp">
+        <MappingFragment StoreEntitySet="TblProformaInvoiceBodyTemp">
+          <ScalarProperty Name="Create_By" ColumnName="Create_By" />
+          <ScalarProperty Name="FK_JobMasterId" ColumnName="FK_JobMasterId" />
+          <ScalarProperty Name="FK_CustomerId" ColumnName="FK_CustomerId" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="Fk_InvoiceNarrttionId" ColumnName="Fk_InvoiceNarrttionId" />
+          <ScalarProperty Name="BodyRowId" ColumnName="BodyRowId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TblProformaInvoiceHeads">
+      <EntityTypeMapping TypeName="AuditSystemModel.TblProformaInvoiceHead">
+        <MappingFragment StoreEntitySet="TblProformaInvoiceHead">
+          <ScalarProperty Name="IsPostingToInvoice" ColumnName="IsPostingToInvoice" />
+          <ScalarProperty Name="ManagerOneComfirmDate" ColumnName="ManagerOneComfirmDate" />
+          <ScalarProperty Name="IsMangerOneComfirm" ColumnName="IsMangerOneComfirm" />
+          <ScalarProperty Name="Delete_Date" ColumnName="Delete_Date" />
+          <ScalarProperty Name="Delete_By" ColumnName="Delete_By" />
+          <ScalarProperty Name="Edit_Date" ColumnName="Edit_Date" />
+          <ScalarProperty Name="Edit_By" ColumnName="Edit_By" />
+          <ScalarProperty Name="Create_Date" ColumnName="Create_Date" />
+          <ScalarProperty Name="Create_By" ColumnName="Create_By" />
+          <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+          <ScalarProperty Name="PartnerOneComfirmDate" ColumnName="PartnerOneComfirmDate" />
+          <ScalarProperty Name="IsPartnerOneComfirm" ColumnName="IsPartnerOneComfirm" />
+          <ScalarProperty Name="IsActiveDate" ColumnName="IsActiveDate" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="TotalReceivedAmount" ColumnName="TotalReceivedAmount" />
+          <ScalarProperty Name="ValueVAT" ColumnName="ValueVAT" />
+          <ScalarProperty Name="ValueNBT" ColumnName="ValueNBT" />
+          <ScalarProperty Name="TotalAmount" ColumnName="TotalAmount" />
+          <ScalarProperty Name="PostingDate" ColumnName="PostingDate" />
+          <ScalarProperty Name="LastYearAmount" ColumnName="LastYearAmount" />
+          <ScalarProperty Name="Fk_JobMasterId" ColumnName="Fk_JobMasterId" />
+          <ScalarProperty Name="Fk_InvoiceShortNarrationId" ColumnName="Fk_InvoiceShortNarrationId" />
+          <ScalarProperty Name="NarrationTwo" ColumnName="NarrationTwo" />
+          <ScalarProperty Name="NarrationOne" ColumnName="NarrationOne" />
+          <ScalarProperty Name="NBTPercentage" ColumnName="NBTPercentage" />
+          <ScalarProperty Name="VatPercentage" ColumnName="VatPercentage" />
+          <ScalarProperty Name="NoNVatPrecentage" ColumnName="NoNVatPrecentage" />
+          <ScalarProperty Name="NoNVat" ColumnName="NoNVat" />
+          <ScalarProperty Name="Fk_NatureId" ColumnName="Fk_NatureId" />
+          <ScalarProperty Name="TaxType" ColumnName="TaxType" />
+          <ScalarProperty Name="Fk_ManagerThird" ColumnName="Fk_ManagerThird" />
+          <ScalarProperty Name="Fk_ManagerSecond" ColumnName="Fk_ManagerSecond" />
+          <ScalarProperty Name="Fk_ManagerOne" ColumnName="Fk_ManagerOne" />
+          <ScalarProperty Name="Fk_PartnerThird" ColumnName="Fk_PartnerThird" />
+          <ScalarProperty Name="Fk_PartnerSecond" ColumnName="Fk_PartnerSecond" />
+          <ScalarProperty Name="Fk_PartnerOne" ColumnName="Fk_PartnerOne" />
+          <ScalarProperty Name="Fk_CustomerId" ColumnName="Fk_CustomerId" />
+          <ScalarProperty Name="Fk_WorkGroupId" ColumnName="Fk_WorkGroupId" />
+          <ScalarProperty Name="YourReferance" ColumnName="YourReferance" />
+          <ScalarProperty Name="OurReferance" ColumnName="OurReferance" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="DocNo" ColumnName="DocNo" />
+          <ScalarProperty Name="Fk_DepartmentIdThird" ColumnName="Fk_DepartmentIdThird" />
+          <ScalarProperty Name="Fk_DepartmentIdTwo" ColumnName="Fk_DepartmentIdTwo" />
+          <ScalarProperty Name="Fk_DepartmentIdOne" ColumnName="Fk_DepartmentIdOne" />
+          <ScalarProperty Name="InvoiceNoProforma" ColumnName="InvoiceNoProforma" />
+          <ScalarProperty Name="Fk_CompanyId" ColumnName="Fk_CompanyId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TblSectorMasters">
+      <EntityTypeMapping TypeName="AuditSystemModel.TblSectorMaster">
+        <MappingFragment StoreEntitySet="TblSectorMaster">
+          <ScalarProperty Name="Delete_Date" ColumnName="Delete_Date" />
+          <ScalarProperty Name="Delete_By" ColumnName="Delete_By" />
+          <ScalarProperty Name="Edit_Date" ColumnName="Edit_Date" />
+          <ScalarProperty Name="Edit_By" ColumnName="Edit_By" />
+          <ScalarProperty Name="Create_Date" ColumnName="Create_Date" />
+          <ScalarProperty Name="Create_By" ColumnName="Create_By" />
+          <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="Narration" ColumnName="Narration" />
+          <ScalarProperty Name="Code" ColumnName="Code" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TblSiteSettings">
+      <EntityTypeMapping TypeName="AuditSystemModel.TblSiteSetting">
+        <MappingFragment StoreEntitySet="TblSiteSetting">
+          <ScalarProperty Name="Delete_Date" ColumnName="Delete_Date" />
+          <ScalarProperty Name="Delete_By" ColumnName="Delete_By" />
+          <ScalarProperty Name="Edit_Date" ColumnName="Edit_Date" />
+          <ScalarProperty Name="Edit_By" ColumnName="Edit_By" />
+          <ScalarProperty Name="Create_Date" ColumnName="Create_Date" />
+          <ScalarProperty Name="Create_By" ColumnName="Create_By" />
+          <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="Value" ColumnName="Value" />
+          <ScalarProperty Name="Code" ColumnName="Code" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TblTitles">
+      <EntityTypeMapping TypeName="AuditSystemModel.TblTitle">
+        <MappingFragment StoreEntitySet="TblTitle">
+          <ScalarProperty Name="Delete_Date" ColumnName="Delete_Date" />
+          <ScalarProperty Name="Delete_By" ColumnName="Delete_By" />
+          <ScalarProperty Name="Edit_Date" ColumnName="Edit_Date" />
+          <ScalarProperty Name="Edit_By" ColumnName="Edit_By" />
+          <ScalarProperty Name="Create_Date" ColumnName="Create_Date" />
+          <ScalarProperty Name="Create_By" ColumnName="Create_By" />
+          <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="Narration" ColumnName="Narration" />
+          <ScalarProperty Name="Code" ColumnName="Code" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TblWorkGroups">
+      <EntityTypeMapping TypeName="AuditSystemModel.TblWorkGroup">
+        <MappingFragment StoreEntitySet="TblWorkGroup">
+          <ScalarProperty Name="Delete_Date" ColumnName="Delete_Date" />
+          <ScalarProperty Name="Delete_By" ColumnName="Delete_By" />
+          <ScalarProperty Name="Edit_Date" ColumnName="Edit_Date" />
+          <ScalarProperty Name="Edit_By" ColumnName="Edit_By" />
+          <ScalarProperty Name="Create_Date" ColumnName="Create_Date" />
+          <ScalarProperty Name="Create_By" ColumnName="Create_By" />
+          <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="Narration" ColumnName="Narration" />
+          <ScalarProperty Name="Code" ColumnName="Code" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TblWorkTypes">
+      <EntityTypeMapping TypeName="AuditSystemModel.TblWorkType">
+        <MappingFragment StoreEntitySet="TblWorkType">
+          <ScalarProperty Name="Delete_Date" ColumnName="Delete_Date" />
+          <ScalarProperty Name="Delete_By" ColumnName="Delete_By" />
+          <ScalarProperty Name="Edit_Date" ColumnName="Edit_Date" />
+          <ScalarProperty Name="Edit_By" ColumnName="Edit_By" />
+          <ScalarProperty Name="Create_Date" ColumnName="Create_Date" />
+          <ScalarProperty Name="Create_By" ColumnName="Create_By" />
+          <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="Fk_WorkGroupId" ColumnName="Fk_WorkGroupId" />
+          <ScalarProperty Name="Billable" ColumnName="Billable" />
+          <ScalarProperty Name="Narration" ColumnName="Narration" />
+          <ScalarProperty Name="Code" ColumnName="Code" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="VW_CurrentlyGetJobAssignee">
+      <EntityTypeMapping TypeName="AuditSystemModel.VW_CurrentlyGetJobAssignee">
+        <MappingFragment StoreEntitySet="VW_CurrentlyGetJobAssignee">
+          <ScalarProperty Name="DesignationCode" ColumnName="DesignationCode" />
+          <ScalarProperty Name="CombinedCode" ColumnName="CombinedCode" />
+          <ScalarProperty Name="CombinedName" ColumnName="CombinedName" />
+          <ScalarProperty Name="Delete_Date" ColumnName="Delete_Date" />
+          <ScalarProperty Name="Delete_By" ColumnName="Delete_By" />
+          <ScalarProperty Name="Edit_Date" ColumnName="Edit_Date" />
+          <ScalarProperty Name="Edit_By" ColumnName="Edit_By" />
+          <ScalarProperty Name="Create_Date" ColumnName="Create_Date" />
+          <ScalarProperty Name="Create_By" ColumnName="Create_By" />
+          <ScalarProperty Name="BudgetedHours" ColumnName="BudgetedHours" />
+          <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+          <ScalarProperty Name="TypeOfTableId" ColumnName="TypeOfTableId" />
+          <ScalarProperty Name="TypeOfTable" ColumnName="TypeOfTable" />
+          <ScalarProperty Name="Fk_CustomerId" ColumnName="Fk_CustomerId" />
+          <ScalarProperty Name="IsProjectOnwer" ColumnName="IsProjectOnwer" />
+          <ScalarProperty Name="Fk_JobMasterId" ColumnName="Fk_JobMasterId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="VW_Customer">
+      <EntityTypeMapping TypeName="AuditSystemModel.VW_Customer">
+        <MappingFragment StoreEntitySet="VW_Customer">
+          <ScalarProperty Name="InternationslReferalCode" ColumnName="InternationslReferalCode" />
+          <ScalarProperty Name="IntroductionCode" ColumnName="IntroductionCode" />
+          <ScalarProperty Name="SectorMasterCode" ColumnName="SectorMasterCode" />
+          <ScalarProperty Name="LegalStatusMasterCode" ColumnName="LegalStatusMasterCode" />
+          <ScalarProperty Name="ManagerName" ColumnName="ManagerName" />
+          <ScalarProperty Name="Partner" ColumnName="Partner" />
+          <ScalarProperty Name="GradeMasterCode" ColumnName="GradeMasterCode" />
+          <ScalarProperty Name="WorkGroupCode" ColumnName="WorkGroupCode" />
+          <ScalarProperty Name="Delete_Date" ColumnName="Delete_Date" />
+          <ScalarProperty Name="Delete_By" ColumnName="Delete_By" />
+          <ScalarProperty Name="Edit_Date" ColumnName="Edit_Date" />
+          <ScalarProperty Name="Edit_By" ColumnName="Edit_By" />
+          <ScalarProperty Name="Create_Date" ColumnName="Create_Date" />
+          <ScalarProperty Name="Create_By" ColumnName="Create_By" />
+          <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Code" ColumnName="Code" />
+          <ScalarProperty Name="DateOfJoined" ColumnName="DateOfJoined" />
+          <ScalarProperty Name="Fk_InternationslReferalId" ColumnName="Fk_InternationslReferalId" />
+          <ScalarProperty Name="Fk_IntroductionId" ColumnName="Fk_IntroductionId" />
+          <ScalarProperty Name="Fk_SectorMasterId" ColumnName="Fk_SectorMasterId" />
+          <ScalarProperty Name="Fk_LegalStatusMasterId" ColumnName="Fk_LegalStatusMasterId" />
+          <ScalarProperty Name="Fk_ManagerId" ColumnName="Fk_ManagerId" />
+          <ScalarProperty Name="Fk_PartnerId" ColumnName="Fk_PartnerId" />
+          <ScalarProperty Name="ContactPersonSecond" ColumnName="ContactPersonSecond" />
+          <ScalarProperty Name="ContactPersonOne" ColumnName="ContactPersonOne" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Fk_GradeMasterId" ColumnName="Fk_GradeMasterId" />
+          <ScalarProperty Name="TelSecond" ColumnName="TelSecond" />
+          <ScalarProperty Name="TelOne" ColumnName="TelOne" />
+          <ScalarProperty Name="Fax" ColumnName="Fax" />
+          <ScalarProperty Name="SVatNo" ColumnName="SVatNo" />
+          <ScalarProperty Name="VatNo" ColumnName="VatNo" />
+          <ScalarProperty Name="TaxNo" ColumnName="TaxNo" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="VatType" ColumnName="VatType" />
+          <ScalarProperty Name="Fk_CustomerGroupId" ColumnName="Fk_CustomerGroupId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="VW_Employee">
+      <EntityTypeMapping TypeName="AuditSystemModel.VW_Employee">
+        <MappingFragment StoreEntitySet="VW_Employee">
+          <ScalarProperty Name="titleCode" ColumnName="titleCode" />
+          <ScalarProperty Name="DesignationCode" ColumnName="DesignationCode" />
+          <ScalarProperty Name="DepartmentCode" ColumnName="DepartmentCode" />
+          <ScalarProperty Name="DateOfJoin" ColumnName="DateOfJoin" />
+          <ScalarProperty Name="JObPrefixCode" ColumnName="JObPrefixCode" />
+          <ScalarProperty Name="Delete_Date" ColumnName="Delete_Date" />
+          <ScalarProperty Name="Delete_By" ColumnName="Delete_By" />
+          <ScalarProperty Name="Edit_Date" ColumnName="Edit_Date" />
+          <ScalarProperty Name="Edit_By" ColumnName="Edit_By" />
+          <ScalarProperty Name="Create_Date" ColumnName="Create_Date" />
+          <ScalarProperty Name="Create_By" ColumnName="Create_By" />
+          <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="Fk_DepartmentId" ColumnName="Fk_DepartmentId" />
+          <ScalarProperty Name="Fk_DesginationId" ColumnName="Fk_DesginationId" />
+          <ScalarProperty Name="Fk_TitleId" ColumnName="Fk_TitleId" />
+          <ScalarProperty Name="IsPartner" ColumnName="IsPartner" />
+          <ScalarProperty Name="IsManager" ColumnName="IsManager" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Nic" ColumnName="Nic" />
+          <ScalarProperty Name="BirthDay" ColumnName="BirthDay" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Code" ColumnName="Code" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="VW_EmployeeJobTransaction">
+      <EntityTypeMapping TypeName="AuditSystemModel.VW_EmployeeJobTransaction">
+        <MappingFragment StoreEntitySet="VW_EmployeeJobTransaction">
+          <ScalarProperty Name="IsApplyTravelingCost" ColumnName="IsApplyTravelingCost" />
+          <ScalarProperty Name="Delete_Date" ColumnName="Delete_Date" />
+          <ScalarProperty Name="Delete_By" ColumnName="Delete_By" />
+          <ScalarProperty Name="Edit_Date" ColumnName="Edit_Date" />
+          <ScalarProperty Name="Edit_By" ColumnName="Edit_By" />
+          <ScalarProperty Name="Create_Date" ColumnName="Create_Date" />
+          <ScalarProperty Name="Create_By" ColumnName="Create_By" />
+          <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+          <ScalarProperty Name="Fk_CustomerId" ColumnName="Fk_CustomerId" />
+          <ScalarProperty Name="Fk_WorkTypeId" ColumnName="Fk_WorkTypeId" />
+          <ScalarProperty Name="Hours" ColumnName="Hours" />
+          <ScalarProperty Name="Fk_LocationId" ColumnName="Fk_LocationId" />
+          <ScalarProperty Name="Narration" ColumnName="Narration" />
+          <ScalarProperty Name="LocationName" ColumnName="LocationName" />
+          <ScalarProperty Name="WorkTypeCode" ColumnName="WorkTypeCode" />
+          <ScalarProperty Name="LocationCode" ColumnName="LocationCode" />
+          <ScalarProperty Name="EmployeeName" ColumnName="EmployeeName" />
+          <ScalarProperty Name="CustomerCode" ColumnName="CustomerCode" />
+          <ScalarProperty Name="JobCode" ColumnName="JobCode" />
+          <ScalarProperty Name="Fk_EmployeeId" ColumnName="Fk_EmployeeId" />
+          <ScalarProperty Name="Fk_JobMasterId" ColumnName="Fk_JobMasterId" />
+          <ScalarProperty Name="TrDate" ColumnName="TrDate" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="VW_GetJObActualValue">
+      <EntityTypeMapping TypeName="AuditSystemModel.VW_GetJObActualValue">
+        <MappingFragment StoreEntitySet="VW_GetJObActualValue">
+          <ScalarProperty Name="FullDetails" ColumnName="FullDetails" />
+          <ScalarProperty Name="VarianceValue" ColumnName="VarianceValue" />
+          <ScalarProperty Name="BudgetValue" ColumnName="BudgetValue" />
+          <ScalarProperty Name="ActualValue" ColumnName="ActualValue" />
+          <ScalarProperty Name="TotalBudgetedHours" ColumnName="TotalBudgetedHours" />
+          <ScalarProperty Name="ActualHours" ColumnName="ActualHours" />
+          <ScalarProperty Name="JobmasterIsDelete" ColumnName="JobmasterIsDelete" />
+          <ScalarProperty Name="CompletedDate" ColumnName="CompletedDate" />
+          <ScalarProperty Name="IsCompleted" ColumnName="IsCompleted" />
+          <ScalarProperty Name="DueDate" ColumnName="DueDate" />
+          <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+          <ScalarProperty Name="PreViewvalue" ColumnName="PreViewvalue" />
+          <ScalarProperty Name="JobCode" ColumnName="JobCode" />
+          <ScalarProperty Name="CustomerCode" ColumnName="CustomerCode" />
+          <ScalarProperty Name="CustomerName" ColumnName="CustomerName" />
+          <ScalarProperty Name="Fk_CustomerId" ColumnName="Fk_CustomerId" />
+          <ScalarProperty Name="Fk_JobMasterId" ColumnName="Fk_JobMasterId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="VW_GradeMaster">
+      <EntityTypeMapping TypeName="AuditSystemModel.VW_GradeMaster">
+        <MappingFragment StoreEntitySet="VW_GradeMaster">
+          <ScalarProperty Name="Delete_Date" ColumnName="Delete_Date" />
+          <ScalarProperty Name="Delete_By" ColumnName="Delete_By" />
+          <ScalarProperty Name="Edit_Date" ColumnName="Edit_Date" />
+          <ScalarProperty Name="Edit_By" ColumnName="Edit_By" />
+          <ScalarProperty Name="Create_Date" ColumnName="Create_Date" />
+          <ScalarProperty Name="Create_By" ColumnName="Create_By" />
+          <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="Narration" ColumnName="Narration" />
+          <ScalarProperty Name="Code" ColumnName="Code" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="VW_InternationalReferalMaster">
+      <EntityTypeMapping TypeName="AuditSystemModel.VW_InternationalReferalMaster">
+        <MappingFragment StoreEntitySet="VW_InternationalReferalMaster">
+          <ScalarProperty Name="Delete_Date" ColumnName="Delete_Date" />
+          <ScalarProperty Name="Delete_By" ColumnName="Delete_By" />
+          <ScalarProperty Name="Edit_Date" ColumnName="Edit_Date" />
+          <ScalarProperty Name="Edit_By" ColumnName="Edit_By" />
+          <ScalarProperty Name="Create_Date" ColumnName="Create_Date" />
+          <ScalarProperty Name="Create_By" ColumnName="Create_By" />
+          <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="Narration" ColumnName="Narration" />
+          <ScalarProperty Name="Code" ColumnName="Code" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="VW_IntroductionMaster">
+      <EntityTypeMapping TypeName="AuditSystemModel.VW_IntroductionMaster">
+        <MappingFragment StoreEntitySet="VW_IntroductionMaster">
+          <ScalarProperty Name="Delete_Date" ColumnName="Delete_Date" />
+          <ScalarProperty Name="Delete_By" ColumnName="Delete_By" />
+          <ScalarProperty Name="Edit_Date" ColumnName="Edit_Date" />
+          <ScalarProperty Name="Edit_By" ColumnName="Edit_By" />
+          <ScalarProperty Name="Create_Date" ColumnName="Create_Date" />
+          <ScalarProperty Name="Create_By" ColumnName="Create_By" />
+          <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="Narration" ColumnName="Narration" />
+          <ScalarProperty Name="Code" ColumnName="Code" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="VW_InvoiceHead">
+      <EntityTypeMapping TypeName="AuditSystemModel.VW_InvoiceHead">
+        <MappingFragment StoreEntitySet="VW_InvoiceHead">
+          <ScalarProperty Name="ManagerThreeName" ColumnName="ManagerThreeName" />
+          <ScalarProperty Name="ManagerTwoName" ColumnName="ManagerTwoName" />
+          <ScalarProperty Name="ManagerOneName" ColumnName="ManagerOneName" />
+          <ScalarProperty Name="PartnerThreeName" ColumnName="PartnerThreeName" />
+          <ScalarProperty Name="PartnerTwoName" ColumnName="PartnerTwoName" />
+          <ScalarProperty Name="PartnerOneName" ColumnName="PartnerOneName" />
+          <ScalarProperty Name="SVatNo" ColumnName="SVatNo" />
+          <ScalarProperty Name="VatNo" ColumnName="VatNo" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="CustomerName" ColumnName="CustomerName" />
+          <ScalarProperty Name="WorkGroupName" ColumnName="WorkGroupName" />
+          <ScalarProperty Name="DepartmentThreeName" ColumnName="DepartmentThreeName" />
+          <ScalarProperty Name="DepartmentTwoName" ColumnName="DepartmentTwoName" />
+          <ScalarProperty Name="DepartmentOneName" ColumnName="DepartmentOneName" />
+          <ScalarProperty Name="JobCode" ColumnName="JobCode" />
+          <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+          <ScalarProperty Name="ManagerOneComfirmDate" ColumnName="ManagerOneComfirmDate" />
+          <ScalarProperty Name="IsMangerOneComfirm" ColumnName="IsMangerOneComfirm" />
+          <ScalarProperty Name="Delete_Date" ColumnName="Delete_Date" />
+          <ScalarProperty Name="Delete_By" ColumnName="Delete_By" />
+          <ScalarProperty Name="Edit_Date" ColumnName="Edit_Date" />
+          <ScalarProperty Name="Edit_By" ColumnName="Edit_By" />
+          <ScalarProperty Name="Create_Date" ColumnName="Create_Date" />
+          <ScalarProperty Name="Create_By" ColumnName="Create_By" />
+          <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+          <ScalarProperty Name="PartnerOneComfirmDate" ColumnName="PartnerOneComfirmDate" />
+          <ScalarProperty Name="IsPartnerOneComfirm" ColumnName="IsPartnerOneComfirm" />
+          <ScalarProperty Name="IsActiveDate" ColumnName="IsActiveDate" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="TotalReceivedAmount" ColumnName="TotalReceivedAmount" />
+          <ScalarProperty Name="ValueVAT" ColumnName="ValueVAT" />
+          <ScalarProperty Name="ValueNBT" ColumnName="ValueNBT" />
+          <ScalarProperty Name="TotalAmount" ColumnName="TotalAmount" />
+          <ScalarProperty Name="PostingDate" ColumnName="PostingDate" />
+          <ScalarProperty Name="LastYearAmount" ColumnName="LastYearAmount" />
+          <ScalarProperty Name="Fk_JobMasterId" ColumnName="Fk_JobMasterId" />
+          <ScalarProperty Name="Fk_InvoiceShortNarrationId" ColumnName="Fk_InvoiceShortNarrationId" />
+          <ScalarProperty Name="NarrationTwo" ColumnName="NarrationTwo" />
+          <ScalarProperty Name="NarrationOne" ColumnName="NarrationOne" />
+          <ScalarProperty Name="NBTPercentage" ColumnName="NBTPercentage" />
+          <ScalarProperty Name="VatPercentage" ColumnName="VatPercentage" />
+          <ScalarProperty Name="NoNVatPrecentage" ColumnName="NoNVatPrecentage" />
+          <ScalarProperty Name="NoNVat" ColumnName="NoNVat" />
+          <ScalarProperty Name="Fk_NatureId" ColumnName="Fk_NatureId" />
+          <ScalarProperty Name="TaxType" ColumnName="TaxType" />
+          <ScalarProperty Name="Fk_ManagerThird" ColumnName="Fk_ManagerThird" />
+          <ScalarProperty Name="Fk_ManagerSecond" ColumnName="Fk_ManagerSecond" />
+          <ScalarProperty Name="Fk_ManagerOne" ColumnName="Fk_ManagerOne" />
+          <ScalarProperty Name="Fk_PartnerThird" ColumnName="Fk_PartnerThird" />
+          <ScalarProperty Name="Fk_PartnerSecond" ColumnName="Fk_PartnerSecond" />
+          <ScalarProperty Name="Fk_PartnerOne" ColumnName="Fk_PartnerOne" />
+          <ScalarProperty Name="Fk_CustomerId" ColumnName="Fk_CustomerId" />
+          <ScalarProperty Name="Fk_WorkGroupId" ColumnName="Fk_WorkGroupId" />
+          <ScalarProperty Name="YourReferance" ColumnName="YourReferance" />
+          <ScalarProperty Name="OurReferance" ColumnName="OurReferance" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="DocNo" ColumnName="DocNo" />
+          <ScalarProperty Name="Fk_DepartmentIdThird" ColumnName="Fk_DepartmentIdThird" />
+          <ScalarProperty Name="Fk_DepartmentIdTwo" ColumnName="Fk_DepartmentIdTwo" />
+          <ScalarProperty Name="Fk_DepartmentIdOne" ColumnName="Fk_DepartmentIdOne" />
+          <ScalarProperty Name="InvoiceNo" ColumnName="InvoiceNo" />
+          <ScalarProperty Name="Fk_CompanyId" ColumnName="Fk_CompanyId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="VW_InvoiceNarrationMaster">
+      <EntityTypeMapping TypeName="AuditSystemModel.VW_InvoiceNarrationMaster">
+        <MappingFragment StoreEntitySet="VW_InvoiceNarrationMaster">
+          <ScalarProperty Name="Delete_Date" ColumnName="Delete_Date" />
+          <ScalarProperty Name="Delete_By" ColumnName="Delete_By" />
+          <ScalarProperty Name="Edit_Date" ColumnName="Edit_Date" />
+          <ScalarProperty Name="Edit_By" ColumnName="Edit_By" />
+          <ScalarProperty Name="Create_Date" ColumnName="Create_Date" />
+          <ScalarProperty Name="Create_By" ColumnName="Create_By" />
+          <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="Narration" ColumnName="Narration" />
+          <ScalarProperty Name="Code" ColumnName="Code" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="VW_InvoiceShortNarrationMaster">
+      <EntityTypeMapping TypeName="AuditSystemModel.VW_InvoiceShortNarrationMaster">
+        <MappingFragment StoreEntitySet="VW_InvoiceShortNarrationMaster">
+          <ScalarProperty Name="Delete_Date" ColumnName="Delete_Date" />
+          <ScalarProperty Name="Delete_By" ColumnName="Delete_By" />
+          <ScalarProperty Name="Edit_Date" ColumnName="Edit_Date" />
+          <ScalarProperty Name="Edit_By" ColumnName="Edit_By" />
+          <ScalarProperty Name="Create_Date" ColumnName="Create_Date" />
+          <ScalarProperty Name="Create_By" ColumnName="Create_By" />
+          <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="Narration" ColumnName="Narration" />
+          <ScalarProperty Name="Code" ColumnName="Code" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="VW_JobMaster">
+      <EntityTypeMapping TypeName="AuditSystemModel.VW_JobMaster">
+        <MappingFragment StoreEntitySet="VW_JobMaster">
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Delete_Date" ColumnName="Delete_Date" />
+          <ScalarProperty Name="Delete_By" ColumnName="Delete_By" />
+          <ScalarProperty Name="Edit_Date" ColumnName="Edit_Date" />
+          <ScalarProperty Name="Edit_By" ColumnName="Edit_By" />
+          <ScalarProperty Name="Create_Date" ColumnName="Create_Date" />
+          <ScalarProperty Name="Create_By" ColumnName="Create_By" />
+          <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="Fk_PartnerId" ColumnName="Fk_PartnerId" />
+          <ScalarProperty Name="Fk_MangerId" ColumnName="Fk_MangerId" />
+          <ScalarProperty Name="JObPrefixCode" ColumnName="JObPrefixCode" />
+          <ScalarProperty Name="CompletedDate" ColumnName="CompletedDate" />
+          <ScalarProperty Name="ReActivateDate" ColumnName="ReActivateDate" />
+          <ScalarProperty Name="IsReActivate" ColumnName="IsReActivate" />
+          <ScalarProperty Name="IsCompleted" ColumnName="IsCompleted" />
+          <ScalarProperty Name="Fk_CustomerId" ColumnName="Fk_CustomerId" />
+          <ScalarProperty Name="DueDate" ColumnName="DueDate" />
+          <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+          <ScalarProperty Name="PreViewvalue" ColumnName="PreViewvalue" />
+          <ScalarProperty Name="Narration" ColumnName="Narration" />
+          <ScalarProperty Name="JobCode" ColumnName="JobCode" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="VW_JobMasterViewforCalculatorJobCostReport">
+      <EntityTypeMapping TypeName="AuditSystemModel.VW_JobMasterViewforCalculatorJobCostReport">
+        <MappingFragment StoreEntitySet="VW_JobMasterViewforCalculatorJobCostReport">
+          <ScalarProperty Name="VarianceValue" ColumnName="VarianceValue" />
+          <ScalarProperty Name="BudgetValue" ColumnName="BudgetValue" />
+          <ScalarProperty Name="ActualValue" ColumnName="ActualValue" />
+          <ScalarProperty Name="TotalBudgetedHours" ColumnName="TotalBudgetedHours" />
+          <ScalarProperty Name="ActualHours" ColumnName="ActualHours" />
+          <ScalarProperty Name="CombinedCode" ColumnName="CombinedCode" />
+          <ScalarProperty Name="CombinedName" ColumnName="CombinedName" />
+          <ScalarProperty Name="Delete_Date" ColumnName="Delete_Date" />
+          <ScalarProperty Name="Delete_By" ColumnName="Delete_By" />
+          <ScalarProperty Name="Edit_Date" ColumnName="Edit_Date" />
+          <ScalarProperty Name="Edit_By" ColumnName="Edit_By" />
+          <ScalarProperty Name="Create_Date" ColumnName="Create_Date" />
+          <ScalarProperty Name="Create_By" ColumnName="Create_By" />
+          <ScalarProperty Name="JobmasterIsDelete" ColumnName="JobmasterIsDelete" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="ReActivateDate" ColumnName="ReActivateDate" />
+          <ScalarProperty Name="CompletedDate" ColumnName="CompletedDate" />
+          <ScalarProperty Name="IsReActivate" ColumnName="IsReActivate" />
+          <ScalarProperty Name="IsCompleted" ColumnName="IsCompleted" />
+          <ScalarProperty Name="DueDate" ColumnName="DueDate" />
+          <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+          <ScalarProperty Name="PreViewvalue" ColumnName="PreViewvalue" />
+          <ScalarProperty Name="Narration" ColumnName="Narration" />
+          <ScalarProperty Name="JobCode" ColumnName="JobCode" />
+          <ScalarProperty Name="JobmasterId" ColumnName="JobmasterId" />
+          <ScalarProperty Name="CustomerCode" ColumnName="CustomerCode" />
+          <ScalarProperty Name="CustomerName" ColumnName="CustomerName" />
+          <ScalarProperty Name="PartnersIsDelete" ColumnName="PartnersIsDelete" />
+          <ScalarProperty Name="TypeOfTableId" ColumnName="TypeOfTableId" />
+          <ScalarProperty Name="TypeOfTable" ColumnName="TypeOfTable" />
+          <ScalarProperty Name="Fk_CustomerId" ColumnName="Fk_CustomerId" />
+          <ScalarProperty Name="BudgetedHours" ColumnName="BudgetedHours" />
+          <ScalarProperty Name="Fk_JobMasterId" ColumnName="Fk_JobMasterId" />
+          <ScalarProperty Name="PartnerTableId" ColumnName="PartnerTableId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="VW_JobMasterViewforReport">
+      <EntityTypeMapping TypeName="AuditSystemModel.VW_JobMasterViewforReport">
+        <MappingFragment StoreEntitySet="VW_JobMasterViewforReport">
+          <ScalarProperty Name="CombinedCode" ColumnName="CombinedCode" />
+          <ScalarProperty Name="CombinedName" ColumnName="CombinedName" />
+          <ScalarProperty Name="Delete_Date" ColumnName="Delete_Date" />
+          <ScalarProperty Name="Delete_By" ColumnName="Delete_By" />
+          <ScalarProperty Name="Edit_Date" ColumnName="Edit_Date" />
+          <ScalarProperty Name="Edit_By" ColumnName="Edit_By" />
+          <ScalarProperty Name="Create_Date" ColumnName="Create_Date" />
+          <ScalarProperty Name="Create_By" ColumnName="Create_By" />
+          <ScalarProperty Name="JobmasterIsDelete" ColumnName="JobmasterIsDelete" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="ReActivateDate" ColumnName="ReActivateDate" />
+          <ScalarProperty Name="CompletedDate" ColumnName="CompletedDate" />
+          <ScalarProperty Name="IsReActivate" ColumnName="IsReActivate" />
+          <ScalarProperty Name="IsCompleted" ColumnName="IsCompleted" />
+          <ScalarProperty Name="DueDate" ColumnName="DueDate" />
+          <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+          <ScalarProperty Name="PreViewvalue" ColumnName="PreViewvalue" />
+          <ScalarProperty Name="Narration" ColumnName="Narration" />
+          <ScalarProperty Name="JobCode" ColumnName="JobCode" />
+          <ScalarProperty Name="JobmasterId" ColumnName="JobmasterId" />
+          <ScalarProperty Name="CustomerCode" ColumnName="CustomerCode" />
+          <ScalarProperty Name="CustomerName" ColumnName="CustomerName" />
+          <ScalarProperty Name="PartnersIsDelete" ColumnName="PartnersIsDelete" />
+          <ScalarProperty Name="TypeOfTableId" ColumnName="TypeOfTableId" />
+          <ScalarProperty Name="TypeOfTable" ColumnName="TypeOfTable" />
+          <ScalarProperty Name="Fk_CustomerId" ColumnName="Fk_CustomerId" />
+          <ScalarProperty Name="BudgetedHours" ColumnName="BudgetedHours" />
+          <ScalarProperty Name="Fk_JobMasterId" ColumnName="Fk_JobMasterId" />
+          <ScalarProperty Name="PartnerTableId" ColumnName="PartnerTableId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="VW_LegalStatusMaster">
+      <EntityTypeMapping TypeName="AuditSystemModel.VW_LegalStatusMaster">
+        <MappingFragment StoreEntitySet="VW_LegalStatusMaster">
+          <ScalarProperty Name="Delete_Date" ColumnName="Delete_Date" />
+          <ScalarProperty Name="Delete_By" ColumnName="Delete_By" />
+          <ScalarProperty Name="Edit_Date" ColumnName="Edit_Date" />
+          <ScalarProperty Name="Edit_By" ColumnName="Edit_By" />
+          <ScalarProperty Name="Create_Date" ColumnName="Create_Date" />
+          <ScalarProperty Name="Create_By" ColumnName="Create_By" />
+          <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="Narration" ColumnName="Narration" />
+          <ScalarProperty Name="Code" ColumnName="Code" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="VW_NatureMaster">
+      <EntityTypeMapping TypeName="AuditSystemModel.VW_NatureMaster">
+        <MappingFragment StoreEntitySet="VW_NatureMaster">
+          <ScalarProperty Name="Delete_Date" ColumnName="Delete_Date" />
+          <ScalarProperty Name="Delete_By" ColumnName="Delete_By" />
+          <ScalarProperty Name="Edit_Date" ColumnName="Edit_Date" />
+          <ScalarProperty Name="Edit_By" ColumnName="Edit_By" />
+          <ScalarProperty Name="Create_Date" ColumnName="Create_Date" />
+          <ScalarProperty Name="Create_By" ColumnName="Create_By" />
+          <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="Narration" ColumnName="Narration" />
+          <ScalarProperty Name="Code" ColumnName="Code" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="VW_OpeningBalance">
+      <EntityTypeMapping TypeName="AuditSystemModel.VW_OpeningBalance">
+        <MappingFragment StoreEntitySet="VW_OpeningBalance">
+          <ScalarProperty Name="Delete_Date" ColumnName="Delete_Date" />
+          <ScalarProperty Name="Delete_By" ColumnName="Delete_By" />
+          <ScalarProperty Name="Edit_Date" ColumnName="Edit_Date" />
+          <ScalarProperty Name="Edit_By" ColumnName="Edit_By" />
+          <ScalarProperty Name="Create_Date" ColumnName="Create_Date" />
+          <ScalarProperty Name="Create_By" ColumnName="Create_By" />
+          <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+          <ScalarProperty Name="Narration" ColumnName="Narration" />
+          <ScalarProperty Name="SalesRep" ColumnName="SalesRep" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="Fk_CustomerId" ColumnName="Fk_CustomerId" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="VW_ProformaInvoiceHead">
+      <EntityTypeMapping TypeName="AuditSystemModel.VW_ProformaInvoiceHead">
+        <MappingFragment StoreEntitySet="VW_ProformaInvoiceHead">
+          <ScalarProperty Name="ManagerThreeName" ColumnName="ManagerThreeName" />
+          <ScalarProperty Name="ManagerTwoName" ColumnName="ManagerTwoName" />
+          <ScalarProperty Name="ManagerOneName" ColumnName="ManagerOneName" />
+          <ScalarProperty Name="PartnerThreeName" ColumnName="PartnerThreeName" />
+          <ScalarProperty Name="PartnerTwoName" ColumnName="PartnerTwoName" />
+          <ScalarProperty Name="PartnerOneName" ColumnName="PartnerOneName" />
+          <ScalarProperty Name="VatNo" ColumnName="VatNo" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="CustomerName" ColumnName="CustomerName" />
+          <ScalarProperty Name="WorkGroupName" ColumnName="WorkGroupName" />
+          <ScalarProperty Name="DepartmentThreeName" ColumnName="DepartmentThreeName" />
+          <ScalarProperty Name="DepartmentTwoName" ColumnName="DepartmentTwoName" />
+          <ScalarProperty Name="DepartmentOneName" ColumnName="DepartmentOneName" />
+          <ScalarProperty Name="JobCode" ColumnName="JobCode" />
+          <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+          <ScalarProperty Name="IsPostingToInvoice" ColumnName="IsPostingToInvoice" />
+          <ScalarProperty Name="ManagerOneComfirmDate" ColumnName="ManagerOneComfirmDate" />
+          <ScalarProperty Name="IsMangerOneComfirm" ColumnName="IsMangerOneComfirm" />
+          <ScalarProperty Name="Delete_Date" ColumnName="Delete_Date" />
+          <ScalarProperty Name="Delete_By" ColumnName="Delete_By" />
+          <ScalarProperty Name="Edit_Date" ColumnName="Edit_Date" />
+          <ScalarProperty Name="Edit_By" ColumnName="Edit_By" />
+          <ScalarProperty Name="Create_Date" ColumnName="Create_Date" />
+          <ScalarProperty Name="Create_By" ColumnName="Create_By" />
+          <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+          <ScalarProperty Name="PartnerOneComfirmDate" ColumnName="PartnerOneComfirmDate" />
+          <ScalarProperty Name="IsPartnerOneComfirm" ColumnName="IsPartnerOneComfirm" />
+          <ScalarProperty Name="IsActiveDate" ColumnName="IsActiveDate" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="TotalReceivedAmount" ColumnName="TotalReceivedAmount" />
+          <ScalarProperty Name="ValueVAT" ColumnName="ValueVAT" />
+          <ScalarProperty Name="ValueNBT" ColumnName="ValueNBT" />
+          <ScalarProperty Name="TotalAmount" ColumnName="TotalAmount" />
+          <ScalarProperty Name="PostingDate" ColumnName="PostingDate" />
+          <ScalarProperty Name="LastYearAmount" ColumnName="LastYearAmount" />
+          <ScalarProperty Name="Fk_JobMasterId" ColumnName="Fk_JobMasterId" />
+          <ScalarProperty Name="Fk_InvoiceShortNarrationId" ColumnName="Fk_InvoiceShortNarrationId" />
+          <ScalarProperty Name="NarrationTwo" ColumnName="NarrationTwo" />
+          <ScalarProperty Name="NarrationOne" ColumnName="NarrationOne" />
+          <ScalarProperty Name="NBTPercentage" ColumnName="NBTPercentage" />
+          <ScalarProperty Name="VatPercentage" ColumnName="VatPercentage" />
+          <ScalarProperty Name="NoNVatPrecentage" ColumnName="NoNVatPrecentage" />
+          <ScalarProperty Name="NoNVat" ColumnName="NoNVat" />
+          <ScalarProperty Name="Fk_NatureId" ColumnName="Fk_NatureId" />
+          <ScalarProperty Name="TaxType" ColumnName="TaxType" />
+          <ScalarProperty Name="Fk_ManagerThird" ColumnName="Fk_ManagerThird" />
+          <ScalarProperty Name="Fk_ManagerSecond" ColumnName="Fk_ManagerSecond" />
+          <ScalarProperty Name="Fk_ManagerOne" ColumnName="Fk_ManagerOne" />
+          <ScalarProperty Name="Fk_PartnerThird" ColumnName="Fk_PartnerThird" />
+          <ScalarProperty Name="Fk_PartnerSecond" ColumnName="Fk_PartnerSecond" />
+          <ScalarProperty Name="Fk_PartnerOne" ColumnName="Fk_PartnerOne" />
+          <ScalarProperty Name="Fk_CustomerId" ColumnName="Fk_CustomerId" />
+          <ScalarProperty Name="Fk_WorkGroupId" ColumnName="Fk_WorkGroupId" />
+          <ScalarProperty Name="YourReferance" ColumnName="YourReferance" />
+          <ScalarProperty Name="OurReferance" ColumnName="OurReferance" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="DocNo" ColumnName="DocNo" />
+          <ScalarProperty Name="Fk_DepartmentIdThird" ColumnName="Fk_DepartmentIdThird" />
+          <ScalarProperty Name="Fk_DepartmentIdTwo" ColumnName="Fk_DepartmentIdTwo" />
+          <ScalarProperty Name="Fk_DepartmentIdOne" ColumnName="Fk_DepartmentIdOne" />
+          <ScalarProperty Name="InvoiceNoProforma" ColumnName="InvoiceNoProforma" />
+          <ScalarProperty Name="Fk_CompanyId" ColumnName="Fk_CompanyId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="VW_SectorMaster">
+      <EntityTypeMapping TypeName="AuditSystemModel.VW_SectorMaster">
+        <MappingFragment StoreEntitySet="VW_SectorMaster">
+          <ScalarProperty Name="Delete_Date" ColumnName="Delete_Date" />
+          <ScalarProperty Name="Delete_By" ColumnName="Delete_By" />
+          <ScalarProperty Name="Edit_Date" ColumnName="Edit_Date" />
+          <ScalarProperty Name="Edit_By" ColumnName="Edit_By" />
+          <ScalarProperty Name="Create_Date" ColumnName="Create_Date" />
+          <ScalarProperty Name="Create_By" ColumnName="Create_By" />
+          <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="Narration" ColumnName="Narration" />
+          <ScalarProperty Name="Code" ColumnName="Code" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

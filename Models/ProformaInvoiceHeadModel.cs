@@ -5,6 +5,7 @@ namespace WOPHRMSystem.Models
 {
     public class ProformaInvoiceHeadModel
     {
+        public string VatNo { get; set; }
         public int Id { get; set; }
         public string InvoiceNoProforma { get; set; }
         public int Fk_DepartmentIdOne { get; set; }
@@ -53,7 +54,7 @@ namespace WOPHRMSystem.Models
         public string ManagerOneName { get; set; }
         public string ManagerTwoName { get; set; }
         public string ManagerThreeName { get; set; }
-
+        public string Address { get; set; }
         public int Fk_CompanyId { get; set; }
         public string CompanyName { get; set; }
         public bool IsPartnerOneComfirm { get; set; }

@@ -1,10 +1,14 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Web.Mvc;
 
 namespace WOPHRMSystem.Models
 {
     public class InvoiceHeadModel
     {
+        public string Address { get; set; }
+        public string VatNo { get; set; }
+        public string SVatNo { get; set; }
         public int Id { get; set; }
         public string InvoiceNo { get; set; }
         public int Fk_DepartmentIdOne { get; set; }
@@ -74,5 +78,13 @@ namespace WOPHRMSystem.Models
         public SelectList DepartmentListThird { get; set; }
         public SelectList NatureList { get; set; }
         public SelectList JobList { get; set; }
+    }
+
+    public class Invoicehead : InvoiceHeadModel { }
+    public class InvoicePrintModel
+    {
+
+        public Invoicehead Invoicehead1 { get; set; }
+        public List<InvoiceBodyModel> InvoiceBodyModels { get; set; }
     }
 }

@@ -1,0 +1,280 @@
+﻿@model WOPHRMSystem.Models.ProformaInvoiceHeadModel
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        /* Create two equal columns that floats next to each other */
+        .column {
+            float: left;
+            width: 50%;
+            padding: 10px;
+            height: 3cm; /* Should be removed. Only for demonstration */
+
+        }
+
+        /* Clear floats after the columns */
+        .row:after {
+            content: "";
+            display: table;
+            clear: both;
+            width: 16cm;
+        }
+        /* Create two equal columns that floats next to each other */
+        .column1 {
+            float: left;
+            width: 50%;
+            padding: 10px;
+            height: 4.2cm;
+            font-size: 14px; /* Should be removed. Only for demonstration */
+        }
+
+        /* Clear floats after the columns */
+        .row1:after {
+            content: "";
+            display: table;
+            clear: both;
+            width: 16cm;
+        }
+
+        .column2 {
+            float: left;
+            width: 50%;
+            padding: 10px;
+            height: 4.2cm; /* Should be removed. Only for demonstration */
+        }
+
+        /* Clear floats after the columns */
+        .row2:after {
+            content: "";
+            display: table;
+            clear: both;
+            width: 16cm;
+        }
+
+        .column3 {
+            float: left;
+            width: 50%;
+            padding: 10px;
+            height: 1.8cm; /* Should be removed. Only for demonstration */
+        }
+
+        /* Clear floats after the columns */
+        .row3:after {
+            content: "";
+            display: table;
+            clear: both;
+            width: 16cm;
+        }
+
+
+        .column4 {
+            float: left;
+            width: 30%;
+            padding: 10px;
+            height: 2.2cm; /* Should be removed. Only for demonstration */
+        }
+
+        .column5 {
+            float: left;
+            width: 70%;
+            padding: 10px;
+            height: 2.2cm; /* Should be removed. Only for demonstration */
+        }
+
+        /* Clear floats after the columns */
+        .row4:after {
+            content: "";
+            display: table;
+            clear: both;
+            width: 16cm;
+        }
+
+        .column6 {
+            float: left;
+            width: 100%;
+            padding: 10px;
+            height: 2.2cm; /* Should be removed. Only for demonstration */
+        }
+
+        /* Clear floats after the columns */
+        .row6:after {
+            content: "";
+            display: table;
+            clear: both;
+            width: 16cm;
+        }
+
+
+
+        table {
+            border-collapse: collapse;
+        }
+
+        th, td {
+            font-size:14px;
+            padding: 6px; /* Default text alignment for th and td */
+        }
+
+            td.right-align {
+                text-align: right; /* Align text to the right for this class */
+            }
+
+        .address {
+            display: grid;
+            grid-template-rows: repeat(3, auto);
+            max-width: 200px; /* Adjust the width as needed */
+            word-wrap: break-word;
+            margin: 8px 0px 0px 0px;
+
+        }
+
+        .amount-container {
+            text-align: center;
+            display: inline-block;
+        }
+
+        .line-top,
+        .line-bottom {
+            width: 100%;
+            display: block;
+        }
+
+        .line-top {
+            border-top: 1px solid black;
+            margin: 10px 0;
+        }
+
+        .line-bottom {
+            border-top: 3px double black;
+            margin: 10px 0;
+        }
+
+        .amount {
+            display: inline-block;
+            padding: 0 10px;
+            position: relative;
+            z-index: 1;
+        }
+    </style>
+</head>
+<body>
+
+
+    <div class="row">
+        <div class="column">
+            <p style="margin:80px 0px 0px 0px; text-align: left;">For the attention of</p>
+        </div>
+        <div class="column">
+
+        </div>
+    </div>
+
+    <div class="row1">
+        <div class="column1">
+            <p style="margin:0px 0px 0px 0px; text-align: left;">@Model.CustomerName</p>
+            <p class="address">
+                @Model.Address
+            </p>
+            <p>Vat No : @Model.VatNo</p>
+        </div>
+        <div class="column1">
+            <h2 style="text-align: left;margin:0px 00px 0px 20px; font-size:25px">PROFORMA INVOICE</h2>
+            <div style="margin: 0px 0px 0px 18px; ">
+                <table style="width:100%">
+                    <tr>
+                        <td>Invoice No:</td>
+                        <td class="right-align">@Model.InvoiceNoProforma</td>
+                    </tr>
+                    <tr>
+                        <td>Date:</td>
+                        <td class="right-align">@Model.Date.Value.ToShortDateString()</td>
+                    </tr>
+                    <tr>
+                        <td>Our reference:</td>
+                        <td class="right-align">@Model.OurReferance</td>
+                    </tr>
+                    <tr>
+                        <td>Job No:</td>
+                        <td class="right-align">@Model.JobCode</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="row2">
+        <div style="margin: 8px 0px 0px -10px; font-size: 15px; padding: 10px;">
+            @Model.NarrationOne
+
+        </div>
+        <div style="margin: 5px 0px 0px 0px; font-size: 16px; padding: 0px;">
+            @Model.NarrationTwo
+        </div>
+    </div>
+
+    <div class="row3">
+        <div class="column3">
+            <div style="margin: 40px 0px 0px -10px; font-size: 15px;">
+                (Other Taxes Rs. @Model.ValueNBT  + @Model.ValueVAT)
+            </div>
+
+        </div>
+        <div class="column3">
+            <div style="margin: 40px 10px 0px 0px; font-size: 15px; text-align: right;">
+                Rs. @Model.TotalReceivedAmount.Value.ToString("N2")
+            </div>
+
+        </div>
+    </div>
+
+    <div class="row4">
+        <div class="column5">
+            <div style="margin: 40px 0px 0px -10px; font-size: 15px;">
+                @ViewBag.AmountInWords
+            </div>
+
+        </div>
+        <div class="column4">
+            <div style="margin: 15px 0px 0px 0px; font-size: 15px; text-align: right;">
+                <div class="amount-container">
+                    <div class="line-top"></div>
+                    <div class="amount">
+                        Rs. @Model.TotalReceivedAmount.Value.ToString("N2")
+                    </div>
+                    <div class="line-bottom"></div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="row6">
+        <div class="column6" @*style="background-color:#aaa;*@">
+
+            <p style="margin:-15px 0px 0px 0px; font-size:13px"><strong>TERMS AND OTHER COMMENTS</strong></p>
+            <p style="font-size:12px">
+                This Proforma Invoice is valid only until the original invoice is generated & should be settled as per the term of the engagement.<br>
+                Cheques should be drawn in favour of "BDO PARTNERS".
+            </p>
+            <p style="font-size:12px;text-align:center"><em>This is a computer generated invoice. Hence, no signature required by law.</em></p>
+
+
+        </div>
+
+    </div>
+
+
+
+
+</body>
+</html>
+

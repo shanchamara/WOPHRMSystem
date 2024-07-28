@@ -1060,6 +1060,9 @@ warning 6002: The table/view 'AuditSystem.dbo.VW_InvoiceHead' does not have a pr
           <Property Name="DepartmentThreeName" Type="nvarchar(max)" Nullable="false" />
           <Property Name="WorkGroupName" Type="nvarchar(max)" Nullable="false" />
           <Property Name="CustomerName" Type="nvarchar(max)" />
+          <Property Name="Address" Type="nvarchar(max)" />
+          <Property Name="VatNo" Type="nvarchar(max)" />
+          <Property Name="SVatNo" Type="nvarchar(max)" />
           <Property Name="PartnerOneName" Type="nvarchar(max)" Nullable="false" />
           <Property Name="PartnerTwoName" Type="nvarchar(max)" Nullable="false" />
           <Property Name="PartnerThreeName" Type="nvarchar(max)" Nullable="false" />
@@ -1405,6 +1408,8 @@ warning 6002: The table/view 'AuditSystem.dbo.VW_ProformaInvoiceHead' does not h
           <Property Name="DepartmentThreeName" Type="nvarchar(max)" Nullable="false" />
           <Property Name="WorkGroupName" Type="nvarchar(max)" Nullable="false" />
           <Property Name="CustomerName" Type="nvarchar(max)" />
+          <Property Name="Address" Type="nvarchar(max)" />
+          <Property Name="VatNo" Type="nvarchar(max)" />
           <Property Name="PartnerOneName" Type="nvarchar(max)" Nullable="false" />
           <Property Name="PartnerTwoName" Type="nvarchar(max)" Nullable="false" />
           <Property Name="PartnerThreeName" Type="nvarchar(max)" Nullable="false" />
@@ -2371,6 +2376,9 @@ FROM [dbo].[VW_IntroductionMaster] AS [VW_IntroductionMaster]</DefiningQuery>
 [VW_InvoiceHead].[DepartmentThreeName] AS [DepartmentThreeName], 
 [VW_InvoiceHead].[WorkGroupName] AS [WorkGroupName], 
 [VW_InvoiceHead].[CustomerName] AS [CustomerName], 
+[VW_InvoiceHead].[Address] AS [Address], 
+[VW_InvoiceHead].[VatNo] AS [VatNo], 
+[VW_InvoiceHead].[SVatNo] AS [SVatNo], 
 [VW_InvoiceHead].[PartnerOneName] AS [PartnerOneName], 
 [VW_InvoiceHead].[PartnerTwoName] AS [PartnerTwoName], 
 [VW_InvoiceHead].[PartnerThreeName] AS [PartnerThreeName], 
@@ -2612,6 +2620,8 @@ FROM [dbo].[VW_OpeningBalance] AS [VW_OpeningBalance]</DefiningQuery>
 [VW_ProformaInvoiceHead].[DepartmentThreeName] AS [DepartmentThreeName], 
 [VW_ProformaInvoiceHead].[WorkGroupName] AS [WorkGroupName], 
 [VW_ProformaInvoiceHead].[CustomerName] AS [CustomerName], 
+[VW_ProformaInvoiceHead].[Address] AS [Address], 
+[VW_ProformaInvoiceHead].[VatNo] AS [VatNo], 
 [VW_ProformaInvoiceHead].[PartnerOneName] AS [PartnerOneName], 
 [VW_ProformaInvoiceHead].[PartnerTwoName] AS [PartnerTwoName], 
 [VW_ProformaInvoiceHead].[PartnerThreeName] AS [PartnerThreeName], 
@@ -4256,6 +4266,9 @@ FROM [dbo].[VW_SectorMaster] AS [VW_SectorMaster]</DefiningQuery>
           <Property Name="DepartmentThreeName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="WorkGroupName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="CustomerName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="VatNo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SVatNo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="PartnerOneName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="PartnerTwoName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="PartnerThreeName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
@@ -4583,6 +4596,8 @@ FROM [dbo].[VW_SectorMaster] AS [VW_SectorMaster]</DefiningQuery>
           <Property Name="DepartmentThreeName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="WorkGroupName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="CustomerName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="VatNo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="PartnerOneName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="PartnerTwoName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="PartnerThreeName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
@@ -6226,6 +6241,9 @@ FROM [dbo].[VW_SectorMaster] AS [VW_SectorMaster]</DefiningQuery>
                 <ScalarProperty Name="PartnerThreeName" ColumnName="PartnerThreeName" />
                 <ScalarProperty Name="PartnerTwoName" ColumnName="PartnerTwoName" />
                 <ScalarProperty Name="PartnerOneName" ColumnName="PartnerOneName" />
+                <ScalarProperty Name="SVatNo" ColumnName="SVatNo" />
+                <ScalarProperty Name="VatNo" ColumnName="VatNo" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
                 <ScalarProperty Name="CustomerName" ColumnName="CustomerName" />
                 <ScalarProperty Name="WorkGroupName" ColumnName="WorkGroupName" />
                 <ScalarProperty Name="DepartmentThreeName" ColumnName="DepartmentThreeName" />
@@ -6484,6 +6502,8 @@ FROM [dbo].[VW_SectorMaster] AS [VW_SectorMaster]</DefiningQuery>
                 <ScalarProperty Name="PartnerThreeName" ColumnName="PartnerThreeName" />
                 <ScalarProperty Name="PartnerTwoName" ColumnName="PartnerTwoName" />
                 <ScalarProperty Name="PartnerOneName" ColumnName="PartnerOneName" />
+                <ScalarProperty Name="VatNo" ColumnName="VatNo" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
                 <ScalarProperty Name="CustomerName" ColumnName="CustomerName" />
                 <ScalarProperty Name="WorkGroupName" ColumnName="WorkGroupName" />
                 <ScalarProperty Name="DepartmentThreeName" ColumnName="DepartmentThreeName" />

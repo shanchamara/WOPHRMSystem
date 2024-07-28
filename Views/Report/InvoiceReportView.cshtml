@@ -1,0 +1,536 @@
+﻿@model WOPHRMSystem.Models.InvoicePrintModel
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        * {
+            box-sizing: border-box;
+            /*font-family: 'Century Gothic', sans-serif;*/
+            font-family: 'Roboto', sans-serif;
+        }
+
+        .container {
+            border: 1px solid black; /* Apply solid border */
+            padding: 10px; /* Optional padding for better appearance */
+        }
+
+        .columnheading {
+            float: left;
+            width: 100%;
+            text-align: center;
+            font-size: 25px;
+            margin: 90px 0px 0px 0px;
+        }
+
+        /* Clear floats after the columns */
+        .rowheading:after {
+            content: "";
+            display: table;
+            clear: both;
+            width: 16cm;
+        }
+
+
+        /* Create two equal columns that floats next to each other */
+        .column {
+            float: left;
+            width: 100%;
+            padding: 10px;
+            margin: -30px 0px 0px 0px;
+            text-align: left;
+        }
+
+        /* Clear floats after the columns */
+        .row:after {
+            content: "";
+            display: table;
+            clear: both;
+            width: 16cm;
+        }
+        /* Create two equal columns that floats next to each other */
+        .column1 {
+            float: left;
+            width: 70%;
+            padding: 10px;
+            height: 4.2cm;
+            font-size: 14px;
+            margin: -20px 0px 0px 0px;
+            text-align: left;
+        }
+
+        .column1right {
+            float: left;
+            width: 30%;
+            padding: 10px;
+            height: 4.2cm;
+            font-size: 14px;
+            margin: -20px 0px 0px 0px;
+            text-align: left;
+            border-left: 2px solid black;
+        }
+
+        /* Clear floats after the columns */
+        .row1:after {
+            content: "";
+            display: table;
+            clear: both;
+            width: 16cm;
+        }
+
+        .column2 {
+            float: left;
+            width: 50%;
+            padding: 10px;
+            height: 4.2cm; /* Should be removed. Only for demonstration */
+        }
+
+        /* Clear floats after the columns */
+        .row2:after {
+            content: "";
+            display: table;
+            clear: both;
+            width: 16cm;
+        }
+
+        .column3 {
+            float: left;
+            width: 50%;
+            padding: 10px;
+            height: 1.8cm; /* Should be removed. Only for demonstration */
+        }
+
+        /* Clear floats after the columns */
+        .row3:after {
+            content: "";
+            display: table;
+            clear: both;
+            width: 16cm;
+        }
+
+
+        .column4 {
+            float: left;
+            width: 30%;
+            padding: 10px;
+            height: 2.2cm; /* Should be removed. Only for demonstration */
+        }
+
+        .column5 {
+            float: left;
+            width: 70%;
+            padding: 10px;
+            height: 2.2cm; /* Should be removed. Only for demonstration */
+        }
+
+        /* Clear floats after the columns */
+        .row4:after {
+            content: "";
+            display: table;
+            clear: both;
+            width: 16cm;
+        }
+
+        .column6 {
+            float: left;
+            width: 100%;
+            padding: 10px;
+            height: 2.2cm;
+        }
+
+        /* Clear floats after the columns */
+        .row6:after {
+            content: "";
+            display: table;
+            clear: both;
+            width: 16cm;
+        }
+
+        .column7 {
+            float: left;
+            width: 70%;
+            padding: 10px;
+            height: 1cm;
+            text-align: right;
+            margin-left: -60px
+        }
+
+        .column7right {
+            float: left;
+            width: 30%;
+            padding: 10px;
+            height: 1cm;
+            text-align: right;
+        }
+
+        /* Clear floats after the columns */
+        .row7:after {
+            content: "";
+            display: table;
+            clear: both;
+            width: 16cm;
+        }
+
+
+
+        table {
+            border-collapse: collapse;
+        }
+
+        th, td {
+            font-size: 14px;
+            padding: 6px;
+            width: 25%;
+        }
+
+            td.right-align {
+                text-align: right; /* Align text to the right for this class */
+            }
+
+        .address {
+            display: grid;
+            grid-template-rows: repeat(3, auto);
+            max-width: 200px; /* Adjust the width as needed */
+            word-wrap: break-word;
+            margin: 8px 0px 0px 0px;
+        }
+
+        .amount-container {
+            text-align: center;
+            display: inline-block;
+        }
+
+        .line-top,
+        .line-bottom {
+            width: 100%;
+            display: block;
+        }
+
+        .line-top {
+            border-top: 1px solid black;
+            margin: 10px 0;
+        }
+
+        .line-topheading {
+            border-top: 2px solid black;
+            margin: -20px 0px 0px 0px;
+            margin-left: 10px;
+        }
+
+        .line-footerheading {
+            border-top: 2px solid black;
+            margin-left: 10px;
+        }
+
+        .content {
+            height: 1150px; 
+            overflow: hidden;
+        }
+
+        .line-footerheading2 {
+            border-top: 2px solid black;
+            margin: 0px 0px 0px 0px;
+            margin-left: 10px;
+        }
+
+        .fixed {
+            bottom: 0;
+            width: 100%;
+            height: 50px;
+            text-align: center;
+            padding: 10px;
+        }
+
+        .line-bottom {
+            border-top: 3px double black;
+            margin: 10px 0;
+        }
+
+        .line-bottomItemasection {
+            border-top: 2px solid black;
+            margin-left: -20px;
+            margin-bottom: 5px;
+            margin-right: -20px;
+        }
+
+        .line-bottomItemasection2 {
+            border-top: 2px solid black;
+            margin-left: 100px;
+            margin-top: 20px;
+            margin-bottom: 5px;
+            margin-right: 5px;
+        }
+
+        .amount {
+            display: inline-block;
+            padding: 0 10px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .border-bottom {
+            border-bottom: 2px solid black;
+            width: 80%;
+        }
+
+        .invoice-container {
+            width: 100%;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .left-section {
+            float: left;
+            width: 70%;
+            text-align: left;
+            position: relative;
+        }
+
+            .left-section .label {
+                float: left;
+                width: 50%;
+            }
+
+            .left-section .value {
+                float: right;
+                width: 50%;
+                text-align: left;
+            }
+
+            .left-section .item {
+                clear: both;
+                overflow: hidden;
+                margin-bottom: 10px;
+            }
+
+            .left-section .itemvat {
+                clear: both;
+                overflow: hidden;
+                margin: 60px 0px 0px 0px;
+            }
+
+        .right-section {
+            float: right;
+            width: 30%;
+            text-align: left;
+            position: relative;
+        }
+
+            .right-section::before {
+                content: "";
+                position: absolute;
+                left: -20px;
+                top: -20px;
+                bottom: -863px;
+                width: 2px;
+                background-color: #000;
+            }
+
+        .clearfix::after {
+            content: "";
+            clear: both;
+            display: table;
+        }
+
+        .right-section .label {
+            float: left;
+            width: 50%;
+            font-weight: bold;
+        }
+
+        .right-section .value {
+            float: right;
+            width: 50%;
+            text-align: right;
+        }
+
+        .right-section .item {
+            clear: both;
+            overflow: hidden;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="content">
+        <div class="rowheading">
+            <div class="columnheading">
+                <p>SUSPENDED TAX INVOICE</p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="column">
+                <p>Supplies To</p>
+            </div>
+        </div>
+        <div class="line-topheading"></div>
+
+        <div class="invoice-container clearfix">
+            <div class="left-section">
+                <div class="item">
+                    <div class="label">@Model.Invoicehead1.CustomerName</div>
+                </div>
+
+                <div class="item">
+                    <div class="label">@Model.Invoicehead1.Address</div>
+                </div>
+
+
+                <div class="itemvat">
+                    <div class="label">SVAT No : @Model.Invoicehead1.SVatNo</div>
+                    <div class="value">VAT No : @Model.Invoicehead1.VatNo</div>
+                </div>
+            </div>
+            <div class="right-section">
+                <div class="item">
+                    <div class="label">Invoice No.</div>
+                    <div class="value">@Model.Invoicehead1.InvoiceNo</div>
+                </div>
+                <div class="line-bottomItemasection"></div>
+                <div class="item">
+                    <div class="label">Date</div>
+                    <div class="value">@Model.Invoicehead1.Date.Value.ToShortDateString()</div>
+                </div>
+                <div class="line-bottomItemasection"></div>
+                <div class="item">
+                    <div class="label">Prof. Invoice No</div>
+                    <div class="value">M000080867</div>
+                </div>
+                <div class="line-bottomItemasection"></div>
+                <div class="item">
+                    <div class="label">Our reference</div>
+                    <div class="value">@Model.Invoicehead1.OurReferance</div>
+                </div>
+
+            </div>
+        </div>
+        <div class="line-topheading"></div>
+        <div class="row2">
+            <div style="margin: 0px 0px 0px 0px; font-size: 15px; padding: 10px;">
+                @Model.Invoicehead1.NarrationOne
+
+            </div>
+            <div style="margin: -15px 0px 0px 0px; font-size: 15px; padding: 10px;">
+                @Model.Invoicehead1.NarrationTwo
+            </div>
+
+        </div>
+
+        <div class="row3">
+            @foreach (var d in Model.InvoiceBodyModels)
+            {
+
+
+                <div style="margin: 10px 0px 0px 0px; font-size: 15px; padding: 10px;">
+                    @d.Code  @d.Narration
+                </div>
+                <div style="margin: -25px 20px 0px 0px; font-size: 15px; text-align: right;">
+                    Rs. @d.Amount.Value.ToString("N2")
+                </div>
+            }
+        </div>
+
+        <div class="row4">
+
+
+            <div class="column5">
+
+            </div>
+            <div class="column4">
+
+                <div class="line-bottomItemasection2"></div>
+                <div style="margin: 0px 10px 0px 0px; font-size: 15px; text-align: right;">
+                    Rs. @Model.Invoicehead1.TotalAmount.Value.ToString("N2")
+                </div>
+            </div>
+
+
+        </div>
+
+        <div class="row7">
+            <div class="column7">
+                Add: Social Security Contribution 2.5 %
+            </div>
+            <div style="margin: 15px 20px 0px 0px; font-size: 15px; text-align: right;">
+                Rs. @Model.Invoicehead1.ValueNBT.Value.ToString("N2")
+            </div>
+        </div>
+
+        @{
+
+            decimal totalPlusNBT = (Model.Invoicehead1.TotalAmount ?? 0) + (Model.Invoicehead1.ValueNBT ?? 0);
+
+        }
+        <div class="row7">
+            <div class="column7">
+                Value of Supply
+            </div>
+            <div style="margin: 0px 10px 0px 0px; font-size: 15px; text-align: right;">
+                <div class="amount-container">
+                    <div class="line-top"></div>
+                    <div class="amount">
+                        Rs.@totalPlusNBT.ToString("N2")
+                    </div>
+                    <div class="line-top"></div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="row4">
+            <div style="font-size:14px;margin-bottom:15px">
+                <strong> @ViewBag.AmountInWords</strong>
+            </div>
+
+        </div>
+
+        <div class="row7">
+            <div class="column7">
+                Suspended Value Added Tax 15%
+            </div>
+            <div style="margin: 0px 20px 0px 0px; font-size: 15px; text-align: right;">
+                Rs. @Model.Invoicehead1.ValueVAT.Value.ToString("N2")
+            </div>
+        </div>
+
+        <div class="row7">
+            <div class="column7">
+                Total Value of Supply
+            </div>
+            <div style="margin: 0px 10px 0px 0px; font-size: 15px; text-align: right;">
+                <div class="amount-container">
+                    <div class="line-top"></div>
+                    <div class="amount">
+                        Rs. @Model.Invoicehead1.TotalReceivedAmount.Value.ToString("N2")
+                    </div>
+                    <div class="line-bottom"></div>
+                </div>
+            </div>
+        </div>
+        <div class="row4">
+            <div style="font-size:14px;margin-bottom:15px">
+                <strong> @ViewBag.GrandAmountInWords</strong>
+            </div>
+
+        </div>
+    </div>
+    <div class="line-footerheading"></div>
+
+
+    
+    <div class="row4">
+        <div style="font-size:14px;margin:10px;text-align:center">
+            <strong> This invoice should be settled within 30 days, cheques should be drawn in favour of "BDO Partners"</strong>
+        </div>
+
+    </div>
+    <div class="line-footerheading2"></div>
+
+</body>
+</html>
+

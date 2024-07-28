@@ -69,6 +69,8 @@ namespace WOPHRMSystem.Context
         public string DepartmentThreeName { get; set; }
         public string WorkGroupName { get; set; }
         public string CustomerName { get; set; }
+        public string Address { get; set; }
+        public string VatNo { get; set; }
         public string PartnerOneName { get; set; }
         public string PartnerTwoName { get; set; }
         public string PartnerThreeName { get; set; }

@@ -1,8 +1,10 @@
 ﻿using ClosedXML.Excel;
+using DocumentFormat.OpenXml.Office2010.Excel;
 using Rotativa;
 using System;
 using System.IO;
 using System.Web.Mvc;
+using WOPHRMSystem.Helps;
 using WOPHRMSystem.Models;
 using WOPHRMSystem.Services;
 
@@ -15,6 +17,8 @@ namespace WOPHRMSystem.Controllers
 
         readonly JobReportServices _ClientService = new JobReportServices();
         readonly EmployeeServices employeeServices = new EmployeeServices();
+        readonly ProformaInvoiceHeadServices proformaInvoiceHead = new ProformaInvoiceHeadServices();
+        readonly InvoiceHeadServices invoiceHead = new InvoiceHeadServices();
 
         #region Job Details 
         // GET: Report
@@ -209,5 +213,116 @@ namespace WOPHRMSystem.Controllers
         #endregion
 
 
+        #region Proforma Invoice 
+
+        // GET: Report
+        public ActionResult ProformaInvoiceReportView()
+        {
+            return View();
+        }
+
+
+        [HttpGet]
+        public ActionResult ProformaInvoiceReportPDF(int id)
+        {
+            var dt = proformaInvoiceHead.GetAllTransferedInvoiceForPrint(id);
+
+            decimal amount = Convert.ToDecimal(dt.TotalReceivedAmount);
+            string AmountInWords = CommonResources.ConvertAmountToWords(amount);
+
+            ViewBag.AmountInWords = AmountInWords;
+            //ViewBag.StartDate = jobMasterForReportModel.ReportGenaratedDate.Value.ToShortDateString();
+            return new ViewAsPdf("ProformaInvoiceReportView", dt)
+            {
+                PageSize = Rotativa.Options.Size.A5,
+                PageOrientation = Rotativa.Options.Orientation.Landscape,
+                PageMargins = new Rotativa.Options.Margins(10, 10, 10, 10)
+            };
+        }
+
+        #endregion
+
+        #region  SuspendedInvoice 
+
+        // GET: Report
+        public ActionResult InvoiceReportView()
+        {
+            return View();
+        }
+
+
+        [HttpGet]
+        public ActionResult InvoiceReportPDF(int id)
+        {
+            var dt = invoiceHead.GetAllTransferedInvoiceForPrint(id);
+            var dtbody = invoiceHead.GetAllTransferedInvoiceForPrintbody(id);
+
+
+            decimal amount = Convert.ToDecimal(dt.TotalReceivedAmount);
+            decimal amountplusNBT = Convert.ToDecimal(dt.TotalAmount + dt.ValueNBT);
+
+            string GrandAmountInWords = CommonResources.ConvertAmountToWords(amount);
+            string AmountInWords = CommonResources.ConvertAmountToWords(amountplusNBT);
+
+
+            var model = new InvoicePrintModel()
+            {
+                InvoiceBodyModels = dtbody,
+                Invoicehead1 = dt
+
+            };
+            ViewBag.GrandAmountInWords = GrandAmountInWords;
+            ViewBag.AmountInWords = AmountInWords;
+            return new ViewAsPdf("InvoiceReportView", model)
+            {
+                PageSize = Rotativa.Options.Size.A4,
+                PageOrientation = Rotativa.Options.Orientation.Portrait,
+                PageMargins = new Rotativa.Options.Margins(10, 10, 10, 10)
+            };
+        }
+
+        #endregion
+
+
+        #region  TAXInvoice 
+
+        // GET: Report
+        public ActionResult TAXInvoiceReportView()
+        {
+            return View();
+        }
+
+
+        [HttpGet]
+        public ActionResult TAXInvoiceReportPDF(int id)
+        {
+            var dt = invoiceHead.GetAllTransferedInvoiceForPrint(id);
+            var dtbody = invoiceHead.GetAllTransferedInvoiceForPrintbody(id);
+
+
+            decimal amount = Convert.ToDecimal(dt.TotalReceivedAmount);
+            decimal amountplusNBT = Convert.ToDecimal(dt.TotalAmount + dt.ValueNBT);
+
+            string GrandAmountInWords = CommonResources.ConvertAmountToWords(amount);
+            string AmountInWords = CommonResources.ConvertAmountToWords(amountplusNBT);
+
+
+            var model = new InvoicePrintModel()
+            {
+                InvoiceBodyModels = dtbody,
+                Invoicehead1 = dt
+
+            };
+            ViewBag.GrandAmountInWords = GrandAmountInWords;
+            ViewBag.AmountInWords = AmountInWords;
+            return new ViewAsPdf("TAXInvoiceReportView", model)
+            {
+                PageSize = Rotativa.Options.Size.A4,
+                PageOrientation = Rotativa.Options.Orientation.Portrait,
+                PageMargins = new Rotativa.Options.Margins(10, 10, 10, 10)
+            };
+        }
+
+        #endregion
     }
 }
