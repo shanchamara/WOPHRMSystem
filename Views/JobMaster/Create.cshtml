@@ -141,11 +141,11 @@
                                                 <div class="mb-2">
                                                     <div class="form-group">
                                                         <label for="exampleInputEmail1" class="form-control-sm">Strat Date</label>
-                                                        <div class="input-group date" id="reservationdate" data-target-input="nearest">
-                                                            @Html.EditorFor(model => model.StartDate, new { htmlAttributes = new { @class = "form-control datetimepicker-input form-control-sm", data_target = "#reservationdate" } })
+                                                        <div class="input-group date" id="StartDate" data-target-input="nearest">
+                                                            @Html.EditorFor(model => model.StartDate, new { htmlAttributes = new { @class = "form-control datetimepicker-input form-control-sm", data_target = "#StartDate" } })
 
                                                             @*<input type="text" name="Date" class="form-control datetimepicker-input" data-target="#reservationdate" />*@
-                                                            <div class="input-group-append" data-target="#reservationdate" data-toggle="datetimepicker">
+                                                            <div class="input-group-append" data-target="#StartDate" data-toggle="datetimepicker">
                                                                 <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                                                             </div>
                                                         </div>
@@ -156,11 +156,11 @@
                                                 <div class="mb-4">
                                                     <div class="form-group">
                                                         <label for="exampleInputEmail1" class="form-control-sm">End Date</label>
-                                                        <div class="input-group date" id="reservationdate1" data-target-input="nearest">
-                                                            @Html.EditorFor(model => model.DueDate, new { htmlAttributes = new { @class = "form-control datetimepicker-input form-control-sm", data_target = "#reservationdate" } })
+                                                        <div class="input-group date" id="DueDate" data-target-input="nearest">
+                                                            @Html.EditorFor(model => model.DueDate, new { htmlAttributes = new { @class = "form-control datetimepicker-input form-control-sm", data_target = "#DueDate" } })
 
                                                             @*<input type="text" name="Date" class="form-control datetimepicker-input" data-target="#reservationdate" />*@
-                                                            <div class="input-group-append" data-target="#reservationdate1" data-toggle="datetimepicker">
+                                                            <div class="input-group-append" data-target="#DueDate" data-toggle="datetimepicker">
                                                                 <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                                                             </div>
                                                         </div>
@@ -324,13 +324,14 @@
             $('[data-mask]').inputmask()
 
             //Date picker
-            $('#reservationdate').datetimepicker({
+            $('#StartDate').datetimepicker({
                 format: 'L',
                 maxDate: moment() // Disable future dates
             });
-            $('#reservationdate1').datetimepicker({
+
+            $('#DueDate').datetimepicker({
                 format: 'L',
-                minDate: moment()
+                maxDate: moment() // Disable future dates
             });
 
             //Date and time picker

@@ -102,7 +102,8 @@ namespace WOPHRMSystem.Controllers
                         NarrationOne = masterModel.NarrationOne,
                         NarrationTwo = masterModel.NarrationTwo,
                         Create_Date = new CommonResources().LocalDatetime().Date,
-
+                        BalanceAmount = masterModel.TotalReceivedAmount,
+                        InvoiceNo= masterModel.DocNo
                     };
                     return Json(_ClientService.Insert(tbl));
                 };
@@ -198,7 +199,7 @@ namespace WOPHRMSystem.Controllers
                 {
                     var tbl = new TblInvoiceHead
                     {
-                        Create_By = "User",
+                        Edit_By = "User",
                         IsActive = masterModel.IsActive,
                         Fk_PartnerSecond = masterModel.Fk_PartnerSecond,
                         Fk_PartnerOne = masterModel.Fk_PartnerOne,
@@ -233,7 +234,7 @@ namespace WOPHRMSystem.Controllers
                         PostingDate = masterModel.PostingDate,
                         NarrationOne = masterModel.NarrationOne,
                         NarrationTwo = masterModel.NarrationTwo,
-                        Create_Date = new CommonResources().LocalDatetime().Date,
+                        Edit_Date = new CommonResources().LocalDatetime().Date,
                         Id = masterModel.Id,
                         IsMangerOneComfirm = masterModel.IsMangerOneComfirm,
                         //IsPostingToInvoice = masterModel.IsPostingToInvoice,
@@ -446,7 +447,24 @@ namespace WOPHRMSystem.Controllers
         }
         #endregion
 
+        #region Invoice Print 
 
+
+        [HttpGet]
+        public ActionResult ReadyToPrintSVATInvoice()
+        {
+            var dt = _ClientService.GetAllSVATInvoices();
+            return View(dt);
+        }
+
+        [HttpGet]
+        public ActionResult ReadyToPrintVATInvoice()
+        {
+            var dt = _ClientService.GetAllVATInvoices();
+            return View(dt);
+        }
+
+        #endregion
 
     }
 }

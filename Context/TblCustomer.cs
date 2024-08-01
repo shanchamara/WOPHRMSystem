@@ -24,6 +24,7 @@ namespace WOPHRMSystem.Context
             this.TblOpeningBalances = new HashSet<TblOpeningBalance>();
             this.TblProformaInvoiceBodies = new HashSet<TblProformaInvoiceBody>();
             this.TblProformaInvoiceHeads = new HashSet<TblProformaInvoiceHead>();
+            this.TblReceipts = new HashSet<TblReceipt>();
         }
     
         public int Id { get; set; }
@@ -72,5 +73,6 @@ namespace WOPHRMSystem.Context
         public virtual ICollection<TblOpeningBalance> TblOpeningBalances { get; set; }
         public virtual ICollection<TblProformaInvoiceBody> TblProformaInvoiceBodies { get; set; }
         public virtual ICollection<TblProformaInvoiceHead> TblProformaInvoiceHeads { get; set; }
+        public virtual ICollection<TblReceipt> TblReceipts { get; set; }
     }
 }

@@ -28,8 +28,7 @@ namespace WOPHRMSystem.Services
 
                         var JobCodePattern = _context.TblDocuments.SingleOrDefault(d => d.TypeOfTable.Equals("TblInvoiceHead"));
 
-                        obj.DocNo = "M0000" + Convert.ToString(JobCodePattern.Number + 1);
-
+                        obj.InvoiceNo= Convert.ToString(JobCodePattern.Pattern + 1);
                         JobCodePattern.Number++;
                         _context.TblInvoiceHeads.Add(obj);
                         _context.SaveChanges();
@@ -398,6 +397,148 @@ namespace WOPHRMSystem.Services
 
             }
             return "dd";
+        }
+
+
+        public List<InvoiceHeadModel> GetAllSVATInvoices()
+        {
+            try
+            {
+                var dr = (from a in _context.VW_InvoiceHead
+                          orderby a.Id descending
+                          where a.IsActive == false && a.TaxType == "SVAT"
+                          select new InvoiceHeadModel()
+                          {
+                              Id = a.Id,
+                              IsActive = a.IsActive,
+                              IsDelete = a.IsDelete,
+                              Fk_WorkGroupId = a.Fk_WorkGroupId,
+                              InvoiceNo = a.InvoiceNo,
+                              Fk_DepartmentIdOne = a.Fk_DepartmentIdOne,
+                              Fk_DepartmentIdTwo = a.Fk_DepartmentIdTwo,
+                              Fk_DepartmentIdThird = a.Fk_DepartmentIdThird,
+                              DocNo = a.DocNo,
+                              Date = a.Date,
+                              OurReferance = a.OurReferance,
+                              YourReferance = a.YourReferance,
+                              Fk_CustomerId = a.Fk_CustomerId,
+                              Fk_PartnerOne = a.Fk_PartnerOne,
+                              Fk_PartnerSecond = a.Fk_PartnerSecond,
+                              Fk_PartnerThird = a.Fk_PartnerThird,
+                              Fk_ManagerOne = a.Fk_ManagerOne,
+                              Fk_ManagerSecond = a.Fk_ManagerSecond,
+                              Fk_ManagerThird = a.Fk_ManagerThird,
+                              TaxType = a.TaxType,
+                              Fk_NatureId = a.Fk_NatureId,
+                              NoNVat = a.NoNVat,
+                              NoNVatPrecentage = a.NoNVatPrecentage,
+                              VatPercentage = a.VatPercentage,
+                              NBTPercentage = a.NBTPercentage,
+                              NarrationOne = a.NarrationOne,
+                              NarrationTwo = a.NarrationTwo,
+                              Fk_InvoiceShortNarrationId = a.Fk_InvoiceShortNarrationId,
+                              Fk_JobMasterId = a.Fk_JobMasterId,
+                              LastYearAmount = a.LastYearAmount,
+                              PostingDate = a.PostingDate,
+                              IsActiveDate = a.IsActiveDate,
+                              DepartmentOneName = a.DepartmentOneName,
+                              DepartmentTwoName = a.DepartmentTwoName,
+                              DepartmentThreeName = a.DepartmentThreeName,
+                              WorkGroupName = a.WorkGroupName,
+                              CustomerName = a.CustomerName,
+                              PartnerOneName = a.PartnerOneName,
+                              PartnerTwoName = a.PartnerTwoName,
+                              PartnerThreeName = a.PartnerThreeName,
+                              ManagerOneName = a.ManagerOneName,
+                              ManagerTwoName = a.ManagerTwoName,
+                              ManagerThreeName = a.ManagerThreeName,
+                              Fk_CompanyId = a.Fk_CompanyId,
+                              CompanyName = a.CompanyName,
+                              TotalAmount = a.TotalAmount,
+                              ValueNBT = a.ValueNBT,
+                              ValueVAT = a.ValueVAT,
+                              TotalReceivedAmount = a.TotalReceivedAmount,
+
+                              JobCode = a.JobCode,
+                          }).Where(d => d.IsDelete.Equals(false)).ToList();
+                return dr;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+
+        public List<InvoiceHeadModel> GetAllVATInvoices()
+        {
+            try
+            {
+                var dr = (from a in _context.VW_InvoiceHead
+                          orderby a.Id descending
+                          where a.IsActive == false && a.TaxType == "VAT"
+                          select new InvoiceHeadModel()
+                          {
+                              Id = a.Id,
+                              IsActive = a.IsActive,
+                              IsDelete = a.IsDelete,
+                              Fk_WorkGroupId = a.Fk_WorkGroupId,
+                              InvoiceNo = a.InvoiceNo,
+                              Fk_DepartmentIdOne = a.Fk_DepartmentIdOne,
+                              Fk_DepartmentIdTwo = a.Fk_DepartmentIdTwo,
+                              Fk_DepartmentIdThird = a.Fk_DepartmentIdThird,
+                              DocNo = a.DocNo,
+                              Date = a.Date,
+                              OurReferance = a.OurReferance,
+                              YourReferance = a.YourReferance,
+                              Fk_CustomerId = a.Fk_CustomerId,
+                              Fk_PartnerOne = a.Fk_PartnerOne,
+                              Fk_PartnerSecond = a.Fk_PartnerSecond,
+                              Fk_PartnerThird = a.Fk_PartnerThird,
+                              Fk_ManagerOne = a.Fk_ManagerOne,
+                              Fk_ManagerSecond = a.Fk_ManagerSecond,
+                              Fk_ManagerThird = a.Fk_ManagerThird,
+                              TaxType = a.TaxType,
+                              Fk_NatureId = a.Fk_NatureId,
+                              NoNVat = a.NoNVat,
+                              NoNVatPrecentage = a.NoNVatPrecentage,
+                              VatPercentage = a.VatPercentage,
+                              NBTPercentage = a.NBTPercentage,
+                              NarrationOne = a.NarrationOne,
+                              NarrationTwo = a.NarrationTwo,
+                              Fk_InvoiceShortNarrationId = a.Fk_InvoiceShortNarrationId,
+                              Fk_JobMasterId = a.Fk_JobMasterId,
+                              LastYearAmount = a.LastYearAmount,
+                              PostingDate = a.PostingDate,
+                              IsActiveDate = a.IsActiveDate,
+                              DepartmentOneName = a.DepartmentOneName,
+                              DepartmentTwoName = a.DepartmentTwoName,
+                              DepartmentThreeName = a.DepartmentThreeName,
+                              WorkGroupName = a.WorkGroupName,
+                              CustomerName = a.CustomerName,
+                              PartnerOneName = a.PartnerOneName,
+                              PartnerTwoName = a.PartnerTwoName,
+                              PartnerThreeName = a.PartnerThreeName,
+                              ManagerOneName = a.ManagerOneName,
+                              ManagerTwoName = a.ManagerTwoName,
+                              ManagerThreeName = a.ManagerThreeName,
+                              Fk_CompanyId = a.Fk_CompanyId,
+                              CompanyName = a.CompanyName,
+                              TotalAmount = a.TotalAmount,
+                              ValueNBT = a.ValueNBT,
+                              ValueVAT = a.ValueVAT,
+                              TotalReceivedAmount = a.TotalReceivedAmount,
+
+                              JobCode = a.JobCode,
+                          }).Where(d => d.IsDelete.Equals(false)).ToList();
+                return dr;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
     }

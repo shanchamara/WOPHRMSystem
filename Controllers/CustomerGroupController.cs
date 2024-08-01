@@ -87,6 +87,7 @@ namespace WOPHRMSystem.Controllers
                         tbl.Edit_By = "User";
                         tbl.Id = masterModel.Id;
                         tbl.IsActive = masterModel.IsActive;
+                        tbl.Edit_Date = new CommonResources().LocalDatetime().Date;
                     };
 
                     return Json(_ClientService.Update(tbl));

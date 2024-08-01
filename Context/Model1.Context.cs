@@ -26,6 +26,8 @@ namespace WOPHRMSystem.Context
         }
     
         public DbSet<C__EFMigrationsHistory> C__EFMigrationsHistory { get; set; }
+        public DbSet<TblChequeDetail> TblChequeDetails { get; set; }
+        public DbSet<TblChequeTempDetail> TblChequeTempDetails { get; set; }
         public DbSet<TblCompany> TblCompanies { get; set; }
         public DbSet<TblCustomerGroup> TblCustomerGroups { get; set; }
         public DbSet<TblCustomer> TblCustomers { get; set; }
@@ -58,6 +60,9 @@ namespace WOPHRMSystem.Context
         public DbSet<TblProformaInvoiceBody> TblProformaInvoiceBodies { get; set; }
         public DbSet<TblProformaInvoiceBodyTemp> TblProformaInvoiceBodyTemps { get; set; }
         public DbSet<TblProformaInvoiceHead> TblProformaInvoiceHeads { get; set; }
+        public DbSet<TblReceipt> TblReceipts { get; set; }
+        public DbSet<TblReceiptBodydeatil> TblReceiptBodydeatils { get; set; }
+        public DbSet<TblReceiptTempInvoice> TblReceiptTempInvoices { get; set; }
         public DbSet<TblSectorMaster> TblSectorMasters { get; set; }
         public DbSet<TblSiteSetting> TblSiteSettings { get; set; }
         public DbSet<TblTitle> TblTitles { get; set; }
@@ -81,6 +86,7 @@ namespace WOPHRMSystem.Context
         public DbSet<VW_NatureMaster> VW_NatureMaster { get; set; }
         public DbSet<VW_OpeningBalance> VW_OpeningBalance { get; set; }
         public DbSet<VW_ProformaInvoiceHead> VW_ProformaInvoiceHead { get; set; }
+        public DbSet<VW_Receipts> VW_Receipts { get; set; }
         public DbSet<VW_SectorMaster> VW_SectorMaster { get; set; }
     }
 }

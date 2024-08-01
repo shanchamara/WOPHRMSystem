@@ -9,6 +9,51 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="TblChequeDetails">
+      <EntityTypeMapping TypeName="AuditSystemModel.TblChequeDetail">
+        <MappingFragment StoreEntitySet="TblChequeDetails">
+          <ScalarProperty Name="Delete_Date" ColumnName="Delete_Date" />
+          <ScalarProperty Name="Delete_By" ColumnName="Delete_By" />
+          <ScalarProperty Name="Edit_Date" ColumnName="Edit_Date" />
+          <ScalarProperty Name="Edit_By" ColumnName="Edit_By" />
+          <ScalarProperty Name="Create_Date" ColumnName="Create_Date" />
+          <ScalarProperty Name="Create_By" ColumnName="Create_By" />
+          <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="CashTookDate" ColumnName="CashTookDate" />
+          <ScalarProperty Name="ReceivedDate" ColumnName="ReceivedDate" />
+          <ScalarProperty Name="BankDetails" ColumnName="BankDetails" />
+          <ScalarProperty Name="ChequeNo" ColumnName="ChequeNo" />
+          <ScalarProperty Name="TableHeadId" ColumnName="TableHeadId" />
+          <ScalarProperty Name="TableName" ColumnName="TableName" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TblChequeTempDetails">
+      <EntityTypeMapping TypeName="AuditSystemModel.TblChequeTempDetail">
+        <MappingFragment StoreEntitySet="TblChequeTempDetails">
+          <ScalarProperty Name="Delete_Date" ColumnName="Delete_Date" />
+          <ScalarProperty Name="Delete_By" ColumnName="Delete_By" />
+          <ScalarProperty Name="Edit_Date" ColumnName="Edit_Date" />
+          <ScalarProperty Name="Edit_By" ColumnName="Edit_By" />
+          <ScalarProperty Name="Create_Date" ColumnName="Create_Date" />
+          <ScalarProperty Name="Create_By" ColumnName="Create_By" />
+          <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="CashTookDate" ColumnName="CashTookDate" />
+          <ScalarProperty Name="ReceivedDate" ColumnName="ReceivedDate" />
+          <ScalarProperty Name="BankDetails" ColumnName="BankDetails" />
+          <ScalarProperty Name="ChequeNo" ColumnName="ChequeNo" />
+          <ScalarProperty Name="TableHeadId" ColumnName="TableHeadId" />
+          <ScalarProperty Name="TableName" ColumnName="TableName" />
+          <ScalarProperty Name="RowId" ColumnName="RowId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="TblCompanies">
       <EntityTypeMapping TypeName="AuditSystemModel.TblCompany">
         <MappingFragment StoreEntitySet="TblCompany">
@@ -283,6 +328,7 @@
     <EntitySetMapping Name="TblInvoiceHeads">
       <EntityTypeMapping TypeName="AuditSystemModel.TblInvoiceHead">
         <MappingFragment StoreEntitySet="TblInvoiceHead">
+          <ScalarProperty Name="BalanceAmount" ColumnName="BalanceAmount" />
           <ScalarProperty Name="Delete_Date" ColumnName="Delete_Date" />
           <ScalarProperty Name="Delete_By" ColumnName="Delete_By" />
           <ScalarProperty Name="Edit_Date" ColumnName="Edit_Date" />
@@ -657,6 +703,61 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="TblReceipts">
+      <EntityTypeMapping TypeName="AuditSystemModel.TblReceipt">
+        <MappingFragment StoreEntitySet="TblReceipt">
+          <ScalarProperty Name="Delete_Date" ColumnName="Delete_Date" />
+          <ScalarProperty Name="Delete_By" ColumnName="Delete_By" />
+          <ScalarProperty Name="Edit_Date" ColumnName="Edit_Date" />
+          <ScalarProperty Name="Edit_By" ColumnName="Edit_By" />
+          <ScalarProperty Name="Create_Date" ColumnName="Create_Date" />
+          <ScalarProperty Name="Create_By" ColumnName="Create_By" />
+          <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+          <ScalarProperty Name="CancelDate" ColumnName="CancelDate" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="PaymentType" ColumnName="PaymentType" />
+          <ScalarProperty Name="NoNTaxAmount" ColumnName="NoNTaxAmount" />
+          <ScalarProperty Name="ReceiptAmount" ColumnName="ReceiptAmount" />
+          <ScalarProperty Name="Fk_CompanyId" ColumnName="Fk_CompanyId" />
+          <ScalarProperty Name="Narration" ColumnName="Narration" />
+          <ScalarProperty Name="Fk_CustomerId" ColumnName="Fk_CustomerId" />
+          <ScalarProperty Name="Fk_WorkGroupId" ColumnName="Fk_WorkGroupId" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="ReceiptNo" ColumnName="ReceiptNo" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TblReceiptBodydeatils">
+      <EntityTypeMapping TypeName="AuditSystemModel.TblReceiptBodydeatil">
+        <MappingFragment StoreEntitySet="TblReceiptBodydeatils">
+          <ScalarProperty Name="PaymentAmount" ColumnName="PaymentAmount" />
+          <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+          <ScalarProperty Name="Edit_Date" ColumnName="Edit_Date" />
+          <ScalarProperty Name="Edit_By" ColumnName="Edit_By" />
+          <ScalarProperty Name="Delete_Date" ColumnName="Delete_Date" />
+          <ScalarProperty Name="Delete_By" ColumnName="Delete_By" />
+          <ScalarProperty Name="Create_Date" ColumnName="Create_Date" />
+          <ScalarProperty Name="Create_By" ColumnName="Create_By" />
+          <ScalarProperty Name="BalanceAmount" ColumnName="BalanceAmount" />
+          <ScalarProperty Name="GrandAmount" ColumnName="GrandAmount" />
+          <ScalarProperty Name="Fk_InvoiceId" ColumnName="Fk_InvoiceId" />
+          <ScalarProperty Name="Fk_ReceiptId" ColumnName="Fk_ReceiptId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TblReceiptTempInvoices">
+      <EntityTypeMapping TypeName="AuditSystemModel.TblReceiptTempInvoice">
+        <MappingFragment StoreEntitySet="TblReceiptTempInvoice">
+          <ScalarProperty Name="RowId" ColumnName="RowId" />
+          <ScalarProperty Name="Create_By" ColumnName="Create_By" />
+          <ScalarProperty Name="InvoiceId" ColumnName="InvoiceId" />
+          <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="TblSectorMasters">
       <EntityTypeMapping TypeName="AuditSystemModel.TblSectorMaster">
         <MappingFragment StoreEntitySet="TblSectorMaster">
@@ -980,6 +1081,7 @@
           <ScalarProperty Name="TotalReceivedAmount" ColumnName="TotalReceivedAmount" />
           <ScalarProperty Name="ValueVAT" ColumnName="ValueVAT" />
           <ScalarProperty Name="ValueNBT" ColumnName="ValueNBT" />
+          <ScalarProperty Name="BalanceAmount" ColumnName="BalanceAmount" />
           <ScalarProperty Name="TotalAmount" ColumnName="TotalAmount" />
           <ScalarProperty Name="PostingDate" ColumnName="PostingDate" />
           <ScalarProperty Name="LastYearAmount" ColumnName="LastYearAmount" />
@@ -1271,6 +1373,34 @@
           <ScalarProperty Name="Fk_DepartmentIdOne" ColumnName="Fk_DepartmentIdOne" />
           <ScalarProperty Name="InvoiceNoProforma" ColumnName="InvoiceNoProforma" />
           <ScalarProperty Name="Fk_CompanyId" ColumnName="Fk_CompanyId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="VW_Receipts">
+      <EntityTypeMapping TypeName="AuditSystemModel.VW_Receipts">
+        <MappingFragment StoreEntitySet="VW_Receipts">
+          <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+          <ScalarProperty Name="WorkGroupName" ColumnName="WorkGroupName" />
+          <ScalarProperty Name="CustomerName" ColumnName="CustomerName" />
+          <ScalarProperty Name="Delete_Date" ColumnName="Delete_Date" />
+          <ScalarProperty Name="Delete_By" ColumnName="Delete_By" />
+          <ScalarProperty Name="Edit_Date" ColumnName="Edit_Date" />
+          <ScalarProperty Name="Edit_By" ColumnName="Edit_By" />
+          <ScalarProperty Name="Create_Date" ColumnName="Create_Date" />
+          <ScalarProperty Name="Create_By" ColumnName="Create_By" />
+          <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+          <ScalarProperty Name="CancelDate" ColumnName="CancelDate" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="PaymentType" ColumnName="PaymentType" />
+          <ScalarProperty Name="NoNTaxAmount" ColumnName="NoNTaxAmount" />
+          <ScalarProperty Name="ReceiptAmount" ColumnName="ReceiptAmount" />
+          <ScalarProperty Name="Fk_CompanyId" ColumnName="Fk_CompanyId" />
+          <ScalarProperty Name="Narration" ColumnName="Narration" />
+          <ScalarProperty Name="Fk_CustomerId" ColumnName="Fk_CustomerId" />
+          <ScalarProperty Name="Fk_WorkGroupId" ColumnName="Fk_WorkGroupId" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="ReceiptNo" ColumnName="ReceiptNo" />
           <ScalarProperty Name="Id" ColumnName="Id" />
         </MappingFragment>
       </EntityTypeMapping>

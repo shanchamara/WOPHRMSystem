@@ -241,7 +241,7 @@ namespace WOPHRMSystem.Controllers
                         IsPartnerOneComfirm = masterModel.IsPartnerOneComfirm,
                         ManagerOneComfirmDate = masterModel.ManagerOneComfirmDate,
                         InvoiceNoProforma = masterModel.InvoiceNoProforma,
-                        
+
                     };
                     return Json(_ClientService.Update(tbl));
                 }
@@ -915,6 +915,19 @@ namespace WOPHRMSystem.Controllers
             });
         }
 
-        #endregion 
+        #endregion
+
+
+        #region Print Invoice  
+
+
+        [HttpGet]
+        public ActionResult ReadyToPrintInvoice()
+        {
+            var dt = _ClientService.GetAllReadyToPrintInvoice();
+            return View(dt);
+        }
+
+        #endregion
     }
 }

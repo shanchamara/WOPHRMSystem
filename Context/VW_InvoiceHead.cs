@@ -45,6 +45,7 @@ namespace WOPHRMSystem.Context
         public Nullable<decimal> LastYearAmount { get; set; }
         public Nullable<System.DateTime> PostingDate { get; set; }
         public Nullable<decimal> TotalAmount { get; set; }
+        public Nullable<decimal> BalanceAmount { get; set; }
         public Nullable<decimal> ValueNBT { get; set; }
         public Nullable<decimal> ValueVAT { get; set; }
         public Nullable<decimal> TotalReceivedAmount { get; set; }

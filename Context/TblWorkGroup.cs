@@ -18,6 +18,7 @@ namespace WOPHRMSystem.Context
         {
             this.TblInvoiceHeads = new HashSet<TblInvoiceHead>();
             this.TblProformaInvoiceHeads = new HashSet<TblProformaInvoiceHead>();
+            this.TblReceipts = new HashSet<TblReceipt>();
             this.TblWorkTypes = new HashSet<TblWorkType>();
         }
     
@@ -35,6 +36,7 @@ namespace WOPHRMSystem.Context
     
         public virtual ICollection<TblInvoiceHead> TblInvoiceHeads { get; set; }
         public virtual ICollection<TblProformaInvoiceHead> TblProformaInvoiceHeads { get; set; }
+        public virtual ICollection<TblReceipt> TblReceipts { get; set; }
         public virtual ICollection<TblWorkType> TblWorkTypes { get; set; }
     }
 }

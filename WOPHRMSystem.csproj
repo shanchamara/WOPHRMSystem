@@ -251,6 +251,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Model1.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Context\TblChequeDetail.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context\TblChequeTempDetail.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Context\TblCompany.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -347,6 +353,15 @@
     <Compile Include="Context\TblProformaInvoiceHead.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Context\TblReceipt.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context\TblReceiptBodydeatil.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context\TblReceiptTempInvoice.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Context\TblSectorMaster.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -416,6 +431,9 @@
     <Compile Include="Context\VW_ProformaInvoiceHead.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Context\VW_Receipts.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Context\VW_SectorMaster.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -427,6 +445,7 @@
     <Compile Include="Controllers\DesignationController.cs" />
     <Compile Include="Controllers\EmployeeController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ReceiptController.cs" />
     <Compile Include="Controllers\InvoiceHeadController.cs" />
     <Compile Include="Controllers\JobMasterController.cs" />
     <Compile Include="Controllers\JobTransactionController.cs" />
@@ -442,6 +461,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helps\CommonResources.cs" />
+    <Compile Include="Models\ChequeDetailsModel.cs" />
     <Compile Include="Models\CompanyModel.cs" />
     <Compile Include="Models\CustomerGroupModel.cs" />
     <Compile Include="Models\CustomerModel.cs" />
@@ -472,6 +492,7 @@
     <Compile Include="Models\NonEffectiveEmployeeModel.cs" />
     <Compile Include="Models\InvoiceHeadModel.cs" />
     <Compile Include="Models\ProformaInvoiceHeadModel.cs" />
+    <Compile Include="Models\ReceiptModel.cs" />
     <Compile Include="Models\SectorMasterModel.cs" />
     <Compile Include="Models\SiteSettingModel.cs" />
     <Compile Include="Models\TitleModel.cs" />
@@ -490,6 +511,7 @@
     <Compile Include="Services\GradeMasterServices.cs" />
     <Compile Include="Services\InternationalReferalMasterServices.cs" />
     <Compile Include="Services\IntroductionMasterServices.cs" />
+    <Compile Include="Services\ReceiptServices.cs" />
     <Compile Include="Services\InvoiceHeadServices.cs" />
     <Compile Include="Services\InvoiceNarrationMasterServices.cs" />
     <Compile Include="Services\InvoiceShortNarrationMasterServices.cs" />
@@ -2711,6 +2733,14 @@
     <Content Include="Views\Report\ProformaInvoiceReportView.cshtml" />
     <Content Include="Views\Report\InvoiceReportView.cshtml" />
     <Content Include="Views\Report\TAXInvoiceReportView.cshtml" />
+    <Content Include="Views\ProformaInvoiceHead\ReadyToPrintInvoice.cshtml" />
+    <Content Include="Views\InvoiceHead\ReadyToPrintSVATInvoice.cshtml" />
+    <Content Include="Views\InvoiceHead\ReadyToPrintVATInvoice.cshtml" />
+    <Content Include="Views\Receipt\Index.cshtml" />
+    <Content Include="Views\Receipt\Create.cshtml" />
+    <Content Include="Views\Receipt\GetCustomerrWiseInvoices.cshtml" />
+    <Content Include="Views\Receipt\ViewSelectedInvoices.cshtml" />
+    <Content Include="Views\Receipt\ReceiptChequeList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

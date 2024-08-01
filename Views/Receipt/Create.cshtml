@@ -1,0 +1,688 @@
+﻿@model  WOPHRMSystem.Models.ReceiptModel
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout1.cshtml";
+}
+
+<!-- daterange picker -->
+<link rel="stylesheet" href="~/plugins/daterangepicker/daterangepicker.css">
+<!-- iCheck for checkboxes and radio inputs -->
+<link rel="stylesheet" href="~/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+<!-- Bootstrap Color Picker -->
+<link rel="stylesheet" href="~/plugins/bootstrap-colorpicker/css/bootstrap-colorpicker.min.css">
+<!-- Tempusdominus Bootstrap 4 -->
+<link rel="stylesheet" href="~/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
+<!-- Select2 -->
+<link rel="stylesheet" href="~/plugins/select2/css/select2.min.css">
+<link rel="stylesheet" href="~/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
+<!-- Bootstrap4 Duallistbox -->
+<link rel="stylesheet" href="~/plugins/bootstrap4-duallistbox/bootstrap-duallistbox.min.css">
+<!-- BS Stepper -->
+<link rel="stylesheet" href="~/plugins/bs-stepper/css/bs-stepper.min.css">
+<!-- dropzonejs -->
+<link rel="stylesheet" href="~/plugins/dropzone/min/dropzone.min.css">
+
+<div class="content-wrapper disable-height">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>Add New Receipt</h1>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item">Home</li>
+                        <li class="breadcrumb-item active"><a href="@Url.Action("Index","Receipt")">List Of Receipts </a></li>
+                    </ol>
+                </div>
+            </div>
+        </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+
+                <!-- /.col -->
+            </div>
+            <!-- /.row -->
+        </div>
+        <!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+
+                    <!-- /.card -->
+                    <div class="card">
+                        @*<div class="card-header">
+                                <h3 class="card-title"></h3>
+                            </div>*@
+                        <!-- /.card-header -->
+                        <div class="card-body">
+                            <div class="card card-info">
+                                <div class="card-header">
+                                    <h3 class="card-title">Details</h3>
+                                </div>
+
+                                @using (Html.BeginForm("", "", FormMethod.Post, new { role = "form", enctype = "multipart/form-data", id = "quickForm", @autocomplete = "off" }))
+                                {
+                                    <div class="card-body">
+
+                                        <div class="row">
+
+                                            <div class="col-lg-3">
+                                                <div class="mb-3">
+                                                    <div class="form-group">
+                                                        <label for="exampleInputEmail1">Receipt No</label>
+
+                                                        @Html.EditorFor(model => model.ReceiptNo, new { htmlAttributes = new { @class = "form-control form-control-sm", placeholder = "", required = "required", @ReadOnly = "ReadOnly" } })
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6">
+
+                                                <div class="mb-4">
+                                                    <div class="form-group">
+                                                        <label for="exampleInputEmail1">Date</label>
+                                                        <div class="input-group date" id="reservationdate" data-target-input="nearest">
+                                                            @Html.EditorFor(model => model.Date, new { htmlAttributes = new { @class = "form-control form-control-sm datetimepicker-input", data_target = "#reservationdate" } })
+
+                                                            @*<input type="text" name="Date" class="form-control form-control-sm datetimepicker-input" data-target="#reservationdate" />*@
+                                                            <div class="input-group-append" data-target="#reservationdate" data-toggle="datetimepicker">
+                                                                <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3">
+                                                <div class="mb-3">
+                                                    <div class="form-group">
+                                                        <label for="exampleInputEmail1">Company Name</label>
+
+                                                        @Html.DropDownListFor(model => model.Fk_CompanyId, Model.Companylist, "Select", htmlAttributes: new { @class = "form-control form-control-sm", required = "required" })
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+
+                                            <div class="col-lg-6">
+
+                                                <div class="mb-4">
+                                                    <div class="form-group">
+                                                        <label for="exampleInputEmail1">Group </label>
+
+                                                        @Html.DropDownListFor(model => model.Fk_WorkGroupId, Model.WorkGroupList, "Select", htmlAttributes: new { @class = "form-control form-control-sm", required = "required" })
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div class="mb-3">
+                                                    <div class="form-group">
+                                                        <label for="exampleInputEmail1">Receipt Amount</label>
+
+                                                        @Html.EditorFor(model => model.ReceiptAmount, new
+                                                        {
+                                                            htmlAttributes = new
+                                                            {
+                                                                @class = "form-control form-control-sm",
+                                                                placeholder = "",
+                                                                required = "required",
+                                                                @aria_label = "Address",
+                                                       @type = "number",
+                                                       @min = "0"
+                                                   }
+                                                        })
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-lg-6">
+                                                <div class="mb-3">
+                                                    <div class="form-group">
+                                                        <label for="exampleInputEmail1">Customer Name</label>
+
+                                                        @Html.DropDownListFor(model => model.Fk_CustomerId, Model.CustomerList, "Select", htmlAttributes: new { @class = "form-control form-control-sm", id = "selectCustomer", required = "required", })
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6">
+
+                                                <div class="mb-4">
+                                                    <div class="form-group">
+                                                        <label for="basicpill-address-input">Non Tax Amount</label>
+                                                        @Html.EditorFor(model => model.NoNTaxAmount, new
+                                                        {
+                                                            htmlAttributes = new
+                                                            {
+                                                                @class = "form-control form-control-sm",
+                                                                placeholder = "",
+                                                                @type = "number",
+                                                                @min = "0"
+                                                            }
+                                                        })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-lg-6">
+                                                <div class="mb-3">
+                                                    <div class="form-group">
+                                                        <label for="exampleInputEmail1">Narration</label>
+
+                                                        @Html.EditorFor(model => model.Narration, new { htmlAttributes = new { @class = "form-control form-control-sm", placeholder = "", required = "required" } })
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3">
+
+                                                <div class="mb-4" style="margin: 31px 0px 0px 0px;">
+                                                    <div class="form-group">
+
+
+                                                        <button type="button" onclick="GetCustomerWiseInvoices()" class="btn btn-success waves-effect waves-light mb-3 btn-sm"> Load Invoices</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3">
+                                                <div class="mb-3">
+                                                    <div class="form-group">
+                                                        <label for="exampleInputEmail1">Payment Method</label>
+
+                                                        @Html.DropDownListFor(model => model.PaymentType, new SelectList(new List<Object>
+                                                         {
+
+                                                         new { value = "" , text = "Select "  },
+                                                         new { value = "Cash" , text = "Cash"  },
+                                                         new { value = "Cheque" , text = "Cheque"  },
+
+                                                         }, "value", "text", "Select Payment Type"), htmlAttributes: new { @class = "form-control form-control-sm", id = "paymentType" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-lg-12">
+
+                                                <div id="InvoiceBodySelected">
+
+                                                </div>
+                                                <span id="errorInvoiceList" class="text-danger sm"></span>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-lg-12">
+
+                                                <div id="ChequeSelected">
+
+                                                </div>
+
+                                                <span id="errorChequeList" class="text-danger sm"></span>
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+
+
+
+
+
+
+                                    <!-- /.card-body -->
+                                    <div class="card-footer">
+                                        <div class="col-12">
+
+                                            <button type="submit" class="btn btn-primary float-right">Submit</button>
+
+                                        </div>
+
+                                    </div>
+                                }
+
+
+                            </div>
+                        </div>
+                        <!-- /.card-body -->
+                    </div>
+
+                    <!-- /.card -->
+                </div>
+                <!-- /.col -->
+            </div>
+            <!-- /.row -->
+        </div>
+        <!-- /.container-fluid -->
+    </section>
+</div>
+
+@section scripts {
+
+    <!-- jQuery -->
+    <script src="~/plugins/jquery/jquery.min.js"></script>
+    <!-- Bootstrap 4 -->
+    <script src="~/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- Select2 -->
+    <script src="~/plugins/select2/js/select2.full.min.js"></script>
+    <!-- Bootstrap4 Duallistbox -->
+    <script src="~/plugins/bootstrap4-duallistbox/jquery.bootstrap-duallistbox.min.js"></script>
+    <!-- InputMask -->
+    <script src="~/plugins/moment/moment.min.js"></script>
+    <script src="~/plugins/inputmask/jquery.inputmask.min.js"></script>
+    <!-- date-range-picker -->
+    <script src="~/plugins/daterangepicker/daterangepicker.js"></script>
+    <!-- jquery-validation -->
+    <script src="~/plugins/jquery-validation/jquery.validate.min.js"></script>
+    <script src="~/plugins/jquery-validation/additional-methods.min.js"></script>
+    <!-- bootstrap color picker -->
+    <script src="~/plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js"></script>
+    <!-- Tempusdominus Bootstrap 4 -->
+    <script src="~/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
+    <!-- Bootstrap Switch -->
+    <script src="~/plugins/bootstrap-switch/js/bootstrap-switch.min.js"></script>
+    <!-- BS-Stepper -->
+    <script src="~/plugins/bs-stepper/js/bs-stepper.min.js"></script>
+    <!-- dropzonejs -->
+    <script src="~/plugins/dropzone/min/dropzone.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src="~/dist/js/adminlte.min.js"></script>
+    <!-- AdminLTE for demo purposes -->
+    <script src="~/dist/js/demo.js"></script>
+
+
+    <script>
+        $(function () {
+            //Initialize Select2 Elements
+            $('.select2').select2()
+
+            //Initialize Select2 Elements
+            $('.select2bs4').select2({
+                theme: 'bootstrap4'
+            })
+
+            //Datemask dd/mm/yyyy
+            $('#datemask').inputmask('dd/mm/yyyy', { 'placeholder': 'dd/mm/yyyy' })
+            //Datemask2 mm/dd/yyyy
+            $('#datemask2').inputmask('mm/dd/yyyy', { 'placeholder': 'mm/dd/yyyy' })
+            //Money Euro
+            $('[data-mask]').inputmask()
+
+            //Date picker
+            $('#reservationdate').datetimepicker({
+                format: 'L',
+                maxDate: moment() // Disable future dates
+            });
+
+            //Date and time picker
+            $('#reservationdatetime').datetimepicker({ icons: { time: 'far fa-clock' } });
+
+            //Date range picker
+            $('#reservation').daterangepicker()
+            //Date range picker with time picker
+            $('#reservationtime').daterangepicker({
+                timePicker: true,
+                timePickerIncrement: 30,
+                locale: {
+                    format: 'MM/DD/YYYY hh:mm A'
+                }
+            })
+            //Date range as a button
+            $('#daterange-btn').daterangepicker(
+                {
+                    ranges: {
+                        'Today': [moment(), moment()],
+                        'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+                        'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+                        'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+                        'This Month': [moment().startOf('month'), moment().endOf('month')],
+                        'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+                    },
+                    startDate: moment().subtract(29, 'days'),
+                    endDate: moment()
+                },
+                function (start, end) {
+                    $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'))
+                }
+            )
+
+
+
+        })
+
+
+
+    </script>
+
+    <script>
+
+   var IsInvoice = false;
+   var IsCheque = false;
+
+    $(function () {
+        debugger
+
+        //$.validator.addMethod("totalAmountMatchesRowTotal", function (value, element) {
+        //    debugger
+        //    var rowTotalAmount = parseFloat($("[name='RowTotalAmount']").val()); // Adjust based on your actual field name
+        //    var totalAmount = parseFloat(value);
+        //    return totalAmount === rowTotalAmount;
+        //}, function (params, element) {
+        //    // Generate the error message dynamically
+        //    return "Total Amount must match Row Total Amount (" + $("[name='RowTotalAmount']").val() + ").";
+        //});
+        $.validator.setDefaults({
+            submitHandler: function () {
+                //alert("Form successful submitted!");
+                var data = $('#quickForm').serialize();
+
+                var paytype = document.getElementById("paymentType").value;
+
+                if (IsInvoice === false) {
+                    $('#errorInvoiceList').html("Please add the Invoice");
+                } if (IsCheque === false && paytype === "Cheque") {
+                    $('#errorChequeList').html("Please add the Cheque Value");
+                } if (IsInvoice === true) {
+                    $('#errorInvoiceList').html("");
+                }
+                if (IsCheque === true) {
+                    $('#errorChequeList').html("");
+                }
+                if (IsInvoice === true && paytype === "Cash") {
+                    PostReceiptInsert(data);
+                }
+                if (IsInvoice === true && IsCheque === true) {
+                    $('#errorInvoiceList').html("");
+                    PostReceiptInsert(data);
+                }
+            }
+        });
+
+        $.validator.addMethod("totalAmountMatchesRowTotal", function (value, element) {
+            debugger;
+            var paytype = $("#paymentType").val();
+            if (paytype === "Cheque") {
+                var rowTotalAmount = parseFloat($("[name='RowTotalAmount']").val()); // Adjust based on your actual field name
+                var totalAmount = parseFloat(value);
+                return totalAmount === rowTotalAmount;
+            }
+            return true; // Skip validation if payment type is not Cheque
+        }, function (params, element) {
+            debugger;
+            // Generate the error message dynamically
+            return "Total Amount must match Row Total Amount (" + $("[name='RowTotalAmount']").val() + ").";
+        });
+
+        $('#quickForm').validate({
+            rules: {
+                ReceiptNo: {
+                    required: true,
+                },
+                Date: {
+                    required: true,
+                    date: true
+                },
+                Fk_WorkGroupId: {
+                    required: true,
+                    digits: true
+                },
+                Fk_CustomerId: {
+                    required: true,
+                    digits: true
+                },
+                Narration: {
+                    required: true,
+                },
+                Fk_CompanyId: {
+                    required: true,
+                    digits: true
+                },
+                ReceiptAmount: {
+                    required: true,
+                    number: true,
+                    totalAmountMatchesRowTotal: true // Use the custom method here
+                },
+                NoNTaxAmount: {
+                    required: true,
+                    number: true
+                },
+                PaymentType: {
+                    required: true,
+                },
+                Fk_InvoiceHeadId: {
+                    required: true,
+                    digits: true
+                }
+            },
+            messages: {
+                ReceiptNo: {
+                    required: "Please enter a receipt number",
+                },
+                Date: {
+                    required: "Please enter a date",
+                    date: "Please enter a valid date"
+                },
+                Fk_WorkGroupId: {
+                    required: "Please select a work group",
+                    digits: "Work group ID should be a number"
+                },
+                Fk_CustomerId: {
+                    required: "Please select a customer",
+                    digits: "Customer ID should be a number"
+                },
+                Narration: {
+                    required: "Please provide a narration",
+                },
+                Fk_CompanyId: {
+                    required: "Please select a company",
+                    digits: "Company ID should be a number"
+                },
+                ReceiptAmount: {
+                    required: "Please enter a receipt amount",
+                    number: "Please enter a valid amount",
+                    totalAmountMatchesRowTotal: function () {
+                        return "When the payment type is Cheque, the Cheque value must be equal to the Receipt amount. Please ensure these amounts match and try again.";
+                    }
+                },
+                NoNTaxAmount: {
+                    required: "Please enter a non-tax amount",
+                    number: "Please enter a valid amount"
+                },
+                PaymentType: {
+                    required: "Please select a payment type",
+                },
+                Fk_InvoiceHeadId: {
+                    required: "Please select an invoice head",
+                    digits: "Invoice head ID should be a number"
+                }
+            },
+            errorElement: 'span',
+            errorPlacement: function (error, element) {
+                error.addClass('invalid-feedback');
+                element.closest('.form-group').append(error);
+            },
+            highlight: function (element, errorClass, validClass) {
+                $(element).addClass('is-invalid');
+            },
+            unhighlight: function (element, errorClass, validClass) {
+                $(element).removeClass('is-invalid');
+            },
+            invalidHandler: function (event, validator) {
+                debugger;
+                // Handle invalid form submission with Swal alert
+                var errorMessage = "";
+                if (!validator.valid() && validator.errorList.length > 0) {
+                    // Check if the error is specifically about Total Amount and Row Total Amount mismatch
+                    var totalAmountError = validator.errorList.find(function (error) {
+                        return error.method === 'totalAmountMatchesRowTotal';
+                    });
+                    if (totalAmountError) {
+                        errorMessage = totalAmountError.message;
+                    }
+                }
+                if (errorMessage) {
+                    Swal.fire({
+                        title: 'Validation Error',
+                        text: errorMessage,
+                        icon: 'error',
+                        confirmButtonText: 'OK'
+                    });
+                }
+            }
+        });
+
+        $.validator.addMethod("faxPattern", function (value, element) {
+            return this.optional(element) || /^[+]?[0-9\s-]+$/.test(value);
+        }, "Please enter a valid fax number.");
+    });
+
+    $.validator.addMethod("faxPattern", function(value, element) {
+    return this.optional(element) || /^[+]?[0-9\s-]+$/.test(value);
+    }, "Please enter a valid fax number.");
+
+
+
+
+
+        window.addEventListener('load', function () {
+
+            GetSelectedInvoices();
+            GetSelectedCheque();
+        });
+
+
+        var GetCustomerWiseInvoices = function () {
+
+            var customerId = document.getElementById("selectCustomer").value;
+            $.ajax({
+                type: "GET",
+                url: "/Receipt/GetCustomerrWiseInvoices",
+                data: { id: customerId },
+
+                success: function (result) {
+
+                    $("#staticBackdropBody").html(result);
+                    $("#staticBackdrop").modal("show");
+                    document.getElementById('staticBackdrop').className = "modal fade bs-example-modal-xl show";
+                    document.getElementById('style').className = "modal-dialog modal-xl";
+                    document.getElementById('staticBackdropLabel').style.textAlign = "center";
+                    document.getElementById('Savebutton').style.display = 'none';
+
+                    $('#staticBackdropLabel').html(" Invoice's List ");
+
+                },
+            })
+        }
+
+
+        var GetSelectedInvoices = function () {
+
+            $.ajax({
+                type: "GET",
+                url: "/Receipt/ViewSelectedInvoices",
+                //data: { Createby: 'User' },
+
+                success: function (result) {
+
+                    $("#InvoiceBodySelected").html(result);
+                },
+            })
+        }
+
+
+        var GetSelectedCheque = function () {
+
+            $.ajax({
+                type: "GET",
+                url: "/Receipt/ReceiptChequeList",
+                //data: { Createby: 'User' },
+
+                success: function (result) {
+
+                    $("#ChequeSelected").html(result);
+                },
+            })
+        }
+
+
+    var PostReceiptInsert = function (model) {
+
+        $.ajax({
+            type: "Post",
+            url: "/Receipt/Create",
+            data: model,
+
+            success: function (result) {
+                Swal.fire({
+
+                    icon: result.Status,
+                    title: result.Status,
+                    text: result.Text
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = "@Url.Action("Index", "Receipt")"
+                    }
+                    else {
+                        window.location.href = "@Url.Action("Index", "Receipt")"
+                    }
+                })
+            },
+        })
+
+        }
+
+
+
+
+
+
+        // Function to get the selected value from the dropdown
+        function getSelectedValue1() {
+            // Get the dropdown element by its ID
+            var selectElement = document.getElementById("paymentType");
+            debugger
+            // Get the selected value
+            var selectedValue = selectElement.value;
+
+            if (selectedValue == "Cash") {
+                document.getElementById("ChequeSelected").style.visibility = "hidden";
+            } else {
+                document.getElementById("ChequeSelected").style.visibility = "";
+            }
+            // Log or use the selected value
+            //console.log("Selected value:", selectedValue);
+
+            // You can return the value if needed
+            return selectedValue;
+        }
+
+        document.getElementById("paymentType").addEventListener("change", function () {
+            var selectedValue = getSelectedValue1();
+            // alert("The selected value is: " + selectedValue);
+        });
+
+
+
+
+    </script>
+}
+

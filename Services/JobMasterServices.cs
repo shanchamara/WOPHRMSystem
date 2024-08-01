@@ -196,7 +196,7 @@ namespace WOPHRMSystem.Services
                     _context.SaveChanges();
 
 
-                    var location = _context.TblJobMasterLocationTemps.Where(d => d.CustomerId.Equals(obj.Fk_CustomerId) && d.Create_By.Equals(obj.Create_By)).ToList();
+                    var location = _context.TblJobMasterLocationTemps.Where(d => d.CustomerId.Equals(obj.Fk_CustomerId) && d.Create_By.Equals(obj.Edit_By)).ToList();
                     foreach (var s in location)
                     {
                         var Editlocation = _context.TblJobMasterLocations.SingleOrDefault(d => d.FK_LocationId.Equals(s.FK_LocationId) && d.Fk_JobMasterId.Equals(obj.Id));
@@ -204,8 +204,8 @@ namespace WOPHRMSystem.Services
                         {
                             TblJobMasterLocation tblJobMasterLocation = new TblJobMasterLocation
                             {
-                                Create_By = obj.Create_By,
-                                Create_Date = obj.Create_Date,
+                                Edit_By = obj.Edit_By,
+                                Edit_Date = obj.Create_Date,
                                 Fk_JobMasterId = obj.Id,
                                 IsDelete = false,
                                 FK_LocationId = s.FK_LocationId,
@@ -218,7 +218,7 @@ namespace WOPHRMSystem.Services
                         {
                             TblJobMasterLocation tblJobMasterLocation = new TblJobMasterLocation
                             {
-                                Create_By = obj.Create_By,
+                                Create_By = obj.Edit_By,
                                 Create_Date = obj.Create_Date,
                                 Fk_JobMasterId = obj.Id,
                                 IsDelete = false,
@@ -230,7 +230,7 @@ namespace WOPHRMSystem.Services
 
                     }
 
-                    var partners = _context.TblJobMasterAssignTemps.Where(d => d.Create_By.Equals(obj.Create_By)).ToList();
+                    var partners = _context.TblJobMasterAssignTemps.Where(d => d.Create_By.Equals(obj.Edit_By)).ToList();
                     foreach (var s in partners)
                     {
                         //var editpartners = _context.TblJobMasterPartners.SingleOrDefault(d => d.Fk_JobMasterId.Equals(obj.Id) && d.Id.Equals(s.RowId));
@@ -238,8 +238,8 @@ namespace WOPHRMSystem.Services
                         //{
                         TblJobMasterPartner tblJobMasterPartner = new TblJobMasterPartner
                         {
-                            Create_By = obj.Create_By,
-                            Create_Date = obj.Create_Date,
+                            Edit_By = obj.Edit_By,
+                            Edit_Date = obj.Create_Date,
                             Fk_JobMasterId = obj.Id,
                             IsDelete = false,
                             TypeOfTable = s.TypeOftable,

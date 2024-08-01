@@ -6,7 +6,9 @@ namespace WOPHRMSystem.Models
 {
     public class InvoiceHeadModel
     {
+        public Nullable<decimal> BalanceAmount { get; set; }
         public string Address { get; set; }
+        public string InvoiceNoANDDocNo { get; set; }
         public string VatNo { get; set; }
         public string SVatNo { get; set; }
         public int Id { get; set; }

@@ -126,7 +126,7 @@ namespace WOPHRMSystem.Controllers
                         DueDate = masterModel.DueDate,
                         StartDate = masterModel.StartDate,
                         JobCode = masterModel.JobCode,
-                        Create_By = "User",
+                        Edit_By = "User",
                         IsActive = masterModel.IsActive,
                         Create_Date = new CommonResources().LocalDatetime().Date,
                         Id = masterModel.Id,
