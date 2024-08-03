@@ -27,6 +27,7 @@ namespace WOPHRMSystem.Context
         public bool IsActive { get; set; }
         public Nullable<System.DateTime> CancelDate { get; set; }
         public bool IsDelete { get; set; }
+        public bool IsPrint { get; set; }
         public string Create_By { get; set; }
         public System.DateTime Create_Date { get; set; }
         public string Edit_By { get; set; }

@@ -1,0 +1,153 @@
+﻿@model IEnumerable<WOPHRMSystem.Models.InvoiceHeadModel>
+
+<!-- DataTables -->
+<link rel="stylesheet" href="~/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+<link rel="stylesheet" href="~/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+<link rel="stylesheet" href="~/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
+
+<style>
+    .disable-height {
+        height: auto !important;
+    }
+
+    .list-group {
+        max-height: 400px;
+        margin-bottom: 10px;
+        overflow-x: hidden;
+        -webkit-overflow-scrolling: touch;
+    }
+</style>
+@{
+    int Rows = 1;
+}
+
+
+
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+
+            <!-- /.card -->
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Selected Invoice's</h3>
+                </div>
+                <div class="list-group">
+                    <table id="example1" class="table table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th style="display:none;">Id</th> <!-- Hidden Id column -->
+                                <th class="col-2 form-control-sm">Customer Name</th>
+                                <th class="col-2 form-control-sm">Invoice No</th>
+                                <th class="col-2 form-control-sm">Job Code</th>
+                                <th class="col-2 form-control-sm">Doc No</th>
+                                <th class="col-2 form-control-sm">Total Amount</th>
+                                <th class="col-2 form-control-sm">VAT </th>
+                                <th class="col-2 form-control-sm">NBT</th>
+                                <th class="col-3 form-control-sm">Grand Amount</th>
+                                <th class="col-3 form-control-sm">Balance Amount</th>
+                                <th class="col-2 form-control-sm">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var s in Model)
+                            {
+                                <tr>
+                                    <td style="display:none;">@s.Id</td> <!-- Hidden Id column -->
+                                    <td>@s.CustomerName</td> <!-- Hidden Id column -->
+                                    <td class="form-control-sm">@s.InvoiceNo  </td>
+                                    <td class="form-control-sm">@s.JobCode  </td>
+                                    <td class="form-control-sm">@s.DocNo</td>
+                                    <td class="form-control-sm">@s.TotalAmount</td>
+                                    <td class="form-control-sm">@s.ValueVAT</td>
+                                    <td class="form-control-sm">@s.ValueNBT</td>
+                                    <td class="form-control-sm">@s.TotalReceivedAmount</td>
+                                    <td class="form-control-sm">@s.BalanceAmount</td>
+
+                                    <td class="col-2 project-actions text-right">
+                                        <a class="btn btn-danger btn-sm" onclick="PostDelete1('@s.Id')">
+                                            <i class="fas fa-trash"></i>
+                                        </a>
+
+                                    </td>
+                                </tr>
+                                Rows++;
+                            }
+
+
+                        </tbody>
+                    </table>
+                </div>
+                <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+        </div>
+        <!-- /.col -->
+    </div>
+    <!-- /.row -->
+</div>
+
+<script>
+
+
+
+    $(document).ready(function () {
+        $('.budgeted-hours').keydown(function (event) {
+            if (event.keyCode == 13) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+
+
+    var PostDelete1 = function (Id) {
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "Do you really want to Remove this Record?",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    type: "DELETE",
+                    url: "/Receipt/DeleteInvoice",
+                    data: { ID: Id },
+
+                    success: function (result) {
+                        Swal.fire({
+                            icon: result.Status,
+                            title: result.Status,
+                            text: result.Text
+                        }).then((result) => {
+                            $.ajax({
+                                type: "GET",
+                                url: "/Receipt/ViewSelectedInvoices",
+                                //data: { Createby: 'User' },
+
+                                success: function (result) {
+
+                                    $("#InvoiceBodySelected").html(result);
+                                },
+                            })
+                        });
+                    }
+                });
+            }
+        });
+    }
+
+
+
+
+
+
+
+
+
+</script>

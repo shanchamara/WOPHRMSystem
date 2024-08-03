@@ -682,6 +682,42 @@
 
 
 
+        // Function to get the selected value from the dropdown
+        function ChangeInvoiceList() {
+            // Get the dropdown element by its ID
+            var selectElement = document.getElementById("selectCustomer");
+            debugger
+            // Get the selected value
+            var selectedValue = selectElement.value;
+
+            GetCustomerWise()
+            // Log or use the selected value
+            //console.log("Selected value:", selectedValue);
+
+            // You can return the value if needed
+            return selectedValue;
+        }
+
+        document.getElementById("selectCustomer").addEventListener("change", function () {
+            var selectedValue = ChangeInvoiceList();
+            // alert("The selected value is: " + selectedValue);
+        });
+
+
+        var GetCustomerWise = function (id) {
+
+            $.ajax({
+                type: "GET",
+                url: "/Receipt/ClearSelectedInvoiceCustomerWise",
+                //data: { Createby: 'User' },
+
+                success: function (result) {
+
+                    $("#InvoiceBodySelected").html(result);
+                },
+            })
+        }
+
 
     </script>
 }

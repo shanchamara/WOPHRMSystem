@@ -16,6 +16,7 @@ namespace WOPHRMSystem.Context
     {
         public TblWorkGroup()
         {
+            this.TblGenaralReceipts = new HashSet<TblGenaralReceipt>();
             this.TblInvoiceHeads = new HashSet<TblInvoiceHead>();
             this.TblProformaInvoiceHeads = new HashSet<TblProformaInvoiceHead>();
             this.TblReceipts = new HashSet<TblReceipt>();
@@ -34,6 +35,7 @@ namespace WOPHRMSystem.Context
         public string Delete_By { get; set; }
         public Nullable<System.DateTime> Delete_Date { get; set; }
     
+        public virtual ICollection<TblGenaralReceipt> TblGenaralReceipts { get; set; }
         public virtual ICollection<TblInvoiceHead> TblInvoiceHeads { get; set; }
         public virtual ICollection<TblProformaInvoiceHead> TblProformaInvoiceHeads { get; set; }
         public virtual ICollection<TblReceipt> TblReceipts { get; set; }

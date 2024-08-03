@@ -19,5 +19,8 @@ namespace WOPHRMSystem.Context
         public int InvoiceId { get; set; }
         public string Create_By { get; set; }
         public int RowId { get; set; }
+        public Nullable<decimal> BalanceAmount { get; set; }
+        public Nullable<decimal> GrandAmount { get; set; }
+        public Nullable<decimal> PaymentAmount { get; set; }
     }
 }

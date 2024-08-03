@@ -16,6 +16,7 @@ namespace WOPHRMSystem.Context
     {
         public TblCustomer()
         {
+            this.TblGenaralReceipts = new HashSet<TblGenaralReceipt>();
             this.TblInvoiceBodies = new HashSet<TblInvoiceBody>();
             this.TblInvoiceHeads = new HashSet<TblInvoiceHead>();
             this.TblJobMasters = new HashSet<TblJobMaster>();
@@ -65,6 +66,7 @@ namespace WOPHRMSystem.Context
         public virtual TblIntroductionMaster TblIntroductionMaster { get; set; }
         public virtual TblLegalStatusMaster TblLegalStatusMaster { get; set; }
         public virtual TblSectorMaster TblSectorMaster { get; set; }
+        public virtual ICollection<TblGenaralReceipt> TblGenaralReceipts { get; set; }
         public virtual ICollection<TblInvoiceBody> TblInvoiceBodies { get; set; }
         public virtual ICollection<TblInvoiceHead> TblInvoiceHeads { get; set; }
         public virtual ICollection<TblJobMaster> TblJobMasters { get; set; }

@@ -251,6 +251,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Model1.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Context\TblAccount.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Context\TblChequeDetail.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -285,6 +288,9 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Context\TblEmployeeHourlyRate.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context\TblGenaralReceipt.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Context\TblGradeMaster.cs">
@@ -389,6 +395,9 @@
     <Compile Include="Context\VW_EmployeeJobTransaction.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Context\VW_GeneralReceipts.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Context\VW_GetJObActualValue.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -445,6 +454,7 @@
     <Compile Include="Controllers\DesignationController.cs" />
     <Compile Include="Controllers\EmployeeController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\GeneralReceiptController.cs" />
     <Compile Include="Controllers\ReceiptController.cs" />
     <Compile Include="Controllers\InvoiceHeadController.cs" />
     <Compile Include="Controllers\JobMasterController.cs" />
@@ -461,6 +471,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helps\CommonResources.cs" />
+    <Compile Include="Models\AccountModel.cs" />
     <Compile Include="Models\ChequeDetailsModel.cs" />
     <Compile Include="Models\CompanyModel.cs" />
     <Compile Include="Models\CustomerGroupModel.cs" />
@@ -499,6 +510,7 @@
     <Compile Include="Models\WorkGroupModel.cs" />
     <Compile Include="Models\WorkTypeModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\AccountServices.cs" />
     <Compile Include="Services\CompanyServices.cs" />
     <Compile Include="Services\CustomerGroupServices.cs" />
     <Compile Include="Services\CustomerServices.cs" />
@@ -511,6 +523,7 @@
     <Compile Include="Services\GradeMasterServices.cs" />
     <Compile Include="Services\InternationalReferalMasterServices.cs" />
     <Compile Include="Services\IntroductionMasterServices.cs" />
+    <Compile Include="Services\GeneralReceiptServices.cs" />
     <Compile Include="Services\ReceiptServices.cs" />
     <Compile Include="Services\InvoiceHeadServices.cs" />
     <Compile Include="Services\InvoiceNarrationMasterServices.cs" />
@@ -2741,6 +2754,12 @@
     <Content Include="Views\Receipt\GetCustomerrWiseInvoices.cshtml" />
     <Content Include="Views\Receipt\ViewSelectedInvoices.cshtml" />
     <Content Include="Views\Receipt\ReceiptChequeList.cshtml" />
+    <Content Include="Views\Receipt\Edit.cshtml" />
+    <Content Include="Views\GeneralReceipt\Create.cshtml" />
+    <Content Include="Views\GeneralReceipt\Edit.cshtml" />
+    <Content Include="Views\GeneralReceipt\Index.cshtml" />
+    <Content Include="Views\GeneralReceipt\ReceiptChequeList.cshtml" />
+    <Content Include="Views\Receipt\ClearSelectedInvoiceCustomerWise.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

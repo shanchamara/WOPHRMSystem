@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DocumentFormat.OpenXml.Drawing;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity.Migrations;
 using System.Linq;
@@ -104,7 +105,7 @@ namespace WOPHRMSystem.Services
                                 receiptAmount -= BalancePayAmount;
                             }
                             // Subtract the invoice amount from the receipt amount
-                            
+
 
 
 
@@ -169,7 +170,15 @@ namespace WOPHRMSystem.Services
                     }
                     _context.SaveChanges();
 
-                    var tempBody = _context.TblChequeTempDetails.Where(d => d.TableHeadId.Equals(obj.Id) && d.TableName.Equals("TblReceipt") && d.Create_By.Equals(obj.Create_By)).ToList();
+                    var CurrentInvoice = _context.TblReceiptBodydeatils.Where(d => d.Fk_ReceiptId == obj.Id && d.IsDelete.Equals(false)).ToList();
+                    foreach (var s in CurrentInvoice)
+                    {
+                        s.IsDelete = true;
+                        s.Delete_Date = new CommonResources().LocalDatetime().Date;
+                    }
+                    _context.SaveChanges();
+
+                    var tempBody = _context.TblChequeTempDetails.Where(d => d.TableName.Equals("TblReceipt") && d.Create_By.Equals(obj.Edit_By)).ToList();
 
                     foreach (var s in tempBody)
                     {
@@ -178,8 +187,8 @@ namespace WOPHRMSystem.Services
                         {
                             TblChequeDetail tbl = new TblChequeDetail
                             {
-                                Create_By = obj.Create_By,
-                                Create_Date = obj.Create_Date,
+                                Edit_By = obj.Edit_By,
+                                Edit_Date = obj.Edit_Date,
                                 IsDelete = false,
                                 TableName = s.TableName,
                                 Amount = s.Amount,
@@ -196,8 +205,8 @@ namespace WOPHRMSystem.Services
                         {
                             TblChequeDetail tbl = new TblChequeDetail
                             {
-                                Create_By = obj.Create_By,
-                                Create_Date = obj.Create_Date,
+                                Edit_By = obj.Edit_By,
+                                Edit_Date = obj.Edit_Date,
                                 IsDelete = false,
                                 TableName = s.TableName,
                                 Amount = s.Amount,
@@ -211,6 +220,71 @@ namespace WOPHRMSystem.Services
                         }
 
 
+                    }
+
+                    decimal receiptAmount = Convert.ToDecimal(obj.ReceiptAmount);
+
+                    var get = _context.TblReceiptTempInvoices.Where(d => d.CustomerId == obj.Fk_CustomerId && d.Create_By.Equals(obj.Edit_By)).OrderBy(d => d.Id).ToList();
+                    foreach (var record in get)
+                    {
+                        var getSingleInvoice = _context.TblInvoiceHeads.SingleOrDefault(d => d.Id == record.InvoiceId);
+
+                        decimal BalancePayAmount = Convert.ToDecimal(getSingleInvoice.BalanceAmount + record.PaymentAmount);
+
+                        if (receiptAmount > BalancePayAmount)
+                        {
+                            TblReceiptBodydeatil tbl = new TblReceiptBodydeatil
+                            {
+                                Edit_By = obj.Edit_By,
+                                Edit_Date = obj.Edit_Date,
+                                Fk_InvoiceId = record.InvoiceId,
+                                Fk_ReceiptId = obj.Id,
+                                GrandAmount = getSingleInvoice.TotalReceivedAmount,
+                                BalanceAmount = 0,
+                                PaymentAmount = BalancePayAmount,
+                            };
+                            _context.TblReceiptBodydeatils.Add(tbl);
+
+                            // Update Invoice Table 
+                            getSingleInvoice.BalanceAmount = 0;
+                            _context.SaveChanges();
+
+                            receiptAmount -= BalancePayAmount;
+                        }
+                        else
+                        {
+                            if (receiptAmount > 0)
+                            {
+
+
+                                // Create a receipt detail for the entire invoice amount
+                                TblReceiptBodydeatil tbl1 = new TblReceiptBodydeatil
+                                {
+                                    Edit_By = obj.Edit_By,
+                                    Edit_Date = obj.Edit_Date,
+                                    Fk_InvoiceId = record.InvoiceId,
+                                    Fk_ReceiptId = obj.Id,
+                                    GrandAmount = getSingleInvoice.TotalReceivedAmount,
+                                    BalanceAmount = BalancePayAmount - receiptAmount,
+                                    PaymentAmount = receiptAmount,
+                                };
+                                _context.TblReceiptBodydeatils.Add(tbl1);
+                            }
+                            getSingleInvoice.BalanceAmount = BalancePayAmount - receiptAmount;
+                            _context.SaveChanges();
+                            receiptAmount -= BalancePayAmount;
+                        }
+                        // Subtract the invoice amount from the receipt amount
+
+
+
+
+                        if (receiptAmount < 0)
+                        {
+                            receiptAmount = 0;
+
+                        }
+                        //_context.TblReceiptBodydeatils.Add(tbl);
                     }
 
                     scope.Complete();
@@ -300,6 +374,8 @@ namespace WOPHRMSystem.Services
             try
             {
                 var dr = (from a in _context.VW_InvoiceHead
+                          join s in _context.TblReceiptTempInvoices on a.Id equals s.InvoiceId into tempInvoices
+                          from s in tempInvoices.DefaultIfEmpty()
                           orderby a.Id descending
                           where a.IsActive == false && a.Fk_CustomerId == customerid
                           select new InvoiceHeadModel()
@@ -354,10 +430,12 @@ namespace WOPHRMSystem.Services
                               ValueNBT = a.ValueNBT,
                               ValueVAT = a.ValueVAT,
                               TotalReceivedAmount = a.TotalReceivedAmount,
-                              BalanceAmount = a.BalanceAmount,
+                              BalanceAmount = a.BalanceAmount + (s != null ? s.PaymentAmount : 0), // DefaultIfEmpty ensures s can be null
                               JobCode = a.JobCode,
-                          }).Where(d => d.IsDelete.Equals(false)).ToList();
+
+                          }).Where(d => d.IsDelete == false).ToList();
                 return dr;
+
             }
             catch (Exception)
             {
@@ -564,7 +642,7 @@ namespace WOPHRMSystem.Services
                         _context.TblChequeTempDetails.Remove(record);
                     }
 
-                    var get = _context.TblChequeDetails.Where(d => d.TableHeadId == pInvoiceId && d.IsDelete.Equals(false)).ToList();
+                    var get = _context.TblChequeDetails.Where(d => d.TableHeadId == pInvoiceId && d.IsDelete.Equals(false) && d.TableName.Equals("TblReceipt")).ToList();
                     foreach (var record in get)
                     {
                         TblChequeTempDetail tbl = new TblChequeTempDetail
@@ -660,7 +738,7 @@ namespace WOPHRMSystem.Services
                               ValueNBT = a.ValueNBT,
                               ValueVAT = a.ValueVAT,
                               TotalReceivedAmount = a.TotalReceivedAmount,
-                              BalanceAmount = a.BalanceAmount,
+                              BalanceAmount = a.BalanceAmount + s.PaymentAmount,
                               JobCode = a.JobCode,
                           }).Where(d => d.IsDelete.Equals(false)).ToList();
                 return dr;
@@ -782,6 +860,9 @@ namespace WOPHRMSystem.Services
                             InvoiceId = record.Fk_InvoiceId,
                             RowId = record.Id,
                             CustomerId = CustomerId,
+                            BalanceAmount = record.BalanceAmount,
+                            PaymentAmount = record.PaymentAmount,
+                            GrandAmount = record.GrandAmount,
                         };
                         _context.TblReceiptTempInvoices.Add(tbl);
                     }

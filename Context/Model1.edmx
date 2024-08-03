@@ -12,6 +12,13 @@
           <Property Name="MigrationId" Type="nvarchar" MaxLength="150" Nullable="false" />
           <Property Name="ProductVersion" Type="nvarchar" MaxLength="32" Nullable="false" />
         </EntityType>
+        <EntityType Name="TblAccount">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" />
+        </EntityType>
         <EntityType Name="TblChequeDetails">
           <Key>
             <PropertyRef Name="Id" />
@@ -225,6 +232,31 @@
           <Property Name="FromDate" Type="datetime2" Precision="7" />
           <Property Name="ToDate" Type="datetime2" Precision="7" />
           <Property Name="Fk_EmployeeId" Type="int" Nullable="false" />
+          <Property Name="IsDelete" Type="bit" Nullable="false" />
+          <Property Name="Create_By" Type="nvarchar(max)" />
+          <Property Name="Create_Date" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="Edit_By" Type="nvarchar(max)" />
+          <Property Name="Edit_Date" Type="datetime2" Precision="7" />
+          <Property Name="Delete_By" Type="nvarchar(max)" />
+          <Property Name="Delete_Date" Type="datetime2" Precision="7" />
+        </EntityType>
+        <EntityType Name="TblGenaralReceipt">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ReceiptNo" Type="nvarchar(max)" />
+          <Property Name="Date" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="Fk_WorkGroupId" Type="int" Nullable="false" />
+          <Property Name="Fk_CustomerId" Type="int" Nullable="false" />
+          <Property Name="Narration" Type="nvarchar(max)" />
+          <Property Name="Fk_CompanyId" Type="int" Nullable="false" />
+          <Property Name="Fk_AccountId" Type="int" Nullable="false" />
+          <Property Name="ReceiptAmount" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="PaymentType" Type="nvarchar(max)" />
+          <Property Name="IsPrint" Type="bit" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="CancelDate" Type="datetime2" Precision="7" />
           <Property Name="IsDelete" Type="bit" Nullable="false" />
           <Property Name="Create_By" Type="nvarchar(max)" />
           <Property Name="Create_Date" Type="datetime2" Precision="7" Nullable="false" />
@@ -695,6 +727,7 @@
           <Property Name="Edit_Date" Type="datetime2" Precision="7" />
           <Property Name="Delete_By" Type="nvarchar(max)" />
           <Property Name="Delete_Date" Type="datetime2" Precision="7" />
+          <Property Name="IsPrint" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="TblReceiptBodydeatils">
           <Key>
@@ -723,6 +756,9 @@
           <Property Name="InvoiceId" Type="int" Nullable="false" />
           <Property Name="Create_By" Type="nvarchar(max)" />
           <Property Name="RowId" Type="int" Nullable="false" />
+          <Property Name="BalanceAmount" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="GrandAmount" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="PaymentAmount" Type="decimal" Precision="18" Scale="2" />
         </EntityType>
         <EntityType Name="TblSectorMaster">
           <Key>
@@ -972,6 +1008,47 @@ warning 6002: The table/view 'AuditSystem.dbo.VW_EmployeeJobTransaction' does no
           <Property Name="Delete_By" Type="nvarchar(max)" />
           <Property Name="Delete_Date" Type="datetime2" Precision="7" />
           <Property Name="IsApplyTravelingCost" Type="bit" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'AuditSystem.dbo.VW_GeneralReceipts' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="VW_GeneralReceipts">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="Date" />
+            <PropertyRef Name="Fk_WorkGroupId" />
+            <PropertyRef Name="Fk_CustomerId" />
+            <PropertyRef Name="Fk_AccountId" />
+            <PropertyRef Name="Fk_CompanyId" />
+            <PropertyRef Name="IsActive" />
+            <PropertyRef Name="IsDelete" />
+            <PropertyRef Name="IsPrint" />
+            <PropertyRef Name="Create_Date" />
+            <PropertyRef Name="WorkGroupName" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="ReceiptNo" Type="nvarchar(max)" />
+          <Property Name="Date" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="Fk_WorkGroupId" Type="int" Nullable="false" />
+          <Property Name="Fk_CustomerId" Type="int" Nullable="false" />
+          <Property Name="Fk_AccountId" Type="int" Nullable="false" />
+          <Property Name="Narration" Type="nvarchar(max)" />
+          <Property Name="Fk_CompanyId" Type="int" Nullable="false" />
+          <Property Name="ReceiptAmount" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="PaymentType" Type="nvarchar(max)" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="CancelDate" Type="datetime2" Precision="7" />
+          <Property Name="IsDelete" Type="bit" Nullable="false" />
+          <Property Name="IsPrint" Type="bit" Nullable="false" />
+          <Property Name="Create_By" Type="nvarchar(max)" />
+          <Property Name="Create_Date" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="Edit_By" Type="nvarchar(max)" />
+          <Property Name="Edit_Date" Type="datetime2" Precision="7" />
+          <Property Name="Delete_By" Type="nvarchar(max)" />
+          <Property Name="Delete_Date" Type="datetime2" Precision="7" />
+          <Property Name="CustomerName" Type="nvarchar(max)" />
+          <Property Name="WorkGroupName" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="CompanyName" Type="nvarchar(max)" />
+          <Property Name="AccountName" Type="nvarchar(max)" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'AuditSystem.dbo.VW_GetJObActualValue' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -1525,6 +1602,7 @@ warning 6002: The table/view 'AuditSystem.dbo.VW_Receipts' does not have a prima
             <PropertyRef Name="Fk_CompanyId" />
             <PropertyRef Name="IsActive" />
             <PropertyRef Name="IsDelete" />
+            <PropertyRef Name="IsPrint" />
             <PropertyRef Name="Create_Date" />
             <PropertyRef Name="WorkGroupName" />
           </Key>
@@ -1541,6 +1619,7 @@ warning 6002: The table/view 'AuditSystem.dbo.VW_Receipts' does not have a prima
           <Property Name="IsActive" Type="bit" Nullable="false" />
           <Property Name="CancelDate" Type="datetime2" Precision="7" />
           <Property Name="IsDelete" Type="bit" Nullable="false" />
+          <Property Name="IsPrint" Type="bit" Nullable="false" />
           <Property Name="Create_By" Type="nvarchar(max)" />
           <Property Name="Create_Date" Type="datetime2" Precision="7" Nullable="false" />
           <Property Name="Edit_By" Type="nvarchar(max)" />
@@ -1745,6 +1824,62 @@ warning 6002: The table/view 'AuditSystem.dbo.VW_SectorMaster' does not have a p
             </Principal>
             <Dependent Role="TblEmployeeHourlyRate">
               <PropertyRef Name="Fk_EmployeeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TblGenaralReceipt_TblAccount_Fk_AccountId">
+          <End Role="TblAccount" Type="Self.TblAccount" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="TblGenaralReceipt" Type="Self.TblGenaralReceipt" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblAccount">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TblGenaralReceipt">
+              <PropertyRef Name="Fk_AccountId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TblGenaralReceipt_TblCompany_Fk_CompanyId">
+          <End Role="TblCompany" Type="Self.TblCompany" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="TblGenaralReceipt" Type="Self.TblGenaralReceipt" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblCompany">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TblGenaralReceipt">
+              <PropertyRef Name="Fk_CompanyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TblGenaralReceipt_TblCustomers_Fk_CustomerId">
+          <End Role="TblCustomers" Type="Self.TblCustomers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="TblGenaralReceipt" Type="Self.TblGenaralReceipt" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblCustomers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TblGenaralReceipt">
+              <PropertyRef Name="Fk_CustomerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TblGenaralReceipt_TblWorkGroup_Fk_WorkGroupId">
+          <End Role="TblWorkGroup" Type="Self.TblWorkGroup" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="TblGenaralReceipt" Type="Self.TblGenaralReceipt" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblWorkGroup">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TblGenaralReceipt">
+              <PropertyRef Name="Fk_WorkGroupId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2296,6 +2431,7 @@ warning 6002: The table/view 'AuditSystem.dbo.VW_SectorMaster' does not have a p
         </Association>
         <EntityContainer Name="AuditSystemModelStoreContainer">
           <EntitySet Name="__EFMigrationsHistory" EntityType="Self.__EFMigrationsHistory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TblAccount" EntityType="Self.TblAccount" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TblChequeDetails" EntityType="Self.TblChequeDetails" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TblChequeTempDetails" EntityType="Self.TblChequeTempDetails" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TblCompany" EntityType="Self.TblCompany" Schema="dbo" store:Type="Tables" />
@@ -2308,6 +2444,7 @@ warning 6002: The table/view 'AuditSystem.dbo.VW_SectorMaster' does not have a p
           <EntitySet Name="TblDocument" EntityType="Self.TblDocument" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TblEmployee" EntityType="Self.TblEmployee" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TblEmployeeHourlyRate" EntityType="Self.TblEmployeeHourlyRate" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TblGenaralReceipt" EntityType="Self.TblGenaralReceipt" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TblGradeMaster" EntityType="Self.TblGradeMaster" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TblInternationalReferalMaster" EntityType="Self.TblInternationalReferalMaster" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TblIntroductionMaster" EntityType="Self.TblIntroductionMaster" Schema="dbo" store:Type="Tables" />
@@ -2456,6 +2593,34 @@ FROM [dbo].[VW_Employee] AS [VW_Employee]</DefiningQuery>
 [VW_EmployeeJobTransaction].[Delete_Date] AS [Delete_Date], 
 [VW_EmployeeJobTransaction].[IsApplyTravelingCost] AS [IsApplyTravelingCost]
 FROM [dbo].[VW_EmployeeJobTransaction] AS [VW_EmployeeJobTransaction]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="VW_GeneralReceipts" EntityType="Self.VW_GeneralReceipts" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+[VW_GeneralReceipts].[Id] AS [Id], 
+[VW_GeneralReceipts].[ReceiptNo] AS [ReceiptNo], 
+[VW_GeneralReceipts].[Date] AS [Date], 
+[VW_GeneralReceipts].[Fk_WorkGroupId] AS [Fk_WorkGroupId], 
+[VW_GeneralReceipts].[Fk_CustomerId] AS [Fk_CustomerId], 
+[VW_GeneralReceipts].[Fk_AccountId] AS [Fk_AccountId], 
+[VW_GeneralReceipts].[Narration] AS [Narration], 
+[VW_GeneralReceipts].[Fk_CompanyId] AS [Fk_CompanyId], 
+[VW_GeneralReceipts].[ReceiptAmount] AS [ReceiptAmount], 
+[VW_GeneralReceipts].[PaymentType] AS [PaymentType], 
+[VW_GeneralReceipts].[IsActive] AS [IsActive], 
+[VW_GeneralReceipts].[CancelDate] AS [CancelDate], 
+[VW_GeneralReceipts].[IsDelete] AS [IsDelete], 
+[VW_GeneralReceipts].[IsPrint] AS [IsPrint], 
+[VW_GeneralReceipts].[Create_By] AS [Create_By], 
+[VW_GeneralReceipts].[Create_Date] AS [Create_Date], 
+[VW_GeneralReceipts].[Edit_By] AS [Edit_By], 
+[VW_GeneralReceipts].[Edit_Date] AS [Edit_Date], 
+[VW_GeneralReceipts].[Delete_By] AS [Delete_By], 
+[VW_GeneralReceipts].[Delete_Date] AS [Delete_Date], 
+[VW_GeneralReceipts].[CustomerName] AS [CustomerName], 
+[VW_GeneralReceipts].[WorkGroupName] AS [WorkGroupName], 
+[VW_GeneralReceipts].[CompanyName] AS [CompanyName], 
+[VW_GeneralReceipts].[AccountName] AS [AccountName]
+FROM [dbo].[VW_GeneralReceipts] AS [VW_GeneralReceipts]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="VW_GetJObActualValue" EntityType="Self.VW_GetJObActualValue" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
@@ -2849,6 +3014,7 @@ FROM [dbo].[VW_ProformaInvoiceHead] AS [VW_ProformaInvoiceHead]</DefiningQuery>
 [VW_Receipts].[IsActive] AS [IsActive], 
 [VW_Receipts].[CancelDate] AS [CancelDate], 
 [VW_Receipts].[IsDelete] AS [IsDelete], 
+[VW_Receipts].[IsPrint] AS [IsPrint], 
 [VW_Receipts].[Create_By] AS [Create_By], 
 [VW_Receipts].[Create_Date] AS [Create_Date], 
 [VW_Receipts].[Edit_By] AS [Edit_By], 
@@ -2926,6 +3092,22 @@ FROM [dbo].[VW_SectorMaster] AS [VW_SectorMaster]</DefiningQuery>
           <AssociationSet Name="FK_TblEmployeeHourlyRate_TblEmployee_Fk_EmployeeId" Association="Self.FK_TblEmployeeHourlyRate_TblEmployee_Fk_EmployeeId">
             <End Role="TblEmployee" EntitySet="TblEmployee" />
             <End Role="TblEmployeeHourlyRate" EntitySet="TblEmployeeHourlyRate" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TblGenaralReceipt_TblAccount_Fk_AccountId" Association="Self.FK_TblGenaralReceipt_TblAccount_Fk_AccountId">
+            <End Role="TblAccount" EntitySet="TblAccount" />
+            <End Role="TblGenaralReceipt" EntitySet="TblGenaralReceipt" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TblGenaralReceipt_TblCompany_Fk_CompanyId" Association="Self.FK_TblGenaralReceipt_TblCompany_Fk_CompanyId">
+            <End Role="TblCompany" EntitySet="TblCompany" />
+            <End Role="TblGenaralReceipt" EntitySet="TblGenaralReceipt" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TblGenaralReceipt_TblCustomers_Fk_CustomerId" Association="Self.FK_TblGenaralReceipt_TblCustomers_Fk_CustomerId">
+            <End Role="TblCustomers" EntitySet="TblCustomers" />
+            <End Role="TblGenaralReceipt" EntitySet="TblGenaralReceipt" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TblGenaralReceipt_TblWorkGroup_Fk_WorkGroupId" Association="Self.FK_TblGenaralReceipt_TblWorkGroup_Fk_WorkGroupId">
+            <End Role="TblWorkGroup" EntitySet="TblWorkGroup" />
+            <End Role="TblGenaralReceipt" EntitySet="TblGenaralReceipt" />
           </AssociationSet>
           <AssociationSet Name="FK_TblInvoiceBody_TblCustomers_Fk_CustomerId" Association="Self.FK_TblInvoiceBody_TblCustomers_Fk_CustomerId">
             <End Role="TblCustomers" EntitySet="TblCustomers" />
@@ -3110,6 +3292,7 @@ FROM [dbo].[VW_SectorMaster] AS [VW_SectorMaster]</DefiningQuery>
       <Schema Namespace="AuditSystemModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="AuditSystemEntities" annotation:LazyLoadingEnabled="true" >
           <EntitySet Name="C__EFMigrationsHistory" EntityType="AuditSystemModel.C__EFMigrationsHistory" />
+          <EntitySet Name="TblAccounts" EntityType="AuditSystemModel.TblAccount" />
           <EntitySet Name="TblChequeDetails" EntityType="AuditSystemModel.TblChequeDetail" />
           <EntitySet Name="TblChequeTempDetails" EntityType="AuditSystemModel.TblChequeTempDetail" />
           <EntitySet Name="TblCompanies" EntityType="AuditSystemModel.TblCompany" />
@@ -3122,6 +3305,7 @@ FROM [dbo].[VW_SectorMaster] AS [VW_SectorMaster]</DefiningQuery>
           <EntitySet Name="TblDocuments" EntityType="AuditSystemModel.TblDocument" />
           <EntitySet Name="TblEmployees" EntityType="AuditSystemModel.TblEmployee" />
           <EntitySet Name="TblEmployeeHourlyRates" EntityType="AuditSystemModel.TblEmployeeHourlyRate" />
+          <EntitySet Name="TblGenaralReceipts" EntityType="AuditSystemModel.TblGenaralReceipt" />
           <EntitySet Name="TblGradeMasters" EntityType="AuditSystemModel.TblGradeMaster" />
           <EntitySet Name="TblInternationalReferalMasters" EntityType="AuditSystemModel.TblInternationalReferalMaster" />
           <EntitySet Name="TblIntroductionMasters" EntityType="AuditSystemModel.TblIntroductionMaster" />
@@ -3156,6 +3340,7 @@ FROM [dbo].[VW_SectorMaster] AS [VW_SectorMaster]</DefiningQuery>
           <EntitySet Name="VW_Customer" EntityType="AuditSystemModel.VW_Customer" />
           <EntitySet Name="VW_Employee" EntityType="AuditSystemModel.VW_Employee" />
           <EntitySet Name="VW_EmployeeJobTransaction" EntityType="AuditSystemModel.VW_EmployeeJobTransaction" />
+          <EntitySet Name="VW_GeneralReceipts" EntityType="AuditSystemModel.VW_GeneralReceipts" />
           <EntitySet Name="VW_GetJObActualValue" EntityType="AuditSystemModel.VW_GetJObActualValue" />
           <EntitySet Name="VW_GradeMaster" EntityType="AuditSystemModel.VW_GradeMaster" />
           <EntitySet Name="VW_InternationalReferalMaster" EntityType="AuditSystemModel.VW_InternationalReferalMaster" />
@@ -3172,6 +3357,14 @@ FROM [dbo].[VW_SectorMaster] AS [VW_SectorMaster]</DefiningQuery>
           <EntitySet Name="VW_ProformaInvoiceHead" EntityType="AuditSystemModel.VW_ProformaInvoiceHead" />
           <EntitySet Name="VW_Receipts" EntityType="AuditSystemModel.VW_Receipts" />
           <EntitySet Name="VW_SectorMaster" EntityType="AuditSystemModel.VW_SectorMaster" />
+          <AssociationSet Name="FK_TblGenaralReceipt_TblAccount_Fk_AccountId" Association="AuditSystemModel.FK_TblGenaralReceipt_TblAccount_Fk_AccountId">
+            <End Role="TblAccount" EntitySet="TblAccounts" />
+            <End Role="TblGenaralReceipt" EntitySet="TblGenaralReceipts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TblGenaralReceipt_TblCompany_Fk_CompanyId" Association="AuditSystemModel.FK_TblGenaralReceipt_TblCompany_Fk_CompanyId">
+            <End Role="TblCompany" EntitySet="TblCompanies" />
+            <End Role="TblGenaralReceipt" EntitySet="TblGenaralReceipts" />
+          </AssociationSet>
           <AssociationSet Name="FK_TblInvoiceHead_TblCompany_Fk_CompanyId" Association="AuditSystemModel.FK_TblInvoiceHead_TblCompany_Fk_CompanyId">
             <End Role="TblCompany" EntitySet="TblCompanies" />
             <End Role="TblInvoiceHead" EntitySet="TblInvoiceHeads" />
@@ -3207,6 +3400,10 @@ FROM [dbo].[VW_SectorMaster] AS [VW_SectorMaster]</DefiningQuery>
           <AssociationSet Name="FK_TblCustomers_TblSectorMaster_Fk_SectorMasterId" Association="AuditSystemModel.FK_TblCustomers_TblSectorMaster_Fk_SectorMasterId">
             <End Role="TblSectorMaster" EntitySet="TblSectorMasters" />
             <End Role="TblCustomer" EntitySet="TblCustomers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TblGenaralReceipt_TblCustomers_Fk_CustomerId" Association="AuditSystemModel.FK_TblGenaralReceipt_TblCustomers_Fk_CustomerId">
+            <End Role="TblCustomer" EntitySet="TblCustomers" />
+            <End Role="TblGenaralReceipt" EntitySet="TblGenaralReceipts" />
           </AssociationSet>
           <AssociationSet Name="FK_TblInvoiceBody_TblCustomers_Fk_CustomerId" Association="AuditSystemModel.FK_TblInvoiceBody_TblCustomers_Fk_CustomerId">
             <End Role="TblCustomer" EntitySet="TblCustomers" />
@@ -3303,6 +3500,10 @@ FROM [dbo].[VW_SectorMaster] AS [VW_SectorMaster]</DefiningQuery>
           <AssociationSet Name="FK_TblNonEffectiveEmployee_TblEmployee_Fk_EmployeeId" Association="AuditSystemModel.FK_TblNonEffectiveEmployee_TblEmployee_Fk_EmployeeId">
             <End Role="TblEmployee" EntitySet="TblEmployees" />
             <End Role="TblNonEffectiveEmployee" EntitySet="TblNonEffectiveEmployees" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TblGenaralReceipt_TblWorkGroup_Fk_WorkGroupId" Association="AuditSystemModel.FK_TblGenaralReceipt_TblWorkGroup_Fk_WorkGroupId">
+            <End Role="TblWorkGroup" EntitySet="TblWorkGroups" />
+            <End Role="TblGenaralReceipt" EntitySet="TblGenaralReceipts" />
           </AssociationSet>
           <AssociationSet Name="FK_TblInvoiceBody_TblInvoiceHead_Fk_InvoiceHeadId" Association="AuditSystemModel.FK_TblInvoiceBody_TblInvoiceHead_Fk_InvoiceHeadId">
             <End Role="TblInvoiceHead" EntitySet="TblInvoiceHeads" />
@@ -3408,6 +3609,14 @@ FROM [dbo].[VW_SectorMaster] AS [VW_SectorMaster]</DefiningQuery>
           <Property Name="MigrationId" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
           <Property Name="ProductVersion" Type="String" Nullable="false" MaxLength="32" FixedLength="false" Unicode="true" />
         </EntityType>
+        <EntityType Name="TblAccount">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="TblGenaralReceipts" Relationship="AuditSystemModel.FK_TblGenaralReceipt_TblAccount_Fk_AccountId" FromRole="TblAccount" ToRole="TblGenaralReceipt" />
+        </EntityType>
         <EntityType Name="TblChequeDetail">
           <Key>
             <PropertyRef Name="Id" />
@@ -3457,6 +3666,7 @@ FROM [dbo].[VW_SectorMaster] AS [VW_SectorMaster]</DefiningQuery>
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="TblGenaralReceipts" Relationship="AuditSystemModel.FK_TblGenaralReceipt_TblCompany_Fk_CompanyId" FromRole="TblCompany" ToRole="TblGenaralReceipt" />
           <NavigationProperty Name="TblInvoiceHeads" Relationship="AuditSystemModel.FK_TblInvoiceHead_TblCompany_Fk_CompanyId" FromRole="TblCompany" ToRole="TblInvoiceHead" />
           <NavigationProperty Name="TblProformaInvoiceHeads" Relationship="AuditSystemModel.FK_TblProformaInvoiceHead_TblCompany_Fk_CompanyId" FromRole="TblCompany" ToRole="TblProformaInvoiceHead" />
           <NavigationProperty Name="TblReceipts" Relationship="AuditSystemModel.FK_TblReceipt_TblCompany_Fk_CompanyId" FromRole="TblCompany" ToRole="TblReceipt" />
@@ -3519,6 +3729,7 @@ FROM [dbo].[VW_SectorMaster] AS [VW_SectorMaster]</DefiningQuery>
           <NavigationProperty Name="TblIntroductionMaster" Relationship="AuditSystemModel.FK_TblCustomers_TblIntroductionMaster_Fk_IntroductionId" FromRole="TblCustomer" ToRole="TblIntroductionMaster" />
           <NavigationProperty Name="TblLegalStatusMaster" Relationship="AuditSystemModel.FK_TblCustomers_TblLegalStatusMaster_Fk_LegalStatusMasterId" FromRole="TblCustomer" ToRole="TblLegalStatusMaster" />
           <NavigationProperty Name="TblSectorMaster" Relationship="AuditSystemModel.FK_TblCustomers_TblSectorMaster_Fk_SectorMasterId" FromRole="TblCustomer" ToRole="TblSectorMaster" />
+          <NavigationProperty Name="TblGenaralReceipts" Relationship="AuditSystemModel.FK_TblGenaralReceipt_TblCustomers_Fk_CustomerId" FromRole="TblCustomer" ToRole="TblGenaralReceipt" />
           <NavigationProperty Name="TblInvoiceBodies" Relationship="AuditSystemModel.FK_TblInvoiceBody_TblCustomers_Fk_CustomerId" FromRole="TblCustomer" ToRole="TblInvoiceBody" />
           <NavigationProperty Name="TblInvoiceHeads" Relationship="AuditSystemModel.FK_TblInvoiceHead_TblCustomers_Fk_CustomerId" FromRole="TblCustomer" ToRole="TblInvoiceHead" />
           <NavigationProperty Name="TblJobMasters" Relationship="AuditSystemModel.FK_TblJobMaster_TblCustomers_Fk_CustomerId" FromRole="TblCustomer" ToRole="TblJobMaster" />
@@ -3668,6 +3879,35 @@ FROM [dbo].[VW_SectorMaster] AS [VW_SectorMaster]</DefiningQuery>
           <Property Name="Delete_By" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Delete_Date" Type="DateTime" Precision="7" />
           <NavigationProperty Name="TblEmployee" Relationship="AuditSystemModel.FK_TblEmployeeHourlyRate_TblEmployee_Fk_EmployeeId" FromRole="TblEmployeeHourlyRate" ToRole="TblEmployee" />
+        </EntityType>
+        <EntityType Name="TblGenaralReceipt">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ReceiptNo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="Fk_WorkGroupId" Type="Int32" Nullable="false" />
+          <Property Name="Fk_CustomerId" Type="Int32" Nullable="false" />
+          <Property Name="Narration" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Fk_CompanyId" Type="Int32" Nullable="false" />
+          <Property Name="Fk_AccountId" Type="Int32" Nullable="false" />
+          <Property Name="ReceiptAmount" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="PaymentType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsPrint" Type="Boolean" Nullable="false" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="CancelDate" Type="DateTime" Precision="7" />
+          <Property Name="IsDelete" Type="Boolean" Nullable="false" />
+          <Property Name="Create_By" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Create_Date" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="Edit_By" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Edit_Date" Type="DateTime" Precision="7" />
+          <Property Name="Delete_By" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Delete_Date" Type="DateTime" Precision="7" />
+          <NavigationProperty Name="TblAccount" Relationship="AuditSystemModel.FK_TblGenaralReceipt_TblAccount_Fk_AccountId" FromRole="TblGenaralReceipt" ToRole="TblAccount" />
+          <NavigationProperty Name="TblCompany" Relationship="AuditSystemModel.FK_TblGenaralReceipt_TblCompany_Fk_CompanyId" FromRole="TblGenaralReceipt" ToRole="TblCompany" />
+          <NavigationProperty Name="TblCustomer" Relationship="AuditSystemModel.FK_TblGenaralReceipt_TblCustomers_Fk_CustomerId" FromRole="TblGenaralReceipt" ToRole="TblCustomer" />
+          <NavigationProperty Name="TblWorkGroup" Relationship="AuditSystemModel.FK_TblGenaralReceipt_TblWorkGroup_Fk_WorkGroupId" FromRole="TblGenaralReceipt" ToRole="TblWorkGroup" />
         </EntityType>
         <EntityType Name="TblGradeMaster">
           <Key>
@@ -4191,6 +4431,7 @@ FROM [dbo].[VW_SectorMaster] AS [VW_SectorMaster]</DefiningQuery>
           <Property Name="Edit_Date" Type="DateTime" Precision="7" />
           <Property Name="Delete_By" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Delete_Date" Type="DateTime" Precision="7" />
+          <Property Name="IsPrint" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="TblCompany" Relationship="AuditSystemModel.FK_TblReceipt_TblCompany_Fk_CompanyId" FromRole="TblReceipt" ToRole="TblCompany" />
           <NavigationProperty Name="TblCustomer" Relationship="AuditSystemModel.FK_TblReceipt_TblCustomers_Fk_CustomerId" FromRole="TblReceipt" ToRole="TblCustomer" />
           <NavigationProperty Name="TblWorkGroup" Relationship="AuditSystemModel.FK_TblReceipt_TblWorkGroup_Fk_WorkGroupId" FromRole="TblReceipt" ToRole="TblWorkGroup" />
@@ -4225,6 +4466,9 @@ FROM [dbo].[VW_SectorMaster] AS [VW_SectorMaster]</DefiningQuery>
           <Property Name="InvoiceId" Type="Int32" Nullable="false" />
           <Property Name="Create_By" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="RowId" Type="Int32" Nullable="false" />
+          <Property Name="BalanceAmount" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="GrandAmount" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="PaymentAmount" Type="Decimal" Precision="18" Scale="2" />
         </EntityType>
         <EntityType Name="TblSectorMaster">
           <Key>
@@ -4291,6 +4535,7 @@ FROM [dbo].[VW_SectorMaster] AS [VW_SectorMaster]</DefiningQuery>
           <Property Name="Edit_Date" Type="DateTime" Precision="7" />
           <Property Name="Delete_By" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Delete_Date" Type="DateTime" Precision="7" />
+          <NavigationProperty Name="TblGenaralReceipts" Relationship="AuditSystemModel.FK_TblGenaralReceipt_TblWorkGroup_Fk_WorkGroupId" FromRole="TblWorkGroup" ToRole="TblGenaralReceipt" />
           <NavigationProperty Name="TblInvoiceHeads" Relationship="AuditSystemModel.FK_TblInvoiceHead_TblWorkGroup_Fk_WorkGroupId" FromRole="TblWorkGroup" ToRole="TblInvoiceHead" />
           <NavigationProperty Name="TblProformaInvoiceHeads" Relationship="AuditSystemModel.FK_TblProformaInvoiceHead_TblWorkGroup_Fk_WorkGroupId" FromRole="TblWorkGroup" ToRole="TblProformaInvoiceHead" />
           <NavigationProperty Name="TblReceipts" Relationship="AuditSystemModel.FK_TblReceipt_TblWorkGroup_Fk_WorkGroupId" FromRole="TblWorkGroup" ToRole="TblReceipt" />
@@ -4474,6 +4719,45 @@ FROM [dbo].[VW_SectorMaster] AS [VW_SectorMaster]</DefiningQuery>
           <Property Name="Delete_By" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Delete_Date" Type="DateTime" Precision="7" />
           <Property Name="IsApplyTravelingCost" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="VW_GeneralReceipts">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="Date" />
+            <PropertyRef Name="Fk_WorkGroupId" />
+            <PropertyRef Name="Fk_CustomerId" />
+            <PropertyRef Name="Fk_AccountId" />
+            <PropertyRef Name="Fk_CompanyId" />
+            <PropertyRef Name="IsActive" />
+            <PropertyRef Name="IsDelete" />
+            <PropertyRef Name="IsPrint" />
+            <PropertyRef Name="Create_Date" />
+            <PropertyRef Name="WorkGroupName" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="ReceiptNo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="Fk_WorkGroupId" Type="Int32" Nullable="false" />
+          <Property Name="Fk_CustomerId" Type="Int32" Nullable="false" />
+          <Property Name="Fk_AccountId" Type="Int32" Nullable="false" />
+          <Property Name="Narration" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Fk_CompanyId" Type="Int32" Nullable="false" />
+          <Property Name="ReceiptAmount" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="PaymentType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="CancelDate" Type="DateTime" Precision="7" />
+          <Property Name="IsDelete" Type="Boolean" Nullable="false" />
+          <Property Name="IsPrint" Type="Boolean" Nullable="false" />
+          <Property Name="Create_By" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Create_Date" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="Edit_By" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Edit_Date" Type="DateTime" Precision="7" />
+          <Property Name="Delete_By" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Delete_Date" Type="DateTime" Precision="7" />
+          <Property Name="CustomerName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="WorkGroupName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CompanyName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="AccountName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="VW_GetJObActualValue">
           <Key>
@@ -4997,6 +5281,7 @@ FROM [dbo].[VW_SectorMaster] AS [VW_SectorMaster]</DefiningQuery>
             <PropertyRef Name="Fk_CompanyId" />
             <PropertyRef Name="IsActive" />
             <PropertyRef Name="IsDelete" />
+            <PropertyRef Name="IsPrint" />
             <PropertyRef Name="Create_Date" />
             <PropertyRef Name="WorkGroupName" />
           </Key>
@@ -5013,6 +5298,7 @@ FROM [dbo].[VW_SectorMaster] AS [VW_SectorMaster]</DefiningQuery>
           <Property Name="IsActive" Type="Boolean" Nullable="false" />
           <Property Name="CancelDate" Type="DateTime" Precision="7" />
           <Property Name="IsDelete" Type="Boolean" Nullable="false" />
+          <Property Name="IsPrint" Type="Boolean" Nullable="false" />
           <Property Name="Create_By" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Create_Date" Type="DateTime" Nullable="false" Precision="7" />
           <Property Name="Edit_By" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
@@ -5042,6 +5328,34 @@ FROM [dbo].[VW_SectorMaster] AS [VW_SectorMaster]</DefiningQuery>
           <Property Name="Delete_By" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Delete_Date" Type="DateTime" Precision="7" />
         </EntityType>
+        <Association Name="FK_TblGenaralReceipt_TblAccount_Fk_AccountId">
+          <End Type="AuditSystemModel.TblAccount" Role="TblAccount" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="AuditSystemModel.TblGenaralReceipt" Role="TblGenaralReceipt" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblAccount">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TblGenaralReceipt">
+              <PropertyRef Name="Fk_AccountId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TblGenaralReceipt_TblCompany_Fk_CompanyId">
+          <End Type="AuditSystemModel.TblCompany" Role="TblCompany" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="AuditSystemModel.TblGenaralReceipt" Role="TblGenaralReceipt" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblCompany">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TblGenaralReceipt">
+              <PropertyRef Name="Fk_CompanyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_TblInvoiceHead_TblCompany_Fk_CompanyId">
           <End Type="AuditSystemModel.TblCompany" Role="TblCompany" Multiplicity="1" />
           <End Type="AuditSystemModel.TblInvoiceHead" Role="TblInvoiceHead" Multiplicity="*" />
@@ -5157,6 +5471,20 @@ FROM [dbo].[VW_SectorMaster] AS [VW_SectorMaster]</DefiningQuery>
             </Principal>
             <Dependent Role="TblCustomer">
               <PropertyRef Name="Fk_SectorMasterId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TblGenaralReceipt_TblCustomers_Fk_CustomerId">
+          <End Type="AuditSystemModel.TblCustomer" Role="TblCustomer" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="AuditSystemModel.TblGenaralReceipt" Role="TblGenaralReceipt" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblCustomer">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TblGenaralReceipt">
+              <PropertyRef Name="Fk_CustomerId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -5463,6 +5791,20 @@ FROM [dbo].[VW_SectorMaster] AS [VW_SectorMaster]</DefiningQuery>
             </Principal>
             <Dependent Role="TblNonEffectiveEmployee">
               <PropertyRef Name="Fk_EmployeeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TblGenaralReceipt_TblWorkGroup_Fk_WorkGroupId">
+          <End Type="AuditSystemModel.TblWorkGroup" Role="TblWorkGroup" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="AuditSystemModel.TblGenaralReceipt" Role="TblGenaralReceipt" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblWorkGroup">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TblGenaralReceipt">
+              <PropertyRef Name="Fk_WorkGroupId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -5778,6 +6120,14 @@ FROM [dbo].[VW_SectorMaster] AS [VW_SectorMaster]</DefiningQuery>
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="TblAccounts">
+            <EntityTypeMapping TypeName="AuditSystemModel.TblAccount">
+              <MappingFragment StoreEntitySet="TblAccount">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="TblChequeDetails">
             <EntityTypeMapping TypeName="AuditSystemModel.TblChequeDetail">
               <MappingFragment StoreEntitySet="TblChequeDetails">
@@ -6007,6 +6357,32 @@ FROM [dbo].[VW_SectorMaster] AS [VW_SectorMaster]</DefiningQuery>
                 <ScalarProperty Name="ToDate" ColumnName="ToDate" />
                 <ScalarProperty Name="FromDate" ColumnName="FromDate" />
                 <ScalarProperty Name="Rate" ColumnName="Rate" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TblGenaralReceipts">
+            <EntityTypeMapping TypeName="AuditSystemModel.TblGenaralReceipt">
+              <MappingFragment StoreEntitySet="TblGenaralReceipt">
+                <ScalarProperty Name="Delete_Date" ColumnName="Delete_Date" />
+                <ScalarProperty Name="Delete_By" ColumnName="Delete_By" />
+                <ScalarProperty Name="Edit_Date" ColumnName="Edit_Date" />
+                <ScalarProperty Name="Edit_By" ColumnName="Edit_By" />
+                <ScalarProperty Name="Create_Date" ColumnName="Create_Date" />
+                <ScalarProperty Name="Create_By" ColumnName="Create_By" />
+                <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+                <ScalarProperty Name="CancelDate" ColumnName="CancelDate" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="IsPrint" ColumnName="IsPrint" />
+                <ScalarProperty Name="PaymentType" ColumnName="PaymentType" />
+                <ScalarProperty Name="ReceiptAmount" ColumnName="ReceiptAmount" />
+                <ScalarProperty Name="Fk_AccountId" ColumnName="Fk_AccountId" />
+                <ScalarProperty Name="Fk_CompanyId" ColumnName="Fk_CompanyId" />
+                <ScalarProperty Name="Narration" ColumnName="Narration" />
+                <ScalarProperty Name="Fk_CustomerId" ColumnName="Fk_CustomerId" />
+                <ScalarProperty Name="Fk_WorkGroupId" ColumnName="Fk_WorkGroupId" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="ReceiptNo" ColumnName="ReceiptNo" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -6475,6 +6851,7 @@ FROM [dbo].[VW_SectorMaster] AS [VW_SectorMaster]</DefiningQuery>
           <EntitySetMapping Name="TblReceipts">
             <EntityTypeMapping TypeName="AuditSystemModel.TblReceipt">
               <MappingFragment StoreEntitySet="TblReceipt">
+                <ScalarProperty Name="IsPrint" ColumnName="IsPrint" />
                 <ScalarProperty Name="Delete_Date" ColumnName="Delete_Date" />
                 <ScalarProperty Name="Delete_By" ColumnName="Delete_By" />
                 <ScalarProperty Name="Edit_Date" ColumnName="Edit_Date" />
@@ -6519,6 +6896,9 @@ FROM [dbo].[VW_SectorMaster] AS [VW_SectorMaster]</DefiningQuery>
           <EntitySetMapping Name="TblReceiptTempInvoices">
             <EntityTypeMapping TypeName="AuditSystemModel.TblReceiptTempInvoice">
               <MappingFragment StoreEntitySet="TblReceiptTempInvoice">
+                <ScalarProperty Name="PaymentAmount" ColumnName="PaymentAmount" />
+                <ScalarProperty Name="GrandAmount" ColumnName="GrandAmount" />
+                <ScalarProperty Name="BalanceAmount" ColumnName="BalanceAmount" />
                 <ScalarProperty Name="RowId" ColumnName="RowId" />
                 <ScalarProperty Name="Create_By" ColumnName="Create_By" />
                 <ScalarProperty Name="InvoiceId" ColumnName="InvoiceId" />
@@ -6737,6 +7117,36 @@ FROM [dbo].[VW_SectorMaster] AS [VW_SectorMaster]</DefiningQuery>
                 <ScalarProperty Name="Fk_EmployeeId" ColumnName="Fk_EmployeeId" />
                 <ScalarProperty Name="Fk_JobMasterId" ColumnName="Fk_JobMasterId" />
                 <ScalarProperty Name="TrDate" ColumnName="TrDate" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VW_GeneralReceipts">
+            <EntityTypeMapping TypeName="AuditSystemModel.VW_GeneralReceipts">
+              <MappingFragment StoreEntitySet="VW_GeneralReceipts">
+                <ScalarProperty Name="AccountName" ColumnName="AccountName" />
+                <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+                <ScalarProperty Name="WorkGroupName" ColumnName="WorkGroupName" />
+                <ScalarProperty Name="CustomerName" ColumnName="CustomerName" />
+                <ScalarProperty Name="Delete_Date" ColumnName="Delete_Date" />
+                <ScalarProperty Name="Delete_By" ColumnName="Delete_By" />
+                <ScalarProperty Name="Edit_Date" ColumnName="Edit_Date" />
+                <ScalarProperty Name="Edit_By" ColumnName="Edit_By" />
+                <ScalarProperty Name="Create_Date" ColumnName="Create_Date" />
+                <ScalarProperty Name="Create_By" ColumnName="Create_By" />
+                <ScalarProperty Name="IsPrint" ColumnName="IsPrint" />
+                <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+                <ScalarProperty Name="CancelDate" ColumnName="CancelDate" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="PaymentType" ColumnName="PaymentType" />
+                <ScalarProperty Name="ReceiptAmount" ColumnName="ReceiptAmount" />
+                <ScalarProperty Name="Fk_CompanyId" ColumnName="Fk_CompanyId" />
+                <ScalarProperty Name="Narration" ColumnName="Narration" />
+                <ScalarProperty Name="Fk_AccountId" ColumnName="Fk_AccountId" />
+                <ScalarProperty Name="Fk_CustomerId" ColumnName="Fk_CustomerId" />
+                <ScalarProperty Name="Fk_WorkGroupId" ColumnName="Fk_WorkGroupId" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="ReceiptNo" ColumnName="ReceiptNo" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -7158,6 +7568,7 @@ FROM [dbo].[VW_SectorMaster] AS [VW_SectorMaster]</DefiningQuery>
                 <ScalarProperty Name="Edit_By" ColumnName="Edit_By" />
                 <ScalarProperty Name="Create_Date" ColumnName="Create_Date" />
                 <ScalarProperty Name="Create_By" ColumnName="Create_By" />
+                <ScalarProperty Name="IsPrint" ColumnName="IsPrint" />
                 <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
                 <ScalarProperty Name="CancelDate" ColumnName="CancelDate" />
                 <ScalarProperty Name="IsActive" ColumnName="IsActive" />

@@ -91,8 +91,8 @@
                                         <th>Invoice No </th>
                                         <th>Receipt Amount</th>
                                         <th>NoN TAX Amount</th>
-                                       
-                                        
+
+
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -106,12 +106,12 @@
                                             <td>@s.PaymentType</td>
                                             <td>@s.ReceiptAmount</td>
                                             <td>@s.NoNTaxAmount</td>
-                                           
+
 
                                             <td class="project-actions text-right">
-                                                @*<a class="btn btn-info btn-sm" href="@Url.Action("Edit", "Receipt", new { Id = s.Id })">
+                                                <a class="btn btn-info btn-sm" onclick="CheckIsprintStatus('@s.Id')">
                                                     <i class="fas fa-pencil-alt"></i> Edit
-                                                </a>*@
+                                                </a>
                                                 <a class="btn btn-danger btn-sm" onclick="PostDelete('@s.Id')">
                                                     <i class="fas fa-trash"></i> Delete
                                                 </a>
@@ -210,7 +210,42 @@
             });
         }
     });
-}
+        }
+
+
+          var CheckIsprintStatus = function(Id) {
+           $.ajax({
+               type: "Post",
+               url: "/Receipt/CheckStatus",
+               data: { Id: Id },
+
+               success: function (result) {
+
+                   if (result.Value == "true") {
+                       Swal.fire({
+
+                           icon: result.Status,
+                           title: result.Status,
+                           text: result.Text
+                       }).then((result) => {
+                           if (result.isConfirmed) {
+                               window.location.href = "@Url.Action("Index", "Receipt")"
+                           }
+                           else {
+                               window.location.href = "@Url.Action("Index", "Receipt")"
+                           }
+                       })
+                   } else {
+                         var editUrl = "@Url.Action("Edit", "Receipt")" + "?Id=" + Id;
+                         window.location.href = editUrl;
+                   }
+
+
+
+
+                },
+            })
+          }
 
 
     </script>

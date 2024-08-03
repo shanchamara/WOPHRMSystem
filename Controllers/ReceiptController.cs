@@ -84,8 +84,109 @@ namespace WOPHRMSystem.Controllers
             });
         }
 
+        [HttpGet]
+        public ActionResult Edit(int Id)
+        {
+            var dt = _ClientService.GetById(Id);
 
-   
+            if (dt.IsPrint == false)
+            {
+
+
+                _ClientService.DeleteCurrentlyTempAndInsertDataForUpdate("User", Id);
+                _ClientService.DeleteCurrentlyInvoiceTempAndInsertDataForUpdate("User", Id, dt.Fk_CustomerId);
+
+
+                var model = new ReceiptModel()
+                {
+                    Id = Id,
+                    ReceiptNo = dt.ReceiptNo,
+                    ReceiptAmount = dt.ReceiptAmount,
+                    PaymentType = dt.PaymentType,
+                    NoNTaxAmount = dt.NoNTaxAmount,
+                    Narration = dt.Narration,
+                    Fk_WorkGroupId = dt.Fk_WorkGroupId,
+                    Date = dt.Date,
+                    Fk_CustomerId = dt.Fk_CustomerId,
+                    Fk_CompanyId = dt.Fk_CompanyId,
+                    WorkGroupList = new SelectList(workGroup.GetAll(), "Id", "CodeAndNarration"),
+                    Companylist = new SelectList(companyServices.GetAll(), "Id", "Name"),
+                    CustomerList = new SelectList(customer.GetAll(), "Id", "Name"),
+                };
+                return View(model);
+            }
+            else
+            {
+                return Json(new MessageModelTwo()
+                {
+                    Status = "warning",
+                    Text = $"There was a error with retrieving data. Please try again",
+                    Value = "true"
+                });
+            }
+        }
+
+        [HttpPost]
+        public ActionResult CheckStatus(int Id)
+        {
+            var dt = _ClientService.GetById(Id);
+
+            if (dt.IsPrint == false)
+            {
+                return RedirectToAction("Edit", new { Id });
+            }
+            else
+            {
+                return Json(new MessageModelTwo()
+                {
+                    Status = "warning",
+                    Text = $"There was a error with retrieving data. Please try again",
+                    Value = "true"
+                });
+            }
+        }
+
+        [HttpPost]
+        public ActionResult Edit(ReceiptModel masterModel)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    var tbl = new TblReceipt
+                    {
+                        Edit_By = "User",
+                        IsActive = masterModel.IsActive,
+                        Date = Convert.ToDateTime(masterModel.Date),
+                        Fk_CompanyId = masterModel.Fk_CompanyId,
+                        Fk_CustomerId = masterModel.Fk_CustomerId,
+                        Fk_WorkGroupId = masterModel.Fk_WorkGroupId,
+                        Narration = masterModel.Narration,
+                        NoNTaxAmount = masterModel.NoNTaxAmount,
+                        PaymentType = masterModel.PaymentType,
+                        ReceiptAmount = masterModel.ReceiptAmount,
+                        ReceiptNo = masterModel.ReceiptNo,
+                        Edit_Date = new CommonResources().LocalDatetime().Date,
+                        Id = masterModel.Id,
+                    };
+                    return Json(_ClientService.Update(tbl));
+                }
+            }
+            catch (Exception)
+            {
+                return Json(new MessageModel()
+                {
+                    Status = "warning",
+                    Text = $"There was a error with retrieving data. Please try again",
+                });
+            }
+            return Json(new MessageModel()
+            {
+                Status = "warning",
+                Text = $"There was a error with retrieving data. Please try again",
+            });
+        }
+
 
         [HttpDelete]
         public ActionResult Delete(int ID)
@@ -183,6 +284,13 @@ namespace WOPHRMSystem.Controllers
         public ActionResult ViewSelectedInvoices()
         {
             return PartialView("ViewSelectedInvoices", _ClientService.GetAllInvoices("User"));
+        }
+
+        [HttpGet]
+        public ActionResult ClearSelectedInvoiceCustomerWise()
+        {
+            _ClientService.DeleteCurrentlyInvoiceTemp("User");
+            return PartialView("ClearSelectedInvoiceCustomerWise", _ClientService.GetAllInvoices("User"));
         }
 
         #endregion
