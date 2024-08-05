@@ -35,6 +35,7 @@ namespace WOPHRMSystem.Context
         public string Delete_By { get; set; }
         public Nullable<System.DateTime> Delete_Date { get; set; }
         public string CustomerName { get; set; }
+        public string Address { get; set; }
         public string WorkGroupName { get; set; }
         public string CompanyName { get; set; }
     }

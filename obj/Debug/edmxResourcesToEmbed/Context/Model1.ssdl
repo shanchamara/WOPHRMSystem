@@ -1622,6 +1622,7 @@ warning 6002: The table/view 'AuditSystem.dbo.VW_Receipts' does not have a prima
     <Property Name="Delete_By" Type="nvarchar(max)" />
     <Property Name="Delete_Date" Type="datetime2" Precision="7" />
     <Property Name="CustomerName" Type="nvarchar(max)" />
+    <Property Name="Address" Type="nvarchar(max)" />
     <Property Name="WorkGroupName" Type="nvarchar(max)" Nullable="false" />
     <Property Name="CompanyName" Type="nvarchar(max)" />
   </EntityType>
@@ -3017,6 +3018,7 @@ FROM [dbo].[VW_ProformaInvoiceHead] AS [VW_ProformaInvoiceHead]</DefiningQuery>
 [VW_Receipts].[Delete_By] AS [Delete_By], 
 [VW_Receipts].[Delete_Date] AS [Delete_Date], 
 [VW_Receipts].[CustomerName] AS [CustomerName], 
+[VW_Receipts].[Address] AS [Address], 
 [VW_Receipts].[WorkGroupName] AS [WorkGroupName], 
 [VW_Receipts].[CompanyName] AS [CompanyName]
 FROM [dbo].[VW_Receipts] AS [VW_Receipts]</DefiningQuery>

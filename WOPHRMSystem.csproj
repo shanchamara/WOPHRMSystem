@@ -2760,6 +2760,7 @@
     <Content Include="Views\GeneralReceipt\Index.cshtml" />
     <Content Include="Views\GeneralReceipt\ReceiptChequeList.cshtml" />
     <Content Include="Views\Receipt\ClearSelectedInvoiceCustomerWise.cshtml" />
+    <Content Include="Views\Report\ReceiptReportView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1450,6 +1450,7 @@
         <MappingFragment StoreEntitySet="VW_Receipts">
           <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
           <ScalarProperty Name="WorkGroupName" ColumnName="WorkGroupName" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
           <ScalarProperty Name="CustomerName" ColumnName="CustomerName" />
           <ScalarProperty Name="Delete_Date" ColumnName="Delete_Date" />
           <ScalarProperty Name="Delete_By" ColumnName="Delete_By" />

@@ -462,6 +462,41 @@ namespace WOPHRMSystem.Services
         }
 
 
+        public ReceiptModel GetReceiptDetailsbyId(int id)
+        {
+            try
+            {
+                var dr = (from a in _context.VW_Receipts
+                          orderby a.Id descending
+                          where a.IsActive == false && a.Id == id
+                          select new ReceiptModel()
+                          {
+                              Id = a.Id,
+                              CancelDate = a.CancelDate,
+                              Date = a.Date,
+                              Fk_CompanyId = a.Fk_CompanyId,
+                              IsDelete = a.IsDelete,
+                              Fk_CustomerId = a.Fk_CustomerId,
+                              Fk_WorkGroupId = a.Fk_WorkGroupId,
+                              IsActive = a.IsActive,
+                              Narration = a.Narration,
+                              NoNTaxAmount = a.NoNTaxAmount,
+                              PaymentType = a.PaymentType,
+                              ReceiptAmount = a.ReceiptAmount,
+                              ReceiptNo = a.ReceiptNo,
+                              CustomerName = a.CustomerName,
+                              Address = a.Address,
+                          }).Where(d => d.IsDelete.Equals(false)).SingleOrDefault();
+                return dr;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+
         #endregion
 
 
@@ -678,6 +713,7 @@ namespace WOPHRMSystem.Services
 
 
         #region Invoices
+
         public List<InvoiceHeadModel> GetAllInvoices(string Create_By)
         {
             try

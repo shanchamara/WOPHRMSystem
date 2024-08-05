@@ -2016,6 +2016,7 @@
     <Property Name="Delete_By" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="Delete_Date" Type="DateTime" Precision="7" />
     <Property Name="CustomerName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="WorkGroupName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="CompanyName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
   </EntityType>

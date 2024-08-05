@@ -31,6 +31,7 @@ namespace WOPHRMSystem.Models
         public string WorkGroupName { get; set; }
         public string InvoiceNo { get; set; }
         public string CompanyName { get; set; }
+        public string Address { get; set; }
 
 
         public SelectList WorkGroupList { get; set; }

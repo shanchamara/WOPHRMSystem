@@ -12,13 +12,11 @@ namespace WOPHRMSystem.Controllers
 {
     public class ReportController : Controller
     {
-
-
-
         readonly JobReportServices _ClientService = new JobReportServices();
         readonly EmployeeServices employeeServices = new EmployeeServices();
         readonly ProformaInvoiceHeadServices proformaInvoiceHead = new ProformaInvoiceHeadServices();
         readonly InvoiceHeadServices invoiceHead = new InvoiceHeadServices();
+        readonly ReceiptServices receiptServices = new ReceiptServices();
 
         #region Job Details 
         // GET: Report
@@ -324,5 +322,32 @@ namespace WOPHRMSystem.Controllers
         }
 
         #endregion
+
+
+        #region Receipt  
+
+        // GET: Report
+        public ActionResult ReceiptReportView()
+        {
+            return View();
+        }
+
+        [HttpGet]
+        public ActionResult ReceiptReportPDF(int id)
+        {
+            var dt = receiptServices.GetReceiptDetailsbyId(id);
+
+            
+            return new ViewAsPdf("ReceiptReportView", dt)
+            {
+                PageSize = Rotativa.Options.Size.A5,
+                PageOrientation = Rotativa.Options.Orientation.Landscape,
+                PageMargins = new Rotativa.Options.Margins(10, 10, 10, 10)
+            };
+        }
+
+        #endregion
+
+
     }
 }
