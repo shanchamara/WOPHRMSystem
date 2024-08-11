@@ -106,7 +106,7 @@
                                                     <div class="form-group">
                                                         <label for="exampleInputEmail1">Title</label>
 
-                                                        @Html.DropDownListFor(model => model.Fk_TitleId, Model.TitileLists, "Select", htmlAttributes: new { @class = "form-control", id = "selectUnit", required = "required" })
+                                                        @Html.DropDownListFor(model => model.Fk_TitleId, Model.TitileLists, "Select", htmlAttributes: new { @class = "form-control", id = "selectTitle", required = "required" })
 
                                                     </div>
                                                 </div>
@@ -130,7 +130,7 @@
                                                     <div class="form-group">
                                                         <label for="exampleInputEmail1">Department </label>
 
-                                                        @Html.DropDownListFor(model => model.Fk_DepartmentId, Model.DepartmentLists, "Select", htmlAttributes: new { @class = "form-control", id = "selectUnit", required = "required" })
+                                                        @Html.DropDownListFor(model => model.Fk_DepartmentId, Model.DepartmentLists, "Select", htmlAttributes: new { @class = "form-control", id = "selectDepartment", required = "required" })
 
                                                     </div>
                                                 </div>
@@ -140,7 +140,7 @@
                                                 <div class="mb-4">
                                                     <div class="form-group">
                                                         <label for="basicpill-address-input">Desgination</label>
-                                                        @Html.DropDownListFor(model => model.Fk_DesginationId, Model.Designationlists, "Select", htmlAttributes: new { @class = "form-control", id = "selectUnit", required = "required" })
+                                                        @Html.DropDownListFor(model => model.Fk_DesginationId, Model.Designationlists, "Select", htmlAttributes: new { @class = "form-control", id = "selectDesgination", required = "required" })
 
                                                     </div>
                                                 </div>
@@ -259,6 +259,9 @@
                                     </div>
                                 }
 
+                                <div class="modal-body" id="staticBackdropBody1">
+                                    <!-- Content loaded via AJAX will appear here -->
+                                </div>
 
                             </div>
                         </div>
@@ -393,8 +396,12 @@
             })
 
         })
-       
 
+        document.addEventListener('DOMContentLoaded', function () {
+            localStorage.clear();
+
+            GetEmployeeHourlyRateList1();
+        })
     </script>
 
     <script>
@@ -493,30 +500,74 @@
     });
 
 
-    var PostCustomerInsert = function (model) {
+        var GetEmployeeHourlyRateList1 = function () {
 
-        $.ajax({
-            type: "Post",
-            url: "/Employee/Create",
-            data: model,
+            //$("#loaderbody").removeClass('hide');
+            $.ajax({
+                type: "GET",
+                url: "/Employee/ViewEmployeeHourlyRateTemperley",
+                //data: { Fk_employeeId: selectElement, Createby: 'User' },
 
-            success: function (result) {
-                Swal.fire({
+                success: function (result) {
+                    debugger
+                    $("#staticBackdropBody1").html(result);
 
-                    icon: result.Status,
-                    title: result.Status,
-                    text: result.Text
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        window.location.href = "@Url.Action("Index", "Employee")"
-                    }
-                    else {
-                        window.location.href = "@Url.Action("Index", "Employee")"
-                    }
+                },
+            })
+        }
+
+
+        var PostCustomerInsert = function (model) {
+
+          
+            var masterModel = {
+                Name: $("#Name").val(),
+                Email: $("#Email").val(),
+                Nic: $("#Nic").val(),
+                IsManager: document.getElementById("IsManagerCheckbox").checked,
+                IsPartner: document.getElementById("IsPartnerCheckbox").checked,
+                BirthDay: $("#BirthDay").val(),
+                Fk_DesginationId: document.getElementById("selectDesgination").value,
+                Fk_DepartmentId: document.getElementById("selectDepartment").value,
+                Fk_TitleId: document.getElementById("selectTitle").value,
+                Code: $("#Code").val(),
+                DateOfJoin: $("#DateOfJoin").val(),
+                IsActive: document.getElementById("exampleCheck1").checked,
+                JObPrefixCode: $("#JObPrefixCode").val()
+            };
+
+            var rates = JSON.parse(localStorage.getItem('rates')) || [];
+            debugger
+
+                $.ajax({
+                    //type: "Post",
+                    //url: "/Employee/Create",
+                    //data: model,
+                    url: '/Employee/Create',
+                    type: 'POST',
+                    contentType: 'application/json; charset=utf-8',
+                    data: JSON.stringify({ masterModel: masterModel, rates: rates }),
+                    dataType: 'json',
+
+                    success: function (result) {
+                        Swal.fire({
+
+                            icon: result.Status,
+                            title: result.Status,
+                            text: result.Text
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                window.location.href = "@Url.Action("Index", "Employee")"
+                            }
+                            else {
+                                window.location.href = "@Url.Action("Index", "Employee")"
+                            }
+                        })
+                    },
                 })
-            },
-        })
-    }
+
+                }
+
 
 
         document.addEventListener("DOMContentLoaded", function () {

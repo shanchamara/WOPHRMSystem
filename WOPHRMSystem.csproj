@@ -2761,6 +2761,7 @@
     <Content Include="Views\GeneralReceipt\ReceiptChequeList.cshtml" />
     <Content Include="Views\Receipt\ClearSelectedInvoiceCustomerWise.cshtml" />
     <Content Include="Views\Report\ReceiptReportView.cshtml" />
+    <Content Include="Views\Employee\ViewEmployeeHourlyRateTemperley.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

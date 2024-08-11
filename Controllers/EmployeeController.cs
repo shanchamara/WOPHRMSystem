@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Web.Http;
+using System.Web.ModelBinding;
 using System.Web.Mvc;
 using WOPHRMSystem.Context;
 using WOPHRMSystem.Helps;
@@ -16,14 +19,14 @@ namespace WOPHRMSystem.Controllers
 
         #region Head
 
-        [HttpGet]
+        [System.Web.Mvc.HttpGet]
         public ActionResult Index()
         {
             var dt = _ClientService.GetAll();
             return View(dt);
         }
 
-        [HttpGet]
+        [System.Web.Mvc.HttpGet]
         public ActionResult Create()
         {
             var model = new EmployeeModel()
@@ -36,8 +39,8 @@ namespace WOPHRMSystem.Controllers
 
         }
 
-        [HttpPost]
-        public ActionResult Create(EmployeeModel masterModel)
+        [System.Web.Mvc.HttpPost]
+        public ActionResult Create(EmployeeModel masterModel, List<ListEmployeeRate> rates)
         {
             try
             {
@@ -62,7 +65,7 @@ namespace WOPHRMSystem.Controllers
                         tbl.JObPrefixCode = masterModel.JObPrefixCode;
                     };
 
-                    return Json(_ClientService.Insert(tbl));
+                    return Json(_ClientService.Insert(tbl, rates));
                 }
             }
             catch (Exception)
@@ -81,7 +84,7 @@ namespace WOPHRMSystem.Controllers
         }
 
 
-        [HttpGet]
+        [System.Web.Mvc.HttpGet]
         public ActionResult Edit(int Id)
         {
             var dt = _ClientService.GetById(Id);
@@ -108,7 +111,7 @@ namespace WOPHRMSystem.Controllers
             return View(model);
         }
 
-        [HttpPost]
+        [System.Web.Mvc.HttpPost]
         public ActionResult Edit(EmployeeModel masterModel)
         {
             try
@@ -152,7 +155,7 @@ namespace WOPHRMSystem.Controllers
             });
         }
 
-        [HttpDelete]
+        [System.Web.Mvc.HttpDelete]
         public ActionResult Delete(int ID)
         {
             try
@@ -180,7 +183,7 @@ namespace WOPHRMSystem.Controllers
 
         #region Body Add Hourly Rate 
 
-        [HttpGet]
+        [System.Web.Mvc.HttpGet]
         public ActionResult ViewEmployeeHourlyRate(int Fk_employeeId)
         {
             var data = _ClientService.GetAllEmployeeWiseRateList(Fk_employeeId);
@@ -188,8 +191,16 @@ namespace WOPHRMSystem.Controllers
             return PartialView("ViewEmployeeHourlyRate", model);
         }
 
+        [System.Web.Mvc.HttpGet]
+        public ActionResult ViewEmployeeHourlyRateTemperley()
+        {
+            var data = _ClientService.GetAllEmployeeWiseRateList(0);
+            var model = new ListEmployeeRate() { EmployeeHourlyRateModels = data };
+            return PartialView("ViewEmployeeHourlyRateTemperley", model);
+        }
 
-        [HttpDelete]
+
+        [System.Web.Mvc.HttpDelete]
         public ActionResult DeleteHourlyRate(int ID)
         {
             try
@@ -212,7 +223,7 @@ namespace WOPHRMSystem.Controllers
 
         }
 
-        [HttpPost]
+        [System.Web.Mvc.HttpPost]
         public ActionResult PostEmployeeRate(int Fk_EmployeeId, string ToDate, string FromDate, decimal Rate)
         {
             try

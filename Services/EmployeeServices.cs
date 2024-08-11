@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DocumentFormat.OpenXml.VariantTypes;
+using System;
 using System.Collections.Generic;
 using System.Data.Common.CommandTrees.ExpressionBuilder;
 using System.Linq;
@@ -18,7 +19,7 @@ namespace WOPHRMSystem.Services
             return _context.TblEmployees.SingleOrDefault(d => d.Code.Equals(code) || d.JObPrefixCode.Equals(jobPrefixcode));
         }
 
-        public MessageModel Insert(TblEmployee obj)
+        public MessageModel Insert(TblEmployee obj, List<ListEmployeeRate> lists)
         {
 
             try
@@ -28,6 +29,24 @@ namespace WOPHRMSystem.Services
                 {
                     _context.TblEmployees.Add(obj);
                     _context.SaveChanges();
+
+                    foreach (var item in lists)
+                    {
+                        TblEmployeeHourlyRate tbl = new TblEmployeeHourlyRate
+                        {
+
+                            Rate = item.Rate,
+                            FromDate = Convert.ToDateTime(item.FromDate),
+                            ToDate = Convert.ToDateTime(item.ToDate),
+                            Fk_EmployeeId = obj.Id,
+                            Create_By = "User",
+                            Create_Date = new CommonResources().LocalDatetime().Date,
+                        };
+                        _context.TblEmployeeHourlyRates.Add(tbl);
+                        _context.SaveChanges();
+
+                    }
+
 
                     return new MessageModel()
                     {
@@ -64,43 +83,32 @@ namespace WOPHRMSystem.Services
         {
             try
             {
-                var data = GetByName(obj.Code, obj.JObPrefixCode);
-                if (data == null)
+
+                var dbobj = GetById(obj.Id);
+                dbobj.Fk_DepartmentId = obj.Fk_DepartmentId;
+                dbobj.Fk_DesginationId = obj.Fk_DesginationId;
+                dbobj.Nic = obj.Nic;
+                dbobj.Email = obj.Email;
+                dbobj.Fk_TitleId = obj.Fk_TitleId;
+                dbobj.BirthDay = obj.BirthDay;
+                dbobj.IsPartner = obj.IsPartner;
+                dbobj.IsManager = obj.IsManager;
+                dbobj.DateOfJoin = obj.DateOfJoin;
+                dbobj.Name = obj.Name;
+                dbobj.Code = obj.Code;
+                dbobj.Edit_By = obj.Edit_By;
+                dbobj.IsActive = obj.IsActive;
+                dbobj.JObPrefixCode = obj.JObPrefixCode;
+                dbobj.Edit_Date = new CommonResources().LocalDatetime().Date;
+
+                _context.SaveChanges();
+
+                return new MessageModel()
                 {
-                    var dbobj = GetById(obj.Id);
-                    dbobj.Fk_DepartmentId = obj.Fk_DepartmentId;
-                    dbobj.Fk_DesginationId = obj.Fk_DesginationId;
-                    dbobj.Nic = obj.Nic;
-                    dbobj.Email = obj.Email;
-                    dbobj.Fk_TitleId = obj.Fk_TitleId;
-                    dbobj.BirthDay = obj.BirthDay;
-                    dbobj.IsPartner = obj.IsPartner;
-                    dbobj.IsManager = obj.IsManager;
-                    dbobj.DateOfJoin = obj.DateOfJoin;
-                    dbobj.Name = obj.Name;
-                    dbobj.Code = obj.Code;
-                    dbobj.Edit_By = obj.Edit_By;
-                    dbobj.IsActive = obj.IsActive;
-                    dbobj.JObPrefixCode = obj.JObPrefixCode;
-                    dbobj.Edit_Date = new CommonResources().LocalDatetime().Date;
+                    Status = "success",
+                    Text = $"This Record has been Updated",
+                };
 
-                    _context.SaveChanges();
-
-                    return new MessageModel()
-                    {
-                        Status = "success",
-                        Text = $"This Record has been Updated",
-                    };
-                }
-
-                else
-                {
-                    return new MessageModel()
-                    {
-                        Status = "warning",
-                        Text = $"This Record has been already registered",
-                    };
-                }
             }
             catch (Exception)
             {
