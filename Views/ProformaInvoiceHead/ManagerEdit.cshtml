@@ -1201,12 +1201,7 @@
                     document.getElementById("LastYearAmount").value = result[0].PreViewvalue.toFixed(2);
 
 
-                    var amountField = document.getElementById("narrationid");
-                    amountField.removeAttribute("readonly");
-
-                    var amountField2 = document.getElementById("Amount");
-                    amountField2.removeAttribute("readonly");
-                    debugger
+                  
 
                     // Get the entered values
                     var vatPercentage = parseFloat($('#vatPercentageInput').val()) || 0;
@@ -1228,22 +1223,30 @@
 
                     $('#TotalReceivedAmount').val(grandTotal.toFixed(2));
 
+                    setTimeout(function () {
+                        var amountField = document.getElementById("narrationid");
+                        amountField.removeAttribute("readonly");
 
+                        var amountField2 = document.getElementById("Amount");
+                        amountField2.removeAttribute("readonly");
+                    }, 100); // 100ms delay, adjust if necessary
+
+                    $.ajax({
+                        type: "GET",
+                        url: "/ProformaInvoiceHead/InvoiceNarrationList",
+                        //data: { Createby: 'User' },
+
+                        success: function (result) {
+                            debugger
+                            $("#staticBackdropBody").html(result);
+
+                        },
+                    })
 
                 },
             })
 
-            $.ajax({
-                type: "GET",
-                url: "/ProformaInvoiceHead/InvoiceNarrationList",
-                //data: { Createby: 'User' },
-
-                success: function (result) {
-                    debugger
-                    $("#staticBackdropBody").html(result);
-
-                },
-            })
+           
 
         }
 
