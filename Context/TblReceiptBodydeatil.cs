@@ -18,15 +18,15 @@ namespace WOPHRMSystem.Context
         public int Fk_ReceiptId { get; set; }
         public int Fk_InvoiceId { get; set; }
         public Nullable<decimal> GrandAmount { get; set; }
+        public Nullable<decimal> PaymentAmount { get; set; }
         public Nullable<decimal> BalanceAmount { get; set; }
+        public bool IsDelete { get; set; }
         public string Create_By { get; set; }
         public System.DateTime Create_Date { get; set; }
-        public string Delete_By { get; set; }
-        public Nullable<System.DateTime> Delete_Date { get; set; }
         public string Edit_By { get; set; }
         public Nullable<System.DateTime> Edit_Date { get; set; }
-        public bool IsDelete { get; set; }
-        public Nullable<decimal> PaymentAmount { get; set; }
+        public string Delete_By { get; set; }
+        public Nullable<System.DateTime> Delete_Date { get; set; }
     
         public virtual TblInvoiceHead TblInvoiceHead { get; set; }
         public virtual TblReceipt TblReceipt { get; set; }

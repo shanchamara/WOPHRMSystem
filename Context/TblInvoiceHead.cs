@@ -54,6 +54,7 @@ namespace WOPHRMSystem.Context
         public Nullable<decimal> ValueNBT { get; set; }
         public Nullable<decimal> ValueVAT { get; set; }
         public Nullable<decimal> TotalReceivedAmount { get; set; }
+        public Nullable<decimal> BalanceAmount { get; set; }
         public bool IsActive { get; set; }
         public Nullable<System.DateTime> IsActiveDate { get; set; }
         public bool IsPartnerOneComfirm { get; set; }
@@ -67,7 +68,6 @@ namespace WOPHRMSystem.Context
         public Nullable<System.DateTime> Edit_Date { get; set; }
         public string Delete_By { get; set; }
         public Nullable<System.DateTime> Delete_Date { get; set; }
-        public Nullable<decimal> BalanceAmount { get; set; }
     
         public virtual TblCompany TblCompany { get; set; }
         public virtual TblCustomer TblCustomer { get; set; }

@@ -244,6 +244,7 @@
           <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
           <ScalarProperty Name="Fk_EmployeeId" ColumnName="Fk_EmployeeId" />
           <ScalarProperty Name="ToDate" ColumnName="ToDate" />
+          <ScalarProperty Name="Fk_DesginationId" ColumnName="Fk_DesginationId" />
           <ScalarProperty Name="FromDate" ColumnName="FromDate" />
           <ScalarProperty Name="Rate" ColumnName="Rate" />
           <ScalarProperty Name="Id" ColumnName="Id" />
@@ -362,7 +363,6 @@
     <EntitySetMapping Name="TblInvoiceHeads">
       <EntityTypeMapping TypeName="AuditSystemModel.TblInvoiceHead">
         <MappingFragment StoreEntitySet="TblInvoiceHead">
-          <ScalarProperty Name="BalanceAmount" ColumnName="BalanceAmount" />
           <ScalarProperty Name="Delete_Date" ColumnName="Delete_Date" />
           <ScalarProperty Name="Delete_By" ColumnName="Delete_By" />
           <ScalarProperty Name="Edit_Date" ColumnName="Edit_Date" />
@@ -376,6 +376,7 @@
           <ScalarProperty Name="IsPartnerOneComfirm" ColumnName="IsPartnerOneComfirm" />
           <ScalarProperty Name="IsActiveDate" ColumnName="IsActiveDate" />
           <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="BalanceAmount" ColumnName="BalanceAmount" />
           <ScalarProperty Name="TotalReceivedAmount" ColumnName="TotalReceivedAmount" />
           <ScalarProperty Name="ValueVAT" ColumnName="ValueVAT" />
           <ScalarProperty Name="ValueNBT" ColumnName="ValueNBT" />
@@ -494,6 +495,8 @@
     <EntitySetMapping Name="TblJobMasterLocations">
       <EntityTypeMapping TypeName="AuditSystemModel.TblJobMasterLocation">
         <MappingFragment StoreEntitySet="TblJobMasterLocation">
+          <ScalarProperty Name="ToDate" ColumnName="ToDate" />
+          <ScalarProperty Name="FromDate" ColumnName="FromDate" />
           <ScalarProperty Name="Delete_Date" ColumnName="Delete_Date" />
           <ScalarProperty Name="Delete_By" ColumnName="Delete_By" />
           <ScalarProperty Name="Edit_Date" ColumnName="Edit_Date" />
@@ -512,6 +515,8 @@
       <EntityTypeMapping TypeName="AuditSystemModel.TblJobMasterLocationTemp">
         <MappingFragment StoreEntitySet="TblJobMasterLocationTemp">
           <ScalarProperty Name="Create_By" ColumnName="Create_By" />
+          <ScalarProperty Name="ToDate" ColumnName="ToDate" />
+          <ScalarProperty Name="FromDate" ColumnName="FromDate" />
           <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
           <ScalarProperty Name="Narration" ColumnName="Narration" />
           <ScalarProperty Name="Code" ColumnName="Code" />
@@ -686,9 +691,6 @@
     <EntitySetMapping Name="TblProformaInvoiceHeads">
       <EntityTypeMapping TypeName="AuditSystemModel.TblProformaInvoiceHead">
         <MappingFragment StoreEntitySet="TblProformaInvoiceHead">
-          <ScalarProperty Name="IsPostingToInvoice" ColumnName="IsPostingToInvoice" />
-          <ScalarProperty Name="ManagerOneComfirmDate" ColumnName="ManagerOneComfirmDate" />
-          <ScalarProperty Name="IsMangerOneComfirm" ColumnName="IsMangerOneComfirm" />
           <ScalarProperty Name="Delete_Date" ColumnName="Delete_Date" />
           <ScalarProperty Name="Delete_By" ColumnName="Delete_By" />
           <ScalarProperty Name="Edit_Date" ColumnName="Edit_Date" />
@@ -696,6 +698,8 @@
           <ScalarProperty Name="Create_Date" ColumnName="Create_Date" />
           <ScalarProperty Name="Create_By" ColumnName="Create_By" />
           <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+          <ScalarProperty Name="ManagerOneComfirmDate" ColumnName="ManagerOneComfirmDate" />
+          <ScalarProperty Name="IsMangerOneComfirm" ColumnName="IsMangerOneComfirm" />
           <ScalarProperty Name="PartnerOneComfirmDate" ColumnName="PartnerOneComfirmDate" />
           <ScalarProperty Name="IsPartnerOneComfirm" ColumnName="IsPartnerOneComfirm" />
           <ScalarProperty Name="IsActiveDate" ColumnName="IsActiveDate" />
@@ -705,6 +709,7 @@
           <ScalarProperty Name="ValueNBT" ColumnName="ValueNBT" />
           <ScalarProperty Name="TotalAmount" ColumnName="TotalAmount" />
           <ScalarProperty Name="PostingDate" ColumnName="PostingDate" />
+          <ScalarProperty Name="IsPostingToInvoice" ColumnName="IsPostingToInvoice" />
           <ScalarProperty Name="LastYearAmount" ColumnName="LastYearAmount" />
           <ScalarProperty Name="Fk_JobMasterId" ColumnName="Fk_JobMasterId" />
           <ScalarProperty Name="Fk_InvoiceShortNarrationId" ColumnName="Fk_InvoiceShortNarrationId" />
@@ -740,7 +745,6 @@
     <EntitySetMapping Name="TblReceipts">
       <EntityTypeMapping TypeName="AuditSystemModel.TblReceipt">
         <MappingFragment StoreEntitySet="TblReceipt">
-          <ScalarProperty Name="IsPrint" ColumnName="IsPrint" />
           <ScalarProperty Name="Delete_Date" ColumnName="Delete_Date" />
           <ScalarProperty Name="Delete_By" ColumnName="Delete_By" />
           <ScalarProperty Name="Edit_Date" ColumnName="Edit_Date" />
@@ -750,6 +754,7 @@
           <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
           <ScalarProperty Name="CancelDate" ColumnName="CancelDate" />
           <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="IsPrint" ColumnName="IsPrint" />
           <ScalarProperty Name="PaymentType" ColumnName="PaymentType" />
           <ScalarProperty Name="NoNTaxAmount" ColumnName="NoNTaxAmount" />
           <ScalarProperty Name="ReceiptAmount" ColumnName="ReceiptAmount" />
@@ -766,15 +771,15 @@
     <EntitySetMapping Name="TblReceiptBodydeatils">
       <EntityTypeMapping TypeName="AuditSystemModel.TblReceiptBodydeatil">
         <MappingFragment StoreEntitySet="TblReceiptBodydeatils">
-          <ScalarProperty Name="PaymentAmount" ColumnName="PaymentAmount" />
-          <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
-          <ScalarProperty Name="Edit_Date" ColumnName="Edit_Date" />
-          <ScalarProperty Name="Edit_By" ColumnName="Edit_By" />
           <ScalarProperty Name="Delete_Date" ColumnName="Delete_Date" />
           <ScalarProperty Name="Delete_By" ColumnName="Delete_By" />
+          <ScalarProperty Name="Edit_Date" ColumnName="Edit_Date" />
+          <ScalarProperty Name="Edit_By" ColumnName="Edit_By" />
           <ScalarProperty Name="Create_Date" ColumnName="Create_Date" />
           <ScalarProperty Name="Create_By" ColumnName="Create_By" />
+          <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
           <ScalarProperty Name="BalanceAmount" ColumnName="BalanceAmount" />
+          <ScalarProperty Name="PaymentAmount" ColumnName="PaymentAmount" />
           <ScalarProperty Name="GrandAmount" ColumnName="GrandAmount" />
           <ScalarProperty Name="Fk_InvoiceId" ColumnName="Fk_InvoiceId" />
           <ScalarProperty Name="Fk_ReceiptId" ColumnName="Fk_ReceiptId" />
@@ -785,11 +790,11 @@
     <EntitySetMapping Name="TblReceiptTempInvoices">
       <EntityTypeMapping TypeName="AuditSystemModel.TblReceiptTempInvoice">
         <MappingFragment StoreEntitySet="TblReceiptTempInvoice">
+          <ScalarProperty Name="BalanceAmount" ColumnName="BalanceAmount" />
           <ScalarProperty Name="PaymentAmount" ColumnName="PaymentAmount" />
           <ScalarProperty Name="GrandAmount" ColumnName="GrandAmount" />
-          <ScalarProperty Name="BalanceAmount" ColumnName="BalanceAmount" />
-          <ScalarProperty Name="RowId" ColumnName="RowId" />
           <ScalarProperty Name="Create_By" ColumnName="Create_By" />
+          <ScalarProperty Name="RowId" ColumnName="RowId" />
           <ScalarProperty Name="InvoiceId" ColumnName="InvoiceId" />
           <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
           <ScalarProperty Name="Id" ColumnName="Id" />

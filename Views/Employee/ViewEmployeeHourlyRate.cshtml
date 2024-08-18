@@ -21,8 +21,10 @@
                         <thead>
                             <tr>
                                 <th style="display:none;">Id</th> <!-- Hidden Id column -->
+                                <th style="display:none;">DesignationId</th> <!-- Hidden Id column -->
                                 <th>To Date</th>
                                 <th>From Date</th>
+                                <th>Designation</th>
                                 <th>Rate</th>
                                 <th>Action</th>
                             </tr>
@@ -32,8 +34,10 @@
                             {
                                 <tr>
                                     <td style="display:none;">@s.Id</td> <!-- Hidden Id column -->
+                                    <td style="display:none;">@s.Fk_DesginationId</td> <!-- Hidden Id column -->
                                     <td>@s.ToDate.Value.ToShortDateString()</td>
                                     <td>@s.FromDate.Value.ToShortDateString()</td>
+                                    <td>@s.DesignationName</td>
                                     <td>@s.Rate</td>
                                     <td class="project-actions text-right">
                                         <a class="btn btn-danger btn-sm" onclick="PostDelete('@s.Id')">
@@ -53,6 +57,10 @@
                                     </td>
                                     <td>
                                         @Html.EditorFor(model => model.FromDate, new { htmlAttributes = new { @class = "form-control", id = "FromDate", required = "required", onchange = "handleDateChange()" } })
+                                    </td>
+                                    <td>
+                                        @Html.DropDownListFor(model => model.Fk_DesginationId, Model.Designationlists, "Select", htmlAttributes: new { @class = "form-control", id = "selectDesgination1", required = "required", onchange = "handleDateChange1()" })
+
                                     </td>
                                     <td>
                                         @Html.EditorFor(model => model.Rate, new { htmlAttributes = new { @class = "form-control", id = "Rate", required = "required", @type = "number", @min = "0", onchange = "handleDateChange()" } })
@@ -127,6 +135,7 @@
         var ToDate = document.getElementById("ToDate").value;
         var fromDate = document.getElementById("FromDate").value;
         var Rate = document.getElementById("Rate").value;
+        var Fk_DesginationId = $('#selectDesgination1').val();
 
         if (ToDate != "") {
 
@@ -146,6 +155,14 @@
 
 
         }
+
+        if (Fk_DesginationId != "") {
+            var dropdown = document.getElementById("selectDesgination1");
+            setTimeout(function () {
+                dropdown.classList.remove("is-invalid");
+            }, 10);
+
+        }
     }
 
 
@@ -158,7 +175,7 @@
         var fromDate = document.getElementById("FromDate").value;
         var Rate = document.getElementById("Rate").value;
         var Fk_EmployeeId = document.getElementById("Fk_EmployeeId").value;
-
+        var Fk_DesginationId = $('#selectDesgination1').val();
 
         if (ToDate == "") {
             IsValid = false;
@@ -173,7 +190,15 @@
 
             return IsValid;
         }
-
+        if (Fk_DesginationId == "") {
+            IsValid = false;
+            // $('#selectDesgination').className = "form-control text-box single-line is-invalid";
+            var dropdown = document.getElementById("selectDesgination1");
+            setTimeout(function () {
+                dropdown.classList.add("is-invalid");
+            }, 10);
+            return IsValid;
+        }
         if (Rate == "") {
             IsValid = false;
             document.getElementById("Rate").className = "form-control text-box single-line is-invalid";
@@ -184,14 +209,15 @@
 
 
 
-        PostRate(Fk_EmployeeId, ToDate, fromDate, Rate);
+
+        PostRate(Fk_EmployeeId, ToDate, fromDate, Rate, Fk_DesginationId);
     }
 
-    function PostRate(Fk_EmployeeId, ToDate, FromDate, rate) {
+    function PostRate(Fk_EmployeeId, ToDate, FromDate, rate, fk_DesginationId) {
         $.ajax({
             type: "POST",
             url: "/Employee/PostEmployeeRate",
-            data: { Fk_EmployeeId: Fk_EmployeeId, ToDate: ToDate, FromDate: FromDate, Rate: rate },
+            data: { Fk_EmployeeId: Fk_EmployeeId, ToDate: ToDate, FromDate: FromDate, Rate: rate, Fk_DesginationId: fk_DesginationId },
             success: function (result) {
                 Swal.fire({
                     icon: result.Status,

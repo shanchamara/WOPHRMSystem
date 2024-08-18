@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DocumentFormat.OpenXml.VariantTypes;
+using System;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 using WOPHRMSystem.Context;
@@ -309,7 +310,7 @@ namespace WOPHRMSystem.Controllers
 
 
         [HttpPost]
-        public ActionResult InsertSelectedLocation(int locationId, int customerId)
+        public ActionResult InsertSelectedLocation(int locationId, int customerId, string toDate, string fromDate)
         {
             try
             {
@@ -319,7 +320,9 @@ namespace WOPHRMSystem.Controllers
                     {
                         Create_By = "User",
                         FK_LocationId = locationId,
-                        CustomerId = customerId
+                        CustomerId = customerId,
+                        FromDate = Convert.ToDateTime(fromDate),
+                        ToDate = Convert.ToDateTime(toDate),
                     };
 
                     return Json(jobMasterLocationTemp.Insert(tbl));

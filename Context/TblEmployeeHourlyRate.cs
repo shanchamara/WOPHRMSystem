@@ -17,6 +17,7 @@ namespace WOPHRMSystem.Context
         public int Id { get; set; }
         public Nullable<decimal> Rate { get; set; }
         public Nullable<System.DateTime> FromDate { get; set; }
+        public int Fk_DesginationId { get; set; }
         public Nullable<System.DateTime> ToDate { get; set; }
         public int Fk_EmployeeId { get; set; }
         public bool IsDelete { get; set; }
@@ -27,6 +28,7 @@ namespace WOPHRMSystem.Context
         public string Delete_By { get; set; }
         public Nullable<System.DateTime> Delete_Date { get; set; }
     
+        public virtual TblDesignation TblDesignation { get; set; }
         public virtual TblEmployee TblEmployee { get; set; }
     }
 }

@@ -33,7 +33,10 @@
                             <tr>
                                 <th style="display:none;">Id</th> <!-- Hidden Id column -->
                                 <th class="form-control-sm">Code</th>
+
                                 <th class="form-control-sm">Narration</th>
+                                <th class="form-control-sm">To Date</th>
+                                <th class="form-control-sm">From Date</th>
                                 <th class="form-control-sm">Action</th>
                             </tr>
                         </thead>
@@ -44,6 +47,8 @@
                                     <td style="display:none;">@s.Id</td> <!-- Hidden Id column -->
                                     <td class="form-control-sm">@s.Code</td>
                                     <td class="form-control-sm">@s.Narration</td>
+                                    <td>@s.ToDate.Value.ToShortDateString()</td>
+                                    <td>@s.FromDate.Value.ToShortDateString()</td>
                                     <td class="project-actions text-right form-control-sm">
                                         <a class="btn btn-danger btn-sm" onclick="PostDelete('@s.Id')">
                                             <i class="fas fa-trash"></i>
@@ -57,10 +62,19 @@
                                 @Html.HiddenFor(model => model.Fk_locationId)
                                 <tr>
                                     <td style="display:none;"></td> <!-- Hidden Id column -->
+
+
+
                                     <td colspan="2">
                                         @Html.DropDownListFor(model => model.Fk_locationId, Model.LocationSelectListItems, "Select", htmlAttributes: new { @class = "form-control form-control-sm", id = "selectlocation", required = "required" })
                                     </td>
-                                    <td class="project-actions text-right">
+                                    <td>
+                                        @Html.EditorFor(model => model.ToDate, new { htmlAttributes = new { @class = "form-control form-control-sm", id = "ToDate", required = "required" } })
+                                    </td>
+                                    <td>
+                                        @Html.EditorFor(model => model.FromDate, new { htmlAttributes = new { @class = "form-control form-control-sm", id = "FromDate", required = "required" } })
+                                    </td>
+                                    <td class="project-actions text-right" colspan="2">
                                         <button class="btn btn-info btn-sm" type="submit" onclick="AddLocation()">
                                             <i class="fas fa-plus"></i>
                                         </button>
@@ -73,7 +87,7 @@
                 <div class="card-footer">
                     The selected customer has these locations
                 </div>
-               
+
                 <!-- /.card-body -->
             </div>
         </div>

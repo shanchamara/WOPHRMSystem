@@ -225,6 +225,7 @@
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Rate" Type="decimal" Precision="18" Scale="2" />
     <Property Name="FromDate" Type="datetime2" Precision="7" />
+    <Property Name="Fk_DesginationId" Type="int" Nullable="false" />
     <Property Name="ToDate" Type="datetime2" Precision="7" />
     <Property Name="Fk_EmployeeId" Type="int" Nullable="false" />
     <Property Name="IsDelete" Type="bit" Nullable="false" />
@@ -376,6 +377,7 @@
     <Property Name="ValueNBT" Type="decimal" Precision="18" Scale="2" />
     <Property Name="ValueVAT" Type="decimal" Precision="18" Scale="2" />
     <Property Name="TotalReceivedAmount" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="BalanceAmount" Type="decimal" Precision="18" Scale="2" />
     <Property Name="IsActive" Type="bit" Nullable="false" />
     <Property Name="IsActiveDate" Type="datetime2" Precision="7" />
     <Property Name="IsPartnerOneComfirm" Type="bit" Nullable="false" />
@@ -389,7 +391,6 @@
     <Property Name="Edit_Date" Type="datetime2" Precision="7" />
     <Property Name="Delete_By" Type="nvarchar(max)" />
     <Property Name="Delete_Date" Type="datetime2" Precision="7" />
-    <Property Name="BalanceAmount" Type="decimal" Precision="18" Scale="2" />
   </EntityType>
   <EntityType Name="TblInvoiceNarrationMaster">
     <Key>
@@ -480,6 +481,8 @@
     <Property Name="Edit_Date" Type="datetime2" Precision="7" />
     <Property Name="Delete_By" Type="nvarchar(max)" />
     <Property Name="Delete_Date" Type="datetime2" Precision="7" />
+    <Property Name="FromDate" Type="datetime2" Precision="7" />
+    <Property Name="ToDate" Type="datetime2" Precision="7" />
   </EntityType>
   <EntityType Name="TblJobMasterLocationTemp">
     <Key>
@@ -490,6 +493,8 @@
     <Property Name="Code" Type="nvarchar(max)" />
     <Property Name="Narration" Type="nvarchar(max)" />
     <Property Name="CustomerId" Type="int" Nullable="false" />
+    <Property Name="FromDate" Type="datetime2" Precision="7" />
+    <Property Name="ToDate" Type="datetime2" Precision="7" />
     <Property Name="Create_By" Type="nvarchar(max)" />
   </EntityType>
   <EntityType Name="TblJobMasterPartner">
@@ -679,6 +684,7 @@
     <Property Name="Fk_InvoiceShortNarrationId" Type="int" Nullable="false" />
     <Property Name="Fk_JobMasterId" Type="int" Nullable="false" />
     <Property Name="LastYearAmount" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="IsPostingToInvoice" Type="bit" Nullable="false" />
     <Property Name="PostingDate" Type="datetime2" Precision="7" />
     <Property Name="TotalAmount" Type="decimal" Precision="18" Scale="2" />
     <Property Name="ValueNBT" Type="decimal" Precision="18" Scale="2" />
@@ -688,6 +694,8 @@
     <Property Name="IsActiveDate" Type="datetime2" Precision="7" />
     <Property Name="IsPartnerOneComfirm" Type="bit" Nullable="false" />
     <Property Name="PartnerOneComfirmDate" Type="datetime2" Precision="7" />
+    <Property Name="IsMangerOneComfirm" Type="bit" Nullable="false" />
+    <Property Name="ManagerOneComfirmDate" Type="datetime2" Precision="7" />
     <Property Name="IsDelete" Type="bit" Nullable="false" />
     <Property Name="Create_By" Type="nvarchar(max)" />
     <Property Name="Create_Date" Type="datetime2" Precision="7" Nullable="false" />
@@ -695,9 +703,6 @@
     <Property Name="Edit_Date" Type="datetime2" Precision="7" />
     <Property Name="Delete_By" Type="nvarchar(max)" />
     <Property Name="Delete_Date" Type="datetime2" Precision="7" />
-    <Property Name="IsMangerOneComfirm" Type="bit" Nullable="false" />
-    <Property Name="ManagerOneComfirmDate" Type="datetime2" Precision="7" />
-    <Property Name="IsPostingToInvoice" Type="bit" Nullable="false" />
   </EntityType>
   <EntityType Name="TblReceipt">
     <Key>
@@ -713,6 +718,7 @@
     <Property Name="ReceiptAmount" Type="decimal" Precision="18" Scale="2" />
     <Property Name="NoNTaxAmount" Type="decimal" Precision="18" Scale="2" />
     <Property Name="PaymentType" Type="nvarchar(max)" />
+    <Property Name="IsPrint" Type="bit" Nullable="false" />
     <Property Name="IsActive" Type="bit" Nullable="false" />
     <Property Name="CancelDate" Type="datetime2" Precision="7" />
     <Property Name="IsDelete" Type="bit" Nullable="false" />
@@ -722,7 +728,6 @@
     <Property Name="Edit_Date" Type="datetime2" Precision="7" />
     <Property Name="Delete_By" Type="nvarchar(max)" />
     <Property Name="Delete_Date" Type="datetime2" Precision="7" />
-    <Property Name="IsPrint" Type="bit" Nullable="false" />
   </EntityType>
   <EntityType Name="TblReceiptBodydeatils">
     <Key>
@@ -732,15 +737,15 @@
     <Property Name="Fk_ReceiptId" Type="int" Nullable="false" />
     <Property Name="Fk_InvoiceId" Type="int" Nullable="false" />
     <Property Name="GrandAmount" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="PaymentAmount" Type="decimal" Precision="18" Scale="2" />
     <Property Name="BalanceAmount" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="IsDelete" Type="bit" Nullable="false" />
     <Property Name="Create_By" Type="nvarchar(max)" />
     <Property Name="Create_Date" Type="datetime2" Precision="7" Nullable="false" />
-    <Property Name="Delete_By" Type="nvarchar(max)" />
-    <Property Name="Delete_Date" Type="datetime2" Precision="7" />
     <Property Name="Edit_By" Type="nvarchar(max)" />
     <Property Name="Edit_Date" Type="datetime2" Precision="7" />
-    <Property Name="IsDelete" Type="bit" Nullable="false" />
-    <Property Name="PaymentAmount" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="Delete_By" Type="nvarchar(max)" />
+    <Property Name="Delete_Date" Type="datetime2" Precision="7" />
   </EntityType>
   <EntityType Name="TblReceiptTempInvoice">
     <Key>
@@ -749,11 +754,11 @@
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="CustomerId" Type="int" Nullable="false" />
     <Property Name="InvoiceId" Type="int" Nullable="false" />
-    <Property Name="Create_By" Type="nvarchar(max)" />
     <Property Name="RowId" Type="int" Nullable="false" />
-    <Property Name="BalanceAmount" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="Create_By" Type="nvarchar(max)" />
     <Property Name="GrandAmount" Type="decimal" Precision="18" Scale="2" />
     <Property Name="PaymentAmount" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="BalanceAmount" Type="decimal" Precision="18" Scale="2" />
   </EntityType>
   <EntityType Name="TblSectorMaster">
     <Key>
@@ -1806,6 +1811,18 @@ warning 6002: The table/view 'AuditSystem.dbo.VW_SectorMaster' does not have a p
       </Principal>
       <Dependent Role="TblEmployee">
         <PropertyRef Name="Fk_TitleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TblEmployeeHourlyRate_TblDesignation_Fk_DesginationId">
+    <End Role="TblDesignation" Type="Self.TblDesignation" Multiplicity="1" />
+    <End Role="TblEmployeeHourlyRate" Type="Self.TblEmployeeHourlyRate" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TblDesignation">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TblEmployeeHourlyRate">
+        <PropertyRef Name="Fk_DesginationId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -3085,6 +3102,10 @@ FROM [dbo].[VW_SectorMaster] AS [VW_SectorMaster]</DefiningQuery>
     <AssociationSet Name="FK_TblEmployee_TblTitle_Fk_TitleId" Association="Self.FK_TblEmployee_TblTitle_Fk_TitleId">
       <End Role="TblTitle" EntitySet="TblTitle" />
       <End Role="TblEmployee" EntitySet="TblEmployee" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TblEmployeeHourlyRate_TblDesignation_Fk_DesginationId" Association="Self.FK_TblEmployeeHourlyRate_TblDesignation_Fk_DesginationId">
+      <End Role="TblDesignation" EntitySet="TblDesignation" />
+      <End Role="TblEmployeeHourlyRate" EntitySet="TblEmployeeHourlyRate" />
     </AssociationSet>
     <AssociationSet Name="FK_TblEmployeeHourlyRate_TblEmployee_Fk_EmployeeId" Association="Self.FK_TblEmployeeHourlyRate_TblEmployee_Fk_EmployeeId">
       <End Role="TblEmployee" EntitySet="TblEmployee" />

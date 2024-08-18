@@ -48,7 +48,8 @@ namespace WOPHRMSystem.Services
                                 IsDelete = false,
                                 FK_LocationId = s.FK_LocationId,
                                 Fk_CustomerId = obj.Fk_CustomerId,
-
+                                ToDate = s.ToDate,
+                                FromDate = s.FromDate,
                             };
                             _context.TblJobMasterLocations.AddOrUpdate(tblJobMasterLocation);
 
@@ -210,7 +211,9 @@ namespace WOPHRMSystem.Services
                                 IsDelete = false,
                                 FK_LocationId = s.FK_LocationId,
                                 Fk_CustomerId = obj.Fk_CustomerId,
-                                Id = Editlocation.Id
+                                Id = Editlocation.Id,
+                                ToDate = Editlocation.ToDate,
+                                FromDate = Editlocation.FromDate,
                             };
                             _context.TblJobMasterLocations.AddOrUpdate(tblJobMasterLocation);
                         }

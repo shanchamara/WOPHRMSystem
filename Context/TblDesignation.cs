@@ -17,6 +17,7 @@ namespace WOPHRMSystem.Context
         public TblDesignation()
         {
             this.TblEmployees = new HashSet<TblEmployee>();
+            this.TblEmployeeHourlyRates = new HashSet<TblEmployeeHourlyRate>();
         }
     
         public int Id { get; set; }
@@ -32,5 +33,6 @@ namespace WOPHRMSystem.Context
         public Nullable<System.DateTime> Delete_Date { get; set; }
     
         public virtual ICollection<TblEmployee> TblEmployees { get; set; }
+        public virtual ICollection<TblEmployeeHourlyRate> TblEmployeeHourlyRates { get; set; }
     }
 }

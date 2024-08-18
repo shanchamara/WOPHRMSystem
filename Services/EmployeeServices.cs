@@ -40,6 +40,7 @@ namespace WOPHRMSystem.Services
                             ToDate = Convert.ToDateTime(item.ToDate),
                             Fk_EmployeeId = obj.Id,
                             Create_By = "User",
+                            Fk_DesginationId = item.Fk_DesginationId,
                             Create_Date = new CommonResources().LocalDatetime().Date,
                         };
                         _context.TblEmployeeHourlyRates.Add(tbl);
@@ -268,6 +269,7 @@ namespace WOPHRMSystem.Services
             try
             {
                 var dr = (from a in _context.TblEmployeeHourlyRates
+                          join d in _context.TblDesignations on a.Fk_DesginationId equals d.Id
                           where a.Fk_EmployeeId == id
                           orderby a.Id descending
                           select new EmployeeHourlyRateModel()
@@ -276,6 +278,8 @@ namespace WOPHRMSystem.Services
                               Fk_EmployeeId = a.Fk_EmployeeId,
                               FromDate = a.FromDate,
                               Rate = a.Rate,
+                              Fk_DesginationId = a.Fk_DesginationId,
+                              DesignationName = d.Code + " " + d.Narration,
                               ToDate = a.ToDate,
                               IsDelete = a.IsDelete,
                           }).Where(d => d.IsDelete.Equals(false)).ToList();

@@ -19,6 +19,8 @@ namespace WOPHRMSystem.Context
         public string Code { get; set; }
         public string Narration { get; set; }
         public int CustomerId { get; set; }
+        public Nullable<System.DateTime> FromDate { get; set; }
+        public Nullable<System.DateTime> ToDate { get; set; }
         public string Create_By { get; set; }
     }
 }

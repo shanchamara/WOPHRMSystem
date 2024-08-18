@@ -152,7 +152,8 @@ namespace WOPHRMSystem.Services
                               Id = a.Id,
                               Create_By = a.Create_By,
                               CustomerId = CustomerId,
-
+                              ToDate = a.ToDate,
+                              FromDate = a.FromDate,
                           }).ToList();
                 return dr;
             }
@@ -209,7 +210,9 @@ namespace WOPHRMSystem.Services
                               Narration = l.Narration,
                               Create_By = a.Create_By,
                               CustomerId = a.Fk_CustomerId,
-                              Fk_locationId = a.FK_LocationId
+                              Fk_locationId = a.FK_LocationId,
+                              ToDate = a.ToDate,
+                              FromDate = a.FromDate,
 
 
                           }).ToList();
@@ -231,7 +234,9 @@ namespace WOPHRMSystem.Services
                         Code = d.Code,
                         FK_LocationId = d.Fk_locationId,
                         Narration = d.Narration,
-                        Id = d.Id
+                        Id = d.Id,
+                        ToDate = d.ToDate,
+                        FromDate = d.FromDate,
 
                     };
                     _context.TblJobMasterLocationTemps.Add(tblJobMasterLocationTemp);

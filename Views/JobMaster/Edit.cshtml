@@ -623,11 +623,14 @@
         var AddLocation = function () {
             var selectElement = document.getElementById("selectlocation").value;
             var selectCustomerElement = document.getElementById("selectUnit").value;
-            //$("#loaderbody").removeClass('hide');
+            var FromDate = document.getElementById("FromDate").value;
+            var ToDate = document.getElementById("ToDate").value;
+
+
             $.ajax({
                 type: "Post",
                 url: "/JobMaster/InsertSelectedLocation",
-                data: { locationId: selectElement, customerId: selectCustomerElement },
+                data: { locationId: selectElement, customerId: selectCustomerElement, fromDate: FromDate, toDate: ToDate },
 
                 success: function (result) {
                     Swal.fire({

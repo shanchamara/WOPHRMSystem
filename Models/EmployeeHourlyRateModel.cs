@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Web.Mvc;
 
 namespace WOPHRMSystem.Models
 {
@@ -12,6 +13,8 @@ namespace WOPHRMSystem.Models
         public Nullable<System.DateTime> ToDate { get; set; }
         public int Fk_EmployeeId { get; set; }
         public bool IsDelete { get; set; }
+        public int Fk_DesginationId { get; set; }
+        public string DesignationName { get; set; }
     }
 
     public class ListEmployeeRate
@@ -28,6 +31,9 @@ namespace WOPHRMSystem.Models
         [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}")]
         public Nullable<System.DateTime> ToDate { get; set; }
         public int Fk_EmployeeId { get; set; }
+        public int Fk_DesginationId { get; set; }
         public bool IsDelete { get; set; }
+
+        public SelectList Designationlists { get; set; }
     }
 }

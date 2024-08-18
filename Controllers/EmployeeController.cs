@@ -187,7 +187,7 @@ namespace WOPHRMSystem.Controllers
         public ActionResult ViewEmployeeHourlyRate(int Fk_employeeId)
         {
             var data = _ClientService.GetAllEmployeeWiseRateList(Fk_employeeId);
-            var model = new ListEmployeeRate() { EmployeeHourlyRateModels = data };
+            var model = new ListEmployeeRate() { EmployeeHourlyRateModels = data, Designationlists = new SelectList(designationServices.GetAll(), "Id", "CodeAndNarration"), };
             return PartialView("ViewEmployeeHourlyRate", model);
         }
 
@@ -195,7 +195,11 @@ namespace WOPHRMSystem.Controllers
         public ActionResult ViewEmployeeHourlyRateTemperley()
         {
             var data = _ClientService.GetAllEmployeeWiseRateList(0);
-            var model = new ListEmployeeRate() { EmployeeHourlyRateModels = data };
+            var model = new ListEmployeeRate()
+            {
+                EmployeeHourlyRateModels = data,
+                Designationlists = new SelectList(designationServices.GetAll(), "Id", "CodeAndNarration"),
+            };
             return PartialView("ViewEmployeeHourlyRateTemperley", model);
         }
 
@@ -224,7 +228,7 @@ namespace WOPHRMSystem.Controllers
         }
 
         [System.Web.Mvc.HttpPost]
-        public ActionResult PostEmployeeRate(int Fk_EmployeeId, string ToDate, string FromDate, decimal Rate)
+        public ActionResult PostEmployeeRate(int Fk_EmployeeId, string ToDate, string FromDate, decimal Rate, int Fk_DesginationId)
         {
             try
             {
@@ -238,6 +242,7 @@ namespace WOPHRMSystem.Controllers
                         ToDate = Convert.ToDateTime(ToDate),
                         Fk_EmployeeId = Fk_EmployeeId,
                         Create_By = "User",
+                        Fk_DesginationId = Fk_DesginationId,
                         Create_Date = new CommonResources().LocalDatetime().Date,
                     };
 

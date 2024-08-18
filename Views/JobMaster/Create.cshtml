@@ -58,7 +58,7 @@
                         <div class="col-md-6">
                             @using (Html.BeginForm("", "", FormMethod.Post, new { role = "form", enctype = "multipart/form-data", id = "quickForm", @autocomplete = "off" }))
                             {
-                                @Html.HiddenFor(model=>model.DefaultJobCode)
+                                @Html.HiddenFor(model => model.DefaultJobCode)
                                 <div class="card card-danger">
                                     <div class="card-header">
                                         <h3 class="card-title">Job Details</h3>
@@ -499,7 +499,7 @@
                 data: { id: id },
 
                 success: function (result) {
-                   
+
                     Swal.fire({
 
                         icon: result.Status,
@@ -513,7 +513,7 @@
                                 data: { Createby: 'User' },
 
                                 success: function (result) {
-                                
+
                                     $("#staticEmployee").html(result);
                                 },
                             })
@@ -581,12 +581,14 @@
 
         var AddLocation = function () {
             var selectElement = document.getElementById("selectlocation").value;
+            var FromDate = document.getElementById("FromDate").value;
+            var ToDate = document.getElementById("ToDate").value;
             var selectCustomerElement = document.getElementById("selectUnit").value;
-            //$("#loaderbody").removeClass('hide');
+           
             $.ajax({
                 type: "Post",
                 url: "/JobMaster/InsertSelectedLocation",
-                data: { locationId: selectElement, customerId: selectCustomerElement },
+                data: { locationId: selectElement, customerId: selectCustomerElement, fromDate: FromDate, toDate: ToDate },
 
                 success: function (result) {
                     Swal.fire({

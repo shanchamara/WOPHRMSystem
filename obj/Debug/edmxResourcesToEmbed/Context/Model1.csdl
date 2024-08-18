@@ -195,6 +195,10 @@
       <End Role="TblDesignation" EntitySet="TblDesignations" />
       <End Role="TblEmployee" EntitySet="TblEmployees" />
     </AssociationSet>
+    <AssociationSet Name="FK_TblEmployeeHourlyRate_TblDesignation_Fk_DesginationId" Association="AuditSystemModel.FK_TblEmployeeHourlyRate_TblDesignation_Fk_DesginationId">
+      <End Role="TblDesignation" EntitySet="TblDesignations" />
+      <End Role="TblEmployeeHourlyRate" EntitySet="TblEmployeeHourlyRates" />
+    </AssociationSet>
     <AssociationSet Name="FK_TblEmployee_TblTitle_Fk_TitleId" Association="AuditSystemModel.FK_TblEmployee_TblTitle_Fk_TitleId">
       <End Role="TblTitle" EntitySet="TblTitles" />
       <End Role="TblEmployee" EntitySet="TblEmployees" />
@@ -530,6 +534,7 @@
     <Property Name="Delete_By" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="Delete_Date" Type="DateTime" Precision="7" />
     <NavigationProperty Name="TblEmployees" Relationship="AuditSystemModel.FK_TblEmployee_TblDesignation_Fk_DesginationId" FromRole="TblDesignation" ToRole="TblEmployee" />
+    <NavigationProperty Name="TblEmployeeHourlyRates" Relationship="AuditSystemModel.FK_TblEmployeeHourlyRate_TblDesignation_Fk_DesginationId" FromRole="TblDesignation" ToRole="TblEmployeeHourlyRate" />
   </EntityType>
   <EntityType Name="TblDocument">
     <Key>
@@ -579,6 +584,7 @@
     <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="Rate" Type="Decimal" Precision="18" Scale="2" />
     <Property Name="FromDate" Type="DateTime" Precision="7" />
+    <Property Name="Fk_DesginationId" Type="Int32" Nullable="false" />
     <Property Name="ToDate" Type="DateTime" Precision="7" />
     <Property Name="Fk_EmployeeId" Type="Int32" Nullable="false" />
     <Property Name="IsDelete" Type="Boolean" Nullable="false" />
@@ -588,6 +594,7 @@
     <Property Name="Edit_Date" Type="DateTime" Precision="7" />
     <Property Name="Delete_By" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="Delete_Date" Type="DateTime" Precision="7" />
+    <NavigationProperty Name="TblDesignation" Relationship="AuditSystemModel.FK_TblEmployeeHourlyRate_TblDesignation_Fk_DesginationId" FromRole="TblEmployeeHourlyRate" ToRole="TblDesignation" />
     <NavigationProperty Name="TblEmployee" Relationship="AuditSystemModel.FK_TblEmployeeHourlyRate_TblEmployee_Fk_EmployeeId" FromRole="TblEmployeeHourlyRate" ToRole="TblEmployee" />
   </EntityType>
   <EntityType Name="TblGenaralReceipt">
@@ -742,6 +749,7 @@
     <Property Name="ValueNBT" Type="Decimal" Precision="18" Scale="2" />
     <Property Name="ValueVAT" Type="Decimal" Precision="18" Scale="2" />
     <Property Name="TotalReceivedAmount" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="BalanceAmount" Type="Decimal" Precision="18" Scale="2" />
     <Property Name="IsActive" Type="Boolean" Nullable="false" />
     <Property Name="IsActiveDate" Type="DateTime" Precision="7" />
     <Property Name="IsPartnerOneComfirm" Type="Boolean" Nullable="false" />
@@ -755,7 +763,6 @@
     <Property Name="Edit_Date" Type="DateTime" Precision="7" />
     <Property Name="Delete_By" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="Delete_Date" Type="DateTime" Precision="7" />
-    <Property Name="BalanceAmount" Type="Decimal" Precision="18" Scale="2" />
     <NavigationProperty Name="TblCompany" Relationship="AuditSystemModel.FK_TblInvoiceHead_TblCompany_Fk_CompanyId" FromRole="TblInvoiceHead" ToRole="TblCompany" />
     <NavigationProperty Name="TblCustomer" Relationship="AuditSystemModel.FK_TblInvoiceHead_TblCustomers_Fk_CustomerId" FromRole="TblInvoiceHead" ToRole="TblCustomer" />
     <NavigationProperty Name="TblDepartment" Relationship="AuditSystemModel.FK_TblInvoiceHead_TblDepartment_Fk_DepartmentIdOne" FromRole="TblInvoiceHead" ToRole="TblDepartment" />
@@ -869,6 +876,8 @@
     <Property Name="Edit_Date" Type="DateTime" Precision="7" />
     <Property Name="Delete_By" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="Delete_Date" Type="DateTime" Precision="7" />
+    <Property Name="FromDate" Type="DateTime" Precision="7" />
+    <Property Name="ToDate" Type="DateTime" Precision="7" />
     <NavigationProperty Name="TblJobMaster" Relationship="AuditSystemModel.FK_TblJobMasterLocation_TblJobMaster_Fk_JobMasterId" FromRole="TblJobMasterLocation" ToRole="TblJobMaster" />
     <NavigationProperty Name="TblLocation" Relationship="AuditSystemModel.FK_TblJobMasterLocation_TblLocation_FK_LocationId" FromRole="TblJobMasterLocation" ToRole="TblLocation" />
   </EntityType>
@@ -881,6 +890,8 @@
     <Property Name="Code" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="Narration" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="CustomerId" Type="Int32" Nullable="false" />
+    <Property Name="FromDate" Type="DateTime" Precision="7" />
+    <Property Name="ToDate" Type="DateTime" Precision="7" />
     <Property Name="Create_By" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="TblJobMasterPartner">
@@ -1088,6 +1099,7 @@
     <Property Name="Fk_InvoiceShortNarrationId" Type="Int32" Nullable="false" />
     <Property Name="Fk_JobMasterId" Type="Int32" Nullable="false" />
     <Property Name="LastYearAmount" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="IsPostingToInvoice" Type="Boolean" Nullable="false" />
     <Property Name="PostingDate" Type="DateTime" Precision="7" />
     <Property Name="TotalAmount" Type="Decimal" Precision="18" Scale="2" />
     <Property Name="ValueNBT" Type="Decimal" Precision="18" Scale="2" />
@@ -1097,6 +1109,8 @@
     <Property Name="IsActiveDate" Type="DateTime" Precision="7" />
     <Property Name="IsPartnerOneComfirm" Type="Boolean" Nullable="false" />
     <Property Name="PartnerOneComfirmDate" Type="DateTime" Precision="7" />
+    <Property Name="IsMangerOneComfirm" Type="Boolean" Nullable="false" />
+    <Property Name="ManagerOneComfirmDate" Type="DateTime" Precision="7" />
     <Property Name="IsDelete" Type="Boolean" Nullable="false" />
     <Property Name="Create_By" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="Create_Date" Type="DateTime" Nullable="false" Precision="7" />
@@ -1104,9 +1118,6 @@
     <Property Name="Edit_Date" Type="DateTime" Precision="7" />
     <Property Name="Delete_By" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="Delete_Date" Type="DateTime" Precision="7" />
-    <Property Name="IsMangerOneComfirm" Type="Boolean" Nullable="false" />
-    <Property Name="ManagerOneComfirmDate" Type="DateTime" Precision="7" />
-    <Property Name="IsPostingToInvoice" Type="Boolean" Nullable="false" />
     <NavigationProperty Name="TblCompany" Relationship="AuditSystemModel.FK_TblProformaInvoiceHead_TblCompany_Fk_CompanyId" FromRole="TblProformaInvoiceHead" ToRole="TblCompany" />
     <NavigationProperty Name="TblCustomer" Relationship="AuditSystemModel.FK_TblProformaInvoiceHead_TblCustomers_Fk_CustomerId" FromRole="TblProformaInvoiceHead" ToRole="TblCustomer" />
     <NavigationProperty Name="TblDepartment" Relationship="AuditSystemModel.FK_TblProformaInvoiceHead_TblDepartment_Fk_DepartmentIdOne" FromRole="TblProformaInvoiceHead" ToRole="TblDepartment" />
@@ -1132,6 +1143,7 @@
     <Property Name="ReceiptAmount" Type="Decimal" Precision="18" Scale="2" />
     <Property Name="NoNTaxAmount" Type="Decimal" Precision="18" Scale="2" />
     <Property Name="PaymentType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="IsPrint" Type="Boolean" Nullable="false" />
     <Property Name="IsActive" Type="Boolean" Nullable="false" />
     <Property Name="CancelDate" Type="DateTime" Precision="7" />
     <Property Name="IsDelete" Type="Boolean" Nullable="false" />
@@ -1141,7 +1153,6 @@
     <Property Name="Edit_Date" Type="DateTime" Precision="7" />
     <Property Name="Delete_By" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="Delete_Date" Type="DateTime" Precision="7" />
-    <Property Name="IsPrint" Type="Boolean" Nullable="false" />
     <NavigationProperty Name="TblCompany" Relationship="AuditSystemModel.FK_TblReceipt_TblCompany_Fk_CompanyId" FromRole="TblReceipt" ToRole="TblCompany" />
     <NavigationProperty Name="TblCustomer" Relationship="AuditSystemModel.FK_TblReceipt_TblCustomers_Fk_CustomerId" FromRole="TblReceipt" ToRole="TblCustomer" />
     <NavigationProperty Name="TblWorkGroup" Relationship="AuditSystemModel.FK_TblReceipt_TblWorkGroup_Fk_WorkGroupId" FromRole="TblReceipt" ToRole="TblWorkGroup" />
@@ -1155,15 +1166,15 @@
     <Property Name="Fk_ReceiptId" Type="Int32" Nullable="false" />
     <Property Name="Fk_InvoiceId" Type="Int32" Nullable="false" />
     <Property Name="GrandAmount" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="PaymentAmount" Type="Decimal" Precision="18" Scale="2" />
     <Property Name="BalanceAmount" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="IsDelete" Type="Boolean" Nullable="false" />
     <Property Name="Create_By" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="Create_Date" Type="DateTime" Nullable="false" Precision="7" />
-    <Property Name="Delete_By" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="Delete_Date" Type="DateTime" Precision="7" />
     <Property Name="Edit_By" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="Edit_Date" Type="DateTime" Precision="7" />
-    <Property Name="IsDelete" Type="Boolean" Nullable="false" />
-    <Property Name="PaymentAmount" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Delete_By" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Delete_Date" Type="DateTime" Precision="7" />
     <NavigationProperty Name="TblInvoiceHead" Relationship="AuditSystemModel.FK_TblReceiptBodydeatils_TblInvoiceHead_Fk_InvoiceId" FromRole="TblReceiptBodydeatil" ToRole="TblInvoiceHead" />
     <NavigationProperty Name="TblReceipt" Relationship="AuditSystemModel.FK_TblReceiptBodydeatils_TblReceipt_Fk_ReceiptId" FromRole="TblReceiptBodydeatil" ToRole="TblReceipt" />
   </EntityType>
@@ -1174,11 +1185,11 @@
     <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="CustomerId" Type="Int32" Nullable="false" />
     <Property Name="InvoiceId" Type="Int32" Nullable="false" />
-    <Property Name="Create_By" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="RowId" Type="Int32" Nullable="false" />
-    <Property Name="BalanceAmount" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Create_By" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="GrandAmount" Type="Decimal" Precision="18" Scale="2" />
     <Property Name="PaymentAmount" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="BalanceAmount" Type="Decimal" Precision="18" Scale="2" />
   </EntityType>
   <EntityType Name="TblSectorMaster">
     <Key>
@@ -2447,6 +2458,18 @@
         <PropertyRef Name="Id" />
       </Principal>
       <Dependent Role="TblEmployee">
+        <PropertyRef Name="Fk_DesginationId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TblEmployeeHourlyRate_TblDesignation_Fk_DesginationId">
+    <End Type="AuditSystemModel.TblDesignation" Role="TblDesignation" Multiplicity="1" />
+    <End Type="AuditSystemModel.TblEmployeeHourlyRate" Role="TblEmployeeHourlyRate" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TblDesignation">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TblEmployeeHourlyRate">
         <PropertyRef Name="Fk_DesginationId" />
       </Dependent>
     </ReferentialConstraint>
