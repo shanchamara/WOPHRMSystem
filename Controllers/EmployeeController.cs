@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DocumentFormat.OpenXml.Office2010.Excel;
+using System;
 using System.Collections.Generic;
 using System.Web.Http;
 using System.Web.ModelBinding;
@@ -27,6 +28,16 @@ namespace WOPHRMSystem.Controllers
         }
 
         [System.Web.Mvc.HttpGet]
+        public ActionResult GetLoadPrefixCode()
+        {
+            var dt = _ClientService.GetAllJobPrefixCode();
+            return Json((new MessageModelWithData<List<EmployeeModel>>()
+            {
+                DataList = dt
+            }), JsonRequestBehavior.AllowGet);
+        }
+
+        [System.Web.Mvc.HttpGet]
         public ActionResult Create()
         {
             var model = new EmployeeModel()
@@ -34,6 +45,7 @@ namespace WOPHRMSystem.Controllers
                 DepartmentLists = new SelectList(departmentServices.GetAll(), "Id", "CodeAndNarration"),
                 Designationlists = new SelectList(designationServices.GetAll(), "Id", "CodeAndNarration"),
                 TitileLists = new SelectList(titleServices.GetAll(), "Id", "CodeAndNarration"),
+                IsActive = true
             };
             return View(model);
 

@@ -401,6 +401,7 @@
         // BS-Stepper Init
         document.addEventListener('DOMContentLoaded', function () {
             GetEmployeeHourlyRateList();
+            GetEmployeePrefixCode();
         })
 
 
@@ -417,80 +418,103 @@
                 PostCustomerInsert(data);
             }
         });
-        $('#quickForm').validate({
-            rules: {
-                Code: {
-                    required: true,
+        $(document).ready(function () {
 
-                },
-                JObPrefixCode: {
-                    required: true,
+            var validator = $('#quickForm').validate({
+                rules: {
+                    Code: {
+                        required: true,
 
-                },
-                Name: {
-                    required: true,
+                    },
+                    JObPrefixCode: {
+                        required: true,
 
-                },
-                IsActive: {
-                    required: false
-                },
-                Fk_TitleId: { required: true },
-                Nic: { required: true, nicPattern: true},
-              
-                Email: { required: true, emailPattern:true },
-                Fk_DesginationId: { required: true },
-                Fk_DepartmentId: { required: true },
-                DateOfJoin: {
-                    required: true,
-                    date: true
-                },
-                BirthDay: {
-                    required: true,
-                    date: true
-                },
-            },
-            messages: {
-                Code: {
-                    required: "Please enter a code",
-                },
-                JObPrefixCode: {
-                    required: "Please enter a JOb Prefix Code",
-                },
-                Nic: {
-                    required: "Please enter a Nic Number",
-                },
-                Email: {
-                    required: "Please enter a Email",
-                },
-                Name: {
-                    required: "Please provide a Name",
+                    },
+                    Name: {
+                        required: true,
 
+                    },
+                    IsActive: {
+                        required: false
+                    },
+                    Fk_TitleId: { required: true },
+                    Nic: { required: true, nicPattern: true },
+                    Email: { required: true, emailPattern: true },
+                    Fk_DesginationId: { required: true },
+                    Fk_DepartmentId: { required: true },
+                    DateOfJoin: {
+                        required: true,
+                        date: true
+                    },
+                    BirthDay: {
+                        required: true,
+                        date: true
+                    },
                 },
-                terms: "Please Select the Status",
-                
-                Fk_TitleId: {
-                    required: "Please Select the Title",
+                messages: {
+                    Code: {
+                        required: "Please enter a code",
+                    },
+                    JObPrefixCode: {
+                        required: "Please enter a JOb Prefix Code",
+                    },
+                    Nic: {
+                        required: "Please enter a Nic Number",
+                    },
+                    Email: {
+                        required: "Please enter a Email",
+                    },
+                    Name: {
+                        required: "Please provide a Name",
+
+                    },
+                    terms: "Please Select the Status",
+
+                    Fk_TitleId: {
+                        required: "Please Select the Title",
+                    },
+                    Fk_DesginationId: {
+                        required: "Please Select the Desgination",
+                    },
+                    Fk_DepartmentId: {
+                        required: "Please Select the Department",
+                    },
+                    DateOfJoin: "Please Select the Date Of Joined",
+                    BirthDay: "Please Select the Date Of Birth",
                 },
-                Fk_DesginationId: {
-                    required: "Please Select the Desgination",
+                errorElement: 'span',
+                errorPlacement: function (error, element) {
+                    error.addClass('invalid-feedback');
+                    element.closest('.form-group').append(error);
                 },
-                Fk_DepartmentId: {
-                    required: "Please Select the Department",
+                highlight: function (element, errorClass, validClass) {
+                    $(element).addClass('is-invalid');
                 },
-                DateOfJoin: "Please Select the Date Of Joined",
-                BirthDay: "Please Select the Date Of Birth",
-            },
-            errorElement: 'span',
-            errorPlacement: function (error, element) {
-                error.addClass('invalid-feedback');
-                element.closest('.form-group').append(error);
-            },
-            highlight: function (element, errorClass, validClass) {
-                $(element).addClass('is-invalid');
-            },
-            unhighlight: function (element, errorClass, validClass) {
-                $(element).removeClass('is-invalid');
-            }
+                unhighlight: function (element, errorClass, validClass) {
+                    $(element).removeClass('is-invalid');
+                }
+            });
+
+            $('#JObPrefixCode').change(function () {
+                var Current = $(this).val();
+                debugger
+                var Code = JSON.parse(localStorage.getItem('PrefixCodeList')) || [];
+
+                Code.forEach(item => {
+                    debugger
+                    if (item.JObPrefixCode.toLowerCase() === Current.toLowerCase()) {
+
+
+                        Swal.fire({
+                            title: 'Warning!',
+                            text: 'This prefix code is duplicated.',
+                            icon: 'warning',
+                            confirmButtonText: 'OK'
+                        });
+                    }
+                });
+            });
+
         });
 
         $.validator.addMethod("emailPattern", function (value, element) {
@@ -502,6 +526,23 @@
         }, "Please enter a valid Nic.");
     });
 
+
+        var GetEmployeePrefixCode = function () {
+
+            //$("#loaderbody").removeClass('hide');
+            $.ajax({
+                type: "GET",
+                url: "/Employee/GetLoadPrefixCode",
+
+                success: function (result) {
+                    debugger
+
+                    var Code = JSON.parse(localStorage.getItem('PrefixCodeList')) || [];
+                    Code = [...Code, ...result.DataList];
+                    localStorage.setItem('PrefixCodeList', JSON.stringify(Code));
+                },
+            })
+        }
 
     var PostCustomerInsert = function (model) {
 

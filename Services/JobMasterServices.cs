@@ -339,7 +339,8 @@ namespace WOPHRMSystem.Services
             try
             {
                 var JobCodePattern = _context.TblDocuments.SingleOrDefault(d => d.TypeOfTable.Equals("TblJobMaster"));
-                var makeJobCode = "000" + Convert.ToString(JobCodePattern.Number + 1);
+                var nextNumber = JobCodePattern.Number + 1;
+                var makeJobCode = nextNumber.ToString().PadLeft(8, '0');
                 return makeJobCode;
 
             }

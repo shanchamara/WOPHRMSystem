@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DocumentFormat.OpenXml.EMMA;
+using System;
 using System.Web.Mvc;
 using WOPHRMSystem.Context;
 using WOPHRMSystem.Helps;
@@ -22,7 +23,11 @@ namespace WOPHRMSystem.Controllers
         [HttpGet]
         public ActionResult Create()
         {
-            var model = new LocationModel() { CustomerLists = new SelectList(_ClientService2.GetAll(), "Id", "Name"), };
+            var model = new LocationModel()
+            {
+                CustomerLists = new SelectList(_ClientService2.GetAll(), "Id", "Name"),
+                IsActive = true
+            };
             return View(model);
         }
 
@@ -138,5 +143,14 @@ namespace WOPHRMSystem.Controllers
             }
 
         }
+
+        [HttpGet]
+        public ActionResult DisplayCustomerHasLocation(int id)
+        {
+            var dt = _ClientService.GetAllLocationByCustomer(id);
+            return PartialView("DisplayCustomerHasLocation", dt);
+        }
+
+
     }
 }

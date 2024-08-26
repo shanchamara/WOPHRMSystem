@@ -27,7 +27,7 @@ namespace WOPHRMSystem.Models
         public int BodyRowId { get; set; }
         public int Fk_InvoiceNarrttionId { get; set; }
         public string Code { get; set; }
-        public string Narration { get; set; }
+        public string InvoiceNarration { get; set; }
         public Nullable<decimal> Amount { get; set; }
         public Nullable<decimal> RowTotalAmount { get; set; }
         public int FK_CustomerId { get; set; }
@@ -35,7 +35,7 @@ namespace WOPHRMSystem.Models
         public string Create_By { get; set; }
 
 
-
+        public List<InvoiceNarrationMasterModel> ListNarrations { get; set; }
         public SelectList SelectListItems { get; set; }
     }
 

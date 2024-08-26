@@ -21,8 +21,9 @@
                         <thead>
                             <tr>
                                 <th style="display:none;">Id</th> <!-- Hidden Id column -->
-                                <th>To Date</th>
                                 <th>From Date</th>
+                                <th>To Date</th>
+                                
                                 <th>Designation</th>
                                 <th>Rate</th>
                                 <th>Action</th>
@@ -33,28 +34,29 @@
                             @using (Html.BeginForm("", "", FormMethod.Post, new { role = "form", enctype = "multipart/form-data", id = "quickForm1", @autocomplete = "off" }))
                             {
                                 @Html.HiddenFor(model => model.Id)
-                                <tr>
-                                    <td style="display:none;"></td> <!-- Hidden Id column -->
-                                    <td>
-                                        @Html.EditorFor(model => model.ToDate, new { htmlAttributes = new { @class = "form-control", id = "ToDate", required = "required", onchange = "handleDateChange1()" } })
-                                    </td>
+                            <tr>
+                                <td style="display:none;"></td> <!-- Hidden Id column -->
 
-                                    <td>
-                                        @Html.EditorFor(model => model.FromDate, new { htmlAttributes = new { @class = "form-control", id = "FromDate", required = "required", onchange = "handleDateChange1()" } })
-                                    </td>
-                                    <td>
-                                        @Html.DropDownListFor(model => model.Fk_DesginationId, Model.Designationlists, "Select", htmlAttributes: new { @class = "form-control", id = "selectDesgination1", required = "required", onchange = "handleDateChange1()" })
 
-                                    </td>
-                                    <td>
-                                        @Html.EditorFor(model => model.Rate, new { htmlAttributes = new { @class = "form-control", id = "Rate", required = "required", @type = "number", @min = "0", onchange = "handleDateChange1()" } })
-                                    </td>
-                                    <td class="project-actions text-right">
-                                        <button class="btn btn-info btn-sm" type="button" onclick="SubmitStepTemperley()">
-                                            <i class="fas fa-pencil-alt"></i> Add
-                                        </button>
-                                    </td>
-                                </tr>
+                                <td>
+                                    @Html.EditorFor(model => model.FromDate, new { htmlAttributes = new { @class = "form-control", id = "FromDate", required = "required", onchange = "handleDateChange1()" } })
+                                </td>
+                                <td>
+                                    @Html.EditorFor(model => model.ToDate, new { htmlAttributes = new { @class = "form-control", id = "ToDate", required = "required", onchange = "handleDateChange1()" } })
+                                </td>
+                                <td>
+                                    @Html.DropDownListFor(model => model.Fk_DesginationId, Model.Designationlists, "Select", htmlAttributes: new { @class = "form-control", id = "selectDesgination1", required = "required", onchange = "handleDateChange1()" })
+
+                                </td>
+                                <td>
+                                    @Html.EditorFor(model => model.Rate, new { htmlAttributes = new { @class = "form-control", id = "Rate", required = "required", @type = "number", @min = "0", onchange = "handleDateChange1()" } })
+                                </td>
+                                <td class="project-actions text-right">
+                                    <button class="btn btn-info btn-sm" type="button" onclick="SubmitStepTemperley()">
+                                        <i class="fas fa-pencil-alt"></i> Add
+                                    </button>
+                                </td>
+                            </tr>
                             }
                         </tbody>
                     </table>
@@ -79,21 +81,16 @@
         var Rate = document.getElementById("Rate").value;
         var Fk_DesginationId = $('#selectDesgination1').val();
 
-        if (ToDate != "") {
-
-            document.getElementById("ToDate").className = "form-control text-box single-line";
-
-
-        }
+      
 
         if (fromDate != "") {
             document.getElementById("FromDate").className = "form-control text-box single-line";
 
 
         }
+        if (ToDate != "") {
 
-        if (Rate != "") {
-            document.getElementById("Rate").className = "form-control text-box single-line";
+            document.getElementById("ToDate").className = "form-control text-box single-line";
 
 
         }
@@ -104,6 +101,12 @@
             }, 10);
 
         }
+        if (Rate != "") {
+            document.getElementById("Rate").className = "form-control text-box single-line";
+
+
+        }
+       
     }
 
 
@@ -119,12 +122,7 @@
 
 
 
-        if (ToDate == "") {
-            IsValid = false;
-            document.getElementById("ToDate").className = "form-control text-box single-line is-invalid";
-
-            return IsValid;
-        }
+       
 
         if (fromDate == "") {
             IsValid = false;
@@ -132,7 +130,12 @@
 
             return IsValid;
         }
+        if (ToDate == "") {
+            IsValid = false;
+            document.getElementById("ToDate").className = "form-control text-box single-line is-invalid";
 
+            return IsValid;
+        }
 
 
         if (Fk_DesginationId == "") {

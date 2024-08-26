@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DocumentFormat.OpenXml.Bibliography;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using WOPHRMSystem.Context;
@@ -149,9 +150,6 @@ namespace WOPHRMSystem.Services
         {
             try
             {
-
-
-
                 var department = (from a in _context.TblDepartmentSeconds
                                             where a.Fk_DepartmentIdFirst == Id
                                             orderby a.Id descending

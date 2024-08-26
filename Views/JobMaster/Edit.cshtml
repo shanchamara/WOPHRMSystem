@@ -430,44 +430,24 @@
                 data: { id: id },
 
                 success: function (result) {
-                    debugger
-                    document.getElementById("JObPrefixCode").value = result.Value;
 
+                    document.getElementById("JObPrefixCode").value = result.Value;
+                    IsAssignee = true;
                     // take the JobCode value
                     var JobCodevalue = document.getElementById("DefaultJobCode").value;
 
                     document.getElementById("JobCode").value = result.Value + JobCodevalue;
-                    Swal.fire({
 
-                            icon: result.Status,
-                            title: result.Status,
-                            text: result.Text
-                        }).then((result) => {
-                            if (result.isConfirmed) {
-                                   $.ajax({
-                                         type: "GET",
-                                         url: "/JobMaster/ViewAssignees",
-                                         data: { Createby: 'User' },
+                    $.ajax({
+                        type: "GET",
+                        url: "/JobMaster/ViewAssignees",
+                        data: { Createby: 'User' },
 
-                                         success: function (result) {
-                                             debugger
-                                             $("#staticEmployee").html(result);
-                                         },
-                                     })
-                            }
-                            else {
-                                $.ajax({
-                                     type: "GET",
-                                     url: "/JobMaster/ViewAssignees",
-                                     data: { Createby: 'User' },
+                        success: function (result) {
 
-                                     success: function (result) {
-                                         debugger
-                                         $("#staticEmployee").html(result);
-                                     },
-                                 })
-                            }
-                        })
+                            $("#staticEmployee").html(result);
+                        },
+                    })
 
                 },
             })
@@ -505,44 +485,23 @@
 
                 success: function (result) {
 
-                    Swal.fire({
+                    IsAssignee = true;
+                    $.ajax({
+                        type: "GET",
+                        url: "/JobMaster/ViewAssignees",
+                        data: { Createby: 'User' },
 
-                        icon: result.Status,
-                        title: result.Status,
-                        text: result.Text
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                            $.ajax({
-                                type: "GET",
-                                url: "/JobMaster/ViewAssignees",
-                                data: { Createby: 'User' },
+                        success: function (result) {
 
-                                success: function (result) {
-
-                                    $("#staticEmployee").html(result);
-                                },
-                            })
-                        }
-                        else {
-                            $.ajax({
-                                type: "GET",
-                                url: "/JobMaster/ViewAssignees",
-                                data: { Createby: 'User' },
-
-                                success: function (result) {
-                                    debugger
-                                    $("#staticEmployee").html(result);
-                                },
-                            })
-                        }
+                            $("#staticEmployee").html(result);
+                        },
                     })
-
                 },
             })
         }
 
         window.addEventListener('load', function () {
-
+            IsLocation = true;
             GetDefaultLocaion();
             GetDefaultAssignes();
         });
@@ -620,11 +579,68 @@
             })
         }
 
+        function handleDateChange1() {
+            // Your logic here
+            debugger
+            var ToDate = document.getElementById("ToDate").value;
+            var fromDate = document.getElementById("FromDate").value;
+            var selectElement = document.getElementById("selectlocation").value;
+
+            if (ToDate != "") {
+
+                document.getElementById("ToDate").className = "form-control text-box single-line";
+
+
+            }
+
+            if (fromDate != "") {
+                document.getElementById("FromDate").className = "form-control text-box single-line";
+
+
+            }
+
+            if (selectElement != "") {
+                document.getElementById("selectlocation").className = "form-control text-box single-line";
+
+            }
+
+
+        }
+
+
+        var IsValidLocation = true;
+
         var AddLocation = function () {
             var selectElement = document.getElementById("selectlocation").value;
             var selectCustomerElement = document.getElementById("selectUnit").value;
             var FromDate = document.getElementById("FromDate").value;
             var ToDate = document.getElementById("ToDate").value;
+
+            if (selectElement == "") {
+                IsValidLocation = false;
+
+                document.getElementById("selectlocation").className = "form-control form-control-sm is-invalid";
+                return false;
+            }
+            if (FromDate == "") {
+                IsValidLocation = false;
+
+                document.getElementById("FromDate").className = "form-control form-control-sm is-invalid";
+                return false;
+            }
+            if (ToDate == "") {
+                IsValidLocation = false;
+
+                document.getElementById("ToDate").className = "form-control form-control-sm is-invalid";
+                return false;
+            }
+
+            if (selectCustomerElement == "") {
+                IsValidLocation = false;
+
+                document.getElementById("selectUnit").className = "form-control form-control-sm is-invalid";
+                return false;
+            }
 
 
             $.ajax({
@@ -702,15 +718,56 @@
 
          }
 
-        var IsLocation = true;
+        var IsLocation = false;
         var IsAssignee = false;
 
         $(function () {
+
             $.validator.setDefaults({
                 submitHandler: function () {
-                    //alert("Form successful submitted!");
+
                     var data = $('#quickForm').serialize();
-                    debugger;
+
+                    var List = JSON.parse(localStorage.getItem('ViewAssignee')) || [];
+
+
+                    if (IsAssignee === true) {
+                        let hasWarning = false;
+
+                        List.forEach(item => {
+                            if (item.BudgetedHours === null || item.BudgetedHours === 0) {
+                                Swal.fire({
+                                    title: 'Warning!',
+                                    text: 'BudgetedHours is not defined.',
+                                    icon: 'warning',
+                                    confirmButtonText: 'OK'
+                                });
+                                hasWarning = true; // Set flag to true
+                            }
+                        });
+
+                        if (hasWarning) {
+                            return; // Exit function or prevent further execution
+                        }
+
+                        // Continue with the rest of the logic
+                        const hasEmployeesRecord = List.some(record => record.TypeOftable === 'Employees');
+
+                        if (hasEmployeesRecord === false) {
+                            Swal.fire({
+                                title: 'Warning!',
+                                text: 'Please assign the employee.',
+                                icon: 'warning',
+                                confirmButtonText: 'OK'
+                            });
+                            hasWarning = true;
+                        }
+
+                        if (hasWarning) {
+                            return; // Exit function or prevent further execution
+                        }
+                    }
+
                     if (IsLocation === false) {
                         $('#errorLocation').html("Please add the Location");
                     } else {
@@ -721,94 +778,88 @@
                 }
             });
 
-            $.validator.addMethod("checkIsLocation", function (value, element) {
-                var isValid = IsLocation === true;
-                if (!isValid) {
-                    $('#errorLocation').html("Please add the Location");
-                }
-                return isValid;
-            }, "Location must be selected.");
 
-            $('#quickForm').validate({
-                rules: {
-                    PreViewvalue: {
-                        required: true,
-                    },
-                    Narration: {
-                        required: true,
-                    },
-                    StartDate: {
-                        required: true,
-                        date: true
-                    },
-                    DueDate: {
-                        required: true,
-                        date: true
-                    },
-                    Fk_CustomerId: {
-                      required: true,
-                    },
-                    ManagerId: {
-                        required: true,
-                    },
-                    PartnerId: {
-                        required: true,
-                    },
-                    IsActive: {
-                        required: true
-                    },
 
-                },
-                messages: {
+            $(document).ready(function () {
 
-                    PreViewvalue: {
-                        required: "Please provide a Previews Value",
-                    },
-                    Narration: {
-                        required: "Please provide a Narration",
-                    },
-                    Fk_CustomerId: {
-                        required: "Please provide a Customer",
-                    },
-                    ManagerId: {
-                        required: "Please provide a Manager",
-                    },
-                    PartnerId: {
-                        required: "Please provide a Manager",
-                    },
-                    StartDate: {
-                        required: "Please provide a Start Date",
-                    },
-                    DueDate: {
-                        required: "Please provide a Due Date",
-                    },
-                    IsActive: "Please Select the Status"
+                var validator = $('#quickForm').validate({
+                    rules: {
+                        PreViewvalue: {
+                            required: true,
 
-                },
-                errorElement: 'span',
-                errorPlacement: function (error, element) {
-                    error.addClass('invalid-feedback');
-                    element.closest('.form-group').append(error);
-                },
-                highlight: function (element, errorClass, validClass) {
-                    $(element).addClass('is-invalid');
-                },
-                unhighlight: function (element, errorClass, validClass) {
-                    $(element).removeClass('is-invalid');
-                }
+                        },
+
+                        Narration: {
+                            required: true,
+                        },
+                        StartDate: {
+                            required: true,
+                            date: true
+                        },
+                        DueDate: {
+                            required: true,
+                            date: true
+                        },
+                        Fk_CustomerId: {
+                            required: true,
+                        },
+                        ManagerId: {
+                            required: true,
+                        },
+                        PartnerId: {
+                            required: true,
+                        },
+                        IsActive: {
+                            required: true
+                        },
+
+                    },
+                    messages: {
+
+                        PreViewvalue: {
+                            required: "Please provide a Previews Value",
+                        },
+                        Narration: {
+                            required: "Please provide a Narration",
+                        },
+                        Fk_CustomerId: {
+                            required: "Please provide a Customer",
+                        },
+                        ManagerId: {
+                            required: "Please provide a Manager",
+                        },
+                        PartnerId: {
+                            required: "Please provide a Manager",
+                        },
+                        StartDate: {
+                            required: "Please provide a Start Date",
+                        },
+                        DueDate: {
+                            required: "Please provide a Due Date",
+                        },
+                        IsActive: "Please Select the Status",
+
+                    },
+                    errorElement: 'span',
+                    errorPlacement: function (error, element) {
+                        error.addClass('invalid-feedback');
+                        element.closest('.form-group').append(error);
+                    },
+                    highlight: function (element, errorClass, validClass) {
+                        $(element).addClass('is-invalid');
+                    },
+                    unhighlight: function (element, errorClass, validClass) {
+                        $(element).removeClass('is-invalid');
+                    },
+                });
+
             });
+
         });
 
 
 
         /// Second step
-
-
-
-
-
-
-
 
 
          var PostInsert = function (model) {

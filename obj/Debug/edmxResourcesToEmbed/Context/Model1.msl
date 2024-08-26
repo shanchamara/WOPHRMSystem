@@ -331,6 +331,7 @@
     <EntitySetMapping Name="TblInvoiceBodies">
       <EntityTypeMapping TypeName="AuditSystemModel.TblInvoiceBody">
         <MappingFragment StoreEntitySet="TblInvoiceBody">
+          <ScalarProperty Name="Narration" ColumnName="Narration" />
           <ScalarProperty Name="Delete_Date" ColumnName="Delete_Date" />
           <ScalarProperty Name="Delete_By" ColumnName="Delete_By" />
           <ScalarProperty Name="Edit_Date" ColumnName="Edit_Date" />
@@ -350,6 +351,7 @@
     <EntitySetMapping Name="TblInvoiceBodyTemps">
       <EntityTypeMapping TypeName="AuditSystemModel.TblInvoiceBodyTemp">
         <MappingFragment StoreEntitySet="TblInvoiceBodyTemp">
+          <ScalarProperty Name="Narration" ColumnName="Narration" />
           <ScalarProperty Name="Create_By" ColumnName="Create_By" />
           <ScalarProperty Name="FK_JobMasterId" ColumnName="FK_JobMasterId" />
           <ScalarProperty Name="FK_CustomerId" ColumnName="FK_CustomerId" />
@@ -363,6 +365,8 @@
     <EntitySetMapping Name="TblInvoiceHeads">
       <EntityTypeMapping TypeName="AuditSystemModel.TblInvoiceHead">
         <MappingFragment StoreEntitySet="TblInvoiceHead">
+          <ScalarProperty Name="ShortNarrationtext" ColumnName="ShortNarrationtext" />
+          <ScalarProperty Name="JobCostAmount" ColumnName="JobCostAmount" />
           <ScalarProperty Name="Delete_Date" ColumnName="Delete_Date" />
           <ScalarProperty Name="Delete_By" ColumnName="Delete_By" />
           <ScalarProperty Name="Edit_Date" ColumnName="Edit_Date" />
@@ -659,6 +663,7 @@
     <EntitySetMapping Name="TblProformaInvoiceBodies">
       <EntityTypeMapping TypeName="AuditSystemModel.TblProformaInvoiceBody">
         <MappingFragment StoreEntitySet="TblProformaInvoiceBody">
+          <ScalarProperty Name="Narration" ColumnName="Narration" />
           <ScalarProperty Name="Delete_Date" ColumnName="Delete_Date" />
           <ScalarProperty Name="Delete_By" ColumnName="Delete_By" />
           <ScalarProperty Name="Edit_Date" ColumnName="Edit_Date" />
@@ -678,6 +683,7 @@
     <EntitySetMapping Name="TblProformaInvoiceBodyTemps">
       <EntityTypeMapping TypeName="AuditSystemModel.TblProformaInvoiceBodyTemp">
         <MappingFragment StoreEntitySet="TblProformaInvoiceBodyTemp">
+          <ScalarProperty Name="Narration" ColumnName="Narration" />
           <ScalarProperty Name="Create_By" ColumnName="Create_By" />
           <ScalarProperty Name="FK_JobMasterId" ColumnName="FK_JobMasterId" />
           <ScalarProperty Name="FK_CustomerId" ColumnName="FK_CustomerId" />
@@ -691,6 +697,8 @@
     <EntitySetMapping Name="TblProformaInvoiceHeads">
       <EntityTypeMapping TypeName="AuditSystemModel.TblProformaInvoiceHead">
         <MappingFragment StoreEntitySet="TblProformaInvoiceHead">
+          <ScalarProperty Name="ShortNarrationtext" ColumnName="ShortNarrationtext" />
+          <ScalarProperty Name="JobCostAmount" ColumnName="JobCostAmount" />
           <ScalarProperty Name="Delete_Date" ColumnName="Delete_Date" />
           <ScalarProperty Name="Delete_By" ColumnName="Delete_By" />
           <ScalarProperty Name="Edit_Date" ColumnName="Edit_Date" />
@@ -1060,6 +1068,7 @@
           <ScalarProperty Name="DueDate" ColumnName="DueDate" />
           <ScalarProperty Name="StartDate" ColumnName="StartDate" />
           <ScalarProperty Name="PreViewvalue" ColumnName="PreViewvalue" />
+          <ScalarProperty Name="VatType" ColumnName="VatType" />
           <ScalarProperty Name="JobCode" ColumnName="JobCode" />
           <ScalarProperty Name="CustomerCode" ColumnName="CustomerCode" />
           <ScalarProperty Name="CustomerName" ColumnName="CustomerName" />
@@ -1157,6 +1166,8 @@
           <ScalarProperty Name="BalanceAmount" ColumnName="BalanceAmount" />
           <ScalarProperty Name="TotalAmount" ColumnName="TotalAmount" />
           <ScalarProperty Name="PostingDate" ColumnName="PostingDate" />
+          <ScalarProperty Name="JobCostAmount" ColumnName="JobCostAmount" />
+          <ScalarProperty Name="ShortNarrationtext" ColumnName="ShortNarrationtext" />
           <ScalarProperty Name="LastYearAmount" ColumnName="LastYearAmount" />
           <ScalarProperty Name="Fk_JobMasterId" ColumnName="Fk_JobMasterId" />
           <ScalarProperty Name="Fk_InvoiceShortNarrationId" ColumnName="Fk_InvoiceShortNarrationId" />
@@ -1416,6 +1427,7 @@
           <ScalarProperty Name="TotalReceivedAmount" ColumnName="TotalReceivedAmount" />
           <ScalarProperty Name="ValueVAT" ColumnName="ValueVAT" />
           <ScalarProperty Name="ValueNBT" ColumnName="ValueNBT" />
+          <ScalarProperty Name="JobCostAmount" ColumnName="JobCostAmount" />
           <ScalarProperty Name="TotalAmount" ColumnName="TotalAmount" />
           <ScalarProperty Name="PostingDate" ColumnName="PostingDate" />
           <ScalarProperty Name="LastYearAmount" ColumnName="LastYearAmount" />
@@ -1426,6 +1438,7 @@
           <ScalarProperty Name="NBTPercentage" ColumnName="NBTPercentage" />
           <ScalarProperty Name="VatPercentage" ColumnName="VatPercentage" />
           <ScalarProperty Name="NoNVatPrecentage" ColumnName="NoNVatPrecentage" />
+          <ScalarProperty Name="ShortNarrationtext" ColumnName="ShortNarrationtext" />
           <ScalarProperty Name="NoNVat" ColumnName="NoNVat" />
           <ScalarProperty Name="Fk_NatureId" ColumnName="Fk_NatureId" />
           <ScalarProperty Name="TaxType" ColumnName="TaxType" />

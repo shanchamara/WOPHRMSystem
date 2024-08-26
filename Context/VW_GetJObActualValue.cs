@@ -19,6 +19,7 @@ namespace WOPHRMSystem.Context
         public string CustomerName { get; set; }
         public string CustomerCode { get; set; }
         public string JobCode { get; set; }
+        public string VatType { get; set; }
         public Nullable<decimal> PreViewvalue { get; set; }
         public Nullable<System.DateTime> StartDate { get; set; }
         public Nullable<System.DateTime> DueDate { get; set; }

@@ -39,7 +39,7 @@ namespace WOPHRMSystem.Controllers
                 DefaultJobCode = _ClientService.GetJoBCode(),
                 PartnerSelectListItems = new SelectList(_employeeServices.GetAllIsPartner(), "Id", "Name"),
                 ManagerSelectListItems = new SelectList(_employeeServices.GetAllIsManager(), "Id", "Name"),
-
+                IsActive = true
             };
             return View(model);
         }

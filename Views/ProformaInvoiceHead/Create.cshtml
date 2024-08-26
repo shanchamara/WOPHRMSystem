@@ -43,7 +43,7 @@
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item">Home</li>
-                        <li class="breadcrumb-item active"><a href="@Url.Action("Index","Customer")">List Of Proforma Invoice's </a></li>
+                        <li class="breadcrumb-item active"><a href="@Url.Action("Index","ProformaInvoiceHead")">List Of Proforma Invoice's </a></li>
                     </ol>
                 </div>
             </div>
@@ -198,10 +198,11 @@
                                                                  {
 
                                                                  new { value = "" , text = "Select "  },
+                                                                  new { value = "Non VAT" , text = "Non VAT"  },
                                                                  new { value = "VAT" , text = "VAT"  },
                                                                  new { value = "SVAT" , text = "SVAT"  },
 
-                                                                 }, "value", "text", "Select VAT Type"), htmlAttributes: new { @class = "form-control form-control-sm", id = "selectGrnType" })
+                                                                 }, "value", "text", "Select VAT Type"), htmlAttributes: new { @class = "form-control form-control-sm", id = "selectVatType", @ReadOnly = "ReadOnly" })
                                                             </div>
                                                         </div>
                                                     </div>
@@ -272,17 +273,27 @@
 
                                                 <div class="row">
 
-                                                    <div class="col-lg-12">
+                                                    <div class="col-lg-6">
                                                         <div class="mb-2">
                                                             <!-- Adjusted margin bottom here -->
                                                             <div class="form-group">
-                                                                <label for="exampleInputEmail1" class="form-control-sm">Short Narration  </label>
-                                                                @Html.DropDownListFor(model => model.Fk_InvoiceShortNarrationId, Model.InvoiceShrotNarration, "Select", htmlAttributes: new { @class = "form-control form-control-sm", id = "selectManager" })
+                                                                <label for="exampleInputEmail1" class="form-control-sm">Short Narration Code </label>
+                                                                @Html.DropDownListFor(model => model.Fk_InvoiceShortNarrationId, Model.InvoiceShrotNarration, "Select", htmlAttributes: new { @class = "form-control form-control-sm", id = "SelectShortNarration" })
 
                                                             </div>
                                                         </div>
                                                     </div>
 
+                                                    <div class="col-lg-6">
+                                                        <div class="mb-2">
+                                                            <!-- Adjusted margin bottom here -->
+                                                            <div class="form-group">
+                                                                <label for="exampleInputEmail1" class="form-control-sm">Short Narration  </label>
+                                                                @Html.EditorFor(model => model.ShortNarrationtext, new { htmlAttributes = new { @class = "form-control form-control-sm", placeholder = "" } })
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
 
                                                 </div>
 
@@ -503,7 +514,7 @@
 
                                                                 new { value = "" , text = "Select "  }
 
-                                                                }, "value", "text", "Select VAT Department"), htmlAttributes: new { @class = "form-control form-control-sm", id = "JobNo" })
+                                                                }, "value", "text", "Select "), htmlAttributes: new { @class = "form-control form-control-sm", id = "JobNo" })
                                                             </div>
                                                         </div>
                                                     </div>
@@ -531,14 +542,14 @@
 
                                     <div class="row">
 
-                                        <div class="col-md-4">
+                                        <div class="col-md-3">
                                             <div class="card-body">
                                                 <div class="row">
 
                                                     <div class="col-lg-6">
                                                         <div class="mb-2">
                                                             <!-- Adjusted margin bottom here -->
-                                                            
+
                                                         </div>
                                                     </div>
 
@@ -550,7 +561,7 @@
                                                         <div class="mb-2">
                                                             <!-- Adjusted margin bottom here -->
                                                             <div class="form-group">
-                                                                
+                                                               
                                                             </div>
                                                         </div>
                                                     </div>
@@ -560,24 +571,43 @@
 
                                         </div>
 
-                                        <div class="col-md-3">
-                                            <div class="card-body">
-                                                <div class="row">
+                                       
 
+                                        <div class="col-md-4">
+                                            <div class="card-body">
+                                                <div class="row custom-row">
                                                     <div class="col-lg-6">
-                                                        <div class="mb-2">
-                                                            <!-- Adjusted margin bottom here -->
-                                                            <div class="form-group">
-                                                                <label for="exampleInputEmail1" class="form-control-sm">Last Year Amount</label>
+                                                        <div class="row mb-2">
+                                                            <label for="horizontal-firstname-input" class="col-sm-12 col-form-label form-control-sm">Last Year Amount</label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-6">
+                                                        <div class="row mb-2">
+                                                            <div class="col-sm-12">
                                                                 @Html.EditorFor(model => model.LastYearAmount, new { htmlAttributes = new { @class = "form-control form-control-sm text-right", placeholder = "", @ReadOnly = "ReadOnly" } })
                                                             </div>
                                                         </div>
                                                     </div>
-
-
-
                                                 </div>
 
+                                               
+
+                                               
+
+                                                <div class="row custom-row">
+                                                    <div class="col-lg-6">
+                                                        <div class="row mb-2">
+                                                            <label for="horizontal-firstname-input" class="col-sm-12 col-form-label form-control-sm">Job Cost Amount</label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-6">
+                                                        <div class="row mb-2">
+                                                            <div class="col-sm-12">
+                                                                @Html.EditorFor(model => model.JobCostAmount, new { htmlAttributes = new { @class = "form-control form-control-sm text-right", placeholder = "", @ReadOnly = "ReadOnly" } })
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
 
@@ -592,7 +622,7 @@
                                                     <div class="col-lg-6">
                                                         <div class="row mb-2">
                                                             <div class="col-sm-12">
-                                                                @Html.EditorFor(model => model.TotalAmount, new { htmlAttributes = new { @class = "form-control form-control-sm text-right", placeholder = "", @ReadOnly = "ReadOnly" } })
+                                                                @Html.EditorFor(model => model.TotalAmount, new { htmlAttributes = new { @class = "form-control form-control-sm text-right", placeholder = "" } })
                                                             </div>
                                                         </div>
                                                     </div>
@@ -795,7 +825,13 @@
         // DropzoneJS Demo Code End
     </script>
 
+
     <script>
+
+        var IsDepartmentTwo = false;
+        var IsDepartmentThird = false;
+        var IsVatType = true;
+
         $(function () {
             // Custom validation method to compare TotalAmount with RowTotalAmount
             $.validator.addMethod("totalAmountMatchesRowTotal", function (value, element) {
@@ -821,16 +857,22 @@
             });
 
             // Define validation rules and messages
-            $('#quickForm').validate({
+
+
+            $(document).ready(function () {
+                // Initialize form validation
+                var validator = $('#quickForm').validate({
+
                 rules: {
                     InvoiceNoProforma: { required: false },
                     Fk_DepartmentIdOne: { required: true },
-                    Fk_DepartmentIdTwo: { required: true },
-                    Fk_DepartmentIdThird: { required: true },
+                    Fk_DepartmentIdTwo: { required: function () { return IsDepartmentTwo; } },
+                    Fk_DepartmentIdThird: { required: function () { return IsDepartmentThird; } }, 
                     DocNo: { required: true },
                     Date: { required: true, date: true },
-                    OurReferance: { required: true },
-                    YourReferance: { required: true },
+                    ShortNarrationtext: { required: true },
+                    //OurReferance: { required: true },
+                    //YourReferance: { required: true },
                     Fk_WorkGroupId: { required: true },
                     Fk_CustomerId: { required: true },
                     Fk_PartnerOne: { required: true },
@@ -856,8 +898,8 @@
                     IsDelete: { required: false },
                     TotalAmount: { required: true, number: true },
                     TotalReceivedAmount: { required: true, number: true },
-                    ValueNBT: { required: true, number: true },
-                    ValueVAT: { required: true, number: true },
+                        ValueNBT: { required: function () { return IsVatType; } , number: true },
+                        ValueVAT: { required: function () { return IsVatType; } , number: true },
                     Fk_CompanyId: { required: true },
                     TotalAmount: {
                         required: true,
@@ -873,6 +915,7 @@
                     Fk_DepartmentIdTwo: { required: "Please select Department Two" },
                     Fk_DepartmentIdThird: { required: "Please select Department Third" },
                     DocNo: { required: "Please enter a Doc No" },
+                    ShortNarrationtext: { required: "Please enter a Narration " },
                     Date: { required: "Please select a Date", date: "Please enter a valid date" },
                     OurReferance: { required: "Please provide Our Reference" },
                     YourReferance: { required: "Please provide Your Reference" },
@@ -943,8 +986,12 @@
                             confirmButtonText: 'OK'
                         });
                     }
-                }
+                    }
+                });
+
+                
             });
+
         });
 
 
@@ -980,29 +1027,6 @@
 
         // Set Department Two
 
-
-        // Function to get the selected value from the dropdown
-        function getSelectedValue() {
-            // Get the dropdown element by its ID
-            var selectElement = document.getElementById("departmentFirst");
-            debugger
-            // Get the selected value
-            var selectedValue = selectElement.value;
-
-            GetDepartmentTwoByFirstid(selectedValue)
-            // Log or use the selected value
-            //console.log("Selected value:", selectedValue);
-
-            // You can return the value if needed
-            return selectedValue;
-        }
-
-        // Attach the function to the dropdown change event
-        document.getElementById("departmentFirst").addEventListener("change", function () {
-            var selectedValue = getSelectedValue();
-            // alert("The selected value is: " + selectedValue);
-        });
-
         var GetDepartmentTwoByFirstid = function (id) {
 
             //$("#loaderbody").removeClass('hide');
@@ -1013,14 +1037,17 @@
 
                 success: function (result) {
 
-                  debugger
-                    var dropdown = $('#departmentTwo');
-                    dropdown.empty();
-                    dropdown.append('<option value="">Select</option>');
-                    $.each(result, function (index, item) {
-                        dropdown.append('<option value="' + item.Id + '">' + item.CodeAndNarration + '</option>');
-                    });
+                    debugger
 
+                    IsDepartmentTwo = result.length > 0;
+                    
+                        var dropdown = $('#departmentTwo');
+                        dropdown.empty();
+                        dropdown.append('<option value="">Select</option>');
+                        $.each(result, function (index, item) {
+                            dropdown.append('<option value="' + item.Id + '">' + item.CodeAndNarration + '</option>');
+                        });
+                    
                 },
             })
         }
@@ -1029,30 +1056,6 @@
 
         // Set Department THird
 
-
-
-        // Function to get the selected value from the dropdown
-        function getSelectedValuethird() {
-            // Get the dropdown element by its ID
-            var selectElementsecond = document.getElementById("departmentTwo");
-            var selectElementFirst = document.getElementById("departmentFirst");
-
-            // Get the selected value
-            var selectedValuefirst = selectElementFirst.value;
-
-            GetDepartmentThirdBytwoid(selectedValuefirst, selectElementsecond.value)
-            // Log or use the selected value
-            //console.log("Selected value:", selectedValue);
-
-            // You can return the value if needed
-            return selectedValue;
-        }
-
-        // Attach the function to the dropdown change event
-        document.getElementById("departmentTwo").addEventListener("change", function () {
-            var selectedValue = getSelectedValuethird();
-            // alert("The selected value is: " + selectedValue);
-        });
 
         var GetDepartmentThirdBytwoid = function (id,sid) {
 
@@ -1066,40 +1069,20 @@
                 success: function (result) {
 
                     debugger
-                    var dropdown = $('#departmentThird');
-                    dropdown.empty();
-                    dropdown.append('<option value="">Select</option>');
-                    $.each(result, function (index, item) {
-                        dropdown.append('<option value="' + item.Id + '">' + item.CodeAndNarration + '</option>');
-                    });
-
+                    IsDepartmentThird = result.length > 0;
+                      var dropdown = $('#departmentThird');
+                        dropdown.empty();
+                        dropdown.append('<option value="">Select</option>');
+                        $.each(result, function (index, item) {
+                            dropdown.append('<option value="' + item.Id + '">' + item.CodeAndNarration + '</option>');
+                        });
+                    
                 },
             })
         }
 
 
         // Customer Wise Job
-
-        function getSelectedValuejob() {
-            // Get the dropdown element by its ID
-            var selectElementFirst = document.getElementById("selectCustomer");
-
-            // Get the selected value
-            var selectedValuefirst = selectElementFirst.value;
-
-            GetCustomerWisejob(selectedValuefirst)
-            // Log or use the selected value
-            //console.log("Selected value:", selectedValue);
-
-            // You can return the value if needed
-            return selectedValuefirst;
-        }
-
-        // Attach the function to the dropdown change event
-        document.getElementById("selectCustomer").addEventListener("change", function () {
-            var selectedValue = getSelectedValuejob();
-            // alert("The selected value is: " + selectedValue);
-        });
 
         var GetCustomerWisejob = function (id) {
 
@@ -1111,8 +1094,8 @@
                 data: { CustomerId: id },
 
                 success: function (result) {
-
                     debugger
+                    
                     var dropdown = $('#JobNo');
                     dropdown.empty();
                     dropdown.append('<option value="">Select</option>');
@@ -1120,7 +1103,26 @@
                         dropdown.append('<option value="' + item.Fk_JobMasterId + '">' + item.FullDetails + '</option>');
                     });
 
-                },
+                    
+                    var dropdownVatType = $('#selectVatType');
+                    dropdownVatType.empty();
+                    dropdownVatType.append('<option value="">Select</option>');
+
+                    
+                    var firstItem = result[0]; // Get the first item from the array
+                    dropdownVatType.append('<option value="' + firstItem.VatType + '">' + firstItem.VatType + '</option>');
+                    
+
+                    // Select the first value if there are options available
+                    if (dropdownVatType.find('option').length > 1) {
+                        var firstValue = dropdownVatType.find('option').eq(1).val();
+                        dropdownVatType.val(firstValue);
+                    }
+                    if ($('#selectVatType').val() == "Non VAT") {
+                        IsVatType = false;
+                    }
+                }
+
             })
         }
         //
@@ -1128,8 +1130,9 @@
 
 
         window.addEventListener('load', function () {
-
+            localStorage.clear();
             GetDefaultInvoiceBody();
+
         });
 
 
@@ -1144,32 +1147,13 @@
                 success: function (result) {
                     debugger
                     $("#staticBackdropBody").html(result);
-
+                    var List = JSON.parse(localStorage.getItem('NarrationMasterList')) || [];
+                    var json = @Html.Raw(Json.Encode(@Model.NarrationMasterList));
+                    List = [...json];
+                    localStorage.setItem('NarrationMasterList', JSON.stringify(List));
                 },
             })
         }
-
-
-        function getSelectedValueLastAmountTotalAmount() {
-            // Get the dropdown element by its ID
-            var selectElementFirst = document.getElementById("JobNo");
-            var Customerid = document.getElementById("selectCustomer");
-            // Get the selected value
-            var selectedValuefirst = selectElementFirst.value;
-
-            GetLastAmountTotalAmount(Customerid.value, selectedValuefirst)
-            // Log or use the selected value
-            //console.log("Selected value:", selectedValue);
-
-            // You can return the value if needed
-            return selectedValuefirst;
-        }
-
-        // Attach the function to the dropdown change event
-        document.getElementById("JobNo").addEventListener("change", function () {
-            var selectedValue = getSelectedValueLastAmountTotalAmount();
-            // alert("The selected value is: " + selectedValue);
-        });
 
         var GetLastAmountTotalAmount = function (id,jobid) {
 
@@ -1183,34 +1167,42 @@
                 success: function (result) {
 
                     document.getElementById("TotalAmount").value = result[0].ActualValue.toFixed(2);
+                    document.getElementById("JobCostAmount").value = result[0].ActualValue.toFixed(2);
                     document.getElementById("LastYearAmount").value = result[0].PreViewvalue.toFixed(2);
 
 
-                    
+                    //selectVatType
+                    if ($('#selectVatType').val() !== "Non VAT") {
+                        // Get the entered values
+                        var vatPercentage = parseFloat($('#vatPercentageInput').val()) || 0;
+                        var nbtPercentage = parseFloat($('#NbtPercentageInput').val()) || 0;
+                        var totalAmount = parseFloat($('#TotalAmount').val()) || 0;
+                        debugger
+                        // Calculate value VAT and value NBT
+                        var valueVAT = totalAmount * (vatPercentage / 100);
+                        var valueNBT = totalAmount * (nbtPercentage / 100);
 
-                    // Get the entered values
-                    var vatPercentage = parseFloat($('#vatPercentageInput').val()) || 0;
-                    var nbtPercentage = parseFloat($('#NbtPercentageInput').val()) || 0;
-                    var totalAmount = parseFloat($('#TotalAmount').val()) || 0;
-                    debugger
-                    // Calculate value VAT and value NBT
-                    var valueVAT = totalAmount * (vatPercentage / 100);
-                    var valueNBT = totalAmount * (nbtPercentage / 100);
+                        // Update the value VAT and value NBT fields
+                        $('#ValueVAT').val(valueVAT.toFixed(2));
+                        $('#ValueNBT').val(valueNBT.toFixed(2));
 
-                    // Update the value VAT and value NBT fields
-                    $('#ValueVAT').val(valueVAT.toFixed(2));
-                    $('#ValueNBT').val(valueNBT.toFixed(2));
+                        // Calculate grand total
+                        var grandTotal = totalAmount + valueVAT + valueNBT;
 
-                    // Calculate grand total
-                    var grandTotal = totalAmount + valueVAT + valueNBT;
+                        // Update the grand total display
 
-                    // Update the grand total display
-
-                     $('#TotalReceivedAmount').val(grandTotal.toFixed(2));
-
+                        $('#TotalReceivedAmount').val(grandTotal.toFixed(2));
+                    }
+                    if ($('#selectVatType').val() == "Non VAT") {
+                        IsVatType = false;
+                        $('#TotalReceivedAmount').val(result[0].ActualValue.toFixed(2));
+                    }
 
                     setTimeout(function () {
                         var amountField = document.getElementById("narrationid");
+                        amountField.removeAttribute("readonly");
+
+                        var amountField = document.getElementById("InvoiceNarration");
                         amountField.removeAttribute("readonly");
 
                         var amountField2 = document.getElementById("Amount");
@@ -1231,7 +1223,7 @@
                 },
             })
 
-           
+
 
         }
 
@@ -1240,25 +1232,85 @@
         $(document).ready(function () {
             $('#vatPercentageInput, #NbtPercentageInput, #TotalAmount').on('input', function () {
                 // Get the entered values
-                var vatPercentage = parseFloat($('#vatPercentageInput').val()) || 0;
-                var nbtPercentage = parseFloat($('#NbtPercentageInput').val()) || 0;
-                var totalAmount = parseFloat($('#TotalAmount').val()) || 0;
+
+                if ($('#selectVatType').val() !== "Non VAT") {
+                    var vatPercentage = parseFloat($('#vatPercentageInput').val()) || 0;
+                    var nbtPercentage = parseFloat($('#NbtPercentageInput').val()) || 0;
+                    var totalAmount = parseFloat($('#TotalAmount').val()) || 0;
+                    debugger
+                    // Calculate value VAT and value NBT
+                    var valueVAT = totalAmount * (vatPercentage / 100);
+                    var valueNBT = totalAmount * (nbtPercentage / 100);
+
+                    // Update the value VAT and value NBT fields
+                    $('#ValueVAT').val(valueVAT.toFixed(2));
+                    $('#ValueNBT').val(valueNBT.toFixed(2));
+
+                    // Calculate grand total
+                    var grandTotal = totalAmount + valueVAT + valueNBT;
+
+                    // Update the grand total display
+                    $('#TotalReceivedAmount').val(grandTotal.toFixed(2));
+                }
+                if ($('#selectVatType').val() == "Non VAT") {
+                    var totalAmount = parseFloat($('#TotalAmount').val()) || 0;
+                    $('#TotalReceivedAmount').val(totalAmount.toFixed(2));
+                }
+
+            });
+
+            $('#SelectShortNarration').on('input', function () {
+                // Get the entered values
+                var ShortNarrationid = parseFloat($('#SelectShortNarration').val()) || 0;
+                var List = JSON.parse(localStorage.getItem('NarrationMasterList')) || [];
                 debugger
+                const hasRecord = List.find(record => record.Id === parseInt(ShortNarrationid));
+
+                if (hasRecord) {
+                    var NarrationText = hasRecord.Narration;
+                    // Assign the value to the InvoiceNarration field
+                    $('#ShortNarrationtext').val(NarrationText);
+                } else {
+                    console.log("No matching record found.");
+                    // Optionally, clear the input field or set it to a default value
+                    $('#ShortNarrationtext').val("");
+                }
                 // Calculate value VAT and value NBT
-                var valueVAT = totalAmount * (vatPercentage / 100);
-                var valueNBT = totalAmount * (nbtPercentage / 100);
 
-                // Update the value VAT and value NBT fields
-                $('#ValueVAT').val(valueVAT.toFixed(2));
-                $('#ValueNBT').val(valueNBT.toFixed(2));
+            });
 
-                // Calculate grand total
-                var grandTotal = totalAmount + valueVAT + valueNBT;
+            $('#departmentFirst').on('input', function () {
 
-                // Update the grand total display
-                $('#TotalReceivedAmount').val(grandTotal.toFixed(2));
+                var selectElement = parseFloat($('#departmentFirst').val()) || 0;
+               
+                GetDepartmentTwoByFirstid(selectElement)
+            });
+
+            $('#departmentTwo').on('input', function () {
+
+                var FirstElement = parseFloat($('#departmentFirst').val()) || 0;
+                var TwoElement = parseFloat($('#departmentTwo').val()) || 0;
+
+                GetDepartmentThirdBytwoid(FirstElement, TwoElement)
+            });
+            $('#selectCustomer').on('input', function () {
+
+                var customerId = parseFloat($('#selectCustomer').val()) || 0;
+
+                GetCustomerWisejob(customerId)
+            });
+
+            $('#JobNo').on('input', function () {
+
+                var selectElementFirst = document.getElementById("JobNo");
+                var Customerid = parseFloat($('#selectCustomer').val()) || 0;
+                // Get the selected value
+                var selectedValuefirst = selectElementFirst.value;
+
+                GetLastAmountTotalAmount(Customerid, selectedValuefirst)
             });
         });
+
 
     </script>
 }

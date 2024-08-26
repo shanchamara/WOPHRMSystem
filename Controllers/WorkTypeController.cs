@@ -22,7 +22,7 @@ namespace WOPHRMSystem.Controllers
         [HttpGet]
         public ActionResult Create()
         {
-            var model = new WorkTypeModel() { WorkGroupLists = new SelectList(_ClientService2.GetAll(), "Id", "CodeAndNarration"), };
+            var model = new WorkTypeModel() { WorkGroupLists = new SelectList(_ClientService2.GetAll(), "Id", "CodeAndNarration"), IsActive = true };
             return View(model);
         }
 

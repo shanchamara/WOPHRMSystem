@@ -1,4 +1,6 @@
-﻿@model WOPHRMSystem.Models.ListViewCurrentlyAssignees
+﻿@*@using System.Text.Json*@
+@model WOPHRMSystem.Models.ListViewCurrentlyAssignees
+
 
 <!-- DataTables -->
 <link rel="stylesheet" href="~/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
@@ -101,6 +103,14 @@
 
 <script>
 
+    debugger
+    localStorage.clear();
+    var List = JSON.parse(localStorage.getItem('ViewAssignee')) || [];
+    var json = @Html.Raw(Json.Encode(@Model.JobMasterAssignTempModels));
+    List = [...json];
+    localStorage.setItem('ViewAssignee', JSON.stringify(List));
+
+
     function getInputValue1(button, typeOftableId, typeOftable, name, code, id, Designation) {
         var row = button.closest('tr');
         var budgetedHours = row.querySelector('.budgeted-hours').value || 0;
@@ -119,15 +129,10 @@
             data: { TypeOftableId: TypeOftableId, TypeOftable: TypeOftable, Name: Name, Code: Code, Designation: Designation, Id: id, BudgetedHours: BudgetedHours },
 
             success: function (result) {
-                Swal.fire({
-
-                    icon: result.Status,
-                    title: result.Status,
-                    text: result.Text
-                }).then((result) => {
+               
                     IsAssignee = true;
                     $('#errorAssignee').html("");
-                    if (result.isConfirmed) {
+                   
                         $.ajax({
                             type: "GET",
                             url: "/JobMaster/ViewAssignees",
@@ -138,20 +143,7 @@
                                 $("#staticEmployee").html(result);
                             },
                         })
-                    }
-                    else {
-                        $.ajax({
-                            type: "GET",
-                            url: "/JobMaster/ViewAssignees",
-                            data: { Createby: 'User' },
-
-                            success: function (result) {
-                                debugger
-                                $("#staticEmployee").html(result);
-                            },
-                        })
-                    }
-                })
+                   
             },
         })
     }
@@ -209,6 +201,7 @@
 
 
 
+
     var AddAssign = function (e) {
         e.preventDefault();  // Prevent the default form submission
         //debugger
@@ -222,13 +215,8 @@
             url: "/JobMaster/InsertSelectedAssign",
             data: { id: selectElement, Hours: Elements},
             success: function (result) {
-                Swal.fire({
-                    icon: result.Status,
-                    title: result.Status,
-                    text: result.Text
-                }).then((result) => {
-                    IsAssignee = true;
-                    if (result.isConfirmed) {
+                IsAssignee = true;
+               
                         $.ajax({
                             type: "GET",
                             url: "/JobMaster/ViewAssignees",
@@ -238,18 +226,7 @@
                                 $("#staticEmployee").html(result);
                             }
                         });
-                    } else {
-                        $.ajax({
-                            type: "GET",
-                            url: "/JobMaster/ViewAssignees",
-                            data: { Createby: 'User' },
-                            success: function (result) {
-                                debugger;
-                                $("#staticEmployee").html(result);
-                            }
-                        });
-                    }
-                });
+                   
             }
         });
     };

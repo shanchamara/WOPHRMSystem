@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Web.Mvc;
 
 namespace WOPHRMSystem.Models
@@ -9,8 +10,8 @@ namespace WOPHRMSystem.Models
         public int Id { get; set; }
         public string InvoiceNoProforma { get; set; }
         public int Fk_DepartmentIdOne { get; set; }
-        public int Fk_DepartmentIdTwo { get; set; }
-        public int Fk_DepartmentIdThird { get; set; }
+        public int? Fk_DepartmentIdTwo { get; set; }
+        public int? Fk_DepartmentIdThird { get; set; }
         public string DocNo { get; set; }
         public string JobCode { get; set; }
         public Nullable<System.DateTime> Date { get; set; }
@@ -33,6 +34,7 @@ namespace WOPHRMSystem.Models
         public string NarrationOne { get; set; }
         public string NarrationTwo { get; set; }
         public int Fk_InvoiceShortNarrationId { get; set; }
+        public string ShortNarrationtext { get; set; }
         public int Fk_JobMasterId { get; set; }
         public Nullable<decimal> LastYearAmount { get; set; }
         public Nullable<System.DateTime> PostingDate { get; set; }
@@ -40,6 +42,7 @@ namespace WOPHRMSystem.Models
         public Nullable<System.DateTime> IsActiveDate { get; set; }
         public bool IsDelete { get; set; }
         public Nullable<decimal> TotalAmount { get; set; }
+        public Nullable<decimal> JobCostAmount { get; set; }
         public Nullable<decimal> TotalReceivedAmount { get; set; }
         public Nullable<decimal> ValueNBT { get; set; }
         public Nullable<decimal> ValueVAT { get; set; }
@@ -75,5 +78,7 @@ namespace WOPHRMSystem.Models
         public SelectList DepartmentListThird { get; set; }
         public SelectList NatureList { get; set; }
         public SelectList JobList { get; set; }
+
+        public List<InvoiceShortNarrationMasterModel> NarrationMasterList { get; set; }
     }
 }

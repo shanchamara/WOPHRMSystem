@@ -21,5 +21,6 @@ namespace WOPHRMSystem.Context
         public int FK_CustomerId { get; set; }
         public int FK_JobMasterId { get; set; }
         public string Create_By { get; set; }
+        public string Narration { get; set; }
     }
 }

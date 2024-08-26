@@ -52,6 +52,8 @@ namespace WOPHRMSystem.Controllers
                 NBTPercentage = 2,
                 VatPercentage = 15,
                 DocNo = _ClientService.GetDOCNo(),
+                IsActive = true,
+                NarrationMasterList = invoiceShortNarrationMasterServices.GetAll()
             };
             return View(model);
         }
@@ -103,7 +105,10 @@ namespace WOPHRMSystem.Controllers
                         NarrationTwo = masterModel.NarrationTwo,
                         Create_Date = new CommonResources().LocalDatetime().Date,
                         BalanceAmount = masterModel.TotalReceivedAmount,
-                        InvoiceNo= masterModel.DocNo
+                        InvoiceNo = masterModel.DocNo,
+                        JobCostAmount = masterModel.JobCostAmount,
+                        ShortNarrationtext = masterModel.ShortNarrationtext,
+
                     };
                     return Json(_ClientService.Insert(tbl));
                 };
@@ -149,7 +154,7 @@ namespace WOPHRMSystem.Controllers
                 NarrationOne = " To Profressional Services render re - ",
                 InvoiceShrotNarration = new SelectList(invoiceShortNarrationMasterServices.GetAll(), "Id", "CodeAndNarration"),
                 DepartmentListOne = new SelectList(department.GetAll(), "Id", "CodeAndNarration"),
-                DepartmentListThird = new SelectList(thirdServices.GetDepartmentThirdByDepartmentOneId(dt.Fk_DepartmentIdOne, dt.Fk_DepartmentIdTwo), "Id", "CodeAndNarration"),
+                DepartmentListThird = new SelectList(thirdServices.GetDepartmentThirdByDepartmentOneId(dt.Fk_DepartmentIdOne, dt.Fk_DepartmentIdTwo ?? 0), "Id", "CodeAndNarration"),
                 DepartmentListsecond = new SelectList(secondServices.GetDepartmentSecondByDepartmentOneId(dt.Fk_DepartmentIdOne), "Id", "CodeAndNarration"),
                 NatureList = new SelectList(natureMasterServices.GetAll(), "Id", "CodeAndNarration"),
                 JobList = new SelectList(jobMasterServices.GetAllJObsForIsReadytoInvoice(dt.Fk_CustomerId), "Fk_JobMasterId", "FullDetails"),
@@ -158,8 +163,8 @@ namespace WOPHRMSystem.Controllers
                 Fk_CompanyId = dt.Fk_CompanyId,
                 Fk_CustomerId = dt.Fk_CustomerId,
                 Fk_DepartmentIdOne = dt.Fk_DepartmentIdOne,
-                Fk_DepartmentIdThird = dt.Fk_DepartmentIdThird,
-                Fk_DepartmentIdTwo = dt.Fk_DepartmentIdTwo,
+                Fk_DepartmentIdThird = dt.Fk_DepartmentIdThird ?? 0,
+                Fk_DepartmentIdTwo = dt.Fk_DepartmentIdTwo ?? 0,
                 Fk_InvoiceShortNarrationId = dt.Fk_InvoiceShortNarrationId,
                 Fk_JobMasterId = dt.Fk_JobMasterId,
                 Fk_ManagerOne = dt.Fk_ManagerOne,
@@ -174,7 +179,7 @@ namespace WOPHRMSystem.Controllers
                 IsActiveDate = dt.IsActiveDate,
                 InvoiceNo = dt.InvoiceNo,
                 IsDelete = dt.IsDelete,
-                LastYearAmount = dt.LastYearAmount,
+                LastYearAmount = dt.LastYearAmount ?? 0,
                 NBTPercentage = dt.NBTPercentage,
                 NarrationTwo = dt.NarrationTwo,
                 NoNVat = dt.NoNVat,
@@ -184,8 +189,9 @@ namespace WOPHRMSystem.Controllers
                 VatPercentage = dt.VatPercentage,
                 YourReferance = dt.YourReferance,
 
-
-
+                JobCostAmount = dt.JobCostAmount,
+                ShortNarrationtext = dt.ShortNarrationtext,
+                NarrationMasterList = invoiceShortNarrationMasterServices.GetAll()
             };
             return View(model);
         }
@@ -242,7 +248,8 @@ namespace WOPHRMSystem.Controllers
                         IsPartnerOneComfirm = masterModel.IsPartnerOneComfirm,
                         ManagerOneComfirmDate = masterModel.ManagerOneComfirmDate,
                         InvoiceNo = masterModel.InvoiceNo,
-
+                        JobCostAmount = masterModel.JobCostAmount,
+                        ShortNarrationtext = masterModel.ShortNarrationtext,
                     };
                     return Json(_ClientService.Update(tbl));
                 }
@@ -345,6 +352,7 @@ namespace WOPHRMSystem.Controllers
             {
                 SelectListItems = new SelectList(narrationMasterServices.GetAll(), "Id", "CodeAndNarration"),
                 InvoiceBodyModels = narrationMasterServices.GetAllInvoiceBody(Create_By),
+                ListNarrations = narrationMasterServices.GetAll(),
                 RowTotalAmount = narrationMasterServices.GetAllInvoiceBodyRowTotalAmount(Create_By)
             };
 
@@ -353,7 +361,7 @@ namespace WOPHRMSystem.Controllers
 
 
         [HttpPost]
-        public ActionResult InvoiceBodyTempInsert(int CusId, int JobId, int NarratiionId, decimal Amount)
+        public ActionResult InvoiceBodyTempInsert(int CusId, int JobId, int NarratiionId, decimal Amount, string Narration)
         {
             try
             {
@@ -365,7 +373,8 @@ namespace WOPHRMSystem.Controllers
                         FK_CustomerId = CusId,
                         FK_JobMasterId = JobId,
                         Amount = Amount,
-                        Fk_InvoiceNarrttionId = NarratiionId
+                        Fk_InvoiceNarrttionId = NarratiionId,
+                        Narration = Narration
                     };
 
                     return Json(narrationMasterServices.Insert(tbl));
@@ -388,7 +397,7 @@ namespace WOPHRMSystem.Controllers
 
 
         [HttpPost]
-        public ActionResult InvoiceBodyTempUpdate(int Id, int CusId, int JobId, int NarratiionId, decimal Amount)
+        public ActionResult InvoiceBodyTempUpdate(int Id, int CusId, int JobId, int NarratiionId, decimal Amount, string Narration)
         {
             try
             {
@@ -402,7 +411,8 @@ namespace WOPHRMSystem.Controllers
                         Amount = Amount,
                         Fk_InvoiceNarrttionId = NarratiionId,
                         Id = Id,
-                        BodyRowId = Id
+                        BodyRowId = Id,
+                        Narration = Narration
                     };
 
                     return Json(narrationMasterServices.Update(tbl));

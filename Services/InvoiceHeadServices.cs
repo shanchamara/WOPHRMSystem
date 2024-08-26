@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DocumentFormat.OpenXml.Office2010.Excel;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity.Migrations;
 using System.Linq;
@@ -27,8 +28,18 @@ namespace WOPHRMSystem.Services
 
 
                         var JobCodePattern = _context.TblDocuments.SingleOrDefault(d => d.TypeOfTable.Equals("TblInvoiceHead"));
+                        var GetJobPrefoxcode = _context.TblJobMasters.SingleOrDefault(d => d.Id.Equals(obj.Fk_JobMasterId));
 
-                        obj.InvoiceNo= Convert.ToString(JobCodePattern.Pattern + 1);
+                        var nextNumber = JobCodePattern.Number + 1;
+                        var InvoiceNo = GetJobPrefoxcode.JObPrefixCode + nextNumber.ToString().PadLeft(8, '0');
+
+
+
+                        var makeJobCode = nextNumber.ToString().PadLeft(8, '0');
+
+                        obj.DocNo = "C" + makeJobCode;
+
+                        obj.InvoiceNo = InvoiceNo;
                         JobCodePattern.Number++;
                         _context.TblInvoiceHeads.Add(obj);
                         _context.SaveChanges();
@@ -43,6 +54,7 @@ namespace WOPHRMSystem.Services
                                 Create_Date = obj.Create_Date,
                                 Fk_JobMasterId = obj.Fk_JobMasterId,
                                 IsDelete = false,
+                                Narration = s.Narration,
                                 Fk_InvoiceNarrttionId = s.Fk_InvoiceNarrttionId,
                                 Fk_CustomerId = obj.Fk_CustomerId,
                                 Amount = s.Amount,
@@ -367,12 +379,14 @@ namespace WOPHRMSystem.Services
         }
 
 
-        public string GetInvoiceNo()
+        public string GetInvoiceNo(int id)
         {
             try
             {
                 var JobCodePattern = _context.TblDocuments.SingleOrDefault(d => d.TypeOfTable.Equals("TblInvoiceHead"));
-                var makeJobCode = JobCodePattern.Pattern + Convert.ToString(JobCodePattern.Number + 1);
+                var GetJobPrefoxcode = _context.TblJobMasters.SingleOrDefault(d => d.Id.Equals(id));
+                var nextNumber = JobCodePattern.Number + 1;
+                var makeJobCode = GetJobPrefoxcode.JObPrefixCode + nextNumber.ToString().PadLeft(8, '0');
                 return makeJobCode;
 
             }
@@ -388,7 +402,9 @@ namespace WOPHRMSystem.Services
             try
             {
                 var JobCodePattern = _context.TblDocuments.SingleOrDefault(d => d.TypeOfTable.Equals("TblProformaInvoiceHead"));
-                var makeJobCode = "M0000" + Convert.ToString(JobCodePattern.Number + 1);
+
+                var nextNumber = JobCodePattern.Number + 1;
+                var makeJobCode = "C" + nextNumber.ToString().PadLeft(8, '0');
                 return makeJobCode;
 
             }

@@ -152,15 +152,19 @@ namespace WOPHRMSystem.Services
 
 
 
-        public List<DepartmentModel> GetDepartmentThirdByDepartmentOneId(int FirstId, int SecondId)
+        public List<DepartmentModel> GetDepartmentThirdByDepartmentOneId(int? FirstId, int? SecondId)
         {
             try
             {
 
+                if (SecondId == 0)
+                {
+                    return new List<DepartmentModel>();
+                }
 
 
                 var department = (from a in _context.TblDepartmentThirds
-                                  where a.Fk_DepartmentIdFirst == FirstId && a.Fk_DepartmentIdSecond.Equals(SecondId)  
+                                  where a.Fk_DepartmentIdFirst == FirstId && a.Fk_DepartmentIdSecond == SecondId
                                   orderby a.Id descending
                                   select new DepartmentModel()
                                   {
@@ -170,7 +174,7 @@ namespace WOPHRMSystem.Services
                                       IsActive = a.IsActive,
                                       CodeAndNarration = a.Code + " " + a.Narration,
                                       IsDelete = a.IsDelete,
-                                  }).Where(d => d.IsDelete.Equals(false)).ToList();
+                                  }).Where(d => d.IsDelete == false).ToList();
 
                 return department;
 

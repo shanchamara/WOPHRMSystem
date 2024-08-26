@@ -52,7 +52,10 @@
                                     <td style="display:none;">@s.Id</td> <!-- Hidden Id column -->
                                     <td style="display:none;">@s.Fk_InvoiceNarrttionId</td> <!-- Hidden Id column -->
                                     <td class="col-1 form-control-sm">@s.Code</td>
-                                    <td class="col-4 form-control-sm">@s.Narration</td>
+                                    @*<td class="col-4 form-control-sm">@s.Narration</td>*@
+                                    <td class="col-4">
+                                        <input type="text" class="form-control Narrations form-control-sm text-left" value="@s.Narration" />
+                                    </td>
                                     <td class="col-2">
                                         <input type="text" class="form-control budgeted-hours form-control-sm text-right" value="@s.Amount" />
                                     </td>
@@ -72,8 +75,12 @@
 
                                 <tr>
                                     @Html.HiddenFor(model => model.RowTotalAmount)
-                                    <td colspan="2">
+                                    <td colspan="1">
                                         @Html.DropDownListFor(model => model.Fk_InvoiceNarrttionId, Model.SelectListItems, "Select", htmlAttributes: new { @class = "form-control form-control-sm", id = "narrationid", @readonly = "readonly" })
+                                    </td>
+                                    <td>
+                                        @Html.EditorFor(model => model.InvoiceNarration, new { htmlAttributes = new { @class = "form-control form-control-sm", placeholder = "", @readonly = "readonly" } })
+
                                     </td>
                                     <td>
                                         @Html.EditorFor(model => model.Amount, new { htmlAttributes = new { @class = "form-control form-control-sm", placeholder = "", @type = "number", @min = "0", @readonly = "readonly" } })
@@ -100,17 +107,21 @@
 
 <script>
 
-
+     var List = JSON.parse(localStorage.getItem('NarrationList')) || [];
+     var json = @Html.Raw(Json.Encode(@Model.ListNarrations));
+     List = [...json];
+     localStorage.setItem('NarrationList', JSON.stringify(List));
 
     function getInputValue1(button, Id,narrationid) {
         var row = button.closest('tr');
         var budgetedHours = row.querySelector('.budgeted-hours').value || 0;
+        var narrationtext = row.querySelector('.Narrations').value || 0;
 
         // Call your AddAssign function or handle the values as needed
-        UpdateBudget(Id, budgetedHours, narrationid);
+        UpdateBudget(Id, budgetedHours, narrationid, narrationtext);
     }
 
-    var UpdateBudget = function (Id, amount, narrationid) {
+    var UpdateBudget = function (Id, amount, narrationid,text) {
         //$("#loaderbody").removeClass('hide');
         var jobId = document.getElementById("JobNo").value;
         var Customerid = document.getElementById("selectCustomer").value;
@@ -120,15 +131,9 @@
         $.ajax({
             type: "POST",
             url: "/InvoiceHead/InvoiceBodyTempUpdate",
-            data: { Id: Id, CusId: Customerid, JobId: jobId, NarratiionId: narrationid, Amount: amount },
+            data: { Id: Id, CusId: Customerid, JobId: jobId, NarratiionId: narrationid, Amount: amount, Narration: text },
             success: function (result) {
-                Swal.fire({
-                    icon: result.Status,
-                    title: result.Status,
-                    text: result.Text
-                }).then((result) => {
 
-                    if (result.isConfirmed) {
                         $.ajax({
                             type: "GET",
                             url: "/InvoiceHead/InvoiceNarrationList",
@@ -141,29 +146,14 @@
                                 var amountField = document.getElementById("narrationid");
                                 amountField.removeAttribute("readonly");
 
-                                var amountField2 = document.getElementById("Amount");
-                                amountField2.removeAttribute("readonly");
-                            },
-                        })
-                    } else {
-                        $.ajax({
-                            type: "GET",
-                            url: "/InvoiceHead/InvoiceNarrationList",
-                            //data: { Createby: 'User' },
-
-                            success: function (result) {
-
-                                $("#staticBackdropBody").html(result);
-
-                                var amountField = document.getElementById("narrationid");
-                                amountField.removeAttribute("readonly");
+                                var amountField3 = document.getElementById("InvoiceNarration");
+                                amountField3.removeAttribute("readonly");
 
                                 var amountField2 = document.getElementById("Amount");
                                 amountField2.removeAttribute("readonly");
                             },
                         })
-                    }
-                });
+
             }
         });
     }
@@ -215,6 +205,9 @@
                                     var amountField = document.getElementById("narrationid");
                                     amountField.removeAttribute("readonly");
 
+                                    var amountField3 = document.getElementById("InvoiceNarration");
+                                    amountField3.removeAttribute("readonly");
+
                                     var amountField2 = document.getElementById("Amount");
                                     amountField2.removeAttribute("readonly");
                                 },
@@ -236,13 +229,14 @@
         //debugger
         //var data = $('#quickForm1').serialize();
         var selectElement = document.getElementById("narrationid").value;
-        var Amount = document.getElementById("Amount").value;
-        var Elements = parseInt(document.getElementById('Amount').value);
-        var RowTotalAmount = parseInt(document.getElementById('RowTotalAmount').value);
+        var Amount = document.getElementById("Amount").value || 0;
+        var Elements = parseInt(document.getElementById('Amount').value) || 0;
+        var RowTotalAmount = parseInt(document.getElementById('RowTotalAmount').value) || 0;
+        var NarrationNote = document.getElementById('InvoiceNarration').value;
 
         var valueRowTotalAndelements = RowTotalAmount + Elements;
 
-        var TotalAmount = parseInt(document.getElementById('TotalAmount').value);
+        var TotalAmount = parseInt(document.getElementById('TotalAmount').value) || 0;
         var jobId = document.getElementById("JobNo").value;
         var Customerid = document.getElementById("selectCustomer").value;
 
@@ -251,6 +245,13 @@
             IsValid = false;
 
             document.getElementById("narrationid").className = "form-control form-control-sm is-invalid";
+            return false;
+        }
+
+        if (NarrationNote == "") {
+            IsValid = false;
+
+            document.getElementById("InvoiceNarration").className = "form-control form-control-sm is-invalid";
             return false;
         }
 
@@ -280,15 +281,10 @@
         $.ajax({
             type: "POST",
             url: "/InvoiceHead/InvoiceBodyTempInsert",
-            data: { CusId: Customerid, JobId: jobId, NarratiionId: selectElement, Amount: Elements },
+            data: { CusId: Customerid, JobId: jobId, NarratiionId: selectElement, Amount: Elements, Narration: NarrationNote  },
             success: function (result) {
-                Swal.fire({
-                    icon: result.Status,
-                    title: result.Status,
-                    text: result.Text
-                }).then((result) => {
 
-                    if (result.isConfirmed) {
+
                         $.ajax({
                             type: "GET",
                             url: "/InvoiceHead/InvoiceNarrationList",
@@ -301,35 +297,41 @@
                                 var amountField = document.getElementById("narrationid");
                                 amountField.removeAttribute("readonly");
 
-                                var amountField2 = document.getElementById("Amount");
-                                amountField2.removeAttribute("readonly");
-                            },
-                        })
-                    } else {
-                        $.ajax({
-                            type: "GET",
-                            url: "/InvoiceHead/InvoiceNarrationList",
-                            //data: { Createby: 'User' },
-
-                            success: function (result) {
-
-                                $("#staticBackdropBody").html(result);
-
-                                var amountField = document.getElementById("narrationid");
-                                amountField.removeAttribute("readonly");
+                                var amountField3 = document.getElementById("InvoiceNarration");
+                                amountField3.removeAttribute("readonly");
 
                                 var amountField2 = document.getElementById("Amount");
                                 amountField2.removeAttribute("readonly");
                             },
                         })
-                    }
-                });
+
+
             }
         });
     };
 
 
-    
+
+    $(document).ready(function () {
+        $('#narrationid').on('input', function () {
+            // Get the entered value
+            var selectElementValue = $(this).val();  // Use jQuery to get the value directly
+            var List = JSON.parse(localStorage.getItem('NarrationList')) || [];
+
+            // Find the matching record in the List
+            const hasRecord = List.find(record => record.Id === parseInt(selectElementValue));
+
+            if (hasRecord) {
+                var NarrationText = hasRecord.Narration;
+                // Assign the value to the InvoiceNarration field
+                $('#InvoiceNarration').val(NarrationText);
+            } else {
+                console.log("No matching record found.");
+                // Optionally, clear the input field or set it to a default value
+                $('#InvoiceNarration').val("");
+            }
+        });
+    });
 
 
 

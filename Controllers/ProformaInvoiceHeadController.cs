@@ -46,12 +46,14 @@ namespace WOPHRMSystem.Controllers
                 MangerLists = new SelectList(employee.GetAllIsManager(), "Id", "Name"),
                 CustomerLists = new SelectList(customer.GetAll(), "Id", "Name"),
                 NarrationOne = " To Profressional Services render re - ",
-                InvoiceShrotNarration = new SelectList(invoiceShortNarrationMasterServices.GetAll(), "Id", "CodeAndNarration"),
+                InvoiceShrotNarration = new SelectList(invoiceShortNarrationMasterServices.GetAll(), "Id", "Code"),
                 DepartmentListOne = new SelectList(department.GetAll(), "Id", "CodeAndNarration"),
                 NatureList = new SelectList(natureMasterServices.GetAll(), "Id", "CodeAndNarration"),
                 NBTPercentage = 2,
                 VatPercentage = 15,
-                DocNo = _ClientService.GetDOCNo(),
+                DocNo = "M" + _ClientService.GetDOCNo(),
+                IsActive = true,
+                NarrationMasterList = invoiceShortNarrationMasterServices.GetAll()
             };
             return View(model);
         }
@@ -66,7 +68,7 @@ namespace WOPHRMSystem.Controllers
                     var tbl = new TblProformaInvoiceHead
                     {
 
-
+                        ShortNarrationtext = masterModel.ShortNarrationtext,
                         Create_By = "User",
                         IsActive = masterModel.IsActive,
                         Fk_PartnerSecond = masterModel.Fk_PartnerSecond,
@@ -102,6 +104,7 @@ namespace WOPHRMSystem.Controllers
                         NarrationOne = masterModel.NarrationOne,
                         NarrationTwo = masterModel.NarrationTwo,
                         Create_Date = new CommonResources().LocalDatetime().Date,
+                        JobCostAmount = masterModel.JobCostAmount,
 
                     };
                     return Json(_ClientService.Insert(tbl));
@@ -131,7 +134,6 @@ namespace WOPHRMSystem.Controllers
         {
             narrationMasterServices.DeleteCurrentlyProformaTempAndInsertDataForUpdate("User", Id);
             var dt = _ClientService.GetById(Id);
-
             var model = new ProformaInvoiceHeadModel()
             {
                 Id = Id,
@@ -148,7 +150,7 @@ namespace WOPHRMSystem.Controllers
                 NarrationOne = " To Profressional Services render re - ",
                 InvoiceShrotNarration = new SelectList(invoiceShortNarrationMasterServices.GetAll(), "Id", "CodeAndNarration"),
                 DepartmentListOne = new SelectList(department.GetAll(), "Id", "CodeAndNarration"),
-                DepartmentListThird = new SelectList(thirdServices.GetDepartmentThirdByDepartmentOneId(dt.Fk_DepartmentIdOne, dt.Fk_DepartmentIdTwo), "Id", "CodeAndNarration"),
+                DepartmentListThird = new SelectList(thirdServices.GetDepartmentThirdByDepartmentOneId(dt.Fk_DepartmentIdOne, dt.Fk_DepartmentIdTwo ?? 0), "Id", "CodeAndNarration"),
                 DepartmentListsecond = new SelectList(secondServices.GetDepartmentSecondByDepartmentOneId(dt.Fk_DepartmentIdOne), "Id", "CodeAndNarration"),
                 NatureList = new SelectList(natureMasterServices.GetAll(), "Id", "CodeAndNarration"),
                 JobList = new SelectList(jobMasterServices.GetAllJObsForIsReadytoInvoice(dt.Fk_CustomerId), "Fk_JobMasterId", "FullDetails"),
@@ -157,8 +159,8 @@ namespace WOPHRMSystem.Controllers
                 Fk_CompanyId = dt.Fk_CompanyId,
                 Fk_CustomerId = dt.Fk_CustomerId,
                 Fk_DepartmentIdOne = dt.Fk_DepartmentIdOne,
-                Fk_DepartmentIdThird = dt.Fk_DepartmentIdThird,
-                Fk_DepartmentIdTwo = dt.Fk_DepartmentIdTwo,
+                Fk_DepartmentIdThird = dt.Fk_DepartmentIdThird ?? 0,
+                Fk_DepartmentIdTwo = dt.Fk_DepartmentIdTwo ?? 0,
                 Fk_InvoiceShortNarrationId = dt.Fk_InvoiceShortNarrationId,
                 Fk_JobMasterId = dt.Fk_JobMasterId,
                 Fk_ManagerOne = dt.Fk_ManagerOne,
@@ -182,8 +184,8 @@ namespace WOPHRMSystem.Controllers
                 PostingDate = dt.PostingDate,
                 VatPercentage = dt.VatPercentage,
                 YourReferance = dt.YourReferance,
-
-
+                JobCostAmount = dt.JobCostAmount,
+                ShortNarrationtext = dt.ShortNarrationtext,
 
             };
             return View(model);
@@ -241,6 +243,8 @@ namespace WOPHRMSystem.Controllers
                         IsPartnerOneComfirm = masterModel.IsPartnerOneComfirm,
                         ManagerOneComfirmDate = masterModel.ManagerOneComfirmDate,
                         InvoiceNoProforma = masterModel.InvoiceNoProforma,
+                        JobCostAmount = masterModel.JobCostAmount,
+                        ShortNarrationtext = masterModel.ShortNarrationtext,
 
                     };
                     return Json(_ClientService.Update(tbl));
@@ -343,6 +347,7 @@ namespace WOPHRMSystem.Controllers
             var model = new ListInvoiceBodyModel()
             {
                 SelectListItems = new SelectList(narrationMasterServices.GetAll(), "Id", "CodeAndNarration"),
+                ListNarrations = narrationMasterServices.GetAll(),
                 InvoiceBodyModels = narrationMasterServices.GetAllProformaInvoiceBody(Create_By),
                 RowTotalAmount = narrationMasterServices.GetAllProformaInvoiceBodyRowTotalAmount(Create_By)
             };
@@ -352,7 +357,7 @@ namespace WOPHRMSystem.Controllers
 
 
         [HttpPost]
-        public ActionResult InvoiceBodyTempInsert(int CusId, int JobId, int NarratiionId, decimal Amount)
+        public ActionResult InvoiceBodyTempInsert(int CusId, int JobId, int NarratiionId, decimal Amount, string Narration)
         {
             try
             {
@@ -364,7 +369,8 @@ namespace WOPHRMSystem.Controllers
                         FK_CustomerId = CusId,
                         FK_JobMasterId = JobId,
                         Amount = Amount,
-                        Fk_InvoiceNarrttionId = NarratiionId
+                        Fk_InvoiceNarrttionId = NarratiionId,
+                        Narration = Narration
                     };
 
                     return Json(narrationMasterServices.Insert(tbl));
@@ -387,7 +393,7 @@ namespace WOPHRMSystem.Controllers
 
 
         [HttpPost]
-        public ActionResult InvoiceBodyTempUpdate(int Id, int CusId, int JobId, int NarratiionId, decimal Amount)
+        public ActionResult InvoiceBodyTempUpdate(int Id, int CusId, int JobId, int NarratiionId, decimal Amount, string Narration)
         {
             try
             {
@@ -401,7 +407,8 @@ namespace WOPHRMSystem.Controllers
                         Amount = Amount,
                         Fk_InvoiceNarrttionId = NarratiionId,
                         Id = Id,
-                        BodyRowId = Id
+                        BodyRowId = Id,
+                        Narration = Narration
                     };
 
                     return Json(narrationMasterServices.Update(tbl));
@@ -487,7 +494,7 @@ namespace WOPHRMSystem.Controllers
                 NarrationOne = " To Profressional Services render re - ",
                 InvoiceShrotNarration = new SelectList(invoiceShortNarrationMasterServices.GetAll(), "Id", "CodeAndNarration"),
                 DepartmentListOne = new SelectList(department.GetAll(), "Id", "CodeAndNarration"),
-                DepartmentListThird = new SelectList(thirdServices.GetDepartmentThirdByDepartmentOneId(dt.Fk_DepartmentIdOne, dt.Fk_DepartmentIdTwo), "Id", "CodeAndNarration"),
+                DepartmentListThird = new SelectList(thirdServices.GetDepartmentThirdByDepartmentOneId(dt.Fk_DepartmentIdOne, dt.Fk_DepartmentIdTwo ?? 0), "Id", "CodeAndNarration"),
                 DepartmentListsecond = new SelectList(secondServices.GetDepartmentSecondByDepartmentOneId(dt.Fk_DepartmentIdOne), "Id", "CodeAndNarration"),
                 NatureList = new SelectList(natureMasterServices.GetAll(), "Id", "CodeAndNarration"),
                 JobList = new SelectList(jobMasterServices.GetAllJObsForIsReadytoInvoice(dt.Fk_CustomerId), "Fk_JobMasterId", "FullDetails"),
@@ -496,8 +503,8 @@ namespace WOPHRMSystem.Controllers
                 Fk_CompanyId = dt.Fk_CompanyId,
                 Fk_CustomerId = dt.Fk_CustomerId,
                 Fk_DepartmentIdOne = dt.Fk_DepartmentIdOne,
-                Fk_DepartmentIdThird = dt.Fk_DepartmentIdThird,
-                Fk_DepartmentIdTwo = dt.Fk_DepartmentIdTwo,
+                Fk_DepartmentIdThird = dt.Fk_DepartmentIdThird ?? 0,
+                Fk_DepartmentIdTwo = dt.Fk_DepartmentIdTwo ?? 0,
                 Fk_InvoiceShortNarrationId = dt.Fk_InvoiceShortNarrationId,
                 Fk_JobMasterId = dt.Fk_JobMasterId,
                 Fk_ManagerOne = dt.Fk_ManagerOne,
@@ -519,13 +526,14 @@ namespace WOPHRMSystem.Controllers
                 PostingDate = dt.PostingDate,
                 VatPercentage = dt.VatPercentage,
                 YourReferance = dt.YourReferance,
+                JobCostAmount = dt.JobCostAmount,
+                ShortNarrationtext = dt.ShortNarrationtext,
                 IsPartnerOneComfirm = dt.IsPartnerOneComfirm,
                 PartnerOneComfirmDate = dt.PartnerOneComfirmDate,
                 IsActive = dt.IsActive,
                 IsActiveDate = dt.IsActiveDate,
                 IsMangerOneComfirm = dt.IsMangerOneComfirm,
                 ManagerOneComfirmDate = dt.ManagerOneComfirmDate
-
             };
             return View(model);
         }
@@ -575,14 +583,17 @@ namespace WOPHRMSystem.Controllers
                         NarrationTwo = masterModel.NarrationTwo,
                         Create_Date = new CommonResources().LocalDatetime().Date,
                         Id = masterModel.Id,
-                        IsPartnerOneComfirm = masterModel.IsPartnerOneComfirm,
+                        IsMangerOneComfirm = masterModel.IsMangerOneComfirm,
+                        IsPostingToInvoice = masterModel.IsPostingToInvoice,
                         PartnerOneComfirmDate = masterModel.PartnerOneComfirmDate,
+                        IsPartnerOneComfirm = masterModel.IsPartnerOneComfirm,
+                        ManagerOneComfirmDate = masterModel.ManagerOneComfirmDate,
+                        InvoiceNoProforma = masterModel.InvoiceNoProforma,
+                        JobCostAmount = masterModel.JobCostAmount,
+                        ShortNarrationtext = masterModel.ShortNarrationtext,
                         IsActive = masterModel.IsActive,
                         IsActiveDate = masterModel.IsActiveDate,
-                        InvoiceNoProforma = masterModel.InvoiceNoProforma,
-                        IsMangerOneComfirm = masterModel.IsMangerOneComfirm,
-                        ManagerOneComfirmDate = masterModel.ManagerOneComfirmDate,
-                        IsPostingToInvoice = masterModel.IsPostingToInvoice,
+
                     };
                     return Json(_ClientService.Update(tbl));
                 }
@@ -647,7 +658,7 @@ namespace WOPHRMSystem.Controllers
                 NarrationOne = " To Profressional Services render re - ",
                 InvoiceShrotNarration = new SelectList(invoiceShortNarrationMasterServices.GetAll(), "Id", "CodeAndNarration"),
                 DepartmentListOne = new SelectList(department.GetAll(), "Id", "CodeAndNarration"),
-                DepartmentListThird = new SelectList(thirdServices.GetDepartmentThirdByDepartmentOneId(dt.Fk_DepartmentIdOne, dt.Fk_DepartmentIdTwo), "Id", "CodeAndNarration"),
+                DepartmentListThird = new SelectList(thirdServices.GetDepartmentThirdByDepartmentOneId(dt.Fk_DepartmentIdOne, dt.Fk_DepartmentIdTwo ?? 0), "Id", "CodeAndNarration"),
                 DepartmentListsecond = new SelectList(secondServices.GetDepartmentSecondByDepartmentOneId(dt.Fk_DepartmentIdOne), "Id", "CodeAndNarration"),
                 NatureList = new SelectList(natureMasterServices.GetAll(), "Id", "CodeAndNarration"),
                 JobList = new SelectList(jobMasterServices.GetAllJObsForIsReadytoInvoice(dt.Fk_CustomerId), "Fk_JobMasterId", "FullDetails"),
@@ -656,8 +667,8 @@ namespace WOPHRMSystem.Controllers
                 Fk_CompanyId = dt.Fk_CompanyId,
                 Fk_CustomerId = dt.Fk_CustomerId,
                 Fk_DepartmentIdOne = dt.Fk_DepartmentIdOne,
-                Fk_DepartmentIdThird = dt.Fk_DepartmentIdThird,
-                Fk_DepartmentIdTwo = dt.Fk_DepartmentIdTwo,
+                Fk_DepartmentIdThird = dt.Fk_DepartmentIdThird ?? 0,
+                Fk_DepartmentIdTwo = dt.Fk_DepartmentIdTwo ?? 0,
                 Fk_InvoiceShortNarrationId = dt.Fk_InvoiceShortNarrationId,
                 Fk_JobMasterId = dt.Fk_JobMasterId,
                 Fk_ManagerOne = dt.Fk_ManagerOne,
@@ -679,6 +690,8 @@ namespace WOPHRMSystem.Controllers
                 PostingDate = dt.PostingDate,
                 VatPercentage = dt.VatPercentage,
                 YourReferance = dt.YourReferance,
+                JobCostAmount = dt.JobCostAmount,
+                ShortNarrationtext = dt.ShortNarrationtext,
                 IsMangerOneComfirm = dt.IsMangerOneComfirm,
                 ManagerOneComfirmDate = dt.ManagerOneComfirmDate,
                 IsPartnerOneComfirm = dt.IsPartnerOneComfirm,
@@ -700,6 +713,7 @@ namespace WOPHRMSystem.Controllers
                     var tbl = new TblProformaInvoiceHead
                     {
                         Create_By = "User",
+                        IsActive = masterModel.IsActive,
                         Fk_PartnerSecond = masterModel.Fk_PartnerSecond,
                         Fk_PartnerOne = masterModel.Fk_PartnerOne,
                         Fk_ManagerSecond = masterModel.Fk_ManagerSecond,
@@ -717,6 +731,7 @@ namespace WOPHRMSystem.Controllers
                         Fk_CustomerId = masterModel.Fk_CustomerId,
                         Fk_DepartmentIdTwo = masterModel.Fk_DepartmentIdTwo,
                         Fk_ManagerOne = masterModel.Fk_ManagerOne,
+                        IsActiveDate = masterModel.IsActiveDate,
                         LastYearAmount = masterModel.LastYearAmount,
                         NoNVat = masterModel.NoNVat,
                         NBTPercentage = masterModel.NBTPercentage,
@@ -735,9 +750,14 @@ namespace WOPHRMSystem.Controllers
                         Create_Date = new CommonResources().LocalDatetime().Date,
                         Id = masterModel.Id,
                         IsMangerOneComfirm = masterModel.IsMangerOneComfirm,
-                        ManagerOneComfirmDate = masterModel.ManagerOneComfirmDate,
-                        IsPartnerOneComfirm = masterModel.IsPartnerOneComfirm,
+                        IsPostingToInvoice = masterModel.IsPostingToInvoice,
                         PartnerOneComfirmDate = masterModel.PartnerOneComfirmDate,
+                        IsPartnerOneComfirm = masterModel.IsPartnerOneComfirm,
+                        ManagerOneComfirmDate = masterModel.ManagerOneComfirmDate,
+                        InvoiceNoProforma = masterModel.InvoiceNoProforma,
+                        JobCostAmount = masterModel.JobCostAmount,
+                        ShortNarrationtext = masterModel.ShortNarrationtext,
+
                     };
                     return Json(_ClientService.Update(tbl));
                 }
@@ -800,7 +820,7 @@ namespace WOPHRMSystem.Controllers
                 NarrationOne = " To Profressional Services render re - ",
                 InvoiceShrotNarration = new SelectList(invoiceShortNarrationMasterServices.GetAll(), "Id", "CodeAndNarration"),
                 DepartmentListOne = new SelectList(department.GetAll(), "Id", "CodeAndNarration"),
-                DepartmentListThird = new SelectList(thirdServices.GetDepartmentThirdByDepartmentOneId(dt.Fk_DepartmentIdOne, dt.Fk_DepartmentIdTwo), "Id", "CodeAndNarration"),
+                DepartmentListThird = new SelectList(thirdServices.GetDepartmentThirdByDepartmentOneId(dt.Fk_DepartmentIdOne, dt.Fk_DepartmentIdTwo ?? 0), "Id", "CodeAndNarration"),
                 DepartmentListsecond = new SelectList(secondServices.GetDepartmentSecondByDepartmentOneId(dt.Fk_DepartmentIdOne), "Id", "CodeAndNarration"),
                 NatureList = new SelectList(natureMasterServices.GetAll(), "Id", "CodeAndNarration"),
                 JobList = new SelectList(jobMasterServices.GetAllJObsForIsReadytoInvoice(dt.Fk_CustomerId), "Fk_JobMasterId", "FullDetails"),
@@ -809,8 +829,8 @@ namespace WOPHRMSystem.Controllers
                 Fk_CompanyId = dt.Fk_CompanyId,
                 Fk_CustomerId = dt.Fk_CustomerId,
                 Fk_DepartmentIdOne = dt.Fk_DepartmentIdOne,
-                Fk_DepartmentIdThird = dt.Fk_DepartmentIdThird,
-                Fk_DepartmentIdTwo = dt.Fk_DepartmentIdTwo,
+                Fk_DepartmentIdThird = dt.Fk_DepartmentIdThird ?? 0,
+                Fk_DepartmentIdTwo = dt.Fk_DepartmentIdTwo ?? 0,
                 Fk_InvoiceShortNarrationId = dt.Fk_InvoiceShortNarrationId,
                 Fk_JobMasterId = dt.Fk_JobMasterId,
                 Fk_ManagerOne = dt.Fk_ManagerOne,
@@ -821,7 +841,7 @@ namespace WOPHRMSystem.Controllers
                 Fk_PartnerSecond = dt.Fk_PartnerSecond,
                 Fk_PartnerThird = dt.Fk_PartnerThird,
                 Fk_WorkGroupId = dt.Fk_WorkGroupId,
-                InvoiceNoProforma = _ClientService.GetInvoiceNo(),
+                InvoiceNoProforma = _ClientService.GetInvoiceNo(dt.Fk_JobMasterId),
                 IsDelete = dt.IsDelete,
                 LastYearAmount = dt.LastYearAmount,
                 NBTPercentage = dt.NBTPercentage,
@@ -838,7 +858,8 @@ namespace WOPHRMSystem.Controllers
                 PartnerOneComfirmDate = dt.PartnerOneComfirmDate,
                 IsActive = dt.IsActive,
                 IsActiveDate = dt.IsActiveDate,
-
+                ShortNarrationtext = dt.ShortNarrationtext,
+                JobCostAmount = dt.JobCostAmount,
             };
             return View(model);
         }
@@ -896,6 +917,9 @@ namespace WOPHRMSystem.Controllers
                         IsActive = masterModel.IsActive,
                         IsActiveDate = masterModel.IsActiveDate,
                         IsPartnerOneComfirm = masterModel.IsPartnerOneComfirm,
+                        ShortNarrationtext = masterModel.ShortNarrationtext,
+                        JobCostAmount = masterModel.JobCostAmount,
+
                     };
                     return Json(_ClientService.UpdatePostingProformaInvoice(tbl));
                 }

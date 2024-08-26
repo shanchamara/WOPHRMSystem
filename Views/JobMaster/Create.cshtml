@@ -72,7 +72,7 @@
                                                     <!-- Adjusted margin bottom here -->
                                                     <div class="form-group">
                                                         <label for="exampleInputEmail1" class="form-control-sm">Partner</label>
-                                                        @Html.DropDownListFor(model => model.PartnerId, Model.PartnerSelectListItems, "Select", htmlAttributes: new { @class = "form-control form-control-sm", id = "selectPartner", required = "required" })
+                                                        @Html.DropDownListFor(model => model.PartnerId, Model.PartnerSelectListItems, "Select", htmlAttributes: new { @class = "form-control form-control-sm", id = "selectPartner" })
                                                     </div>
                                                 </div>
                                             </div>
@@ -398,7 +398,7 @@
         function getSelectedValue1() {
             // Get the dropdown element by its ID
             var selectElement = document.getElementById("selectPartner");
-            debugger
+            
             // Get the selected value
             var selectedValue = selectElement.value;
 
@@ -425,44 +425,25 @@
                 data: { id: id },
 
                 success: function (result) {
-                    debugger
+                    
                     document.getElementById("JObPrefixCode").value = result.Value;
-
+                    IsAssignee = true;
                     // take the JobCode value
                     var JobCodevalue = document.getElementById("DefaultJobCode").value;
 
                     document.getElementById("JobCode").value = result.Value + JobCodevalue;
-                    Swal.fire({
 
-                            icon: result.Status,
-                            title: result.Status,
-                            text: result.Text
-                        }).then((result) => {
-                            if (result.isConfirmed) {
-                                   $.ajax({
-                                         type: "GET",
-                                         url: "/JobMaster/ViewAssignees",
-                                         data: { Createby: 'User' },
+                    $.ajax({
+                            type: "GET",
+                            url: "/JobMaster/ViewAssignees",
+                            data: { Createby: 'User' },
 
-                                         success: function (result) {
-                                             debugger
-                                             $("#staticEmployee").html(result);
-                                         },
-                                     })
-                            }
-                            else {
-                                $.ajax({
-                                     type: "GET",
-                                     url: "/JobMaster/ViewAssignees",
-                                     data: { Createby: 'User' },
+                            success: function (result) {
+                                
+                                $("#staticEmployee").html(result);
+                            },
+                    })
 
-                                     success: function (result) {
-                                         debugger
-                                         $("#staticEmployee").html(result);
-                                     },
-                                 })
-                            }
-                        })
 
                 },
             })
@@ -472,7 +453,7 @@
         function getSelectedValue2() {
             // Get the dropdown element by its ID
             var selectElement = document.getElementById("selectManager");
-            debugger
+            
             // Get the selected value
             var selectedValue = selectElement.value;
 
@@ -499,40 +480,18 @@
                 data: { id: id },
 
                 success: function (result) {
+                    IsAssignee = true;
+                    $.ajax({
+                        type: "GET",
+                        url: "/JobMaster/ViewAssignees",
+                        data: { Createby: 'User' },
 
-                    Swal.fire({
+                        success: function (result) {
 
-                        icon: result.Status,
-                        title: result.Status,
-                        text: result.Text
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                            $.ajax({
-                                type: "GET",
-                                url: "/JobMaster/ViewAssignees",
-                                data: { Createby: 'User' },
-
-                                success: function (result) {
-
-                                    $("#staticEmployee").html(result);
-                                },
-                            })
-                        }
-                        else {
-                            $.ajax({
-                                type: "GET",
-                                url: "/JobMaster/ViewAssignees",
-                                data: { Createby: 'User' },
-
-                                success: function (result) {
-                                    debugger
-                                    $("#staticEmployee").html(result);
-                                },
-                            })
-                        }
+                            $("#staticEmployee").html(result);
+                        },
                     })
-
-                },
+                }
             })
         }
 
@@ -543,7 +502,7 @@
         function getSelectedValue() {
             // Get the dropdown element by its ID
             var selectElement = document.getElementById("selectUnit");
-            debugger
+            
             // Get the selected value
             var selectedValue = selectElement.value;
 
@@ -572,34 +531,54 @@
                 data: { customerId: selectElement, Createby: 'User' },
 
                 success: function (result) {
-                    debugger
+                    
                     $("#staticBackdropBody").html(result);
 
                 },
             })
         }
 
+        var IsValidLocation = true;
         var AddLocation = function () {
             var selectElement = document.getElementById("selectlocation").value;
             var FromDate = document.getElementById("FromDate").value;
             var ToDate = document.getElementById("ToDate").value;
             var selectCustomerElement = document.getElementById("selectUnit").value;
-           
+
+
+            if (selectElement == "") {
+                IsValidLocation = false;
+
+                document.getElementById("selectlocation").className = "form-control form-control-sm is-invalid";
+                return false;
+            }
+            if (FromDate == "") {
+                IsValidLocation = false;
+
+                document.getElementById("FromDate").className = "form-control form-control-sm is-invalid";
+                return false;
+            }
+            if (ToDate == "") {
+                IsValidLocation = false;
+
+                document.getElementById("ToDate").className = "form-control form-control-sm is-invalid";
+                return false;
+            }
+
+            if (selectCustomerElement == "") {
+                IsValidLocation = false;
+
+                document.getElementById("selectUnit").className = "form-control form-control-sm is-invalid";
+                return false;
+            }
+
             $.ajax({
                 type: "Post",
                 url: "/JobMaster/InsertSelectedLocation",
                 data: { locationId: selectElement, customerId: selectCustomerElement, fromDate: FromDate, toDate: ToDate },
 
                 success: function (result) {
-                    Swal.fire({
-
-                        icon: result.Status,
-                        title: result.Status,
-                        text: result.Text
-                    }).then((result) => {
-                        IsLocation = true;
-                        $('#errorLocation').html("");
-                        if (result.isConfirmed) {
+                    IsLocation = true;
 
                             var selectElement = document.getElementById("selectUnit").value;
                             $.ajax({
@@ -608,33 +587,46 @@
                                 data: { customerId: selectElement, Createby: 'User' },
 
                                 success: function (result) {
-                                    debugger
+                                    
                                     $("#staticBackdropBody").html(result);
 
                                 },
                             })
-                        }
-                        else {
-                            var selectElement = document.getElementById("selectUnit").value;
-                            $.ajax({
-                                type: "GET",
-                                url: "/JobMaster/ViewCustomerSelectedLocation",
-                                data: { customerId: selectElement, Createby: 'User' },
 
-                                success: function (result) {
-                                    debugger
-                                    $("#staticBackdropBody").html(result);
-
-                                },
-                            })
-                        }
-                    })
                 },
             })
         }
 
+        function handleDateChange1() {
+            // Your logic here
+            debugger
+            var ToDate = document.getElementById("ToDate").value;
+            var fromDate = document.getElementById("FromDate").value;
+            var selectElement = document.getElementById("selectlocation").value;
 
-         var PostInsert = function (model) {
+            if (ToDate != "") {
+
+                document.getElementById("ToDate").className = "form-control text-box single-line";
+
+
+            }
+
+            if (fromDate != "") {
+                document.getElementById("FromDate").className = "form-control text-box single-line";
+
+
+            }
+
+            if (selectElement != "") {
+                document.getElementById("selectlocation").className = "form-control text-box single-line";
+
+            }
+
+          
+        }
+
+
+        var PostInsert = function (model) {
 
              $.ajax({
                  type: "Post",
@@ -664,11 +656,52 @@
         var IsAssignee = false;
 
         $(function () {
+
             $.validator.setDefaults({
                 submitHandler: function () {
-                    //alert("Form successful submitted!");
+
                     var data = $('#quickForm').serialize();
-                    debugger;
+
+                    var List = JSON.parse(localStorage.getItem('ViewAssignee')) || [];
+
+                    
+                    if (IsAssignee === true) {
+                        let hasWarning = false;
+
+                        List.forEach(item => {
+                            if (item.BudgetedHours === null || item.BudgetedHours === 0) {
+                                Swal.fire({
+                                    title: 'Warning!',
+                                    text: 'BudgetedHours is not defined.',
+                                    icon: 'warning',
+                                    confirmButtonText: 'OK'
+                                });
+                                hasWarning = true; // Set flag to true
+                            }
+                        });
+
+                        if (hasWarning) {
+                            return; // Exit function or prevent further execution
+                        }
+
+                        // Continue with the rest of the logic
+                        const hasEmployeesRecord = List.some(record => record.TypeOftable === 'Employees');
+
+                        if (hasEmployeesRecord === false) {
+                            Swal.fire({
+                                title: 'Warning!',
+                                text: 'Please assign the employee.',
+                                icon: 'warning',
+                                confirmButtonText: 'OK'
+                            });
+                            hasWarning = true;
+                        }
+
+                        if (hasWarning) {
+                            return; // Exit function or prevent further execution
+                        }
+                    }
+
                     if (IsLocation === false) {
                         $('#errorLocation').html("Please add the Location");
                     } else {
@@ -679,19 +712,17 @@
                 }
             });
 
-            $.validator.addMethod("checkIsLocation", function (value, element) {
-                var isValid = IsLocation === true;
-                if (!isValid) {
-                    $('#errorLocation').html("Please add the Location");
-                }
-                return isValid;
-            }, "Location must be selected.");
 
-            $('#quickForm').validate({
+
+            $(document).ready(function () {
+
+                var validator = $('#quickForm').validate({
                 rules: {
                     PreViewvalue: {
                         required: true,
+
                     },
+
                     Narration: {
                         required: true,
                     },
@@ -740,7 +771,7 @@
                     DueDate: {
                         required: "Please provide a Due Date",
                     },
-                    IsActive: "Please Select the Status"
+                    IsActive: "Please Select the Status",
 
                 },
                 errorElement: 'span',
@@ -753,20 +784,16 @@
                 },
                 unhighlight: function (element, errorClass, validClass) {
                     $(element).removeClass('is-invalid');
-                }
+                    },
+                });
+
             });
+
         });
 
 
 
         /// Second step
-
-
-
-
-
-
-
 
 
          var PostInsert = function (model) {

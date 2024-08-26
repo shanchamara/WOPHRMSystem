@@ -145,7 +145,32 @@ namespace WOPHRMSystem.Services
             }
         }
 
+        public List<LocationModel> GetAllLocationByCustomer(int id)
+        {
+            try
+            {
+                var dr = (from a in _context.TblLocations
+                          join c in _context.TblCustomers on a.Fk_CustomerId equals c.Id
+                          orderby a.Id descending
+                          select new LocationModel()
+                          {
+                              Id = a.Id,
+                              Code = a.Code,
+                              Narration = a.Narration,
+                              IsActive = a.IsActive,
+                              Fk_CustomerId = a.Fk_CustomerId,
+                              Rate = a.Rate,
+                              CustomerName = c.Name,
+                              IsDelete = a.IsDelete,
+                          }).Where(d => d.IsDelete.Equals(false) && d.Fk_CustomerId.Equals(id)).ToList();
+                return dr;
+            }
+            catch (Exception)
+            {
 
+                throw;
+            }
+        }
 
     }
 }

@@ -54,7 +54,7 @@ namespace AuditSystem.Services
                           {
                               Id = a.Id,
                               Code = n.Code,
-                              Narration = n.Narration,
+                              Narration = a.Narration,
                               FK_CustomerId = a.FK_CustomerId,
                               Amount = a.Amount,
                               BodyRowId = a.BodyRowId,
@@ -225,6 +225,7 @@ namespace AuditSystem.Services
                             BodyRowId = record.Id,
                             FK_JobMasterId = record.Fk_JobMasterId,
                             Amount = record.Amount,
+                            Narration = record.Narration,
                             FK_CustomerId = record.Fk_CustomerId,
                             Fk_InvoiceNarrttionId = record.Fk_InvoiceNarrttionId
                         };
@@ -264,7 +265,7 @@ namespace AuditSystem.Services
                           {
                               Id = a.Id,
                               Code = n.Code,
-                              Narration = n.Narration,
+                              Narration = a.Narration,
                               FK_CustomerId = a.FK_CustomerId,
                               Amount = a.Amount,
                               BodyRowId = a.BodyRowId,
@@ -435,6 +436,7 @@ namespace AuditSystem.Services
                             BodyRowId = record.Id,
                             FK_JobMasterId = record.Fk_JobMasterId,
                             Amount = record.Amount,
+                            Narration = record.Narration,
                             FK_CustomerId = record.Fk_CustomerId,
                             Fk_InvoiceNarrttionId = record.Fk_InvoiceNarrttionId
                         };

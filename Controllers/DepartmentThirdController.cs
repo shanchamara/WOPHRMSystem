@@ -26,6 +26,7 @@ namespace WOPHRMSystem.Controllers
             {
                 SelectListItems = new SelectList(department.GetAll(), "Id", "CodeAndNarration"),
                 SelectSecondListItems = new SelectList(departmentSecond.GetAll(), "Id", "CodeAndNarration"),
+                IsActive = true
             };
             return View("Create", model);
         }

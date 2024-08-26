@@ -24,8 +24,8 @@ namespace WOPHRMSystem.Context
         public int Fk_CompanyId { get; set; }
         public string InvoiceNo { get; set; }
         public int Fk_DepartmentIdOne { get; set; }
-        public int Fk_DepartmentIdTwo { get; set; }
-        public int Fk_DepartmentIdThird { get; set; }
+        public Nullable<int> Fk_DepartmentIdTwo { get; set; }
+        public Nullable<int> Fk_DepartmentIdThird { get; set; }
         public string DocNo { get; set; }
         public System.DateTime Date { get; set; }
         public string OurReferance { get; set; }
@@ -68,6 +68,8 @@ namespace WOPHRMSystem.Context
         public Nullable<System.DateTime> Edit_Date { get; set; }
         public string Delete_By { get; set; }
         public Nullable<System.DateTime> Delete_Date { get; set; }
+        public Nullable<decimal> JobCostAmount { get; set; }
+        public string ShortNarrationtext { get; set; }
     
         public virtual TblCompany TblCompany { get; set; }
         public virtual TblCustomer TblCustomer { get; set; }

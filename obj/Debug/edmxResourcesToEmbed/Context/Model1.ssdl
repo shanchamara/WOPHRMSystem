@@ -326,6 +326,7 @@
     <Property Name="Edit_Date" Type="datetime2" Precision="7" />
     <Property Name="Delete_By" Type="nvarchar(max)" />
     <Property Name="Delete_Date" Type="datetime2" Precision="7" />
+    <Property Name="Narration" Type="nvarchar(max)" />
   </EntityType>
   <EntityType Name="TblInvoiceBodyTemp">
     <Key>
@@ -338,6 +339,7 @@
     <Property Name="FK_CustomerId" Type="int" Nullable="false" />
     <Property Name="FK_JobMasterId" Type="int" Nullable="false" />
     <Property Name="Create_By" Type="nvarchar(max)" />
+    <Property Name="Narration" Type="nvarchar(max)" />
   </EntityType>
   <EntityType Name="TblInvoiceHead">
     <Key>
@@ -347,8 +349,8 @@
     <Property Name="Fk_CompanyId" Type="int" Nullable="false" />
     <Property Name="InvoiceNo" Type="nvarchar(max)" />
     <Property Name="Fk_DepartmentIdOne" Type="int" Nullable="false" />
-    <Property Name="Fk_DepartmentIdTwo" Type="int" Nullable="false" />
-    <Property Name="Fk_DepartmentIdThird" Type="int" Nullable="false" />
+    <Property Name="Fk_DepartmentIdTwo" Type="int" />
+    <Property Name="Fk_DepartmentIdThird" Type="int" />
     <Property Name="DocNo" Type="nvarchar(max)" />
     <Property Name="Date" Type="datetime2" Precision="7" Nullable="false" />
     <Property Name="OurReferance" Type="nvarchar(max)" />
@@ -391,6 +393,8 @@
     <Property Name="Edit_Date" Type="datetime2" Precision="7" />
     <Property Name="Delete_By" Type="nvarchar(max)" />
     <Property Name="Delete_Date" Type="datetime2" Precision="7" />
+    <Property Name="JobCostAmount" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="ShortNarrationtext" Type="nvarchar(max)" />
   </EntityType>
   <EntityType Name="TblInvoiceNarrationMaster">
     <Key>
@@ -638,6 +642,7 @@
     <Property Name="Edit_Date" Type="datetime2" Precision="7" />
     <Property Name="Delete_By" Type="nvarchar(max)" />
     <Property Name="Delete_Date" Type="datetime2" Precision="7" />
+    <Property Name="Narration" Type="nvarchar(max)" />
   </EntityType>
   <EntityType Name="TblProformaInvoiceBodyTemp">
     <Key>
@@ -650,6 +655,7 @@
     <Property Name="FK_CustomerId" Type="int" Nullable="false" />
     <Property Name="FK_JobMasterId" Type="int" Nullable="false" />
     <Property Name="Create_By" Type="nvarchar(max)" />
+    <Property Name="Narration" Type="nvarchar(max)" />
   </EntityType>
   <EntityType Name="TblProformaInvoiceHead">
     <Key>
@@ -659,8 +665,8 @@
     <Property Name="Fk_CompanyId" Type="int" Nullable="false" />
     <Property Name="InvoiceNoProforma" Type="nvarchar(max)" />
     <Property Name="Fk_DepartmentIdOne" Type="int" Nullable="false" />
-    <Property Name="Fk_DepartmentIdTwo" Type="int" Nullable="false" />
-    <Property Name="Fk_DepartmentIdThird" Type="int" Nullable="false" />
+    <Property Name="Fk_DepartmentIdTwo" Type="int" />
+    <Property Name="Fk_DepartmentIdThird" Type="int" />
     <Property Name="DocNo" Type="nvarchar(max)" />
     <Property Name="Date" Type="datetime2" Precision="7" Nullable="false" />
     <Property Name="OurReferance" Type="nvarchar(max)" />
@@ -703,6 +709,8 @@
     <Property Name="Edit_Date" Type="datetime2" Precision="7" />
     <Property Name="Delete_By" Type="nvarchar(max)" />
     <Property Name="Delete_Date" Type="datetime2" Precision="7" />
+    <Property Name="JobCostAmount" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="ShortNarrationtext" Type="nvarchar(max)" />
   </EntityType>
   <EntityType Name="TblReceipt">
     <Key>
@@ -1066,6 +1074,7 @@ warning 6002: The table/view 'AuditSystem.dbo.VW_GetJObActualValue' does not hav
     <Property Name="CustomerName" Type="nvarchar(max)" />
     <Property Name="CustomerCode" Type="nvarchar(max)" />
     <Property Name="JobCode" Type="nvarchar(max)" />
+    <Property Name="VatType" Type="nvarchar(max)" />
     <Property Name="PreViewvalue" Type="decimal" Precision="18" Scale="2" />
     <Property Name="StartDate" Type="datetime2" Precision="7" />
     <Property Name="DueDate" Type="datetime2" Precision="7" />
@@ -1149,8 +1158,6 @@ warning 6002: The table/view 'AuditSystem.dbo.VW_InvoiceHead' does not have a pr
       <PropertyRef Name="Id" />
       <PropertyRef Name="Fk_CompanyId" />
       <PropertyRef Name="Fk_DepartmentIdOne" />
-      <PropertyRef Name="Fk_DepartmentIdTwo" />
-      <PropertyRef Name="Fk_DepartmentIdThird" />
       <PropertyRef Name="Date" />
       <PropertyRef Name="Fk_WorkGroupId" />
       <PropertyRef Name="Fk_CustomerId" />
@@ -1183,8 +1190,8 @@ warning 6002: The table/view 'AuditSystem.dbo.VW_InvoiceHead' does not have a pr
     <Property Name="Fk_CompanyId" Type="int" Nullable="false" />
     <Property Name="InvoiceNo" Type="nvarchar(max)" />
     <Property Name="Fk_DepartmentIdOne" Type="int" Nullable="false" />
-    <Property Name="Fk_DepartmentIdTwo" Type="int" Nullable="false" />
-    <Property Name="Fk_DepartmentIdThird" Type="int" Nullable="false" />
+    <Property Name="Fk_DepartmentIdTwo" Type="int" />
+    <Property Name="Fk_DepartmentIdThird" Type="int" />
     <Property Name="DocNo" Type="nvarchar(max)" />
     <Property Name="Date" Type="datetime2" Precision="7" Nullable="false" />
     <Property Name="OurReferance" Type="nvarchar(max)" />
@@ -1208,6 +1215,8 @@ warning 6002: The table/view 'AuditSystem.dbo.VW_InvoiceHead' does not have a pr
     <Property Name="Fk_InvoiceShortNarrationId" Type="int" Nullable="false" />
     <Property Name="Fk_JobMasterId" Type="int" Nullable="false" />
     <Property Name="LastYearAmount" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="ShortNarrationtext" Type="nvarchar(max)" />
+    <Property Name="JobCostAmount" Type="decimal" Precision="18" Scale="2" />
     <Property Name="PostingDate" Type="datetime2" Precision="7" />
     <Property Name="TotalAmount" Type="decimal" Precision="18" Scale="2" />
     <Property Name="BalanceAmount" Type="decimal" Precision="18" Scale="2" />
@@ -1496,8 +1505,6 @@ warning 6002: The table/view 'AuditSystem.dbo.VW_ProformaInvoiceHead' does not h
       <PropertyRef Name="Id" />
       <PropertyRef Name="Fk_CompanyId" />
       <PropertyRef Name="Fk_DepartmentIdOne" />
-      <PropertyRef Name="Fk_DepartmentIdTwo" />
-      <PropertyRef Name="Fk_DepartmentIdThird" />
       <PropertyRef Name="Date" />
       <PropertyRef Name="Fk_WorkGroupId" />
       <PropertyRef Name="Fk_CustomerId" />
@@ -1531,8 +1538,8 @@ warning 6002: The table/view 'AuditSystem.dbo.VW_ProformaInvoiceHead' does not h
     <Property Name="Fk_CompanyId" Type="int" Nullable="false" />
     <Property Name="InvoiceNoProforma" Type="nvarchar(max)" />
     <Property Name="Fk_DepartmentIdOne" Type="int" Nullable="false" />
-    <Property Name="Fk_DepartmentIdTwo" Type="int" Nullable="false" />
-    <Property Name="Fk_DepartmentIdThird" Type="int" Nullable="false" />
+    <Property Name="Fk_DepartmentIdTwo" Type="int" />
+    <Property Name="Fk_DepartmentIdThird" Type="int" />
     <Property Name="DocNo" Type="nvarchar(max)" />
     <Property Name="Date" Type="datetime2" Precision="7" Nullable="false" />
     <Property Name="OurReferance" Type="nvarchar(max)" />
@@ -1548,6 +1555,7 @@ warning 6002: The table/view 'AuditSystem.dbo.VW_ProformaInvoiceHead' does not h
     <Property Name="TaxType" Type="nvarchar(max)" />
     <Property Name="Fk_NatureId" Type="int" Nullable="false" />
     <Property Name="NoNVat" Type="nvarchar(max)" />
+    <Property Name="ShortNarrationtext" Type="nvarchar(max)" />
     <Property Name="NoNVatPrecentage" Type="decimal" Precision="18" Scale="2" />
     <Property Name="VatPercentage" Type="decimal" Precision="18" Scale="2" />
     <Property Name="NBTPercentage" Type="decimal" Precision="18" Scale="2" />
@@ -1558,6 +1566,7 @@ warning 6002: The table/view 'AuditSystem.dbo.VW_ProformaInvoiceHead' does not h
     <Property Name="LastYearAmount" Type="decimal" Precision="18" Scale="2" />
     <Property Name="PostingDate" Type="datetime2" Precision="7" />
     <Property Name="TotalAmount" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="JobCostAmount" Type="decimal" Precision="18" Scale="2" />
     <Property Name="ValueNBT" Type="decimal" Precision="18" Scale="2" />
     <Property Name="ValueVAT" Type="decimal" Precision="18" Scale="2" />
     <Property Name="TotalReceivedAmount" Type="decimal" Precision="18" Scale="2" />
@@ -1981,7 +1990,7 @@ warning 6002: The table/view 'AuditSystem.dbo.VW_SectorMaster' does not have a p
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_TblInvoiceHead_TblDepartmentSecond_Fk_DepartmentIdTwo">
-    <End Role="TblDepartmentSecond" Type="Self.TblDepartmentSecond" Multiplicity="1" />
+    <End Role="TblDepartmentSecond" Type="Self.TblDepartmentSecond" Multiplicity="0..1" />
     <End Role="TblInvoiceHead" Type="Self.TblInvoiceHead" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="TblDepartmentSecond">
@@ -1993,7 +2002,7 @@ warning 6002: The table/view 'AuditSystem.dbo.VW_SectorMaster' does not have a p
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_TblInvoiceHead_TblDepartmentThird_Fk_DepartmentIdThird">
-    <End Role="TblDepartmentThird" Type="Self.TblDepartmentThird" Multiplicity="1" />
+    <End Role="TblDepartmentThird" Type="Self.TblDepartmentThird" Multiplicity="0..1" />
     <End Role="TblInvoiceHead" Type="Self.TblInvoiceHead" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="TblDepartmentThird">
@@ -2293,7 +2302,7 @@ warning 6002: The table/view 'AuditSystem.dbo.VW_SectorMaster' does not have a p
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_TblProformaInvoiceHead_TblDepartmentSecond_Fk_DepartmentIdTwo">
-    <End Role="TblDepartmentSecond" Type="Self.TblDepartmentSecond" Multiplicity="1" />
+    <End Role="TblDepartmentSecond" Type="Self.TblDepartmentSecond" Multiplicity="0..1" />
     <End Role="TblProformaInvoiceHead" Type="Self.TblProformaInvoiceHead" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="TblDepartmentSecond">
@@ -2305,7 +2314,7 @@ warning 6002: The table/view 'AuditSystem.dbo.VW_SectorMaster' does not have a p
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_TblProformaInvoiceHead_TblDepartmentThird_Fk_DepartmentIdThird">
-    <End Role="TblDepartmentThird" Type="Self.TblDepartmentThird" Multiplicity="1" />
+    <End Role="TblDepartmentThird" Type="Self.TblDepartmentThird" Multiplicity="0..1" />
     <End Role="TblProformaInvoiceHead" Type="Self.TblProformaInvoiceHead" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="TblDepartmentThird">
@@ -2642,6 +2651,7 @@ FROM [dbo].[VW_GeneralReceipts] AS [VW_GeneralReceipts]</DefiningQuery>
 [VW_GetJObActualValue].[CustomerName] AS [CustomerName], 
 [VW_GetJObActualValue].[CustomerCode] AS [CustomerCode], 
 [VW_GetJObActualValue].[JobCode] AS [JobCode], 
+[VW_GetJObActualValue].[VatType] AS [VatType], 
 [VW_GetJObActualValue].[PreViewvalue] AS [PreViewvalue], 
 [VW_GetJObActualValue].[StartDate] AS [StartDate], 
 [VW_GetJObActualValue].[DueDate] AS [DueDate], 
@@ -2732,6 +2742,8 @@ FROM [dbo].[VW_IntroductionMaster] AS [VW_IntroductionMaster]</DefiningQuery>
 [VW_InvoiceHead].[Fk_InvoiceShortNarrationId] AS [Fk_InvoiceShortNarrationId], 
 [VW_InvoiceHead].[Fk_JobMasterId] AS [Fk_JobMasterId], 
 [VW_InvoiceHead].[LastYearAmount] AS [LastYearAmount], 
+[VW_InvoiceHead].[ShortNarrationtext] AS [ShortNarrationtext], 
+[VW_InvoiceHead].[JobCostAmount] AS [JobCostAmount], 
 [VW_InvoiceHead].[PostingDate] AS [PostingDate], 
 [VW_InvoiceHead].[TotalAmount] AS [TotalAmount], 
 [VW_InvoiceHead].[BalanceAmount] AS [BalanceAmount], 
@@ -2968,6 +2980,7 @@ FROM [dbo].[VW_OpeningBalance] AS [VW_OpeningBalance]</DefiningQuery>
 [VW_ProformaInvoiceHead].[TaxType] AS [TaxType], 
 [VW_ProformaInvoiceHead].[Fk_NatureId] AS [Fk_NatureId], 
 [VW_ProformaInvoiceHead].[NoNVat] AS [NoNVat], 
+[VW_ProformaInvoiceHead].[ShortNarrationtext] AS [ShortNarrationtext], 
 [VW_ProformaInvoiceHead].[NoNVatPrecentage] AS [NoNVatPrecentage], 
 [VW_ProformaInvoiceHead].[VatPercentage] AS [VatPercentage], 
 [VW_ProformaInvoiceHead].[NBTPercentage] AS [NBTPercentage], 
@@ -2978,6 +2991,7 @@ FROM [dbo].[VW_OpeningBalance] AS [VW_OpeningBalance]</DefiningQuery>
 [VW_ProformaInvoiceHead].[LastYearAmount] AS [LastYearAmount], 
 [VW_ProformaInvoiceHead].[PostingDate] AS [PostingDate], 
 [VW_ProformaInvoiceHead].[TotalAmount] AS [TotalAmount], 
+[VW_ProformaInvoiceHead].[JobCostAmount] AS [JobCostAmount], 
 [VW_ProformaInvoiceHead].[ValueNBT] AS [ValueNBT], 
 [VW_ProformaInvoiceHead].[ValueVAT] AS [ValueVAT], 
 [VW_ProformaInvoiceHead].[TotalReceivedAmount] AS [TotalReceivedAmount], 

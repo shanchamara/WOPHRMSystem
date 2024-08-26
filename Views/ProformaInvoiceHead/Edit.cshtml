@@ -43,7 +43,7 @@
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item">Home</li>
-                        <li class="breadcrumb-item active"><a href="@Url.Action("Index","Customer")">List Of Proforma Invoice's </a></li>
+                        <li class="breadcrumb-item active"><a href="@Url.Action("Index","ProformaInvoiceHead")">List Of Proforma Invoice's </a></li>
                     </ol>
                 </div>
             </div>
@@ -202,10 +202,11 @@
                                                                  {
 
                                                                  new { value = "" , text = "Select "  },
+                                                                  new { value = "Non VAT" , text = "Non VAT"  },
                                                                  new { value = "VAT" , text = "VAT"  },
                                                                  new { value = "SVAT" , text = "SVAT"  },
 
-                                                                 }, "value", "text", "Select VAT Type"), htmlAttributes: new { @class = "form-control form-control-sm", id = "selectGrnType" })
+                                                                 }, "value", "text", "Select VAT Type"), htmlAttributes: new { @class = "form-control form-control-sm", id = "selectVatType", @ReadOnly = "ReadOnly" })
                                                             </div>
                                                         </div>
                                                     </div>
@@ -276,17 +277,27 @@
 
                                                 <div class="row">
 
-                                                    <div class="col-lg-12">
+                                                    <div class="col-lg-6">
                                                         <div class="mb-2">
                                                             <!-- Adjusted margin bottom here -->
                                                             <div class="form-group">
-                                                                <label for="exampleInputEmail1" class="form-control-sm">Short Narration  </label>
-                                                                @Html.DropDownListFor(model => model.Fk_InvoiceShortNarrationId, Model.InvoiceShrotNarration, "Select", htmlAttributes: new { @class = "form-control form-control-sm", id = "selectManager" })
+                                                                <label for="exampleInputEmail1" class="form-control-sm">Short Narration Code </label>
+                                                                @Html.DropDownListFor(model => model.Fk_InvoiceShortNarrationId, Model.InvoiceShrotNarration, "Select", htmlAttributes: new { @class = "form-control form-control-sm", id = "SelectShortNarration" })
 
                                                             </div>
                                                         </div>
                                                     </div>
 
+                                                    <div class="col-lg-6">
+                                                        <div class="mb-2">
+                                                            <!-- Adjusted margin bottom here -->
+                                                            <div class="form-group">
+                                                                <label for="exampleInputEmail1" class="form-control-sm">Short Narration  </label>
+                                                                @Html.EditorFor(model => model.ShortNarrationtext, new { htmlAttributes = new { @class = "form-control form-control-sm", placeholder = "" } })
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
 
                                                 </div>
 
@@ -315,7 +326,12 @@
                                                                 <label for="basicpill-address-input" class="form-control-sm"> Department Two</label>
                                                                 @Html.DropDownListFor(model => model.Fk_DepartmentIdTwo, Model.DepartmentListsecond, "Select", htmlAttributes: new { @class = "form-control form-control-sm", id = "departmentTwo" })
 
-
+                                                                @*@Html.DropDownListFor(
+                                                                        model => model.Fk_DepartmentIdTwo,
+                                                                        new SelectList(new List<SelectListItem>()),
+                                                                        "Select",
+                                                                        htmlAttributes: new { @class = "form-control form-control-sm", id = "departmentTwo", required = "required" }
+                                                                    )*@
                                                             </div>
                                                         </div>
                                                     </div>
@@ -328,7 +344,12 @@
                                                                 <label for="basicpill-address-input" class="form-control-sm"> Department Third</label>
                                                                 @Html.DropDownListFor(model => model.Fk_DepartmentIdThird, Model.DepartmentListThird, "Select", htmlAttributes: new { @class = "form-control form-control-sm", id = "departmentThird" })
 
+                                                                @*@Html.DropDownListFor(model => model.Fk_DepartmentIdThird, new SelectList(new List<Object>
+                                                                {
 
+                                                                new { value = "" , text = "Select "  }
+
+                                                                }, "value", "text", "Select VAT Department"), htmlAttributes: new { @class = "form-control form-control-sm", id = "departmentThird" })*@
                                                             </div>
                                                         </div>
                                                     </div>
@@ -495,9 +516,7 @@
                                                                 <label for="basicpill-address-input" class="form-control-sm"> Job No </label>
                                                                 @Html.DropDownListFor(model => model.Fk_JobMasterId, Model.JobList, "Select", htmlAttributes: new { @class = "form-control form-control-sm", id = "JobNo" })
 
-
-
-                                                            </div>
+                                                                </div>
                                                         </div>
                                                     </div>
 
@@ -524,29 +543,36 @@
 
                                     <div class="row">
 
-                                        <div class="col-md-4">
+                                     
+                                        <div class="col-md-3">
                                             <div class="card-body">
-                                                <div class="row">
-
+                                                <div class="row custom-row">
                                                     <div class="col-lg-6">
-                                                        <div class="mb-2">
-                                                            <!-- Adjusted margin bottom here -->
-                                                            <div class="custom-control custom-checkbox">
-                                                                @Html.CheckBoxFor(model => model.IsActive, new { @class = "form-check-input", id = "exampleCheck1" })
-                                                                <label for="exampleCheck1">Cancelled.</label>
+                                                        <div class="row mb-2">
+                                                            @*<label for="horizontal-firstname-input" class="col-sm-12 col-form-label form-control-sm">Last Year Amount</label>*@
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-6">
+                                                        <div class="row mb-2">
+                                                            <div class="col-sm-12">
+                                                                <div class="custom-control custom-checkbox form-control-sm">
+                                                                    @Html.CheckBoxFor(model => model.IsActive, new { @class = "form-check-input", id = "exampleCheck1" })
+                                                                    <label for="exampleCheck1">Cancelled.</label>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
-
-
-
                                                 </div>
-                                                <div class="row">
+
+                                                <div class="row custom-row">
                                                     <div class="col-lg-6">
-                                                        <div class="mb-2">
-                                                            <!-- Adjusted margin bottom here -->
-                                                            <div class="form-group">
-                                                                <label for="exampleInputEmail1" class="form-control-sm">Cancelled Date</label>
+                                                        <div class="row mb-2">
+                                                            <label for="horizontal-firstname-input" class="col-sm-12 col-form-label form-control-sm">Cancelled Date</label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-6">
+                                                        <div class="row mb-2">
+                                                            <div class="col-sm-12">
                                                                 <div class="input-group date" id="IsActiveDate" data-target-input="nearest">
                                                                     @Html.EditorFor(model => model.IsActiveDate, new { htmlAttributes = new { @class = "form-control datetimepicker-input form-control-sm", data_target = "#IsActiveDate" } })
 
@@ -559,28 +585,45 @@
                                                         </div>
                                                     </div>
                                                 </div>
+
+
+
                                             </div>
-
-
                                         </div>
 
-                                        <div class="col-md-3">
+                                        <div class="col-md-4">
                                             <div class="card-body">
-                                                <div class="row">
-
+                                                <div class="row custom-row">
                                                     <div class="col-lg-6">
-                                                        <div class="mb-2">
-                                                            <!-- Adjusted margin bottom here -->
-                                                            <div class="form-group">
-                                                                <label for="exampleInputEmail1" class="form-control-sm">Last Year Amount</label>
+                                                        <div class="row mb-2">
+                                                            <label for="horizontal-firstname-input" class="col-sm-12 col-form-label form-control-sm">Last Year Amount</label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-6">
+                                                        <div class="row mb-2">
+                                                            <div class="col-sm-12">
                                                                 @Html.EditorFor(model => model.LastYearAmount, new { htmlAttributes = new { @class = "form-control form-control-sm text-right", placeholder = "", @ReadOnly = "ReadOnly" } })
                                                             </div>
                                                         </div>
                                                     </div>
-
-
-
                                                 </div>
+
+                                                <div class="row custom-row">
+                                                    <div class="col-lg-6">
+                                                        <div class="row mb-2">
+                                                            <label for="horizontal-firstname-input" class="col-sm-12 col-form-label form-control-sm">Job Cost Amount</label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-6">
+                                                        <div class="row mb-2">
+                                                            <div class="col-sm-12">
+                                                                @Html.EditorFor(model => model.JobCostAmount, new { htmlAttributes = new { @class = "form-control form-control-sm text-right", placeholder = "", @ReadOnly = "ReadOnly" } })
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+
 
                                             </div>
                                         </div>
@@ -596,7 +639,7 @@
                                                     <div class="col-lg-6">
                                                         <div class="row mb-2">
                                                             <div class="col-sm-12">
-                                                                @Html.EditorFor(model => model.TotalAmount, new { htmlAttributes = new { @class = "form-control form-control-sm text-right", placeholder = "", @ReadOnly = "ReadOnly" } })
+                                                                @Html.EditorFor(model => model.TotalAmount, new { htmlAttributes = new { @class = "form-control form-control-sm text-right", placeholder = "" } })
                                                             </div>
                                                         </div>
                                                     </div>
@@ -800,6 +843,10 @@
     </script>
 
     <script>
+        var IsDepartmentTwo = false;
+        var IsDepartmentThird = false;
+        var IsVatType = true;
+
         $(function () {
             // Custom validation method to compare TotalAmount with RowTotalAmount
             $.validator.addMethod("totalAmountMatchesRowTotal", function (value, element) {
@@ -825,132 +872,142 @@
             });
 
             // Define validation rules and messages
-            $('#quickForm').validate({
-                rules: {
-                    InvoiceNoProforma: { required: false },
-                    Fk_DepartmentIdOne: { required: true },
-                    Fk_DepartmentIdTwo: { required: true },
-                    Fk_DepartmentIdThird: { required: true },
-                    DocNo: { required: true },
-                    Date: { required: true, date: true },
-                    OurReferance: { required: true },
-                    YourReferance: { required: true },
-                    Fk_WorkGroupId: { required: true },
-                    Fk_CustomerId: { required: true },
-                    Fk_PartnerOne: { required: true },
-                    Fk_PartnerSecond: { required: true },
-                    Fk_PartnerThird: { required: true },
-                    Fk_ManagerOne: { required: true },
-                    Fk_ManagerSecond: { required: true },
-                    Fk_ManagerThird: { required: true },
-                    TaxType: { required: true },
-                    Fk_NatureId: { required: true },
-                    NoNVat: { required: false },
-                    NoNVatPrecentage: { required: false, number: true },
-                    VatPercentage: { required: true, number: true },
-                    NBTPercentage: { required: true, number: true },
-                    NarrationOne: { required: true },
-                    NarrationTwo: { required: true },
-                    Fk_InvoiceShortNarrationId: { required: true },
-                    Fk_JobMasterId: { required: true },
-                    LastYearAmount: { required: true, number: true },
-                    PostingDate: { required: true, date: true },
-                    IsActive: { required: false },
-                    IsActiveDate: { required: false, date: true },
-                    IsDelete: { required: false },
-                    TotalAmount: { required: true, number: true },
-                    TotalReceivedAmount: { required: true, number: true },
-                    ValueNBT: { required: true, number: true },
-                    ValueVAT: { required: true, number: true },
-                    Fk_CompanyId: { required: true },
-                    TotalAmount: {
-                        required: true,
-                        number: true,
-                        totalAmountMatchesRowTotal: true // Use the custom method here
-                    },
 
 
-                },
-                messages: {
-                    InvoiceNoProforma: { required: "Please enter an Invoice No Proforma" },
-                    Fk_DepartmentIdOne: { required: "Please select Department One" },
-                    Fk_DepartmentIdTwo: { required: "Please select Department Two" },
-                    Fk_DepartmentIdThird: { required: "Please select Department Third" },
-                    DocNo: { required: "Please enter a Doc No" },
-                    Date: { required: "Please select a Date", date: "Please enter a valid date" },
-                    OurReferance: { required: "Please provide Our Reference" },
-                    YourReferance: { required: "Please provide Your Reference" },
-                    Fk_WorkGroupId: { required: "Please select a Work Group" },
-                    Fk_CustomerId: { required: "Please select a Customer" },
-                    Fk_PartnerOne: { required: "Please select Partner One" },
-                    Fk_PartnerSecond: { required: "Please select Partner Two" },
-                    Fk_PartnerThird: { required: "Please select Partner Three" },
-                    Fk_ManagerOne: { required: "Please select Manager One" },
-                    Fk_ManagerSecond: { required: "Please select Manager Two" },
-                    Fk_ManagerThird: { required: "Please select Manager Three" },
-                    TaxType: { required: "Please enter a Tax Type" },
-                    Fk_NatureId: { required: "Please select a Nature" },
-                    NoNVat: { required: "Please enter Non VAT" },
-                    NoNVatPrecentage: { required: "Please enter Non VAT Percentage", number: "Please enter a valid number" },
-                    VatPercentage: { required: "Please enter VAT Percentage", number: "Please enter a valid number" },
-                    NBTPercentage: { required: "Please enter NBT Percentage", number: "Please enter a valid number" },
-                    NarrationOne: { required: "Please enter Narration One" },
-                    NarrationTwo: { required: "Please enter Narration Two" },
-                    Fk_InvoiceShortNarrationId: { required: "Please select an Invoice Short Narration" },
-                    Fk_JobMasterId: { required: "Please select a Job Master" },
-                    LastYearAmount: { required: "Please enter Last Year Amount", number: "Please enter a valid number" },
-                    PostingDate: { required: "Please select a Posting Date", date: "Please enter a valid date" },
-                    IsActive: { required: "Please select Active status" },
-                    IsActiveDate: { required: "Please select an Active Date", date: "Please enter a valid date" },
-                    IsDelete: { required: "Please select Delete status" },
-                    TotalAmount: { required: "Please enter Total Amount", number: "Please enter a valid number" },
-                    TotalReceivedAmount: { required: "Please enter Total Received Amount", number: "Please enter a valid number" },
-                    ValueNBT: { required: "Please enter Value NBT", number: "Please enter a valid number" },
-                    ValueVAT: { required: "Please enter Value VAT", number: "Please enter a valid number" },
-                    Fk_CompanyId: { required: "Please select a Company" },
-                    TotalAmount: {
-                        required: "Please enter Total Amount",
-                        number: "Please enter a valid number",
-                        totalAmountMatchesRowTotal: function () {
-                            return "Total Amount must match Row Total Amount (" + $("[name='RowTotalAmount']").val() + ").";
-                        }
+            $(document).ready(function () {
+                // Initialize form validation
+                var validator = $('#quickForm').validate({
+
+                    rules: {
+                        InvoiceNoProforma: { required: false },
+                        Fk_DepartmentIdOne: { required: true },
+                        Fk_DepartmentIdTwo: { required: function () { return IsDepartmentTwo; } },
+                        Fk_DepartmentIdThird: { required: function () { return IsDepartmentThird; } },
+                        DocNo: { required: true },
+                        Date: { required: true, date: true },
+                        ShortNarrationtext: { required: true },
+                        //OurReferance: { required: true },
+                        //YourReferance: { required: true },
+                        Fk_WorkGroupId: { required: true },
+                        Fk_CustomerId: { required: true },
+                        Fk_PartnerOne: { required: true },
+                        Fk_PartnerSecond: { required: true },
+                        Fk_PartnerThird: { required: true },
+                        Fk_ManagerOne: { required: true },
+                        Fk_ManagerSecond: { required: true },
+                        Fk_ManagerThird: { required: true },
+                        TaxType: { required: true },
+                        Fk_NatureId: { required: true },
+                        NoNVat: { required: false },
+                        NoNVatPrecentage: { required: false, number: true },
+                        VatPercentage: { required: true, number: true },
+                        NBTPercentage: { required: true, number: true },
+                        NarrationOne: { required: true },
+                        NarrationTwo: { required: true },
+                        Fk_InvoiceShortNarrationId: { required: true },
+                        Fk_JobMasterId: { required: true },
+                        LastYearAmount: { required: true, number: true },
+                        PostingDate: { required: true, date: true },
+                        IsActive: { required: false },
+                        IsActiveDate: { required: false, date: true },
+                        IsDelete: { required: false },
+                        TotalAmount: { required: true, number: true },
+                        TotalReceivedAmount: { required: true, number: true },
+                        ValueNBT: { required: function () { return IsVatType; }, number: true },
+                        ValueVAT: { required: function () { return IsVatType; }, number: true },
+                        Fk_CompanyId: { required: true },
+                        TotalAmount: {
+                            required: true,
+                            number: true,
+                            totalAmountMatchesRowTotal: true // Use the custom method here
+                        },
+
+
                     },
-                },
-                errorElement: 'span',
-                errorPlacement: function (error, element) {
-                    error.addClass('invalid-feedback');
-                    element.closest('.form-group').append(error);
-                },
-                highlight: function (element, errorClass, validClass) {
-                    $(element).addClass('is-invalid');
-                },
-                unhighlight: function (element, errorClass, validClass) {
-                    $(element).removeClass('is-invalid');
-                },
-                invalidHandler: function (event, validator) {
-                    // Handle invalid form submission with Swal alert
-                    var errorMessage = "";
-                    if (!validator.valid() && validator.errorList.length > 0) {
-                        // Check if the error is specifically about Total Amount and Row Total Amount mismatch
-                        var totalAmountError = validator.errorList.find(function (error) {
-                            return error.method === 'totalAmountMatchesRowTotal';
-                        });
-                        if (totalAmountError) {
-                            errorMessage = totalAmountError.message;
+                    messages: {
+                        InvoiceNoProforma: { required: "Please enter an Invoice No Proforma" },
+                        Fk_DepartmentIdOne: { required: "Please select Department One" },
+                        Fk_DepartmentIdTwo: { required: "Please select Department Two" },
+                        Fk_DepartmentIdThird: { required: "Please select Department Third" },
+                        DocNo: { required: "Please enter a Doc No" },
+                        ShortNarrationtext: { required: "Please enter a Narration " },
+                        Date: { required: "Please select a Date", date: "Please enter a valid date" },
+                        OurReferance: { required: "Please provide Our Reference" },
+                        YourReferance: { required: "Please provide Your Reference" },
+                        Fk_WorkGroupId: { required: "Please select a Work Group" },
+                        Fk_CustomerId: { required: "Please select a Customer" },
+                        Fk_PartnerOne: { required: "Please select Partner One" },
+                        Fk_PartnerSecond: { required: "Please select Partner Two" },
+                        Fk_PartnerThird: { required: "Please select Partner Three" },
+                        Fk_ManagerOne: { required: "Please select Manager One" },
+                        Fk_ManagerSecond: { required: "Please select Manager Two" },
+                        Fk_ManagerThird: { required: "Please select Manager Three" },
+                        TaxType: { required: "Please enter a Tax Type" },
+                        Fk_NatureId: { required: "Please select a Nature" },
+                        NoNVat: { required: "Please enter Non VAT" },
+                        NoNVatPrecentage: { required: "Please enter Non VAT Percentage", number: "Please enter a valid number" },
+                        VatPercentage: { required: "Please enter VAT Percentage", number: "Please enter a valid number" },
+                        NBTPercentage: { required: "Please enter NBT Percentage", number: "Please enter a valid number" },
+                        NarrationOne: { required: "Please enter Narration One" },
+                        NarrationTwo: { required: "Please enter Narration Two" },
+                        Fk_InvoiceShortNarrationId: { required: "Please select an Invoice Short Narration" },
+                        Fk_JobMasterId: { required: "Please select a Job Master" },
+                        LastYearAmount: { required: "Please enter Last Year Amount", number: "Please enter a valid number" },
+                        PostingDate: { required: "Please select a Posting Date", date: "Please enter a valid date" },
+                        IsActive: { required: "Please select Active status" },
+                        IsActiveDate: { required: "Please select an Active Date", date: "Please enter a valid date" },
+                        IsDelete: { required: "Please select Delete status" },
+                        TotalAmount: { required: "Please enter Total Amount", number: "Please enter a valid number" },
+                        TotalReceivedAmount: { required: "Please enter Total Received Amount", number: "Please enter a valid number" },
+                        ValueNBT: { required: "Please enter Value NBT", number: "Please enter a valid number" },
+                        ValueVAT: { required: "Please enter Value VAT", number: "Please enter a valid number" },
+                        Fk_CompanyId: { required: "Please select a Company" },
+                        TotalAmount: {
+                            required: "Please enter Total Amount",
+                            number: "Please enter a valid number",
+                            totalAmountMatchesRowTotal: function () {
+                                return "Total Amount must match Row Total Amount (" + $("[name='RowTotalAmount']").val() + ").";
+                            }
+                        },
+                    },
+                    errorElement: 'span',
+                    errorPlacement: function (error, element) {
+                        error.addClass('invalid-feedback');
+                        element.closest('.form-group').append(error);
+                    },
+                    highlight: function (element, errorClass, validClass) {
+                        $(element).addClass('is-invalid');
+                    },
+                    unhighlight: function (element, errorClass, validClass) {
+                        $(element).removeClass('is-invalid');
+                    },
+                    invalidHandler: function (event, validator) {
+                        // Handle invalid form submission with Swal alert
+                        var errorMessage = "";
+                        if (!validator.valid() && validator.errorList.length > 0) {
+                            // Check if the error is specifically about Total Amount and Row Total Amount mismatch
+                            var totalAmountError = validator.errorList.find(function (error) {
+                                return error.method === 'totalAmountMatchesRowTotal';
+                            });
+                            if (totalAmountError) {
+                                errorMessage = totalAmountError.message;
+                            }
+                        }
+                        if (errorMessage) {
+                            Swal.fire({
+                                title: 'Validation Error',
+                                text: errorMessage,
+                                icon: 'error',
+                                confirmButtonText: 'OK'
+                            });
                         }
                     }
-                    if (errorMessage) {
-                        Swal.fire({
-                            title: 'Validation Error',
-                            text: errorMessage,
-                            icon: 'error',
-                            confirmButtonText: 'OK'
-                        });
-                    }
-                }
+                });
+
+
             });
-        });
 
+        });
 
 
         var PostCustomerInsert = function (model) {
@@ -979,300 +1036,297 @@
 
         }
 
+          // Set Department Two
+
+          var GetDepartmentTwoByFirstid = function (id) {
+
+              //$("#loaderbody").removeClass('hide');
+              $.ajax({
+                  type: "GET",
+                  url: "/ProformaInvoiceHead/GetDepartmentTwo",
+                  data: { id: id },
+
+                  success: function (result) {
+
+                      debugger
+
+                      IsDepartmentTwo = result.length > 0;
+                     
+                          var dropdown = $('#departmentTwo');
+                          dropdown.empty();
+                          dropdown.append('<option value="">Select</option>');
+                          $.each(result, function (index, item) {
+                              dropdown.append('<option value="' + item.Id + '">' + item.CodeAndNarration + '</option>');
+                          });
+                      
+                  },
+              })
+          }
 
 
 
-        // Set Department Two
+          // Set Department THird
 
 
-        // Function to get the selected value from the dropdown
-        function getSelectedValue() {
-            // Get the dropdown element by its ID
-            var selectElement = document.getElementById("departmentFirst");
-            debugger
-            // Get the selected value
-            var selectedValue = selectElement.value;
+          var GetDepartmentThirdBytwoid = function (id,sid) {
 
-            GetDepartmentTwoByFirstid(selectedValue)
-            // Log or use the selected value
-            //console.log("Selected value:", selectedValue);
+              //$("#loaderbody").removeClass('hide');
 
-            // You can return the value if needed
-            return selectedValue;
-        }
+              $.ajax({
+                  type: "GET",
+                  url: "/ProformaInvoiceHead/GetDepartmentThird",
+                  data: { Firstid: id, Secondid: sid },
 
-        // Attach the function to the dropdown change event
-        document.getElementById("departmentFirst").addEventListener("change", function () {
-            var selectedValue = getSelectedValue();
-            // alert("The selected value is: " + selectedValue);
-        });
+                  success: function (result) {
 
-        var GetDepartmentTwoByFirstid = function (id) {
+                      debugger
+                      IsDepartmentThird = result.length > 0;
+                    
+                          var dropdown = $('#departmentThird');
+                          dropdown.empty();
+                          dropdown.append('<option value="">Select</option>');
+                          $.each(result, function (index, item) {
+                              dropdown.append('<option value="' + item.Id + '">' + item.CodeAndNarration + '</option>');
+                          });
+                      
+                  },
+              })
+          }
 
-            //$("#loaderbody").removeClass('hide');
-            $.ajax({
-                type: "GET",
-                url: "/ProformaInvoiceHead/GetDepartmentTwo",
-                data: { id: id },
 
-                success: function (result) {
+          // Customer Wise Job
 
+          var GetCustomerWisejob = function (id) {
+
+              //$("#loaderbody").removeClass('hide');
+
+              $.ajax({
+                  type: "GET",
+                  url: "/ProformaInvoiceHead/GetCustomerWiseJob",
+                  data: { CustomerId: id },
+
+                  success: function (result) {
+                      debugger
+
+                      var dropdown = $('#JobNo');
+                      dropdown.empty();
+                      dropdown.append('<option value="">Select</option>');
+                      $.each(result, function (index, item) {
+                          dropdown.append('<option value="' + item.Fk_JobMasterId + '">' + item.FullDetails + '</option>');
+                      });
+
+                      var dropdownVatType = $('#selectVatType');
+                      dropdownVatType.empty();
+                      dropdownVatType.append('<option value="">Select</option>');
+
+
+                      var firstItem = result[0]; // Get the first item from the array
+                      dropdownVatType.append('<option value="' + firstItem.VatType + '">' + firstItem.VatType + '</option>');
+
+
+                      // Select the first value if there are options available
+                      if (dropdownVatType.find('option').length > 1) {
+                          var firstValue = dropdownVatType.find('option').eq(1).val();
+                          dropdownVatType.val(firstValue);
+                      }
+                      if ($('#selectVatType').val() == "Non VAT") {
+                          IsVatType = false;
+                      }
+                  }
+
+              })
+          }
+          //
+
+
+
+          window.addEventListener('load', function () {
+              localStorage.clear();
+              GetDefaultInvoiceBody();
+              if ($('#selectVatType').val() == "Non VAT") {
+                  IsVatType = false;
+         
+              }
+          });
+
+
+          var GetDefaultInvoiceBody = function () {
+
+              //$("#loaderbody").removeClass('hide');
+              $.ajax({
+                  type: "GET",
+                  url: "/ProformaInvoiceHead/InvoiceNarrationList",
+                  //data: { Createby: 'User' },
+
+                  success: function (result) {
+                      debugger
+                      $("#staticBackdropBody").html(result);
+                      var List = JSON.parse(localStorage.getItem('NarrationMasterList')) || [];
+                      var json = @Html.Raw(Json.Encode(@Model.NarrationMasterList));
+                      List = [...json];
+                      localStorage.setItem('NarrationMasterList', JSON.stringify(List));
+                  },
+              })
+          }
+
+          var GetLastAmountTotalAmount = function (id,jobid) {
+
+              //$("#loaderbody").removeClass('hide');
+
+              $.ajax({
+                  type: "GET",
+                  url: "/ProformaInvoiceHead/GetSelectedValueLastAmountTotalAmount",
+                  data: { CustomerId: id, JobId: jobid },
+
+                  success: function (result) {
+
+                      document.getElementById("TotalAmount").value = result[0].ActualValue.toFixed(2);
+                      document.getElementById("JobCostAmount").value = result[0].ActualValue.toFixed(2);
+                      document.getElementById("LastYearAmount").value = result[0].PreViewvalue.toFixed(2);
+
+
+                      //selectVatType
+                      if ($('#selectVatType').val() !== "Non VAT") {
+                          // Get the entered values
+                          var vatPercentage = parseFloat($('#vatPercentageInput').val()) || 0;
+                          var nbtPercentage = parseFloat($('#NbtPercentageInput').val()) || 0;
+                          var totalAmount = parseFloat($('#TotalAmount').val()) || 0;
+                          debugger
+                          // Calculate value VAT and value NBT
+                          var valueVAT = totalAmount * (vatPercentage / 100);
+                          var valueNBT = totalAmount * (nbtPercentage / 100);
+
+                          // Update the value VAT and value NBT fields
+                          $('#ValueVAT').val(valueVAT.toFixed(2));
+                          $('#ValueNBT').val(valueNBT.toFixed(2));
+
+                          // Calculate grand total
+                          var grandTotal = totalAmount + valueVAT + valueNBT;
+
+                          // Update the grand total display
+
+                          $('#TotalReceivedAmount').val(grandTotal.toFixed(2));
+                      }
+                      if ($('#selectVatType').val() == "Non VAT") {
+                          IsVatType = false;
+                          $('#TotalReceivedAmount').val(result[0].ActualValue.toFixed(2));
+                      }
+
+                      setTimeout(function () {
+                          var amountField = document.getElementById("narrationid");
+                          amountField.removeAttribute("readonly");
+
+                          var amountField = document.getElementById("InvoiceNarration");
+                          amountField.removeAttribute("readonly");
+
+                          var amountField2 = document.getElementById("Amount");
+                          amountField2.removeAttribute("readonly");
+                      }, 100); // 100ms delay, adjust if necessary
+
+                      $.ajax({
+                          type: "GET",
+                          url: "/ProformaInvoiceHead/InvoiceNarrationList",
+                          //data: { Createby: 'User' },
+
+                          success: function (result) {
+                              debugger
+                              $("#staticBackdropBody").html(result);
+
+                          },
+                      })
+                  },
+              })
+
+
+
+          }
+
+
+
+          $(document).ready(function () {
+              $('#vatPercentageInput, #NbtPercentageInput, #TotalAmount').on('input', function () {
+                  // Get the entered values
+
+                  if ($('#selectVatType').val() !== "Non VAT") {
+                      var vatPercentage = parseFloat($('#vatPercentageInput').val()) || 0;
+                      var nbtPercentage = parseFloat($('#NbtPercentageInput').val()) || 0;
+                      var totalAmount = parseFloat($('#TotalAmount').val()) || 0;
+                      debugger
+                      // Calculate value VAT and value NBT
+                      var valueVAT = totalAmount * (vatPercentage / 100);
+                      var valueNBT = totalAmount * (nbtPercentage / 100);
+
+                      // Update the value VAT and value NBT fields
+                      $('#ValueVAT').val(valueVAT.toFixed(2));
+                      $('#ValueNBT').val(valueNBT.toFixed(2));
+
+                      // Calculate grand total
+                      var grandTotal = totalAmount + valueVAT + valueNBT;
+
+                      // Update the grand total display
+                      $('#TotalReceivedAmount').val(grandTotal.toFixed(2));
+                  }
+                  if ($('#selectVatType').val() == "Non VAT") {
+                      var totalAmount = parseFloat($('#TotalAmount').val()) || 0;
+                      $('#TotalReceivedAmount').val(totalAmount.toFixed(2));
+                  }
+
+              });
+
+              $('#SelectShortNarration').on('input', function () {
+                  // Get the entered values
+                  var ShortNarrationid = parseFloat($('#SelectShortNarration').val()) || 0;
+                  var List = JSON.parse(localStorage.getItem('NarrationMasterList')) || [];
                   debugger
-                    var dropdown = $('#departmentTwo');
-                    dropdown.empty();
-                    dropdown.append('<option value="">Select</option>');
-                    $.each(result, function (index, item) {
-                        dropdown.append('<option value="' + item.Id + '">' + item.CodeAndNarration + '</option>');
-                    });
+                  const hasRecord = List.find(record => record.Id === parseInt(ShortNarrationid));
 
-                },
-            })
-        }
+                  if (hasRecord) {
+                      var NarrationText = hasRecord.Narration;
+                      // Assign the value to the InvoiceNarration field
+                      $('#ShortNarrationtext').val(NarrationText);
+                  } else {
+                      console.log("No matching record found.");
+                      // Optionally, clear the input field or set it to a default value
+                      $('#ShortNarrationtext').val("");
+                  }
+                  // Calculate value VAT and value NBT
 
+              });
 
+              $('#departmentFirst').on('input', function () {
 
-        // Set Department THird
+                  var selectElement = parseFloat($('#departmentFirst').val()) || 0;
 
+                  GetDepartmentTwoByFirstid(selectElement)
+              });
 
+              $('#departmentTwo').on('input', function () {
 
-        // Function to get the selected value from the dropdown
-        function getSelectedValuethird() {
-            // Get the dropdown element by its ID
-            var selectElementsecond = document.getElementById("departmentTwo");
-            var selectElementFirst = document.getElementById("departmentFirst");
+                  var FirstElement = parseFloat($('#departmentFirst').val()) || 0;
+                  var TwoElement = parseFloat($('#departmentTwo').val()) || 0;
 
-            // Get the selected value
-            var selectedValuefirst = selectElementFirst.value;
+                  GetDepartmentThirdBytwoid(FirstElement, TwoElement)
+              });
+              $('#selectCustomer').on('input', function () {
 
-            GetDepartmentThirdBytwoid(selectedValuefirst, selectElementsecond.value)
-            // Log or use the selected value
-            //console.log("Selected value:", selectedValue);
+                  var customerId = parseFloat($('#selectCustomer').val()) || 0;
 
-            // You can return the value if needed
-            return selectedValue;
-        }
+                  GetCustomerWisejob(customerId)
+              });
 
-        // Attach the function to the dropdown change event
-        document.getElementById("departmentTwo").addEventListener("change", function () {
-            var selectedValue = getSelectedValuethird();
-            // alert("The selected value is: " + selectedValue);
-        });
+              $('#JobNo').on('input', function () {
 
-        var GetDepartmentThirdBytwoid = function (id,sid) {
+                  var selectElementFirst = document.getElementById("JobNo");
+                  var Customerid = parseFloat($('#selectCustomer').val()) || 0;
+                  // Get the selected value
+                  var selectedValuefirst = selectElementFirst.value;
 
-            //$("#loaderbody").removeClass('hide');
+                  GetLastAmountTotalAmount(Customerid, selectedValuefirst)
+              });
+          });
 
-            $.ajax({
-                type: "GET",
-                url: "/ProformaInvoiceHead/GetDepartmentThird",
-                data: { Firstid: id, Secondid: sid },
 
-                success: function (result) {
 
-                    debugger
-                    var dropdown = $('#departmentThird');
-                    dropdown.empty();
-                    dropdown.append('<option value="">Select</option>');
-                    $.each(result, function (index, item) {
-                        dropdown.append('<option value="' + item.Id + '">' + item.CodeAndNarration + '</option>');
-                    });
-
-                },
-            })
-        }
-
-
-        // Customer Wise Job
-
-        function getSelectedValuejob() {
-            // Get the dropdown element by its ID
-            var selectElementFirst = document.getElementById("selectCustomer");
-
-            // Get the selected value
-            var selectedValuefirst = selectElementFirst.value;
-
-            GetCustomerWisejob(selectedValuefirst)
-            // Log or use the selected value
-            //console.log("Selected value:", selectedValue);
-
-            // You can return the value if needed
-            return selectedValuefirst;
-        }
-
-        // Attach the function to the dropdown change event
-        document.getElementById("selectCustomer").addEventListener("change", function () {
-            var selectedValue = getSelectedValuejob();
-            // alert("The selected value is: " + selectedValue);
-        });
-
-        var GetCustomerWisejob = function (id) {
-
-            //$("#loaderbody").removeClass('hide');
-
-            $.ajax({
-                type: "GET",
-                url: "/ProformaInvoiceHead/GetCustomerWiseJob",
-                data: { CustomerId: id },
-
-                success: function (result) {
-
-                    debugger
-                    var dropdown = $('#JobNo');
-                    dropdown.empty();
-                    dropdown.append('<option value="">Select</option>');
-                    $.each(result, function (index, item) {
-                        dropdown.append('<option value="' + item.Fk_JobMasterId + '">' + item.FullDetails + '</option>');
-                    });
-
-                },
-            })
-        }
-        //
-
-
-
-        window.addEventListener('load', function () {
-
-            GetDefaultInvoiceBody();
-           
-        });
-
-
-        var GetDefaultInvoiceBody = function () {
-
-            //$("#loaderbody").removeClass('hide');
-            $.ajax({
-                type: "GET",
-                url: "/ProformaInvoiceHead/InvoiceNarrationList",
-                //data: { Createby: 'User' },
-
-                success: function (result) {
-                    debugger
-                    $("#staticBackdropBody").html(result);
-                    debugger
-                    var amountField = document.getElementById("narrationid");
-                    amountField.removeAttribute("readonly");
-
-                    var amountField2 = document.getElementById("Amount");
-                    amountField2.removeAttribute("readonly");
-                },
-            })
-
-
-           
-        }
-
-
-        function getSelectedValueLastAmountTotalAmount() {
-            // Get the dropdown element by its ID
-            var selectElementFirst = document.getElementById("JobNo");
-            var Customerid = document.getElementById("selectCustomer");
-            // Get the selected value
-            var selectedValuefirst = selectElementFirst.value;
-
-            GetLastAmountTotalAmount(Customerid.value, selectedValuefirst)
-            // Log or use the selected value
-            //console.log("Selected value:", selectedValue);
-
-            // You can return the value if needed
-            return selectedValuefirst;
-        }
-
-        // Attach the function to the dropdown change event
-        document.getElementById("JobNo").addEventListener("change", function () {
-            var selectedValue = getSelectedValueLastAmountTotalAmount();
-            // alert("The selected value is: " + selectedValue);
-        });
-
-        var GetLastAmountTotalAmount = function (id,jobid) {
-
-            //$("#loaderbody").removeClass('hide');
-
-            $.ajax({
-                type: "GET",
-                url: "/ProformaInvoiceHead/GetSelectedValueLastAmountTotalAmount",
-                data: { CustomerId: id, JobId: jobid },
-
-                success: function (result) {
-
-                   
-
-                    document.getElementById("TotalAmount").value = result[0].ActualValue.toFixed(2);
-                    document.getElementById("LastYearAmount").value = result[0].PreViewvalue.toFixed(2);
-
-
-                   
-
-                    // Get the entered values
-                    var vatPercentage = parseFloat($('#vatPercentageInput').val()) || 0;
-                    var nbtPercentage = parseFloat($('#NbtPercentageInput').val()) || 0;
-                    var totalAmount = parseFloat($('#TotalAmount').val()) || 0;
-                    debugger
-                    // Calculate value VAT and value NBT
-                    var valueVAT = totalAmount * (vatPercentage / 100);
-                    var valueNBT = totalAmount * (nbtPercentage / 100);
-
-                    // Update the value VAT and value NBT fields
-                    $('#ValueVAT').val(valueVAT.toFixed(2));
-                    $('#ValueNBT').val(valueNBT.toFixed(2));
-
-                    // Calculate grand total
-                    var grandTotal = totalAmount + valueVAT + valueNBT;
-
-                    // Update the grand total display
-
-                    $('#TotalReceivedAmount').val(grandTotal.toFixed(2));
-
-                    setTimeout(function () {
-                        var amountField = document.getElementById("narrationid");
-                        amountField.removeAttribute("readonly");
-
-                        var amountField2 = document.getElementById("Amount");
-                        amountField2.removeAttribute("readonly");
-                    }, 100); // 100ms delay, adjust if necessary
-
-                    $.ajax({
-                        type: "GET",
-                        url: "/ProformaInvoiceHead/InvoiceNarrationList",
-                        //data: { Createby: 'User' },
-
-                        success: function (result) {
-                            debugger
-                            $("#staticBackdropBody").html(result);
-
-                        },
-                    })
-                },
-            })
-
-           
-
-        }
-
-
-
-        $(document).ready(function () {
-            $('#vatPercentageInput, #NbtPercentageInput, #TotalAmount').on('input', function () {
-                // Get the entered values
-                var vatPercentage = parseFloat($('#vatPercentageInput').val()) || 0;
-                var nbtPercentage = parseFloat($('#NbtPercentageInput').val()) || 0;
-                var totalAmount = parseFloat($('#TotalAmount').val()) || 0;
-                debugger
-                // Calculate value VAT and value NBT
-                var valueVAT = totalAmount * (vatPercentage / 100);
-                var valueNBT = totalAmount * (nbtPercentage / 100);
-
-                // Update the value VAT and value NBT fields
-                $('#ValueVAT').val(valueVAT.toFixed(2));
-                $('#ValueNBT').val(valueNBT.toFixed(2));
-
-                // Calculate grand total
-                var grandTotal = totalAmount + valueVAT + valueNBT;
-
-                // Update the grand total display
-                $('#TotalReceivedAmount').val(grandTotal.toFixed(2));
-            });
-        });
 
     </script>
 }

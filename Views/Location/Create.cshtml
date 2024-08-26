@@ -65,7 +65,7 @@
                                                     <div class="form-group">
                                                         <label for="exampleInputEmail1">Customer</label>
 
-                                                        @Html.DropDownListFor(model => model.Fk_CustomerId, Model.CustomerLists, "Select", htmlAttributes: new { @class = "form-control", id = "selectUnit", required = "required" })
+                                                        @Html.DropDownListFor(model => model.Fk_CustomerId, Model.CustomerLists, "Select", htmlAttributes: new { @class = "form-control", id = "selectCustomer", required = "required" })
 
                                                     </div>
                                                 </div>
@@ -109,6 +109,16 @@
                                             <div class="custom-control custom-checkbox">
                                                 @Html.CheckBoxFor(model => model.IsActive, new { @class = "form-check-input", id = "exampleCheck1" })
                                                 <label for="exampleCheck1">Is Active.</label>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-lg-12">
+
+                                                <div id="Viewdata">
+
+                                                </div>
+                                                
                                             </div>
                                         </div>
                                     </div>
@@ -236,7 +246,41 @@
             },
         })
 
-    }
+        }
+
+
+        function getSelectedValue1() {
+            // Get the dropdown element by its ID
+            var selectElement = document.getElementById("selectCustomer");
+            debugger
+            // Get the selected value
+            var selectedValue = selectElement.value;
+
+            GetSelectedCustomerHasLocation(selectedValue);
+            // You can return the value if needed
+            return selectedValue;
+        }
+
+        document.getElementById("selectCustomer").addEventListener("change", function () {
+            var selectedValue = getSelectedValue1();
+            // alert("The selected value is: " + selectedValue);
+        });
+
+
+        var GetSelectedCustomerHasLocation = function (id) {
+
+            $.ajax({
+                type: "GET",
+                url: "/Location/DisplayCustomerHasLocation",
+                data: { id: id },
+
+                success: function (result) {
+
+                    $("#Viewdata").html(result);
+                },
+            })
+        }
+
     </script>
 }
 

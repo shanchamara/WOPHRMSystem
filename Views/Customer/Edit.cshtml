@@ -229,6 +229,7 @@
 
                                                 new { value = "" , text = "Select "  },
                                                 new { value = "VAT" , text = "VAT"  },
+                                                new { value = "Non VAT" , text = "Non VAT"  },
                                                 new { value = "SVAT" , text = "SVAT"  },
 
                                                 }, "value", "text", "Select VAT Type"), htmlAttributes: new { @class = "form-control", id = "selectGrnType" })
@@ -596,129 +597,173 @@
                 PostCustomerInsert(data);
             }
         });
-        $('#quickForm').validate({
-            rules: {
-                Code: {
-                    required: true,
+        $(document).ready(function () {
+            // Initialize form validation
+            var validator = $('#quickForm').validate({
+                rules: {
+                    Code: { required: true },
+                    Name: { required: true },
+                    Address: { required: true },
+                    IsActive: { required: false },
+                    TaxNo: { required: true },
+                    DateOfJoined: { required: true, date: true },
+                    Email: { required: true },
+                    ContactPersonOne: { required: true },
+                    ContactPersonSecond: { required: true },
+                    TelOne: { required: true },
+                    TelSecond: { required: true },
+                    VatType: { required: true },
+                    VatNo: {
+                        required: {
+                            depends: function (element) {
+                                return $("#selectVatType").val() !== "Non VAT";
+                            }
+                        }
+                    },
+                    SVatNo: {
+                        required: {
+                            depends: function (element) {
+                                return $("#selectVatType").val() !== "Non VAT";
+                            }
+                        }
+                    },
+                    Fk_GradeMasterId: { required: true },
+                    Fk_CustomerGroupId: { required: true },
+                    Fk_PartnerId: { required: true },
+                    Fk_ManagerId: { required: true },
+                    Fk_SectorMasterId: { required: true },
+                    Fk_IntroductionId: { required: true },
+                    Fk_InternationslReferalId: { required: true },
+                    Fk_LegalStatusMasterId: { required: true },
+                    Fax: {
+                        required: true,
+                        faxPattern: true
+                    }
+                },
+                messages: {
+                    Code: {
+                        required: "Please enter a code",
+                    },
+                    Name: {
+                        required: "Please provide a Customer Name",
+
+                    },
+                    Address: {
+                        required: "Please provide a Address",
+                    },
+                    ContactPersonOne: {
+                        required: "Please provide a Address",
+                    },
+                    ContactPersonSecond: {
+                        required: "Please provide a Address",
+                    },
+                    TelSecond: {
+                        required: "Please provide a Contact Number",
+                    },
+                    TelOne: {
+                        required: "Please provide a Contact Number",
+                    },
+                    VatType: {
+                        required: "Please provide a Vat Type",
+                    },
+                    VatNo: {
+                        required: "Please provide a Vat No",
+                    },
+                    SVatNo: {
+                        required: "Please provide a SVat No",
+                    },
+                    TaxNo: {
+                        required: "Please provide a TAX No",
+                    },
+                    Fk_GradeMasterId: {
+                        required: "Please Select the GradeMaster",
+                    },
+                    Fk_CustomerGroupId: {
+                        required: "Please Select the Customer Group",
+                    },
+                    Fk_PartnerId: {
+                        required: "Please Select the Partner",
+                    },
+                    Fk_InternationslReferalId: {
+                        required: "Please Select the InternationalReferal",
+                    },
+                    Fk_LegalStatusMasterId: {
+                        required: "Please Select the Legal Status",
+                    },
+                    Fk_SectorMasterId: {
+                        required: "Please Select the Sector",
+                    },
+                    Fk_IntroductionId: {
+                        required: "Please Select the Introduction",
+                    },
+                    Fk_ManagerId: {
+                        required: "Please Select the Manager",
+                    },
+                    terms: "Please Select the Status",
+                    Email: "Please enter a Email",
+                    Fax: "Please enter a valid fax number",
+                    DateOfJoined: "Please Select the Date Of Joined",
 
                 },
-                Name: {
-                    required: true,
+                errorElement: 'span',
+                errorPlacement: function (error, element) {
+                    error.addClass('invalid-feedback');
+                    element.closest('.form-group').append(error);
+                },
+                highlight: function (element, errorClass, validClass) {
+                    $(element).addClass('is-invalid');
+                },
+                unhighlight: function (element, errorClass, validClass) {
+                    $(element).removeClass('is-invalid');
+                }
+            });
 
-                },
-                Address: {
-                    required: true,
+            // Update validation rules on VatType change
+            $('#selectVatType').change(function () {
+                var vatType = $(this).val();
 
-                },
-                IsActive: {
-                    required: false
-                },
-                TaxNo: {
-                    required: true
-                },
-                DateOfJoined: {
-                    required: true,
-                    date: true
-                },
-                Email: { required: true },
-                ContactPersonOne: { required: true },
-                ContactPersonSecond: { required: true },
-                TelOne: { required: true },
-                TelSecond: { required: true },
-                VatType: { required: true },
-                VatNo: { required: true },
-                SVatNo: { required: true },
-                TaxNo: { required: true },
-                Fk_GradeMasterId: { required: true },
-                Fk_CustomerGroupId: { required: true },
-                Fk_PartnerId: { required: true },
-                Fk_ManagerId: { required: true },
-                Fk_SectorMasterId: { required: true },
-                Fk_IntroductionId: { required: true },
-                Fk_InternationslReferalId: { required: true },
-                Fk_LegalStatusMasterId: { required: true },
-                Fax: {
-                    required: true,
-                    faxPattern: true
+                // Remove existing rules
+                $("#VatNo").rules("remove", "required");
+                $("#SVatNo").rules("remove", "required");
+
+                if (vatType === "VAT") {
+                    // VAT selected, only VatNo is required
+                    $("#VatNo").rules("add", {
+                        required: true,
+                        messages: {
+                            required: "Please provide a Vat No"
+                        }
+                    });
+                    $("#SVatNo").rules("add", {
+                        required: false,
+                    });
+                }
+                if (vatType === "SVAT") {
+                    // SVat selected, only SVatNo is required
+                    $("#SVatNo").rules("add", {
+                        required: true,
+                        messages: {
+                            required: "Please provide a SVat No"
+                        }
+                    });
+                    $("#VatNo").rules("add", {
+                        required: false,
+                    });
+                }
+                if (vatType === "Non VAT") {
+                    // SVat selected, only SVatNo is required
+                    $("#SVatNo").rules("add", {
+                        required: false,
+                    });
+                    $("#VatNo").rules("add", {
+                        required: false,
+                    });
                 }
 
-            },
-            messages: {
-                Code: {
-                    required: "Please enter a code",
-                },
-                Name: {
-                    required: "Please provide a Customer Name",
-
-                },
-                Address: {
-                    required: "Please provide a Address",
-                },
-                ContactPersonOne: {
-                    required: "Please provide a Address",
-                },
-                ContactPersonSecond: {
-                    required: "Please provide a Address",
-                },
-                TelSecond: {
-                    required: "Please provide a Contact Number",
-                },
-                TelOne: {
-                    required: "Please provide a Contact Number",
-                },
-                VatType: {
-                    required: "Please provide a Vat Type",
-                },
-                VatNo: {
-                    required: "Please provide a Vat No",
-                },
-                SVatNo: {
-                    required: "Please provide a SVat No",
-                },
-                TaxNo: {
-                    required: "Please provide a TAX No",
-                },
-                Fk_GradeMasterId: {
-                    required: "Please Select the GradeMaster",
-                },
-                Fk_CustomerGroupId: {
-                    required: "Please Select the Customer Group",
-                },
-                Fk_PartnerId: {
-                    required: "Please Select the Partner",
-                },
-                Fk_InternationslReferalId: {
-                    required: "Please Select the InternationalReferal",
-                },
-                Fk_LegalStatusMasterId: {
-                    required: "Please Select the Legal Status",
-                },
-                Fk_SectorMasterId: {
-                    required: "Please Select the Sector",
-                },
-                Fk_IntroductionId: {
-                    required: "Please Select the Introduction",
-                },
-                Fk_ManagerId: {
-                    required: "Please Select the Manager",
-                },
-                terms: "Please Select the Status",
-                Email: "Please enter a Email",
-                Fax: "Please enter a valid fax number",
-                DateOfJoined: "Please Select the Date Of Joined",
-
-            },
-            errorElement: 'span',
-            errorPlacement: function (error, element) {
-                error.addClass('invalid-feedback');
-                element.closest('.form-group').append(error);
-            },
-            highlight: function (element, errorClass, validClass) {
-                $(element).addClass('is-invalid');
-            },
-            unhighlight: function (element, errorClass, validClass) {
-                $(element).removeClass('is-invalid');
-            }
+                // Re-validate the fields
+                $("#VatNo").valid();
+                $("#SVatNo").valid();
+            });
         });
 
         $.validator.addMethod("faxPattern", function (value, element) {

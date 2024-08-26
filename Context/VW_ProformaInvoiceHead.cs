@@ -18,8 +18,8 @@ namespace WOPHRMSystem.Context
         public int Fk_CompanyId { get; set; }
         public string InvoiceNoProforma { get; set; }
         public int Fk_DepartmentIdOne { get; set; }
-        public int Fk_DepartmentIdTwo { get; set; }
-        public int Fk_DepartmentIdThird { get; set; }
+        public Nullable<int> Fk_DepartmentIdTwo { get; set; }
+        public Nullable<int> Fk_DepartmentIdThird { get; set; }
         public string DocNo { get; set; }
         public System.DateTime Date { get; set; }
         public string OurReferance { get; set; }
@@ -35,6 +35,7 @@ namespace WOPHRMSystem.Context
         public string TaxType { get; set; }
         public int Fk_NatureId { get; set; }
         public string NoNVat { get; set; }
+        public string ShortNarrationtext { get; set; }
         public Nullable<decimal> NoNVatPrecentage { get; set; }
         public Nullable<decimal> VatPercentage { get; set; }
         public Nullable<decimal> NBTPercentage { get; set; }
@@ -45,6 +46,7 @@ namespace WOPHRMSystem.Context
         public Nullable<decimal> LastYearAmount { get; set; }
         public Nullable<System.DateTime> PostingDate { get; set; }
         public Nullable<decimal> TotalAmount { get; set; }
+        public Nullable<decimal> JobCostAmount { get; set; }
         public Nullable<decimal> ValueNBT { get; set; }
         public Nullable<decimal> ValueVAT { get; set; }
         public Nullable<decimal> TotalReceivedAmount { get; set; }

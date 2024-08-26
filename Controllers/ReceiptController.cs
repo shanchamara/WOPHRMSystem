@@ -32,6 +32,7 @@ namespace WOPHRMSystem.Controllers
             _ClientService.DeleteCurrentlyInvoiceTemp("User");
             var model = new ReceiptModel()
             {
+                IsActive = true,
                 ReceiptNo = _ClientService.GeTReceiptNo(),
                 WorkGroupList = new SelectList(workGroup.GetAll(), "Id", "CodeAndNarration"),
                 Companylist = new SelectList(companyServices.GetAll(), "Id", "Name"),

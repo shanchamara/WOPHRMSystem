@@ -21,7 +21,8 @@ namespace WOPHRMSystem.Controllers
         [HttpGet]
         public ActionResult Create()
         {
-            return View("Create");
+            var model = new TitleModel() { IsActive = true };
+            return View("Create", model);
         }
 
         [HttpPost]

@@ -27,8 +27,9 @@ namespace WOPHRMSystem.Services
 
 
                         var JobCodePattern = _context.TblDocuments.SingleOrDefault(d => d.TypeOfTable.Equals("TblProformaInvoiceHead"));
-
-                        obj.DocNo = "M0000" + Convert.ToString(JobCodePattern.Number + 1);
+                        var nextNumber = JobCodePattern.Number + 1;
+                        var makeJobCode = nextNumber.ToString().PadLeft(8, '0');
+                        obj.DocNo = "M" + makeJobCode;
 
                         JobCodePattern.Number++;
                         _context.TblProformaInvoiceHeads.Add(obj);
@@ -44,6 +45,7 @@ namespace WOPHRMSystem.Services
                                 Create_Date = obj.Create_Date,
                                 Fk_JobMasterId = obj.Fk_JobMasterId,
                                 IsDelete = false,
+                                Narration = s.Narration,
                                 Fk_InvoiceNarrttionId = s.Fk_InvoiceNarrttionId,
                                 Fk_CustomerId = obj.Fk_CustomerId,
                                 Amount = s.Amount,
@@ -119,6 +121,7 @@ namespace WOPHRMSystem.Services
                                 Create_Date = obj.Create_Date,
                                 Fk_JobMasterId = obj.Fk_JobMasterId,
                                 IsDelete = false,
+                                Narration = s.Narration,
                                 Fk_InvoiceNarrttionId = s.Fk_InvoiceNarrttionId,
                                 Fk_CustomerId = obj.Fk_CustomerId,
                                 Amount = s.Amount,
@@ -135,6 +138,7 @@ namespace WOPHRMSystem.Services
                                 Create_Date = obj.Create_Date,
                                 Fk_JobMasterId = obj.Fk_JobMasterId,
                                 IsDelete = false,
+                                Narration = s.Narration,
                                 Fk_InvoiceNarrttionId = s.Fk_InvoiceNarrttionId,
                                 Fk_CustomerId = obj.Fk_CustomerId,
                                 Amount = s.Amount,
@@ -208,10 +212,10 @@ namespace WOPHRMSystem.Services
                         NoNVatPrecentage = obj.NoNVatPrecentage,
                         OurReferance = obj.OurReferance,
                         TaxType = obj.TaxType,
-                        ValueNBT = obj.ValueNBT,
+                        ValueNBT = obj.ValueNBT ?? 0,
                         VatPercentage = obj.VatPercentage,
                         YourReferance = obj.YourReferance,
-                        ValueVAT = obj.ValueVAT,
+                        ValueVAT = obj.ValueVAT ?? 0,
                         TotalReceivedAmount = obj.TotalReceivedAmount,
                         TotalAmount = obj.TotalAmount,
                         PostingDate = obj.PostingDate,
@@ -226,7 +230,8 @@ namespace WOPHRMSystem.Services
                         IsActive = obj.IsActive,
                         IsActiveDate = obj.IsActiveDate,
                         IsPartnerOneComfirm = obj.IsPartnerOneComfirm,
-
+                        JobCostAmount = obj.JobCostAmount,
+                        ShortNarrationtext = obj.ShortNarrationtext,
                     };
 
 
@@ -262,6 +267,7 @@ namespace WOPHRMSystem.Services
                                 Create_Date = obj.Create_Date,
                                 Fk_JobMasterId = obj.Fk_JobMasterId,
                                 IsDelete = false,
+                                Narration = s.Narration,
                                 Fk_InvoiceNarrttionId = s.Fk_InvoiceNarrttionId,
                                 Fk_CustomerId = obj.Fk_CustomerId,
                                 Amount = s.Amount,
@@ -276,6 +282,7 @@ namespace WOPHRMSystem.Services
                                 Create_Date = obj.Create_Date,
                                 Fk_JobMasterId = obj.Fk_JobMasterId,
                                 IsDelete = false,
+                                Narration = s.Narration,
                                 Fk_InvoiceNarrttionId = s.Fk_InvoiceNarrttionId,
                                 Fk_CustomerId = obj.Fk_CustomerId,
                                 Amount = s.Amount,
@@ -1019,12 +1026,14 @@ namespace WOPHRMSystem.Services
         }
 
 
-        public string GetInvoiceNo()
+        public string GetInvoiceNo(int id)
         {
             try
             {
                 var JobCodePattern = _context.TblDocuments.SingleOrDefault(d => d.TypeOfTable.Equals("TblInvoiceHead"));
-                var makeJobCode = JobCodePattern.Pattern + Convert.ToString(JobCodePattern.Number + 1);
+                var GetJobPrefoxcode = _context.TblJobMasters.SingleOrDefault(d => d.Id.Equals(id));
+                var nextNumber = JobCodePattern.Number + 1;
+                var makeJobCode = GetJobPrefoxcode.JObPrefixCode + nextNumber.ToString().PadLeft(8, '0');
                 return makeJobCode;
 
             }
@@ -1040,7 +1049,9 @@ namespace WOPHRMSystem.Services
             try
             {
                 var JobCodePattern = _context.TblDocuments.SingleOrDefault(d => d.TypeOfTable.Equals("TblProformaInvoiceHead"));
-                var makeJobCode = "M0000" + Convert.ToString(JobCodePattern.Number + 1);
+
+                var nextNumber = JobCodePattern.Number + 1;
+                var makeJobCode = nextNumber.ToString().PadLeft(8, '0');
                 return makeJobCode;
 
             }

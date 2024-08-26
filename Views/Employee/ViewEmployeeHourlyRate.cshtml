@@ -22,8 +22,9 @@
                             <tr>
                                 <th style="display:none;">Id</th> <!-- Hidden Id column -->
                                 <th style="display:none;">DesignationId</th> <!-- Hidden Id column -->
-                                <th>To Date</th>
                                 <th>From Date</th>
+                                <th>To Date</th>
+
                                 <th>Designation</th>
                                 <th>Rate</th>
                                 <th>Action</th>
@@ -35,8 +36,9 @@
                                 <tr>
                                     <td style="display:none;">@s.Id</td> <!-- Hidden Id column -->
                                     <td style="display:none;">@s.Fk_DesginationId</td> <!-- Hidden Id column -->
-                                    <td>@s.ToDate.Value.ToShortDateString()</td>
                                     <td>@s.FromDate.Value.ToShortDateString()</td>
+                                    <td>@s.ToDate.Value.ToShortDateString()</td>
+
                                     <td>@s.DesignationName</td>
                                     <td>@s.Rate</td>
                                     <td class="project-actions text-right">
@@ -50,27 +52,28 @@
                             {
                                 @Html.HiddenFor(model => model.Id)
                                 @Html.HiddenFor(model => model.Fk_EmployeeId)
-                                <tr>
-                                    <td style="display:none;"></td> <!-- Hidden Id column -->
-                                    <td>
-                                        @Html.EditorFor(model => model.ToDate, new { htmlAttributes = new { @class = "form-control", id = "ToDate", required = "required", onchange = "handleDateChange()" } })
-                                    </td>
-                                    <td>
-                                        @Html.EditorFor(model => model.FromDate, new { htmlAttributes = new { @class = "form-control", id = "FromDate", required = "required", onchange = "handleDateChange()" } })
-                                    </td>
-                                    <td>
-                                        @Html.DropDownListFor(model => model.Fk_DesginationId, Model.Designationlists, "Select", htmlAttributes: new { @class = "form-control", id = "selectDesgination1", required = "required", onchange = "handleDateChange1()" })
+                        <tr>
+                            <td style="display:none;"></td> <!-- Hidden Id column -->
 
-                                    </td>
-                                    <td>
-                                        @Html.EditorFor(model => model.Rate, new { htmlAttributes = new { @class = "form-control", id = "Rate", required = "required", @type = "number", @min = "0", onchange = "handleDateChange()" } })
-                                    </td>
-                                    <td class="project-actions text-right">
-                                        <button class="btn btn-info btn-sm" type="button" onclick="SubmitStep()">
-                                            <i class="fas fa-pencil-alt"></i> Add
-                                        </button>
-                                    </td>
-                                </tr>
+                            <td>
+                                @Html.EditorFor(model => model.FromDate, new { htmlAttributes = new { @class = "form-control", id = "FromDate", required = "required", onchange = "handleDateChange()" } })
+                            </td>
+                            <td>
+                                @Html.EditorFor(model => model.ToDate, new { htmlAttributes = new { @class = "form-control", id = "ToDate", required = "required", onchange = "handleDateChange()" } })
+                            </td>
+                            <td>
+                                @Html.DropDownListFor(model => model.Fk_DesginationId, Model.Designationlists, "Select", htmlAttributes: new { @class = "form-control", id = "selectDesgination1", required = "required", onchange = "handleDateChange()" })
+
+                            </td>
+                            <td>
+                                @Html.EditorFor(model => model.Rate, new { htmlAttributes = new { @class = "form-control", id = "Rate", required = "required", @type = "number", @min = "0", onchange = "handleDateChange()" } })
+                            </td>
+                            <td class="project-actions text-right">
+                                <button class="btn btn-info btn-sm" type="button" onclick="SubmitStep()">
+                                    <i class="fas fa-pencil-alt"></i> Add
+                                </button>
+                            </td>
+                        </tr>
                             }
                         </tbody>
                     </table>
@@ -177,6 +180,12 @@
         var Fk_EmployeeId = document.getElementById("Fk_EmployeeId").value;
         var Fk_DesginationId = $('#selectDesgination1').val();
 
+        if (fromDate == "") {
+            IsValid = false;
+            document.getElementById("FromDate").className = "form-control text-box single-line is-invalid";
+
+            return IsValid;
+        }
         if (ToDate == "") {
             IsValid = false;
             document.getElementById("ToDate").className = "form-control text-box single-line is-invalid";
@@ -184,12 +193,7 @@
             return IsValid;
         }
 
-        if (fromDate == "") {
-            IsValid = false;
-            document.getElementById("FromDate").className = "form-control text-box single-line is-invalid";
-
-            return IsValid;
-        }
+      
         if (Fk_DesginationId == "") {
             IsValid = false;
             // $('#selectDesgination').className = "form-control text-box single-line is-invalid";

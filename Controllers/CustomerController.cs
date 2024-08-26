@@ -41,6 +41,7 @@ namespace WOPHRMSystem.Controllers
                 LegalStatusMasterLists = new SelectList(legalStatusMasterServices.GetAll(), "Id", "CodeAndNarration"),
                 GradeMasterLists = new SelectList(gradeMasterServices.GetAll(), "Id", "CodeAndNarration"),
                 MangerLists = new SelectList(employee.GetAllIsManager(), "Id", "Name"),
+                IsActive = true
             };
             return View(model);
         }

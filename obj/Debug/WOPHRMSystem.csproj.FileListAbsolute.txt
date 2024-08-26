@@ -209,7 +209,6 @@ E:\Devop Project\SWIS Software\Freelancer Project\Second Project\WOPHRMSystem\bi
 E:\Devop Project\SWIS Software\Freelancer Project\Second Project\WOPHRMSystem\bin\System.Web.WebPages.xml
 E:\Devop Project\SWIS Software\Freelancer Project\Second Project\WOPHRMSystem\bin\System.Web.WebPages.Deployment.xml
 E:\Devop Project\SWIS Software\Freelancer Project\Second Project\WOPHRMSystem\bin\System.Web.WebPages.Razor.xml
-E:\Devop Project\SWIS Software\Freelancer Project\Second Project\WOPHRMSystem\bin\Newtonsoft.Json.xml
 E:\Devop Project\SWIS Software\Freelancer Project\Second Project\WOPHRMSystem\bin\Antlr3.Runtime.pdb
 E:\Devop Project\SWIS Software\Freelancer Project\Second Project\WOPHRMSystem\bin\System.Net.Http.Formatting.xml
 E:\Devop Project\SWIS Software\Freelancer Project\Second Project\WOPHRMSystem\bin\System.Web.Http.xml

@@ -185,6 +185,27 @@ namespace WOPHRMSystem.Services
             }
         }
 
+        public List<EmployeeModel> GetAllJobPrefixCode()
+        {
+            try
+            {
+                var dr = (from a in _context.VW_Employee
+                          orderby a.Id descending
+                          select new EmployeeModel()
+                          {
+                              IsActive = a.IsActive,
+                              IsDelete = a.IsDelete,
+                              JObPrefixCode = a.JObPrefixCode,
+                          }).Where(d => d.IsDelete.Equals(false)).ToList();
+                return dr;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
 
         public List<EmployeeModel> GetAllIsManager()
         {

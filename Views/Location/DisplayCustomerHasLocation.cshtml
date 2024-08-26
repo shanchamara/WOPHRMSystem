@@ -1,0 +1,81 @@
+﻿@model IEnumerable<WOPHRMSystem.Models.LocationModel>
+
+
+<!-- DataTables -->
+<link rel="stylesheet" href="~/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+<link rel="stylesheet" href="~/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+<link rel="stylesheet" href="~/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
+
+<style>
+    .disable-height {
+        height: auto !important;
+    }
+
+    .list-group {
+        max-height: 400px;
+        margin-bottom: 10px;
+        overflow-x: hidden;
+        -webkit-overflow-scrolling: touch;
+    }
+</style>
+@{
+    int Rows = 1;
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+
+            <!-- /.card -->
+            <div class="card">
+                <div class="card-header">
+                <h3 class="card-title">Customer Has Location's </h3>
+                </div>
+                <!-- /.card-header -->
+                <div class="list-group">
+                    <table id="example1" class="table table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th style="display:none;">Id</th> <!-- Hidden Id column -->
+                                <th>Code</th>
+                                <th>CustomerName</th>
+                                <th>Location Name</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var s in Model)
+                            {
+                                <tr>
+                                    <td style="display:none;">@s.Id</td> <!-- Hidden Id column -->
+                                    <td>@s.Code</td>
+                                    <td>@s.CustomerName</td>
+                                    <td>@s.Narration</td>
+                                    <td>
+                                        @if (s.IsActive)
+                                        {
+                                            <span class="badge bg-primary">Active</span>
+                                        }
+                                        else
+                                        {
+                                            <span class="badge bg-danger">Not Active</span>
+                                        }
+                                    </td>
+
+
+                                </tr>
+                                Rows++;
+                            }
+                        </tbody>
+                    </table>
+                </div>
+                <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+        </div>
+        <!-- /.col -->
+    </div>
+    <!-- /.row -->
+</div>
+
+

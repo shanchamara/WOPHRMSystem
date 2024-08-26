@@ -37,6 +37,7 @@ namespace WOPHRMSystem.Controllers
                 Companylist = new SelectList(companyServices.GetAll(), "Id", "Name"),
                 CustomerList = new SelectList(customer.GetAll(), "Id", "Name"),
                 AccountList = new SelectList(accountServices.GetAll(), "Id", "Name"),
+                IsActive = true
             };
             return View(model);
         }
