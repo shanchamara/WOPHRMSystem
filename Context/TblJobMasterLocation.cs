@@ -25,8 +25,6 @@ namespace WOPHRMSystem.Context
         public Nullable<System.DateTime> Edit_Date { get; set; }
         public string Delete_By { get; set; }
         public Nullable<System.DateTime> Delete_Date { get; set; }
-        public Nullable<System.DateTime> FromDate { get; set; }
-        public Nullable<System.DateTime> ToDate { get; set; }
     
         public virtual TblJobMaster TblJobMaster { get; set; }
         public virtual TblLocation TblLocation { get; set; }

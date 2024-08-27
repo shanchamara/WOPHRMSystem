@@ -15,5 +15,7 @@ namespace WOPHRMSystem.Models
         public bool IsDelete { get; set; }
         public string CodeAndNarration { get; set; }
         public SelectList CustomerLists { get; set; }
+        public Nullable<System.DateTime> FromDate { get; set; }
+        public Nullable<System.DateTime> ToDate { get; set; }
     }
 }

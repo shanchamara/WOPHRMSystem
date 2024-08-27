@@ -490,8 +490,6 @@
           <Property Name="Edit_Date" Type="datetime2" Precision="7" />
           <Property Name="Delete_By" Type="nvarchar(max)" />
           <Property Name="Delete_Date" Type="datetime2" Precision="7" />
-          <Property Name="FromDate" Type="datetime2" Precision="7" />
-          <Property Name="ToDate" Type="datetime2" Precision="7" />
         </EntityType>
         <EntityType Name="TblJobMasterLocationTemp">
           <Key>
@@ -502,8 +500,6 @@
           <Property Name="Code" Type="nvarchar(max)" />
           <Property Name="Narration" Type="nvarchar(max)" />
           <Property Name="CustomerId" Type="int" Nullable="false" />
-          <Property Name="FromDate" Type="datetime2" Precision="7" />
-          <Property Name="ToDate" Type="datetime2" Precision="7" />
           <Property Name="Create_By" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="TblJobMasterPartner">
@@ -580,6 +576,8 @@
           <Property Name="Edit_Date" Type="datetime2" Precision="7" />
           <Property Name="Delete_By" Type="nvarchar(max)" />
           <Property Name="Delete_Date" Type="datetime2" Precision="7" />
+          <Property Name="FromDate" Type="datetime2" Precision="7" />
+          <Property Name="ToDate" Type="datetime2" Precision="7" />
         </EntityType>
         <EntityType Name="TblNatureMaster">
           <Key>
@@ -4207,8 +4205,6 @@ FROM [dbo].[VW_SectorMaster] AS [VW_SectorMaster]</DefiningQuery>
           <Property Name="Edit_Date" Type="DateTime" Precision="7" />
           <Property Name="Delete_By" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Delete_Date" Type="DateTime" Precision="7" />
-          <Property Name="FromDate" Type="DateTime" Precision="7" />
-          <Property Name="ToDate" Type="DateTime" Precision="7" />
           <NavigationProperty Name="TblJobMaster" Relationship="AuditSystemModel.FK_TblJobMasterLocation_TblJobMaster_Fk_JobMasterId" FromRole="TblJobMasterLocation" ToRole="TblJobMaster" />
           <NavigationProperty Name="TblLocation" Relationship="AuditSystemModel.FK_TblJobMasterLocation_TblLocation_FK_LocationId" FromRole="TblJobMasterLocation" ToRole="TblLocation" />
         </EntityType>
@@ -4221,8 +4217,6 @@ FROM [dbo].[VW_SectorMaster] AS [VW_SectorMaster]</DefiningQuery>
           <Property Name="Code" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Narration" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="CustomerId" Type="Int32" Nullable="false" />
-          <Property Name="FromDate" Type="DateTime" Precision="7" />
-          <Property Name="ToDate" Type="DateTime" Precision="7" />
           <Property Name="Create_By" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="TblJobMasterPartner">
@@ -4306,6 +4300,8 @@ FROM [dbo].[VW_SectorMaster] AS [VW_SectorMaster]</DefiningQuery>
           <Property Name="Edit_Date" Type="DateTime" Precision="7" />
           <Property Name="Delete_By" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Delete_Date" Type="DateTime" Precision="7" />
+          <Property Name="FromDate" Type="DateTime" Precision="7" />
+          <Property Name="ToDate" Type="DateTime" Precision="7" />
           <NavigationProperty Name="TblCustomer" Relationship="AuditSystemModel.FK_TblLocation_TblCustomers_Fk_CustomerId" FromRole="TblLocation" ToRole="TblCustomer" />
           <NavigationProperty Name="TblJobMasterLocations" Relationship="AuditSystemModel.FK_TblJobMasterLocation_TblLocation_FK_LocationId" FromRole="TblLocation" ToRole="TblJobMasterLocation" />
           <NavigationProperty Name="TblJobTransactions" Relationship="AuditSystemModel.FK_TblJobTransaction_TblLocation_Fk_LocationId" FromRole="TblLocation" ToRole="TblJobTransaction" />
@@ -6680,8 +6676,6 @@ FROM [dbo].[VW_SectorMaster] AS [VW_SectorMaster]</DefiningQuery>
           <EntitySetMapping Name="TblJobMasterLocations">
             <EntityTypeMapping TypeName="AuditSystemModel.TblJobMasterLocation">
               <MappingFragment StoreEntitySet="TblJobMasterLocation">
-                <ScalarProperty Name="ToDate" ColumnName="ToDate" />
-                <ScalarProperty Name="FromDate" ColumnName="FromDate" />
                 <ScalarProperty Name="Delete_Date" ColumnName="Delete_Date" />
                 <ScalarProperty Name="Delete_By" ColumnName="Delete_By" />
                 <ScalarProperty Name="Edit_Date" ColumnName="Edit_Date" />
@@ -6700,8 +6694,6 @@ FROM [dbo].[VW_SectorMaster] AS [VW_SectorMaster]</DefiningQuery>
             <EntityTypeMapping TypeName="AuditSystemModel.TblJobMasterLocationTemp">
               <MappingFragment StoreEntitySet="TblJobMasterLocationTemp">
                 <ScalarProperty Name="Create_By" ColumnName="Create_By" />
-                <ScalarProperty Name="ToDate" ColumnName="ToDate" />
-                <ScalarProperty Name="FromDate" ColumnName="FromDate" />
                 <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
                 <ScalarProperty Name="Narration" ColumnName="Narration" />
                 <ScalarProperty Name="Code" ColumnName="Code" />
@@ -6773,6 +6765,8 @@ FROM [dbo].[VW_SectorMaster] AS [VW_SectorMaster]</DefiningQuery>
           <EntitySetMapping Name="TblLocations">
             <EntityTypeMapping TypeName="AuditSystemModel.TblLocation">
               <MappingFragment StoreEntitySet="TblLocation">
+                <ScalarProperty Name="ToDate" ColumnName="ToDate" />
+                <ScalarProperty Name="FromDate" ColumnName="FromDate" />
                 <ScalarProperty Name="Delete_Date" ColumnName="Delete_Date" />
                 <ScalarProperty Name="Delete_By" ColumnName="Delete_By" />
                 <ScalarProperty Name="Edit_Date" ColumnName="Edit_Date" />

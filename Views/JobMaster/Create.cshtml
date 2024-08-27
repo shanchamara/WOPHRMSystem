@@ -541,8 +541,6 @@
         var IsValidLocation = true;
         var AddLocation = function () {
             var selectElement = document.getElementById("selectlocation").value;
-            var FromDate = document.getElementById("FromDate").value;
-            var ToDate = document.getElementById("ToDate").value;
             var selectCustomerElement = document.getElementById("selectUnit").value;
 
 
@@ -552,18 +550,7 @@
                 document.getElementById("selectlocation").className = "form-control form-control-sm is-invalid";
                 return false;
             }
-            if (FromDate == "") {
-                IsValidLocation = false;
-
-                document.getElementById("FromDate").className = "form-control form-control-sm is-invalid";
-                return false;
-            }
-            if (ToDate == "") {
-                IsValidLocation = false;
-
-                document.getElementById("ToDate").className = "form-control form-control-sm is-invalid";
-                return false;
-            }
+           
 
             if (selectCustomerElement == "") {
                 IsValidLocation = false;
@@ -575,7 +562,7 @@
             $.ajax({
                 type: "Post",
                 url: "/JobMaster/InsertSelectedLocation",
-                data: { locationId: selectElement, customerId: selectCustomerElement, fromDate: FromDate, toDate: ToDate },
+                data: { locationId: selectElement, customerId: selectCustomerElement },
 
                 success: function (result) {
                     IsLocation = true;

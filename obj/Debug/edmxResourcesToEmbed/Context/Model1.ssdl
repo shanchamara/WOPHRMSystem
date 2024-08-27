@@ -485,8 +485,6 @@
     <Property Name="Edit_Date" Type="datetime2" Precision="7" />
     <Property Name="Delete_By" Type="nvarchar(max)" />
     <Property Name="Delete_Date" Type="datetime2" Precision="7" />
-    <Property Name="FromDate" Type="datetime2" Precision="7" />
-    <Property Name="ToDate" Type="datetime2" Precision="7" />
   </EntityType>
   <EntityType Name="TblJobMasterLocationTemp">
     <Key>
@@ -497,8 +495,6 @@
     <Property Name="Code" Type="nvarchar(max)" />
     <Property Name="Narration" Type="nvarchar(max)" />
     <Property Name="CustomerId" Type="int" Nullable="false" />
-    <Property Name="FromDate" Type="datetime2" Precision="7" />
-    <Property Name="ToDate" Type="datetime2" Precision="7" />
     <Property Name="Create_By" Type="nvarchar(max)" />
   </EntityType>
   <EntityType Name="TblJobMasterPartner">
@@ -575,6 +571,8 @@
     <Property Name="Edit_Date" Type="datetime2" Precision="7" />
     <Property Name="Delete_By" Type="nvarchar(max)" />
     <Property Name="Delete_Date" Type="datetime2" Precision="7" />
+    <Property Name="FromDate" Type="datetime2" Precision="7" />
+    <Property Name="ToDate" Type="datetime2" Precision="7" />
   </EntityType>
   <EntityType Name="TblNatureMaster">
     <Key>

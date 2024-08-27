@@ -499,8 +499,6 @@
     <EntitySetMapping Name="TblJobMasterLocations">
       <EntityTypeMapping TypeName="AuditSystemModel.TblJobMasterLocation">
         <MappingFragment StoreEntitySet="TblJobMasterLocation">
-          <ScalarProperty Name="ToDate" ColumnName="ToDate" />
-          <ScalarProperty Name="FromDate" ColumnName="FromDate" />
           <ScalarProperty Name="Delete_Date" ColumnName="Delete_Date" />
           <ScalarProperty Name="Delete_By" ColumnName="Delete_By" />
           <ScalarProperty Name="Edit_Date" ColumnName="Edit_Date" />
@@ -519,8 +517,6 @@
       <EntityTypeMapping TypeName="AuditSystemModel.TblJobMasterLocationTemp">
         <MappingFragment StoreEntitySet="TblJobMasterLocationTemp">
           <ScalarProperty Name="Create_By" ColumnName="Create_By" />
-          <ScalarProperty Name="ToDate" ColumnName="ToDate" />
-          <ScalarProperty Name="FromDate" ColumnName="FromDate" />
           <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
           <ScalarProperty Name="Narration" ColumnName="Narration" />
           <ScalarProperty Name="Code" ColumnName="Code" />
@@ -592,6 +588,8 @@
     <EntitySetMapping Name="TblLocations">
       <EntityTypeMapping TypeName="AuditSystemModel.TblLocation">
         <MappingFragment StoreEntitySet="TblLocation">
+          <ScalarProperty Name="ToDate" ColumnName="ToDate" />
+          <ScalarProperty Name="FromDate" ColumnName="FromDate" />
           <ScalarProperty Name="Delete_Date" ColumnName="Delete_Date" />
           <ScalarProperty Name="Delete_By" ColumnName="Delete_By" />
           <ScalarProperty Name="Edit_Date" ColumnName="Edit_Date" />

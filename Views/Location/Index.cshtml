@@ -89,6 +89,8 @@
                                         <th>Code</th>
                                         <th>CustomerName</th>
                                         <th>Location Name</th>
+                                        <th>From Date</th>
+                                        <th>To Date</th>
                                         <th>Status</th>
                                         <th>Action</th>
                                     </tr>
@@ -101,6 +103,8 @@
                                             <td>@s.Code</td>
                                             <td>@s.CustomerName</td>
                                             <td>@s.Narration</td>
+                                            <td>@s.FromDate.Value.ToShortDateString()</td>
+                                            <td>@s.ToDate.Value.ToShortDateString()</td>
                                             <td>
                                                 @if (s.IsActive)
                                                 {

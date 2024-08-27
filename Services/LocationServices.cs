@@ -68,6 +68,8 @@ namespace WOPHRMSystem.Services
                 dbobj.Code = obj.Code;
                 dbobj.Fk_CustomerId = obj.Fk_CustomerId;
                 dbobj.Rate = obj.Rate;
+                dbobj.ToDate = obj.ToDate;
+                dbobj.FromDate = obj.FromDate;
                 dbobj.Edit_By = obj.Edit_By;
                 dbobj.IsActive = obj.IsActive;
                 dbobj.Edit_Date = new CommonResources().LocalDatetime().Date;
@@ -135,6 +137,8 @@ namespace WOPHRMSystem.Services
                               Rate = a.Rate,
                               CustomerName = c.Name,
                               IsDelete = a.IsDelete,
+                              FromDate = a.FromDate,
+                              ToDate = a.ToDate,
                           }).Where(d => d.IsDelete.Equals(false)).ToList();
                 return dr;
             }
@@ -162,6 +166,8 @@ namespace WOPHRMSystem.Services
                               Rate = a.Rate,
                               CustomerName = c.Name,
                               IsDelete = a.IsDelete,
+                              FromDate = a.FromDate,
+                              ToDate = a.ToDate,
                           }).Where(d => d.IsDelete.Equals(false) && d.Fk_CustomerId.Equals(id)).ToList();
                 return dr;
             }

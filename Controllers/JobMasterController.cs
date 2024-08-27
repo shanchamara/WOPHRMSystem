@@ -310,7 +310,7 @@ namespace WOPHRMSystem.Controllers
 
 
         [HttpPost]
-        public ActionResult InsertSelectedLocation(int locationId, int customerId, string toDate, string fromDate)
+        public ActionResult InsertSelectedLocation(int locationId, int customerId)
         {
             try
             {
@@ -321,8 +321,6 @@ namespace WOPHRMSystem.Controllers
                         Create_By = "User",
                         FK_LocationId = locationId,
                         CustomerId = customerId,
-                        FromDate = Convert.ToDateTime(fromDate),
-                        ToDate = Convert.ToDateTime(toDate),
                     };
 
                     return Json(jobMasterLocationTemp.Insert(tbl));

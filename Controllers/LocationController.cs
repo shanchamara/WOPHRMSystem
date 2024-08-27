@@ -47,6 +47,8 @@ namespace WOPHRMSystem.Controllers
                         tbl.Rate = masterModel.Rate;
                         tbl.Fk_CustomerId = masterModel.Fk_CustomerId;
                         tbl.Create_Date = new CommonResources().LocalDatetime().Date;
+                        tbl.FromDate = masterModel.FromDate;
+                        tbl.ToDate = masterModel.ToDate;
                     };
 
                     return Json(_ClientService.Insert(tbl));
@@ -81,6 +83,8 @@ namespace WOPHRMSystem.Controllers
                 CustomerLists = new SelectList(_ClientService2.GetAll(), "Id", "Name"),
                 Fk_CustomerId = dt.Fk_CustomerId,
                 Rate = dt.Rate,
+                ToDate = dt.ToDate,
+                FromDate = dt.FromDate,
             };
             return View(model);
         }
@@ -101,6 +105,8 @@ namespace WOPHRMSystem.Controllers
                         tbl.IsActive = masterModel.IsActive;
                         tbl.Fk_CustomerId = masterModel.Fk_CustomerId;
                         tbl.Rate = masterModel.Rate;
+                        tbl.ToDate = masterModel.ToDate;
+                        tbl.FromDate = masterModel.FromDate;
                     };
 
                     return Json(_ClientService.Update(tbl));

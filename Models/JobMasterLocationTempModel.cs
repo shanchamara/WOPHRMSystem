@@ -14,8 +14,6 @@ namespace WOPHRMSystem.Models
         public string Create_By { get; set; }
         public int CustomerId { get; set; }
 
-        public Nullable<System.DateTime> FromDate { get; set; }
-        public Nullable<System.DateTime> ToDate { get; set; }
     }
 
     public class ListLocationCustomerWise
