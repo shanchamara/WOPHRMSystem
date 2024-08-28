@@ -1,5 +1,7 @@
 ﻿using DocumentFormat.OpenXml.EMMA;
 using System;
+using System.Collections.Generic;
+using System.Web.Http;
 using System.Web.Mvc;
 using WOPHRMSystem.Context;
 using WOPHRMSystem.Helps;
@@ -13,14 +15,14 @@ namespace WOPHRMSystem.Controllers
         readonly LocationServices _ClientService = new LocationServices();
         readonly CustomerServices _ClientService2 = new CustomerServices();
 
-        [HttpGet]
+        [System.Web.Mvc.HttpGet]
         public ActionResult Index()
         {
             var dt = _ClientService.GetAll();
             return View(dt);
         }
 
-        [HttpGet]
+        [System.Web.Mvc.HttpGet]
         public ActionResult Create()
         {
             var model = new LocationModel()
@@ -31,27 +33,32 @@ namespace WOPHRMSystem.Controllers
             return View(model);
         }
 
-        [HttpPost]
-        public ActionResult Create(LocationModel masterModel)
+       
+       
+
+
+
+        [System.Web.Mvc.HttpPost]
+        public ActionResult Create([FromBody] CombinedModel combinedModel)
         {
             try
             {
                 if (ModelState.IsValid)
                 {
-                    TblLocation tbl = new TblLocation();
-                    {
-                        tbl.Narration = masterModel.Narration;
-                        tbl.Code = masterModel.Code;
-                        tbl.Create_By = "User";
-                        tbl.IsActive = masterModel.IsActive;
-                        tbl.Rate = masterModel.Rate;
-                        tbl.Fk_CustomerId = masterModel.Fk_CustomerId;
-                        tbl.Create_Date = new CommonResources().LocalDatetime().Date;
-                        tbl.FromDate = masterModel.FromDate;
-                        tbl.ToDate = masterModel.ToDate;
-                    };
+                    //TblLocation tbl = new TblLocation();
+                    //{
+                    //    tbl.Narration = masterModel.Narration;
+                    //    tbl.Code = masterModel.Code;
+                    //    tbl.Create_By = "User";
+                    //    tbl.IsActive = masterModel.IsActive;
+                    //    tbl.Rate = masterModel.Rate;
+                    //    tbl.Fk_CustomerId = masterModel.Fk_CustomerId;
+                    //    tbl.Create_Date = new CommonResources().LocalDatetime().Date;
+                    //    tbl.FromDate = masterModel.FromDate;
+                    //    tbl.ToDate = masterModel.ToDate;
+                    //};
 
-                    return Json(_ClientService.Insert(tbl));
+                    return Json(_ClientService.Insert(combinedModel));
                 }
             }
             catch (Exception)
@@ -70,7 +77,7 @@ namespace WOPHRMSystem.Controllers
         }
 
 
-        [HttpGet]
+        [System.Web.Mvc.HttpGet]
         public ActionResult Edit(int Id)
         {
             var dt = _ClientService.GetById(Id);
@@ -89,27 +96,27 @@ namespace WOPHRMSystem.Controllers
             return View(model);
         }
 
-        [HttpPost]
-        public ActionResult Edit(LocationModel masterModel)
+        [System.Web.Mvc.HttpPost]
+        public ActionResult Edit([FromBody] CombinedModel combinedModel)
         {
             try
             {
                 if (ModelState.IsValid)
                 {
-                    TblLocation tbl = new TblLocation();
-                    {
-                        tbl.Narration = masterModel.Narration;
-                        tbl.Code = masterModel.Code;
-                        tbl.Edit_By = "User";
-                        tbl.Id = masterModel.Id;
-                        tbl.IsActive = masterModel.IsActive;
-                        tbl.Fk_CustomerId = masterModel.Fk_CustomerId;
-                        tbl.Rate = masterModel.Rate;
-                        tbl.ToDate = masterModel.ToDate;
-                        tbl.FromDate = masterModel.FromDate;
-                    };
+                    //TblLocation tbl = new TblLocation();
+                    //{
+                    //    tbl.Narration = masterModel.Narration;
+                    //    tbl.Code = masterModel.Code;
+                    //    tbl.Edit_By = "User";
+                    //    tbl.Id = masterModel.Id;
+                    //    tbl.IsActive = masterModel.IsActive;
+                    //    tbl.Fk_CustomerId = masterModel.Fk_CustomerId;
+                    //    tbl.Rate = masterModel.Rate;
+                    //    tbl.ToDate = masterModel.ToDate;
+                    //    tbl.FromDate = masterModel.FromDate;
+                    //};
 
-                    return Json(_ClientService.Update(tbl));
+                    return Json(_ClientService.Update(combinedModel));
                 }
             }
             catch (Exception)
@@ -127,7 +134,7 @@ namespace WOPHRMSystem.Controllers
             });
         }
 
-        [HttpDelete]
+        [System.Web.Mvc.HttpDelete]
         public ActionResult Delete(int ID)
         {
             try
@@ -150,13 +157,25 @@ namespace WOPHRMSystem.Controllers
 
         }
 
-        [HttpGet]
+        [System.Web.Mvc.HttpGet]
         public ActionResult DisplayCustomerHasLocation(int id)
         {
             var dt = _ClientService.GetAllLocationByCustomer(id);
-            return PartialView("DisplayCustomerHasLocation", dt);
+            var model = new ListLocationDetails()
+            {
+                LocationModels = dt,
+            };
+            return PartialView("DisplayCustomerHasLocation", model);
         }
-
-
+        [System.Web.Mvc.HttpGet]
+        public ActionResult DisplayCustomerHasLocationForEdit(int id)
+        {
+            var dt = _ClientService.GetAllLocationByCustomer(id);
+            var model = new ListLocationDetails()
+            {
+                LocationModels = dt,
+            };
+            return PartialView("DisplayCustomerHasLocationForEdit", model);
+        }
     }
 }

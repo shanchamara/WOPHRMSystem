@@ -2763,6 +2763,7 @@
     <Content Include="Views\Report\ReceiptReportView.cshtml" />
     <Content Include="Views\Employee\ViewEmployeeHourlyRateTemperley.cshtml" />
     <Content Include="Views\Location\DisplayCustomerHasLocation.cshtml" />
+    <Content Include="Views\Location\DisplayCustomerHasLocationForEdit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
