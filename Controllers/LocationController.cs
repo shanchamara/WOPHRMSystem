@@ -33,8 +33,8 @@ namespace WOPHRMSystem.Controllers
             return View(model);
         }
 
-       
-       
+
+
 
 
 
@@ -43,23 +43,19 @@ namespace WOPHRMSystem.Controllers
         {
             try
             {
-                if (ModelState.IsValid)
-                {
-                    //TblLocation tbl = new TblLocation();
-                    //{
-                    //    tbl.Narration = masterModel.Narration;
-                    //    tbl.Code = masterModel.Code;
-                    //    tbl.Create_By = "User";
-                    //    tbl.IsActive = masterModel.IsActive;
-                    //    tbl.Rate = masterModel.Rate;
-                    //    tbl.Fk_CustomerId = masterModel.Fk_CustomerId;
-                    //    tbl.Create_Date = new CommonResources().LocalDatetime().Date;
-                    //    tbl.FromDate = masterModel.FromDate;
-                    //    tbl.ToDate = masterModel.ToDate;
-                    //};
 
-                    return Json(_ClientService.Insert(combinedModel));
-                }
+                TblLocation tbl = new TblLocation()
+                {
+                    Fk_CustomerId = combinedModel.MasterModel.Fk_CustomerId,
+                    Code = combinedModel.MasterModel.Code,
+                    Narration = combinedModel.MasterModel.Narration,
+                    Create_By = "User",
+                    Create_Date = new CommonResources().LocalDatetime().Date,
+                    IsActive = true
+                };
+
+                return Json(_ClientService.Insert(tbl, combinedModel));
+
             }
             catch (Exception)
             {
@@ -69,11 +65,7 @@ namespace WOPHRMSystem.Controllers
                     Text = $"There was a error with retrieving data. Please try again",
                 });
             }
-            return Json(new MessageModel()
-            {
-                Status = "warning",
-                Text = $"There was a error with retrieving data. Please try again",
-            });
+
         }
 
 
@@ -89,9 +81,7 @@ namespace WOPHRMSystem.Controllers
                 Narration = dt.Narration,
                 CustomerLists = new SelectList(_ClientService2.GetAll(), "Id", "Name"),
                 Fk_CustomerId = dt.Fk_CustomerId,
-                Rate = dt.Rate,
-                ToDate = dt.ToDate,
-                FromDate = dt.FromDate,
+
             };
             return View(model);
         }
@@ -103,20 +93,17 @@ namespace WOPHRMSystem.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    //TblLocation tbl = new TblLocation();
-                    //{
-                    //    tbl.Narration = masterModel.Narration;
-                    //    tbl.Code = masterModel.Code;
-                    //    tbl.Edit_By = "User";
-                    //    tbl.Id = masterModel.Id;
-                    //    tbl.IsActive = masterModel.IsActive;
-                    //    tbl.Fk_CustomerId = masterModel.Fk_CustomerId;
-                    //    tbl.Rate = masterModel.Rate;
-                    //    tbl.ToDate = masterModel.ToDate;
-                    //    tbl.FromDate = masterModel.FromDate;
-                    //};
-
-                    return Json(_ClientService.Update(combinedModel));
+                    TblLocation tbl = new TblLocation()
+                    {
+                        Fk_CustomerId = combinedModel.MasterModel.Fk_CustomerId,
+                        Code = combinedModel.MasterModel.Code,
+                        Narration = combinedModel.MasterModel.Narration,
+                        Create_By = "User",
+                        Create_Date = new CommonResources().LocalDatetime().Date,
+                        Id = combinedModel.MasterModel.Id,
+                        IsActive = combinedModel.MasterModel.IsActive,
+                    };
+                    return Json(_ClientService.Update(tbl, combinedModel));
                 }
             }
             catch (Exception)
@@ -158,24 +145,15 @@ namespace WOPHRMSystem.Controllers
         }
 
         [System.Web.Mvc.HttpGet]
-        public ActionResult DisplayCustomerHasLocation(int id)
+        public ActionResult DisplayCustomerHasLocation(int id, int locid)
         {
-            var dt = _ClientService.GetAllLocationByCustomer(id);
+            var dt = _ClientService.GetAllLocationByCustomer(id, locid);
             var model = new ListLocationDetails()
             {
                 LocationModels = dt,
             };
             return PartialView("DisplayCustomerHasLocation", model);
         }
-        [System.Web.Mvc.HttpGet]
-        public ActionResult DisplayCustomerHasLocationForEdit(int id)
-        {
-            var dt = _ClientService.GetAllLocationByCustomer(id);
-            var model = new ListLocationDetails()
-            {
-                LocationModels = dt,
-            };
-            return PartialView("DisplayCustomerHasLocationForEdit", model);
-        }
+
     }
 }

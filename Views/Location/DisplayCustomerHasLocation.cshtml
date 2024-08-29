@@ -53,12 +53,9 @@
                         <thead>
                             <tr>
                                 <th style="display:none;">Id</th> <!-- Hidden Id column -->
-                                <th>Code</th>
-                                <th>CustomerName</th>
-                                <th>Location Name</th>
-                                <th>From Date</th>
-                                <th>To Date</th>
-                                <th>Rate</th>
+                                <th colspan="1">From Date</th>
+                                <th colspan="1">To Date</th>
+                                <th colspan="2">Rate</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -67,11 +64,8 @@
                             {
                                 <tr>
                                     <td style="display:none;">@s.Id</td> <!-- Hidden Id column -->
-                                    <td>@s.Code</td>
-                                    <td>@s.CustomerName</td>
-                                    <td>@s.Narration</td>
-                                    <td>@s.FromDate.Value.ToShortDateString()</td>
-                                    <td>@s.ToDate.Value.ToShortDateString()</td>
+                                    <td>@s.FromDate</td>
+                                    <td>@s.ToDate</td>
                                     <td>@s.Rate</td>
 
 
@@ -84,16 +78,7 @@
                                 @Html.HiddenFor(model => model.Id)
                                 <tr>
                                     <td style="display:none;"></td> <!-- Hidden Id column -->
-                                    <td colspan="2">
-                                        <label for="exampleInputEmail1">Location Name</label>
-                                        @Html.DropDownListFor(model => model.CodeAndNarration, new SelectList(new List<Object>
-                                        {
 
-                                        new { value = "" , text = "Select "  }
-
-                                        }, "value", "text", "Select "), htmlAttributes: new { @class = "form-control form-control-sm", id = "LocationList" })
-
-                                    </td>
 
                                     <td colspan="1">
                                         <label for="exampleInputEmail1">From Date</label>
@@ -137,45 +122,17 @@
 
 
      var Code = JSON.parse(localStorage.getItem('CustomerLocationList')) || [];
-     var ForDropdown = JSON.parse(localStorage.getItem('CustomerLocationListForDropdown')) || [];
      var json = @Html.Raw(Json.Encode(@Model.LocationModels));
      Code = [...Code, ...json];
      localStorage.setItem('CustomerLocationList', JSON.stringify(Code));
-     localStorage.setItem('CustomerLocationListForDropdown', JSON.stringify(Code));
-
-    debugger
-
-    var listdata = JSON.parse(localStorage.getItem('CustomerLocationListForDropdown')) || [];
-    var dropdown = $('#LocationList');
-    dropdown.empty();
-    dropdown.append('<option value="">Select</option>');
-    $.each(listdata, function (index, item) {
-        dropdown.append('<option value="' + item.Code + ' ' + item.Narration + '">' + item.Code +' '+item.Narration + '</option>');
-    });
-
-    var TakeCode = document.getElementById("Code").value;
-    var value = document.getElementById("Narration").value;
-
-    var dropdown = document.getElementById("LocationList");
-    if (TakeCode != '' && value != '') {
 
 
-        // Create a new option element
-        var option = document.createElement("option");
-
-        // Set the value and text content of the option
-        option.value = TakeCode + ' ' + value;
-        option.text = TakeCode + ' ' + value;
-        dropdown.appendChild(option);
-    }
     function handleDateChangelocation() {
         // Your logic here
         debugger
         var ToDate = document.getElementById("ToDate").value;
         var fromDate = document.getElementById("FromDate").value;
         var Rate = document.getElementById("Rate").value;
-        var Fk_DesginationId = $('#LocationList').val();
-
 
 
         if (fromDate != "") {
@@ -189,13 +146,7 @@
 
 
         }
-        if (Fk_DesginationId != "") {
-            var dropdown = document.getElementById("LocationList");
-            setTimeout(function () {
-                dropdown.classlist.remove("is-invalid");
-            }, 10);
 
-        }
         if (Rate != "") {
             document.getElementById("Rate").className = "form-control text-box single-line";
 
@@ -212,18 +163,8 @@
         var ToDate = document.getElementById("ToDate").value;
         var fromDate = document.getElementById("FromDate").value;
         var Rate = document.getElementById("Rate").value;
-        var locationName = $('#LocationList').val();
 
 
-        if (locationName == "") {
-            IsValid = false;
-            // $('#selectDesgination').className = "form-control text-box single-line is-invalid";
-            var dropdown = document.getElementById("LocationList");
-            setTimeout(function () {
-                dropdown.classList.add("is-invalid");
-            }, 10);
-            return IsValid;
-        }
         if (fromDate == "") {
             IsValid = false;
             document.getElementById("FromDate").className = "form-control text-box single-line is-invalid";
@@ -247,14 +188,6 @@
         }
 
 
-        debugger
-        var selectElement = document.getElementById("selectCustomer");
-        var selectedText = selectElement.options[selectElement.selectedIndex].text;
-
-
-        var NarrationValue = document.getElementById("Narration").value;
-        var CodeValue = document.getElementById("Code").value;
-
         // Convert the date string to a Date object
         const todate = new Date(ToDate);
         const formdate = new Date(fromDate);
@@ -263,59 +196,24 @@
         const todatetimestamp = todate.getTime();
         const fromdatetimestamp = formdate.getTime();
 
+
+        var CustomerId = document.getElementById("selectCustomer").value;
+
+
         var rates = JSON.parse(localStorage.getItem('CustomerLocationList')) || [];
-        var randomId = Math.floor(Math.random() * 10000) + 1;
-        //rates.push({ toDate: ToDate, fromDate: fromDate, rate: Rate, LocationName: locationName });
+
         var rateObject = {
-            Code: CodeValue,
-            CodeAndNarration: locationName,
-            CustomerLists: null,
-            CustomerName: selectedText,
-            Fk_CustomerId: 6,
-            FromDate: fromdatetimestamp,
-            Id: randomId,
-            IsActive: true,
-            IsDelete: true,
-            Narration: NarrationValue,
+            id : 0,
+            Fk_CustomerId: CustomerId,
+            FromDate: fromDate,
             Rate: Rate,
-            ToDate: todatetimestamp
+            ToDate: ToDate
         };
 
         rates.push(rateObject);
 
         localStorage.setItem('CustomerLocationList', JSON.stringify(rates));
         displayRates();
-
-        var listdata = JSON.parse(localStorage.getItem('CustomerLocationListForDropdown')) || [];
-        var dropdown = $('#LocationList');
-        var addedValues = new Set();
-
-        dropdown.empty();
-        dropdown.append('<option value="">Select</option>');
-
-        $.each(listdata, function (index, item) {
-            var value = item.Code + ' ' + item.Narration;
-
-            if (!addedValues.has(value)) {
-                dropdown.append('<option value="' + value + '">' + value + '</option>');
-                addedValues.add(value);
-            }
-        });
-
-
-
-        var TakeCode = document.getElementById("Code").value;
-        var value = document.getElementById("Narration").value;
-
-        var dropdown = document.getElementById("LocationList");
-
-        // Create a new option element
-        var option = document.createElement("option");
-
-        // Set the value and text content of the option
-        option.value = TakeCode + ' ' + value;
-        option.text = TakeCode + ' ' + value;
-        dropdown.appendChild(option);
     }
 
     // Function to convert the .NET JSON date format to MM/DD/YYYY
@@ -357,21 +255,13 @@
      rates.forEach(function (rate, index) {
          var row = `<tr>
                 <td style="display:none;">${rate.Id}</td> <!-- Hidden Id column -->
-                <td>${rate.Code}</td>
-                <td>${rate.CustomerName}</td>
-                <td>${rate.Narration}</td>
-                <td>${formatDate(rate.FromDate)}</td>
-                <td>${formatDate(rate.ToDate)}</td>
-                <td>${rate.Rate}</td>
+                <td>${(rate.FromDate)}</td>
+                <td>${(rate.ToDate)}</td>
+                <td colspan="2">${rate.Rate}</td>
 
 
 
-                  ${rate.IsDelete ? `
-                    <td class="project-actions text-right">
-                        <a class="btn btn-danger btn-sm" onclick="deleteRate(${index})">
-                            <i class="fas fa-trash"></i> Remove
-                        </a>
-                    </td>` : ''}
+
              </tr>
 
 
@@ -385,16 +275,7 @@
        @Html.HiddenFor(model => model.Id)
        <tr>
            <td style="display:none;"></td> <!-- Hidden Id column -->
-           <td colspan="2">
-               <label for="exampleInputEmail1">Location Name</label>
-               @Html.DropDownListFor(model => model.CodeAndNarration, new SelectList(new List<Object>
-               {
 
-               new { value = "" , text = "Select "  }
-
-               }, "value", "text", "Select "), htmlAttributes: new { @class = "form-control form-control-sm", id = "LocationList" })
-
-           </td>
 
            <td colspan="1">
                <label for="exampleInputEmail1">From Date</label>
@@ -432,35 +313,6 @@
         displayRates();
 
 
-        var dropdown = $('#LocationList');
-        var addedValues = new Set();
-
-        dropdown.empty();
-        dropdown.append('<option value="">Select</option>');
-
-        $.each(listdata, function (index, item) {
-            var value = item.Code + ' ' + item.Narration;
-
-            if (!addedValues.has(value)) {
-                dropdown.append('<option value="' + value + '">' + value + '</option>');
-                addedValues.add(value);
-            }
-        });
-
-
-
-        var TakeCode = document.getElementById("Code").value;
-        var value = document.getElementById("Narration").value;
-
-        var dropdown = document.getElementById("LocationList");
-
-        // Create a new option element
-        var option = document.createElement("option");
-
-        // Set the value and text content of the option
-        option.value = TakeCode + ' ' + value;
-        option.text = TakeCode + ' ' + value;
-        dropdown.appendChild(option);
     }
 
 

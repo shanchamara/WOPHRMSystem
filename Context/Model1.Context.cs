@@ -56,6 +56,7 @@ namespace WOPHRMSystem.Context
         public DbSet<TblJobTransaction> TblJobTransactions { get; set; }
         public DbSet<TblLegalStatusMaster> TblLegalStatusMasters { get; set; }
         public DbSet<TblLocation> TblLocations { get; set; }
+        public DbSet<TblLocationRate> TblLocationRates { get; set; }
         public DbSet<TblNatureMaster> TblNatureMasters { get; set; }
         public DbSet<TblNonEffectiveEmployee> TblNonEffectiveEmployees { get; set; }
         public DbSet<TblOpeningBalance> TblOpeningBalances { get; set; }

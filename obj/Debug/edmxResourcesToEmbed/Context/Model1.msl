@@ -588,8 +588,6 @@
     <EntitySetMapping Name="TblLocations">
       <EntityTypeMapping TypeName="AuditSystemModel.TblLocation">
         <MappingFragment StoreEntitySet="TblLocation">
-          <ScalarProperty Name="ToDate" ColumnName="ToDate" />
-          <ScalarProperty Name="FromDate" ColumnName="FromDate" />
           <ScalarProperty Name="Delete_Date" ColumnName="Delete_Date" />
           <ScalarProperty Name="Delete_By" ColumnName="Delete_By" />
           <ScalarProperty Name="Edit_Date" ColumnName="Edit_Date" />
@@ -599,9 +597,19 @@
           <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
           <ScalarProperty Name="IsActive" ColumnName="IsActive" />
           <ScalarProperty Name="Fk_CustomerId" ColumnName="Fk_CustomerId" />
-          <ScalarProperty Name="Rate" ColumnName="Rate" />
           <ScalarProperty Name="Narration" ColumnName="Narration" />
           <ScalarProperty Name="Code" ColumnName="Code" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TblLocationRates">
+      <EntityTypeMapping TypeName="AuditSystemModel.TblLocationRate">
+        <MappingFragment StoreEntitySet="TblLocationRates">
+          <ScalarProperty Name="Rate" ColumnName="Rate" />
+          <ScalarProperty Name="ToDate" ColumnName="ToDate" />
+          <ScalarProperty Name="FromDate" ColumnName="FromDate" />
+          <ScalarProperty Name="Fk_LocatonId" ColumnName="Fk_LocatonId" />
           <ScalarProperty Name="Id" ColumnName="Id" />
         </MappingFragment>
       </EntityTypeMapping>

@@ -19,53 +19,49 @@ namespace WOPHRMSystem.Services
             return _context.TblLocations.SingleOrDefault(d => d.Code.Equals(code));
         }
 
-        public MessageModel Insert(CombinedModel model)
+        public MessageModel Insert(TblLocation tblLocation, CombinedModel model)
         {
 
             try
             {
-                foreach (var item in model.Rates)
+                var data = GetByName(model.MasterModel.Code);
+                if (data == null)
                 {
-                    var data = GetByName(item.Code);
-                    if (data == null)
+                    _context.TblLocations.Add(tblLocation);
+                    _context.SaveChanges();
+
+
+                    foreach (var item in model.Rates)
                     {
-                        string myStringfrom = item.FromDate;
-                        long Fromtimestamp = long.Parse(myStringfrom);
-
-                        string myStringTo = item.ToDate;
-                        long Totimestamp = long.Parse(myStringTo);
-
-                        DateTime FromdateTime = DateTimeOffset.FromUnixTimeMilliseconds(Fromtimestamp).UtcDateTime;
-                        DateTime TodateTime = DateTimeOffset.FromUnixTimeMilliseconds(Totimestamp).UtcDateTime;
-                        TblLocation tbl = new TblLocation
+                       
+                        TblLocationRate tbl = new TblLocationRate
                         {
 
                             Rate = item.Rate,
-                            FromDate = FromdateTime,
-                            ToDate = TodateTime,
-                            Fk_CustomerId = item.Fk_CustomerId,
-                            Create_By = "User",
-                            Code = item.Code,
-                            Create_Date = new CommonResources().LocalDatetime().Date,
-                            Narration = item.Narration,
-                            IsActive = true
+                            FromDate = Convert.ToDateTime(item.FromDate),
+                            ToDate = Convert.ToDateTime(item.ToDate),
+                            Fk_LocatonId = tblLocation.Id,
                         };
-                        _context.TblLocations.Add(tbl);
+                        _context.TblLocationRates.Add(tbl);
                         _context.SaveChanges();
+
                     }
-                    else
+
+
+                    return new MessageModel()
                     {
-
-                    }
+                        Status = "success",
+                        Text = $"This Record has been registered",
+                    };
                 }
-                return new MessageModel()
+                else
                 {
-                    Status = "success",
-                    Text = $"This Record has been registered",
-                };
-
-
-
+                    return new MessageModel()
+                    {
+                        Status = "warning",
+                        Text = $"This Record has been already registered",
+                    };
+                }
             }
             catch (Exception)
             {
@@ -83,88 +79,46 @@ namespace WOPHRMSystem.Services
         }
 
 
-        public MessageModel Update(CombinedModel model)
+        public MessageModel Update(TblLocation tbl, CombinedModel model)
         {
             try
             {
+                var dbobj = GetById(tbl.Id);
+                dbobj.Narration = tbl.Narration;
+                dbobj.Code = tbl.Code;
+                dbobj.Edit_By = tbl.Edit_By;
+                dbobj.IsActive = tbl.IsActive;
+                dbobj.Edit_Date = new CommonResources().LocalDatetime().Date;
+
+                _context.SaveChanges();
+
+
                 foreach (var item in model.Rates)
                 {
-                    //
-                    var dbobj = GetById(item.Id);
-                    if (dbobj != null)
+                    var ishave = _context.TblLocationRates.SingleOrDefault(d => d.Id == item.Id);
+                    if (ishave == null)
                     {
-                        dbobj.Narration = item.Narration;
-                        dbobj.Code = item.Code;
-                        dbobj.Fk_CustomerId = item.Fk_CustomerId;
-                        dbobj.Rate = item.Rate;
-                        dbobj.Edit_By = "User";
-                        dbobj.IsActive = item.IsActive;
+                        TblLocationRate tblrate = new TblLocationRate
+                        {
 
+                            Rate = item.Rate,
+                            FromDate = Convert.ToDateTime(item.FromDate),
+                            ToDate = Convert.ToDateTime(item.ToDate),
+                            Fk_LocatonId = tbl.Id,
+                        };
+
+                        _context.TblLocationRates.Add(tblrate);
                         _context.SaveChanges();
                     }
-                    else
-                    {
-                        var data = GetByName(item.Code);
 
-                        if (data != null)
-                        {
-                            string myStringfrom = item.FromDate;
-                            long Fromtimestamp = long.Parse(myStringfrom);
-
-                            string myStringTo = item.ToDate;
-                            long Totimestamp = long.Parse(myStringTo);
-
-                            DateTime FromdateTime = DateTimeOffset.FromUnixTimeMilliseconds(Fromtimestamp).UtcDateTime;
-                            DateTime TodateTime = DateTimeOffset.FromUnixTimeMilliseconds(Totimestamp).UtcDateTime;
-
-                            data.Narration = item.Narration;
-                            data.Code = item.Code;
-                            data.Fk_CustomerId = item.Fk_CustomerId;
-                            data.Rate = item.Rate;
-                            data.Edit_By = "User";
-                            data.FromDate = FromdateTime;
-                            data.ToDate = TodateTime;
-                            data.IsActive = item.IsActive;
-
-                            _context.SaveChanges();
-
-                        }
-                        else
-                        {
-                            string myStringfrom = item.FromDate;
-                            long Fromtimestamp = long.Parse(myStringfrom);
-
-                            string myStringTo = item.ToDate;
-                            long Totimestamp = long.Parse(myStringTo);
-
-                            DateTime FromdateTime = DateTimeOffset.FromUnixTimeMilliseconds(Fromtimestamp).UtcDateTime;
-                            DateTime TodateTime = DateTimeOffset.FromUnixTimeMilliseconds(Totimestamp).UtcDateTime;
-                            TblLocation tbl = new TblLocation
-                            {
-
-                                Rate = item.Rate,
-                                FromDate = FromdateTime,
-                                ToDate = TodateTime,
-                                Fk_CustomerId = item.Fk_CustomerId,
-                                Create_By = "User",
-                                Code = item.Code,
-                                Create_Date = new CommonResources().LocalDatetime().Date,
-                                Narration = item.Narration,
-                                IsActive = true
-                            };
-                            _context.TblLocations.Add(tbl);
-                            _context.SaveChanges();
-                        }
-                    }
                 }
+
+
                 return new MessageModel()
                 {
                     Status = "success",
                     Text = $"This Record has been Updated",
                 };
-
-
-
             }
             catch (Exception)
             {
@@ -218,11 +172,8 @@ namespace WOPHRMSystem.Services
                               Narration = a.Narration,
                               IsActive = a.IsActive,
                               Fk_CustomerId = a.Fk_CustomerId,
-                              Rate = a.Rate,
                               CustomerName = c.Name,
                               IsDelete = a.IsDelete,
-                              FromDate = a.FromDate,
-                              ToDate = a.ToDate,
                           }).Where(d => d.IsDelete.Equals(false)).ToList();
                 return dr;
             }
@@ -233,27 +184,38 @@ namespace WOPHRMSystem.Services
             }
         }
 
-        public List<LocationModel> GetAllLocationByCustomer(int id)
+        public List<RateModel> GetAllLocationByCustomer(int id, int locid)
         {
             try
             {
-                var dr = (from a in _context.TblLocations
-                          join c in _context.TblCustomers on a.Fk_CustomerId equals c.Id
+                var dr = (from a in _context.TblLocationRates
+                          join c in _context.TblLocations on a.Fk_LocatonId equals c.Id
                           orderby a.Id descending
-                          select new LocationModel()
+                          select new
                           {
-                              Id = a.Id,
-                              Code = a.Code,
-                              Narration = a.Narration,
-                              IsActive = a.IsActive,
-                              Fk_CustomerId = a.Fk_CustomerId,
-                              Rate = a.Rate,
-                              CustomerName = c.Name,
-                              IsDelete = a.IsDelete,
-                              FromDate = a.FromDate,
-                              ToDate = a.ToDate,
-                          }).Where(d => d.IsDelete.Equals(false) && d.Fk_CustomerId.Equals(id)).ToList();
+                              a.Id,
+                              a.Rate,
+                              a.Fk_LocatonId,
+                              c.Fk_CustomerId,
+                              a.ToDate,
+                              a.FromDate
+                          })
+           .Where(d => d.Fk_CustomerId.Equals(id) && d.Fk_LocatonId.Equals(locid))
+           .AsEnumerable()  // Executes the query and brings the data into memory
+           .Select(x => new RateModel()
+           {
+               Id = x.Id,
+               Rate = x.Rate,
+               Fk_LocatonId = x.Fk_LocatonId,
+               Fk_CustomerId = x.Fk_CustomerId,
+               ToDate = x.ToDate.HasValue ? x.ToDate.Value.ToString("yyyy-MM-dd") : "",
+               FromDate = x.FromDate.HasValue ? x.FromDate.Value.ToString("yyyy-MM-dd") : "",
+           })
+           .ToList();
+
                 return dr;
+
+
             }
             catch (Exception)
             {

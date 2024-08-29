@@ -13,7 +13,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Add New Location</h1>
+                    <h1>Edit Location</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
@@ -56,7 +56,7 @@
 
                                 @using (Html.BeginForm("", "", FormMethod.Post, new { role = "form", enctype = "multipart/form-data", id = "quickForm", @autocomplete = "off" }))
                                 {
-                                    @Html.HiddenFor(model => model.Id)
+                                    @Html.HiddenFor(Model => Model.Id)
                                     <div class="card-body">
 
                                         <div class="row">
@@ -66,7 +66,7 @@
                                                     <div class="form-group">
                                                         <label for="exampleInputEmail1">Customer</label>
 
-                                                        @Html.DropDownListFor(model => model.Fk_CustomerId, Model.CustomerLists, "Select", htmlAttributes: new { @class = "form-control", id = "selectCustomer", required = "required" })
+                                                        @Html.DropDownListFor(model => model.Fk_CustomerId, Model.CustomerLists, "Select", htmlAttributes: new { @class = "form-control", id = "selectCustomer", required = "required", @ReadOnly = "ReadOnly" })
 
                                                     </div>
                                                 </div>
@@ -81,7 +81,7 @@
                                                     <div class="form-group">
                                                         <label for="exampleInputEmail1">Code</label>
 
-                                                        @Html.EditorFor(model => model.Code, new { htmlAttributes = new { @class = "form-control", placeholder = "", required = "required", onchange = "TakeCodefunction(this)" } })
+                                                        @Html.EditorFor(model => model.Code, new { htmlAttributes = new { @class = "form-control", placeholder = "", required = "required" } })
 
                                                     </div>
                                                 </div>
@@ -91,7 +91,7 @@
                                                 <div class="mb-4">
                                                     <div class="form-group">
                                                         <label for="basicpill-address-input">Location</label>
-                                                        @Html.EditorFor(model => model.Narration, new { htmlAttributes = new { @class = "form-control", placeholder = "", required = "required", onchange = "TakeNarrationfunction(this)" } })
+                                                        @Html.EditorFor(model => model.Narration, new { htmlAttributes = new { @class = "form-control", placeholder = "", required = "required" } })
 
                                                     </div>
                                                 </div>
@@ -168,24 +168,25 @@
                     var data = $('#quickForm').serialize();
                     debugger;
 
-                    var TakeCode = document.getElementById("Code").value;
-                    var TakeNarration = document.getElementById("Narration").value;
-                    var List = JSON.parse(localStorage.getItem('CustomerLocationList')) || [];
+                   var List = JSON.parse(localStorage.getItem('CustomerLocationList')) || [];
 
-                    if (TakeCode != '' && TakeNarration != '') {
+                    if (List.length > 0) {
+
+                    } else {
                         let hasWarning = false;
 
-                        const hasEmployeesRecord = List.some(record => record.Code === TakeCode && record.Narration === TakeNarration);
-                        debugger;
-                        if (hasEmployeesRecord === false) {
-                            Swal.fire({
+
+                          Swal.fire({
                                 title: 'Warning!',
                                 text: 'please add the date range and rate in the new record.',
                                 icon: 'warning',
                                 confirmButtonText: 'OK'
-                            });
+                          });
+
+
+
                             hasWarning = true;
-                        }
+
 
                         if (hasWarning) {
                             return; // Exit function or prevent further execution
@@ -243,20 +244,14 @@
             });
         });
 
-        window.addEventListener('load', function () {
-            localStorage.clear();
-            var Customerid = parseFloat($('#selectCustomer').val()) || 0;
-            // Get the selected value
-            GetSelectedCustomerHasLocationForEdit(Customerid);
-
-            
-        });
 
         var PostCustomerInsert = function (model) {
 
             var masterModel = {
                 Narration: $("#Narration").val(),
                 Code: $("#Code").val(),
+                Id: $("#Id").val(),
+                IsActive: document.getElementById("exampleCheck1").checked,
                 Fk_CustomerId: document.getElementById("selectCustomer").value,
                 IsActive: document.getElementById("exampleCheck1").checked,
             };
@@ -298,17 +293,26 @@
 
 
         }
+        window.addEventListener('load', function () {
+            localStorage.clear();
+            var Customerid = parseFloat($('#selectCustomer').val()) || 0;
+            var id = parseFloat($('#Id').val()) || 0;
+            // Get the selected value
+            GetSelectedCustomerHasLocation(Customerid,id);
+
+
+        });
 
 
 
 
 
-        var GetSelectedCustomerHasLocationForEdit = function (id) {
+        var GetSelectedCustomerHasLocation = function (id,locid) {
 
             $.ajax({
                 type: "GET",
-                url: "/Location/DisplayCustomerHasLocationForEdit",
-                data: { id: id },
+                url: "/Location/DisplayCustomerHasLocation",
+                data: { id: id, locid: locid },
 
                 success: function (result) {
                     debugger
@@ -319,89 +323,19 @@
             })
         }
 
-        function TakeCodefunction(element) {
-            var TakeNarration = document.getElementById("Narration").value;
+        $(document).ready(function () {
 
-            if (TakeNarration == "") {
-                document.getElementById("Narration").className = "form-control text-box single-line is-invalid";
-            } else {
-                debugger
-                var code = element.value; // Get the current value of the input
-                var dropdown = document.getElementById("LocationList");
 
-                if (dropdown != null) {
-                    // First, remove any existing option that matches the current code
-                    for (var i = 0; i < dropdown.options.length; i++) {
-                        if (dropdown.options[i].value.startsWith(code + ' ')) {
-                            dropdown.remove(i);
-                            break;
-                        }
-                    }
 
-                    // Create a new option element
-                    var option = document.createElement("option");
 
-                    // Set the value and text content of the option
-                    option.value = code + ' ' + TakeNarration;
-                    option.text = code + ' ' + TakeNarration;
+            $('#selectCustomer').on('input', function () {
+                localStorage.clear();
+                var Customerid = parseFloat($('#selectCustomer').val()) || 0;
+                // Get the selected value
+                GetSelectedCustomerHasLocation(Customerid);
 
-                    // Append the option to the dropdown
-                    dropdown.appendChild(option);
-                }
-            }
-            // Perform your custom logic here
-        }
-
-        // Add an event listener to the Narration input to update the dropdown when the value changes
-        document.getElementById("Narration").addEventListener("input", function () {
-            // Assuming the element is passed from the event listener
-            var element = document.getElementById("CodeElement"); // Replace with the correct ID or reference to the code input element
-            TakeCodefunction(element);
+            });
         });
-
-        function TakeNarrationfunction(element) {
-            var TakeCode = document.getElementById("Code").value;
-
-            if (TakeCode === "") {
-                document.getElementById("Code").className = "form-control text-box single-line is-invalid";
-            } else {
-                var value = element.value; // Get the current value of the input
-                var dropdown = document.getElementById("LocationList");
-
-                if (dropdown != null && value !== "") {
-                    // Construct the new value to be added
-                    var newValue = TakeCode + ' ' + value;
-
-                    // Check if the dropdown already contains the value
-                    var exists = false;
-                    for (var i = 0; i < dropdown.options.length; i++) {
-                        if (dropdown.options[i].value.startsWith(TakeCode + ' ')) {
-                            exists = true;
-                            // Update the existing option if found
-                            dropdown.options[i].value = newValue;
-                            dropdown.options[i].text = newValue;
-                            break;
-                        }
-                    }
-
-                    // If the value doesn't exist, add the new option
-                    if (!exists) {
-                        // Create a new option element
-                        var option = document.createElement("option");
-
-                        // Set the value and text content of the option
-                        option.value = newValue;
-                        option.text = newValue;
-
-                        // Append the option to the dropdown
-                        dropdown.appendChild(option);
-                    }
-                }
-            }
-            // Perform your custom logic here
-        }
-
-        
     </script>
 }
 

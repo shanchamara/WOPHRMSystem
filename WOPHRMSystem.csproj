@@ -341,6 +341,9 @@
     <Compile Include="Context\TblLocation.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Context\TblLocationRate.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Context\TblNatureMaster.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -2763,7 +2766,6 @@
     <Content Include="Views\Report\ReceiptReportView.cshtml" />
     <Content Include="Views\Employee\ViewEmployeeHourlyRateTemperley.cshtml" />
     <Content Include="Views\Location\DisplayCustomerHasLocation.cshtml" />
-    <Content Include="Views\Location\DisplayCustomerHasLocationForEdit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

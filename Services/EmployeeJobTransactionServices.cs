@@ -147,7 +147,6 @@ namespace WOPHRMSystem.Services
                                                 IsActive = a.IsActive,
                                                 CodeAndNarration = a.Code + " " + a.Narration,
                                                 Fk_CustomerId = a.Fk_CustomerId,
-                                                Rate = a.Rate,
                                                 CustomerName = c.Name,
                                                 IsDelete = a.IsDelete,
                                             }).Where(d => d.IsDelete.Equals(false)).ToList();

@@ -561,7 +561,6 @@
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Code" Type="nvarchar(max)" />
     <Property Name="Narration" Type="nvarchar(max)" />
-    <Property Name="Rate" Type="decimal" Precision="18" Scale="2" />
     <Property Name="Fk_CustomerId" Type="int" Nullable="false" />
     <Property Name="IsActive" Type="bit" Nullable="false" />
     <Property Name="IsDelete" Type="bit" Nullable="false" />
@@ -571,8 +570,16 @@
     <Property Name="Edit_Date" Type="datetime2" Precision="7" />
     <Property Name="Delete_By" Type="nvarchar(max)" />
     <Property Name="Delete_Date" Type="datetime2" Precision="7" />
+  </EntityType>
+  <EntityType Name="TblLocationRates">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Fk_LocatonId" Type="int" Nullable="false" />
     <Property Name="FromDate" Type="datetime2" Precision="7" />
     <Property Name="ToDate" Type="datetime2" Precision="7" />
+    <Property Name="Rate" Type="decimal" Precision="18" Scale="2" />
   </EntityType>
   <EntityType Name="TblNatureMaster">
     <Key>
@@ -2187,6 +2194,20 @@ warning 6002: The table/view 'AuditSystem.dbo.VW_SectorMaster' does not have a p
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_TblLocationRates_TblLocation_Fk_LocatonId">
+    <End Role="TblLocation" Type="Self.TblLocation" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="TblLocationRates" Type="Self.TblLocationRates" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TblLocation">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TblLocationRates">
+        <PropertyRef Name="Fk_LocatonId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_TblNonEffectiveEmployee_TblEmployee_Fk_EmployeeId">
     <End Role="TblEmployee" Type="Self.TblEmployee" Multiplicity="1">
       <OnDelete Action="Cascade" />
@@ -2481,6 +2502,7 @@ warning 6002: The table/view 'AuditSystem.dbo.VW_SectorMaster' does not have a p
     <EntitySet Name="TblJobTransaction" EntityType="Self.TblJobTransaction" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TblLegalStatusMaster" EntityType="Self.TblLegalStatusMaster" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TblLocation" EntityType="Self.TblLocation" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TblLocationRates" EntityType="Self.TblLocationRates" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TblNatureMaster" EntityType="Self.TblNatureMaster" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TblNonEffectiveEmployee" EntityType="Self.TblNonEffectiveEmployee" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TblOpeningBalances" EntityType="Self.TblOpeningBalances" Schema="dbo" store:Type="Tables" />
@@ -3230,6 +3252,10 @@ FROM [dbo].[VW_SectorMaster] AS [VW_SectorMaster]</DefiningQuery>
     <AssociationSet Name="FK_TblLocation_TblCustomers_Fk_CustomerId" Association="Self.FK_TblLocation_TblCustomers_Fk_CustomerId">
       <End Role="TblCustomers" EntitySet="TblCustomers" />
       <End Role="TblLocation" EntitySet="TblLocation" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TblLocationRates_TblLocation_Fk_LocatonId" Association="Self.FK_TblLocationRates_TblLocation_Fk_LocatonId">
+      <End Role="TblLocation" EntitySet="TblLocation" />
+      <End Role="TblLocationRates" EntitySet="TblLocationRates" />
     </AssociationSet>
     <AssociationSet Name="FK_TblNonEffectiveEmployee_TblEmployee_Fk_EmployeeId" Association="Self.FK_TblNonEffectiveEmployee_TblEmployee_Fk_EmployeeId">
       <End Role="TblEmployee" EntitySet="TblEmployee" />

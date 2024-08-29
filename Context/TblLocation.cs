@@ -18,12 +18,12 @@ namespace WOPHRMSystem.Context
         {
             this.TblJobMasterLocations = new HashSet<TblJobMasterLocation>();
             this.TblJobTransactions = new HashSet<TblJobTransaction>();
+            this.TblLocationRates = new HashSet<TblLocationRate>();
         }
     
         public int Id { get; set; }
         public string Code { get; set; }
         public string Narration { get; set; }
-        public Nullable<decimal> Rate { get; set; }
         public int Fk_CustomerId { get; set; }
         public bool IsActive { get; set; }
         public bool IsDelete { get; set; }
@@ -33,11 +33,10 @@ namespace WOPHRMSystem.Context
         public Nullable<System.DateTime> Edit_Date { get; set; }
         public string Delete_By { get; set; }
         public Nullable<System.DateTime> Delete_Date { get; set; }
-        public Nullable<System.DateTime> FromDate { get; set; }
-        public Nullable<System.DateTime> ToDate { get; set; }
     
         public virtual TblCustomer TblCustomer { get; set; }
         public virtual ICollection<TblJobMasterLocation> TblJobMasterLocations { get; set; }
         public virtual ICollection<TblJobTransaction> TblJobTransactions { get; set; }
+        public virtual ICollection<TblLocationRate> TblLocationRates { get; set; }
     }
 }

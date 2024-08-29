@@ -32,6 +32,7 @@
     <EntitySet Name="TblJobTransactions" EntityType="AuditSystemModel.TblJobTransaction" />
     <EntitySet Name="TblLegalStatusMasters" EntityType="AuditSystemModel.TblLegalStatusMaster" />
     <EntitySet Name="TblLocations" EntityType="AuditSystemModel.TblLocation" />
+    <EntitySet Name="TblLocationRates" EntityType="AuditSystemModel.TblLocationRate" />
     <EntitySet Name="TblNatureMasters" EntityType="AuditSystemModel.TblNatureMaster" />
     <EntitySet Name="TblNonEffectiveEmployees" EntityType="AuditSystemModel.TblNonEffectiveEmployee" />
     <EntitySet Name="TblOpeningBalances" EntityType="AuditSystemModel.TblOpeningBalance" />
@@ -290,6 +291,10 @@
     <AssociationSet Name="FK_TblJobTransaction_TblWorkType_Fk_WorkTypeId" Association="AuditSystemModel.FK_TblJobTransaction_TblWorkType_Fk_WorkTypeId">
       <End Role="TblWorkType" EntitySet="TblWorkTypes" />
       <End Role="TblJobTransaction" EntitySet="TblJobTransactions" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TblLocationRates_TblLocation_Fk_LocatonId" Association="AuditSystemModel.FK_TblLocationRates_TblLocation_Fk_LocatonId">
+      <End Role="TblLocation" EntitySet="TblLocations" />
+      <End Role="TblLocationRate" EntitySet="TblLocationRates" />
     </AssociationSet>
     <AssociationSet Name="FK_TblProformaInvoiceHead_TblNatureMaster_Fk_NatureId" Association="AuditSystemModel.FK_TblProformaInvoiceHead_TblNatureMaster_Fk_NatureId">
       <End Role="TblNatureMaster" EntitySet="TblNatureMasters" />
@@ -965,7 +970,6 @@
     <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="Code" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="Narration" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="Rate" Type="Decimal" Precision="18" Scale="2" />
     <Property Name="Fk_CustomerId" Type="Int32" Nullable="false" />
     <Property Name="IsActive" Type="Boolean" Nullable="false" />
     <Property Name="IsDelete" Type="Boolean" Nullable="false" />
@@ -975,11 +979,21 @@
     <Property Name="Edit_Date" Type="DateTime" Precision="7" />
     <Property Name="Delete_By" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="Delete_Date" Type="DateTime" Precision="7" />
-    <Property Name="FromDate" Type="DateTime" Precision="7" />
-    <Property Name="ToDate" Type="DateTime" Precision="7" />
     <NavigationProperty Name="TblCustomer" Relationship="AuditSystemModel.FK_TblLocation_TblCustomers_Fk_CustomerId" FromRole="TblLocation" ToRole="TblCustomer" />
     <NavigationProperty Name="TblJobMasterLocations" Relationship="AuditSystemModel.FK_TblJobMasterLocation_TblLocation_FK_LocationId" FromRole="TblLocation" ToRole="TblJobMasterLocation" />
     <NavigationProperty Name="TblJobTransactions" Relationship="AuditSystemModel.FK_TblJobTransaction_TblLocation_Fk_LocationId" FromRole="TblLocation" ToRole="TblJobTransaction" />
+    <NavigationProperty Name="TblLocationRates" Relationship="AuditSystemModel.FK_TblLocationRates_TblLocation_Fk_LocatonId" FromRole="TblLocation" ToRole="TblLocationRate" />
+  </EntityType>
+  <EntityType Name="TblLocationRate">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Fk_LocatonId" Type="Int32" Nullable="false" />
+    <Property Name="FromDate" Type="DateTime" Precision="7" />
+    <Property Name="ToDate" Type="DateTime" Precision="7" />
+    <Property Name="Rate" Type="Decimal" Precision="18" Scale="2" />
+    <NavigationProperty Name="TblLocation" Relationship="AuditSystemModel.FK_TblLocationRates_TblLocation_Fk_LocatonId" FromRole="TblLocationRate" ToRole="TblLocation" />
   </EntityType>
   <EntityType Name="TblNatureMaster">
     <Key>
@@ -2768,6 +2782,20 @@
       </Principal>
       <Dependent Role="TblJobTransaction">
         <PropertyRef Name="Fk_WorkTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TblLocationRates_TblLocation_Fk_LocatonId">
+    <End Type="AuditSystemModel.TblLocation" Role="TblLocation" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="AuditSystemModel.TblLocationRate" Role="TblLocationRate" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TblLocation">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TblLocationRate">
+        <PropertyRef Name="Fk_LocatonId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
