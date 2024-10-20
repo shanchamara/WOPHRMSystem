@@ -29,7 +29,7 @@ namespace WOPHRMSystem.Context
         public Nullable<decimal> ActualHours { get; set; }
         public Nullable<decimal> TotalBudgetedHours { get; set; }
         public Nullable<decimal> ActualValue { get; set; }
-        public Nullable<decimal> BudgetValue { get; set; }
+        public decimal BudgetValue { get; set; }
         public int VarianceValue { get; set; }
         public string FullDetails { get; set; }
     }

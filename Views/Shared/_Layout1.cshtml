@@ -190,7 +190,7 @@
                 <nav class="mt-2">
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                         <!-- Add icons to the links using the .nav-icon class
-                        with font-awesome or any other icon font library -->
+    with font-awesome or any other icon font library -->
                         <li class="nav-item">
                             <a href="#" class="nav-link">
                                 <i class="nav-icon fas fa-tachometer-alt"></i>
@@ -431,54 +431,112 @@
                                     </a>
                                 </li>
 
+
+
                             </ul>
                         </li>
                         <li class="nav-header">EXAMPLES</li>
                         <li class="nav-item">
-                            <a  href="@Url.Action("Index","Receipt")" class="nav-link">
+                            <a href="@Url.Action("Index","Receipt")" class="nav-link">
                                 <i class="nav-icon far fa-calendar-alt"></i>
                                 <p>
-                                    Receipt 
+                                    Receipt
                                     <span class="badge badge-info right">2</span>
                                 </p>
                             </a>
                         </li>
-                        <li class="nav-item">
-                            <a href="pages/gallery.html" class="nav-link">
-                                <i class="nav-icon far fa-image"></i>
-                                <p>
-                                    Gallery
-                                </p>
-                            </a>
-                        </li>
+
                         <li class="nav-item">
                             <a href="#" class="nav-link">
                                 <i class="nav-icon far fa-envelope"></i>
                                 <p>
-                                    Mailbox
+                                    New Report's
                                     <i class="fas fa-angle-left right"></i>
                                 </p>
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="pages/mailbox/mailbox.html" class="nav-link">
+                                    <a href="@Url.Action("LaberUtilizationStatementUserAndDateWiseModel","Report")" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>Inbox</p>
+                                        <p>Laber Utilization Statement Work Type</p>
+                                    </a>
+                                    <a href="@Url.Action("LaberUtilizationStatementWorkGroupUserAndDateWiseModel","Report")" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Laber Utilization Statement Work Group</p>
+                                    </a>
+                                    <a href="@Url.Action("LaberUtilizationSummaryUserAndDateWiseModel","Report")" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Laber Utilization Summary</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="pages/mailbox/compose.html" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Compose</p>
-                                    </a>
-                                </li>
                                 <li class="nav-item">
-                                    <a href="pages/mailbox/read-mail.html" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Read</p>
+                                    <a href="#" class="nav-link">
+                                        <i class="nav-icon far fa-envelope"></i>
+                                        <p>
+                                            Listing Master
+                                            <i class="fas fa-angle-left right"></i>
+                                        </p>
                                     </a>
+                                    <ul class="nav nav-treeview">
+                                        <li class="nav-item">
+                                            <a href="@Url.Action("PrintWorkGroup","Report")" class="nav-link">
+                                                <i class="far fa-circle nav-icon"></i>
+                                                <p>Print Work Group</p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="@Url.Action("PrintWorkType","Report")" class="nav-link">
+                                                <i class="far fa-circle nav-icon"></i>
+                                                <p>Print Work Type</p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="@Url.Action("PrintDesignation","Report")" class="nav-link">
+                                                <i class="far fa-circle nav-icon"></i>
+                                                <p>Print Designation</p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="@Url.Action("PrintLocations","Report")" class="nav-link">
+                                                <i class="far fa-circle nav-icon"></i>
+                                                <p>Print Locations</p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="@Url.Action("PrintCustomers","Report")" class="nav-link">
+                                                <i class="far fa-circle nav-icon"></i>
+                                                <p>Print Customers</p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="@Url.Action("PrintEmployeeHourlyRate","Report")" class="nav-link">
+                                                <i class="far fa-circle nav-icon"></i>
+                                                <p>Print EmployeeHourlyRate</p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="@Url.Action("PrintEmployees","Report")" class="nav-link">
+                                                <i class="far fa-circle nav-icon"></i>
+                                                <p>Print Employees</p>
+                                            </a>
+                                        </li>
+                                    </ul>
                                 </li>
-                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a href="@Url.Action("PrintLocationsRates","Report")" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Location Rate Report</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="@Url.Action("PrintEmployeeVisitingLocationRatesModel","Report")" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Traverling Rate Report</p>
+                            </a>
+                        </li>
+                    </ul>
                         </li>
                         <li class="nav-item">
                             <a href="#" class="nav-link">

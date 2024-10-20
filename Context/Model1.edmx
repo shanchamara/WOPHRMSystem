@@ -948,6 +948,25 @@ warning 6002: The table/view 'AuditSystem.dbo.VW_Customer' does not have a prima
           <Property Name="InternationslReferalCode" Type="nvarchar(max)" />
         </EntityType>
         <!--Errors Found During Generation:
+warning 6002: The table/view 'AuditSystem.dbo.VW_CustomerLocationRates' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="VW_CustomerLocationRates">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="CustomerName" />
+            <PropertyRef Name="LocationName" />
+            <PropertyRef Name="Fk_LocatonId" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="CustomerName" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="LocationName" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Address" Type="nvarchar(max)" />
+          <Property Name="Fk_LocatonId" Type="int" Nullable="false" />
+          <Property Name="FromDate" Type="datetime2" Precision="7" />
+          <Property Name="ToDate" Type="datetime2" Precision="7" />
+          <Property Name="Rate" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="LocationNumber" Type="bigint" />
+        </EntityType>
+        <!--Errors Found During Generation:
 warning 6002: The table/view 'AuditSystem.dbo.VW_Employee' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="VW_Employee">
           <Key>
@@ -962,6 +981,8 @@ warning 6002: The table/view 'AuditSystem.dbo.VW_Employee' does not have a prima
             <PropertyRef Name="IsDelete" />
             <PropertyRef Name="Create_Date" />
             <PropertyRef Name="DateOfJoin" />
+            <PropertyRef Name="DesignationName" />
+            <PropertyRef Name="DepartmentName" />
           </Key>
           <Property Name="Id" Type="int" Nullable="false" />
           <Property Name="Code" Type="nvarchar(max)" />
@@ -987,6 +1008,36 @@ warning 6002: The table/view 'AuditSystem.dbo.VW_Employee' does not have a prima
           <Property Name="DepartmentCode" Type="nvarchar(max)" />
           <Property Name="DesignationCode" Type="nvarchar(max)" />
           <Property Name="titleCode" Type="nvarchar(max)" />
+          <Property Name="DesignationName" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="DepartmentName" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'AuditSystem.dbo.VW_EmployeeHourlyRate' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="VW_EmployeeHourlyRate">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="Fk_DesginationId" />
+            <PropertyRef Name="Fk_EmployeeId" />
+            <PropertyRef Name="IsDelete" />
+            <PropertyRef Name="Create_Date" />
+            <PropertyRef Name="EmployeeName" />
+            <PropertyRef Name="DesignationName" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Rate" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="FromDate" Type="datetime2" Precision="7" />
+          <Property Name="Fk_DesginationId" Type="int" Nullable="false" />
+          <Property Name="ToDate" Type="datetime2" Precision="7" />
+          <Property Name="Fk_EmployeeId" Type="int" Nullable="false" />
+          <Property Name="IsDelete" Type="bit" Nullable="false" />
+          <Property Name="Create_By" Type="nvarchar(max)" />
+          <Property Name="Create_Date" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="Edit_By" Type="nvarchar(max)" />
+          <Property Name="Edit_Date" Type="datetime2" Precision="7" />
+          <Property Name="Delete_By" Type="nvarchar(max)" />
+          <Property Name="Delete_Date" Type="datetime2" Precision="7" />
+          <Property Name="EmployeeName" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="DesignationName" Type="nvarchar(max)" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'AuditSystem.dbo.VW_EmployeeJobTransaction' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -1026,6 +1077,29 @@ warning 6002: The table/view 'AuditSystem.dbo.VW_EmployeeJobTransaction' does no
           <Property Name="Delete_By" Type="nvarchar(max)" />
           <Property Name="Delete_Date" Type="datetime2" Precision="7" />
           <Property Name="IsApplyTravelingCost" Type="bit" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'AuditSystem.dbo.VW_EmployeeVisitingRates' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="VW_EmployeeVisitingRates">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="EmployeeName" />
+            <PropertyRef Name="Fk_EmployeeId" />
+            <PropertyRef Name="IsApplyTravelingCost" />
+            <PropertyRef Name="Fk_LocationId" />
+            <PropertyRef Name="IsDelete" />
+            <PropertyRef Name="LocationName" />
+            <PropertyRef Name="Rate" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="TrDate" Type="datetime2" Precision="7" />
+          <Property Name="EmployeeName" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Fk_EmployeeId" Type="int" Nullable="false" />
+          <Property Name="IsApplyTravelingCost" Type="bit" Nullable="false" />
+          <Property Name="Fk_LocationId" Type="int" Nullable="false" />
+          <Property Name="IsDelete" Type="bit" Nullable="false" />
+          <Property Name="LocationName" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Rate" Type="decimal" Precision="18" Scale="2" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'AuditSystem.dbo.VW_GeneralReceipts' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -1076,6 +1150,7 @@ warning 6002: The table/view 'AuditSystem.dbo.VW_GetJObActualValue' does not hav
             <PropertyRef Name="Fk_CustomerId" />
             <PropertyRef Name="IsCompleted" />
             <PropertyRef Name="JobmasterIsDelete" />
+            <PropertyRef Name="BudgetValue" />
             <PropertyRef Name="VarianceValue" />
             <PropertyRef Name="FullDetails" />
           </Key>
@@ -1094,7 +1169,7 @@ warning 6002: The table/view 'AuditSystem.dbo.VW_GetJObActualValue' does not hav
           <Property Name="ActualHours" Type="decimal" Precision="38" Scale="2" />
           <Property Name="TotalBudgetedHours" Type="decimal" Precision="38" Scale="2" />
           <Property Name="ActualValue" Type="decimal" Precision="38" Scale="2" />
-          <Property Name="BudgetValue" Type="decimal" Precision="38" Scale="4" />
+          <Property Name="BudgetValue" Type="decimal" Precision="38" Scale="4" Nullable="false" />
           <Property Name="VarianceValue" Type="int" Nullable="false" />
           <Property Name="FullDetails" Type="nvarchar(max)" Nullable="false" />
         </EntityType>
@@ -1440,6 +1515,51 @@ warning 6002: The table/view 'AuditSystem.dbo.VW_JobMasterViewforReport' does no
           <Property Name="Delete_Date" Type="datetime2" Precision="7" />
           <Property Name="CombinedName" Type="nvarchar(max)" />
           <Property Name="CombinedCode" Type="nvarchar(max)" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'AuditSystem.dbo.VW_LaberUtilizationStatementWorkTypeAndGroup' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="VW_LaberUtilizationStatementWorkTypeAndGroup">
+          <Key>
+            <PropertyRef Name="Groups" />
+            <PropertyRef Name="Worktypes" />
+            <PropertyRef Name="EmployeeName" />
+          </Key>
+          <Property Name="TransactionId" Type="int" />
+          <Property Name="TrDate" Type="datetime2" Precision="7" />
+          <Property Name="Fk_JobMasterId" Type="int" />
+          <Property Name="Fk_EmployeeId" Type="int" />
+          <Property Name="Narration" Type="nvarchar(max)" />
+          <Property Name="IsApplyTravelingCost" Type="bit" />
+          <Property Name="Fk_LocationId" Type="int" />
+          <Property Name="WorkingHours" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Fk_WorkTypeId" Type="int" />
+          <Property Name="Fk_CustomerId" Type="int" />
+          <Property Name="Groups" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Worktypes" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="EmployeeName" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'AuditSystem.dbo.VW_LaberUtilizationSummaryWorkTypeAndGroup' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="VW_LaberUtilizationSummaryWorkTypeAndGroup">
+          <Key>
+            <PropertyRef Name="Groups" />
+            <PropertyRef Name="Worktypes" />
+            <PropertyRef Name="EmployeeName" />
+          </Key>
+          <Property Name="TransactionId" Type="int" />
+          <Property Name="TrDate" Type="datetime2" Precision="7" />
+          <Property Name="Fk_JobMasterId" Type="int" />
+          <Property Name="Fk_EmployeeId" Type="int" />
+          <Property Name="Narration" Type="nvarchar(max)" />
+          <Property Name="JobCode" Type="nvarchar(max)" />
+          <Property Name="IsApplyTravelingCost" Type="bit" />
+          <Property Name="Fk_LocationId" Type="int" />
+          <Property Name="WorkingHours" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Fk_WorkTypeId" Type="int" />
+          <Property Name="Fk_CustomerId" Type="int" />
+          <Property Name="Groups" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Worktypes" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="EmployeeName" Type="nvarchar(max)" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'AuditSystem.dbo.VW_LegalStatusMaster' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -2586,6 +2706,19 @@ FROM [dbo].[VW_CurrentlyGetJobAssignee] AS [VW_CurrentlyGetJobAssignee]</Definin
 [VW_Customer].[InternationslReferalCode] AS [InternationslReferalCode]
 FROM [dbo].[VW_Customer] AS [VW_Customer]</DefiningQuery>
           </EntitySet>
+          <EntitySet Name="VW_CustomerLocationRates" EntityType="Self.VW_CustomerLocationRates" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+[VW_CustomerLocationRates].[Id] AS [Id], 
+[VW_CustomerLocationRates].[CustomerName] AS [CustomerName], 
+[VW_CustomerLocationRates].[LocationName] AS [LocationName], 
+[VW_CustomerLocationRates].[Address] AS [Address], 
+[VW_CustomerLocationRates].[Fk_LocatonId] AS [Fk_LocatonId], 
+[VW_CustomerLocationRates].[FromDate] AS [FromDate], 
+[VW_CustomerLocationRates].[ToDate] AS [ToDate], 
+[VW_CustomerLocationRates].[Rate] AS [Rate], 
+[VW_CustomerLocationRates].[LocationNumber] AS [LocationNumber]
+FROM [dbo].[VW_CustomerLocationRates] AS [VW_CustomerLocationRates]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="VW_Employee" EntityType="Self.VW_Employee" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
 [VW_Employee].[Id] AS [Id], 
@@ -2611,8 +2744,29 @@ FROM [dbo].[VW_Customer] AS [VW_Customer]</DefiningQuery>
 [VW_Employee].[DateOfJoin] AS [DateOfJoin], 
 [VW_Employee].[DepartmentCode] AS [DepartmentCode], 
 [VW_Employee].[DesignationCode] AS [DesignationCode], 
-[VW_Employee].[titleCode] AS [titleCode]
+[VW_Employee].[titleCode] AS [titleCode], 
+[VW_Employee].[DesignationName] AS [DesignationName], 
+[VW_Employee].[DepartmentName] AS [DepartmentName]
 FROM [dbo].[VW_Employee] AS [VW_Employee]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="VW_EmployeeHourlyRate" EntityType="Self.VW_EmployeeHourlyRate" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+[VW_EmployeeHourlyRate].[Id] AS [Id], 
+[VW_EmployeeHourlyRate].[Rate] AS [Rate], 
+[VW_EmployeeHourlyRate].[FromDate] AS [FromDate], 
+[VW_EmployeeHourlyRate].[Fk_DesginationId] AS [Fk_DesginationId], 
+[VW_EmployeeHourlyRate].[ToDate] AS [ToDate], 
+[VW_EmployeeHourlyRate].[Fk_EmployeeId] AS [Fk_EmployeeId], 
+[VW_EmployeeHourlyRate].[IsDelete] AS [IsDelete], 
+[VW_EmployeeHourlyRate].[Create_By] AS [Create_By], 
+[VW_EmployeeHourlyRate].[Create_Date] AS [Create_Date], 
+[VW_EmployeeHourlyRate].[Edit_By] AS [Edit_By], 
+[VW_EmployeeHourlyRate].[Edit_Date] AS [Edit_Date], 
+[VW_EmployeeHourlyRate].[Delete_By] AS [Delete_By], 
+[VW_EmployeeHourlyRate].[Delete_Date] AS [Delete_Date], 
+[VW_EmployeeHourlyRate].[EmployeeName] AS [EmployeeName], 
+[VW_EmployeeHourlyRate].[DesignationName] AS [DesignationName]
+FROM [dbo].[VW_EmployeeHourlyRate] AS [VW_EmployeeHourlyRate]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="VW_EmployeeJobTransaction" EntityType="Self.VW_EmployeeJobTransaction" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
@@ -2640,6 +2794,19 @@ FROM [dbo].[VW_Employee] AS [VW_Employee]</DefiningQuery>
 [VW_EmployeeJobTransaction].[Delete_Date] AS [Delete_Date], 
 [VW_EmployeeJobTransaction].[IsApplyTravelingCost] AS [IsApplyTravelingCost]
 FROM [dbo].[VW_EmployeeJobTransaction] AS [VW_EmployeeJobTransaction]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="VW_EmployeeVisitingRates" EntityType="Self.VW_EmployeeVisitingRates" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+[VW_EmployeeVisitingRates].[Id] AS [Id], 
+[VW_EmployeeVisitingRates].[TrDate] AS [TrDate], 
+[VW_EmployeeVisitingRates].[EmployeeName] AS [EmployeeName], 
+[VW_EmployeeVisitingRates].[Fk_EmployeeId] AS [Fk_EmployeeId], 
+[VW_EmployeeVisitingRates].[IsApplyTravelingCost] AS [IsApplyTravelingCost], 
+[VW_EmployeeVisitingRates].[Fk_LocationId] AS [Fk_LocationId], 
+[VW_EmployeeVisitingRates].[IsDelete] AS [IsDelete], 
+[VW_EmployeeVisitingRates].[LocationName] AS [LocationName], 
+[VW_EmployeeVisitingRates].[Rate] AS [Rate]
+FROM [dbo].[VW_EmployeeVisitingRates] AS [VW_EmployeeVisitingRates]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="VW_GeneralReceipts" EntityType="Self.VW_GeneralReceipts" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
@@ -2933,6 +3100,41 @@ FROM [dbo].[VW_JobMasterViewforCalculatorJobCostReport] AS [VW_JobMasterViewforC
 [VW_JobMasterViewforReport].[CombinedName] AS [CombinedName], 
 [VW_JobMasterViewforReport].[CombinedCode] AS [CombinedCode]
 FROM [dbo].[VW_JobMasterViewforReport] AS [VW_JobMasterViewforReport]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="VW_LaberUtilizationStatementWorkTypeAndGroup" EntityType="Self.VW_LaberUtilizationStatementWorkTypeAndGroup" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+[VW_LaberUtilizationStatementWorkTypeAndGroup].[TransactionId] AS [TransactionId], 
+[VW_LaberUtilizationStatementWorkTypeAndGroup].[TrDate] AS [TrDate], 
+[VW_LaberUtilizationStatementWorkTypeAndGroup].[Fk_JobMasterId] AS [Fk_JobMasterId], 
+[VW_LaberUtilizationStatementWorkTypeAndGroup].[Fk_EmployeeId] AS [Fk_EmployeeId], 
+[VW_LaberUtilizationStatementWorkTypeAndGroup].[Narration] AS [Narration], 
+[VW_LaberUtilizationStatementWorkTypeAndGroup].[IsApplyTravelingCost] AS [IsApplyTravelingCost], 
+[VW_LaberUtilizationStatementWorkTypeAndGroup].[Fk_LocationId] AS [Fk_LocationId], 
+[VW_LaberUtilizationStatementWorkTypeAndGroup].[WorkingHours] AS [WorkingHours], 
+[VW_LaberUtilizationStatementWorkTypeAndGroup].[Fk_WorkTypeId] AS [Fk_WorkTypeId], 
+[VW_LaberUtilizationStatementWorkTypeAndGroup].[Fk_CustomerId] AS [Fk_CustomerId], 
+[VW_LaberUtilizationStatementWorkTypeAndGroup].[Groups] AS [Groups], 
+[VW_LaberUtilizationStatementWorkTypeAndGroup].[Worktypes] AS [Worktypes], 
+[VW_LaberUtilizationStatementWorkTypeAndGroup].[EmployeeName] AS [EmployeeName]
+FROM [dbo].[VW_LaberUtilizationStatementWorkTypeAndGroup] AS [VW_LaberUtilizationStatementWorkTypeAndGroup]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="VW_LaberUtilizationSummaryWorkTypeAndGroup" EntityType="Self.VW_LaberUtilizationSummaryWorkTypeAndGroup" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+[VW_LaberUtilizationSummaryWorkTypeAndGroup].[TransactionId] AS [TransactionId], 
+[VW_LaberUtilizationSummaryWorkTypeAndGroup].[TrDate] AS [TrDate], 
+[VW_LaberUtilizationSummaryWorkTypeAndGroup].[Fk_JobMasterId] AS [Fk_JobMasterId], 
+[VW_LaberUtilizationSummaryWorkTypeAndGroup].[Fk_EmployeeId] AS [Fk_EmployeeId], 
+[VW_LaberUtilizationSummaryWorkTypeAndGroup].[Narration] AS [Narration], 
+[VW_LaberUtilizationSummaryWorkTypeAndGroup].[JobCode] AS [JobCode], 
+[VW_LaberUtilizationSummaryWorkTypeAndGroup].[IsApplyTravelingCost] AS [IsApplyTravelingCost], 
+[VW_LaberUtilizationSummaryWorkTypeAndGroup].[Fk_LocationId] AS [Fk_LocationId], 
+[VW_LaberUtilizationSummaryWorkTypeAndGroup].[WorkingHours] AS [WorkingHours], 
+[VW_LaberUtilizationSummaryWorkTypeAndGroup].[Fk_WorkTypeId] AS [Fk_WorkTypeId], 
+[VW_LaberUtilizationSummaryWorkTypeAndGroup].[Fk_CustomerId] AS [Fk_CustomerId], 
+[VW_LaberUtilizationSummaryWorkTypeAndGroup].[Groups] AS [Groups], 
+[VW_LaberUtilizationSummaryWorkTypeAndGroup].[Worktypes] AS [Worktypes], 
+[VW_LaberUtilizationSummaryWorkTypeAndGroup].[EmployeeName] AS [EmployeeName]
+FROM [dbo].[VW_LaberUtilizationSummaryWorkTypeAndGroup] AS [VW_LaberUtilizationSummaryWorkTypeAndGroup]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="VW_LegalStatusMaster" EntityType="Self.VW_LegalStatusMaster" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
@@ -3400,8 +3602,11 @@ FROM [dbo].[VW_SectorMaster] AS [VW_SectorMaster]</DefiningQuery>
           <EntitySet Name="TblWorkTypes" EntityType="AuditSystemModel.TblWorkType" />
           <EntitySet Name="VW_CurrentlyGetJobAssignee" EntityType="AuditSystemModel.VW_CurrentlyGetJobAssignee" />
           <EntitySet Name="VW_Customer" EntityType="AuditSystemModel.VW_Customer" />
+          <EntitySet Name="VW_CustomerLocationRates" EntityType="AuditSystemModel.VW_CustomerLocationRates" />
           <EntitySet Name="VW_Employee" EntityType="AuditSystemModel.VW_Employee" />
+          <EntitySet Name="VW_EmployeeHourlyRate" EntityType="AuditSystemModel.VW_EmployeeHourlyRate" />
           <EntitySet Name="VW_EmployeeJobTransaction" EntityType="AuditSystemModel.VW_EmployeeJobTransaction" />
+          <EntitySet Name="VW_EmployeeVisitingRates" EntityType="AuditSystemModel.VW_EmployeeVisitingRates" />
           <EntitySet Name="VW_GeneralReceipts" EntityType="AuditSystemModel.VW_GeneralReceipts" />
           <EntitySet Name="VW_GetJObActualValue" EntityType="AuditSystemModel.VW_GetJObActualValue" />
           <EntitySet Name="VW_GradeMaster" EntityType="AuditSystemModel.VW_GradeMaster" />
@@ -3413,6 +3618,8 @@ FROM [dbo].[VW_SectorMaster] AS [VW_SectorMaster]</DefiningQuery>
           <EntitySet Name="VW_JobMaster" EntityType="AuditSystemModel.VW_JobMaster" />
           <EntitySet Name="VW_JobMasterViewforCalculatorJobCostReport" EntityType="AuditSystemModel.VW_JobMasterViewforCalculatorJobCostReport" />
           <EntitySet Name="VW_JobMasterViewforReport" EntityType="AuditSystemModel.VW_JobMasterViewforReport" />
+          <EntitySet Name="VW_LaberUtilizationStatementWorkTypeAndGroup" EntityType="AuditSystemModel.VW_LaberUtilizationStatementWorkTypeAndGroup" />
+          <EntitySet Name="VW_LaberUtilizationSummaryWorkTypeAndGroup" EntityType="AuditSystemModel.VW_LaberUtilizationSummaryWorkTypeAndGroup" />
           <EntitySet Name="VW_LegalStatusMaster" EntityType="AuditSystemModel.VW_LegalStatusMaster" />
           <EntitySet Name="VW_NatureMaster" EntityType="AuditSystemModel.VW_NatureMaster" />
           <EntitySet Name="VW_OpeningBalance" EntityType="AuditSystemModel.VW_OpeningBalance" />
@@ -4736,6 +4943,23 @@ FROM [dbo].[VW_SectorMaster] AS [VW_SectorMaster]</DefiningQuery>
           <Property Name="IntroductionCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="InternationslReferalCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
+        <EntityType Name="VW_CustomerLocationRates">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="CustomerName" />
+            <PropertyRef Name="LocationName" />
+            <PropertyRef Name="Fk_LocatonId" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="CustomerName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="LocationName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Fk_LocatonId" Type="Int32" Nullable="false" />
+          <Property Name="FromDate" Type="DateTime" Precision="7" />
+          <Property Name="ToDate" Type="DateTime" Precision="7" />
+          <Property Name="Rate" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="LocationNumber" Type="Int64" />
+        </EntityType>
         <EntityType Name="VW_Employee">
           <Key>
             <PropertyRef Name="Id" />
@@ -4749,6 +4973,8 @@ FROM [dbo].[VW_SectorMaster] AS [VW_SectorMaster]</DefiningQuery>
             <PropertyRef Name="IsDelete" />
             <PropertyRef Name="Create_Date" />
             <PropertyRef Name="DateOfJoin" />
+            <PropertyRef Name="DesignationName" />
+            <PropertyRef Name="DepartmentName" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" />
           <Property Name="Code" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
@@ -4774,6 +5000,34 @@ FROM [dbo].[VW_SectorMaster] AS [VW_SectorMaster]</DefiningQuery>
           <Property Name="DepartmentCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="DesignationCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="titleCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DesignationName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DepartmentName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="VW_EmployeeHourlyRate">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="Fk_DesginationId" />
+            <PropertyRef Name="Fk_EmployeeId" />
+            <PropertyRef Name="IsDelete" />
+            <PropertyRef Name="Create_Date" />
+            <PropertyRef Name="EmployeeName" />
+            <PropertyRef Name="DesignationName" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Rate" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="FromDate" Type="DateTime" Precision="7" />
+          <Property Name="Fk_DesginationId" Type="Int32" Nullable="false" />
+          <Property Name="ToDate" Type="DateTime" Precision="7" />
+          <Property Name="Fk_EmployeeId" Type="Int32" Nullable="false" />
+          <Property Name="IsDelete" Type="Boolean" Nullable="false" />
+          <Property Name="Create_By" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Create_Date" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="Edit_By" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Edit_Date" Type="DateTime" Precision="7" />
+          <Property Name="Delete_By" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Delete_Date" Type="DateTime" Precision="7" />
+          <Property Name="EmployeeName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DesignationName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="VW_EmployeeJobTransaction">
           <Key>
@@ -4811,6 +5065,27 @@ FROM [dbo].[VW_SectorMaster] AS [VW_SectorMaster]</DefiningQuery>
           <Property Name="Delete_By" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Delete_Date" Type="DateTime" Precision="7" />
           <Property Name="IsApplyTravelingCost" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="VW_EmployeeVisitingRates">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="EmployeeName" />
+            <PropertyRef Name="Fk_EmployeeId" />
+            <PropertyRef Name="IsApplyTravelingCost" />
+            <PropertyRef Name="Fk_LocationId" />
+            <PropertyRef Name="IsDelete" />
+            <PropertyRef Name="LocationName" />
+            <PropertyRef Name="Rate" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="TrDate" Type="DateTime" Precision="7" />
+          <Property Name="EmployeeName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Fk_EmployeeId" Type="Int32" Nullable="false" />
+          <Property Name="IsApplyTravelingCost" Type="Boolean" Nullable="false" />
+          <Property Name="Fk_LocationId" Type="Int32" Nullable="false" />
+          <Property Name="IsDelete" Type="Boolean" Nullable="false" />
+          <Property Name="LocationName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Rate" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
         </EntityType>
         <EntityType Name="VW_GeneralReceipts">
           <Key>
@@ -4857,6 +5132,7 @@ FROM [dbo].[VW_SectorMaster] AS [VW_SectorMaster]</DefiningQuery>
             <PropertyRef Name="Fk_CustomerId" />
             <PropertyRef Name="IsCompleted" />
             <PropertyRef Name="JobmasterIsDelete" />
+            <PropertyRef Name="BudgetValue" />
             <PropertyRef Name="VarianceValue" />
             <PropertyRef Name="FullDetails" />
           </Key>
@@ -4875,7 +5151,7 @@ FROM [dbo].[VW_SectorMaster] AS [VW_SectorMaster]</DefiningQuery>
           <Property Name="ActualHours" Type="Decimal" Precision="38" Scale="2" />
           <Property Name="TotalBudgetedHours" Type="Decimal" Precision="38" Scale="2" />
           <Property Name="ActualValue" Type="Decimal" Precision="38" Scale="2" />
-          <Property Name="BudgetValue" Type="Decimal" Precision="38" Scale="4" />
+          <Property Name="BudgetValue" Type="Decimal" Nullable="false" Precision="38" Scale="4" />
           <Property Name="VarianceValue" Type="Int32" Nullable="false" />
           <Property Name="FullDetails" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
@@ -5203,6 +5479,47 @@ FROM [dbo].[VW_SectorMaster] AS [VW_SectorMaster]</DefiningQuery>
           <Property Name="Delete_Date" Type="DateTime" Precision="7" />
           <Property Name="CombinedName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="CombinedCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="VW_LaberUtilizationStatementWorkTypeAndGroup">
+          <Key>
+            <PropertyRef Name="Groups" />
+            <PropertyRef Name="Worktypes" />
+            <PropertyRef Name="EmployeeName" />
+          </Key>
+          <Property Name="TransactionId" Type="Int32" />
+          <Property Name="TrDate" Type="DateTime" Precision="7" />
+          <Property Name="Fk_JobMasterId" Type="Int32" />
+          <Property Name="Fk_EmployeeId" Type="Int32" />
+          <Property Name="Narration" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsApplyTravelingCost" Type="Boolean" />
+          <Property Name="Fk_LocationId" Type="Int32" />
+          <Property Name="WorkingHours" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Fk_WorkTypeId" Type="Int32" />
+          <Property Name="Fk_CustomerId" Type="Int32" />
+          <Property Name="Groups" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Worktypes" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="EmployeeName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="VW_LaberUtilizationSummaryWorkTypeAndGroup">
+          <Key>
+            <PropertyRef Name="Groups" />
+            <PropertyRef Name="Worktypes" />
+            <PropertyRef Name="EmployeeName" />
+          </Key>
+          <Property Name="TransactionId" Type="Int32" />
+          <Property Name="TrDate" Type="DateTime" Precision="7" />
+          <Property Name="Fk_JobMasterId" Type="Int32" />
+          <Property Name="Fk_EmployeeId" Type="Int32" />
+          <Property Name="Narration" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="JobCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsApplyTravelingCost" Type="Boolean" />
+          <Property Name="Fk_LocationId" Type="Int32" />
+          <Property Name="WorkingHours" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Fk_WorkTypeId" Type="Int32" />
+          <Property Name="Fk_CustomerId" Type="Int32" />
+          <Property Name="Groups" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Worktypes" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="EmployeeName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="VW_LegalStatusMaster">
           <Key>
@@ -7201,9 +7518,26 @@ FROM [dbo].[VW_SectorMaster] AS [VW_SectorMaster]</DefiningQuery>
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="VW_CustomerLocationRates">
+            <EntityTypeMapping TypeName="AuditSystemModel.VW_CustomerLocationRates">
+              <MappingFragment StoreEntitySet="VW_CustomerLocationRates">
+                <ScalarProperty Name="LocationNumber" ColumnName="LocationNumber" />
+                <ScalarProperty Name="Rate" ColumnName="Rate" />
+                <ScalarProperty Name="ToDate" ColumnName="ToDate" />
+                <ScalarProperty Name="FromDate" ColumnName="FromDate" />
+                <ScalarProperty Name="Fk_LocatonId" ColumnName="Fk_LocatonId" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="LocationName" ColumnName="LocationName" />
+                <ScalarProperty Name="CustomerName" ColumnName="CustomerName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="VW_Employee">
             <EntityTypeMapping TypeName="AuditSystemModel.VW_Employee">
               <MappingFragment StoreEntitySet="VW_Employee">
+                <ScalarProperty Name="DepartmentName" ColumnName="DepartmentName" />
+                <ScalarProperty Name="DesignationName" ColumnName="DesignationName" />
                 <ScalarProperty Name="titleCode" ColumnName="titleCode" />
                 <ScalarProperty Name="DesignationCode" ColumnName="DesignationCode" />
                 <ScalarProperty Name="DepartmentCode" ColumnName="DepartmentCode" />
@@ -7227,6 +7561,27 @@ FROM [dbo].[VW_SectorMaster] AS [VW_SectorMaster]</DefiningQuery>
                 <ScalarProperty Name="BirthDay" ColumnName="BirthDay" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VW_EmployeeHourlyRate">
+            <EntityTypeMapping TypeName="AuditSystemModel.VW_EmployeeHourlyRate">
+              <MappingFragment StoreEntitySet="VW_EmployeeHourlyRate">
+                <ScalarProperty Name="DesignationName" ColumnName="DesignationName" />
+                <ScalarProperty Name="EmployeeName" ColumnName="EmployeeName" />
+                <ScalarProperty Name="Delete_Date" ColumnName="Delete_Date" />
+                <ScalarProperty Name="Delete_By" ColumnName="Delete_By" />
+                <ScalarProperty Name="Edit_Date" ColumnName="Edit_Date" />
+                <ScalarProperty Name="Edit_By" ColumnName="Edit_By" />
+                <ScalarProperty Name="Create_Date" ColumnName="Create_Date" />
+                <ScalarProperty Name="Create_By" ColumnName="Create_By" />
+                <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+                <ScalarProperty Name="Fk_EmployeeId" ColumnName="Fk_EmployeeId" />
+                <ScalarProperty Name="ToDate" ColumnName="ToDate" />
+                <ScalarProperty Name="Fk_DesginationId" ColumnName="Fk_DesginationId" />
+                <ScalarProperty Name="FromDate" ColumnName="FromDate" />
+                <ScalarProperty Name="Rate" ColumnName="Rate" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -7255,6 +7610,21 @@ FROM [dbo].[VW_SectorMaster] AS [VW_SectorMaster]</DefiningQuery>
                 <ScalarProperty Name="JobCode" ColumnName="JobCode" />
                 <ScalarProperty Name="Fk_EmployeeId" ColumnName="Fk_EmployeeId" />
                 <ScalarProperty Name="Fk_JobMasterId" ColumnName="Fk_JobMasterId" />
+                <ScalarProperty Name="TrDate" ColumnName="TrDate" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VW_EmployeeVisitingRates">
+            <EntityTypeMapping TypeName="AuditSystemModel.VW_EmployeeVisitingRates">
+              <MappingFragment StoreEntitySet="VW_EmployeeVisitingRates">
+                <ScalarProperty Name="Rate" ColumnName="Rate" />
+                <ScalarProperty Name="LocationName" ColumnName="LocationName" />
+                <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+                <ScalarProperty Name="Fk_LocationId" ColumnName="Fk_LocationId" />
+                <ScalarProperty Name="IsApplyTravelingCost" ColumnName="IsApplyTravelingCost" />
+                <ScalarProperty Name="Fk_EmployeeId" ColumnName="Fk_EmployeeId" />
+                <ScalarProperty Name="EmployeeName" ColumnName="EmployeeName" />
                 <ScalarProperty Name="TrDate" ColumnName="TrDate" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
@@ -7572,6 +7942,45 @@ FROM [dbo].[VW_SectorMaster] AS [VW_SectorMaster]</DefiningQuery>
                 <ScalarProperty Name="BudgetedHours" ColumnName="BudgetedHours" />
                 <ScalarProperty Name="Fk_JobMasterId" ColumnName="Fk_JobMasterId" />
                 <ScalarProperty Name="PartnerTableId" ColumnName="PartnerTableId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VW_LaberUtilizationStatementWorkTypeAndGroup">
+            <EntityTypeMapping TypeName="AuditSystemModel.VW_LaberUtilizationStatementWorkTypeAndGroup">
+              <MappingFragment StoreEntitySet="VW_LaberUtilizationStatementWorkTypeAndGroup">
+                <ScalarProperty Name="EmployeeName" ColumnName="EmployeeName" />
+                <ScalarProperty Name="Worktypes" ColumnName="Worktypes" />
+                <ScalarProperty Name="Groups" ColumnName="Groups" />
+                <ScalarProperty Name="Fk_CustomerId" ColumnName="Fk_CustomerId" />
+                <ScalarProperty Name="Fk_WorkTypeId" ColumnName="Fk_WorkTypeId" />
+                <ScalarProperty Name="WorkingHours" ColumnName="WorkingHours" />
+                <ScalarProperty Name="Fk_LocationId" ColumnName="Fk_LocationId" />
+                <ScalarProperty Name="IsApplyTravelingCost" ColumnName="IsApplyTravelingCost" />
+                <ScalarProperty Name="Narration" ColumnName="Narration" />
+                <ScalarProperty Name="Fk_EmployeeId" ColumnName="Fk_EmployeeId" />
+                <ScalarProperty Name="Fk_JobMasterId" ColumnName="Fk_JobMasterId" />
+                <ScalarProperty Name="TrDate" ColumnName="TrDate" />
+                <ScalarProperty Name="TransactionId" ColumnName="TransactionId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VW_LaberUtilizationSummaryWorkTypeAndGroup">
+            <EntityTypeMapping TypeName="AuditSystemModel.VW_LaberUtilizationSummaryWorkTypeAndGroup">
+              <MappingFragment StoreEntitySet="VW_LaberUtilizationSummaryWorkTypeAndGroup">
+                <ScalarProperty Name="EmployeeName" ColumnName="EmployeeName" />
+                <ScalarProperty Name="Worktypes" ColumnName="Worktypes" />
+                <ScalarProperty Name="Groups" ColumnName="Groups" />
+                <ScalarProperty Name="Fk_CustomerId" ColumnName="Fk_CustomerId" />
+                <ScalarProperty Name="Fk_WorkTypeId" ColumnName="Fk_WorkTypeId" />
+                <ScalarProperty Name="WorkingHours" ColumnName="WorkingHours" />
+                <ScalarProperty Name="Fk_LocationId" ColumnName="Fk_LocationId" />
+                <ScalarProperty Name="IsApplyTravelingCost" ColumnName="IsApplyTravelingCost" />
+                <ScalarProperty Name="JobCode" ColumnName="JobCode" />
+                <ScalarProperty Name="Narration" ColumnName="Narration" />
+                <ScalarProperty Name="Fk_EmployeeId" ColumnName="Fk_EmployeeId" />
+                <ScalarProperty Name="Fk_JobMasterId" ColumnName="Fk_JobMasterId" />
+                <ScalarProperty Name="TrDate" ColumnName="TrDate" />
+                <ScalarProperty Name="TransactionId" ColumnName="TransactionId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

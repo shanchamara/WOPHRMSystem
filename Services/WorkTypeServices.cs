@@ -134,7 +134,7 @@ namespace WOPHRMSystem.Services
                               IsDelete = a.IsDelete,
                               Billable = a.Billable,
                               Fk_WorkGroupId = a.Fk_WorkGroupId,
-                              GroupCode = g.Code
+                              GroupCode = g.Code,
                           }).Where(d => d.IsDelete.Equals(false)).ToList();
                 return dr;
             }

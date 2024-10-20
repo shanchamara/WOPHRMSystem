@@ -383,6 +383,38 @@ namespace WOPHRMSystem.Services
             }
         }
 
+        public List<JobMasterCompletedModel> GetAllDropdownASC()
+        {
+            try
+            {
+                var dr = (from a in _context.VW_JobMaster
+                          orderby a.Id ascending
+                          select new JobMasterCompletedModel()
+                          {
+                              Id = a.Id,
+                              JobCode = a.JobCode,
+                              Narration = a.Narration,
+                              StartDate = a.StartDate,
+                              DueDate = a.DueDate,
+                              PreViewvalue = a.PreViewvalue,
+                              Fk_CustomerId = a.Fk_CustomerId,
+                              CustomerName = a.Name,
+                              IsActive = a.IsActive,
+                              IsDelete = a.IsDelete,
+                              IsCompleted = a.IsCompleted,
+                              IsReActivate = a.IsReActivate,
+                              CompletedDate = a.CompletedDate,
+                              ReActivateDate = a.ReActivateDate,
+                          }).Where(d => d.IsDelete.Equals(false) && d.IsCompleted.Equals(false)).ToList();
+                return dr;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
         public List<VW_GetJObActualValue> GetAllJObsForIsReadytoInvoice(int cid)
         {
             try

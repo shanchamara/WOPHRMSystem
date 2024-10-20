@@ -175,6 +175,74 @@ namespace WOPHRMSystem.Services
                               IsActive = a.IsActive,
                               IsDelete = a.IsDelete,
                               JObPrefixCode = a.JObPrefixCode,
+                              DesignationName = a.DepartmentName,
+                              DepartmentName = a.DepartmentName,
+                          }).Where(d => d.IsDelete.Equals(false)).ToList();
+                return dr;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public List<EmployeeModel> GetAllEmployeeASC()
+        {
+            try
+            {
+                var dr = (from a in _context.VW_Employee
+                          orderby a.Id ascending
+                          select new EmployeeModel()
+                          {
+                              Id = a.Id,
+                              Code = a.Code,
+                              Name = a.Name,
+                              IsManager = a.IsManager,
+                              IsPartner = a.IsPartner,
+                              BirthDay = a.BirthDay,
+                              Fk_TitleId = a.Fk_TitleId,
+                              Email = a.Email,
+                              Nic = a.Nic,
+                              Fk_DesginationId = a.Fk_DesginationId,
+                              Fk_DepartmentId = a.Fk_DepartmentId,
+                              DepartmentCode = a.DepartmentCode,
+                              DesignationCode = a.DepartmentCode,
+                              DateOfJoin = a.DateOfJoin,
+                              titleCode = a.titleCode,
+                              IsActive = a.IsActive,
+                              IsDelete = a.IsDelete,
+                              JObPrefixCode = a.JObPrefixCode,
+                              DesignationName = a.DepartmentName,
+                              DepartmentName = a.DepartmentName,
+                          }).Where(d => d.IsDelete.Equals(false)).ToList();
+                return dr;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+
+        public List<EmployeeHourlyRateModel> GetAllEmployeeHourlyRates()
+        {
+            try
+            {
+                var dr = (from a in _context.VW_EmployeeHourlyRate
+                          orderby a.Id descending
+                          select new EmployeeHourlyRateModel()
+                          {
+                              Id = a.Id,
+                              DesignationName = a.DesignationName,
+                              Fk_DesginationId = a.Fk_DesginationId,
+                              ToDate = a.ToDate,
+                              FromDate = a.FromDate,
+                              Fk_EmployeeId = a.Fk_EmployeeId,
+                              IsDelete = a.IsDelete,
+                              Rate = a.Rate,
+                              EmployeeName = a.EmployeeName,
                           }).Where(d => d.IsDelete.Equals(false)).ToList();
                 return dr;
             }

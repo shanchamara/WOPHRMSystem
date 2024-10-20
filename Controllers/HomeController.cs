@@ -1,4 +1,8 @@
-﻿using System.Web.Mvc;
+﻿using System.Collections.Generic;
+using System.Web.Mvc;
+using WOPHRMSystem.Context;
+using WOPHRMSystem.Models;
+using WOPHRMSystem.Services;
 
 namespace WOPHRMSystem.Controllers
 {
@@ -6,6 +10,7 @@ namespace WOPHRMSystem.Controllers
     {
         public ActionResult Index()
         {
+            //List<LaberUtilizationStatementWorkTypeAndGroup> data = new ReportServices().GetAll();
             return View();
         }
 

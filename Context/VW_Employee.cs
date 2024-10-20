@@ -38,5 +38,7 @@ namespace WOPHRMSystem.Context
         public string DepartmentCode { get; set; }
         public string DesignationCode { get; set; }
         public string titleCode { get; set; }
+        public string DesignationName { get; set; }
+        public string DepartmentName { get; set; }
     }
 }

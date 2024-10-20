@@ -970,9 +970,26 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="VW_CustomerLocationRates">
+      <EntityTypeMapping TypeName="AuditSystemModel.VW_CustomerLocationRates">
+        <MappingFragment StoreEntitySet="VW_CustomerLocationRates">
+          <ScalarProperty Name="LocationNumber" ColumnName="LocationNumber" />
+          <ScalarProperty Name="Rate" ColumnName="Rate" />
+          <ScalarProperty Name="ToDate" ColumnName="ToDate" />
+          <ScalarProperty Name="FromDate" ColumnName="FromDate" />
+          <ScalarProperty Name="Fk_LocatonId" ColumnName="Fk_LocatonId" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="LocationName" ColumnName="LocationName" />
+          <ScalarProperty Name="CustomerName" ColumnName="CustomerName" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="VW_Employee">
       <EntityTypeMapping TypeName="AuditSystemModel.VW_Employee">
         <MappingFragment StoreEntitySet="VW_Employee">
+          <ScalarProperty Name="DepartmentName" ColumnName="DepartmentName" />
+          <ScalarProperty Name="DesignationName" ColumnName="DesignationName" />
           <ScalarProperty Name="titleCode" ColumnName="titleCode" />
           <ScalarProperty Name="DesignationCode" ColumnName="DesignationCode" />
           <ScalarProperty Name="DepartmentCode" ColumnName="DepartmentCode" />
@@ -996,6 +1013,27 @@
           <ScalarProperty Name="BirthDay" ColumnName="BirthDay" />
           <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="Code" ColumnName="Code" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="VW_EmployeeHourlyRate">
+      <EntityTypeMapping TypeName="AuditSystemModel.VW_EmployeeHourlyRate">
+        <MappingFragment StoreEntitySet="VW_EmployeeHourlyRate">
+          <ScalarProperty Name="DesignationName" ColumnName="DesignationName" />
+          <ScalarProperty Name="EmployeeName" ColumnName="EmployeeName" />
+          <ScalarProperty Name="Delete_Date" ColumnName="Delete_Date" />
+          <ScalarProperty Name="Delete_By" ColumnName="Delete_By" />
+          <ScalarProperty Name="Edit_Date" ColumnName="Edit_Date" />
+          <ScalarProperty Name="Edit_By" ColumnName="Edit_By" />
+          <ScalarProperty Name="Create_Date" ColumnName="Create_Date" />
+          <ScalarProperty Name="Create_By" ColumnName="Create_By" />
+          <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+          <ScalarProperty Name="Fk_EmployeeId" ColumnName="Fk_EmployeeId" />
+          <ScalarProperty Name="ToDate" ColumnName="ToDate" />
+          <ScalarProperty Name="Fk_DesginationId" ColumnName="Fk_DesginationId" />
+          <ScalarProperty Name="FromDate" ColumnName="FromDate" />
+          <ScalarProperty Name="Rate" ColumnName="Rate" />
           <ScalarProperty Name="Id" ColumnName="Id" />
         </MappingFragment>
       </EntityTypeMapping>
@@ -1024,6 +1062,21 @@
           <ScalarProperty Name="JobCode" ColumnName="JobCode" />
           <ScalarProperty Name="Fk_EmployeeId" ColumnName="Fk_EmployeeId" />
           <ScalarProperty Name="Fk_JobMasterId" ColumnName="Fk_JobMasterId" />
+          <ScalarProperty Name="TrDate" ColumnName="TrDate" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="VW_EmployeeVisitingRates">
+      <EntityTypeMapping TypeName="AuditSystemModel.VW_EmployeeVisitingRates">
+        <MappingFragment StoreEntitySet="VW_EmployeeVisitingRates">
+          <ScalarProperty Name="Rate" ColumnName="Rate" />
+          <ScalarProperty Name="LocationName" ColumnName="LocationName" />
+          <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+          <ScalarProperty Name="Fk_LocationId" ColumnName="Fk_LocationId" />
+          <ScalarProperty Name="IsApplyTravelingCost" ColumnName="IsApplyTravelingCost" />
+          <ScalarProperty Name="Fk_EmployeeId" ColumnName="Fk_EmployeeId" />
+          <ScalarProperty Name="EmployeeName" ColumnName="EmployeeName" />
           <ScalarProperty Name="TrDate" ColumnName="TrDate" />
           <ScalarProperty Name="Id" ColumnName="Id" />
         </MappingFragment>
@@ -1341,6 +1394,45 @@
           <ScalarProperty Name="BudgetedHours" ColumnName="BudgetedHours" />
           <ScalarProperty Name="Fk_JobMasterId" ColumnName="Fk_JobMasterId" />
           <ScalarProperty Name="PartnerTableId" ColumnName="PartnerTableId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="VW_LaberUtilizationStatementWorkTypeAndGroup">
+      <EntityTypeMapping TypeName="AuditSystemModel.VW_LaberUtilizationStatementWorkTypeAndGroup">
+        <MappingFragment StoreEntitySet="VW_LaberUtilizationStatementWorkTypeAndGroup">
+          <ScalarProperty Name="EmployeeName" ColumnName="EmployeeName" />
+          <ScalarProperty Name="Worktypes" ColumnName="Worktypes" />
+          <ScalarProperty Name="Groups" ColumnName="Groups" />
+          <ScalarProperty Name="Fk_CustomerId" ColumnName="Fk_CustomerId" />
+          <ScalarProperty Name="Fk_WorkTypeId" ColumnName="Fk_WorkTypeId" />
+          <ScalarProperty Name="WorkingHours" ColumnName="WorkingHours" />
+          <ScalarProperty Name="Fk_LocationId" ColumnName="Fk_LocationId" />
+          <ScalarProperty Name="IsApplyTravelingCost" ColumnName="IsApplyTravelingCost" />
+          <ScalarProperty Name="Narration" ColumnName="Narration" />
+          <ScalarProperty Name="Fk_EmployeeId" ColumnName="Fk_EmployeeId" />
+          <ScalarProperty Name="Fk_JobMasterId" ColumnName="Fk_JobMasterId" />
+          <ScalarProperty Name="TrDate" ColumnName="TrDate" />
+          <ScalarProperty Name="TransactionId" ColumnName="TransactionId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="VW_LaberUtilizationSummaryWorkTypeAndGroup">
+      <EntityTypeMapping TypeName="AuditSystemModel.VW_LaberUtilizationSummaryWorkTypeAndGroup">
+        <MappingFragment StoreEntitySet="VW_LaberUtilizationSummaryWorkTypeAndGroup">
+          <ScalarProperty Name="EmployeeName" ColumnName="EmployeeName" />
+          <ScalarProperty Name="Worktypes" ColumnName="Worktypes" />
+          <ScalarProperty Name="Groups" ColumnName="Groups" />
+          <ScalarProperty Name="Fk_CustomerId" ColumnName="Fk_CustomerId" />
+          <ScalarProperty Name="Fk_WorkTypeId" ColumnName="Fk_WorkTypeId" />
+          <ScalarProperty Name="WorkingHours" ColumnName="WorkingHours" />
+          <ScalarProperty Name="Fk_LocationId" ColumnName="Fk_LocationId" />
+          <ScalarProperty Name="IsApplyTravelingCost" ColumnName="IsApplyTravelingCost" />
+          <ScalarProperty Name="JobCode" ColumnName="JobCode" />
+          <ScalarProperty Name="Narration" ColumnName="Narration" />
+          <ScalarProperty Name="Fk_EmployeeId" ColumnName="Fk_EmployeeId" />
+          <ScalarProperty Name="Fk_JobMasterId" ColumnName="Fk_JobMasterId" />
+          <ScalarProperty Name="TrDate" ColumnName="TrDate" />
+          <ScalarProperty Name="TransactionId" ColumnName="TransactionId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

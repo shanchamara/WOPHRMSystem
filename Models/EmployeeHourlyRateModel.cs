@@ -15,6 +15,7 @@ namespace WOPHRMSystem.Models
         public bool IsDelete { get; set; }
         public int Fk_DesginationId { get; set; }
         public string DesignationName { get; set; }
+        public string EmployeeName { get; set; }
     }
 
     public class ListEmployeeRate

@@ -50,4 +50,18 @@ namespace WOPHRMSystem.Models
         public LocationModel MasterModel { get; set; }
         public List<RateModel> Rates { get; set; }
     }
+
+
+    public partial class VW_CustomerLocationRatesModel
+    {
+        public int Id { get; set; }
+        public string Address { get; set; }
+        public string CustomerName { get; set; }
+        public string LocationName { get; set; }
+        public int Fk_LocatonId { get; set; }
+        public Nullable<System.DateTime> FromDate { get; set; }
+        public Nullable<System.DateTime> ToDate { get; set; }
+        public Nullable<decimal> Rate { get; set; }
+        public Nullable<long> LocationNumber { get; set; }
+    }
 }

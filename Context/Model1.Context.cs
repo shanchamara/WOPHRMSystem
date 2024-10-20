@@ -73,8 +73,11 @@ namespace WOPHRMSystem.Context
         public DbSet<TblWorkType> TblWorkTypes { get; set; }
         public DbSet<VW_CurrentlyGetJobAssignee> VW_CurrentlyGetJobAssignee { get; set; }
         public DbSet<VW_Customer> VW_Customer { get; set; }
+        public DbSet<VW_CustomerLocationRates> VW_CustomerLocationRates { get; set; }
         public DbSet<VW_Employee> VW_Employee { get; set; }
+        public DbSet<VW_EmployeeHourlyRate> VW_EmployeeHourlyRate { get; set; }
         public DbSet<VW_EmployeeJobTransaction> VW_EmployeeJobTransaction { get; set; }
+        public DbSet<VW_EmployeeVisitingRates> VW_EmployeeVisitingRates { get; set; }
         public DbSet<VW_GeneralReceipts> VW_GeneralReceipts { get; set; }
         public DbSet<VW_GetJObActualValue> VW_GetJObActualValue { get; set; }
         public DbSet<VW_GradeMaster> VW_GradeMaster { get; set; }
@@ -86,6 +89,8 @@ namespace WOPHRMSystem.Context
         public DbSet<VW_JobMaster> VW_JobMaster { get; set; }
         public DbSet<VW_JobMasterViewforCalculatorJobCostReport> VW_JobMasterViewforCalculatorJobCostReport { get; set; }
         public DbSet<VW_JobMasterViewforReport> VW_JobMasterViewforReport { get; set; }
+        public DbSet<VW_LaberUtilizationStatementWorkTypeAndGroup> VW_LaberUtilizationStatementWorkTypeAndGroup { get; set; }
+        public DbSet<VW_LaberUtilizationSummaryWorkTypeAndGroup> VW_LaberUtilizationSummaryWorkTypeAndGroup { get; set; }
         public DbSet<VW_LegalStatusMaster> VW_LegalStatusMaster { get; set; }
         public DbSet<VW_NatureMaster> VW_NatureMaster { get; set; }
         public DbSet<VW_OpeningBalance> VW_OpeningBalance { get; set; }
