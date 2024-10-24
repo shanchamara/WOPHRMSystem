@@ -368,3 +368,5 @@ E:\Devop Project\SWIS Software\Freelancer Project\Second Project\WOPHRMSystem\bi
 E:\Devop Project\SWIS Software\Freelancer Project\Second Project\WOPHRMSystem\bin\Reports\ReportLaberUtilizationSummaryWorkType.rdlc
 E:\Devop Project\SWIS Software\Freelancer Project\Second Project\WOPHRMSystem\bin\Reports\ReportLocationRates.rdlc
 E:\Devop Project\SWIS Software\Freelancer Project\Second Project\WOPHRMSystem\bin\Reports\ReportEmployeeVisitingLocationRates.rdlc
+E:\Devop Project\SWIS Software\Freelancer Project\Second Project\WOPHRMSystem\bin\Reports\ReportJObWiseCositingDetailsWithAssignEmployee.rdlc
+E:\Devop Project\SWIS Software\Freelancer Project\Second Project\WOPHRMSystem\bin\Reports\ReportJobCustomerSummaryCost.rdlc

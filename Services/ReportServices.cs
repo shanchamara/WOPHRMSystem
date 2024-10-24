@@ -184,5 +184,164 @@ namespace WOPHRMSystem.Services
                 throw;
             }
         }
+
+        public List<JObWiseCositingDetailsWithAssignEmployeeModel> GetJObWiseCositingDetailsWithAssignEmployee(string fromDate, int JobmasterId)
+        {
+            try
+            {
+                List<JObWiseCositingDetailsWithAssignEmployeeModel> lists;
+                DateTime Fromdate = DateTime.Parse(fromDate);
+
+
+                var dr = (from a in _context.VW_JObWiseCositingDetailsWithAssignEmployee
+                          orderby a.Fk_JobMasterId ascending
+                          where a.Fk_JobMasterId == JobmasterId
+                          select new JObWiseCositingDetailsWithAssignEmployeeModel()
+                          {
+                              ActualValue = a.ActualValue,
+                              BudgetedValue = a.BudgetedValue,
+                              EmployeeCode = a.EmployeeCode,
+                              EmployeeName = a.EmployeeName,
+                              EmployeeNo = a.EmployeeNo,
+                              ActualHours = a.ActualHours,
+                              BudgetedHours = a.BudgetedHours,
+                              CompletedDate = a.CompletedDate,
+                              CustomerCode = a.CustomerCode,
+                              CustomerName = a.CustomerName,
+                              DueDate = a.DueDate,
+                              EmployeeRateValue = a.EmployeeRateValue,
+                              Fk_CustomerId = a.Fk_CustomerId,
+                              Fk_JobMasterId = a.Fk_JobMasterId,
+                              HoursVarianceValue = a.HoursVarianceValue,
+                              IsCompleted = a.IsCompleted,
+                              IsReActivate = a.IsReActivate,
+                              JobCode = a.JobCode,
+                              LocationRate = a.LocationRate,
+                              Narration = a.Narration,
+                              PartnerTableId = a.PartnerTableId,
+                              PreViewvalue = a.PreViewvalue,
+                              ReActivateDate = a.ReActivateDate,
+                              StartDate = a.StartDate,
+                              TypeOfTable = a.TypeOfTable,
+                              VarianceValue = a.VarianceValue,
+                              TrDate = a.TrDate,
+
+                          }).AsNoTracking().ToList();
+
+                lists = dr.Where(d => d.TrDate.Equals(null)).ToList();
+
+                var wheredr = dr.Where(a => a.TrDate <= Fromdate).ToList();
+
+                var finalReSult = lists.Concat(wheredr).ToList();
+
+                var groupedResult = finalReSult
+                   .GroupBy(g => g.EmployeeCode)
+                   .Select(grp => new JObWiseCositingDetailsWithAssignEmployeeModel
+                   {
+
+                       EmployeeCode = grp.Key,
+                       EmployeeName = grp.First().EmployeeName,
+                       ActualValue = grp.Sum(x => x.ActualValue), // Sum of ActualValue per employee
+                       BudgetedValue = grp.First().BudgetedValue, // Sum of BudgetedValue per employee
+                       ActualHours = grp.Sum(x => x.ActualHours), // Sum of ActualHours per employee
+                       BudgetedHours = grp.First().BudgetedHours, // Sum of BudgetedHours per employee
+                       EmployeeRateValue = grp.First().EmployeeRateValue ?? 0,
+                       StartDate = grp.First().StartDate,
+                       CustomerCode = grp.First().CustomerCode,
+                       CustomerName = grp.First().CustomerName,
+                       JobCode = grp.First().JobCode
+                   })
+                   .ToList();
+
+                return groupedResult;
+                //return queryResult;
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public List<JObWiseCositingDetailsWithAssignEmployeeModel> GetJobCositingDetailsWithAssignEmployeeSummary(string fromDate, bool IsCompleted, bool IsCustomer)
+        {
+            try
+            {
+                List<JObWiseCositingDetailsWithAssignEmployeeModel> lists;
+                DateTime Fromdate = DateTime.Parse(fromDate);
+
+                // The BDO customer number is defaulting to the first record 1 . 
+
+                var dr = (from a in _context.VW_JObWiseCositingDetailsWithAssignEmployee
+                          orderby a.Fk_JobMasterId ascending
+                          where a.IsCompleted == IsCompleted && (IsCustomer || a.Fk_CustomerId == 1)
+                          select new JObWiseCositingDetailsWithAssignEmployeeModel()
+                          {
+                              ActualValue = a.ActualValue,
+                              BudgetedValue = a.BudgetedValue,
+                              EmployeeCode = a.EmployeeCode,
+                              EmployeeName = a.EmployeeName,
+                              EmployeeNo = a.EmployeeNo,
+                              ActualHours = a.ActualHours,
+                              BudgetedHours = a.BudgetedHours,
+                              CompletedDate = a.CompletedDate,
+                              CustomerCode = a.CustomerCode,
+                              CustomerName = a.CustomerName,
+                              DueDate = a.DueDate,
+                              EmployeeRateValue = a.EmployeeRateValue,
+                              Fk_CustomerId = a.Fk_CustomerId,
+                              Fk_JobMasterId = a.Fk_JobMasterId,
+                              HoursVarianceValue = a.HoursVarianceValue,
+                              IsCompleted = a.IsCompleted,
+                              IsReActivate = a.IsReActivate,
+                              JobCode = a.JobCode,
+                              LocationRate = a.LocationRate,
+                              Narration = a.Narration,
+                              PartnerTableId = a.PartnerTableId,
+                              PreViewvalue = a.PreViewvalue,
+                              ReActivateDate = a.ReActivateDate,
+                              StartDate = a.StartDate,
+                              TypeOfTable = a.TypeOfTable,
+                              VarianceValue = a.VarianceValue,
+                              TrDate = a.TrDate,
+
+                          }).AsNoTracking().ToList();
+
+                lists = dr.Where(d => d.TrDate.Equals(null)).ToList();
+
+                var wheredr = dr.Where(a => a.TrDate <= Fromdate).ToList();
+
+                var finalReSult = lists.Concat(wheredr).ToList();
+
+                var groupedResult = finalReSult
+                   .GroupBy(g => new { g.Fk_JobMasterId, g.CustomerCode,g.EmployeeCode })
+                   .Select(grp => new JObWiseCositingDetailsWithAssignEmployeeModel
+                   {
+
+                       Fk_JobMasterId = grp.Key.Fk_JobMasterId,
+                       EmployeeName = grp.First().EmployeeName,
+                       ActualValue = grp.Sum(x => x.ActualValue),
+                       BudgetedValue = grp.First().BudgetedValue,
+                       ActualHours = grp.Sum(x => x.ActualHours),
+                       BudgetedHours = grp.First().BudgetedHours,
+                       EmployeeRateValue = grp.First().EmployeeRateValue ?? 0,
+                       StartDate = grp.First().StartDate,
+                       CustomerCode = grp.First().CustomerCode,
+                       CustomerName = grp.First().CustomerName,
+                       JobCode = grp.First().JobCode
+                   })
+                   .ToList();
+
+                return groupedResult;
+               // return finalReSult;
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
     }
 }

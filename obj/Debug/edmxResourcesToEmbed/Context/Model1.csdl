@@ -54,6 +54,7 @@
     <EntitySet Name="VW_EmployeeHourlyRate" EntityType="AuditSystemModel.VW_EmployeeHourlyRate" />
     <EntitySet Name="VW_EmployeeJobTransaction" EntityType="AuditSystemModel.VW_EmployeeJobTransaction" />
     <EntitySet Name="VW_EmployeeVisitingRates" EntityType="AuditSystemModel.VW_EmployeeVisitingRates" />
+    <EntitySet Name="VW_EmployeeWiseJObCositingDetails" EntityType="AuditSystemModel.VW_EmployeeWiseJObCositingDetails" />
     <EntitySet Name="VW_GeneralReceipts" EntityType="AuditSystemModel.VW_GeneralReceipts" />
     <EntitySet Name="VW_GetJObActualValue" EntityType="AuditSystemModel.VW_GetJObActualValue" />
     <EntitySet Name="VW_GradeMaster" EntityType="AuditSystemModel.VW_GradeMaster" />
@@ -65,6 +66,7 @@
     <EntitySet Name="VW_JobMaster" EntityType="AuditSystemModel.VW_JobMaster" />
     <EntitySet Name="VW_JobMasterViewforCalculatorJobCostReport" EntityType="AuditSystemModel.VW_JobMasterViewforCalculatorJobCostReport" />
     <EntitySet Name="VW_JobMasterViewforReport" EntityType="AuditSystemModel.VW_JobMasterViewforReport" />
+    <EntitySet Name="VW_JObWiseCositingDetailsWithAssignEmployee" EntityType="AuditSystemModel.VW_JObWiseCositingDetailsWithAssignEmployee" />
     <EntitySet Name="VW_LaberUtilizationStatementWorkTypeAndGroup" EntityType="AuditSystemModel.VW_LaberUtilizationStatementWorkTypeAndGroup" />
     <EntitySet Name="VW_LaberUtilizationSummaryWorkTypeAndGroup" EntityType="AuditSystemModel.VW_LaberUtilizationSummaryWorkTypeAndGroup" />
     <EntitySet Name="VW_LegalStatusMaster" EntityType="AuditSystemModel.VW_LegalStatusMaster" />
@@ -1534,6 +1536,51 @@
     <Property Name="LocationName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="Rate" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
   </EntityType>
+  <EntityType Name="VW_EmployeeWiseJObCositingDetails">
+    <Key>
+      <PropertyRef Name="PartnerTableId" />
+      <PropertyRef Name="Fk_JobMasterId" />
+      <PropertyRef Name="Fk_CustomerId" />
+      <PropertyRef Name="TypeOfTableId" />
+      <PropertyRef Name="PartnersIsDelete" />
+      <PropertyRef Name="JobmasterId" />
+      <PropertyRef Name="IsCompleted" />
+      <PropertyRef Name="IsReActivate" />
+      <PropertyRef Name="IsActive" />
+      <PropertyRef Name="JobmasterIsDelete" />
+      <PropertyRef Name="LocationRate" />
+      <PropertyRef Name="HoursVarianceValue" />
+      <PropertyRef Name="VarianceValue" />
+    </Key>
+    <Property Name="PartnerTableId" Type="Int32" Nullable="false" />
+    <Property Name="Fk_JobMasterId" Type="Int32" Nullable="false" />
+    <Property Name="Fk_CustomerId" Type="Int32" Nullable="false" />
+    <Property Name="TypeOfTable" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="TypeOfTableId" Type="Int32" Nullable="false" />
+    <Property Name="PartnersIsDelete" Type="Boolean" Nullable="false" />
+    <Property Name="CustomerName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="CustomerCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="JobmasterId" Type="Int32" Nullable="false" />
+    <Property Name="JobCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Narration" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="PreViewvalue" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="StartDate" Type="DateTime" Precision="7" />
+    <Property Name="DueDate" Type="DateTime" Precision="7" />
+    <Property Name="IsCompleted" Type="Boolean" Nullable="false" />
+    <Property Name="IsReActivate" Type="Boolean" Nullable="false" />
+    <Property Name="CompletedDate" Type="DateTime" Precision="7" />
+    <Property Name="ReActivateDate" Type="DateTime" Precision="7" />
+    <Property Name="IsActive" Type="Boolean" Nullable="false" />
+    <Property Name="JobmasterIsDelete" Type="Boolean" Nullable="false" />
+    <Property Name="CombinedName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="CombinedCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="BudgetedHours" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="ActualHours" Type="Decimal" Precision="38" Scale="2" />
+    <Property Name="LocationRate" Type="Decimal" Nullable="false" Precision="38" Scale="2" />
+    <Property Name="EmployeeRateValue" Type="Decimal" Precision="38" Scale="2" />
+    <Property Name="HoursVarianceValue" Type="Decimal" Nullable="false" Precision="38" Scale="2" />
+    <Property Name="VarianceValue" Type="Decimal" Nullable="false" Precision="38" Scale="4" />
+  </EntityType>
   <EntityType Name="VW_GeneralReceipts">
     <Key>
       <PropertyRef Name="Id" />
@@ -1926,6 +1973,49 @@
     <Property Name="Delete_Date" Type="DateTime" Precision="7" />
     <Property Name="CombinedName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="CombinedCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="VW_JObWiseCositingDetailsWithAssignEmployee">
+    <Key>
+      <PropertyRef Name="PartnerTableId" />
+      <PropertyRef Name="Fk_JobMasterId" />
+      <PropertyRef Name="Fk_CustomerId" />
+      <PropertyRef Name="EmployeeNo" />
+      <PropertyRef Name="IsCompleted" />
+      <PropertyRef Name="IsReActivate" />
+      <PropertyRef Name="BudgetedValue" />
+      <PropertyRef Name="ActualHours" />
+      <PropertyRef Name="ActualValue" />
+      <PropertyRef Name="LocationRate" />
+      <PropertyRef Name="HoursVarianceValue" />
+      <PropertyRef Name="VarianceValue" />
+    </Key>
+    <Property Name="PartnerTableId" Type="Int32" Nullable="false" />
+    <Property Name="Fk_JobMasterId" Type="Int32" Nullable="false" />
+    <Property Name="Fk_CustomerId" Type="Int32" Nullable="false" />
+    <Property Name="TypeOfTable" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="EmployeeNo" Type="Int32" Nullable="false" />
+    <Property Name="CustomerName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="CustomerCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="JobCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Narration" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="PreViewvalue" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="StartDate" Type="DateTime" Precision="7" />
+    <Property Name="DueDate" Type="DateTime" Precision="7" />
+    <Property Name="IsCompleted" Type="Boolean" Nullable="false" />
+    <Property Name="IsReActivate" Type="Boolean" Nullable="false" />
+    <Property Name="CompletedDate" Type="DateTime" Precision="7" />
+    <Property Name="ReActivateDate" Type="DateTime" Precision="7" />
+    <Property Name="EmployeeName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="EmployeeCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="TrDate" Type="DateTime" Precision="7" />
+    <Property Name="BudgetedHours" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="BudgetedValue" Type="Decimal" Nullable="false" Precision="38" Scale="4" />
+    <Property Name="ActualHours" Type="Decimal" Nullable="false" Precision="38" Scale="2" />
+    <Property Name="ActualValue" Type="Decimal" Nullable="false" Precision="38" Scale="4" />
+    <Property Name="LocationRate" Type="Decimal" Nullable="false" Precision="38" Scale="2" />
+    <Property Name="EmployeeRateValue" Type="Decimal" Precision="38" Scale="2" />
+    <Property Name="HoursVarianceValue" Type="Decimal" Nullable="false" Precision="38" Scale="2" />
+    <Property Name="VarianceValue" Type="Decimal" Nullable="false" Precision="38" Scale="4" />
   </EntityType>
   <EntityType Name="VW_LaberUtilizationStatementWorkTypeAndGroup">
     <Key>

@@ -6,51 +6,51 @@
     <edmx:Diagrams>
       <Diagram DiagramId="e0a8e202535b46a096b80f06b9771b47" Name="Diagram1" ZoomLevel="64" >
         <EntityTypeShape EntityType="AuditSystemModel.C__EFMigrationsHistory" Width="1.5" PointX="0.75" PointY="0.75" />
-        <EntityTypeShape EntityType="AuditSystemModel.TblAccount" Width="1.5" PointX="3" PointY="52.375" />
+        <EntityTypeShape EntityType="AuditSystemModel.TblAccount" Width="1.5" PointX="3" PointY="47.375" />
         <EntityTypeShape EntityType="AuditSystemModel.TblChequeDetail" Width="1.5" PointX="2.75" PointY="0.75" />
         <EntityTypeShape EntityType="AuditSystemModel.TblChequeTempDetail" Width="1.5" PointX="4.75" PointY="0.75" />
-        <EntityTypeShape EntityType="AuditSystemModel.TblCompany" Width="1.5" PointX="3" PointY="32.625" />
-        <EntityTypeShape EntityType="AuditSystemModel.TblCustomerGroup" Width="1.5" PointX="0.75" PointY="39.625" />
+        <EntityTypeShape EntityType="AuditSystemModel.TblCompany" Width="1.5" PointX="3" PointY="49.75" />
+        <EntityTypeShape EntityType="AuditSystemModel.TblCustomerGroup" Width="1.5" PointX="0.75" PointY="52.75" />
         <EntityTypeShape EntityType="AuditSystemModel.TblCustomer" Width="1.5" PointX="3" PointY="36.25" />
-        <EntityTypeShape EntityType="AuditSystemModel.TblDepartment" Width="1.5" PointX="8.25" PointY="70.75" />
-        <EntityTypeShape EntityType="AuditSystemModel.TblDepartmentSecond" Width="1.5" PointX="8.25" PointY="80.625" />
-        <EntityTypeShape EntityType="AuditSystemModel.TblDepartmentThird" Width="1.5" PointX="8.25" PointY="75.625" />
-        <EntityTypeShape EntityType="AuditSystemModel.TblDesignation" Width="1.5" PointX="3" PointY="65.5" />
+        <EntityTypeShape EntityType="AuditSystemModel.TblDepartment" Width="1.5" PointX="14.25" PointY="63.625" />
+        <EntityTypeShape EntityType="AuditSystemModel.TblDepartmentSecond" Width="1.5" PointX="14.25" PointY="58.875" />
+        <EntityTypeShape EntityType="AuditSystemModel.TblDepartmentThird" Width="1.5" PointX="14.25" PointY="34.75" />
+        <EntityTypeShape EntityType="AuditSystemModel.TblDesignation" Width="1.5" PointX="6" PointY="33.75" />
         <EntityTypeShape EntityType="AuditSystemModel.TblDocument" Width="1.5" PointX="0.75" PointY="5.75" />
-        <EntityTypeShape EntityType="AuditSystemModel.TblEmployee" Width="1.5" PointX="5.25" PointY="62.125" />
-        <EntityTypeShape EntityType="AuditSystemModel.TblEmployeeHourlyRate" Width="1.5" PointX="10.5" PointY="66.625" />
+        <EntityTypeShape EntityType="AuditSystemModel.TblEmployee" Width="1.5" PointX="8.25" PointY="30.375" />
+        <EntityTypeShape EntityType="AuditSystemModel.TblEmployeeHourlyRate" Width="1.5" PointX="13.5" PointY="29.875" />
         <EntityTypeShape EntityType="AuditSystemModel.TblGenaralReceipt" Width="1.5" PointX="5.25" PointY="38.5" />
-        <EntityTypeShape EntityType="AuditSystemModel.TblGradeMaster" Width="1.5" PointX="0.75" PointY="48.625" />
-        <EntityTypeShape EntityType="AuditSystemModel.TblInternationalReferalMaster" Width="1.5" PointX="0.75" PointY="35.5" />
-        <EntityTypeShape EntityType="AuditSystemModel.TblIntroductionMaster" Width="1.5" PointX="0.75" PointY="52.75" />
-        <EntityTypeShape EntityType="AuditSystemModel.TblInvoiceBody" Width="1.5" PointX="7.5" PointY="56.25" />
+        <EntityTypeShape EntityType="AuditSystemModel.TblGradeMaster" Width="1.5" PointX="0.75" PointY="39.625" />
+        <EntityTypeShape EntityType="AuditSystemModel.TblInternationalReferalMaster" Width="1.5" PointX="0.75" PointY="48.625" />
+        <EntityTypeShape EntityType="AuditSystemModel.TblIntroductionMaster" Width="1.5" PointX="0.75" PointY="31.5" />
+        <EntityTypeShape EntityType="AuditSystemModel.TblInvoiceBody" Width="1.5" PointX="7.5" PointY="50.5" />
         <EntityTypeShape EntityType="AuditSystemModel.TblInvoiceBodyTemp" Width="1.5" PointX="6.75" PointY="0.75" />
-        <EntityTypeShape EntityType="AuditSystemModel.TblInvoiceHead" Width="1.5" PointX="10.5" PointY="52.125" />
-        <EntityTypeShape EntityType="AuditSystemModel.TblInvoiceNarrationMaster" Width="1.5" PointX="5.25" PointY="56.75" />
-        <EntityTypeShape EntityType="AuditSystemModel.TblInvoiceShortNarrationMaster" Width="1.5" PointX="8.25" PointY="66.5" />
-        <EntityTypeShape EntityType="AuditSystemModel.TblJobMaster" Width="1.5" PointX="5.25" PointY="74" />
+        <EntityTypeShape EntityType="AuditSystemModel.TblInvoiceHead" Width="1.5" PointX="16.5" PointY="45.375" />
+        <EntityTypeShape EntityType="AuditSystemModel.TblInvoiceNarrationMaster" Width="1.5" PointX="5.25" PointY="56" />
+        <EntityTypeShape EntityType="AuditSystemModel.TblInvoiceShortNarrationMaster" Width="1.5" PointX="14.25" PointY="68.5" />
+        <EntityTypeShape EntityType="AuditSystemModel.TblJobMaster" Width="1.5" PointX="5.25" PointY="60.5" />
         <EntityTypeShape EntityType="AuditSystemModel.TblJobMasterAssignTemp" Width="1.5" PointX="2.75" PointY="6.75" />
-        <EntityTypeShape EntityType="AuditSystemModel.TblJobMasterLocation" Width="1.5" PointX="7.5" PointY="61.625" />
+        <EntityTypeShape EntityType="AuditSystemModel.TblJobMasterLocation" Width="1.5" PointX="7.5" PointY="55.875" />
         <EntityTypeShape EntityType="AuditSystemModel.TblJobMasterLocationTemp" Width="1.5" PointX="6.75" PointY="4.75" />
-        <EntityTypeShape EntityType="AuditSystemModel.TblJobMasterPartner" Width="1.5" PointX="7.5" PointY="104.25" />
-        <EntityTypeShape EntityType="AuditSystemModel.TblJobTransaction" Width="1.5" PointX="7.5" PointY="49.875" />
-        <EntityTypeShape EntityType="AuditSystemModel.TblLegalStatusMaster" Width="1.5" PointX="0.75" PointY="31.5" />
+        <EntityTypeShape EntityType="AuditSystemModel.TblJobMasterPartner" Width="1.5" PointX="7.5" PointY="90.75" />
+        <EntityTypeShape EntityType="AuditSystemModel.TblJobTransaction" Width="1.5" PointX="10.5" PointY="49.125" />
+        <EntityTypeShape EntityType="AuditSystemModel.TblLegalStatusMaster" Width="1.5" PointX="0.75" PointY="44.625" />
         <EntityTypeShape EntityType="AuditSystemModel.TblLocation" Width="1.5" PointX="5.25" PointY="46" />
         <EntityTypeShape EntityType="AuditSystemModel.TblLocationRate" Width="1.5" PointX="7.5" PointY="47" />
-        <EntityTypeShape EntityType="AuditSystemModel.TblNatureMaster" Width="1.5" PointX="8.25" PointY="33.25" />
-        <EntityTypeShape EntityType="AuditSystemModel.TblNonEffectiveEmployee" Width="1.5" PointX="7.5" PointY="85.625" />
+        <EntityTypeShape EntityType="AuditSystemModel.TblNatureMaster" Width="1.5" PointX="14.25" PointY="40.5" />
+        <EntityTypeShape EntityType="AuditSystemModel.TblNonEffectiveEmployee" Width="1.5" PointX="10.5" PointY="31.875" />
         <EntityTypeShape EntityType="AuditSystemModel.TblOpeningBalance" Width="1.5" PointX="5.25" PointY="50.875" />
-        <EntityTypeShape EntityType="AuditSystemModel.TblProformaInvoiceBody" Width="1.5" PointX="15.75" PointY="56.25" />
+        <EntityTypeShape EntityType="AuditSystemModel.TblProformaInvoiceBody" Width="1.5" PointX="10.5" PointY="55.5" />
         <EntityTypeShape EntityType="AuditSystemModel.TblProformaInvoiceBodyTemp" Width="1.5" PointX="4.75" PointY="7.75" />
-        <EntityTypeShape EntityType="AuditSystemModel.TblProformaInvoiceHead" Width="1.5" PointX="13.5" PointY="52.25" />
+        <EntityTypeShape EntityType="AuditSystemModel.TblProformaInvoiceHead" Width="1.5" PointX="13.5" PointY="45.5" />
         <EntityTypeShape EntityType="AuditSystemModel.TblReceipt" Width="1.5" PointX="8.25" PointY="38.5" />
-        <EntityTypeShape EntityType="AuditSystemModel.TblReceiptBodydeatil" Width="1.5" PointX="12.75" PointY="46.75" />
+        <EntityTypeShape EntityType="AuditSystemModel.TblReceiptBodydeatil" Width="1.5" PointX="18.75" PointY="46.375" />
         <EntityTypeShape EntityType="AuditSystemModel.TblReceiptTempInvoice" Width="1.5" PointX="6.75" PointY="7.75" />
-        <EntityTypeShape EntityType="AuditSystemModel.TblSectorMaster" Width="1.5" PointX="0.75" PointY="44.625" />
+        <EntityTypeShape EntityType="AuditSystemModel.TblSectorMaster" Width="1.5" PointX="0.75" PointY="35.5" />
         <EntityTypeShape EntityType="AuditSystemModel.TblSiteSetting" Width="1.5" PointX="8.75" PointY="0.75" />
-        <EntityTypeShape EntityType="AuditSystemModel.TblTitle" Width="1.5" PointX="3" PointY="61.375" />
-        <EntityTypeShape EntityType="AuditSystemModel.TblWorkGroup" Width="1.5" PointX="3" PointY="47.5" />
-        <EntityTypeShape EntityType="AuditSystemModel.TblWorkType" Width="1.5" PointX="5.25" PointY="33.75" />
+        <EntityTypeShape EntityType="AuditSystemModel.TblTitle" Width="1.5" PointX="6" PointY="29.625" />
+        <EntityTypeShape EntityType="AuditSystemModel.TblWorkGroup" Width="1.5" PointX="3" PointY="30.625" />
+        <EntityTypeShape EntityType="AuditSystemModel.TblWorkType" Width="1.5" PointX="8.25" PointY="61" />
         <EntityTypeShape EntityType="AuditSystemModel.VW_CurrentlyGetJobAssignee" Width="1.5" PointX="8.75" PointY="4.75" />
         <EntityTypeShape EntityType="AuditSystemModel.VW_Customer" Width="1.5" PointX="10.75" PointY="0.75" />
         <EntityTypeShape EntityType="AuditSystemModel.VW_CustomerLocationRates" Width="1.5" PointX="0.75" PointY="10.75" />
@@ -58,25 +58,27 @@
         <EntityTypeShape EntityType="AuditSystemModel.VW_EmployeeHourlyRate" Width="1.5" PointX="10.75" PointY="10.75" />
         <EntityTypeShape EntityType="AuditSystemModel.VW_EmployeeJobTransaction" Width="1.5" PointX="2.75" PointY="11.75" />
         <EntityTypeShape EntityType="AuditSystemModel.VW_EmployeeVisitingRates" Width="1.5" PointX="4.75" PointY="11.75" />
-        <EntityTypeShape EntityType="AuditSystemModel.VW_GeneralReceipts" Width="1.5" PointX="12.75" PointY="0.75" />
-        <EntityTypeShape EntityType="AuditSystemModel.VW_GetJObActualValue" Width="1.5" PointX="12.75" PointY="7.75" />
-        <EntityTypeShape EntityType="AuditSystemModel.VW_GradeMaster" Width="1.5" PointX="12.75" PointY="13.75" />
-        <EntityTypeShape EntityType="AuditSystemModel.VW_InternationalReferalMaster" Width="1.5" PointX="14.75" PointY="0.75" />
-        <EntityTypeShape EntityType="AuditSystemModel.VW_IntroductionMaster" Width="1.5" PointX="14.75" PointY="4.75" />
-        <EntityTypeShape EntityType="AuditSystemModel.VW_InvoiceHead" Width="1.5" PointX="14.75" PointY="8.75" />
+        <EntityTypeShape EntityType="AuditSystemModel.VW_EmployeeWiseJObCositingDetails" Width="1.5" PointX="12.75" PointY="0.75" />
+        <EntityTypeShape EntityType="AuditSystemModel.VW_GeneralReceipts" Width="1.5" PointX="12.75" PointY="8.75" />
+        <EntityTypeShape EntityType="AuditSystemModel.VW_GetJObActualValue" Width="1.5" PointX="14.75" PointY="0.75" />
+        <EntityTypeShape EntityType="AuditSystemModel.VW_GradeMaster" Width="1.5" PointX="14.75" PointY="6.75" />
+        <EntityTypeShape EntityType="AuditSystemModel.VW_InternationalReferalMaster" Width="1.5" PointX="14.75" PointY="10.75" />
+        <EntityTypeShape EntityType="AuditSystemModel.VW_IntroductionMaster" Width="1.5" PointX="14.75" PointY="14.75" />
+        <EntityTypeShape EntityType="AuditSystemModel.VW_InvoiceHead" Width="1.5" PointX="10.75" PointY="15.75" />
         <EntityTypeShape EntityType="AuditSystemModel.VW_InvoiceNarrationMaster" Width="1.5" PointX="4.75" PointY="15.75" />
         <EntityTypeShape EntityType="AuditSystemModel.VW_InvoiceShortNarrationMaster" Width="1.5" PointX="16.75" PointY="0.75" />
         <EntityTypeShape EntityType="AuditSystemModel.VW_JobMaster" Width="1.5" PointX="16.75" PointY="4.75" />
         <EntityTypeShape EntityType="AuditSystemModel.VW_JobMasterViewforCalculatorJobCostReport" Width="1.5" PointX="16.75" PointY="11.75" />
         <EntityTypeShape EntityType="AuditSystemModel.VW_JobMasterViewforReport" Width="1.5" PointX="6.75" PointY="17.75" />
-        <EntityTypeShape EntityType="AuditSystemModel.VW_LaberUtilizationStatementWorkTypeAndGroup" Width="1.5" PointX="8.75" PointY="17.75" />
-        <EntityTypeShape EntityType="AuditSystemModel.VW_LaberUtilizationSummaryWorkTypeAndGroup" Width="1.5" PointX="10.75" PointY="17.75" />
-        <EntityTypeShape EntityType="AuditSystemModel.VW_LegalStatusMaster" Width="1.5" PointX="18.75" PointY="0.75" />
-        <EntityTypeShape EntityType="AuditSystemModel.VW_NatureMaster" Width="1.5" PointX="0.75" PointY="18.75" />
-        <EntityTypeShape EntityType="AuditSystemModel.VW_OpeningBalance" Width="1.5" PointX="18.75" PointY="4.75" />
-        <EntityTypeShape EntityType="AuditSystemModel.VW_ProformaInvoiceHead" Width="1.5" PointX="18.75" PointY="9.75" />
+        <EntityTypeShape EntityType="AuditSystemModel.VW_JObWiseCositingDetailsWithAssignEmployee" Width="1.5" PointX="18.75" PointY="0.75" />
+        <EntityTypeShape EntityType="AuditSystemModel.VW_LaberUtilizationStatementWorkTypeAndGroup" Width="1.5" PointX="0.75" PointY="18.75" />
+        <EntityTypeShape EntityType="AuditSystemModel.VW_LaberUtilizationSummaryWorkTypeAndGroup" Width="1.5" PointX="18.75" PointY="7.75" />
+        <EntityTypeShape EntityType="AuditSystemModel.VW_LegalStatusMaster" Width="1.5" PointX="18.75" PointY="12.75" />
+        <EntityTypeShape EntityType="AuditSystemModel.VW_NatureMaster" Width="1.5" PointX="12.75" PointY="18.75" />
+        <EntityTypeShape EntityType="AuditSystemModel.VW_OpeningBalance" Width="1.5" PointX="18.75" PointY="16.75" />
+        <EntityTypeShape EntityType="AuditSystemModel.VW_ProformaInvoiceHead" Width="1.5" PointX="20.75" PointY="0.75" />
         <EntityTypeShape EntityType="AuditSystemModel.VW_Receipts" Width="1.5" PointX="2.75" PointY="19.75" />
-        <EntityTypeShape EntityType="AuditSystemModel.VW_SectorMaster" Width="1.5" PointX="20.75" PointY="0.75" />
+        <EntityTypeShape EntityType="AuditSystemModel.VW_SectorMaster" Width="1.5" PointX="14.75" PointY="20.75" />
         <AssociationConnector Association="AuditSystemModel.FK_TblGenaralReceipt_TblAccount_Fk_AccountId" />
         <AssociationConnector Association="AuditSystemModel.FK_TblGenaralReceipt_TblCompany_Fk_CompanyId" />
         <AssociationConnector Association="AuditSystemModel.FK_TblInvoiceHead_TblCompany_Fk_CompanyId" />

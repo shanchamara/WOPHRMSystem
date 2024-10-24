@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.IO;
+using System.Linq;
 using System.Web.Mvc;
 using WOPHRMSystem.Context;
 using WOPHRMSystem.Helps;
@@ -1061,6 +1062,163 @@ namespace WOPHRMSystem.Controllers
 
             return File(renderedBytes, mimeType);
         }
+
+        #endregion
+
+        #region JobWise assign Employees and Detail Cost
+
+        public ActionResult JobWiseAssignEmployeesAndDetailCostModel()
+        {
+            var model = new JObWiseCositingDetailsWithAssignEmployeeModel
+            {
+                JObList = new SelectList(jobMasterServices.GetAllDropdownASC(), "Id", "JobCode"),
+            };
+            return View(model);
+        }
+
+        [HttpGet]
+        public ActionResult JobWiseAssignEmployeesAndDetailCost(JObWiseCositingDetailsWithAssignEmployeeModel model)
+        {
+            LocalReport localReport = new LocalReport();
+            string path = Server.MapPath("~/Reports/ReportJObWiseCositingDetailsWithAssignEmployee.rdlc");
+            if (System.IO.File.Exists(path))
+            {
+                localReport.ReportPath = path;
+            }
+            else
+            {
+                return View("Error");
+            }
+
+            // Load data
+            var data = new ReportServices().GetJObWiseCositingDetailsWithAssignEmployee(model.FromDate.Value.ToString("yyyy/MM/dd"), model.Fk_JobMasterId);
+
+
+
+            ReportDataSource reportDataSource = new ReportDataSource("DataSet1", data);
+            localReport.DataSources.Add(reportDataSource);
+
+            var firstItem = data.FirstOrDefault();
+            DateTime? completedDate = firstItem?.CompletedDate;
+
+            localReport.SetParameters(new ReportParameter("CompletedDate",
+                completedDate.HasValue
+                ? completedDate.Value.ToString("yyyy-MMM-dd")
+                : null));
+
+            localReport.SetParameters(new ReportParameter("PrintDate", (new CommonResources().LocalDatetime().Date).ToString("yyyy-MMM-dd")));
+
+            localReport.SetParameters(new ReportParameter("ProjectStatus", (data.FirstOrDefault().IsCompleted == false ? "Pending " : "Completed")));
+            localReport.SetParameters(new ReportParameter("CompanyName", data.FirstOrDefault().CustomerCode + " " + data.FirstOrDefault().CustomerName));
+            localReport.SetParameters(new ReportParameter("commencedDate", (data.FirstOrDefault().StartDate.Value.ToString("yyyy-MMM-dd"))));
+            localReport.SetParameters(new ReportParameter("JObNum", data.FirstOrDefault().JobCode));
+
+
+
+            // Render report
+            string reportType = "PDF";
+            string mimeType;
+            string encoding;
+            string fileNameExtension = "sddssdsdsddsdsd";
+
+            string deviceInfo = "<DeviceInfo>" +
+                "  <OutputFormat>PDF</OutputFormat>" +
+                "  <PageWidth>11in</PageWidth>" +
+                "  <PageHeight>8.5in</PageHeight>" +
+                "  <MarginTop>0.3in</MarginTop>" +
+                "  <MarginLeft>0.5in</MarginLeft>" +
+                "  <MarginRight>0.3in</MarginRight>" +
+                "  <MarginBottom>0.3in</MarginBottom>" +
+                "</DeviceInfo>";
+
+            Warning[] warnings;
+            string[] streams;
+            byte[] renderedBytes;
+
+            renderedBytes = localReport.Render(
+                reportType,
+                deviceInfo,
+                out mimeType,
+                out encoding,
+                out fileNameExtension,
+                out streams,
+                out warnings);
+
+            return File(renderedBytes, mimeType);
+        }
+
+        #endregion
+
+
+        #region JobWise assign Employees and Detail Cost
+
+        public ActionResult JobCustomerSummaryCostModel()
+        {
+            return View();
+        }
+
+        [HttpGet]
+        public ActionResult JobCustomerSummaryCost(JObWiseCositingDetailsWithAssignEmployeeModel model)
+        {
+            LocalReport localReport = new LocalReport();
+            string path = Server.MapPath("~/Reports/ReportJobCustomerSummaryCost.rdlc");
+            if (System.IO.File.Exists(path))
+            {
+                localReport.ReportPath = path;
+            }
+            else
+            {
+                return View("Error");
+            }
+
+            // Load data
+            var data = new ReportServices().GetJobCositingDetailsWithAssignEmployeeSummary(model.FromDate.Value.ToString("yyyy/MM/dd"), model.IsCompleted, model.IsOtherCustomer);
+
+
+
+            ReportDataSource reportDataSource = new ReportDataSource("DataSet1", data);
+            localReport.DataSources.Add(reportDataSource);
+
+          
+            localReport.SetParameters(new ReportParameter("PrintDate", (new CommonResources().LocalDatetime().Date).ToString("yyyy-MMM-dd")));
+
+            localReport.SetParameters(new ReportParameter("ProjectStatus", (data.FirstOrDefault().IsCompleted == false ? "Pending " : "Completed")));
+            localReport.SetParameters(new ReportParameter("AsAtDate", (model.FromDate.Value.ToString("yyyy-MMM-dd"))));
+
+
+
+            // Render report
+            string reportType = "PDF";
+            string mimeType;
+            string encoding;
+            string fileNameExtension = "sddssdsdsddsdsd";
+
+            string deviceInfo = "<DeviceInfo>" +
+                "  <OutputFormat>PDF</OutputFormat>" +
+                "  <PageWidth>11in</PageWidth>" +
+                "  <PageHeight>8.5in</PageHeight>" +
+                "  <MarginTop>0.3in</MarginTop>" +
+                "  <MarginLeft>0.5in</MarginLeft>" +
+                "  <MarginRight>0.3in</MarginRight>" +
+                "  <MarginBottom>0.3in</MarginBottom>" +
+                "</DeviceInfo>";
+
+            Warning[] warnings;
+            string[] streams;
+            byte[] renderedBytes;
+
+            renderedBytes = localReport.Render(
+                reportType,
+                deviceInfo,
+                out mimeType,
+                out encoding,
+                out fileNameExtension,
+                out streams,
+                out warnings);
+
+            return File(renderedBytes, mimeType);
+        }
+
 
         #endregion
 

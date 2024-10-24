@@ -1097,6 +1097,53 @@ warning 6002: The table/view 'AuditSystem.dbo.VW_EmployeeVisitingRates' does not
     <Property Name="Rate" Type="decimal" Precision="18" Scale="2" Nullable="false" />
   </EntityType>
   <!--Errors Found During Generation:
+warning 6002: The table/view 'AuditSystem.dbo.VW_EmployeeWiseJObCositingDetails' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="VW_EmployeeWiseJObCositingDetails">
+    <Key>
+      <PropertyRef Name="PartnerTableId" />
+      <PropertyRef Name="Fk_JobMasterId" />
+      <PropertyRef Name="Fk_CustomerId" />
+      <PropertyRef Name="TypeOfTableId" />
+      <PropertyRef Name="PartnersIsDelete" />
+      <PropertyRef Name="JobmasterId" />
+      <PropertyRef Name="IsCompleted" />
+      <PropertyRef Name="IsReActivate" />
+      <PropertyRef Name="IsActive" />
+      <PropertyRef Name="JobmasterIsDelete" />
+      <PropertyRef Name="LocationRate" />
+      <PropertyRef Name="HoursVarianceValue" />
+      <PropertyRef Name="VarianceValue" />
+    </Key>
+    <Property Name="PartnerTableId" Type="int" Nullable="false" />
+    <Property Name="Fk_JobMasterId" Type="int" Nullable="false" />
+    <Property Name="Fk_CustomerId" Type="int" Nullable="false" />
+    <Property Name="TypeOfTable" Type="nvarchar(max)" />
+    <Property Name="TypeOfTableId" Type="int" Nullable="false" />
+    <Property Name="PartnersIsDelete" Type="bit" Nullable="false" />
+    <Property Name="CustomerName" Type="nvarchar(max)" />
+    <Property Name="CustomerCode" Type="nvarchar(max)" />
+    <Property Name="JobmasterId" Type="int" Nullable="false" />
+    <Property Name="JobCode" Type="nvarchar(max)" />
+    <Property Name="Narration" Type="nvarchar(max)" />
+    <Property Name="PreViewvalue" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="StartDate" Type="datetime2" Precision="7" />
+    <Property Name="DueDate" Type="datetime2" Precision="7" />
+    <Property Name="IsCompleted" Type="bit" Nullable="false" />
+    <Property Name="IsReActivate" Type="bit" Nullable="false" />
+    <Property Name="CompletedDate" Type="datetime2" Precision="7" />
+    <Property Name="ReActivateDate" Type="datetime2" Precision="7" />
+    <Property Name="IsActive" Type="bit" Nullable="false" />
+    <Property Name="JobmasterIsDelete" Type="bit" Nullable="false" />
+    <Property Name="CombinedName" Type="nvarchar(max)" />
+    <Property Name="CombinedCode" Type="nvarchar(max)" />
+    <Property Name="BudgetedHours" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="ActualHours" Type="decimal" Precision="38" Scale="2" />
+    <Property Name="LocationRate" Type="decimal" Precision="38" Scale="2" Nullable="false" />
+    <Property Name="EmployeeRateValue" Type="decimal" Precision="38" Scale="2" />
+    <Property Name="HoursVarianceValue" Type="decimal" Precision="38" Scale="2" Nullable="false" />
+    <Property Name="VarianceValue" Type="decimal" Precision="38" Scale="4" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
 warning 6002: The table/view 'AuditSystem.dbo.VW_GeneralReceipts' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
   <EntityType Name="VW_GeneralReceipts">
     <Key>
@@ -1510,6 +1557,51 @@ warning 6002: The table/view 'AuditSystem.dbo.VW_JobMasterViewforReport' does no
     <Property Name="Delete_Date" Type="datetime2" Precision="7" />
     <Property Name="CombinedName" Type="nvarchar(max)" />
     <Property Name="CombinedCode" Type="nvarchar(max)" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'AuditSystem.dbo.VW_JObWiseCositingDetailsWithAssignEmployee' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="VW_JObWiseCositingDetailsWithAssignEmployee">
+    <Key>
+      <PropertyRef Name="PartnerTableId" />
+      <PropertyRef Name="Fk_JobMasterId" />
+      <PropertyRef Name="Fk_CustomerId" />
+      <PropertyRef Name="EmployeeNo" />
+      <PropertyRef Name="IsCompleted" />
+      <PropertyRef Name="IsReActivate" />
+      <PropertyRef Name="BudgetedValue" />
+      <PropertyRef Name="ActualHours" />
+      <PropertyRef Name="ActualValue" />
+      <PropertyRef Name="LocationRate" />
+      <PropertyRef Name="HoursVarianceValue" />
+      <PropertyRef Name="VarianceValue" />
+    </Key>
+    <Property Name="PartnerTableId" Type="int" Nullable="false" />
+    <Property Name="Fk_JobMasterId" Type="int" Nullable="false" />
+    <Property Name="Fk_CustomerId" Type="int" Nullable="false" />
+    <Property Name="TypeOfTable" Type="nvarchar(max)" />
+    <Property Name="EmployeeNo" Type="int" Nullable="false" />
+    <Property Name="CustomerName" Type="nvarchar(max)" />
+    <Property Name="CustomerCode" Type="nvarchar(max)" />
+    <Property Name="JobCode" Type="nvarchar(max)" />
+    <Property Name="Narration" Type="nvarchar(max)" />
+    <Property Name="PreViewvalue" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="StartDate" Type="datetime2" Precision="7" />
+    <Property Name="DueDate" Type="datetime2" Precision="7" />
+    <Property Name="IsCompleted" Type="bit" Nullable="false" />
+    <Property Name="IsReActivate" Type="bit" Nullable="false" />
+    <Property Name="CompletedDate" Type="datetime2" Precision="7" />
+    <Property Name="ReActivateDate" Type="datetime2" Precision="7" />
+    <Property Name="EmployeeName" Type="nvarchar(max)" />
+    <Property Name="EmployeeCode" Type="nvarchar(max)" />
+    <Property Name="TrDate" Type="datetime2" Precision="7" />
+    <Property Name="BudgetedHours" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="BudgetedValue" Type="decimal" Precision="38" Scale="4" Nullable="false" />
+    <Property Name="ActualHours" Type="decimal" Precision="38" Scale="2" Nullable="false" />
+    <Property Name="ActualValue" Type="decimal" Precision="38" Scale="4" Nullable="false" />
+    <Property Name="LocationRate" Type="decimal" Precision="38" Scale="2" Nullable="false" />
+    <Property Name="EmployeeRateValue" Type="decimal" Precision="38" Scale="2" />
+    <Property Name="HoursVarianceValue" Type="decimal" Precision="38" Scale="2" Nullable="false" />
+    <Property Name="VarianceValue" Type="decimal" Precision="38" Scale="4" Nullable="false" />
   </EntityType>
   <!--Errors Found During Generation:
 warning 6002: The table/view 'AuditSystem.dbo.VW_LaberUtilizationStatementWorkTypeAndGroup' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -2803,6 +2895,38 @@ FROM [dbo].[VW_EmployeeJobTransaction] AS [VW_EmployeeJobTransaction]</DefiningQ
 [VW_EmployeeVisitingRates].[Rate] AS [Rate]
 FROM [dbo].[VW_EmployeeVisitingRates] AS [VW_EmployeeVisitingRates]</DefiningQuery>
     </EntitySet>
+    <EntitySet Name="VW_EmployeeWiseJObCositingDetails" EntityType="Self.VW_EmployeeWiseJObCositingDetails" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+[VW_EmployeeWiseJObCositingDetails].[PartnerTableId] AS [PartnerTableId], 
+[VW_EmployeeWiseJObCositingDetails].[Fk_JobMasterId] AS [Fk_JobMasterId], 
+[VW_EmployeeWiseJObCositingDetails].[Fk_CustomerId] AS [Fk_CustomerId], 
+[VW_EmployeeWiseJObCositingDetails].[TypeOfTable] AS [TypeOfTable], 
+[VW_EmployeeWiseJObCositingDetails].[TypeOfTableId] AS [TypeOfTableId], 
+[VW_EmployeeWiseJObCositingDetails].[PartnersIsDelete] AS [PartnersIsDelete], 
+[VW_EmployeeWiseJObCositingDetails].[CustomerName] AS [CustomerName], 
+[VW_EmployeeWiseJObCositingDetails].[CustomerCode] AS [CustomerCode], 
+[VW_EmployeeWiseJObCositingDetails].[JobmasterId] AS [JobmasterId], 
+[VW_EmployeeWiseJObCositingDetails].[JobCode] AS [JobCode], 
+[VW_EmployeeWiseJObCositingDetails].[Narration] AS [Narration], 
+[VW_EmployeeWiseJObCositingDetails].[PreViewvalue] AS [PreViewvalue], 
+[VW_EmployeeWiseJObCositingDetails].[StartDate] AS [StartDate], 
+[VW_EmployeeWiseJObCositingDetails].[DueDate] AS [DueDate], 
+[VW_EmployeeWiseJObCositingDetails].[IsCompleted] AS [IsCompleted], 
+[VW_EmployeeWiseJObCositingDetails].[IsReActivate] AS [IsReActivate], 
+[VW_EmployeeWiseJObCositingDetails].[CompletedDate] AS [CompletedDate], 
+[VW_EmployeeWiseJObCositingDetails].[ReActivateDate] AS [ReActivateDate], 
+[VW_EmployeeWiseJObCositingDetails].[IsActive] AS [IsActive], 
+[VW_EmployeeWiseJObCositingDetails].[JobmasterIsDelete] AS [JobmasterIsDelete], 
+[VW_EmployeeWiseJObCositingDetails].[CombinedName] AS [CombinedName], 
+[VW_EmployeeWiseJObCositingDetails].[CombinedCode] AS [CombinedCode], 
+[VW_EmployeeWiseJObCositingDetails].[BudgetedHours] AS [BudgetedHours], 
+[VW_EmployeeWiseJObCositingDetails].[ActualHours] AS [ActualHours], 
+[VW_EmployeeWiseJObCositingDetails].[LocationRate] AS [LocationRate], 
+[VW_EmployeeWiseJObCositingDetails].[EmployeeRateValue] AS [EmployeeRateValue], 
+[VW_EmployeeWiseJObCositingDetails].[HoursVarianceValue] AS [HoursVarianceValue], 
+[VW_EmployeeWiseJObCositingDetails].[VarianceValue] AS [VarianceValue]
+FROM [dbo].[VW_EmployeeWiseJObCositingDetails] AS [VW_EmployeeWiseJObCositingDetails]</DefiningQuery>
+    </EntitySet>
     <EntitySet Name="VW_GeneralReceipts" EntityType="Self.VW_GeneralReceipts" store:Type="Views" store:Schema="dbo">
       <DefiningQuery>SELECT 
 [VW_GeneralReceipts].[Id] AS [Id], 
@@ -3095,6 +3219,37 @@ FROM [dbo].[VW_JobMasterViewforCalculatorJobCostReport] AS [VW_JobMasterViewforC
 [VW_JobMasterViewforReport].[CombinedName] AS [CombinedName], 
 [VW_JobMasterViewforReport].[CombinedCode] AS [CombinedCode]
 FROM [dbo].[VW_JobMasterViewforReport] AS [VW_JobMasterViewforReport]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="VW_JObWiseCositingDetailsWithAssignEmployee" EntityType="Self.VW_JObWiseCositingDetailsWithAssignEmployee" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+[VW_JObWiseCositingDetailsWithAssignEmployee].[PartnerTableId] AS [PartnerTableId], 
+[VW_JObWiseCositingDetailsWithAssignEmployee].[Fk_JobMasterId] AS [Fk_JobMasterId], 
+[VW_JObWiseCositingDetailsWithAssignEmployee].[Fk_CustomerId] AS [Fk_CustomerId], 
+[VW_JObWiseCositingDetailsWithAssignEmployee].[TypeOfTable] AS [TypeOfTable], 
+[VW_JObWiseCositingDetailsWithAssignEmployee].[EmployeeNo] AS [EmployeeNo], 
+[VW_JObWiseCositingDetailsWithAssignEmployee].[CustomerName] AS [CustomerName], 
+[VW_JObWiseCositingDetailsWithAssignEmployee].[CustomerCode] AS [CustomerCode], 
+[VW_JObWiseCositingDetailsWithAssignEmployee].[JobCode] AS [JobCode], 
+[VW_JObWiseCositingDetailsWithAssignEmployee].[Narration] AS [Narration], 
+[VW_JObWiseCositingDetailsWithAssignEmployee].[PreViewvalue] AS [PreViewvalue], 
+[VW_JObWiseCositingDetailsWithAssignEmployee].[StartDate] AS [StartDate], 
+[VW_JObWiseCositingDetailsWithAssignEmployee].[DueDate] AS [DueDate], 
+[VW_JObWiseCositingDetailsWithAssignEmployee].[IsCompleted] AS [IsCompleted], 
+[VW_JObWiseCositingDetailsWithAssignEmployee].[IsReActivate] AS [IsReActivate], 
+[VW_JObWiseCositingDetailsWithAssignEmployee].[CompletedDate] AS [CompletedDate], 
+[VW_JObWiseCositingDetailsWithAssignEmployee].[ReActivateDate] AS [ReActivateDate], 
+[VW_JObWiseCositingDetailsWithAssignEmployee].[EmployeeName] AS [EmployeeName], 
+[VW_JObWiseCositingDetailsWithAssignEmployee].[EmployeeCode] AS [EmployeeCode], 
+[VW_JObWiseCositingDetailsWithAssignEmployee].[TrDate] AS [TrDate], 
+[VW_JObWiseCositingDetailsWithAssignEmployee].[BudgetedHours] AS [BudgetedHours], 
+[VW_JObWiseCositingDetailsWithAssignEmployee].[BudgetedValue] AS [BudgetedValue], 
+[VW_JObWiseCositingDetailsWithAssignEmployee].[ActualHours] AS [ActualHours], 
+[VW_JObWiseCositingDetailsWithAssignEmployee].[ActualValue] AS [ActualValue], 
+[VW_JObWiseCositingDetailsWithAssignEmployee].[LocationRate] AS [LocationRate], 
+[VW_JObWiseCositingDetailsWithAssignEmployee].[EmployeeRateValue] AS [EmployeeRateValue], 
+[VW_JObWiseCositingDetailsWithAssignEmployee].[HoursVarianceValue] AS [HoursVarianceValue], 
+[VW_JObWiseCositingDetailsWithAssignEmployee].[VarianceValue] AS [VarianceValue]
+FROM [dbo].[VW_JObWiseCositingDetailsWithAssignEmployee] AS [VW_JObWiseCositingDetailsWithAssignEmployee]</DefiningQuery>
     </EntitySet>
     <EntitySet Name="VW_LaberUtilizationStatementWorkTypeAndGroup" EntityType="Self.VW_LaberUtilizationStatementWorkTypeAndGroup" store:Type="Views" store:Schema="dbo">
       <DefiningQuery>SELECT 

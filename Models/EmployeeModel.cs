@@ -50,4 +50,7 @@ namespace WOPHRMSystem.Models
         public int FkFromEmployeeId { get; set; } // ToView
         public int FkToEmployeeId { get; set; } // ToView
     }
+
+
+
 }

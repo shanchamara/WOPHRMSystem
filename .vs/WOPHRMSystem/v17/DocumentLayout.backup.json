@@ -3,28 +3,20 @@
   "WorkspaceRootPath": "E:\\Devop Project\\SWIS Software\\Freelancer Project\\Second Project\\WOPHRMSystem\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{AB94AB58-CA94-4BEC-8A20-86C6CC89C21A}|WOPHRMSystem.csproj|e:\\devop project\\swis software\\freelancer project\\second project\\wophrmsystem\\views\\report\\jobdetailsreportmodel.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{AB94AB58-CA94-4BEC-8A20-86C6CC89C21A}|WOPHRMSystem.csproj|solutionrelative:views\\report\\jobdetailsreportmodel.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{AB94AB58-CA94-4BEC-8A20-86C6CC89C21A}|WOPHRMSystem.csproj|E:\\Devop Project\\SWIS Software\\Freelancer Project\\Second Project\\WOPHRMSystem\\views\\report\\jobcustomersummarycostmodel.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{AB94AB58-CA94-4BEC-8A20-86C6CC89C21A}|WOPHRMSystem.csproj|solutionrelative:views\\report\\jobcustomersummarycostmodel.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{AB94AB58-CA94-4BEC-8A20-86C6CC89C21A}|WOPHRMSystem.csproj|e:\\devop project\\swis software\\freelancer project\\second project\\wophrmsystem\\views\\shared\\_layout1.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{AB94AB58-CA94-4BEC-8A20-86C6CC89C21A}|WOPHRMSystem.csproj|solutionrelative:views\\shared\\_layout1.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{AB94AB58-CA94-4BEC-8A20-86C6CC89C21A}|WOPHRMSystem.csproj|e:\\devop project\\swis software\\freelancer project\\second project\\wophrmsystem\\controllers\\reportcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{AB94AB58-CA94-4BEC-8A20-86C6CC89C21A}|WOPHRMSystem.csproj|E:\\Devop Project\\SWIS Software\\Freelancer Project\\Second Project\\WOPHRMSystem\\controllers\\reportcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{AB94AB58-CA94-4BEC-8A20-86C6CC89C21A}|WOPHRMSystem.csproj|solutionrelative:controllers\\reportcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{AB94AB58-CA94-4BEC-8A20-86C6CC89C21A}|WOPHRMSystem.csproj|e:\\devop project\\swis software\\freelancer project\\second project\\wophrmsystem\\views\\report\\jobcalculatorcostreportview.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{AB94AB58-CA94-4BEC-8A20-86C6CC89C21A}|WOPHRMSystem.csproj|solutionrelative:views\\report\\jobcalculatorcostreportview.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{AB94AB58-CA94-4BEC-8A20-86C6CC89C21A}|WOPHRMSystem.csproj|E:\\Devop Project\\SWIS Software\\Freelancer Project\\Second Project\\WOPHRMSystem\\reports\\reportjobcustomersummarycost.rdlc||{46F6D2A1-5E86-4080-A799-01F3D0E23796}",
+      "RelativeMoniker": "D:0:0:{AB94AB58-CA94-4BEC-8A20-86C6CC89C21A}|WOPHRMSystem.csproj|solutionrelative:reports\\reportjobcustomersummarycost.rdlc||{46F6D2A1-5E86-4080-A799-01F3D0E23796}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{AB94AB58-CA94-4BEC-8A20-86C6CC89C21A}|WOPHRMSystem.csproj|e:\\devop project\\swis software\\freelancer project\\second project\\wophrmsystem\\views\\report\\jobcalculatorcostreportmodel.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{AB94AB58-CA94-4BEC-8A20-86C6CC89C21A}|WOPHRMSystem.csproj|solutionrelative:views\\report\\jobcalculatorcostreportmodel.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{AB94AB58-CA94-4BEC-8A20-86C6CC89C21A}|WOPHRMSystem.csproj|e:\\devop project\\swis software\\freelancer project\\second project\\wophrmsystem\\views\\report\\invoicereportview.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{AB94AB58-CA94-4BEC-8A20-86C6CC89C21A}|WOPHRMSystem.csproj|solutionrelative:views\\report\\invoicereportview.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{AB94AB58-CA94-4BEC-8A20-86C6CC89C21A}|WOPHRMSystem.csproj|e:\\devop project\\swis software\\freelancer project\\second project\\wophrmsystem\\services\\reportservices.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AB94AB58-CA94-4BEC-8A20-86C6CC89C21A}|WOPHRMSystem.csproj|solutionrelative:services\\reportservices.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -34,84 +26,57 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "JObDetailsReportModel.cshtml",
-              "DocumentMoniker": "E:\\Devop Project\\SWIS Software\\Freelancer Project\\Second Project\\WOPHRMSystem\\Views\\Report\\JObDetailsReportModel.cshtml",
-              "RelativeDocumentMoniker": "Views\\Report\\JObDetailsReportModel.cshtml",
-              "ToolTip": "E:\\Devop Project\\SWIS Software\\Freelancer Project\\Second Project\\WOPHRMSystem\\Views\\Report\\JObDetailsReportModel.cshtml",
-              "RelativeToolTip": "Views\\Report\\JObDetailsReportModel.cshtml",
-              "ViewState": "AgIAAIcAAAAAAAAAAAAAAHoAAABCAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-10-20T11:17:08.313Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 3,
-              "Title": "JObCalculatorCostReportView.cshtml",
-              "DocumentMoniker": "E:\\Devop Project\\SWIS Software\\Freelancer Project\\Second Project\\WOPHRMSystem\\Views\\Report\\JObCalculatorCostReportView.cshtml",
-              "RelativeDocumentMoniker": "Views\\Report\\JObCalculatorCostReportView.cshtml",
-              "ToolTip": "E:\\Devop Project\\SWIS Software\\Freelancer Project\\Second Project\\WOPHRMSystem\\Views\\Report\\JObCalculatorCostReportView.cshtml",
-              "RelativeToolTip": "Views\\Report\\JObCalculatorCostReportView.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-10-20T11:17:06.901Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "JObCalculatorCostReportModel.cshtml",
-              "DocumentMoniker": "E:\\Devop Project\\SWIS Software\\Freelancer Project\\Second Project\\WOPHRMSystem\\Views\\Report\\JObCalculatorCostReportModel.cshtml",
-              "RelativeDocumentMoniker": "Views\\Report\\JObCalculatorCostReportModel.cshtml",
-              "ToolTip": "E:\\Devop Project\\SWIS Software\\Freelancer Project\\Second Project\\WOPHRMSystem\\Views\\Report\\JObCalculatorCostReportModel.cshtml",
-              "RelativeToolTip": "Views\\Report\\JObCalculatorCostReportModel.cshtml",
-              "ViewState": "AgIAAIoAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-10-20T11:16:53.748Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "InvoiceReportView.cshtml",
-              "DocumentMoniker": "E:\\Devop Project\\SWIS Software\\Freelancer Project\\Second Project\\WOPHRMSystem\\Views\\Report\\InvoiceReportView.cshtml",
-              "RelativeDocumentMoniker": "Views\\Report\\InvoiceReportView.cshtml",
-              "ToolTip": "E:\\Devop Project\\SWIS Software\\Freelancer Project\\Second Project\\WOPHRMSystem\\Views\\Report\\InvoiceReportView.cshtml",
-              "RelativeToolTip": "Views\\Report\\InvoiceReportView.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-10-20T11:16:51.918Z",
+              "Title": "ReportServices.cs",
+              "DocumentMoniker": "E:\\Devop Project\\SWIS Software\\Freelancer Project\\Second Project\\WOPHRMSystem\\Services\\ReportServices.cs",
+              "RelativeDocumentMoniker": "Services\\ReportServices.cs",
+              "ToolTip": "E:\\Devop Project\\SWIS Software\\Freelancer Project\\Second Project\\WOPHRMSystem\\Services\\ReportServices.cs",
+              "RelativeToolTip": "Services\\ReportServices.cs",
+              "ViewState": "AgIAADEBAAAAAAAAAAAAADoBAAAQAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-23T13:49:53.18Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "ReportController.cs",
-              "DocumentMoniker": "E:\\Devop Project\\SWIS Software\\Freelancer Project\\Second Project\\WOPHRMSystem\\Controllers\\ReportController.cs",
-              "RelativeDocumentMoniker": "Controllers\\ReportController.cs",
-              "ToolTip": "E:\\Devop Project\\SWIS Software\\Freelancer Project\\Second Project\\WOPHRMSystem\\Controllers\\ReportController.cs",
-              "RelativeToolTip": "Controllers\\ReportController.cs",
-              "ViewState": "AgIAAA8AAAAAAAAAAAAAANkAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-20T11:04:46.538Z",
+              "Title": "ReportJobCustomerSummaryCost.rdlc [Design]",
+              "DocumentMoniker": "E:\\Devop Project\\SWIS Software\\Freelancer Project\\Second Project\\WOPHRMSystem\\Reports\\ReportJobCustomerSummaryCost.rdlc",
+              "RelativeDocumentMoniker": "Reports\\ReportJobCustomerSummaryCost.rdlc",
+              "ToolTip": "E:\\Devop Project\\SWIS Software\\Freelancer Project\\Second Project\\WOPHRMSystem\\Reports\\ReportJobCustomerSummaryCost.rdlc [Design]",
+              "RelativeToolTip": "Reports\\ReportJobCustomerSummaryCost.rdlc [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001755|",
+              "WhenOpened": "2024-10-23T13:51:58.566Z",
+              "EditorCaption": " [Design]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "JobCustomerSummaryCostModel.cshtml",
+              "DocumentMoniker": "E:\\Devop Project\\SWIS Software\\Freelancer Project\\Second Project\\WOPHRMSystem\\Views\\Report\\JobCustomerSummaryCostModel.cshtml",
+              "RelativeDocumentMoniker": "Views\\Report\\JobCustomerSummaryCostModel.cshtml",
+              "ToolTip": "E:\\Devop Project\\SWIS Software\\Freelancer Project\\Second Project\\WOPHRMSystem\\Views\\Report\\JobCustomerSummaryCostModel.cshtml",
+              "RelativeToolTip": "Views\\Report\\JobCustomerSummaryCostModel.cshtml",
+              "ViewState": "AgIAAEUBAAAAAAAAAAAAAEsBAAA5AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-10-23T13:44:32.675Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "_Layout1.cshtml",
-              "DocumentMoniker": "E:\\Devop Project\\SWIS Software\\Freelancer Project\\Second Project\\WOPHRMSystem\\Views\\Shared\\_Layout1.cshtml",
-              "RelativeDocumentMoniker": "Views\\Shared\\_Layout1.cshtml",
-              "ToolTip": "E:\\Devop Project\\SWIS Software\\Freelancer Project\\Second Project\\WOPHRMSystem\\Views\\Shared\\_Layout1.cshtml",
-              "RelativeToolTip": "Views\\Shared\\_Layout1.cshtml",
-              "ViewState": "AgIAAP4BAAAAAAAAAAAAAAsCAAApAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-10-20T11:02:42.691Z",
+              "Title": "ReportController.cs",
+              "DocumentMoniker": "E:\\Devop Project\\SWIS Software\\Freelancer Project\\Second Project\\WOPHRMSystem\\Controllers\\ReportController.cs",
+              "RelativeDocumentMoniker": "Controllers\\ReportController.cs",
+              "ToolTip": "E:\\Devop Project\\SWIS Software\\Freelancer Project\\Second Project\\WOPHRMSystem\\Controllers\\ReportController.cs",
+              "RelativeToolTip": "Controllers\\ReportController.cs",
+              "ViewState": "AgIAAJYEAAAAAAAAAAAMwJsEAAA6AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-23T13:32:15.358Z",
               "EditorCaption": ""
             }
           ]
