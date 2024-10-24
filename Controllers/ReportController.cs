@@ -1179,11 +1179,89 @@ namespace WOPHRMSystem.Controllers
             ReportDataSource reportDataSource = new ReportDataSource("DataSet1", data);
             localReport.DataSources.Add(reportDataSource);
 
-          
+
             localReport.SetParameters(new ReportParameter("PrintDate", (new CommonResources().LocalDatetime().Date).ToString("yyyy-MMM-dd")));
 
             localReport.SetParameters(new ReportParameter("ProjectStatus", (data.FirstOrDefault().IsCompleted == false ? "Pending " : "Completed")));
             localReport.SetParameters(new ReportParameter("AsAtDate", (model.FromDate.Value.ToString("yyyy-MMM-dd"))));
+
+
+
+            // Render report
+            string reportType = "PDF";
+            string mimeType;
+            string encoding;
+            string fileNameExtension = "sddssdsdsddsdsd";
+
+            string deviceInfo = "<DeviceInfo>" +
+                "  <OutputFormat>PDF</OutputFormat>" +
+                "  <PageWidth>11in</PageWidth>" +
+                "  <PageHeight>8.5in</PageHeight>" +
+                "  <MarginTop>0.3in</MarginTop>" +
+                "  <MarginLeft>0.5in</MarginLeft>" +
+                "  <MarginRight>0.3in</MarginRight>" +
+                "  <MarginBottom>0.3in</MarginBottom>" +
+                "</DeviceInfo>";
+
+            Warning[] warnings;
+            string[] streams;
+            byte[] renderedBytes;
+
+            renderedBytes = localReport.Render(
+                reportType,
+                deviceInfo,
+                out mimeType,
+                out encoding,
+                out fileNameExtension,
+                out streams,
+                out warnings);
+
+            return File(renderedBytes, mimeType);
+        }
+
+
+        #endregion
+
+
+        #region WIP Report Monthly
+
+        public ActionResult WIPReportDailyModel()
+        {
+            var model = new VW_WIPReportDailyAndMonthlyModel()
+            {
+                JObList = new SelectList(jobMasterServices.GetAllDropdownASC(), "Id", "JobCode"),
+            };
+            return View(model);
+        }
+
+        [HttpGet]
+        public ActionResult WIPReportDaily(VW_WIPReportDailyAndMonthlyModel model)
+        {
+            LocalReport localReport = new LocalReport();
+            string path = Server.MapPath("~/Reports/ReportWIPReportDaily.rdlc");
+            if (System.IO.File.Exists(path))
+            {
+                localReport.ReportPath = path;
+            }
+            else
+            {
+                return View("Error");
+            }
+
+            // Load data
+            var data = new ReportServices().GetReportWIPReportDaily(model.Fk_JobMasterId);
+
+
+
+            ReportDataSource reportDataSource = new ReportDataSource("DataSet1", data);
+            localReport.DataSources.Add(reportDataSource);
+
+
+            localReport.SetParameters(new ReportParameter("PrintDate", (new CommonResources().LocalDatetime().Date).ToString("yyyy-MMM-dd")));
+            localReport.SetParameters(new ReportParameter("commencedDate", (data.FirstOrDefault().StartDate.Value.ToString("yyyy-MMM-dd"))));
+            localReport.SetParameters(new ReportParameter("CustomerName", data.FirstOrDefault().CustomerName));
+            localReport.SetParameters(new ReportParameter("JObNo", data.FirstOrDefault().JobCode));
+            localReport.SetParameters(new ReportParameter("Narration", data.FirstOrDefault().Narration));
 
 
 

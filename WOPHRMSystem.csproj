@@ -579,6 +579,9 @@
     <Compile Include="Context\VW_SectorMaster.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Context\VW_WIPReportDailyAndMonthly.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Controllers\CustomerController.cs" />
     <Compile Include="Controllers\CustomerGroupController.cs" />
     <Compile Include="Controllers\DepartmentController.cs" />
@@ -2935,6 +2938,7 @@
     <Content Include="Views\Report\PrintEmployeeVisitingLocationRatesModel.cshtml" />
     <Content Include="Views\Report\JobWiseAssignEmployeesAndDetailCostModel.cshtml" />
     <Content Include="Views\Report\JobCustomerSummaryCostModel.cshtml" />
+    <Content Include="Views\Report\WIPReportDailyModel.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -2972,6 +2976,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Reports\Report1.rdlc" />
     <EmbeddedResource Include="Reports\ReportCustomers.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\ReportWIPReportDaily.rdlc">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\ReportJobCustomerSummaryCost.rdlc">

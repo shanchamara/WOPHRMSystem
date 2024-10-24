@@ -68,4 +68,40 @@ namespace WOPHRMSystem.Models
 
 
     }
+
+
+    public partial class VW_WIPReportDailyAndMonthlyModel
+    {
+        public int PartnerTableId { get; set; }
+        public int Fk_JobMasterId { get; set; }
+        public int Fk_CustomerId { get; set; }
+        public string TypeOfTable { get; set; }
+        public int EmployeeNo { get; set; }
+        public string CustomerName { get; set; }
+        public string CustomerCode { get; set; }
+        public string JobCode { get; set; }
+        public string Narration { get; set; }
+        public Nullable<decimal> PreViewvalue { get; set; }
+        public Nullable<System.DateTime> StartDate { get; set; }
+        public Nullable<System.DateTime> DueDate { get; set; }
+        public bool IsCompleted { get; set; }
+        public bool IsReActivate { get; set; }
+        public Nullable<System.DateTime> CompletedDate { get; set; }
+        public Nullable<System.DateTime> ReActivateDate { get; set; }
+        public string EmployeeName { get; set; }
+        public string EmployeeCode { get; set; }
+        public Nullable<System.DateTime> TrDate { get; set; }
+        public string Month { get; set; }
+        public string NarrationTrans { get; set; }
+        public Nullable<decimal> BudgetedHours { get; set; }
+        public decimal BudgetedValue { get; set; }
+        public decimal ActualHours { get; set; }
+        public decimal ActualValue { get; set; }
+        public decimal LocationRate { get; set; }
+        public Nullable<decimal> EmployeeRateValue { get; set; }
+        public decimal HoursVarianceValue { get; set; }
+        public decimal VarianceValue { get; set; }
+        public SelectList JObList { get; set; }// ToView
+    }
+
 }

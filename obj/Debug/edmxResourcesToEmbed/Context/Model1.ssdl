@@ -1878,6 +1878,53 @@ warning 6002: The table/view 'AuditSystem.dbo.VW_SectorMaster' does not have a p
     <Property Name="Delete_By" Type="nvarchar(max)" />
     <Property Name="Delete_Date" Type="datetime2" Precision="7" />
   </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'AuditSystem.dbo.VW_WIPReportDailyAndMonthly' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="VW_WIPReportDailyAndMonthly">
+    <Key>
+      <PropertyRef Name="PartnerTableId" />
+      <PropertyRef Name="Fk_JobMasterId" />
+      <PropertyRef Name="Fk_CustomerId" />
+      <PropertyRef Name="EmployeeNo" />
+      <PropertyRef Name="IsCompleted" />
+      <PropertyRef Name="IsReActivate" />
+      <PropertyRef Name="BudgetedValue" />
+      <PropertyRef Name="ActualHours" />
+      <PropertyRef Name="ActualValue" />
+      <PropertyRef Name="LocationRate" />
+      <PropertyRef Name="HoursVarianceValue" />
+      <PropertyRef Name="VarianceValue" />
+    </Key>
+    <Property Name="PartnerTableId" Type="int" Nullable="false" />
+    <Property Name="Fk_JobMasterId" Type="int" Nullable="false" />
+    <Property Name="Fk_CustomerId" Type="int" Nullable="false" />
+    <Property Name="TypeOfTable" Type="nvarchar(max)" />
+    <Property Name="EmployeeNo" Type="int" Nullable="false" />
+    <Property Name="CustomerName" Type="nvarchar(max)" />
+    <Property Name="CustomerCode" Type="nvarchar(max)" />
+    <Property Name="JobCode" Type="nvarchar(max)" />
+    <Property Name="Narration" Type="nvarchar(max)" />
+    <Property Name="PreViewvalue" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="StartDate" Type="datetime2" Precision="7" />
+    <Property Name="DueDate" Type="datetime2" Precision="7" />
+    <Property Name="IsCompleted" Type="bit" Nullable="false" />
+    <Property Name="IsReActivate" Type="bit" Nullable="false" />
+    <Property Name="CompletedDate" Type="datetime2" Precision="7" />
+    <Property Name="ReActivateDate" Type="datetime2" Precision="7" />
+    <Property Name="EmployeeName" Type="nvarchar(max)" />
+    <Property Name="EmployeeCode" Type="nvarchar(max)" />
+    <Property Name="TrDate" Type="datetime2" Precision="7" />
+    <Property Name="Month" Type="nvarchar" MaxLength="30" />
+    <Property Name="NarrationTrans" Type="nvarchar(max)" />
+    <Property Name="BudgetedHours" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="BudgetedValue" Type="decimal" Precision="38" Scale="4" Nullable="false" />
+    <Property Name="ActualHours" Type="decimal" Precision="38" Scale="2" Nullable="false" />
+    <Property Name="ActualValue" Type="decimal" Precision="38" Scale="4" Nullable="false" />
+    <Property Name="LocationRate" Type="decimal" Precision="38" Scale="2" Nullable="false" />
+    <Property Name="EmployeeRateValue" Type="decimal" Precision="38" Scale="2" />
+    <Property Name="HoursVarianceValue" Type="decimal" Precision="38" Scale="2" Nullable="false" />
+    <Property Name="VarianceValue" Type="decimal" Precision="38" Scale="4" Nullable="false" />
+  </EntityType>
   <Association Name="FK_TblCustomers_TblCustomerGroup_Fk_CustomerGroupId">
     <End Role="TblCustomerGroup" Type="Self.TblCustomerGroup" Multiplicity="1" />
     <End Role="TblCustomers" Type="Self.TblCustomers" Multiplicity="*" />
@@ -3445,6 +3492,39 @@ FROM [dbo].[VW_Receipts] AS [VW_Receipts]</DefiningQuery>
 [VW_SectorMaster].[Delete_By] AS [Delete_By], 
 [VW_SectorMaster].[Delete_Date] AS [Delete_Date]
 FROM [dbo].[VW_SectorMaster] AS [VW_SectorMaster]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="VW_WIPReportDailyAndMonthly" EntityType="Self.VW_WIPReportDailyAndMonthly" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+[VW_WIPReportDailyAndMonthly].[PartnerTableId] AS [PartnerTableId], 
+[VW_WIPReportDailyAndMonthly].[Fk_JobMasterId] AS [Fk_JobMasterId], 
+[VW_WIPReportDailyAndMonthly].[Fk_CustomerId] AS [Fk_CustomerId], 
+[VW_WIPReportDailyAndMonthly].[TypeOfTable] AS [TypeOfTable], 
+[VW_WIPReportDailyAndMonthly].[EmployeeNo] AS [EmployeeNo], 
+[VW_WIPReportDailyAndMonthly].[CustomerName] AS [CustomerName], 
+[VW_WIPReportDailyAndMonthly].[CustomerCode] AS [CustomerCode], 
+[VW_WIPReportDailyAndMonthly].[JobCode] AS [JobCode], 
+[VW_WIPReportDailyAndMonthly].[Narration] AS [Narration], 
+[VW_WIPReportDailyAndMonthly].[PreViewvalue] AS [PreViewvalue], 
+[VW_WIPReportDailyAndMonthly].[StartDate] AS [StartDate], 
+[VW_WIPReportDailyAndMonthly].[DueDate] AS [DueDate], 
+[VW_WIPReportDailyAndMonthly].[IsCompleted] AS [IsCompleted], 
+[VW_WIPReportDailyAndMonthly].[IsReActivate] AS [IsReActivate], 
+[VW_WIPReportDailyAndMonthly].[CompletedDate] AS [CompletedDate], 
+[VW_WIPReportDailyAndMonthly].[ReActivateDate] AS [ReActivateDate], 
+[VW_WIPReportDailyAndMonthly].[EmployeeName] AS [EmployeeName], 
+[VW_WIPReportDailyAndMonthly].[EmployeeCode] AS [EmployeeCode], 
+[VW_WIPReportDailyAndMonthly].[TrDate] AS [TrDate], 
+[VW_WIPReportDailyAndMonthly].[Month] AS [Month], 
+[VW_WIPReportDailyAndMonthly].[NarrationTrans] AS [NarrationTrans], 
+[VW_WIPReportDailyAndMonthly].[BudgetedHours] AS [BudgetedHours], 
+[VW_WIPReportDailyAndMonthly].[BudgetedValue] AS [BudgetedValue], 
+[VW_WIPReportDailyAndMonthly].[ActualHours] AS [ActualHours], 
+[VW_WIPReportDailyAndMonthly].[ActualValue] AS [ActualValue], 
+[VW_WIPReportDailyAndMonthly].[LocationRate] AS [LocationRate], 
+[VW_WIPReportDailyAndMonthly].[EmployeeRateValue] AS [EmployeeRateValue], 
+[VW_WIPReportDailyAndMonthly].[HoursVarianceValue] AS [HoursVarianceValue], 
+[VW_WIPReportDailyAndMonthly].[VarianceValue] AS [VarianceValue]
+FROM [dbo].[VW_WIPReportDailyAndMonthly] AS [VW_WIPReportDailyAndMonthly]</DefiningQuery>
     </EntitySet>
     <AssociationSet Name="FK_TblCustomers_TblCustomerGroup_Fk_CustomerGroupId" Association="Self.FK_TblCustomers_TblCustomerGroup_Fk_CustomerGroupId">
       <End Role="TblCustomerGroup" EntitySet="TblCustomerGroup" />

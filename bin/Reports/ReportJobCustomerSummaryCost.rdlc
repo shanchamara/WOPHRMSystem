@@ -895,7 +895,7 @@
                 <Paragraph>
                   <TextRuns>
                     <TextRun>
-                      <Value>Job Costing Detail -</Value>
+                      <Value>Job Costing Summary -</Value>
                       <Style>
                         <FontFamily>Cambria</FontFamily>
                         <FontSize>14pt</FontSize>
@@ -906,9 +906,9 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox1</rd:DefaultName>
-              <Top>0.27778in</Top>
+              <Top>0.26389in</Top>
               <Height>0.25in</Height>
-              <Width>1.675in</Width>
+              <Width>1.95in</Width>
               <ZIndex>1</ZIndex>
               <Style>
                 <Border>
@@ -971,7 +971,7 @@
               </Paragraphs>
               <rd:DefaultName>ProjectStatus</rd:DefaultName>
               <Top>0.27778in</Top>
-              <Left>1.62778in</Left>
+              <Left>2.1in</Left>
               <Height>0.25in</Height>
               <Width>1in</Width>
               <ZIndex>3</ZIndex>
@@ -1004,15 +1004,17 @@
                   <TextRuns>
                     <TextRun>
                       <Value>=Parameters!AsAtDate.Value</Value>
-                      <Style />
+                      <Style>
+                        <Format>MMM d, yyyy</Format>
+                      </Style>
                     </TextRun>
                   </TextRuns>
                   <Style />
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>AsAtDate</rd:DefaultName>
-              <Top>0.58334in</Top>
-              <Left>0.93in</Left>
+              <Top>0.56945in</Top>
+              <Left>0.7in</Left>
               <Height>0.25in</Height>
               <Width>1in</Width>
               <ZIndex>5</ZIndex>
@@ -1045,7 +1047,7 @@
               <rd:DefaultName>Textbox15</rd:DefaultName>
               <Top>0.58334in</Top>
               <Height>0.25in</Height>
-              <Width>1in</Width>
+              <Width>0.7in</Width>
               <ZIndex>6</ZIndex>
               <Style>
                 <Border>
