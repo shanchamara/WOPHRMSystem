@@ -104,4 +104,26 @@ namespace WOPHRMSystem.Models
         public SelectList JObList { get; set; }// ToView
     }
 
+
+    public partial class VW_WIPReportMonthlyModel
+    {
+        public Nullable<decimal> TotalValue { get; set; }
+        public int MonthNumber { get; set; }
+        public string Month { get; set; }
+        public int Fk_JobMasterId { get; set; }
+        public int Fk_EmployeeId { get; set; }
+        public string Narration { get; set; }
+        public decimal TotalHours { get; set; }
+        public decimal EmployeeRateValue { get; set; }
+        public string JobCode { get; set; }
+        public string JobNarration { get; set; }
+        public Nullable<int> Fk_CustomerId { get; set; }
+        public string CustomerName { get; set; }
+        public Nullable<System.DateTime> StartDate { get; set; }
+        public string EmployeeName { get; set; }
+        public string DesignationName { get; set; }
+
+        public SelectList JObList { get; set; }// ToView
+    }
+
 }

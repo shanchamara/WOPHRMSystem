@@ -1710,5 +1710,26 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="VW_WIPReportMonthly">
+      <EntityTypeMapping TypeName="AuditSystemModel.VW_WIPReportMonthly">
+        <MappingFragment StoreEntitySet="VW_WIPReportMonthly">
+          <ScalarProperty Name="DesignationName" ColumnName="DesignationName" />
+          <ScalarProperty Name="EmployeeName" ColumnName="EmployeeName" />
+          <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+          <ScalarProperty Name="CustomerName" ColumnName="CustomerName" />
+          <ScalarProperty Name="Fk_CustomerId" ColumnName="Fk_CustomerId" />
+          <ScalarProperty Name="JobNarration" ColumnName="JobNarration" />
+          <ScalarProperty Name="JobCode" ColumnName="JobCode" />
+          <ScalarProperty Name="TotalValue" ColumnName="TotalValue" />
+          <ScalarProperty Name="EmployeeRateValue" ColumnName="EmployeeRateValue" />
+          <ScalarProperty Name="TotalHours" ColumnName="TotalHours" />
+          <ScalarProperty Name="Narration" ColumnName="Narration" />
+          <ScalarProperty Name="Fk_EmployeeId" ColumnName="Fk_EmployeeId" />
+          <ScalarProperty Name="Fk_JobMasterId" ColumnName="Fk_JobMasterId" />
+          <ScalarProperty Name="MonthNumber" ColumnName="MonthNumber" />
+          <ScalarProperty Name="Month" ColumnName="Month" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

@@ -106,6 +106,50 @@ namespace WOPHRMSystem.Services
             }
         }
 
+
+        public List<LaberUtilizationStatementWorkTypeAndGroup> GetAllLaberUtilizationDailyWorkTypeAndGroups(string fromDate, string todate, int fromJObid, int tojobId)
+        {
+            try
+            {
+               
+                DateTime Fromdate = DateTime.Parse(fromDate);
+                DateTime Todate = DateTime.Parse(todate);
+
+                var dr = (from a in _context.VW_LaberUtilizationSummaryWorkTypeAndGroup
+                          orderby a.JobCode ascending
+                          select new LaberUtilizationStatementWorkTypeAndGroup()
+                          {
+                              TransactionId = a.TransactionId,
+                              EmployeeName = a.EmployeeName,
+                              Fk_CustomerId = a.Fk_CustomerId,
+                              Fk_EmployeeId = a.Fk_EmployeeId,
+                              Fk_JobMasterId = a.Fk_JobMasterId,
+                              Fk_LocationId = a.Fk_LocationId,
+                              Fk_WorkTypeId = a.Fk_WorkTypeId,
+                              Groups = a.Groups,
+                              IsApplyTravelingCost = a.IsApplyTravelingCost,
+                              Narration = a.Narration,
+                              TrDate = a.TrDate,
+                              WorkingHours = a.WorkingHours,
+                              Worktypes = a.Worktypes,
+                              JobCode = a.JobCode,
+
+                          }).AsNoTracking().ToList();
+
+                //lists = dr.Where(d => d.TrDate.Equals(null)).ToList();
+
+                var wheredr = dr.Where(a => (a.TrDate >= Fromdate && a.TrDate <= Todate) && (a.Fk_JobMasterId >= fromJObid && a.Fk_JobMasterId <= tojobId)).ToList();
+
+                return wheredr;
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
         public List<VW_CustomerLocationRatesModel> GetAllCustomersLocationRates()
         {
             try
@@ -415,6 +459,71 @@ namespace WOPHRMSystem.Services
 
                 //return groupedResult;
                 return finalReSult;
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+
+        public List<VW_WIPReportMonthlyModel> GetReportWIPReportMonthly(int JobmasterId)
+        {
+            try
+            {
+                //List<VW_WIPReportMonthlyModel> lists;
+
+                var dr = (from a in _context.VW_WIPReportMonthly
+                          orderby a.MonthNumber ascending
+                          where a.Fk_JobMasterId.Equals(JobmasterId)
+                          select new VW_WIPReportMonthlyModel()
+                          {
+                              Month = a.Month,
+                              StartDate = a.StartDate,
+                              Narration = a.Narration,
+                              JobCode = a.JobCode,
+                              CustomerName = a.CustomerName,
+                              DesignationName = a.DesignationName,
+                              EmployeeName = a.EmployeeName,
+                              EmployeeRateValue = a.EmployeeRateValue,
+                              Fk_CustomerId = a.Fk_CustomerId,
+                              Fk_EmployeeId = a.Fk_EmployeeId,
+                              Fk_JobMasterId = a.Fk_JobMasterId,
+                              JobNarration = a.JobNarration,
+                              TotalHours = a.TotalHours,
+                              MonthNumber = a.MonthNumber,
+                              TotalValue = a.TotalValue,
+                          }).AsNoTracking().ToList();
+
+                //lists = dr.Where(d => d.TrDate.Equals(null)).ToList();
+
+                //var wheredr = dr.Where(a => a.TrDate <= Fromdate).ToList();
+
+                //var finalReSult = lists;
+
+                //var groupedResult = dr
+                //   .GroupBy(g => new { g.Fk_JobMasterId, g.Fk_CustomerId, g.Fk_EmployeeId, g.Month })
+                //   .Select(grp => new VW_WIPReportMonthlyModel
+                //   {
+
+                //       Fk_JobMasterId = grp.Key.Fk_JobMasterId,
+                //       EmployeeName = grp.First().EmployeeName,
+                //       ActualValue = grp.Sum(x => x.ActualValue),
+                //       BudgetedValue = grp.First().BudgetedValue,
+                //       ActualHours = grp.Sum(x => x.ActualHours),
+                //       BudgetedHours = grp.First().BudgetedHours,
+                //       EmployeeRateValue = grp.First().EmployeeRateValue ?? 0,
+                //       StartDate = grp.First().StartDate,
+                //       CustomerCode = grp.First().CustomerCode,
+                //       CustomerName = grp.First().CustomerName,
+                //       JobCode = grp.First().JobCode
+                //   })
+                //   .ToList();
+
+                //return groupedResult;
+                return dr;
 
             }
             catch (Exception)

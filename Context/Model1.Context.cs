@@ -100,5 +100,6 @@ namespace WOPHRMSystem.Context
         public DbSet<VW_Receipts> VW_Receipts { get; set; }
         public DbSet<VW_SectorMaster> VW_SectorMaster { get; set; }
         public DbSet<VW_WIPReportDailyAndMonthly> VW_WIPReportDailyAndMonthly { get; set; }
+        public DbSet<VW_WIPReportMonthly> VW_WIPReportMonthly { get; set; }
     }
 }

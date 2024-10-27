@@ -1930,6 +1930,35 @@ warning 6002: The table/view 'AuditSystem.dbo.VW_WIPReportDailyAndMonthly' does 
           <Property Name="HoursVarianceValue" Type="decimal" Precision="38" Scale="2" Nullable="false" />
           <Property Name="VarianceValue" Type="decimal" Precision="38" Scale="4" Nullable="false" />
         </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'AuditSystem.dbo.VW_WIPReportMonthly' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="VW_WIPReportMonthly">
+          <Key>
+            <PropertyRef Name="Month" />
+            <PropertyRef Name="MonthNumber" />
+            <PropertyRef Name="Fk_JobMasterId" />
+            <PropertyRef Name="Fk_EmployeeId" />
+            <PropertyRef Name="TotalHours" />
+            <PropertyRef Name="EmployeeRateValue" />
+            <PropertyRef Name="EmployeeName" />
+            <PropertyRef Name="DesignationName" />
+          </Key>
+          <Property Name="Month" Type="varchar" MaxLength="9" Nullable="false" />
+          <Property Name="MonthNumber" Type="int" Nullable="false" />
+          <Property Name="Fk_JobMasterId" Type="int" Nullable="false" />
+          <Property Name="Fk_EmployeeId" Type="int" Nullable="false" />
+          <Property Name="Narration" Type="nvarchar(max)" />
+          <Property Name="TotalHours" Type="decimal" Precision="38" Scale="2" Nullable="false" />
+          <Property Name="EmployeeRateValue" Type="decimal" Precision="38" Scale="2" Nullable="false" />
+          <Property Name="TotalValue" Type="decimal" Precision="38" Scale="4" />
+          <Property Name="JobCode" Type="nvarchar(max)" />
+          <Property Name="JobNarration" Type="nvarchar(max)" />
+          <Property Name="Fk_CustomerId" Type="int" />
+          <Property Name="CustomerName" Type="nvarchar(max)" />
+          <Property Name="StartDate" Type="datetime2" Precision="7" />
+          <Property Name="EmployeeName" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="DesignationName" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
         <Association Name="FK_TblCustomers_TblCustomerGroup_Fk_CustomerGroupId">
           <End Role="TblCustomerGroup" Type="Self.TblCustomerGroup" Multiplicity="1" />
           <End Role="TblCustomers" Type="Self.TblCustomers" Multiplicity="*" />
@@ -3531,6 +3560,25 @@ FROM [dbo].[VW_SectorMaster] AS [VW_SectorMaster]</DefiningQuery>
 [VW_WIPReportDailyAndMonthly].[VarianceValue] AS [VarianceValue]
 FROM [dbo].[VW_WIPReportDailyAndMonthly] AS [VW_WIPReportDailyAndMonthly]</DefiningQuery>
           </EntitySet>
+          <EntitySet Name="VW_WIPReportMonthly" EntityType="Self.VW_WIPReportMonthly" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+[VW_WIPReportMonthly].[Month] AS [Month], 
+[VW_WIPReportMonthly].[MonthNumber] AS [MonthNumber], 
+[VW_WIPReportMonthly].[Fk_JobMasterId] AS [Fk_JobMasterId], 
+[VW_WIPReportMonthly].[Fk_EmployeeId] AS [Fk_EmployeeId], 
+[VW_WIPReportMonthly].[Narration] AS [Narration], 
+[VW_WIPReportMonthly].[TotalHours] AS [TotalHours], 
+[VW_WIPReportMonthly].[EmployeeRateValue] AS [EmployeeRateValue], 
+[VW_WIPReportMonthly].[TotalValue] AS [TotalValue], 
+[VW_WIPReportMonthly].[JobCode] AS [JobCode], 
+[VW_WIPReportMonthly].[JobNarration] AS [JobNarration], 
+[VW_WIPReportMonthly].[Fk_CustomerId] AS [Fk_CustomerId], 
+[VW_WIPReportMonthly].[CustomerName] AS [CustomerName], 
+[VW_WIPReportMonthly].[StartDate] AS [StartDate], 
+[VW_WIPReportMonthly].[EmployeeName] AS [EmployeeName], 
+[VW_WIPReportMonthly].[DesignationName] AS [DesignationName]
+FROM [dbo].[VW_WIPReportMonthly] AS [VW_WIPReportMonthly]</DefiningQuery>
+          </EntitySet>
           <AssociationSet Name="FK_TblCustomers_TblCustomerGroup_Fk_CustomerGroupId" Association="Self.FK_TblCustomers_TblCustomerGroup_Fk_CustomerGroupId">
             <End Role="TblCustomerGroup" EntitySet="TblCustomerGroup" />
             <End Role="TblCustomers" EntitySet="TblCustomers" />
@@ -3864,6 +3912,7 @@ FROM [dbo].[VW_WIPReportDailyAndMonthly] AS [VW_WIPReportDailyAndMonthly]</Defin
           <EntitySet Name="VW_Receipts" EntityType="AuditSystemModel.VW_Receipts" />
           <EntitySet Name="VW_SectorMaster" EntityType="AuditSystemModel.VW_SectorMaster" />
           <EntitySet Name="VW_WIPReportDailyAndMonthly" EntityType="AuditSystemModel.VW_WIPReportDailyAndMonthly" />
+          <EntitySet Name="VW_WIPReportMonthly" EntityType="AuditSystemModel.VW_WIPReportMonthly" />
           <AssociationSet Name="FK_TblGenaralReceipt_TblAccount_Fk_AccountId" Association="AuditSystemModel.FK_TblGenaralReceipt_TblAccount_Fk_AccountId">
             <End Role="TblAccount" EntitySet="TblAccounts" />
             <End Role="TblGenaralReceipt" EntitySet="TblGenaralReceipts" />
@@ -6109,6 +6158,33 @@ FROM [dbo].[VW_WIPReportDailyAndMonthly] AS [VW_WIPReportDailyAndMonthly]</Defin
           <Property Name="EmployeeRateValue" Type="Decimal" Precision="38" Scale="2" />
           <Property Name="HoursVarianceValue" Type="Decimal" Nullable="false" Precision="38" Scale="2" />
           <Property Name="VarianceValue" Type="Decimal" Nullable="false" Precision="38" Scale="4" />
+        </EntityType>
+        <EntityType Name="VW_WIPReportMonthly">
+          <Key>
+            <PropertyRef Name="Month" />
+            <PropertyRef Name="MonthNumber" />
+            <PropertyRef Name="Fk_JobMasterId" />
+            <PropertyRef Name="Fk_EmployeeId" />
+            <PropertyRef Name="TotalHours" />
+            <PropertyRef Name="EmployeeRateValue" />
+            <PropertyRef Name="EmployeeName" />
+            <PropertyRef Name="DesignationName" />
+          </Key>
+          <Property Name="Month" Type="String" Nullable="false" MaxLength="9" FixedLength="false" Unicode="false" />
+          <Property Name="MonthNumber" Type="Int32" Nullable="false" />
+          <Property Name="Fk_JobMasterId" Type="Int32" Nullable="false" />
+          <Property Name="Fk_EmployeeId" Type="Int32" Nullable="false" />
+          <Property Name="Narration" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="TotalHours" Type="Decimal" Nullable="false" Precision="38" Scale="2" />
+          <Property Name="EmployeeRateValue" Type="Decimal" Nullable="false" Precision="38" Scale="2" />
+          <Property Name="TotalValue" Type="Decimal" Precision="38" Scale="4" />
+          <Property Name="JobCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="JobNarration" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Fk_CustomerId" Type="Int32" />
+          <Property Name="CustomerName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="StartDate" Type="DateTime" Precision="7" />
+          <Property Name="EmployeeName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DesignationName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <Association Name="FK_TblGenaralReceipt_TblAccount_Fk_AccountId">
           <End Type="AuditSystemModel.TblAccount" Role="TblAccount" Multiplicity="1">
@@ -8626,6 +8702,27 @@ FROM [dbo].[VW_WIPReportDailyAndMonthly] AS [VW_WIPReportDailyAndMonthly]</Defin
                 <ScalarProperty Name="Fk_CustomerId" ColumnName="Fk_CustomerId" />
                 <ScalarProperty Name="Fk_JobMasterId" ColumnName="Fk_JobMasterId" />
                 <ScalarProperty Name="PartnerTableId" ColumnName="PartnerTableId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VW_WIPReportMonthly">
+            <EntityTypeMapping TypeName="AuditSystemModel.VW_WIPReportMonthly">
+              <MappingFragment StoreEntitySet="VW_WIPReportMonthly">
+                <ScalarProperty Name="DesignationName" ColumnName="DesignationName" />
+                <ScalarProperty Name="EmployeeName" ColumnName="EmployeeName" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="CustomerName" ColumnName="CustomerName" />
+                <ScalarProperty Name="Fk_CustomerId" ColumnName="Fk_CustomerId" />
+                <ScalarProperty Name="JobNarration" ColumnName="JobNarration" />
+                <ScalarProperty Name="JobCode" ColumnName="JobCode" />
+                <ScalarProperty Name="TotalValue" ColumnName="TotalValue" />
+                <ScalarProperty Name="EmployeeRateValue" ColumnName="EmployeeRateValue" />
+                <ScalarProperty Name="TotalHours" ColumnName="TotalHours" />
+                <ScalarProperty Name="Narration" ColumnName="Narration" />
+                <ScalarProperty Name="Fk_EmployeeId" ColumnName="Fk_EmployeeId" />
+                <ScalarProperty Name="Fk_JobMasterId" ColumnName="Fk_JobMasterId" />
+                <ScalarProperty Name="MonthNumber" ColumnName="MonthNumber" />
+                <ScalarProperty Name="Month" ColumnName="Month" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

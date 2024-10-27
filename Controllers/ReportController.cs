@@ -804,6 +804,87 @@ namespace WOPHRMSystem.Controllers
         }
         #endregion
 
+
+        #region Work Type Staff Utilization Daily -Detail
+
+        public ActionResult LaberUtilizationDailyModel()
+        {
+            var model = new LaberUtilizationStatementWorkTypeAndGroupReportModel
+            {
+                EmployeeList = new SelectList(employeeServices.GetAllEmployeeASC(), "Id", "Name"),
+                JObList = new SelectList(jobMasterServices.GetAllDropdownASC(), "Id", "JobCode"),
+            };
+            return View(model);
+        }
+
+        [HttpGet]
+        public ActionResult PrintLaberUtilizationDaily(LaberUtilizationStatementWorkTypeAndGroupReportModel model)
+        {
+            LocalReport localReport = new LocalReport();
+            string path = "";
+            if (model.IsWorkType == true)
+            {
+                path = Server.MapPath("~/Reports/ReportLaberUtilizationDailyWorkType.rdlc");
+            }
+            else
+            {
+                path = Server.MapPath("~/Reports/ReportLaberUtilizationDailyWorkGroup.rdlc");
+            }
+
+            if (System.IO.File.Exists(path))
+            {
+                localReport.ReportPath = path;
+            }
+            else
+            {
+                return View("Error");
+            }
+
+            // Load data
+            var data = new ReportServices().GetAllLaberUtilizationDailyWorkTypeAndGroups(model.FromDate.Value.ToString("yyyy/MM/dd"), model.ToDate.Value.ToString("yyyy/MM/dd"), model.FkFromJObId, model.FkToJobId);
+            ReportDataSource reportDataSource = new ReportDataSource("DataSet1", data);
+            localReport.DataSources.Add(reportDataSource);
+
+            localReport.SetParameters(new ReportParameter("PrintDate", (new CommonResources().LocalDatetime().Date).ToString("yyyy-MMM-dd")));
+            localReport.SetParameters(new ReportParameter("FromDate", (model.FromDate.Value.ToString("yyyy-MMM-dd"))));
+            localReport.SetParameters(new ReportParameter("ToDate", (model.ToDate.Value.ToString("yyyy-MMM-dd"))));
+            localReport.SetParameters(new ReportParameter("ToJobNo", Convert.ToString(data.Last().JobCode)));
+            localReport.SetParameters(new ReportParameter("FromJobNo", Convert.ToString(data.First().JobCode)));
+
+
+            // Render report
+            string reportType = "PDF";
+            string mimeType;
+            string encoding;
+            string fileNameExtension = "sddssdsdsddsdsd";
+
+            string deviceInfo = "<DeviceInfo>" +
+                "  <OutputFormat>PDF</OutputFormat>" +
+                "  <PageWidth>15in</PageWidth>" +
+                "  <PageHeight>8.5in</PageHeight>" +
+                "  <MarginTop>0.3in</MarginTop>" +
+                "  <MarginLeft>0.5in</MarginLeft>" +
+                "  <MarginRight>0.3in</MarginRight>" +
+                "  <MarginBottom>0.3in</MarginBottom>" +
+                "</DeviceInfo>";
+
+            Warning[] warnings;
+            string[] streams;
+            byte[] renderedBytes;
+
+            renderedBytes = localReport.Render(
+                reportType,
+                deviceInfo,
+                out mimeType,
+                out encoding,
+                out fileNameExtension,
+                out streams,
+                out warnings);
+
+            return File(renderedBytes, mimeType);
+        }
+        #endregion
+
         #region Group Type
         public ActionResult LaberUtilizationStatementWorkGroupUserAndDateWiseModel()
         {
@@ -912,8 +993,8 @@ namespace WOPHRMSystem.Controllers
             localReport.SetParameters(new ReportParameter("PrintDate", (new CommonResources().LocalDatetime().Date).ToString("yyyy-MMM-dd")));
             localReport.SetParameters(new ReportParameter("FromDate", (model.FromDate.Value.ToString("yyyy-MMM-dd"))));
             localReport.SetParameters(new ReportParameter("ToDate", (model.ToDate.Value.ToString("yyyy-MMM-dd"))));
-            localReport.SetParameters(new ReportParameter("ToJobNo", Convert.ToString(model.FkFromJObId)));
-            localReport.SetParameters(new ReportParameter("FromJobNo", Convert.ToString(model.FkToJobId)));
+            localReport.SetParameters(new ReportParameter("ToJobNo", Convert.ToString(data.Last().JobCode)));
+            localReport.SetParameters(new ReportParameter("FromJobNo", Convert.ToString(data.First().JobCode)));
 
 
             // Render report
@@ -1223,7 +1304,7 @@ namespace WOPHRMSystem.Controllers
         #endregion
 
 
-        #region WIP Report Monthly
+        #region WIP Report Daily
 
         public ActionResult WIPReportDailyModel()
         {
@@ -1278,6 +1359,84 @@ namespace WOPHRMSystem.Controllers
                 "  <MarginTop>0.3in</MarginTop>" +
                 "  <MarginLeft>0.5in</MarginLeft>" +
                 "  <MarginRight>0.3in</MarginRight>" +
+                "  <MarginBottom>0.3in</MarginBottom>" +
+                "</DeviceInfo>";
+
+            Warning[] warnings;
+            string[] streams;
+            byte[] renderedBytes;
+
+            renderedBytes = localReport.Render(
+                reportType,
+                deviceInfo,
+                out mimeType,
+                out encoding,
+                out fileNameExtension,
+                out streams,
+                out warnings);
+
+            return File(renderedBytes, mimeType);
+        }
+
+
+        #endregion
+
+
+        #region WIP Report Monthly
+
+        public ActionResult WIPReportMonthlyModel()
+        {
+            var model = new VW_WIPReportMonthlyModel()
+            {
+                JObList = new SelectList(jobMasterServices.GetAllDropdownASC(), "Id", "JobCode"),
+            };
+            return View(model);
+        }
+
+        [HttpGet]
+        public ActionResult WIPReportMonthly(VW_WIPReportMonthlyModel model)
+        {
+            LocalReport localReport = new LocalReport();
+            string path = Server.MapPath("~/Reports/ReportWIPReportMonthly.rdlc");
+            if (System.IO.File.Exists(path))
+            {
+                localReport.ReportPath = path;
+            }
+            else
+            {
+                return View("Error");
+            }
+
+            // Load data
+            var data = new ReportServices().GetReportWIPReportMonthly(model.Fk_JobMasterId);
+
+
+
+            ReportDataSource reportDataSource = new ReportDataSource("DataSet1", data);
+            localReport.DataSources.Add(reportDataSource);
+
+
+            localReport.SetParameters(new ReportParameter("PrintDate", (new CommonResources().LocalDatetime().Date).ToString("yyyy-MMM-dd")));
+            localReport.SetParameters(new ReportParameter("commencedDate", (data.FirstOrDefault().StartDate.Value.ToString("yyyy-MMM-dd"))));
+            localReport.SetParameters(new ReportParameter("CustomerName", data.FirstOrDefault().CustomerName));
+            localReport.SetParameters(new ReportParameter("JObNo", data.FirstOrDefault().JobCode));
+            localReport.SetParameters(new ReportParameter("Narration", data.FirstOrDefault().Narration));
+
+
+
+            // Render report
+            string reportType = "PDF";
+            string mimeType;
+            string encoding;
+            string fileNameExtension = "sddssdsdsddsdsd";
+
+            string deviceInfo = "<DeviceInfo>" +
+                "  <OutputFormat>PDF</OutputFormat>" +
+                "  <PageWidth>16in</PageWidth>" +
+                "  <PageHeight>8.5in</PageHeight>" +
+                "  <MarginTop>0.3in</MarginTop>" +
+                "  <MarginLeft>0.2in</MarginLeft>" +
+                "  <MarginRight>0in</MarginRight>" +
                 "  <MarginBottom>0.3in</MarginBottom>" +
                 "</DeviceInfo>";
 

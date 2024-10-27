@@ -76,6 +76,7 @@
     <EntitySet Name="VW_Receipts" EntityType="AuditSystemModel.VW_Receipts" />
     <EntitySet Name="VW_SectorMaster" EntityType="AuditSystemModel.VW_SectorMaster" />
     <EntitySet Name="VW_WIPReportDailyAndMonthly" EntityType="AuditSystemModel.VW_WIPReportDailyAndMonthly" />
+    <EntitySet Name="VW_WIPReportMonthly" EntityType="AuditSystemModel.VW_WIPReportMonthly" />
     <AssociationSet Name="FK_TblGenaralReceipt_TblAccount_Fk_AccountId" Association="AuditSystemModel.FK_TblGenaralReceipt_TblAccount_Fk_AccountId">
       <End Role="TblAccount" EntitySet="TblAccounts" />
       <End Role="TblGenaralReceipt" EntitySet="TblGenaralReceipts" />
@@ -2321,6 +2322,33 @@
     <Property Name="EmployeeRateValue" Type="Decimal" Precision="38" Scale="2" />
     <Property Name="HoursVarianceValue" Type="Decimal" Nullable="false" Precision="38" Scale="2" />
     <Property Name="VarianceValue" Type="Decimal" Nullable="false" Precision="38" Scale="4" />
+  </EntityType>
+  <EntityType Name="VW_WIPReportMonthly">
+    <Key>
+      <PropertyRef Name="Month" />
+      <PropertyRef Name="MonthNumber" />
+      <PropertyRef Name="Fk_JobMasterId" />
+      <PropertyRef Name="Fk_EmployeeId" />
+      <PropertyRef Name="TotalHours" />
+      <PropertyRef Name="EmployeeRateValue" />
+      <PropertyRef Name="EmployeeName" />
+      <PropertyRef Name="DesignationName" />
+    </Key>
+    <Property Name="Month" Type="String" Nullable="false" MaxLength="9" FixedLength="false" Unicode="false" />
+    <Property Name="MonthNumber" Type="Int32" Nullable="false" />
+    <Property Name="Fk_JobMasterId" Type="Int32" Nullable="false" />
+    <Property Name="Fk_EmployeeId" Type="Int32" Nullable="false" />
+    <Property Name="Narration" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="TotalHours" Type="Decimal" Nullable="false" Precision="38" Scale="2" />
+    <Property Name="EmployeeRateValue" Type="Decimal" Nullable="false" Precision="38" Scale="2" />
+    <Property Name="TotalValue" Type="Decimal" Precision="38" Scale="4" />
+    <Property Name="JobCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="JobNarration" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Fk_CustomerId" Type="Int32" />
+    <Property Name="CustomerName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="StartDate" Type="DateTime" Precision="7" />
+    <Property Name="EmployeeName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="DesignationName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
   </EntityType>
   <Association Name="FK_TblGenaralReceipt_TblAccount_Fk_AccountId">
     <End Type="AuditSystemModel.TblAccount" Role="TblAccount" Multiplicity="1">

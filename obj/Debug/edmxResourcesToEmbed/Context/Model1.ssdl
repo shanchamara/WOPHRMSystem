@@ -1925,6 +1925,35 @@ warning 6002: The table/view 'AuditSystem.dbo.VW_WIPReportDailyAndMonthly' does 
     <Property Name="HoursVarianceValue" Type="decimal" Precision="38" Scale="2" Nullable="false" />
     <Property Name="VarianceValue" Type="decimal" Precision="38" Scale="4" Nullable="false" />
   </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'AuditSystem.dbo.VW_WIPReportMonthly' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="VW_WIPReportMonthly">
+    <Key>
+      <PropertyRef Name="Month" />
+      <PropertyRef Name="MonthNumber" />
+      <PropertyRef Name="Fk_JobMasterId" />
+      <PropertyRef Name="Fk_EmployeeId" />
+      <PropertyRef Name="TotalHours" />
+      <PropertyRef Name="EmployeeRateValue" />
+      <PropertyRef Name="EmployeeName" />
+      <PropertyRef Name="DesignationName" />
+    </Key>
+    <Property Name="Month" Type="varchar" MaxLength="9" Nullable="false" />
+    <Property Name="MonthNumber" Type="int" Nullable="false" />
+    <Property Name="Fk_JobMasterId" Type="int" Nullable="false" />
+    <Property Name="Fk_EmployeeId" Type="int" Nullable="false" />
+    <Property Name="Narration" Type="nvarchar(max)" />
+    <Property Name="TotalHours" Type="decimal" Precision="38" Scale="2" Nullable="false" />
+    <Property Name="EmployeeRateValue" Type="decimal" Precision="38" Scale="2" Nullable="false" />
+    <Property Name="TotalValue" Type="decimal" Precision="38" Scale="4" />
+    <Property Name="JobCode" Type="nvarchar(max)" />
+    <Property Name="JobNarration" Type="nvarchar(max)" />
+    <Property Name="Fk_CustomerId" Type="int" />
+    <Property Name="CustomerName" Type="nvarchar(max)" />
+    <Property Name="StartDate" Type="datetime2" Precision="7" />
+    <Property Name="EmployeeName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="DesignationName" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
   <Association Name="FK_TblCustomers_TblCustomerGroup_Fk_CustomerGroupId">
     <End Role="TblCustomerGroup" Type="Self.TblCustomerGroup" Multiplicity="1" />
     <End Role="TblCustomers" Type="Self.TblCustomers" Multiplicity="*" />
@@ -3525,6 +3554,25 @@ FROM [dbo].[VW_SectorMaster] AS [VW_SectorMaster]</DefiningQuery>
 [VW_WIPReportDailyAndMonthly].[HoursVarianceValue] AS [HoursVarianceValue], 
 [VW_WIPReportDailyAndMonthly].[VarianceValue] AS [VarianceValue]
 FROM [dbo].[VW_WIPReportDailyAndMonthly] AS [VW_WIPReportDailyAndMonthly]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="VW_WIPReportMonthly" EntityType="Self.VW_WIPReportMonthly" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+[VW_WIPReportMonthly].[Month] AS [Month], 
+[VW_WIPReportMonthly].[MonthNumber] AS [MonthNumber], 
+[VW_WIPReportMonthly].[Fk_JobMasterId] AS [Fk_JobMasterId], 
+[VW_WIPReportMonthly].[Fk_EmployeeId] AS [Fk_EmployeeId], 
+[VW_WIPReportMonthly].[Narration] AS [Narration], 
+[VW_WIPReportMonthly].[TotalHours] AS [TotalHours], 
+[VW_WIPReportMonthly].[EmployeeRateValue] AS [EmployeeRateValue], 
+[VW_WIPReportMonthly].[TotalValue] AS [TotalValue], 
+[VW_WIPReportMonthly].[JobCode] AS [JobCode], 
+[VW_WIPReportMonthly].[JobNarration] AS [JobNarration], 
+[VW_WIPReportMonthly].[Fk_CustomerId] AS [Fk_CustomerId], 
+[VW_WIPReportMonthly].[CustomerName] AS [CustomerName], 
+[VW_WIPReportMonthly].[StartDate] AS [StartDate], 
+[VW_WIPReportMonthly].[EmployeeName] AS [EmployeeName], 
+[VW_WIPReportMonthly].[DesignationName] AS [DesignationName]
+FROM [dbo].[VW_WIPReportMonthly] AS [VW_WIPReportMonthly]</DefiningQuery>
     </EntitySet>
     <AssociationSet Name="FK_TblCustomers_TblCustomerGroup_Fk_CustomerGroupId" Association="Self.FK_TblCustomers_TblCustomerGroup_Fk_CustomerGroupId">
       <End Role="TblCustomerGroup" EntitySet="TblCustomerGroup" />
