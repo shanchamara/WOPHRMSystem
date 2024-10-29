@@ -107,11 +107,58 @@ namespace WOPHRMSystem.Services
         }
 
 
+        public List<VW_LaberUtilizationJObWiseModel> GetAllSummaryLaberUtilizationJObWise(string fromDate, string todate, int fromJObid, int tojobId)
+        {
+            try
+            {
+                
+                DateTime Fromdate = DateTime.Parse(fromDate);
+                DateTime Todate = DateTime.Parse(todate);
+
+                var dr = (from a in _context.VW_LaberUtilizationJObWise
+                          orderby a.JobCode ascending
+                          select new VW_LaberUtilizationJObWiseModel()
+                          {
+                              TransactionId = a.TransactionId,
+                              EmployeeName = a.EmployeeName,
+                              Fk_CustomerId = a.Fk_CustomerId,
+                              Fk_EmployeeId = a.Fk_EmployeeId,
+                              Fk_JobMasterId = a.Fk_JobMasterId,
+                              Fk_LocationId = a.Fk_LocationId,
+                              Fk_WorkTypeId = a.Fk_WorkTypeId,
+                              Groups = a.Groups,
+                              IsApplyTravelingCost = a.IsApplyTravelingCost,
+                              Narration = a.Narration,
+                              TrDate = a.TrDate,
+                              WorkingHours = a.WorkingHours,
+                              Worktypes = a.Worktypes,
+                              JobCode = a.JobCode,
+                              CustomerName = a.CustomerName,
+                          }).AsNoTracking().ToList();
+
+                
+
+                var wheredr = dr.Where(a => (a.TrDate >= Fromdate && a.TrDate <= Todate) && (a.Fk_JobMasterId >= fromJObid && a.Fk_JobMasterId <= tojobId)).ToList();
+
+                return wheredr.ToList();
+
+
+                //return queryResult;
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+
         public List<LaberUtilizationStatementWorkTypeAndGroup> GetAllLaberUtilizationDailyWorkTypeAndGroups(string fromDate, string todate, int fromJObid, int tojobId)
         {
             try
             {
-               
+
                 DateTime Fromdate = DateTime.Parse(fromDate);
                 DateTime Todate = DateTime.Parse(todate);
 

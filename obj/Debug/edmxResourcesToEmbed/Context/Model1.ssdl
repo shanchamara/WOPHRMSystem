@@ -1604,6 +1604,31 @@ warning 6002: The table/view 'AuditSystem.dbo.VW_JObWiseCositingDetailsWithAssig
     <Property Name="VarianceValue" Type="decimal" Precision="38" Scale="4" Nullable="false" />
   </EntityType>
   <!--Errors Found During Generation:
+warning 6002: The table/view 'AuditSystem.dbo.VW_LaberUtilizationJObWise' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="VW_LaberUtilizationJObWise">
+    <Key>
+      <PropertyRef Name="Groups" />
+      <PropertyRef Name="Worktypes" />
+      <PropertyRef Name="EmployeeName" />
+      <PropertyRef Name="CustomerName" />
+    </Key>
+    <Property Name="TransactionId" Type="int" />
+    <Property Name="TrDate" Type="datetime2" Precision="7" />
+    <Property Name="Fk_JobMasterId" Type="int" />
+    <Property Name="Fk_EmployeeId" Type="int" />
+    <Property Name="Narration" Type="nvarchar(max)" />
+    <Property Name="JobCode" Type="nvarchar(max)" />
+    <Property Name="IsApplyTravelingCost" Type="bit" />
+    <Property Name="Fk_LocationId" Type="int" />
+    <Property Name="WorkingHours" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="Fk_WorkTypeId" Type="int" />
+    <Property Name="Fk_CustomerId" Type="int" />
+    <Property Name="Groups" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Worktypes" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="EmployeeName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="CustomerName" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
 warning 6002: The table/view 'AuditSystem.dbo.VW_LaberUtilizationStatementWorkTypeAndGroup' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
   <EntityType Name="VW_LaberUtilizationStatementWorkTypeAndGroup">
     <Key>
@@ -1938,7 +1963,7 @@ warning 6002: The table/view 'AuditSystem.dbo.VW_WIPReportMonthly' does not have
       <PropertyRef Name="EmployeeName" />
       <PropertyRef Name="DesignationName" />
     </Key>
-    <Property Name="Month" Type="varchar" MaxLength="9" Nullable="false" />
+    <Property Name="Month" Type="varchar" MaxLength="3" Nullable="false" />
     <Property Name="MonthNumber" Type="int" Nullable="false" />
     <Property Name="Fk_JobMasterId" Type="int" Nullable="false" />
     <Property Name="Fk_EmployeeId" Type="int" Nullable="false" />
@@ -3326,6 +3351,25 @@ FROM [dbo].[VW_JobMasterViewforReport] AS [VW_JobMasterViewforReport]</DefiningQ
 [VW_JObWiseCositingDetailsWithAssignEmployee].[HoursVarianceValue] AS [HoursVarianceValue], 
 [VW_JObWiseCositingDetailsWithAssignEmployee].[VarianceValue] AS [VarianceValue]
 FROM [dbo].[VW_JObWiseCositingDetailsWithAssignEmployee] AS [VW_JObWiseCositingDetailsWithAssignEmployee]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="VW_LaberUtilizationJObWise" EntityType="Self.VW_LaberUtilizationJObWise" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+[VW_LaberUtilizationJObWise].[TransactionId] AS [TransactionId], 
+[VW_LaberUtilizationJObWise].[TrDate] AS [TrDate], 
+[VW_LaberUtilizationJObWise].[Fk_JobMasterId] AS [Fk_JobMasterId], 
+[VW_LaberUtilizationJObWise].[Fk_EmployeeId] AS [Fk_EmployeeId], 
+[VW_LaberUtilizationJObWise].[Narration] AS [Narration], 
+[VW_LaberUtilizationJObWise].[JobCode] AS [JobCode], 
+[VW_LaberUtilizationJObWise].[IsApplyTravelingCost] AS [IsApplyTravelingCost], 
+[VW_LaberUtilizationJObWise].[Fk_LocationId] AS [Fk_LocationId], 
+[VW_LaberUtilizationJObWise].[WorkingHours] AS [WorkingHours], 
+[VW_LaberUtilizationJObWise].[Fk_WorkTypeId] AS [Fk_WorkTypeId], 
+[VW_LaberUtilizationJObWise].[Fk_CustomerId] AS [Fk_CustomerId], 
+[VW_LaberUtilizationJObWise].[Groups] AS [Groups], 
+[VW_LaberUtilizationJObWise].[Worktypes] AS [Worktypes], 
+[VW_LaberUtilizationJObWise].[EmployeeName] AS [EmployeeName], 
+[VW_LaberUtilizationJObWise].[CustomerName] AS [CustomerName]
+FROM [dbo].[VW_LaberUtilizationJObWise] AS [VW_LaberUtilizationJObWise]</DefiningQuery>
     </EntitySet>
     <EntitySet Name="VW_LaberUtilizationStatementWorkTypeAndGroup" EntityType="Self.VW_LaberUtilizationStatementWorkTypeAndGroup" store:Type="Views" store:Schema="dbo">
       <DefiningQuery>SELECT 

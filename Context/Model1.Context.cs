@@ -91,6 +91,7 @@ namespace WOPHRMSystem.Context
         public DbSet<VW_JobMasterViewforCalculatorJobCostReport> VW_JobMasterViewforCalculatorJobCostReport { get; set; }
         public DbSet<VW_JobMasterViewforReport> VW_JobMasterViewforReport { get; set; }
         public DbSet<VW_JObWiseCositingDetailsWithAssignEmployee> VW_JObWiseCositingDetailsWithAssignEmployee { get; set; }
+        public DbSet<VW_LaberUtilizationJObWise> VW_LaberUtilizationJObWise { get; set; }
         public DbSet<VW_LaberUtilizationStatementWorkTypeAndGroup> VW_LaberUtilizationStatementWorkTypeAndGroup { get; set; }
         public DbSet<VW_LaberUtilizationSummaryWorkTypeAndGroup> VW_LaberUtilizationSummaryWorkTypeAndGroup { get; set; }
         public DbSet<VW_LegalStatusMaster> VW_LegalStatusMaster { get; set; }

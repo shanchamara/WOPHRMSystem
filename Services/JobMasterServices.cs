@@ -405,7 +405,7 @@ namespace WOPHRMSystem.Services
                               IsReActivate = a.IsReActivate,
                               CompletedDate = a.CompletedDate,
                               ReActivateDate = a.ReActivateDate,
-                          }).Where(d => d.IsDelete.Equals(false) && d.IsCompleted.Equals(false)).ToList();
+                          }).Where(d => d.IsDelete.Equals(false)).ToList();
                 return dr;
             }
             catch (Exception)
