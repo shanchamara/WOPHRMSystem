@@ -1,37 +1,12 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "E:\\Devop Project\\SWIS Software\\Freelancer Project\\Second Project\\WOPHRMSystem\\",
-  "Documents": [
-    {
-      "AbsoluteMoniker": "D:0:0:{AB94AB58-CA94-4BEC-8A20-86C6CC89C21A}|WOPHRMSystem.csproj|e:\\devop project\\swis software\\freelancer project\\second project\\wophrmsystem\\views\\report\\laberutilizationjobwisemodel.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{AB94AB58-CA94-4BEC-8A20-86C6CC89C21A}|WOPHRMSystem.csproj|solutionrelative:views\\report\\laberutilizationjobwisemodel.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    }
-  ],
+  "Documents": [],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
       "VerticalTabListWidth": 256,
-      "DocumentGroups": [
-        {
-          "DockedWidth": 200,
-          "SelectedChildIndex": 0,
-          "Children": [
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "LaberUtilizationJObWiseModel.cshtml",
-              "DocumentMoniker": "E:\\Devop Project\\SWIS Software\\Freelancer Project\\Second Project\\WOPHRMSystem\\Views\\Report\\LaberUtilizationJObWiseModel.cshtml",
-              "RelativeDocumentMoniker": "Views\\Report\\LaberUtilizationJObWiseModel.cshtml",
-              "ToolTip": "E:\\Devop Project\\SWIS Software\\Freelancer Project\\Second Project\\WOPHRMSystem\\Views\\Report\\LaberUtilizationJObWiseModel.cshtml",
-              "RelativeToolTip": "Views\\Report\\LaberUtilizationJObWiseModel.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-10-29T02:23:27.946Z",
-              "EditorCaption": ""
-            }
-          ]
-        }
-      ]
+      "DocumentGroups": []
     }
   ]
 }

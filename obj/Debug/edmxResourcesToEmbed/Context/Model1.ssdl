@@ -962,6 +962,91 @@ warning 6002: The table/view 'AuditSystem.dbo.VW_CustomerLocationRates' does not
     <Property Name="LocationNumber" Type="bigint" />
   </EntityType>
   <!--Errors Found During Generation:
+warning 6002: The table/view 'AuditSystem.dbo.VW_DataEntryDetails' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="VW_DataEntryDetails">
+    <Key>
+      <PropertyRef Name="PartnerTableId" />
+      <PropertyRef Name="Fk_JobMasterId" />
+      <PropertyRef Name="Fk_CustomerId" />
+      <PropertyRef Name="TypeOfTableId" />
+      <PropertyRef Name="PartnersIsDelete" />
+      <PropertyRef Name="JobmasterId" />
+      <PropertyRef Name="IsCompleted" />
+      <PropertyRef Name="IsReActivate" />
+      <PropertyRef Name="IsActive" />
+      <PropertyRef Name="JobmasterIsDelete" />
+      <PropertyRef Name="locationsName" />
+      <PropertyRef Name="WorkName" />
+    </Key>
+    <Property Name="PartnerTableId" Type="int" Nullable="false" />
+    <Property Name="Fk_JobMasterId" Type="int" Nullable="false" />
+    <Property Name="BudgetedHours" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="Fk_CustomerId" Type="int" Nullable="false" />
+    <Property Name="TypeOfTable" Type="nvarchar(max)" />
+    <Property Name="TypeOfTableId" Type="int" Nullable="false" />
+    <Property Name="PartnersIsDelete" Type="bit" Nullable="false" />
+    <Property Name="CustomerName" Type="nvarchar(max)" />
+    <Property Name="CustomerCode" Type="nvarchar(max)" />
+    <Property Name="JobmasterId" Type="int" Nullable="false" />
+    <Property Name="JobCode" Type="nvarchar(max)" />
+    <Property Name="Narration" Type="nvarchar(max)" />
+    <Property Name="PreViewvalue" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="StartDate" Type="datetime2" Precision="7" />
+    <Property Name="DueDate" Type="datetime2" Precision="7" />
+    <Property Name="IsCompleted" Type="bit" Nullable="false" />
+    <Property Name="IsReActivate" Type="bit" Nullable="false" />
+    <Property Name="CompletedDate" Type="datetime2" Precision="7" />
+    <Property Name="ReActivateDate" Type="datetime2" Precision="7" />
+    <Property Name="IsActive" Type="bit" Nullable="false" />
+    <Property Name="JobmasterIsDelete" Type="bit" Nullable="false" />
+    <Property Name="CombinedName" Type="nvarchar(max)" />
+    <Property Name="CombinedCode" Type="nvarchar(max)" />
+    <Property Name="TrDate" Type="datetime2" Precision="7" />
+    <Property Name="TransNarration" Type="nvarchar(max)" />
+    <Property Name="Hours" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="locationsName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="WorkName" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'AuditSystem.dbo.VW_DataEntryEmployeesWise' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="VW_DataEntryEmployeesWise">
+    <Key>
+      <PropertyRef Name="Id" />
+      <PropertyRef Name="Fk_JobMasterId" />
+      <PropertyRef Name="Fk_EmployeeId" />
+      <PropertyRef Name="IsApplyTravelingCost" />
+      <PropertyRef Name="Fk_LocationId" />
+      <PropertyRef Name="Fk_WorkTypeId" />
+      <PropertyRef Name="Fk_CustomerId" />
+      <PropertyRef Name="IsDelete" />
+      <PropertyRef Name="Create_Date" />
+      <PropertyRef Name="locationsName" />
+      <PropertyRef Name="WorkName" />
+      <PropertyRef Name="CustomerName" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="TrDate" Type="datetime2" Precision="7" />
+    <Property Name="Fk_JobMasterId" Type="int" Nullable="false" />
+    <Property Name="Fk_EmployeeId" Type="int" Nullable="false" />
+    <Property Name="Narration" Type="nvarchar(max)" />
+    <Property Name="IsApplyTravelingCost" Type="bit" Nullable="false" />
+    <Property Name="Fk_LocationId" Type="int" Nullable="false" />
+    <Property Name="Hours" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="Fk_WorkTypeId" Type="int" Nullable="false" />
+    <Property Name="Fk_CustomerId" Type="int" Nullable="false" />
+    <Property Name="IsDelete" Type="bit" Nullable="false" />
+    <Property Name="Create_By" Type="nvarchar(max)" />
+    <Property Name="Create_Date" Type="datetime2" Precision="7" Nullable="false" />
+    <Property Name="Edit_By" Type="nvarchar(max)" />
+    <Property Name="Edit_Date" Type="datetime2" Precision="7" />
+    <Property Name="Delete_By" Type="nvarchar(max)" />
+    <Property Name="Delete_Date" Type="datetime2" Precision="7" />
+    <Property Name="locationsName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="WorkName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="CustomerName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="JobCode" Type="nvarchar(max)" />
+  </EntityType>
+  <!--Errors Found During Generation:
 warning 6002: The table/view 'AuditSystem.dbo.VW_Employee' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
   <EntityType Name="VW_Employee">
     <Key>
@@ -1534,6 +1619,10 @@ warning 6002: The table/view 'AuditSystem.dbo.VW_JobMasterViewforReport' does no
     <Property Name="Fk_CustomerId" Type="int" Nullable="false" />
     <Property Name="TypeOfTable" Type="nvarchar(max)" />
     <Property Name="TypeOfTableId" Type="int" Nullable="false" />
+    <Property Name="ManagerCode" Type="nvarchar(max)" />
+    <Property Name="ManagerName" Type="nvarchar(max)" />
+    <Property Name="PartnerCode" Type="nvarchar(max)" />
+    <Property Name="PartnerName" Type="nvarchar(max)" />
     <Property Name="PartnersIsDelete" Type="bit" Nullable="false" />
     <Property Name="CustomerName" Type="nvarchar(max)" />
     <Property Name="CustomerCode" Type="nvarchar(max)" />
@@ -2907,6 +2996,63 @@ FROM [dbo].[VW_Customer] AS [VW_Customer]</DefiningQuery>
 [VW_CustomerLocationRates].[LocationNumber] AS [LocationNumber]
 FROM [dbo].[VW_CustomerLocationRates] AS [VW_CustomerLocationRates]</DefiningQuery>
     </EntitySet>
+    <EntitySet Name="VW_DataEntryDetails" EntityType="Self.VW_DataEntryDetails" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+[VW_DataEntryDetails].[PartnerTableId] AS [PartnerTableId], 
+[VW_DataEntryDetails].[Fk_JobMasterId] AS [Fk_JobMasterId], 
+[VW_DataEntryDetails].[BudgetedHours] AS [BudgetedHours], 
+[VW_DataEntryDetails].[Fk_CustomerId] AS [Fk_CustomerId], 
+[VW_DataEntryDetails].[TypeOfTable] AS [TypeOfTable], 
+[VW_DataEntryDetails].[TypeOfTableId] AS [TypeOfTableId], 
+[VW_DataEntryDetails].[PartnersIsDelete] AS [PartnersIsDelete], 
+[VW_DataEntryDetails].[CustomerName] AS [CustomerName], 
+[VW_DataEntryDetails].[CustomerCode] AS [CustomerCode], 
+[VW_DataEntryDetails].[JobmasterId] AS [JobmasterId], 
+[VW_DataEntryDetails].[JobCode] AS [JobCode], 
+[VW_DataEntryDetails].[Narration] AS [Narration], 
+[VW_DataEntryDetails].[PreViewvalue] AS [PreViewvalue], 
+[VW_DataEntryDetails].[StartDate] AS [StartDate], 
+[VW_DataEntryDetails].[DueDate] AS [DueDate], 
+[VW_DataEntryDetails].[IsCompleted] AS [IsCompleted], 
+[VW_DataEntryDetails].[IsReActivate] AS [IsReActivate], 
+[VW_DataEntryDetails].[CompletedDate] AS [CompletedDate], 
+[VW_DataEntryDetails].[ReActivateDate] AS [ReActivateDate], 
+[VW_DataEntryDetails].[IsActive] AS [IsActive], 
+[VW_DataEntryDetails].[JobmasterIsDelete] AS [JobmasterIsDelete], 
+[VW_DataEntryDetails].[CombinedName] AS [CombinedName], 
+[VW_DataEntryDetails].[CombinedCode] AS [CombinedCode], 
+[VW_DataEntryDetails].[TrDate] AS [TrDate], 
+[VW_DataEntryDetails].[TransNarration] AS [TransNarration], 
+[VW_DataEntryDetails].[Hours] AS [Hours], 
+[VW_DataEntryDetails].[locationsName] AS [locationsName], 
+[VW_DataEntryDetails].[WorkName] AS [WorkName]
+FROM [dbo].[VW_DataEntryDetails] AS [VW_DataEntryDetails]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="VW_DataEntryEmployeesWise" EntityType="Self.VW_DataEntryEmployeesWise" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+[VW_DataEntryEmployeesWise].[Id] AS [Id], 
+[VW_DataEntryEmployeesWise].[TrDate] AS [TrDate], 
+[VW_DataEntryEmployeesWise].[Fk_JobMasterId] AS [Fk_JobMasterId], 
+[VW_DataEntryEmployeesWise].[Fk_EmployeeId] AS [Fk_EmployeeId], 
+[VW_DataEntryEmployeesWise].[Narration] AS [Narration], 
+[VW_DataEntryEmployeesWise].[IsApplyTravelingCost] AS [IsApplyTravelingCost], 
+[VW_DataEntryEmployeesWise].[Fk_LocationId] AS [Fk_LocationId], 
+[VW_DataEntryEmployeesWise].[Hours] AS [Hours], 
+[VW_DataEntryEmployeesWise].[Fk_WorkTypeId] AS [Fk_WorkTypeId], 
+[VW_DataEntryEmployeesWise].[Fk_CustomerId] AS [Fk_CustomerId], 
+[VW_DataEntryEmployeesWise].[IsDelete] AS [IsDelete], 
+[VW_DataEntryEmployeesWise].[Create_By] AS [Create_By], 
+[VW_DataEntryEmployeesWise].[Create_Date] AS [Create_Date], 
+[VW_DataEntryEmployeesWise].[Edit_By] AS [Edit_By], 
+[VW_DataEntryEmployeesWise].[Edit_Date] AS [Edit_Date], 
+[VW_DataEntryEmployeesWise].[Delete_By] AS [Delete_By], 
+[VW_DataEntryEmployeesWise].[Delete_Date] AS [Delete_Date], 
+[VW_DataEntryEmployeesWise].[locationsName] AS [locationsName], 
+[VW_DataEntryEmployeesWise].[WorkName] AS [WorkName], 
+[VW_DataEntryEmployeesWise].[CustomerName] AS [CustomerName], 
+[VW_DataEntryEmployeesWise].[JobCode] AS [JobCode]
+FROM [dbo].[VW_DataEntryEmployeesWise] AS [VW_DataEntryEmployeesWise]</DefiningQuery>
+    </EntitySet>
     <EntitySet Name="VW_Employee" EntityType="Self.VW_Employee" store:Type="Views" store:Schema="dbo">
       <DefiningQuery>SELECT 
 [VW_Employee].[Id] AS [Id], 
@@ -3296,6 +3442,10 @@ FROM [dbo].[VW_JobMasterViewforCalculatorJobCostReport] AS [VW_JobMasterViewforC
 [VW_JobMasterViewforReport].[Fk_CustomerId] AS [Fk_CustomerId], 
 [VW_JobMasterViewforReport].[TypeOfTable] AS [TypeOfTable], 
 [VW_JobMasterViewforReport].[TypeOfTableId] AS [TypeOfTableId], 
+[VW_JobMasterViewforReport].[ManagerCode] AS [ManagerCode], 
+[VW_JobMasterViewforReport].[ManagerName] AS [ManagerName], 
+[VW_JobMasterViewforReport].[PartnerCode] AS [PartnerCode], 
+[VW_JobMasterViewforReport].[PartnerName] AS [PartnerName], 
 [VW_JobMasterViewforReport].[PartnersIsDelete] AS [PartnersIsDelete], 
 [VW_JobMasterViewforReport].[CustomerName] AS [CustomerName], 
 [VW_JobMasterViewforReport].[CustomerCode] AS [CustomerCode], 

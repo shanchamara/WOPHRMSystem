@@ -20,6 +20,10 @@ namespace WOPHRMSystem.Context
         public int Fk_CustomerId { get; set; }
         public string TypeOfTable { get; set; }
         public int TypeOfTableId { get; set; }
+        public string ManagerCode { get; set; }
+        public string ManagerName { get; set; }
+        public string PartnerCode { get; set; }
+        public string PartnerName { get; set; }
         public bool PartnersIsDelete { get; set; }
         public string CustomerName { get; set; }
         public string CustomerCode { get; set; }

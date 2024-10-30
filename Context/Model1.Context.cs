@@ -74,6 +74,8 @@ namespace WOPHRMSystem.Context
         public DbSet<VW_CurrentlyGetJobAssignee> VW_CurrentlyGetJobAssignee { get; set; }
         public DbSet<VW_Customer> VW_Customer { get; set; }
         public DbSet<VW_CustomerLocationRates> VW_CustomerLocationRates { get; set; }
+        public DbSet<VW_DataEntryDetails> VW_DataEntryDetails { get; set; }
+        public DbSet<VW_DataEntryEmployeesWise> VW_DataEntryEmployeesWise { get; set; }
         public DbSet<VW_Employee> VW_Employee { get; set; }
         public DbSet<VW_EmployeeHourlyRate> VW_EmployeeHourlyRate { get; set; }
         public DbSet<VW_EmployeeJobTransaction> VW_EmployeeJobTransaction { get; set; }

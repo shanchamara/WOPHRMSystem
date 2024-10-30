@@ -375,3 +375,6 @@ E:\Devop Project\SWIS Software\Freelancer Project\Second Project\WOPHRMSystem\bi
 E:\Devop Project\SWIS Software\Freelancer Project\Second Project\WOPHRMSystem\bin\Reports\ReportLaberUtilizationDailyWorkType.rdlc
 E:\Devop Project\SWIS Software\Freelancer Project\Second Project\WOPHRMSystem\bin\Reports\ReportLaberUtilizationDailyWorkGroup.rdlc
 E:\Devop Project\SWIS Software\Freelancer Project\Second Project\WOPHRMSystem\bin\Reports\ReportLaberUtilizationSummaryJObWise.rdlc
+E:\Devop Project\SWIS Software\Freelancer Project\Second Project\WOPHRMSystem\bin\Reports\ReportJobListing.rdlc
+E:\Devop Project\SWIS Software\Freelancer Project\Second Project\WOPHRMSystem\bin\Reports\ReportDataEntrySheetEmployeesWise.rdlc
+E:\Devop Project\SWIS Software\Freelancer Project\Second Project\WOPHRMSystem\bin\Reports\ReportDataEntryDetails.rdlc

@@ -504,6 +504,12 @@
     <Compile Include="Context\VW_CustomerLocationRates.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Context\VW_DataEntryDetails.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context\VW_DataEntryEmployeesWise.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Context\VW_Employee.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -2948,6 +2954,9 @@
     <Content Include="Views\Report\WIPReportMonthlyModel.cshtml" />
     <Content Include="Views\Report\LaberUtilizationDailyModel.cshtml" />
     <Content Include="Views\Report\LaberUtilizationJObWiseModel.cshtml" />
+    <Content Include="Views\Report\JObListingModel.cshtml" />
+    <Content Include="Views\Report\DataEntrySheetEmployeesWiseModel.cshtml" />
+    <Content Include="Views\Report\DataEntryDetailsModel.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -2987,10 +2996,19 @@
     <EmbeddedResource Include="Reports\ReportCustomers.rdlc">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reports\ReportDataEntryDetails.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\ReportDataEntrySheetEmployeesWise.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reports\ReportLaberUtilizationDailyWorkGroup.rdlc">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\ReportLaberUtilizationDailyWorkType.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\ReportJobListing.rdlc">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\ReportLaberUtilizationSummaryWorkGroup.rdlc">

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DocumentFormat.OpenXml.VariantTypes;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
@@ -111,7 +112,7 @@ namespace WOPHRMSystem.Services
         {
             try
             {
-                
+
                 DateTime Fromdate = DateTime.Parse(fromDate);
                 DateTime Todate = DateTime.Parse(todate);
 
@@ -136,7 +137,7 @@ namespace WOPHRMSystem.Services
                               CustomerName = a.CustomerName,
                           }).AsNoTracking().ToList();
 
-                
+
 
                 var wheredr = dr.Where(a => (a.TrDate >= Fromdate && a.TrDate <= Todate) && (a.Fk_JobMasterId >= fromJObid && a.Fk_JobMasterId <= tojobId)).ToList();
 
@@ -579,5 +580,190 @@ namespace WOPHRMSystem.Services
                 throw;
             }
         }
+
+
+        public List<JobMasterForReportModel> GetAllJObListing(bool Ispartners, bool isCompleted, bool Allproject, int fromJObid, int tojobId)
+        {
+            try
+            {
+
+                List<JobMasterForReportModel> lists;
+
+
+                var dr = (from a in _context.VW_JobMasterViewforReport
+                          where (a.Fk_JobMasterId >= fromJObid && a.Fk_JobMasterId <= tojobId)
+                          select new JobMasterForReportModel()
+                          {
+                              BudgetedHours = a.BudgetedHours,
+                              CombinedCode = a.CombinedCode,
+                              JobCode = a.JobCode,
+                              CombinedName = a.CombinedName,
+                              CompletedDate = a.CompletedDate,
+                              Create_By = a.Create_By,
+                              Create_Date = a.Create_Date,
+                              CustomerCode = a.CustomerCode,
+                              CustomerName = a.CustomerName,
+                              Delete_By = a.Delete_By,
+                              Delete_Date = a.Delete_Date,
+                              DueDate = a.DueDate,
+                              Edit_By = a.Edit_By,
+                              Edit_Date = a.Edit_Date,
+                              FkFromJObId = a.JobmasterId,
+                              JobmasterId = a.JobmasterId,
+                              JobmasterIsDelete = a.JobmasterIsDelete,
+                              PartnerTableId = a.PartnerTableId,
+                              PreViewvalue = a.PreViewvalue,
+                              Narration = a.Narration,
+                              IsReActivate = a.IsReActivate,
+                              PartnersIsDelete = a.PartnersIsDelete,
+                              ReActivateDate = a.ReActivateDate,
+                              StartDate = a.StartDate,
+                              IsCompleted = a.IsCompleted,
+                              IsActive = a.IsActive,
+                              TypeOfTable = a.TypeOfTable,
+                              TypeOfTableId = a.TypeOfTableId,
+                              Fk_JobMasterId = a.Fk_JobMasterId,
+                              Fk_CustomerId = a.Fk_CustomerId,
+                              ManagerCode = a.ManagerCode,
+                              ManagerName = a.ManagerName,
+                              PartnerCode = a.PartnerCode,
+                              PartnerName = a.PartnerName,
+                          }).AsNoTracking().ToList();
+
+                lists = dr;
+
+
+                var fillter = lists.Where(a => Ispartners == true
+     ? (a.TypeOfTable == "Partners" && (Allproject || a.IsCompleted == isCompleted))
+     : (a.TypeOfTable == "Manager" && (Allproject || a.IsCompleted == isCompleted))).ToList();
+
+
+
+                return fillter;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+
+
+        public List<VW_DataEntryEmployeesWiseModel> GetAllDataEntrySheetEmployeesWise(int fromEmployee, int toEmployee)
+        {
+            try
+            {
+
+                var dr = (from a in _context.VW_DataEntryEmployeesWise
+                          orderby a.Fk_EmployeeId ascending
+                          select new VW_DataEntryEmployeesWiseModel()
+                          {
+                              Create_By = a.Create_By,
+                              Create_Date = a.Create_Date,
+                              CustomerName = a.CustomerName,
+                              Delete_By = a.Delete_By,
+                              Delete_Date = a.Delete_Date,
+                              Edit_By = a.Edit_By,
+                              Edit_Date = a.Edit_Date,
+                              Fk_CustomerId = a.Fk_CustomerId,
+                              Fk_EmployeeId = a.Fk_EmployeeId,
+                              Fk_JobMasterId = a.Fk_JobMasterId,
+                              Fk_LocationId = a.Fk_LocationId,
+                              Fk_WorkTypeId = a.Fk_WorkTypeId,
+                              Hours = a.Hours,
+                              Id = a.Id,
+                              IsApplyTravelingCost = a.IsApplyTravelingCost,
+                              IsDelete = a.IsDelete,
+                              Narration = a.Narration,
+                              TrDate = a.TrDate,
+                              WorkName = a.WorkName,
+                              locationsName = a.locationsName,
+                              JobCode = a.JobCode,
+                          }).AsNoTracking().ToList();
+
+
+                var wheredr = dr.Where(a => (a.Fk_EmployeeId >= fromEmployee && a.Fk_EmployeeId <= toEmployee)).ToList();
+
+                return wheredr.ToList();
+
+
+                //return queryResult;
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+
+        public List<VW_DataEntryDetailsModel> GetAllDataEntryDetails(string fromDate,string todate, bool Ispartners)
+        {
+            try
+            {
+                DateTime Fromdate = DateTime.Parse(fromDate);
+                DateTime Todate = DateTime.Parse(todate);
+
+                var dr = (from a in _context.VW_DataEntryDetails
+
+                          select new VW_DataEntryDetailsModel()
+                          {
+                              Hours = a.Hours,
+                              IsActive = a.IsActive,
+                              Fk_JobMasterId = a.Fk_JobMasterId,
+                              Fk_CustomerId = a.Fk_CustomerId,
+                              FromDate = Fromdate,
+                              CustomerName = a.CustomerName,
+                              DueDate = a.DueDate,
+                              CustomerCode = a.CustomerCode,
+                              CompletedDate = a.CompletedDate,
+                              CombinedCode = a.CombinedCode,
+                              BudgetedHours = a.BudgetedHours,
+                              CombinedName = a.CombinedName,
+                              IsCompleted = a.IsCompleted,
+                              IsReActivate = a.IsReActivate,
+                              JobmasterId = a.JobmasterId,
+                              JobmasterIsDelete = a.JobmasterIsDelete,
+                              PartnersIsDelete = a.PartnersIsDelete,
+                              PreViewvalue = a.PreViewvalue,
+                              PartnerTableId = a.PartnerTableId,
+                              ReActivateDate = a.ReActivateDate,
+                              StartDate = a.StartDate,
+                              TransNarration = a.TransNarration,
+                              TypeOfTable = a.TypeOfTable,
+                              TypeOfTableId = a.TypeOfTableId,
+                              Narration = a.Narration,
+                              TrDate = a.TrDate,
+                              WorkName = a.WorkName,
+                              locationsName = a.locationsName,
+                              JobCode = a.JobCode,
+                          }).AsNoTracking().ToList();
+
+
+
+                var wheredr = dr.Where(a => (a.TrDate >= Fromdate && a.TrDate <= Todate)).ToList();
+
+
+
+                var fillter = wheredr.Where(a => Ispartners == true
+    ? (a.TypeOfTable == "Partners")
+    : (a.TypeOfTable == "Manager")).ToList();
+
+
+                return fillter.ToList();
+
+
+                //return queryResult;
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
     }
 }

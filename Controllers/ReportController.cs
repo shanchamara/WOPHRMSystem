@@ -1,5 +1,6 @@
 ﻿using ClosedXML.Excel;
 using DocumentFormat.OpenXml.Office2010.Excel;
+using DocumentFormat.OpenXml.Vml.Office;
 using Microsoft.Reporting.WebForms;
 using Rotativa;
 using System;
@@ -1507,6 +1508,222 @@ namespace WOPHRMSystem.Controllers
             localReport.SetParameters(new ReportParameter("ToDate", (model.ToDate.Value.ToString("yyyy-MMM-dd"))));
             localReport.SetParameters(new ReportParameter("ToJobNo", Convert.ToString(data.Last().JobCode)));
             localReport.SetParameters(new ReportParameter("FromJobNo", Convert.ToString(data.First().JobCode)));
+
+
+            // Render report
+            string reportType = "PDF";
+            string mimeType;
+            string encoding;
+            string fileNameExtension = "sddssdsdsddsdsd";
+
+            string deviceInfo = "<DeviceInfo>" +
+                "  <OutputFormat>PDF</OutputFormat>" +
+                "  <PageWidth>15in</PageWidth>" +
+                "  <PageHeight>8.5in</PageHeight>" +
+                "  <MarginTop>0.3in</MarginTop>" +
+                "  <MarginLeft>0.5in</MarginLeft>" +
+                "  <MarginRight>0.3in</MarginRight>" +
+                "  <MarginBottom>0.3in</MarginBottom>" +
+                "</DeviceInfo>";
+
+            Warning[] warnings;
+            string[] streams;
+            byte[] renderedBytes;
+
+            renderedBytes = localReport.Render(
+                reportType,
+                deviceInfo,
+                out mimeType,
+                out encoding,
+                out fileNameExtension,
+                out streams,
+                out warnings);
+
+            return File(renderedBytes, mimeType);
+        }
+        #endregion
+
+        #region JOb Listing 
+        public ActionResult JObListingModel()
+        {
+            var model = new JobMasterForReportModel
+            {
+                JObList = new SelectList(jobMasterServices.GetAllDropdownASC(), "Id", "JobCode"),
+            };
+            return View(model);
+        }
+
+        [HttpGet]
+        public ActionResult PrintJObListing(JobMasterForReportModel model)
+        {
+            LocalReport localReport = new LocalReport();
+            string path = "";
+
+            path = Server.MapPath("~/Reports/ReportJobListing.rdlc");
+
+            if (System.IO.File.Exists(path))
+            {
+                localReport.ReportPath = path;
+            }
+            else
+            {
+                return View("Error");
+            }
+
+            // Load data
+            var data = new ReportServices().GetAllJObListing(model.IsPartner, model.IsCompleted, model.AllProject, model.FkFromJObId, model.FkToJobId);
+            ReportDataSource reportDataSource = new ReportDataSource("DataSet1", data);
+            localReport.DataSources.Add(reportDataSource);
+
+            localReport.SetParameters(new ReportParameter("PrintDate", (new CommonResources().LocalDatetime().Date).ToString("yyyy-MMM-dd")));
+            //localReport.SetParameters(new ReportParameter("FromDate", (model.FromDate.Value.ToString("yyyy-MMM-dd"))));
+            //localReport.SetParameters(new ReportParameter("ToDate", (model.ToDate.Value.ToString("yyyy-MMM-dd"))));
+            localReport.SetParameters(new ReportParameter("IsPartnerOrManager", model.IsPartner == true ? "Partners Wise" : "Manager Wise"));
+            localReport.SetParameters(new ReportParameter("TableName", model.IsPartner == true ? "Managers" : "Partners"));
+            localReport.SetParameters(new ReportParameter("ToJobNo", Convert.ToString(data.Last().JobCode)));
+            localReport.SetParameters(new ReportParameter("FromJobNo", Convert.ToString(data.First().JobCode)));
+
+
+            // Render report
+            string reportType = "PDF";
+            string mimeType;
+            string encoding;
+            string fileNameExtension = "sddssdsdsddsdsd";
+
+            string deviceInfo = "<DeviceInfo>" +
+                "  <OutputFormat>PDF</OutputFormat>" +
+                "  <PageWidth>15in</PageWidth>" +
+                "  <PageHeight>8.5in</PageHeight>" +
+                "  <MarginTop>0.3in</MarginTop>" +
+                "  <MarginLeft>0.5in</MarginLeft>" +
+                "  <MarginRight>0.3in</MarginRight>" +
+                "  <MarginBottom>0.3in</MarginBottom>" +
+                "</DeviceInfo>";
+
+            Warning[] warnings;
+            string[] streams;
+            byte[] renderedBytes;
+
+            renderedBytes = localReport.Render(
+                reportType,
+                deviceInfo,
+                out mimeType,
+                out encoding,
+                out fileNameExtension,
+                out streams,
+                out warnings);
+
+            return File(renderedBytes, mimeType);
+        }
+        #endregion
+
+
+        #region Data Entry Sheet - Employees Wise
+        public ActionResult DataEntrySheetEmployeesWiseModel()
+        {
+            var model = new VW_DataEntryEmployeesWiseModel
+            {
+                EmployeeList = new SelectList(employeeServices.GetAllEmployeeASC(), "Id", "Name"),
+            };
+            return View(model);
+        }
+
+        [HttpGet]
+        public ActionResult DataEntrySheetEmployeesWise(VW_DataEntryEmployeesWiseModel model)
+        {
+            LocalReport localReport = new LocalReport();
+            string path = "";
+
+            path = Server.MapPath("~/Reports/ReportDataEntrySheetEmployeesWise.rdlc");
+
+            if (System.IO.File.Exists(path))
+            {
+                localReport.ReportPath = path;
+            }
+            else
+            {
+                return View("Error");
+            }
+
+            // Load data
+            var data = new ReportServices().GetAllDataEntrySheetEmployeesWise(model.FkFromEmployeeId, model.FkToEmployeeId);
+            ReportDataSource reportDataSource = new ReportDataSource("DataSet1", data);
+            localReport.DataSources.Add(reportDataSource);
+
+            localReport.SetParameters(new ReportParameter("PrintDate", (new CommonResources().LocalDatetime().Date).ToString("yyyy-MMM-dd")));
+
+            //localReport.SetParameters(new ReportParameter("ToJobNo", Convert.ToString(data.Last().JobCode)));
+            //localReport.SetParameters(new ReportParameter("FromJobNo", Convert.ToString(data.First().JobCode)));
+
+
+            // Render report
+            string reportType = "PDF";
+            string mimeType;
+            string encoding;
+            string fileNameExtension = "sddssdsdsddsdsd";
+
+            string deviceInfo = "<DeviceInfo>" +
+                "  <OutputFormat>PDF</OutputFormat>" +
+                "  <PageWidth>15in</PageWidth>" +
+                "  <PageHeight>8.5in</PageHeight>" +
+                "  <MarginTop>0.3in</MarginTop>" +
+                "  <MarginLeft>0.5in</MarginLeft>" +
+                "  <MarginRight>0.3in</MarginRight>" +
+                "  <MarginBottom>0.3in</MarginBottom>" +
+                "</DeviceInfo>";
+
+            Warning[] warnings;
+            string[] streams;
+            byte[] renderedBytes;
+
+            renderedBytes = localReport.Render(
+                reportType,
+                deviceInfo,
+                out mimeType,
+                out encoding,
+                out fileNameExtension,
+                out streams,
+                out warnings);
+
+            return File(renderedBytes, mimeType);
+        }
+        #endregion
+
+
+        #region Data Entry Details
+        public ActionResult DataEntryDetailsModel()
+        {
+            return View();
+        }
+
+        [HttpGet]
+        public ActionResult DataEntryDetails(VW_DataEntryDetailsModel model)
+        {
+            LocalReport localReport = new LocalReport();
+            string path = "";
+
+            path = Server.MapPath("~/Reports/ReportDataEntryDetails.rdlc");
+
+            if (System.IO.File.Exists(path))
+            {
+                localReport.ReportPath = path;
+            }
+            else
+            {
+                return View("Error");
+            }
+
+            // Load data
+            var data = new ReportServices().GetAllDataEntryDetails(model.FromDate.Value.ToString("yyyy/MM/dd"), model.ToDate.Value.ToString("yyyy/MM/dd"), model.IsPartner);
+            ReportDataSource reportDataSource = new ReportDataSource("DataSet1", data);
+            localReport.DataSources.Add(reportDataSource);
+
+            localReport.SetParameters(new ReportParameter("PrintDate", (new CommonResources().LocalDatetime().Date).ToString("yyyy-MMM-dd")));
+            localReport.SetParameters(new ReportParameter("FromDate", (model.FromDate.Value.ToString("yyyy-MMM-dd"))));
+            localReport.SetParameters(new ReportParameter("ToDate", (model.ToDate.Value.ToString("yyyy-MMM-dd"))));
+            localReport.SetParameters(new ReportParameter("IsPartnerOrManager", model.IsPartner == true ? "Partners Wise" : "Manager Wise"));
+            //localReport.SetParameters(new ReportParameter("ToJobNo", Convert.ToString(data.Last().JobCode)));
+            //localReport.SetParameters(new ReportParameter("FromJobNo", Convert.ToString(data.First().JobCode)));
 
 
             // Render report
