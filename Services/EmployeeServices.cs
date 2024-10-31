@@ -195,6 +195,7 @@ namespace WOPHRMSystem.Services
                           orderby a.Id ascending
                           select new EmployeeModel()
                           {
+                              CodeAndName = a.Code + " " + a.Name,
                               Id = a.Id,
                               Code = a.Code,
                               Name = a.Name,

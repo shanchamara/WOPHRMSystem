@@ -699,7 +699,7 @@ namespace WOPHRMSystem.Services
         }
 
 
-        public List<VW_DataEntryDetailsModel> GetAllDataEntryDetails(string fromDate,string todate, bool Ispartners)
+        public List<VW_DataEntryDetailsModel> GetAllDataEntryDetails(string fromDate, string todate, bool Ispartners)
         {
             try
             {
@@ -737,7 +737,7 @@ namespace WOPHRMSystem.Services
                               Narration = a.Narration,
                               TrDate = a.TrDate,
                               WorkName = a.WorkName,
-                              locationsName = a.locationsName,
+                              LocationsName = a.locationsName,
                               JobCode = a.JobCode,
                           }).AsNoTracking().ToList();
 
@@ -754,6 +754,160 @@ namespace WOPHRMSystem.Services
 
                 return fillter.ToList();
 
+
+                //return queryResult;
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public List<VW_DataEntryDetailsModel> GetAllDataEntryDetailsPendingAsatDate(string fromDate, bool Ispartners)
+        {
+            try
+            {
+                DateTime Fromdate = DateTime.Parse(fromDate);
+
+                var dr = (from a in _context.VW_DataEntryDetails
+                          where a.IsCompleted == false
+                          select new VW_DataEntryDetailsModel()
+                          {
+                              Hours = a.Hours,
+                              IsActive = a.IsActive,
+                              Fk_JobMasterId = a.Fk_JobMasterId,
+                              Fk_CustomerId = a.Fk_CustomerId,
+                              FromDate = Fromdate,
+                              CustomerName = a.CustomerName,
+                              DueDate = a.DueDate,
+                              CustomerCode = a.CustomerCode,
+                              CompletedDate = a.CompletedDate,
+                              CombinedCode = a.CombinedCode,
+                              BudgetedHours = a.BudgetedHours,
+                              CombinedName = a.CombinedName,
+                              IsCompleted = a.IsCompleted,
+                              IsReActivate = a.IsReActivate,
+                              JobmasterId = a.JobmasterId,
+                              JobmasterIsDelete = a.JobmasterIsDelete,
+                              PartnersIsDelete = a.PartnersIsDelete,
+                              PreViewvalue = a.PreViewvalue,
+                              PartnerTableId = a.PartnerTableId,
+                              ReActivateDate = a.ReActivateDate,
+                              StartDate = a.StartDate,
+                              TransNarration = a.TransNarration,
+                              TypeOfTable = a.TypeOfTable,
+                              TypeOfTableId = a.TypeOfTableId,
+                              Narration = a.Narration,
+                              TrDate = a.TrDate,
+                              WorkName = a.WorkName,
+                              LocationsName = a.locationsName,
+                              JobCode = a.JobCode,
+                          }).AsNoTracking().ToList();
+
+
+
+                var wheredr = dr.Where(a => (a.TrDate >= Fromdate)).ToList();
+
+
+
+                var fillter = wheredr.Where(a => Ispartners == true
+    ? (a.TypeOfTable == "Partners")
+    : (a.TypeOfTable == "Manager")).ToList();
+
+
+                return fillter.ToList();
+
+
+                //return queryResult;
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+
+
+        public List<LaberUtilizationStatementWorkTypeAndGroup> GetAllStaffUtilizationStatementEmployeeWiseJob(string fromDate, string todate, List<EmployeeSectionList> rates)
+        {
+            try
+            {
+                DateTime Fromdate = DateTime.Parse(fromDate);
+                DateTime Todate = DateTime.Parse(todate);
+
+                var employeeIds = rates.Select(r => r.FkFromEmployeeId).ToList();
+
+
+                var result = (from a in _context.VW_LaberUtilizationSummaryWorkTypeAndGroup
+                              where a.TrDate >= Fromdate && a.TrDate <= Todate // Date filter
+                                    && employeeIds.Contains((int)a.Fk_EmployeeId) // Employee filter
+                              orderby a.JobCode ascending
+                              select new LaberUtilizationStatementWorkTypeAndGroup()
+                              {
+                                  TransactionId = a.TransactionId,
+                                  EmployeeName = a.EmployeeName,
+                                  Fk_CustomerId = a.Fk_CustomerId,
+                                  Fk_EmployeeId = a.Fk_EmployeeId,
+                                  Fk_JobMasterId = a.Fk_JobMasterId,
+                                  Fk_LocationId = a.Fk_LocationId,
+                                  Fk_WorkTypeId = a.Fk_WorkTypeId,
+                                  Groups = a.Groups,
+                                  IsApplyTravelingCost = a.IsApplyTravelingCost,
+                                  Narration = a.Narration,
+                                  TrDate = a.TrDate,
+                                  WorkingHours = a.WorkingHours,
+                                  Worktypes = a.Worktypes,
+                                  JobCode = a.JobCode,
+                              }).AsNoTracking().ToList();
+
+                return result;
+
+                //return queryResult;
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+
+        public List<LaberUtilizationStatementWorkTypeAndGroup> GetAllStaffUtilizationStatementSeletedJob(List<JobSectionList> rates)
+        {
+            try
+            {
+
+                var JObsid = rates.Select(r => r.FkFromJObId).ToList();
+
+
+                var result = (from a in _context.VW_LaberUtilizationSummaryWorkTypeAndGroup
+                              where
+                                    JObsid.Contains((int)a.Fk_JobMasterId) // Employee filter
+                              orderby a.JobCode ascending
+                              select new LaberUtilizationStatementWorkTypeAndGroup()
+                              {
+                                  TransactionId = a.TransactionId,
+                                  EmployeeName = a.EmployeeName,
+                                  Fk_CustomerId = a.Fk_CustomerId,
+                                  Fk_EmployeeId = a.Fk_EmployeeId,
+                                  Fk_JobMasterId = a.Fk_JobMasterId,
+                                  Fk_LocationId = a.Fk_LocationId,
+                                  Fk_WorkTypeId = a.Fk_WorkTypeId,
+                                  Groups = a.Groups,
+                                  IsApplyTravelingCost = a.IsApplyTravelingCost,
+                                  Narration = a.Narration,
+                                  TrDate = a.TrDate,
+                                  WorkingHours = a.WorkingHours,
+                                  Worktypes = a.Worktypes,
+                                  JobCode = a.JobCode,
+                              }).AsNoTracking().ToList();
+
+                return result;
 
                 //return queryResult;
 

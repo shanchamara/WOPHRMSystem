@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Web.Mvc;
 
 namespace WOPHRMSystem.Models
@@ -117,7 +118,37 @@ namespace WOPHRMSystem.Models
         public Nullable<System.DateTime> TrDate { get; set; }
         public string TransNarration { get; set; }
         public Nullable<decimal> Hours { get; set; }
-        public string locationsName { get; set; }
+        public string LocationsName { get; set; }
         public string WorkName { get; set; }
+    }
+
+
+    public class StaffUtilizationStatementEmployeeWiseJobModel
+    {
+        public Nullable<System.DateTime> ToDate { get; set; }// ToView
+        public Nullable<System.DateTime> FromDate { get; set; }// ToView
+
+        public SelectList EmployeeList { get; set; }// ToView
+        public int FkFromEmployeeId { get; set; } // ToView
+        public bool EmployeeWise { get; set; }// ToView
+        public bool JobWise { get; set; }// ToView
+        public List<EmployeeSectionList> EmployeeSectionLists { get; set; }
+
+        public SelectList JObList { get; set; }// ToView
+        public int FkFromJObId { get; set; } // ToView
+    }
+
+    public class EmployeeSectionList
+    {
+        public string Name { get; set; } // ToView
+        public int FkFromEmployeeId { get; set; } // ToView
+    }
+
+    public class JobSectionList
+    {
+        
+        public int FkFromJObId { get; set; } // ToView
+        public string Name { get; set; } // ToView
+        
     }
 }

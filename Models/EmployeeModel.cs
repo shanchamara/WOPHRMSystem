@@ -25,7 +25,7 @@ namespace WOPHRMSystem.Models
         public string DepartmentName { get; set; }
         public string DesignationCode { get; set; }
         public string titleCode { get; set; }
-
+        public string CodeAndName { get; set; }
         public SelectList TitileLists { get; set; }
         public SelectList DepartmentLists { get; set; }
         public SelectList Designationlists { get; set; }

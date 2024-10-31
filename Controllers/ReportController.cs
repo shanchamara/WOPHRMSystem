@@ -1,7 +1,10 @@
 ﻿using ClosedXML.Excel;
+using DocumentFormat.OpenXml.EMMA;
 using DocumentFormat.OpenXml.Office2010.Excel;
 using DocumentFormat.OpenXml.Vml.Office;
+using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Reporting.WebForms;
+using Newtonsoft.Json;
 using Rotativa;
 using System;
 using System.Collections.Generic;
@@ -9,6 +12,7 @@ using System.Data;
 using System.IO;
 using System.Linq;
 using System.Web.Mvc;
+using WebGrease;
 using WOPHRMSystem.Context;
 using WOPHRMSystem.Helps;
 using WOPHRMSystem.Models;
@@ -24,6 +28,11 @@ namespace WOPHRMSystem.Controllers
         readonly InvoiceHeadServices invoiceHead = new InvoiceHeadServices();
         readonly ReceiptServices receiptServices = new ReceiptServices();
         readonly JobMasterServices jobMasterServices = new JobMasterServices();
+
+
+        private static IMemoryCache _cache = new MemoryCache(new MemoryCacheOptions());
+
+
 
         #region Job Details 
         // GET: Report
@@ -1714,6 +1723,75 @@ namespace WOPHRMSystem.Controllers
             }
 
             // Load data
+            var data = new ReportServices().GetAllDataEntryDetailsPendingAsatDate(model.FromDate.Value.ToString("yyyy/MM/dd"), model.IsPartner);
+            ReportDataSource reportDataSource = new ReportDataSource("DataSet1", data);
+            localReport.DataSources.Add(reportDataSource);
+
+            localReport.SetParameters(new ReportParameter("PrintDate", (new CommonResources().LocalDatetime().Date).ToString("yyyy-MMM-dd")));
+            localReport.SetParameters(new ReportParameter("FromDate", (model.FromDate.Value.ToString("yyyy-MMM-dd"))));
+            localReport.SetParameters(new ReportParameter("IsPartnerOrManager", model.IsPartner == true ? "Partners Wise" : "Manager Wise"));
+            //localReport.SetParameters(new ReportParameter("ToJobNo", Convert.ToString(data.Last().JobCode)));
+            //localReport.SetParameters(new ReportParameter("FromJobNo", Convert.ToString(data.First().JobCode)));
+
+
+            // Render report
+            string reportType = "PDF";
+            string mimeType;
+            string encoding;
+            string fileNameExtension = "sddssdsdsddsdsd";
+
+            string deviceInfo = "<DeviceInfo>" +
+                "  <OutputFormat>PDF</OutputFormat>" +
+                "  <PageWidth>15in</PageWidth>" +
+                "  <PageHeight>8.5in</PageHeight>" +
+                "  <MarginTop>0.3in</MarginTop>" +
+                "  <MarginLeft>0.5in</MarginLeft>" +
+                "  <MarginRight>0.3in</MarginRight>" +
+                "  <MarginBottom>0.3in</MarginBottom>" +
+                "</DeviceInfo>";
+
+            Warning[] warnings;
+            string[] streams;
+            byte[] renderedBytes;
+
+            renderedBytes = localReport.Render(
+                reportType,
+                deviceInfo,
+                out mimeType,
+                out encoding,
+                out fileNameExtension,
+                out streams,
+                out warnings);
+
+            return File(renderedBytes, mimeType);
+        }
+        #endregion
+
+
+        #region Data Entry Details Pending 
+        public ActionResult DataEntryDetailsPendingModel()
+        {
+            return View();
+        }
+
+        [HttpGet]
+        public ActionResult DataEntryDetailsPending(VW_DataEntryDetailsModel model)
+        {
+            LocalReport localReport = new LocalReport();
+            string path = "";
+
+            path = Server.MapPath("~/Reports/ReportDataEntryDetailsPending.rdlc");
+
+            if (System.IO.File.Exists(path))
+            {
+                localReport.ReportPath = path;
+            }
+            else
+            {
+                return View("Error");
+            }
+
+            // Load data
             var data = new ReportServices().GetAllDataEntryDetails(model.FromDate.Value.ToString("yyyy/MM/dd"), model.ToDate.Value.ToString("yyyy/MM/dd"), model.IsPartner);
             ReportDataSource reportDataSource = new ReportDataSource("DataSet1", data);
             localReport.DataSources.Add(reportDataSource);
@@ -1756,6 +1834,208 @@ namespace WOPHRMSystem.Controllers
                 out warnings);
 
             return File(renderedBytes, mimeType);
+        }
+        #endregion
+
+
+        #region staff Utilization Statement Employee Wise Job 
+        public ActionResult StaffUtilizationStatementEmployeeWiseJobModel()
+        {
+            return View();
+        }
+
+        [System.Web.Mvc.HttpGet]
+        public ActionResult EmployeeSelection()
+        {
+            var model = new StaffUtilizationStatementEmployeeWiseJobModel() { EmployeeList = new SelectList(employeeServices.GetAllEmployeeASC(), "Id", "CodeAndName"), };
+            return PartialView("EmployeeSelection", model);
+        }
+
+
+        [System.Web.Mvc.HttpPost]
+        public ActionResult StaffUtilizationStatementEmployeeWiseJob(StaffUtilizationStatementEmployeeWiseJobModel masterModel, List<EmployeeSectionList> rates)
+        {
+            var data = new ReportServices().GetAllStaffUtilizationStatementEmployeeWiseJob(masterModel.FromDate.Value.ToString("yyyy/MM/dd"), masterModel.ToDate.Value.ToString("yyyy/MM/dd"), rates);
+
+            _cache.Set("RatesListKey", data, new MemoryCacheEntryOptions
+            {
+                AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(30) // Cache expires in 30 minutes
+            });
+
+            return Json("Rates list has been cached successfully.");
+            //return Json("Data has been stored in the cache with both absolute and sliding expirations.");
+
+        }
+
+
+        [System.Web.Mvc.HttpGet]
+        public ActionResult ActionResult(StaffUtilizationStatementEmployeeWiseJobModel masterModel)
+        {
+
+
+            if (_cache.TryGetValue("RatesListKey", out List<LaberUtilizationStatementWorkTypeAndGroup> cachedRates))
+            {
+
+                LocalReport localReport = new LocalReport();
+                string path = "";
+
+                if (masterModel.JobWise == true)
+                {
+                    path = Server.MapPath("~/Reports/ReportStaffUtilizationJobWiseSelectedEmployees.rdlc");
+                }
+                else
+                {
+                    path = Server.MapPath("~/Reports/ReportStaffUtilizationEmployeesJobWiseSelected.rdlc");
+                }
+                if (System.IO.File.Exists(path))
+                {
+                    localReport.ReportPath = path;
+                }
+                else
+                {
+                    return View("Error");
+                }
+
+                ReportDataSource reportDataSource = new ReportDataSource("DataSet1", cachedRates);
+                localReport.DataSources.Add(reportDataSource);
+
+                localReport.SetParameters(new ReportParameter("PrintDate", (new CommonResources().LocalDatetime().Date).ToString("yyyy-MMM-dd")));
+                localReport.SetParameters(new ReportParameter("FromDate", (masterModel.FromDate.Value.ToString("yyyy-MMM-dd"))));
+                localReport.SetParameters(new ReportParameter("ToDate", (masterModel.ToDate.Value.ToString("yyyy-MMM-dd"))));
+
+
+                // Render report
+                string reportType = "PDF";
+                string mimeType;
+                string encoding;
+                string fileNameExtension = "sddssdsdsddsdsd";
+
+                string deviceInfo = "<DeviceInfo>" +
+                    "  <OutputFormat>PDF</OutputFormat>" +
+                    "  <PageWidth>15in</PageWidth>" +
+                    "  <PageHeight>8.5in</PageHeight>" +
+                    "  <MarginTop>0.3in</MarginTop>" +
+                    "  <MarginLeft>0.5in</MarginLeft>" +
+                    "  <MarginRight>0.3in</MarginRight>" +
+                    "  <MarginBottom>0.3in</MarginBottom>" +
+                    "</DeviceInfo>";
+
+                Warning[] warnings;
+                string[] streams;
+                byte[] renderedBytes;
+
+                renderedBytes = localReport.Render(
+                    reportType,
+                    deviceInfo,
+                    out mimeType,
+                    out encoding,
+                    out fileNameExtension,
+                    out streams,
+                    out warnings);
+
+                return File(renderedBytes, mimeType);
+            }
+            return View();
+        }
+        #endregion
+
+
+        #region staff Utilization Statement Selected jobs
+        public ActionResult StaffUtilizationStatementSelectedJobWiseModel()
+        {
+            return View();
+        }
+
+        [System.Web.Mvc.HttpGet]
+        public ActionResult JObSelection()
+        {
+            var model = new StaffUtilizationStatementEmployeeWiseJobModel() { JObList = new SelectList(jobMasterServices.GetAllDropdownASC(), "Id", "JobCode"), };
+            return PartialView("JObSelection", model);
+        }
+
+
+        [System.Web.Mvc.HttpPost]
+        public ActionResult StaffUtilizationStatementSelectedJobWise(StaffUtilizationStatementEmployeeWiseJobModel masterModel, List<JobSectionList> rates)
+        {
+            var data = new ReportServices().GetAllStaffUtilizationStatementSeletedJob(rates);
+
+            _cache.Set("RatesListKey", data, new MemoryCacheEntryOptions
+            {
+                AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(30) // Cache expires in 30 minutes
+            });
+
+            return Json("Rates list has been cached successfully.");
+            //return Json("Data has been stored in the cache with both absolute and sliding expirations.");
+
+        }
+
+
+        [System.Web.Mvc.HttpGet]
+        public ActionResult SelectedJobWiseActionResult(StaffUtilizationStatementEmployeeWiseJobModel masterModel)
+        {
+
+
+            if (_cache.TryGetValue("RatesListKey", out List<LaberUtilizationStatementWorkTypeAndGroup> cachedRates))
+            {
+
+                LocalReport localReport = new LocalReport();
+                string path = "";
+
+                if (masterModel.JobWise == true)
+                {
+                    path = Server.MapPath("~/Reports/ReportStaffUtilizationSelectedJobWiseEmployees.rdlc");
+                }
+                else
+                {
+                    path = Server.MapPath("~/Reports/ReportStaffUtilizationSelectedJobWiseJobs.rdlc");
+                }
+                if (System.IO.File.Exists(path))
+                {
+                    localReport.ReportPath = path;
+                }
+                else
+                {
+                    return View("Error");
+                }
+
+                ReportDataSource reportDataSource = new ReportDataSource("DataSet1", cachedRates);
+                localReport.DataSources.Add(reportDataSource);
+
+                localReport.SetParameters(new ReportParameter("PrintDate", (new CommonResources().LocalDatetime().Date).ToString("yyyy-MMM-dd")));
+               
+
+                // Render report
+                string reportType = "PDF";
+                string mimeType;
+                string encoding;
+                string fileNameExtension = "sddssdsdsddsdsd";
+
+                string deviceInfo = "<DeviceInfo>" +
+                    "  <OutputFormat>PDF</OutputFormat>" +
+                    "  <PageWidth>15in</PageWidth>" +
+                    "  <PageHeight>8.5in</PageHeight>" +
+                    "  <MarginTop>0.3in</MarginTop>" +
+                    "  <MarginLeft>0.5in</MarginLeft>" +
+                    "  <MarginRight>0.3in</MarginRight>" +
+                    "  <MarginBottom>0.3in</MarginBottom>" +
+                    "</DeviceInfo>";
+
+                Warning[] warnings;
+                string[] streams;
+                byte[] renderedBytes;
+
+                renderedBytes = localReport.Render(
+                    reportType,
+                    deviceInfo,
+                    out mimeType,
+                    out encoding,
+                    out fileNameExtension,
+                    out streams,
+                    out warnings);
+
+                return File(renderedBytes, mimeType);
+            }
+            return View();
         }
         #endregion
     }

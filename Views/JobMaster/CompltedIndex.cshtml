@@ -116,7 +116,8 @@
                                                     <span class="badge bg-danger">Not Complete</span>
                                                 }
                                             </td>
-                                            <td>@s.CompletedDate.Value.ToShortDateString()</td>
+                                            <td>@(s.CompletedDate.HasValue ? s.CompletedDate.Value.ToShortDateString() : "")</td>
+
 
                                         </tr>
                                         Rows++;

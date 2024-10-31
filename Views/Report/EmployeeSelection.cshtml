@@ -1,0 +1,169 @@
+﻿@model WOPHRMSystem.Models.StaffUtilizationStatementEmployeeWiseJobModel
+
+
+<!-- DataTables -->
+<link rel="stylesheet" href="~/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+<link rel="stylesheet" href="~/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+<link rel="stylesheet" href="~/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
+
+<style>
+    .disable-height {
+        height: auto !important;
+    }
+</style>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Employee Selection</h3>
+                </div>
+                <div class="card-body">
+                    <table id="example1" class="table table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th style="display:none;">Id</th> <!-- Hidden Id column -->
+                                <th>Code</th>
+                                <th>Name</th>
+
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+
+                        <tbody id="ratesBody">
+                            @using (Html.BeginForm("", "", FormMethod.Post, new { role = "form", enctype = "multipart/form-data", id = "quickForm1", @autocomplete = "off" }))
+                            {
+                                <tr>
+                                    <td style="display:none;"></td> <!-- Hidden Id column -->
+
+
+
+                                    <td colspan="2">
+                                        @Html.DropDownListFor(model => model.FkFromEmployeeId, Model.EmployeeList, "Select", htmlAttributes: new { @class = "form-control", id = "selectDesgination1", required = "required", onchange = "handleDateChange1()" })
+
+                                    </td>
+
+                                    <td class="project-actions text-right">
+                                        <button class="btn btn-info btn-sm" type="button" onclick="SubmitStepTemperley()">
+                                            <i class="fas fa-pencil-alt"></i> Add
+                                        </button>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Ensure jQuery and jQuery Validation scripts are loaded -->
+<script src="~/plugins/jquery/jquery.min.js"></script>
+<script src="~/plugins/jquery-validation/jquery.validate.min.js"></script>
+<script src="~/plugins/jquery-validation/additional-methods.min.js"></script>
+
+<script>
+    localStorage.clear();
+    function handleDateChange1() {
+        // Your logic here
+        debugger
+        var Fk_EmployeeId = $('#selectDesgination1').val();
+
+
+
+        if (Fk_EmployeeId != "") {
+            var dropdown = document.getElementById("selectDesgination1");
+            setTimeout(function () {
+                dropdown.classList.remove("is-invalid");
+            }, 10);
+
+        }
+
+
+    }
+
+
+    var IsValid = true;
+
+    function SubmitStepTemperley() {
+
+        debugger
+
+        var Fk_EmployeeId = $('#selectDesgination1').val();
+
+
+
+
+
+
+
+        if (Fk_EmployeeId == "") {
+            IsValid = false;
+            // $('#selectDesgination').className = "form-control text-box single-line is-invalid";
+            var dropdown = document.getElementById("selectDesgination1");
+            setTimeout(function () {
+                dropdown.classList.add("is-invalid");
+            }, 10);
+            return IsValid;
+        }
+
+        var selectedText = $('#selectDesgination1 option:selected').text();
+
+        debugger
+        var rates = JSON.parse(localStorage.getItem('rates')) || [];
+        rates.push({ FkFromEmployeeId: Fk_EmployeeId, Name: selectedText  });
+        localStorage.setItem('rates', JSON.stringify(rates));
+        displayRates();
+    }
+
+    function displayRates() {
+        var rates = JSON.parse(localStorage.getItem('rates')) || [];
+        var ratesBody = document.getElementById('ratesBody');
+        ratesBody.innerHTML = ''; // Clear previous rows
+
+        rates.forEach(function (rate, index) {
+            var row = `<tr>
+                    <td colspan="2">${rate.Name}</td>
+                   <td></td>
+                </tr>
+
+
+                `;
+            ratesBody.innerHTML += row;
+        });
+
+        var row1 = `
+         @using (Html.BeginForm("", "", FormMethod.Post, new { role = "form", enctype = "multipart/form-data", id = "quickForm1", @autocomplete = "off" }))
+     {
+         @Html.HiddenFor(model => model.FkFromEmployeeId)
+         <tr>
+             <td style="display:none;"></td>
+
+              <td colspan="2">
+                         @Html.DropDownListFor(model => model.FkFromEmployeeId, Model.EmployeeList, "Select", htmlAttributes: new { @class = "form-control", id = "selectDesgination1", onchange = "handleDateChange1()" })
+
+                     </td>
+
+             <td class="project-actions text-right">
+                 <button class="btn btn-info btn-sm" type="button" onclick="SubmitStepTemperley()">
+                     <i class="fas fa-pencil-alt"></i> Add
+                 </button>
+             </td>
+         </tr>
+     }
+
+    `;
+        ratesBody.innerHTML += row1;
+    }
+
+
+    function deleteRate(index) {
+        var rates = JSON.parse(localStorage.getItem('rates')) || [];
+        rates.splice(index, 1);
+        localStorage.setItem('rates', JSON.stringify(rates));
+        displayRates();
+    }
+</script>
+
