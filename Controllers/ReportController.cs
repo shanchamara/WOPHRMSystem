@@ -2002,7 +2002,7 @@ namespace WOPHRMSystem.Controllers
                 localReport.DataSources.Add(reportDataSource);
 
                 localReport.SetParameters(new ReportParameter("PrintDate", (new CommonResources().LocalDatetime().Date).ToString("yyyy-MMM-dd")));
-               
+
 
                 // Render report
                 string reportType = "PDF";
@@ -2038,5 +2038,140 @@ namespace WOPHRMSystem.Controllers
             return View();
         }
         #endregion
+
+
+        #region Employee Daily Job Details
+        public ActionResult EmployeeDailyJobDetailsModel()
+        {
+            var model = new LaberUtilizationStatementWorkTypeAndGroupReportModel
+            {
+                EmployeeList = new SelectList(employeeServices.GetAllEmployeeASC(), "Id", "Name"),
+            };
+            return View(model);
+        }
+
+        [HttpGet]
+        public ActionResult PrintEmployeeDailyJobDetails(LaberUtilizationStatementWorkTypeAndGroupReportModel model)
+        {
+            LocalReport localReport = new LocalReport();
+            string path = "";
+
+            path = Server.MapPath("~/Reports/ReportLaberDailyDetails.rdlc");
+
+
+            if (System.IO.File.Exists(path))
+            {
+                localReport.ReportPath = path;
+            }
+            else
+            {
+                return View("Error");
+            }
+
+            // Load data
+            var data = new ReportServices().GetAllSummaryEmployeeWiseSelectdDate(model.FromDate.Value.ToString("yyyy/MM/dd"), model.ToDate.Value.ToString("yyyy/MM/dd"), model.FkFromEmployeeId, model.FkToEmployeeId);
+            ReportDataSource reportDataSource = new ReportDataSource("DataSet1", data);
+            localReport.DataSources.Add(reportDataSource);
+
+            localReport.SetParameters(new ReportParameter("PrintDate", (new CommonResources().LocalDatetime().Date).ToString("yyyy-MMM-dd")));
+            localReport.SetParameters(new ReportParameter("FromDate", (model.FromDate.Value.ToString("yyyy-MMM-dd"))));
+            localReport.SetParameters(new ReportParameter("ToDate", (model.ToDate.Value.ToString("yyyy-MMM-dd"))));
+            localReport.SetParameters(new ReportParameter("ToJobNo", Convert.ToString(data.Last().JobCode)));
+            localReport.SetParameters(new ReportParameter("FromJobNo", Convert.ToString(data.First().JobCode)));
+
+
+            // Render report
+            string reportType = "PDF";
+            string mimeType;
+            string encoding;
+            string fileNameExtension = "sddssdsdsddsdsd";
+
+            string deviceInfo = "<DeviceInfo>" +
+                "  <OutputFormat>PDF</OutputFormat>" +
+                "  <PageWidth>15in</PageWidth>" +
+                "  <PageHeight>8.5in</PageHeight>" +
+                "  <MarginTop>0.3in</MarginTop>" +
+                "  <MarginLeft>0.5in</MarginLeft>" +
+                "  <MarginRight>0.3in</MarginRight>" +
+                "  <MarginBottom>0.3in</MarginBottom>" +
+                "</DeviceInfo>";
+
+            Warning[] warnings;
+            string[] streams;
+            byte[] renderedBytes;
+
+            renderedBytes = localReport.Render(
+                reportType,
+                deviceInfo,
+                out mimeType,
+                out encoding,
+                out fileNameExtension,
+                out streams,
+                out warnings);
+
+            return File(renderedBytes, mimeType);
+        }
+        #endregion
+
+        #region Job Master
+        public ActionResult PrintJobMaster()
+        {
+            LocalReport localReport = new LocalReport();
+            string path = Server.MapPath("~/Reports/ReportJobMaster.rdlc");
+            if (System.IO.File.Exists(path))
+            {
+                localReport.ReportPath = path;
+            }
+            else
+            {
+                return View("Error");
+            }
+
+            // Load data
+            var data = new ReportServices().GetAllJobMaster();
+            ReportDataSource reportDataSource = new ReportDataSource("DataSet1", data);
+            localReport.DataSources.Add(reportDataSource);
+
+            ReportParameter[] parameters = new ReportParameter[1];
+            parameters[0] = new ReportParameter("PrintDate", (new CommonResources().LocalDatetime().Date).ToString("yyyy-MMM-dd")); // Name of the parameter in the RDLC file
+            localReport.SetParameters(parameters);
+
+            // Render report
+            string reportType = "PDF";
+            string mimeType;
+            string encoding;
+            string fileNameExtension = "sddssdsdsddsdsd";
+
+            string deviceInfo = "<DeviceInfo>" +
+                "  <OutputFormat>PDF</OutputFormat>" +
+                "  <PageWidth>11in</PageWidth>" +
+                "  <PageHeight>8.5in</PageHeight>" +
+                "  <MarginTop>0.5in</MarginTop>" +
+                "  <MarginLeft>0.5in</MarginLeft>" +
+                "  <MarginRight>0.5in</MarginRight>" +
+                "  <MarginBottom>0.5in</MarginBottom>" +
+                "</DeviceInfo>";
+
+            Warning[] warnings;
+            string[] streams;
+            byte[] renderedBytes;
+
+            renderedBytes = localReport.Render(
+                reportType,
+                deviceInfo,
+                out mimeType,
+                out encoding,
+                out fileNameExtension,
+                out streams,
+                out warnings);
+
+            return File(renderedBytes, mimeType);
+        }
+
+
+        #endregion
+
+
+       
     }
 }

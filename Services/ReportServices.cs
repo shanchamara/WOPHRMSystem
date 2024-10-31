@@ -108,6 +108,50 @@ namespace WOPHRMSystem.Services
         }
 
 
+        public List<VW_EmployeeDailyJobDetailsModel> GetAllSummaryEmployeeWiseSelectdDate(string fromDate, string todate, int fromJObid, int tojobId)
+        {
+            try
+            {
+                DateTime Fromdate = DateTime.Parse(fromDate);
+                DateTime Todate = DateTime.Parse(todate);
+
+                var dr = (from a in _context.VW_EmployeeDailyJobDetails
+                          orderby a.JobCode ascending
+                          select new VW_EmployeeDailyJobDetailsModel()
+                          {
+                              TransactionId = a.TransactionId,
+                              EmployeeName = a.EmployeeName,
+                              Fk_CustomerId = a.Fk_CustomerId,
+                              Fk_EmployeeId = a.Fk_EmployeeId,
+                              Fk_JobMasterId = a.Fk_JobMasterId,
+                              Fk_LocationId = a.Fk_LocationId,
+                              Fk_WorkTypeId = a.Fk_WorkTypeId,
+                              CustomerName = a.CustomerName,
+                              IsApplyTravelingCost = a.IsApplyTravelingCost,
+                              Narration = a.Narration,
+                              TrDate = a.TrDate,
+                              WorkingHours = a.WorkingHours,
+                              JobCode = a.JobCode,
+
+                          }).AsNoTracking().ToList();
+
+
+                var wheredr = dr.Where(a => (a.TrDate >= Fromdate && a.TrDate <= Todate) && (a.Fk_EmployeeId >= fromJObid && a.Fk_EmployeeId <= tojobId)).ToList();
+
+                return wheredr;
+
+
+                //return queryResult;
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+
         public List<VW_LaberUtilizationJObWiseModel> GetAllSummaryLaberUtilizationJObWise(string fromDate, string todate, int fromJObid, int tojobId)
         {
             try
@@ -919,5 +963,53 @@ namespace WOPHRMSystem.Services
             }
         }
 
+
+        public List<VW_JobMasterForReportModel> GetAllJobMaster()
+        {
+            try
+            {
+               
+                var dr = (from a in _context.VW_JobMaster
+                          orderby a.JobCode descending
+                          select new VW_JobMasterForReportModel()
+                          {
+                              JobCode = a.JobCode,
+                              CompletedDate = a.CompletedDate,
+                              Create_By = a.Create_By,
+                              Create_Date = a.Create_Date,
+                              Delete_By = a.Delete_By,
+                              Delete_Date = a.Delete_Date,
+                              DueDate = a.DueDate,
+                              Edit_By = a.Edit_By,
+                              Edit_Date = a.Edit_Date,
+                              Fk_CustomerId = a.Fk_CustomerId,
+                              Fk_MangerId = a.Fk_MangerId,
+                              Fk_PartnerId = a.Fk_PartnerId,
+                              Id = a.Id,
+                              IsActive = a.IsActive,
+                              IsCompleted = a.IsCompleted,
+                              IsDelete = a.IsDelete,
+                              IsReActivate = a.IsReActivate,
+                              JObPrefixCode = a.JObPrefixCode,
+                              Name = a.Name,
+                              Narration = a.Narration,
+                              PreViewvalue = a.PreViewvalue,
+                              ReActivateDate = a.ReActivateDate,
+                              StartDate = a.StartDate,
+
+                          }).AsNoTracking().ToList();
+
+               
+
+
+                return dr;
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
     }
 }

@@ -53,6 +53,7 @@
     <EntitySet Name="VW_DataEntryDetails" EntityType="AuditSystemModel.VW_DataEntryDetails" />
     <EntitySet Name="VW_DataEntryEmployeesWise" EntityType="AuditSystemModel.VW_DataEntryEmployeesWise" />
     <EntitySet Name="VW_Employee" EntityType="AuditSystemModel.VW_Employee" />
+    <EntitySet Name="VW_EmployeeDailyJobDetails" EntityType="AuditSystemModel.VW_EmployeeDailyJobDetails" />
     <EntitySet Name="VW_EmployeeHourlyRate" EntityType="AuditSystemModel.VW_EmployeeHourlyRate" />
     <EntitySet Name="VW_EmployeeJobTransaction" EntityType="AuditSystemModel.VW_EmployeeJobTransaction" />
     <EntitySet Name="VW_EmployeeVisitingRates" EntityType="AuditSystemModel.VW_EmployeeVisitingRates" />
@@ -1537,6 +1538,32 @@
     <Property Name="titleCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="DesignationName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="DepartmentName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="VW_EmployeeDailyJobDetails">
+    <Key>
+      <PropertyRef Name="TransactionId" />
+      <PropertyRef Name="Fk_JobMasterId" />
+      <PropertyRef Name="Fk_EmployeeId" />
+      <PropertyRef Name="IsApplyTravelingCost" />
+      <PropertyRef Name="Fk_LocationId" />
+      <PropertyRef Name="Fk_WorkTypeId" />
+      <PropertyRef Name="Fk_CustomerId" />
+      <PropertyRef Name="EmployeeName" />
+      <PropertyRef Name="CustomerName" />
+    </Key>
+    <Property Name="TransactionId" Type="Int32" Nullable="false" />
+    <Property Name="TrDate" Type="DateTime" Precision="7" />
+    <Property Name="Fk_JobMasterId" Type="Int32" Nullable="false" />
+    <Property Name="Fk_EmployeeId" Type="Int32" Nullable="false" />
+    <Property Name="Narration" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="JobCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="IsApplyTravelingCost" Type="Boolean" Nullable="false" />
+    <Property Name="Fk_LocationId" Type="Int32" Nullable="false" />
+    <Property Name="WorkingHours" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Fk_WorkTypeId" Type="Int32" Nullable="false" />
+    <Property Name="Fk_CustomerId" Type="Int32" Nullable="false" />
+    <Property Name="EmployeeName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="CustomerName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="VW_EmployeeHourlyRate">
     <Key>

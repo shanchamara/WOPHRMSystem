@@ -77,6 +77,7 @@ namespace WOPHRMSystem.Context
         public DbSet<VW_DataEntryDetails> VW_DataEntryDetails { get; set; }
         public DbSet<VW_DataEntryEmployeesWise> VW_DataEntryEmployeesWise { get; set; }
         public DbSet<VW_Employee> VW_Employee { get; set; }
+        public DbSet<VW_EmployeeDailyJobDetails> VW_EmployeeDailyJobDetails { get; set; }
         public DbSet<VW_EmployeeHourlyRate> VW_EmployeeHourlyRate { get; set; }
         public DbSet<VW_EmployeeJobTransaction> VW_EmployeeJobTransaction { get; set; }
         public DbSet<VW_EmployeeVisitingRates> VW_EmployeeVisitingRates { get; set; }

@@ -126,4 +126,32 @@ namespace WOPHRMSystem.Models
         public SelectList JObList { get; set; }// ToView
     }
 
+
+    public partial class VW_JobMasterForReportModel
+    {
+        public int Id { get; set; }
+        public string JobCode { get; set; }
+        public string Narration { get; set; }
+        public Nullable<decimal> PreViewvalue { get; set; }
+        public Nullable<System.DateTime> StartDate { get; set; }
+        public Nullable<System.DateTime> DueDate { get; set; }
+        public int Fk_CustomerId { get; set; }
+        public bool IsCompleted { get; set; }
+        public bool IsReActivate { get; set; }
+        public Nullable<System.DateTime> ReActivateDate { get; set; }
+        public Nullable<System.DateTime> CompletedDate { get; set; }
+        public string JObPrefixCode { get; set; }
+        public int Fk_MangerId { get; set; }
+        public int Fk_PartnerId { get; set; }
+        public bool IsActive { get; set; }
+        public bool IsDelete { get; set; }
+        public string Create_By { get; set; }
+        public System.DateTime Create_Date { get; set; }
+        public string Edit_By { get; set; }
+        public Nullable<System.DateTime> Edit_Date { get; set; }
+        public string Delete_By { get; set; }
+        public Nullable<System.DateTime> Delete_Date { get; set; }
+        public string Name { get; set; }
+    }
 }
+

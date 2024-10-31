@@ -27,7 +27,7 @@ namespace WOPHRMSystem.Services
 
                 var groupedData = (from a in _context.VW_JobMasterViewforReport
                                    where /*!a.JobmasterIsDelete && */
-                                   Ispartners == true ? (a.TypeOfTable == "Partners" && a.IsCompleted == isCompleted && a.StartDate.Value == todate) : (a.TypeOfTable == "Manager" && a.IsCompleted == isCompleted && a.StartDate.Value == todate)
+                                   Ispartners == true ? (a.TypeOfTable == "Partners" && a.IsCompleted == isCompleted && a.StartDate.Value >= todate) : (a.TypeOfTable == "Manager" && a.IsCompleted == isCompleted && a.StartDate.Value >= todate)
 
                                    orderby a.JobmasterId descending
                                    group new JobMasterForReportModel

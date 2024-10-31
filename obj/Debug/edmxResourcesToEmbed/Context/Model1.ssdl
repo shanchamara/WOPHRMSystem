@@ -1092,6 +1092,34 @@ warning 6002: The table/view 'AuditSystem.dbo.VW_Employee' does not have a prima
     <Property Name="DepartmentName" Type="nvarchar(max)" Nullable="false" />
   </EntityType>
   <!--Errors Found During Generation:
+warning 6002: The table/view 'AuditSystem.dbo.VW_EmployeeDailyJobDetails' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="VW_EmployeeDailyJobDetails">
+    <Key>
+      <PropertyRef Name="TransactionId" />
+      <PropertyRef Name="Fk_JobMasterId" />
+      <PropertyRef Name="Fk_EmployeeId" />
+      <PropertyRef Name="IsApplyTravelingCost" />
+      <PropertyRef Name="Fk_LocationId" />
+      <PropertyRef Name="Fk_WorkTypeId" />
+      <PropertyRef Name="Fk_CustomerId" />
+      <PropertyRef Name="EmployeeName" />
+      <PropertyRef Name="CustomerName" />
+    </Key>
+    <Property Name="TransactionId" Type="int" Nullable="false" />
+    <Property Name="TrDate" Type="datetime2" Precision="7" />
+    <Property Name="Fk_JobMasterId" Type="int" Nullable="false" />
+    <Property Name="Fk_EmployeeId" Type="int" Nullable="false" />
+    <Property Name="Narration" Type="nvarchar(max)" />
+    <Property Name="JobCode" Type="nvarchar(max)" />
+    <Property Name="IsApplyTravelingCost" Type="bit" Nullable="false" />
+    <Property Name="Fk_LocationId" Type="int" Nullable="false" />
+    <Property Name="WorkingHours" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="Fk_WorkTypeId" Type="int" Nullable="false" />
+    <Property Name="Fk_CustomerId" Type="int" Nullable="false" />
+    <Property Name="EmployeeName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="CustomerName" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
 warning 6002: The table/view 'AuditSystem.dbo.VW_EmployeeHourlyRate' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
   <EntityType Name="VW_EmployeeHourlyRate">
     <Key>
@@ -3082,6 +3110,23 @@ FROM [dbo].[VW_DataEntryEmployeesWise] AS [VW_DataEntryEmployeesWise]</DefiningQ
 [VW_Employee].[DesignationName] AS [DesignationName], 
 [VW_Employee].[DepartmentName] AS [DepartmentName]
 FROM [dbo].[VW_Employee] AS [VW_Employee]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="VW_EmployeeDailyJobDetails" EntityType="Self.VW_EmployeeDailyJobDetails" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+[VW_EmployeeDailyJobDetails].[TransactionId] AS [TransactionId], 
+[VW_EmployeeDailyJobDetails].[TrDate] AS [TrDate], 
+[VW_EmployeeDailyJobDetails].[Fk_JobMasterId] AS [Fk_JobMasterId], 
+[VW_EmployeeDailyJobDetails].[Fk_EmployeeId] AS [Fk_EmployeeId], 
+[VW_EmployeeDailyJobDetails].[Narration] AS [Narration], 
+[VW_EmployeeDailyJobDetails].[JobCode] AS [JobCode], 
+[VW_EmployeeDailyJobDetails].[IsApplyTravelingCost] AS [IsApplyTravelingCost], 
+[VW_EmployeeDailyJobDetails].[Fk_LocationId] AS [Fk_LocationId], 
+[VW_EmployeeDailyJobDetails].[WorkingHours] AS [WorkingHours], 
+[VW_EmployeeDailyJobDetails].[Fk_WorkTypeId] AS [Fk_WorkTypeId], 
+[VW_EmployeeDailyJobDetails].[Fk_CustomerId] AS [Fk_CustomerId], 
+[VW_EmployeeDailyJobDetails].[EmployeeName] AS [EmployeeName], 
+[VW_EmployeeDailyJobDetails].[CustomerName] AS [CustomerName]
+FROM [dbo].[VW_EmployeeDailyJobDetails] AS [VW_EmployeeDailyJobDetails]</DefiningQuery>
     </EntitySet>
     <EntitySet Name="VW_EmployeeHourlyRate" EntityType="Self.VW_EmployeeHourlyRate" store:Type="Views" store:Schema="dbo">
       <DefiningQuery>SELECT 

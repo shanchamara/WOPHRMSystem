@@ -77,4 +77,22 @@ namespace WOPHRMSystem.Models
         public bool IsGroupType { get; set; }
         public bool IsWorkType { get; set; }
     }
+
+
+    public partial class VW_EmployeeDailyJobDetailsModel
+    {
+        public int TransactionId { get; set; }
+        public Nullable<System.DateTime> TrDate { get; set; }
+        public int Fk_JobMasterId { get; set; }
+        public int Fk_EmployeeId { get; set; }
+        public string Narration { get; set; }
+        public string JobCode { get; set; }
+        public bool IsApplyTravelingCost { get; set; }
+        public int Fk_LocationId { get; set; }
+        public Nullable<decimal> WorkingHours { get; set; }
+        public int Fk_WorkTypeId { get; set; }
+        public int Fk_CustomerId { get; set; }
+        public string EmployeeName { get; set; }
+        public string CustomerName { get; set; }
+    }
 }

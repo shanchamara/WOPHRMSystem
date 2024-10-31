@@ -531,6 +531,9 @@
     <Compile Include="Context\VW_Employee.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Context\VW_EmployeeDailyJobDetails.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Context\VW_EmployeeHourlyRate.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -2980,6 +2983,7 @@
     <Content Include="Views\Report\EmployeeSelection.cshtml" />
     <Content Include="Views\Report\StaffUtilizationStatementSelectedJobWiseModel.cshtml" />
     <Content Include="Views\Report\JObSelection.cshtml" />
+    <Content Include="Views\Report\EmployeeDailyJobDetailsModel.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -3026,6 +3030,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\ReportDataEntrySheetEmployeesWise.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\ReportLaberDailyDetails.rdlc">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\ReportLaberUtilizationDailyWorkGroup.rdlc">
@@ -3092,6 +3099,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\ReportEmployeeVisitingLocationRates.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\ReportJobMaster.rdlc">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\ReportWorkType.rdlc">

@@ -395,3 +395,5 @@ E:\Devop Project\SWIS Software\Freelancer Project\Second Project\WOPHRMSystem\bi
 E:\Devop Project\SWIS Software\Freelancer Project\Second Project\WOPHRMSystem\bin\Reports\ReportStaffUtilizationEmployeesJobWiseSelected.rdlc
 E:\Devop Project\SWIS Software\Freelancer Project\Second Project\WOPHRMSystem\bin\Reports\ReportStaffUtilizationSelectedJobWiseJobs.rdlc
 E:\Devop Project\SWIS Software\Freelancer Project\Second Project\WOPHRMSystem\bin\Reports\ReportStaffUtilizationSelectedJobWiseEmployees.rdlc
+E:\Devop Project\SWIS Software\Freelancer Project\Second Project\WOPHRMSystem\bin\Reports\ReportLaberDailyDetails.rdlc
+E:\Devop Project\SWIS Software\Freelancer Project\Second Project\WOPHRMSystem\bin\Reports\ReportJobMaster.rdlc
