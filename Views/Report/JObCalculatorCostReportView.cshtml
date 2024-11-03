@@ -167,9 +167,10 @@
                         <td>@s.CustomerName</td>
                         <td>@s.StartDate.Value.ToShortDateString()</td>
                         <td>@s.DueDate.Value.ToShortDateString()</td>
-                        <td>@s.PreViewvalue.Value.ToString("F2")</td>
-                        <td>@s.ActualValue.Value.ToString("F2")</td>
-                        <td>@s.BudgetValue.Value.ToString("F2")</td>
+                        <td>@(s.PreViewvalue.HasValue ? s.PreViewvalue.Value.ToString("F2") : "")</td>
+                        <td>@(s.ActualValue.HasValue ? s.ActualValue.Value.ToString("F2") : "")</td>
+                        <td>@(s.BudgetValue.HasValue ? s.BudgetValue.Value.ToString("F2") : "")</td>
+
                         <td>@s.VarianceValue</td>
                     </tr>
                 }

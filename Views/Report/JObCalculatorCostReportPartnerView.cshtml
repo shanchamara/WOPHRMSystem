@@ -1,0 +1,189 @@
+﻿@model IEnumerable<IGrouping<string, WOPHRMSystem.Models.JobMasterForCalculatorJobCostModel>>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Report</title>
+    <style>
+        body {
+            font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;
+            text-align: center;
+            color: #777;
+        }
+
+        .container {
+            max-width: 100%;
+            margin: auto;
+            padding: 30px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+        }
+
+        .invoice-header {
+            margin-bottom: 50px;
+            text-align: left;
+        }
+
+            .invoice-header h1 {
+                margin: 0;
+                font-size: 36px;
+                color: #333;
+            }
+
+            .invoice-header .logo {
+                width: 100px;
+                height: 100px;
+                float: left;
+                margin-right: 20px;
+            }
+
+            .invoice-header .details {
+                text-align: right;
+                float: right;
+            }
+
+                .invoice-header .details .invoice-number {
+                    font-size: 28px;
+                    color: #333;
+                }
+
+        .invoice-body {
+            margin-bottom: 50px;
+        }
+
+        .invoice-info {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+            .invoice-info div {
+                width: 45%;
+                display: inline-block;
+                vertical-align: top;
+            }
+
+                .invoice-info div:last-child {
+                    text-align: right;
+                }
+
+                .invoice-info div strong {
+                    display: block;
+                    margin-bottom: 5px;
+                    color: #333;
+                }
+
+        .invoice-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+            .invoice-table th, .invoice-table td {
+                padding: 10px;
+                border-bottom: 1px solid #ddd;
+                text-align: left;
+            }
+
+            .invoice-table th {
+                background-color: #f2f2f2;
+                color: #333;
+            }
+
+            .invoice-table td:last-child {
+                text-align: right;
+            }
+
+        .invoice-footer {
+            text-align: right;
+            font-size: 16px;
+            margin-top: 20px;
+        }
+
+        .total {
+            font-size: 20px;
+            color: #333;
+            font-weight: bold;
+        }
+
+        @@page {
+            size: landscape;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+
+
+        <div class="invoice-header">
+            <img src="https://via.placeholder.com/100" alt="Logo" class="logo">
+            <div class="details">
+                <h1>Job Costing Calculator</h1>
+                <div class="invoice-number">From Date: @ViewBag.FromDate</div>
+                <div class="invoice-number">To Date: @ViewBag.ToDate</div>
+            </div>
+        </div>
+        <div class="invoice-body">
+            <div class="invoice-info">
+                <div>
+                    @*<strong>From: @ViewBag.IsManger</strong>*@
+                </div>
+                <div>
+                    <!-- Include 'To' information if needed -->
+                </div>
+            </div>
+        </div>
+
+        @foreach (var group in Model)
+        {
+
+
+            <h2 style="text-align:left">@ViewBag.IsManger Name: @group.Key</h2>
+
+            <table class="invoice-table">
+                <tr>
+                    <th>Job No</th>
+                    <th>Narration</th>
+                    <th>Customer Code</th>
+                    <th>Customer Name</th>
+                    <th>Commenced Date</th>
+                    <th>Due Date</th>
+                    <th>Preview Value</th>
+                    <th>Actual Value</th>
+                    <th>Budget Value</th>
+                    <th>Variance Value</th>
+
+                </tr>
+                @foreach (var s in group)
+                {
+                    <tr>
+                        <td>@s.JobCode</td>
+                        <td>@s.Narration</td>
+                        <td>@s.CustomerCode</td>
+                        <td>@s.CustomerName</td>
+                        <td>@s.StartDate.Value.ToShortDateString()</td>
+                        <td>@s.DueDate.Value.ToShortDateString()</td>
+                        <td>@(s.PreViewvalue.HasValue ? s.PreViewvalue.Value.ToString("F2") : "")</td>
+                        <td>@(s.ActualValue.HasValue ? s.ActualValue.Value.ToString("F2") : "")</td>
+                        <td>@(s.BudgetValue.HasValue ? s.BudgetValue.Value.ToString("F2") : "")</td>
+
+                        <td>@s.VarianceValue</td>
+                    </tr>
+                }
+
+            </table>
+
+            <div class="invoice-footer">
+                <p>Print Date: @DateTime.Now.ToString("yyyy-MM-dd")</p>
+                <!-- Alternatively, use a specific variable holding the print date -->
+            </div>
+
+        }
+    </div>
+</body>
+</html>
+

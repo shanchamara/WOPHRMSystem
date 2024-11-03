@@ -2984,6 +2984,15 @@
     <Content Include="Views\Report\StaffUtilizationStatementSelectedJobWiseModel.cshtml" />
     <Content Include="Views\Report\JObSelection.cshtml" />
     <Content Include="Views\Report\EmployeeDailyJobDetailsModel.cshtml" />
+    <Content Include="Views\Report\EmployeeDailyJobDetailsCurrentUSerManagerWiseModel.cshtml" />
+    <Content Include="Views\Report\EmployeeDailyJobDetailsCurrentUSerPartnerWiseModel.cshtml" />
+    <Content Include="Views\Report\JobWiseAssignEmployeesAndDetailCostManagerWiseModel.cshtml" />
+    <Content Include="Views\Report\JobWiseAssignEmployeesAndDetailCostPartnerWiseModel.cshtml" />
+    <Content Include="Views\Report\DefaultResult.cshtml" />
+    <Content Include="Views\Report\JObCalculatorCostReportPartnerModel.cshtml" />
+    <Content Include="Views\Report\JObCalculatorCostReportPartnerView.cshtml" />
+    <Content Include="Views\Report\JObCalculatorCostReportManagerModel.cshtml" />
+    <Content Include="Views\Report\JObCalculatorCostReportManagerView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -3029,7 +3038,25 @@
     <EmbeddedResource Include="Reports\ReportDataEntryDetails.rdlc">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reports\ReportDataEntrySheetPartnerWise.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\ReportDataEntrySheetManagerWise.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reports\ReportDataEntrySheetEmployeesWise.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\ReportJobMasterPartnerWise.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\ReportJObWiseCositingDetailsWithAssignEmployeePartnerWise.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\ReportJObWiseCositingDetailsWithAssignEmployeeManagerWise.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\ReportLaberDailyDetailsCurrentUSerManagerWise.rdlc">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\ReportLaberDailyDetails.rdlc">
@@ -3101,7 +3128,7 @@
     <EmbeddedResource Include="Reports\ReportEmployeeVisitingLocationRates.rdlc">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="Reports\ReportJobMaster.rdlc">
+    <EmbeddedResource Include="Reports\ReportJobMasterManagerWise.rdlc">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\ReportWorkType.rdlc">

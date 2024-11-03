@@ -151,6 +151,50 @@ namespace WOPHRMSystem.Services
             }
         }
 
+        public List<VW_EmployeeDailyJobDetailsModel> GetAllSummaryEmployeeWiseSelectdDateCurrentUSerWise(string fromDate, string todate, int UserId)
+        {
+            try
+            {
+                DateTime Fromdate = DateTime.Parse(fromDate);
+                DateTime Todate = DateTime.Parse(todate);
+
+                var dr = (from a in _context.VW_EmployeeDailyJobDetails
+                          orderby a.JobCode ascending
+                          where a.Fk_EmployeeId == UserId
+                          select new VW_EmployeeDailyJobDetailsModel()
+                          {
+                              TransactionId = a.TransactionId,
+                              EmployeeName = a.EmployeeName,
+                              Fk_CustomerId = a.Fk_CustomerId,
+                              Fk_EmployeeId = a.Fk_EmployeeId,
+                              Fk_JobMasterId = a.Fk_JobMasterId,
+                              Fk_LocationId = a.Fk_LocationId,
+                              Fk_WorkTypeId = a.Fk_WorkTypeId,
+                              CustomerName = a.CustomerName,
+                              IsApplyTravelingCost = a.IsApplyTravelingCost,
+                              Narration = a.Narration,
+                              TrDate = a.TrDate,
+                              WorkingHours = a.WorkingHours,
+                              JobCode = a.JobCode,
+
+                          }).AsNoTracking().ToList();
+
+
+                var wheredr = dr.Where(a => a.TrDate >= Fromdate && a.TrDate <= Todate).ToList();
+
+                return wheredr;
+
+
+                //return queryResult;
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
 
         public List<VW_LaberUtilizationJObWiseModel> GetAllSummaryLaberUtilizationJObWise(string fromDate, string todate, int fromJObid, int tojobId)
         {
@@ -332,6 +376,85 @@ namespace WOPHRMSystem.Services
                 var dr = (from a in _context.VW_JObWiseCositingDetailsWithAssignEmployee
                           orderby a.Fk_JobMasterId ascending
                           where a.Fk_JobMasterId == JobmasterId
+                          select new JObWiseCositingDetailsWithAssignEmployeeModel()
+                          {
+                              ActualValue = a.ActualValue,
+                              BudgetedValue = a.BudgetedValue,
+                              EmployeeCode = a.EmployeeCode,
+                              EmployeeName = a.EmployeeName,
+                              EmployeeNo = a.EmployeeNo,
+                              ActualHours = a.ActualHours,
+                              BudgetedHours = a.BudgetedHours,
+                              CompletedDate = a.CompletedDate,
+                              CustomerCode = a.CustomerCode,
+                              CustomerName = a.CustomerName,
+                              DueDate = a.DueDate,
+                              EmployeeRateValue = a.EmployeeRateValue,
+                              Fk_CustomerId = a.Fk_CustomerId,
+                              Fk_JobMasterId = a.Fk_JobMasterId,
+                              HoursVarianceValue = a.HoursVarianceValue,
+                              IsCompleted = a.IsCompleted,
+                              IsReActivate = a.IsReActivate,
+                              JobCode = a.JobCode,
+                              LocationRate = a.LocationRate,
+                              Narration = a.Narration,
+                              PartnerTableId = a.PartnerTableId,
+                              PreViewvalue = a.PreViewvalue,
+                              ReActivateDate = a.ReActivateDate,
+                              StartDate = a.StartDate,
+                              TypeOfTable = a.TypeOfTable,
+                              VarianceValue = a.VarianceValue,
+                              TrDate = a.TrDate,
+
+                          }).AsNoTracking().ToList();
+
+                lists = dr.Where(d => d.TrDate.Equals(null)).ToList();
+
+                var wheredr = dr.Where(a => a.TrDate <= Fromdate).ToList();
+
+                var finalReSult = lists.Concat(wheredr).ToList();
+
+                var groupedResult = finalReSult
+                   .GroupBy(g => g.EmployeeCode)
+                   .Select(grp => new JObWiseCositingDetailsWithAssignEmployeeModel
+                   {
+
+                       EmployeeCode = grp.Key,
+                       EmployeeName = grp.First().EmployeeName,
+                       ActualValue = grp.Sum(x => x.ActualValue), // Sum of ActualValue per employee
+                       BudgetedValue = grp.First().BudgetedValue, // Sum of BudgetedValue per employee
+                       ActualHours = grp.Sum(x => x.ActualHours), // Sum of ActualHours per employee
+                       BudgetedHours = grp.First().BudgetedHours, // Sum of BudgetedHours per employee
+                       EmployeeRateValue = grp.First().EmployeeRateValue ?? 0,
+                       StartDate = grp.First().StartDate,
+                       CustomerCode = grp.First().CustomerCode,
+                       CustomerName = grp.First().CustomerName,
+                       JobCode = grp.First().JobCode
+                   })
+                   .ToList();
+
+                return groupedResult;
+                //return queryResult;
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public List<JObWiseCositingDetailsWithAssignEmployeeModel> GetJObWiseCositingDetailsWithAssignEmployeeCurrentUSerWise(string fromDate, int userId)
+        {
+            try
+            {
+                List<JObWiseCositingDetailsWithAssignEmployeeModel> lists;
+                DateTime Fromdate = DateTime.Parse(fromDate);
+
+
+                var dr = (from a in _context.VW_JObWiseCositingDetailsWithAssignEmployee
+                          orderby a.Fk_JobMasterId ascending
+                          where a.EmployeeNo == userId
                           select new JObWiseCositingDetailsWithAssignEmployeeModel()
                           {
                               ActualValue = a.ActualValue,
@@ -742,6 +865,55 @@ namespace WOPHRMSystem.Services
             }
         }
 
+        public List<VW_DataEntryEmployeesWiseModel> GetAllDataEntrySheetUserWise(int Employee)
+        {
+            try
+            {
+
+                var dr = (from a in _context.VW_DataEntryEmployeesWise
+                          orderby a.Fk_EmployeeId ascending
+                          select new VW_DataEntryEmployeesWiseModel()
+                          {
+                              Create_By = a.Create_By,
+                              Create_Date = a.Create_Date,
+                              CustomerName = a.CustomerName,
+                              Delete_By = a.Delete_By,
+                              Delete_Date = a.Delete_Date,
+                              Edit_By = a.Edit_By,
+                              Edit_Date = a.Edit_Date,
+                              Fk_CustomerId = a.Fk_CustomerId,
+                              Fk_EmployeeId = a.Fk_EmployeeId,
+                              Fk_JobMasterId = a.Fk_JobMasterId,
+                              Fk_LocationId = a.Fk_LocationId,
+                              Fk_WorkTypeId = a.Fk_WorkTypeId,
+                              Hours = a.Hours,
+                              Id = a.Id,
+                              IsApplyTravelingCost = a.IsApplyTravelingCost,
+                              IsDelete = a.IsDelete,
+                              Narration = a.Narration,
+                              TrDate = a.TrDate,
+                              WorkName = a.WorkName,
+                              locationsName = a.locationsName,
+                              JobCode = a.JobCode,
+                          }).AsNoTracking().ToList();
+
+
+                var wheredr = dr.Where(a => (a.Fk_EmployeeId == Employee)).ToList();
+
+                return wheredr.ToList();
+
+
+                //return queryResult;
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+
 
         public List<VW_DataEntryDetailsModel> GetAllDataEntryDetails(string fromDate, string todate, bool Ispartners)
         {
@@ -964,13 +1136,14 @@ namespace WOPHRMSystem.Services
         }
 
 
-        public List<VW_JobMasterForReportModel> GetAllJobMaster()
+        public List<VW_JobMasterForReportModel> GetAllJobMasterManagerWise(int UserId)
         {
             try
             {
-               
+
                 var dr = (from a in _context.VW_JobMaster
                           orderby a.JobCode descending
+                          where a.Fk_MangerId == UserId
                           select new VW_JobMasterForReportModel()
                           {
                               JobCode = a.JobCode,
@@ -999,7 +1172,57 @@ namespace WOPHRMSystem.Services
 
                           }).AsNoTracking().ToList();
 
-               
+
+
+
+                return dr;
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+
+        public List<VW_JobMasterForReportModel> GetAllJobMasterPartnerWise(int UserId)
+        {
+            try
+            {
+
+                var dr = (from a in _context.VW_JobMaster
+                          orderby a.JobCode descending
+                          where a.Fk_PartnerId == UserId
+                          select new VW_JobMasterForReportModel()
+                          {
+                              JobCode = a.JobCode,
+                              CompletedDate = a.CompletedDate,
+                              Create_By = a.Create_By,
+                              Create_Date = a.Create_Date,
+                              Delete_By = a.Delete_By,
+                              Delete_Date = a.Delete_Date,
+                              DueDate = a.DueDate,
+                              Edit_By = a.Edit_By,
+                              Edit_Date = a.Edit_Date,
+                              Fk_CustomerId = a.Fk_CustomerId,
+                              Fk_MangerId = a.Fk_MangerId,
+                              Fk_PartnerId = a.Fk_PartnerId,
+                              Id = a.Id,
+                              IsActive = a.IsActive,
+                              IsCompleted = a.IsCompleted,
+                              IsDelete = a.IsDelete,
+                              IsReActivate = a.IsReActivate,
+                              JObPrefixCode = a.JObPrefixCode,
+                              Name = a.Name,
+                              Narration = a.Narration,
+                              PreViewvalue = a.PreViewvalue,
+                              ReActivateDate = a.ReActivateDate,
+                              StartDate = a.StartDate,
+
+                          }).AsNoTracking().ToList();
+
+
 
 
                 return dr;

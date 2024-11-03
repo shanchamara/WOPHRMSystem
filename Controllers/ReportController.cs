@@ -365,6 +365,7 @@ namespace WOPHRMSystem.Controllers
         #endregion
 
         #region Listings
+        [HttpGet]
         public ActionResult PrintWorkGroup()
         {
             LocalReport localReport = new LocalReport();
@@ -380,46 +381,49 @@ namespace WOPHRMSystem.Controllers
 
             // Load data
             List<WorkGroupModel> data = new WorkGroupServices().GetAll();
-            ReportDataSource reportDataSource = new ReportDataSource("DataSet1", data);
-            localReport.DataSources.Add(reportDataSource);
+            if (data.Count > 0)
+            {
+                ReportDataSource reportDataSource = new ReportDataSource("DataSet1", data);
+                localReport.DataSources.Add(reportDataSource);
 
-            ReportParameter[] parameters = new ReportParameter[1];
-            parameters[0] = new ReportParameter("PrintDate", (new CommonResources().LocalDatetime().Date).ToString("yyyy-MMM-dd")); // Name of the parameter in the RDLC file
-            localReport.SetParameters(parameters);
+                ReportParameter[] parameters = new ReportParameter[1];
+                parameters[0] = new ReportParameter("PrintDate", (new CommonResources().LocalDatetime().Date).ToString("yyyy-MMM-dd")); // Name of the parameter in the RDLC file
+                localReport.SetParameters(parameters);
 
-            // Render report
-            string reportType = "PDF";
-            string mimeType;
-            string encoding;
-            string fileNameExtension = "sddssdsdsddsdsd";
+                // Render report
+                string reportType = "PDF";
+                string mimeType;
+                string encoding;
+                string fileNameExtension = "sddssdsdsddsdsd";
 
-            string deviceInfo = "<DeviceInfo>" +
-                "  <OutputFormat>PDF</OutputFormat>" +
-                "  <PageWidth>8.5in</PageWidth>" +
-                "  <PageHeight>11in</PageHeight>" +
-                "  <MarginTop>0.5in</MarginTop>" +
-                "  <MarginLeft>1in</MarginLeft>" +
-                "  <MarginRight>1in</MarginRight>" +
-                "  <MarginBottom>0.5in</MarginBottom>" +
-                "</DeviceInfo>";
+                string deviceInfo = "<DeviceInfo>" +
+                    "  <OutputFormat>PDF</OutputFormat>" +
+                    "  <PageWidth>8.5in</PageWidth>" +
+                    "  <PageHeight>11in</PageHeight>" +
+                    "  <MarginTop>0.5in</MarginTop>" +
+                    "  <MarginLeft>1in</MarginLeft>" +
+                    "  <MarginRight>1in</MarginRight>" +
+                    "  <MarginBottom>0.5in</MarginBottom>" +
+                    "</DeviceInfo>";
 
-            Warning[] warnings;
-            string[] streams;
-            byte[] renderedBytes;
+                Warning[] warnings;
+                string[] streams;
+                byte[] renderedBytes;
 
-            renderedBytes = localReport.Render(
-                reportType,
-                deviceInfo,
-                out mimeType,
-                out encoding,
-                out fileNameExtension,
-                out streams,
-                out warnings);
+                renderedBytes = localReport.Render(
+                    reportType,
+                    deviceInfo,
+                    out mimeType,
+                    out encoding,
+                    out fileNameExtension,
+                    out streams,
+                    out warnings);
 
-            return File(renderedBytes, mimeType);
+                return File(renderedBytes, mimeType);
+            }
+            return RedirectToAction("DefaultResult");
         }
-
-
+        [HttpGet]
         public ActionResult PrintWorkType()
         {
             LocalReport localReport = new LocalReport();
@@ -435,45 +439,49 @@ namespace WOPHRMSystem.Controllers
 
             // Load data
             List<WorkTypeModel> data = new WorkTypeServices().GetAll();
-            ReportDataSource reportDataSource = new ReportDataSource("DataSet1", data);
-            localReport.DataSources.Add(reportDataSource);
+            if (data.Count > 0)
+            {
+                ReportDataSource reportDataSource = new ReportDataSource("DataSet1", data);
+                localReport.DataSources.Add(reportDataSource);
 
-            ReportParameter[] parameters = new ReportParameter[1];
-            parameters[0] = new ReportParameter("PrintDate", (new CommonResources().LocalDatetime().Date).ToString("yyyy-MMM-dd")); // Name of the parameter in the RDLC file
-            localReport.SetParameters(parameters);
+                ReportParameter[] parameters = new ReportParameter[1];
+                parameters[0] = new ReportParameter("PrintDate", (new CommonResources().LocalDatetime().Date).ToString("yyyy-MMM-dd")); // Name of the parameter in the RDLC file
+                localReport.SetParameters(parameters);
 
-            // Render report
-            string reportType = "PDF";
-            string mimeType;
-            string encoding;
-            string fileNameExtension = "sddssdsdsddsdsd";
+                // Render report
+                string reportType = "PDF";
+                string mimeType;
+                string encoding;
+                string fileNameExtension = "sddssdsdsddsdsd";
 
-            string deviceInfo = "<DeviceInfo>" +
-                "  <OutputFormat>PDF</OutputFormat>" +
-                "  <PageWidth>8.5in</PageWidth>" +
-                "  <PageHeight>11in</PageHeight>" +
-                "  <MarginTop>0.5in</MarginTop>" +
-                "  <MarginLeft>1in</MarginLeft>" +
-                "  <MarginRight>1in</MarginRight>" +
-                "  <MarginBottom>0.5in</MarginBottom>" +
-                "</DeviceInfo>";
+                string deviceInfo = "<DeviceInfo>" +
+                    "  <OutputFormat>PDF</OutputFormat>" +
+                    "  <PageWidth>8.5in</PageWidth>" +
+                    "  <PageHeight>11in</PageHeight>" +
+                    "  <MarginTop>0.5in</MarginTop>" +
+                    "  <MarginLeft>1in</MarginLeft>" +
+                    "  <MarginRight>1in</MarginRight>" +
+                    "  <MarginBottom>0.5in</MarginBottom>" +
+                    "</DeviceInfo>";
 
-            Warning[] warnings;
-            string[] streams;
-            byte[] renderedBytes;
+                Warning[] warnings;
+                string[] streams;
+                byte[] renderedBytes;
 
-            renderedBytes = localReport.Render(
-                reportType,
-                deviceInfo,
-                out mimeType,
-                out encoding,
-                out fileNameExtension,
-                out streams,
-                out warnings);
+                renderedBytes = localReport.Render(
+                    reportType,
+                    deviceInfo,
+                    out mimeType,
+                    out encoding,
+                    out fileNameExtension,
+                    out streams,
+                    out warnings);
 
-            return File(renderedBytes, mimeType);
+                return File(renderedBytes, mimeType);
+            }
+            return RedirectToAction("DefaultResult");
         }
-
+        [HttpGet]
         public ActionResult PrintDesignation()
         {
             LocalReport localReport = new LocalReport();
@@ -489,45 +497,49 @@ namespace WOPHRMSystem.Controllers
 
             // Load data
             List<DesignationModel> data = new DesignationServices().GetAll();
-            ReportDataSource reportDataSource = new ReportDataSource("DataSet1", data);
-            localReport.DataSources.Add(reportDataSource);
+            if (data.Count > 0)
+            {
+                ReportDataSource reportDataSource = new ReportDataSource("DataSet1", data);
+                localReport.DataSources.Add(reportDataSource);
 
-            ReportParameter[] parameters = new ReportParameter[1];
-            parameters[0] = new ReportParameter("PrintDate", (new CommonResources().LocalDatetime().Date).ToString("yyyy-MMM-dd")); // Name of the parameter in the RDLC file
-            localReport.SetParameters(parameters);
+                ReportParameter[] parameters = new ReportParameter[1];
+                parameters[0] = new ReportParameter("PrintDate", (new CommonResources().LocalDatetime().Date).ToString("yyyy-MMM-dd")); // Name of the parameter in the RDLC file
+                localReport.SetParameters(parameters);
 
-            // Render report
-            string reportType = "PDF";
-            string mimeType;
-            string encoding;
-            string fileNameExtension = "sddssdsdsddsdsd";
+                // Render report
+                string reportType = "PDF";
+                string mimeType;
+                string encoding;
+                string fileNameExtension = "sddssdsdsddsdsd";
 
-            string deviceInfo = "<DeviceInfo>" +
-                "  <OutputFormat>PDF</OutputFormat>" +
-                "  <PageWidth>8.5in</PageWidth>" +
-                "  <PageHeight>11in</PageHeight>" +
-                "  <MarginTop>0.5in</MarginTop>" +
-                "  <MarginLeft>1in</MarginLeft>" +
-                "  <MarginRight>1in</MarginRight>" +
-                "  <MarginBottom>0.5in</MarginBottom>" +
-                "</DeviceInfo>";
+                string deviceInfo = "<DeviceInfo>" +
+                    "  <OutputFormat>PDF</OutputFormat>" +
+                    "  <PageWidth>8.5in</PageWidth>" +
+                    "  <PageHeight>11in</PageHeight>" +
+                    "  <MarginTop>0.5in</MarginTop>" +
+                    "  <MarginLeft>1in</MarginLeft>" +
+                    "  <MarginRight>1in</MarginRight>" +
+                    "  <MarginBottom>0.5in</MarginBottom>" +
+                    "</DeviceInfo>";
 
-            Warning[] warnings;
-            string[] streams;
-            byte[] renderedBytes;
+                Warning[] warnings;
+                string[] streams;
+                byte[] renderedBytes;
 
-            renderedBytes = localReport.Render(
-                reportType,
-                deviceInfo,
-                out mimeType,
-                out encoding,
-                out fileNameExtension,
-                out streams,
-                out warnings);
+                renderedBytes = localReport.Render(
+                    reportType,
+                    deviceInfo,
+                    out mimeType,
+                    out encoding,
+                    out fileNameExtension,
+                    out streams,
+                    out warnings);
 
-            return File(renderedBytes, mimeType);
+                return File(renderedBytes, mimeType);
+            }
+            return RedirectToAction("DefaultResult");
         }
-
+        [HttpGet]
 
         public ActionResult PrintLocations()
         {
@@ -544,46 +556,50 @@ namespace WOPHRMSystem.Controllers
 
             // Load data
             List<LocationModel> data = new LocationServices().GetAll();
-            ReportDataSource reportDataSource = new ReportDataSource("DataSet1", data);
-            localReport.DataSources.Add(reportDataSource);
+            if (data.Count > 0)
+            {
+                ReportDataSource reportDataSource = new ReportDataSource("DataSet1", data);
+                localReport.DataSources.Add(reportDataSource);
 
-            ReportParameter[] parameters = new ReportParameter[1];
-            parameters[0] = new ReportParameter("PrintDate", (new CommonResources().LocalDatetime().Date).ToString("yyyy-MMM-dd")); // Name of the parameter in the RDLC file
-            localReport.SetParameters(parameters);
+                ReportParameter[] parameters = new ReportParameter[1];
+                parameters[0] = new ReportParameter("PrintDate", (new CommonResources().LocalDatetime().Date).ToString("yyyy-MMM-dd")); // Name of the parameter in the RDLC file
+                localReport.SetParameters(parameters);
 
-            // Render report
-            string reportType = "PDF";
-            string mimeType;
-            string encoding;
-            string fileNameExtension = "sddssdsdsddsdsd";
+                // Render report
+                string reportType = "PDF";
+                string mimeType;
+                string encoding;
+                string fileNameExtension = "sddssdsdsddsdsd";
 
-            string deviceInfo = "<DeviceInfo>" +
-                "  <OutputFormat>PDF</OutputFormat>" +
-                "  <PageWidth>8.5in</PageWidth>" +
-                "  <PageHeight>11in</PageHeight>" +
-                "  <MarginTop>0.5in</MarginTop>" +
-                "  <MarginLeft>1in</MarginLeft>" +
-                "  <MarginRight>1in</MarginRight>" +
-                "  <MarginBottom>0.5in</MarginBottom>" +
-                "</DeviceInfo>";
+                string deviceInfo = "<DeviceInfo>" +
+                    "  <OutputFormat>PDF</OutputFormat>" +
+                    "  <PageWidth>8.5in</PageWidth>" +
+                    "  <PageHeight>11in</PageHeight>" +
+                    "  <MarginTop>0.5in</MarginTop>" +
+                    "  <MarginLeft>1in</MarginLeft>" +
+                    "  <MarginRight>1in</MarginRight>" +
+                    "  <MarginBottom>0.5in</MarginBottom>" +
+                    "</DeviceInfo>";
 
-            Warning[] warnings;
-            string[] streams;
-            byte[] renderedBytes;
+                Warning[] warnings;
+                string[] streams;
+                byte[] renderedBytes;
 
-            renderedBytes = localReport.Render(
-                reportType,
-                deviceInfo,
-                out mimeType,
-                out encoding,
-                out fileNameExtension,
-                out streams,
-                out warnings);
+                renderedBytes = localReport.Render(
+                    reportType,
+                    deviceInfo,
+                    out mimeType,
+                    out encoding,
+                    out fileNameExtension,
+                    out streams,
+                    out warnings);
 
-            return File(renderedBytes, mimeType);
+                return File(renderedBytes, mimeType);
+            }
+            return RedirectToAction("DefaultResult");
         }
 
-
+        [HttpGet]
         public ActionResult PrintCustomers()
         {
             LocalReport localReport = new LocalReport();
@@ -599,46 +615,49 @@ namespace WOPHRMSystem.Controllers
 
             // Load data
             List<CustomerModel> data = new CustomerServices().GetAll();
-            ReportDataSource reportDataSource = new ReportDataSource("DataSet1", data);
-            localReport.DataSources.Add(reportDataSource);
+            if (data.Count > 0)
+            {
+                ReportDataSource reportDataSource = new ReportDataSource("DataSet1", data);
+                localReport.DataSources.Add(reportDataSource);
 
-            ReportParameter[] parameters = new ReportParameter[1];
-            parameters[0] = new ReportParameter("PrintDate", (new CommonResources().LocalDatetime().Date).ToString("yyyy-MMM-dd")); // Name of the parameter in the RDLC file
-            localReport.SetParameters(parameters);
+                ReportParameter[] parameters = new ReportParameter[1];
+                parameters[0] = new ReportParameter("PrintDate", (new CommonResources().LocalDatetime().Date).ToString("yyyy-MMM-dd")); // Name of the parameter in the RDLC file
+                localReport.SetParameters(parameters);
 
-            // Render report
-            string reportType = "PDF";
-            string mimeType;
-            string encoding;
-            string fileNameExtension = "sddssdsdsddsdsd";
+                // Render report
+                string reportType = "PDF";
+                string mimeType;
+                string encoding;
+                string fileNameExtension = "sddssdsdsddsdsd";
 
-            string deviceInfo = "<DeviceInfo>" +
-                "  <OutputFormat>PDF</OutputFormat>" +
-                "  <PageWidth>11in</PageWidth>" +
-                "  <PageHeight>8.5in</PageHeight>" +
-                "  <MarginTop>0.3in</MarginTop>" +
-                "  <MarginLeft>0.5in</MarginLeft>" +
-                "  <MarginRight>0.3in</MarginRight>" +
-                "  <MarginBottom>0.3in</MarginBottom>" +
-                "</DeviceInfo>";
+                string deviceInfo = "<DeviceInfo>" +
+                    "  <OutputFormat>PDF</OutputFormat>" +
+                    "  <PageWidth>11in</PageWidth>" +
+                    "  <PageHeight>8.5in</PageHeight>" +
+                    "  <MarginTop>0.3in</MarginTop>" +
+                    "  <MarginLeft>0.5in</MarginLeft>" +
+                    "  <MarginRight>0.3in</MarginRight>" +
+                    "  <MarginBottom>0.3in</MarginBottom>" +
+                    "</DeviceInfo>";
 
-            Warning[] warnings;
-            string[] streams;
-            byte[] renderedBytes;
+                Warning[] warnings;
+                string[] streams;
+                byte[] renderedBytes;
 
-            renderedBytes = localReport.Render(
-                reportType,
-                deviceInfo,
-                out mimeType,
-                out encoding,
-                out fileNameExtension,
-                out streams,
-                out warnings);
+                renderedBytes = localReport.Render(
+                    reportType,
+                    deviceInfo,
+                    out mimeType,
+                    out encoding,
+                    out fileNameExtension,
+                    out streams,
+                    out warnings);
 
-            return File(renderedBytes, mimeType);
+                return File(renderedBytes, mimeType);
+            }
+            return RedirectToAction("DefaultResult");
         }
-
-
+        [HttpGet]
         public ActionResult PrintEmployeeHourlyRate()
         {
             LocalReport localReport = new LocalReport();
@@ -654,45 +673,49 @@ namespace WOPHRMSystem.Controllers
 
             // Load data
             List<EmployeeHourlyRateModel> data = new EmployeeServices().GetAllEmployeeHourlyRates();
-            ReportDataSource reportDataSource = new ReportDataSource("DataSet1", data);
-            localReport.DataSources.Add(reportDataSource);
+            if (data.Count > 0)
+            {
+                ReportDataSource reportDataSource = new ReportDataSource("DataSet1", data);
+                localReport.DataSources.Add(reportDataSource);
 
-            ReportParameter[] parameters = new ReportParameter[1];
-            parameters[0] = new ReportParameter("PrintDate", (new CommonResources().LocalDatetime().Date).ToString("yyyy-MMM-dd")); // Name of the parameter in the RDLC file
-            localReport.SetParameters(parameters);
+                ReportParameter[] parameters = new ReportParameter[1];
+                parameters[0] = new ReportParameter("PrintDate", (new CommonResources().LocalDatetime().Date).ToString("yyyy-MMM-dd")); // Name of the parameter in the RDLC file
+                localReport.SetParameters(parameters);
 
-            // Render report
-            string reportType = "PDF";
-            string mimeType;
-            string encoding;
-            string fileNameExtension = "sddssdsdsddsdsd";
+                // Render report
+                string reportType = "PDF";
+                string mimeType;
+                string encoding;
+                string fileNameExtension = "sddssdsdsddsdsd";
 
-            string deviceInfo = "<DeviceInfo>" +
-                "  <OutputFormat>PDF</OutputFormat>" +
-                "  <PageWidth>8.5in</PageWidth>" +
-                "  <PageHeight>11in</PageHeight>" +
-                "  <MarginTop>0.3in</MarginTop>" +
-                "  <MarginLeft>0.5in</MarginLeft>" +
-                "  <MarginRight>0.3in</MarginRight>" +
-                "  <MarginBottom>0.3in</MarginBottom>" +
-                "</DeviceInfo>";
+                string deviceInfo = "<DeviceInfo>" +
+                    "  <OutputFormat>PDF</OutputFormat>" +
+                    "  <PageWidth>8.5in</PageWidth>" +
+                    "  <PageHeight>11in</PageHeight>" +
+                    "  <MarginTop>0.3in</MarginTop>" +
+                    "  <MarginLeft>0.5in</MarginLeft>" +
+                    "  <MarginRight>0.3in</MarginRight>" +
+                    "  <MarginBottom>0.3in</MarginBottom>" +
+                    "</DeviceInfo>";
 
-            Warning[] warnings;
-            string[] streams;
-            byte[] renderedBytes;
+                Warning[] warnings;
+                string[] streams;
+                byte[] renderedBytes;
 
-            renderedBytes = localReport.Render(
-                reportType,
-                deviceInfo,
-                out mimeType,
-                out encoding,
-                out fileNameExtension,
-                out streams,
-                out warnings);
+                renderedBytes = localReport.Render(
+                    reportType,
+                    deviceInfo,
+                    out mimeType,
+                    out encoding,
+                    out fileNameExtension,
+                    out streams,
+                    out warnings);
 
-            return File(renderedBytes, mimeType);
+                return File(renderedBytes, mimeType);
+            }
+            return RedirectToAction("DefaultResult");
         }
-
+        [HttpGet]
         public ActionResult PrintEmployees()
         {
             LocalReport localReport = new LocalReport();
@@ -708,44 +731,108 @@ namespace WOPHRMSystem.Controllers
 
             // Load data
             List<EmployeeModel> data = new EmployeeServices().GetAll();
-            ReportDataSource reportDataSource = new ReportDataSource("DataSet1", data);
-            localReport.DataSources.Add(reportDataSource);
+            if (data.Count > 0)
+            {
+                ReportDataSource reportDataSource = new ReportDataSource("DataSet1", data);
+                localReport.DataSources.Add(reportDataSource);
 
-            ReportParameter[] parameters = new ReportParameter[1];
-            parameters[0] = new ReportParameter("PrintDate", (new CommonResources().LocalDatetime().Date).ToString("yyyy-MMM-dd")); // Name of the parameter in the RDLC file
-            localReport.SetParameters(parameters);
+                ReportParameter[] parameters = new ReportParameter[1];
+                parameters[0] = new ReportParameter("PrintDate", (new CommonResources().LocalDatetime().Date).ToString("yyyy-MMM-dd")); // Name of the parameter in the RDLC file
+                localReport.SetParameters(parameters);
 
-            // Render report
-            string reportType = "PDF";
-            string mimeType;
-            string encoding;
-            string fileNameExtension = "sddssdsdsddsdsd";
+                // Render report
+                string reportType = "PDF";
+                string mimeType;
+                string encoding;
+                string fileNameExtension = "sddssdsdsddsdsd";
 
-            string deviceInfo = "<DeviceInfo>" +
-                "  <OutputFormat>PDF</OutputFormat>" +
-                "  <PageWidth>11in</PageWidth>" +
-                "  <PageHeight>8.5in</PageHeight>" +
-                "  <MarginTop>0.3in</MarginTop>" +
-                "  <MarginLeft>0.5in</MarginLeft>" +
-                "  <MarginRight>0.3in</MarginRight>" +
-                "  <MarginBottom>0.3in</MarginBottom>" +
-                "</DeviceInfo>";
+                string deviceInfo = "<DeviceInfo>" +
+                    "  <OutputFormat>PDF</OutputFormat>" +
+                    "  <PageWidth>11in</PageWidth>" +
+                    "  <PageHeight>8.5in</PageHeight>" +
+                    "  <MarginTop>0.3in</MarginTop>" +
+                    "  <MarginLeft>0.5in</MarginLeft>" +
+                    "  <MarginRight>0.3in</MarginRight>" +
+                    "  <MarginBottom>0.3in</MarginBottom>" +
+                    "</DeviceInfo>";
 
-            Warning[] warnings;
-            string[] streams;
-            byte[] renderedBytes;
+                Warning[] warnings;
+                string[] streams;
+                byte[] renderedBytes;
 
-            renderedBytes = localReport.Render(
-                reportType,
-                deviceInfo,
-                out mimeType,
-                out encoding,
-                out fileNameExtension,
-                out streams,
-                out warnings);
+                renderedBytes = localReport.Render(
+                    reportType,
+                    deviceInfo,
+                    out mimeType,
+                    out encoding,
+                    out fileNameExtension,
+                    out streams,
+                    out warnings);
 
-            return File(renderedBytes, mimeType);
+                return File(renderedBytes, mimeType);
+            }
+            return RedirectToAction("DefaultResult");
         }
+
+        [HttpGet]
+        public ActionResult PrintLocationsRates()
+        {
+            LocalReport localReport = new LocalReport();
+            string path = Server.MapPath("~/Reports/ReportLocationRates.rdlc");
+            if (System.IO.File.Exists(path))
+            {
+                localReport.ReportPath = path;
+            }
+            else
+            {
+                return View("Error");
+            }
+
+            // Load data
+            List<VW_CustomerLocationRatesModel> data = new ReportServices().GetAllCustomersLocationRates();
+            if (data.Count > 0)
+            {
+                ReportDataSource reportDataSource = new ReportDataSource("DataSet1", data);
+                localReport.DataSources.Add(reportDataSource);
+
+                localReport.SetParameters(new ReportParameter("PrintDate", (new CommonResources().LocalDatetime().Date).ToString("yyyy-MMM-dd")));
+
+
+                // Render report
+                string reportType = "PDF";
+                string mimeType;
+                string encoding;
+                string fileNameExtension = "sddssdsdsddsdsd";
+
+                string deviceInfo = "<DeviceInfo>" +
+                    "  <OutputFormat>PDF</OutputFormat>" +
+                    "  <PageWidth>11in</PageWidth>" +
+                    "  <PageHeight>8.5in</PageHeight>" +
+                    "  <MarginTop>0.3in</MarginTop>" +
+                    "  <MarginLeft>0.5in</MarginLeft>" +
+                    "  <MarginRight>0.5in</MarginRight>" +
+                    "  <MarginBottom>0.5in</MarginBottom>" +
+                    "</DeviceInfo>";
+
+                Warning[] warnings;
+                string[] streams;
+                byte[] renderedBytes;
+
+                renderedBytes = localReport.Render(
+                    reportType,
+                    deviceInfo,
+                    out mimeType,
+                    out encoding,
+                    out fileNameExtension,
+                    out streams,
+                    out warnings);
+
+                return File(renderedBytes, mimeType);
+            }
+            return RedirectToAction("DefaultResult");
+        }
+      
+        #endregion
 
         #region Work Type
         public ActionResult LaberUtilizationStatementUserAndDateWiseModel()
@@ -773,47 +860,122 @@ namespace WOPHRMSystem.Controllers
 
             // Load data
             var data = new ReportServices().GetAll(model.FromDate.Value.ToString("yyyy/MM/dd"), model.ToDate.Value.ToString("yyyy/MM/dd"), model.FkFromEmployeeId, model.FkToEmployeeId);
-            ReportDataSource reportDataSource = new ReportDataSource("DataSet1", data);
-            localReport.DataSources.Add(reportDataSource);
+            if (data.Count > 0)
+            {
+                ReportDataSource reportDataSource = new ReportDataSource("DataSet1", data);
+                localReport.DataSources.Add(reportDataSource);
 
-            localReport.SetParameters(new ReportParameter("PrintDate", (new CommonResources().LocalDatetime().Date).ToString("yyyy-MMM-dd")));
-            localReport.SetParameters(new ReportParameter("FromDate", (model.FromDate.Value.ToString("yyyy-MMM-dd"))));
-            localReport.SetParameters(new ReportParameter("ToDate", (model.ToDate.Value.ToString("yyyy-MMM-dd"))));
+                localReport.SetParameters(new ReportParameter("PrintDate", (new CommonResources().LocalDatetime().Date).ToString("yyyy-MMM-dd")));
+                localReport.SetParameters(new ReportParameter("FromDate", (model.FromDate.Value.ToString("yyyy-MMM-dd"))));
+                localReport.SetParameters(new ReportParameter("ToDate", (model.ToDate.Value.ToString("yyyy-MMM-dd"))));
 
 
-            // Render report
-            string reportType = "PDF";
-            string mimeType;
-            string encoding;
-            string fileNameExtension = "sddssdsdsddsdsd";
+                // Render report
+                string reportType = "PDF";
+                string mimeType;
+                string encoding;
+                string fileNameExtension = "sddssdsdsddsdsd";
 
-            string deviceInfo = "<DeviceInfo>" +
-                "  <OutputFormat>PDF</OutputFormat>" +
-                "  <PageWidth>15in</PageWidth>" +
-                "  <PageHeight>8.5in</PageHeight>" +
-                "  <MarginTop>0.3in</MarginTop>" +
-                "  <MarginLeft>0.5in</MarginLeft>" +
-                "  <MarginRight>0.3in</MarginRight>" +
-                "  <MarginBottom>0.3in</MarginBottom>" +
-                "</DeviceInfo>";
+                string deviceInfo = "<DeviceInfo>" +
+                    "  <OutputFormat>PDF</OutputFormat>" +
+                    "  <PageWidth>15in</PageWidth>" +
+                    "  <PageHeight>8.5in</PageHeight>" +
+                    "  <MarginTop>0.3in</MarginTop>" +
+                    "  <MarginLeft>0.5in</MarginLeft>" +
+                    "  <MarginRight>0.3in</MarginRight>" +
+                    "  <MarginBottom>0.3in</MarginBottom>" +
+                    "</DeviceInfo>";
 
-            Warning[] warnings;
-            string[] streams;
-            byte[] renderedBytes;
+                Warning[] warnings;
+                string[] streams;
+                byte[] renderedBytes;
 
-            renderedBytes = localReport.Render(
-                reportType,
-                deviceInfo,
-                out mimeType,
-                out encoding,
-                out fileNameExtension,
-                out streams,
-                out warnings);
+                renderedBytes = localReport.Render(
+                    reportType,
+                    deviceInfo,
+                    out mimeType,
+                    out encoding,
+                    out fileNameExtension,
+                    out streams,
+                    out warnings);
 
-            return File(renderedBytes, mimeType);
+                return File(renderedBytes, mimeType);
+            }
+            return RedirectToAction("DefaultResult");
         }
         #endregion
 
+
+        #region Group Type
+        public ActionResult LaberUtilizationStatementWorkGroupUserAndDateWiseModel()
+        {
+            var model = new LaberUtilizationStatementWorkTypeAndGroupReportModel
+            {
+                EmployeeList = new SelectList(employeeServices.GetAllEmployeeASC(), "Id", "Name"),
+            };
+            return View(model);
+        }
+
+        [HttpGet]
+        public ActionResult PrintLaberUtilizationStatementWorkGroup(LaberUtilizationStatementWorkTypeAndGroupReportModel model)
+        {
+            LocalReport localReport = new LocalReport();
+            string path = Server.MapPath("~/Reports/ReportLaberUtilizationStatementWorkGroup.rdlc");
+            if (System.IO.File.Exists(path))
+            {
+                localReport.ReportPath = path;
+            }
+            else
+            {
+                return View("Error");
+            }
+
+            // Load data
+            var data = new ReportServices().GetAll(model.FromDate.Value.ToString("yyyy/MM/dd"), model.ToDate.Value.ToString("yyyy/MM/dd"), model.FkFromEmployeeId, model.FkToEmployeeId);
+            if (data.Count > 0)
+            {
+                ReportDataSource reportDataSource = new ReportDataSource("DataSet1", data);
+                localReport.DataSources.Add(reportDataSource);
+
+                localReport.SetParameters(new ReportParameter("PrintDate", (new CommonResources().LocalDatetime().Date).ToString("yyyy-MMM-dd")));
+                localReport.SetParameters(new ReportParameter("FromDate", (model.FromDate.Value.ToString("yyyy-MMM-dd"))));
+                localReport.SetParameters(new ReportParameter("ToDate", (model.ToDate.Value.ToString("yyyy-MMM-dd"))));
+
+
+                // Render report
+                string reportType = "PDF";
+                string mimeType;
+                string encoding;
+                string fileNameExtension = "sddssdsdsddsdsd";
+
+                string deviceInfo = "<DeviceInfo>" +
+                    "  <OutputFormat>PDF</OutputFormat>" +
+                    "  <PageWidth>15in</PageWidth>" +
+                    "  <PageHeight>8.5in</PageHeight>" +
+                    "  <MarginTop>0.3in</MarginTop>" +
+                    "  <MarginLeft>0.5in</MarginLeft>" +
+                    "  <MarginRight>0.3in</MarginRight>" +
+                    "  <MarginBottom>0.3in</MarginBottom>" +
+                    "</DeviceInfo>";
+
+                Warning[] warnings;
+                string[] streams;
+                byte[] renderedBytes;
+
+                renderedBytes = localReport.Render(
+                    reportType,
+                    deviceInfo,
+                    out mimeType,
+                    out encoding,
+                    out fileNameExtension,
+                    out streams,
+                    out warnings);
+
+                return File(renderedBytes, mimeType);
+            }
+            return RedirectToAction("DefaultResult");
+        }
+        #endregion
 
         #region Work Type And Group Staff Utilization Daily -Detail
 
@@ -852,115 +1014,54 @@ namespace WOPHRMSystem.Controllers
 
             // Load data
             var data = new ReportServices().GetAllLaberUtilizationDailyWorkTypeAndGroups(model.FromDate.Value.ToString("yyyy/MM/dd"), model.ToDate.Value.ToString("yyyy/MM/dd"), model.FkFromJObId, model.FkToJobId);
-            ReportDataSource reportDataSource = new ReportDataSource("DataSet1", data);
-            localReport.DataSources.Add(reportDataSource);
+            if (data.Count > 0)
+            {
+                ReportDataSource reportDataSource = new ReportDataSource("DataSet1", data);
+                localReport.DataSources.Add(reportDataSource);
 
-            localReport.SetParameters(new ReportParameter("PrintDate", (new CommonResources().LocalDatetime().Date).ToString("yyyy-MMM-dd")));
-            localReport.SetParameters(new ReportParameter("FromDate", (model.FromDate.Value.ToString("yyyy-MMM-dd"))));
-            localReport.SetParameters(new ReportParameter("ToDate", (model.ToDate.Value.ToString("yyyy-MMM-dd"))));
-            localReport.SetParameters(new ReportParameter("ToJobNo", Convert.ToString(data.Last().JobCode)));
-            localReport.SetParameters(new ReportParameter("FromJobNo", Convert.ToString(data.First().JobCode)));
+                localReport.SetParameters(new ReportParameter("PrintDate", (new CommonResources().LocalDatetime().Date).ToString("yyyy-MMM-dd")));
+                localReport.SetParameters(new ReportParameter("FromDate", (model.FromDate.Value.ToString("yyyy-MMM-dd"))));
+                localReport.SetParameters(new ReportParameter("ToDate", (model.ToDate.Value.ToString("yyyy-MMM-dd"))));
+                localReport.SetParameters(new ReportParameter("ToJobNo", Convert.ToString(data.Last().JobCode)));
+                localReport.SetParameters(new ReportParameter("FromJobNo", Convert.ToString(data.First().JobCode)));
 
 
-            // Render report
-            string reportType = "PDF";
-            string mimeType;
-            string encoding;
-            string fileNameExtension = "sddssdsdsddsdsd";
+                // Render report
+                string reportType = "PDF";
+                string mimeType;
+                string encoding;
+                string fileNameExtension = "sddssdsdsddsdsd";
 
-            string deviceInfo = "<DeviceInfo>" +
-                "  <OutputFormat>PDF</OutputFormat>" +
-                "  <PageWidth>15in</PageWidth>" +
-                "  <PageHeight>8.5in</PageHeight>" +
-                "  <MarginTop>0.3in</MarginTop>" +
-                "  <MarginLeft>0.5in</MarginLeft>" +
-                "  <MarginRight>0.3in</MarginRight>" +
-                "  <MarginBottom>0.3in</MarginBottom>" +
-                "</DeviceInfo>";
+                string deviceInfo = "<DeviceInfo>" +
+                    "  <OutputFormat>PDF</OutputFormat>" +
+                    "  <PageWidth>15in</PageWidth>" +
+                    "  <PageHeight>8.5in</PageHeight>" +
+                    "  <MarginTop>0.3in</MarginTop>" +
+                    "  <MarginLeft>0.5in</MarginLeft>" +
+                    "  <MarginRight>0.3in</MarginRight>" +
+                    "  <MarginBottom>0.3in</MarginBottom>" +
+                    "</DeviceInfo>";
 
-            Warning[] warnings;
-            string[] streams;
-            byte[] renderedBytes;
+                Warning[] warnings;
+                string[] streams;
+                byte[] renderedBytes;
 
-            renderedBytes = localReport.Render(
-                reportType,
-                deviceInfo,
-                out mimeType,
-                out encoding,
-                out fileNameExtension,
-                out streams,
-                out warnings);
+                renderedBytes = localReport.Render(
+                    reportType,
+                    deviceInfo,
+                    out mimeType,
+                    out encoding,
+                    out fileNameExtension,
+                    out streams,
+                    out warnings);
 
-            return File(renderedBytes, mimeType);
+                return File(renderedBytes, mimeType);
+            }
+            return RedirectToAction("DefaultResult");
         }
         #endregion
 
-        #region Group Type
-        public ActionResult LaberUtilizationStatementWorkGroupUserAndDateWiseModel()
-        {
-            var model = new LaberUtilizationStatementWorkTypeAndGroupReportModel
-            {
-                EmployeeList = new SelectList(employeeServices.GetAllEmployeeASC(), "Id", "Name"),
-            };
-            return View(model);
-        }
-
-        [HttpGet]
-        public ActionResult PrintLaberUtilizationStatementWorkGroup(LaberUtilizationStatementWorkTypeAndGroupReportModel model)
-        {
-            LocalReport localReport = new LocalReport();
-            string path = Server.MapPath("~/Reports/ReportLaberUtilizationStatementWorkGroup.rdlc");
-            if (System.IO.File.Exists(path))
-            {
-                localReport.ReportPath = path;
-            }
-            else
-            {
-                return View("Error");
-            }
-
-            // Load data
-            var data = new ReportServices().GetAll(model.FromDate.Value.ToString("yyyy/MM/dd"), model.ToDate.Value.ToString("yyyy/MM/dd"), model.FkFromEmployeeId, model.FkToEmployeeId);
-            ReportDataSource reportDataSource = new ReportDataSource("DataSet1", data);
-            localReport.DataSources.Add(reportDataSource);
-
-            localReport.SetParameters(new ReportParameter("PrintDate", (new CommonResources().LocalDatetime().Date).ToString("yyyy-MMM-dd")));
-            localReport.SetParameters(new ReportParameter("FromDate", (model.FromDate.Value.ToString("yyyy-MMM-dd"))));
-            localReport.SetParameters(new ReportParameter("ToDate", (model.ToDate.Value.ToString("yyyy-MMM-dd"))));
-
-
-            // Render report
-            string reportType = "PDF";
-            string mimeType;
-            string encoding;
-            string fileNameExtension = "sddssdsdsddsdsd";
-
-            string deviceInfo = "<DeviceInfo>" +
-                "  <OutputFormat>PDF</OutputFormat>" +
-                "  <PageWidth>15in</PageWidth>" +
-                "  <PageHeight>8.5in</PageHeight>" +
-                "  <MarginTop>0.3in</MarginTop>" +
-                "  <MarginLeft>0.5in</MarginLeft>" +
-                "  <MarginRight>0.3in</MarginRight>" +
-                "  <MarginBottom>0.3in</MarginBottom>" +
-                "</DeviceInfo>";
-
-            Warning[] warnings;
-            string[] streams;
-            byte[] renderedBytes;
-
-            renderedBytes = localReport.Render(
-                reportType,
-                deviceInfo,
-                out mimeType,
-                out encoding,
-                out fileNameExtension,
-                out streams,
-                out warnings);
-
-            return File(renderedBytes, mimeType);
-        }
-        #endregion
+       
 
         #region Summary Work Type And Group
         public ActionResult LaberUtilizationSummaryUserAndDateWiseModel()
@@ -997,102 +1098,54 @@ namespace WOPHRMSystem.Controllers
 
             // Load data
             var data = new ReportServices().GetAllSummary(model.FromDate.Value.ToString("yyyy/MM/dd"), model.ToDate.Value.ToString("yyyy/MM/dd"), model.FkFromJObId, model.FkToJobId);
-            ReportDataSource reportDataSource = new ReportDataSource("DataSet1", data);
-            localReport.DataSources.Add(reportDataSource);
+            if (data.Count > 0)
+            {
+                ReportDataSource reportDataSource = new ReportDataSource("DataSet1", data);
+                localReport.DataSources.Add(reportDataSource);
 
-            localReport.SetParameters(new ReportParameter("PrintDate", (new CommonResources().LocalDatetime().Date).ToString("yyyy-MMM-dd")));
-            localReport.SetParameters(new ReportParameter("FromDate", (model.FromDate.Value.ToString("yyyy-MMM-dd"))));
-            localReport.SetParameters(new ReportParameter("ToDate", (model.ToDate.Value.ToString("yyyy-MMM-dd"))));
-            localReport.SetParameters(new ReportParameter("ToJobNo", Convert.ToString(data.Last().JobCode)));
-            localReport.SetParameters(new ReportParameter("FromJobNo", Convert.ToString(data.First().JobCode)));
+                localReport.SetParameters(new ReportParameter("PrintDate", (new CommonResources().LocalDatetime().Date).ToString("yyyy-MMM-dd")));
+                localReport.SetParameters(new ReportParameter("FromDate", (model.FromDate.Value.ToString("yyyy-MMM-dd"))));
+                localReport.SetParameters(new ReportParameter("ToDate", (model.ToDate.Value.ToString("yyyy-MMM-dd"))));
+                localReport.SetParameters(new ReportParameter("ToJobNo", Convert.ToString(data.Last().JobCode)));
+                localReport.SetParameters(new ReportParameter("FromJobNo", Convert.ToString(data.First().JobCode)));
 
 
-            // Render report
-            string reportType = "PDF";
-            string mimeType;
-            string encoding;
-            string fileNameExtension = "sddssdsdsddsdsd";
+                // Render report
+                string reportType = "PDF";
+                string mimeType;
+                string encoding;
+                string fileNameExtension = "sddssdsdsddsdsd";
 
-            string deviceInfo = "<DeviceInfo>" +
-                "  <OutputFormat>PDF</OutputFormat>" +
-                "  <PageWidth>15in</PageWidth>" +
-                "  <PageHeight>8.5in</PageHeight>" +
-                "  <MarginTop>0.3in</MarginTop>" +
-                "  <MarginLeft>0.5in</MarginLeft>" +
-                "  <MarginRight>0.3in</MarginRight>" +
-                "  <MarginBottom>0.3in</MarginBottom>" +
-                "</DeviceInfo>";
+                string deviceInfo = "<DeviceInfo>" +
+                    "  <OutputFormat>PDF</OutputFormat>" +
+                    "  <PageWidth>15in</PageWidth>" +
+                    "  <PageHeight>8.5in</PageHeight>" +
+                    "  <MarginTop>0.3in</MarginTop>" +
+                    "  <MarginLeft>0.5in</MarginLeft>" +
+                    "  <MarginRight>0.3in</MarginRight>" +
+                    "  <MarginBottom>0.3in</MarginBottom>" +
+                    "</DeviceInfo>";
 
-            Warning[] warnings;
-            string[] streams;
-            byte[] renderedBytes;
+                Warning[] warnings;
+                string[] streams;
+                byte[] renderedBytes;
 
-            renderedBytes = localReport.Render(
-                reportType,
-                deviceInfo,
-                out mimeType,
-                out encoding,
-                out fileNameExtension,
-                out streams,
-                out warnings);
+                renderedBytes = localReport.Render(
+                    reportType,
+                    deviceInfo,
+                    out mimeType,
+                    out encoding,
+                    out fileNameExtension,
+                    out streams,
+                    out warnings);
 
-            return File(renderedBytes, mimeType);
+                return File(renderedBytes, mimeType);
+            }
+            return RedirectToAction("DefaultResult");
         }
         #endregion
 
-        public ActionResult PrintLocationsRates()
-        {
-            LocalReport localReport = new LocalReport();
-            string path = Server.MapPath("~/Reports/ReportLocationRates.rdlc");
-            if (System.IO.File.Exists(path))
-            {
-                localReport.ReportPath = path;
-            }
-            else
-            {
-                return View("Error");
-            }
-
-            // Load data
-            List<VW_CustomerLocationRatesModel> data = new ReportServices().GetAllCustomersLocationRates();
-            ReportDataSource reportDataSource = new ReportDataSource("DataSet1", data);
-            localReport.DataSources.Add(reportDataSource);
-
-            localReport.SetParameters(new ReportParameter("PrintDate", (new CommonResources().LocalDatetime().Date).ToString("yyyy-MMM-dd")));
-
-
-            // Render report
-            string reportType = "PDF";
-            string mimeType;
-            string encoding;
-            string fileNameExtension = "sddssdsdsddsdsd";
-
-            string deviceInfo = "<DeviceInfo>" +
-                "  <OutputFormat>PDF</OutputFormat>" +
-                "  <PageWidth>11in</PageWidth>" +
-                "  <PageHeight>8.5in</PageHeight>" +
-                "  <MarginTop>0.3in</MarginTop>" +
-                "  <MarginLeft>0.5in</MarginLeft>" +
-                "  <MarginRight>0.5in</MarginRight>" +
-                "  <MarginBottom>0.5in</MarginBottom>" +
-                "</DeviceInfo>";
-
-            Warning[] warnings;
-            string[] streams;
-            byte[] renderedBytes;
-
-            renderedBytes = localReport.Render(
-                reportType,
-                deviceInfo,
-                out mimeType,
-                out encoding,
-                out fileNameExtension,
-                out streams,
-                out warnings);
-
-            return File(renderedBytes, mimeType);
-        }
-
+        
         #region EmployeeVisiting LocationRates 
 
         public ActionResult PrintEmployeeVisitingLocationRatesModel()
@@ -1115,48 +1168,53 @@ namespace WOPHRMSystem.Controllers
 
             // Load data
             List<VW_EmployeeVisitingRatesModel> data = new ReportServices().GetEmployeeVisitingLocationRate(model.FromDate.Value.ToString("yyyy/MM/dd"), model.ToDate.Value.ToString("yyyy/MM/dd"));
-            ReportDataSource reportDataSource = new ReportDataSource("DataSet1", data);
-            localReport.DataSources.Add(reportDataSource);
 
-            localReport.SetParameters(new ReportParameter("PrintDate", (new CommonResources().LocalDatetime().Date).ToString("yyyy-MMM-dd")));
-            localReport.SetParameters(new ReportParameter("FromDate", (model.FromDate.Value.ToString("yyyy-MMM-dd"))));
-            localReport.SetParameters(new ReportParameter("ToDate", (model.ToDate.Value.ToString("yyyy-MMM-dd"))));
+            if (data.Count > 0)
+            {
+                ReportDataSource reportDataSource = new ReportDataSource("DataSet1", data);
+                localReport.DataSources.Add(reportDataSource);
 
-            // Render report
-            string reportType = "PDF";
-            string mimeType;
-            string encoding;
-            string fileNameExtension = "sddssdsdsddsdsd";
+                localReport.SetParameters(new ReportParameter("PrintDate", (new CommonResources().LocalDatetime().Date).ToString("yyyy-MMM-dd")));
+                localReport.SetParameters(new ReportParameter("FromDate", (model.FromDate.Value.ToString("yyyy-MMM-dd"))));
+                localReport.SetParameters(new ReportParameter("ToDate", (model.ToDate.Value.ToString("yyyy-MMM-dd"))));
 
-            string deviceInfo = "<DeviceInfo>" +
-                "  <OutputFormat>PDF</OutputFormat>" +
-                "  <PageWidth>11in</PageWidth>" +
-                "  <PageHeight>8.5in</PageHeight>" +
-                "  <MarginTop>0.3in</MarginTop>" +
-                "  <MarginLeft>0.5in</MarginLeft>" +
-                "  <MarginRight>0.5in</MarginRight>" +
-                "  <MarginBottom>0.5in</MarginBottom>" +
-                "</DeviceInfo>";
+                // Render report
+                string reportType = "PDF";
+                string mimeType;
+                string encoding;
+                string fileNameExtension = "sddssdsdsddsdsd";
 
-            Warning[] warnings;
-            string[] streams;
-            byte[] renderedBytes;
+                string deviceInfo = "<DeviceInfo>" +
+                    "  <OutputFormat>PDF</OutputFormat>" +
+                    "  <PageWidth>11in</PageWidth>" +
+                    "  <PageHeight>8.5in</PageHeight>" +
+                    "  <MarginTop>0.3in</MarginTop>" +
+                    "  <MarginLeft>0.5in</MarginLeft>" +
+                    "  <MarginRight>0.5in</MarginRight>" +
+                    "  <MarginBottom>0.5in</MarginBottom>" +
+                    "</DeviceInfo>";
 
-            renderedBytes = localReport.Render(
-                reportType,
-                deviceInfo,
-                out mimeType,
-                out encoding,
-                out fileNameExtension,
-                out streams,
-                out warnings);
+                Warning[] warnings;
+                string[] streams;
+                byte[] renderedBytes;
 
-            return File(renderedBytes, mimeType);
+                renderedBytes = localReport.Render(
+                    reportType,
+                    deviceInfo,
+                    out mimeType,
+                    out encoding,
+                    out fileNameExtension,
+                    out streams,
+                    out warnings);
+
+                return File(renderedBytes, mimeType);
+            }
+            return RedirectToAction("DefaultResult");
         }
 
         #endregion
 
-        #region JobWise assign Employees and Detail Cost
+        #region Costing Detail Report (H)
 
         public ActionResult JobWiseAssignEmployeesAndDetailCostModel()
         {
@@ -1184,64 +1242,67 @@ namespace WOPHRMSystem.Controllers
             // Load data
             var data = new ReportServices().GetJObWiseCositingDetailsWithAssignEmployee(model.FromDate.Value.ToString("yyyy/MM/dd"), model.Fk_JobMasterId);
 
+            if (data.Count > 0)
+            {
+
+                ReportDataSource reportDataSource = new ReportDataSource("DataSet1", data);
+                localReport.DataSources.Add(reportDataSource);
+
+                var firstItem = data.FirstOrDefault();
+                DateTime? completedDate = firstItem?.CompletedDate;
+
+                localReport.SetParameters(new ReportParameter("CompletedDate",
+                    completedDate.HasValue
+                    ? completedDate.Value.ToString("yyyy-MMM-dd")
+                    : null));
+
+                localReport.SetParameters(new ReportParameter("PrintDate", (new CommonResources().LocalDatetime().Date).ToString("yyyy-MMM-dd")));
+
+                localReport.SetParameters(new ReportParameter("ProjectStatus", (data.FirstOrDefault().IsCompleted == false ? "Pending " : "Completed")));
+                localReport.SetParameters(new ReportParameter("CompanyName", data.FirstOrDefault().CustomerCode + " " + data.FirstOrDefault().CustomerName));
+                localReport.SetParameters(new ReportParameter("commencedDate", (data.FirstOrDefault().StartDate.Value.ToString("yyyy-MMM-dd"))));
+                localReport.SetParameters(new ReportParameter("JObNum", data.FirstOrDefault().JobCode));
 
 
-            ReportDataSource reportDataSource = new ReportDataSource("DataSet1", data);
-            localReport.DataSources.Add(reportDataSource);
 
-            var firstItem = data.FirstOrDefault();
-            DateTime? completedDate = firstItem?.CompletedDate;
+                // Render report
+                string reportType = "PDF";
+                string mimeType;
+                string encoding;
+                string fileNameExtension = "sddssdsdsddsdsd";
 
-            localReport.SetParameters(new ReportParameter("CompletedDate",
-                completedDate.HasValue
-                ? completedDate.Value.ToString("yyyy-MMM-dd")
-                : null));
+                string deviceInfo = "<DeviceInfo>" +
+                    "  <OutputFormat>PDF</OutputFormat>" +
+                    "  <PageWidth>11in</PageWidth>" +
+                    "  <PageHeight>8.5in</PageHeight>" +
+                    "  <MarginTop>0.3in</MarginTop>" +
+                    "  <MarginLeft>0.5in</MarginLeft>" +
+                    "  <MarginRight>0.3in</MarginRight>" +
+                    "  <MarginBottom>0.3in</MarginBottom>" +
+                    "</DeviceInfo>";
 
-            localReport.SetParameters(new ReportParameter("PrintDate", (new CommonResources().LocalDatetime().Date).ToString("yyyy-MMM-dd")));
+                Warning[] warnings;
+                string[] streams;
+                byte[] renderedBytes;
 
-            localReport.SetParameters(new ReportParameter("ProjectStatus", (data.FirstOrDefault().IsCompleted == false ? "Pending " : "Completed")));
-            localReport.SetParameters(new ReportParameter("CompanyName", data.FirstOrDefault().CustomerCode + " " + data.FirstOrDefault().CustomerName));
-            localReport.SetParameters(new ReportParameter("commencedDate", (data.FirstOrDefault().StartDate.Value.ToString("yyyy-MMM-dd"))));
-            localReport.SetParameters(new ReportParameter("JObNum", data.FirstOrDefault().JobCode));
+                renderedBytes = localReport.Render(
+                    reportType,
+                    deviceInfo,
+                    out mimeType,
+                    out encoding,
+                    out fileNameExtension,
+                    out streams,
+                    out warnings);
 
-
-
-            // Render report
-            string reportType = "PDF";
-            string mimeType;
-            string encoding;
-            string fileNameExtension = "sddssdsdsddsdsd";
-
-            string deviceInfo = "<DeviceInfo>" +
-                "  <OutputFormat>PDF</OutputFormat>" +
-                "  <PageWidth>11in</PageWidth>" +
-                "  <PageHeight>8.5in</PageHeight>" +
-                "  <MarginTop>0.3in</MarginTop>" +
-                "  <MarginLeft>0.5in</MarginLeft>" +
-                "  <MarginRight>0.3in</MarginRight>" +
-                "  <MarginBottom>0.3in</MarginBottom>" +
-                "</DeviceInfo>";
-
-            Warning[] warnings;
-            string[] streams;
-            byte[] renderedBytes;
-
-            renderedBytes = localReport.Render(
-                reportType,
-                deviceInfo,
-                out mimeType,
-                out encoding,
-                out fileNameExtension,
-                out streams,
-                out warnings);
-
-            return File(renderedBytes, mimeType);
+                return File(renderedBytes, mimeType);
+            }
+            return RedirectToAction("DefaultResult");
         }
 
         #endregion
 
 
-        #region JobWise assign Employees and Detail Cost
+        #region Costing Summary Report (I)
 
         public ActionResult JobCustomerSummaryCostModel()
         {
@@ -1266,50 +1327,52 @@ namespace WOPHRMSystem.Controllers
             var data = new ReportServices().GetJobCositingDetailsWithAssignEmployeeSummary(model.FromDate.Value.ToString("yyyy/MM/dd"), model.IsCompleted, model.IsOtherCustomer);
 
 
-
-            ReportDataSource reportDataSource = new ReportDataSource("DataSet1", data);
-            localReport.DataSources.Add(reportDataSource);
-
-
-            localReport.SetParameters(new ReportParameter("PrintDate", (new CommonResources().LocalDatetime().Date).ToString("yyyy-MMM-dd")));
-
-            localReport.SetParameters(new ReportParameter("ProjectStatus", (data.FirstOrDefault().IsCompleted == false ? "Pending " : "Completed")));
-            localReport.SetParameters(new ReportParameter("AsAtDate", (model.FromDate.Value.ToString("yyyy-MMM-dd"))));
+            if (data.Count > 0)
+            {
+                ReportDataSource reportDataSource = new ReportDataSource("DataSet1", data);
+                localReport.DataSources.Add(reportDataSource);
 
 
+                localReport.SetParameters(new ReportParameter("PrintDate", (new CommonResources().LocalDatetime().Date).ToString("yyyy-MMM-dd")));
 
-            // Render report
-            string reportType = "PDF";
-            string mimeType;
-            string encoding;
-            string fileNameExtension = "sddssdsdsddsdsd";
+                localReport.SetParameters(new ReportParameter("ProjectStatus", (data.FirstOrDefault().IsCompleted == false ? "Pending " : "Completed")));
+                localReport.SetParameters(new ReportParameter("AsAtDate", (model.FromDate.Value.ToString("yyyy-MMM-dd"))));
 
-            string deviceInfo = "<DeviceInfo>" +
-                "  <OutputFormat>PDF</OutputFormat>" +
-                "  <PageWidth>11in</PageWidth>" +
-                "  <PageHeight>8.5in</PageHeight>" +
-                "  <MarginTop>0.3in</MarginTop>" +
-                "  <MarginLeft>0.5in</MarginLeft>" +
-                "  <MarginRight>0.3in</MarginRight>" +
-                "  <MarginBottom>0.3in</MarginBottom>" +
-                "</DeviceInfo>";
 
-            Warning[] warnings;
-            string[] streams;
-            byte[] renderedBytes;
 
-            renderedBytes = localReport.Render(
-                reportType,
-                deviceInfo,
-                out mimeType,
-                out encoding,
-                out fileNameExtension,
-                out streams,
-                out warnings);
+                // Render report
+                string reportType = "PDF";
+                string mimeType;
+                string encoding;
+                string fileNameExtension = "sddssdsdsddsdsd";
 
-            return File(renderedBytes, mimeType);
+                string deviceInfo = "<DeviceInfo>" +
+                    "  <OutputFormat>PDF</OutputFormat>" +
+                    "  <PageWidth>11in</PageWidth>" +
+                    "  <PageHeight>8.5in</PageHeight>" +
+                    "  <MarginTop>0.3in</MarginTop>" +
+                    "  <MarginLeft>0.5in</MarginLeft>" +
+                    "  <MarginRight>0.3in</MarginRight>" +
+                    "  <MarginBottom>0.3in</MarginBottom>" +
+                    "</DeviceInfo>";
+
+                Warning[] warnings;
+                string[] streams;
+                byte[] renderedBytes;
+
+                renderedBytes = localReport.Render(
+                    reportType,
+                    deviceInfo,
+                    out mimeType,
+                    out encoding,
+                    out fileNameExtension,
+                    out streams,
+                    out warnings);
+
+                return File(renderedBytes, mimeType);
+            }
+            return RedirectToAction("DefaultResult");
         }
-
 
         #endregion
 
@@ -1342,50 +1405,53 @@ namespace WOPHRMSystem.Controllers
             // Load data
             var data = new ReportServices().GetReportWIPReportDaily(model.Fk_JobMasterId);
 
+            if (data.Count > 0)
+            {
+
+                ReportDataSource reportDataSource = new ReportDataSource("DataSet1", data);
+                localReport.DataSources.Add(reportDataSource);
 
 
-            ReportDataSource reportDataSource = new ReportDataSource("DataSet1", data);
-            localReport.DataSources.Add(reportDataSource);
-
-
-            localReport.SetParameters(new ReportParameter("PrintDate", (new CommonResources().LocalDatetime().Date).ToString("yyyy-MMM-dd")));
-            localReport.SetParameters(new ReportParameter("commencedDate", (data.FirstOrDefault().StartDate.Value.ToString("yyyy-MMM-dd"))));
-            localReport.SetParameters(new ReportParameter("CustomerName", data.FirstOrDefault().CustomerName));
-            localReport.SetParameters(new ReportParameter("JObNo", data.FirstOrDefault().JobCode));
-            localReport.SetParameters(new ReportParameter("Narration", data.FirstOrDefault().Narration));
+                localReport.SetParameters(new ReportParameter("PrintDate", (new CommonResources().LocalDatetime().Date).ToString("yyyy-MMM-dd")));
+                localReport.SetParameters(new ReportParameter("commencedDate", (data.FirstOrDefault().StartDate.Value.ToString("yyyy-MMM-dd"))));
+                localReport.SetParameters(new ReportParameter("CustomerName", data.FirstOrDefault().CustomerName));
+                localReport.SetParameters(new ReportParameter("JObNo", data.FirstOrDefault().JobCode));
+                localReport.SetParameters(new ReportParameter("Narration", data.FirstOrDefault().Narration));
 
 
 
-            // Render report
-            string reportType = "PDF";
-            string mimeType;
-            string encoding;
-            string fileNameExtension = "sddssdsdsddsdsd";
+                // Render report
+                string reportType = "PDF";
+                string mimeType;
+                string encoding;
+                string fileNameExtension = "sddssdsdsddsdsd";
 
-            string deviceInfo = "<DeviceInfo>" +
-                "  <OutputFormat>PDF</OutputFormat>" +
-                "  <PageWidth>11in</PageWidth>" +
-                "  <PageHeight>8.5in</PageHeight>" +
-                "  <MarginTop>0.3in</MarginTop>" +
-                "  <MarginLeft>0.5in</MarginLeft>" +
-                "  <MarginRight>0.3in</MarginRight>" +
-                "  <MarginBottom>0.3in</MarginBottom>" +
-                "</DeviceInfo>";
+                string deviceInfo = "<DeviceInfo>" +
+                    "  <OutputFormat>PDF</OutputFormat>" +
+                    "  <PageWidth>11in</PageWidth>" +
+                    "  <PageHeight>8.5in</PageHeight>" +
+                    "  <MarginTop>0.3in</MarginTop>" +
+                    "  <MarginLeft>0.5in</MarginLeft>" +
+                    "  <MarginRight>0.3in</MarginRight>" +
+                    "  <MarginBottom>0.3in</MarginBottom>" +
+                    "</DeviceInfo>";
 
-            Warning[] warnings;
-            string[] streams;
-            byte[] renderedBytes;
+                Warning[] warnings;
+                string[] streams;
+                byte[] renderedBytes;
 
-            renderedBytes = localReport.Render(
-                reportType,
-                deviceInfo,
-                out mimeType,
-                out encoding,
-                out fileNameExtension,
-                out streams,
-                out warnings);
+                renderedBytes = localReport.Render(
+                    reportType,
+                    deviceInfo,
+                    out mimeType,
+                    out encoding,
+                    out fileNameExtension,
+                    out streams,
+                    out warnings);
 
-            return File(renderedBytes, mimeType);
+                return File(renderedBytes, mimeType);
+            }
+            return RedirectToAction("DefaultResult");
         }
 
 
@@ -1419,67 +1485,60 @@ namespace WOPHRMSystem.Controllers
 
             // Load data
             var data = new ReportServices().GetReportWIPReportMonthly(model.Fk_JobMasterId);
+            if (data.Count > 0)
+            {
+
+
+                ReportDataSource reportDataSource = new ReportDataSource("DataSet1", data);
+                localReport.DataSources.Add(reportDataSource);
+
+
+                localReport.SetParameters(new ReportParameter("PrintDate", (new CommonResources().LocalDatetime().Date).ToString("yyyy-MMM-dd")));
+                localReport.SetParameters(new ReportParameter("commencedDate", (data.FirstOrDefault().StartDate.Value.ToString("yyyy-MMM-dd"))));
+                localReport.SetParameters(new ReportParameter("CustomerName", data.FirstOrDefault().CustomerName));
+                localReport.SetParameters(new ReportParameter("JObNo", data.FirstOrDefault().JobCode));
+                localReport.SetParameters(new ReportParameter("Narration", data.FirstOrDefault().Narration));
 
 
 
-            ReportDataSource reportDataSource = new ReportDataSource("DataSet1", data);
-            localReport.DataSources.Add(reportDataSource);
+                // Render report
+                string reportType = "PDF";
+                string mimeType;
+                string encoding;
+                string fileNameExtension = "sddssdsdsddsdsd";
 
+                string deviceInfo = "<DeviceInfo>" +
+                    "  <OutputFormat>PDF</OutputFormat>" +
+                    "  <PageWidth>16in</PageWidth>" +
+                    "  <PageHeight>8.5in</PageHeight>" +
+                    "  <MarginTop>0.3in</MarginTop>" +
+                    "  <MarginLeft>0.2in</MarginLeft>" +
+                    "  <MarginRight>0in</MarginRight>" +
+                    "  <MarginBottom>0.3in</MarginBottom>" +
+                    "</DeviceInfo>";
 
-            localReport.SetParameters(new ReportParameter("PrintDate", (new CommonResources().LocalDatetime().Date).ToString("yyyy-MMM-dd")));
-            localReport.SetParameters(new ReportParameter("commencedDate", (data.FirstOrDefault().StartDate.Value.ToString("yyyy-MMM-dd"))));
-            localReport.SetParameters(new ReportParameter("CustomerName", data.FirstOrDefault().CustomerName));
-            localReport.SetParameters(new ReportParameter("JObNo", data.FirstOrDefault().JobCode));
-            localReport.SetParameters(new ReportParameter("Narration", data.FirstOrDefault().Narration));
+                Warning[] warnings;
+                string[] streams;
+                byte[] renderedBytes;
 
+                renderedBytes = localReport.Render(
+                    reportType,
+                    deviceInfo,
+                    out mimeType,
+                    out encoding,
+                    out fileNameExtension,
+                    out streams,
+                    out warnings);
 
-
-            // Render report
-            string reportType = "PDF";
-            string mimeType;
-            string encoding;
-            string fileNameExtension = "sddssdsdsddsdsd";
-
-            string deviceInfo = "<DeviceInfo>" +
-                "  <OutputFormat>PDF</OutputFormat>" +
-                "  <PageWidth>16in</PageWidth>" +
-                "  <PageHeight>8.5in</PageHeight>" +
-                "  <MarginTop>0.3in</MarginTop>" +
-                "  <MarginLeft>0.2in</MarginLeft>" +
-                "  <MarginRight>0in</MarginRight>" +
-                "  <MarginBottom>0.3in</MarginBottom>" +
-                "</DeviceInfo>";
-
-            Warning[] warnings;
-            string[] streams;
-            byte[] renderedBytes;
-
-            renderedBytes = localReport.Render(
-                reportType,
-                deviceInfo,
-                out mimeType,
-                out encoding,
-                out fileNameExtension,
-                out streams,
-                out warnings);
-
-            return File(renderedBytes, mimeType);
+                return File(renderedBytes, mimeType);
+            }
+            return RedirectToAction("DefaultResult");
         }
 
 
         #endregion
 
-        #endregion
-
-        private DataTable GetReportData()
-        {
-            // Implement data fetching logic here
-            // This could be from a database, API, or another source
-            DataTable dt = new DataTable();
-            return dt;
-        }
-
-
+        
         #region Summary Laber Utilization JObWise
         public ActionResult LaberUtilizationJObWiseModel()
         {
@@ -1509,46 +1568,50 @@ namespace WOPHRMSystem.Controllers
 
             // Load data
             var data = new ReportServices().GetAllSummaryLaberUtilizationJObWise(model.FromDate.Value.ToString("yyyy/MM/dd"), model.ToDate.Value.ToString("yyyy/MM/dd"), model.FkFromJObId, model.FkToJobId);
-            ReportDataSource reportDataSource = new ReportDataSource("DataSet1", data);
-            localReport.DataSources.Add(reportDataSource);
+            if (data.Count > 0)
+            {
+                ReportDataSource reportDataSource = new ReportDataSource("DataSet1", data);
+                localReport.DataSources.Add(reportDataSource);
 
-            localReport.SetParameters(new ReportParameter("PrintDate", (new CommonResources().LocalDatetime().Date).ToString("yyyy-MMM-dd")));
-            localReport.SetParameters(new ReportParameter("FromDate", (model.FromDate.Value.ToString("yyyy-MMM-dd"))));
-            localReport.SetParameters(new ReportParameter("ToDate", (model.ToDate.Value.ToString("yyyy-MMM-dd"))));
-            localReport.SetParameters(new ReportParameter("ToJobNo", Convert.ToString(data.Last().JobCode)));
-            localReport.SetParameters(new ReportParameter("FromJobNo", Convert.ToString(data.First().JobCode)));
+                localReport.SetParameters(new ReportParameter("PrintDate", (new CommonResources().LocalDatetime().Date).ToString("yyyy-MMM-dd")));
+                localReport.SetParameters(new ReportParameter("FromDate", (model.FromDate.Value.ToString("yyyy-MMM-dd"))));
+                localReport.SetParameters(new ReportParameter("ToDate", (model.ToDate.Value.ToString("yyyy-MMM-dd"))));
+                localReport.SetParameters(new ReportParameter("ToJobNo", Convert.ToString(data.Last().JobCode)));
+                localReport.SetParameters(new ReportParameter("FromJobNo", Convert.ToString(data.First().JobCode)));
 
 
-            // Render report
-            string reportType = "PDF";
-            string mimeType;
-            string encoding;
-            string fileNameExtension = "sddssdsdsddsdsd";
+                // Render report
+                string reportType = "PDF";
+                string mimeType;
+                string encoding;
+                string fileNameExtension = "sddssdsdsddsdsd";
 
-            string deviceInfo = "<DeviceInfo>" +
-                "  <OutputFormat>PDF</OutputFormat>" +
-                "  <PageWidth>15in</PageWidth>" +
-                "  <PageHeight>8.5in</PageHeight>" +
-                "  <MarginTop>0.3in</MarginTop>" +
-                "  <MarginLeft>0.5in</MarginLeft>" +
-                "  <MarginRight>0.3in</MarginRight>" +
-                "  <MarginBottom>0.3in</MarginBottom>" +
-                "</DeviceInfo>";
+                string deviceInfo = "<DeviceInfo>" +
+                    "  <OutputFormat>PDF</OutputFormat>" +
+                    "  <PageWidth>15in</PageWidth>" +
+                    "  <PageHeight>8.5in</PageHeight>" +
+                    "  <MarginTop>0.3in</MarginTop>" +
+                    "  <MarginLeft>0.5in</MarginLeft>" +
+                    "  <MarginRight>0.3in</MarginRight>" +
+                    "  <MarginBottom>0.3in</MarginBottom>" +
+                    "</DeviceInfo>";
 
-            Warning[] warnings;
-            string[] streams;
-            byte[] renderedBytes;
+                Warning[] warnings;
+                string[] streams;
+                byte[] renderedBytes;
 
-            renderedBytes = localReport.Render(
-                reportType,
-                deviceInfo,
-                out mimeType,
-                out encoding,
-                out fileNameExtension,
-                out streams,
-                out warnings);
+                renderedBytes = localReport.Render(
+                    reportType,
+                    deviceInfo,
+                    out mimeType,
+                    out encoding,
+                    out fileNameExtension,
+                    out streams,
+                    out warnings);
 
-            return File(renderedBytes, mimeType);
+                return File(renderedBytes, mimeType);
+            }
+            return RedirectToAction("DefaultResult");
         }
         #endregion
 
@@ -1581,53 +1644,57 @@ namespace WOPHRMSystem.Controllers
 
             // Load data
             var data = new ReportServices().GetAllJObListing(model.IsPartner, model.IsCompleted, model.AllProject, model.FkFromJObId, model.FkToJobId);
-            ReportDataSource reportDataSource = new ReportDataSource("DataSet1", data);
-            localReport.DataSources.Add(reportDataSource);
+            if (data.Count > 0)
+            {
+                ReportDataSource reportDataSource = new ReportDataSource("DataSet1", data);
+                localReport.DataSources.Add(reportDataSource);
 
-            localReport.SetParameters(new ReportParameter("PrintDate", (new CommonResources().LocalDatetime().Date).ToString("yyyy-MMM-dd")));
-            //localReport.SetParameters(new ReportParameter("FromDate", (model.FromDate.Value.ToString("yyyy-MMM-dd"))));
-            //localReport.SetParameters(new ReportParameter("ToDate", (model.ToDate.Value.ToString("yyyy-MMM-dd"))));
-            localReport.SetParameters(new ReportParameter("IsPartnerOrManager", model.IsPartner == true ? "Partners Wise" : "Manager Wise"));
-            localReport.SetParameters(new ReportParameter("TableName", model.IsPartner == true ? "Managers" : "Partners"));
-            localReport.SetParameters(new ReportParameter("ToJobNo", Convert.ToString(data.Last().JobCode)));
-            localReport.SetParameters(new ReportParameter("FromJobNo", Convert.ToString(data.First().JobCode)));
+                localReport.SetParameters(new ReportParameter("PrintDate", (new CommonResources().LocalDatetime().Date).ToString("yyyy-MMM-dd")));
+                //localReport.SetParameters(new ReportParameter("FromDate", (model.FromDate.Value.ToString("yyyy-MMM-dd"))));
+                //localReport.SetParameters(new ReportParameter("ToDate", (model.ToDate.Value.ToString("yyyy-MMM-dd"))));
+                localReport.SetParameters(new ReportParameter("IsPartnerOrManager", model.IsPartner == true ? "Partners Wise" : "Manager Wise"));
+                localReport.SetParameters(new ReportParameter("TableName", model.IsPartner == true ? "Managers" : "Partners"));
+                localReport.SetParameters(new ReportParameter("ToJobNo", Convert.ToString(data.Last().JobCode)));
+                localReport.SetParameters(new ReportParameter("FromJobNo", Convert.ToString(data.First().JobCode)));
 
 
-            // Render report
-            string reportType = "PDF";
-            string mimeType;
-            string encoding;
-            string fileNameExtension = "sddssdsdsddsdsd";
+                // Render report
+                string reportType = "PDF";
+                string mimeType;
+                string encoding;
+                string fileNameExtension = "sddssdsdsddsdsd";
 
-            string deviceInfo = "<DeviceInfo>" +
-                "  <OutputFormat>PDF</OutputFormat>" +
-                "  <PageWidth>15in</PageWidth>" +
-                "  <PageHeight>8.5in</PageHeight>" +
-                "  <MarginTop>0.3in</MarginTop>" +
-                "  <MarginLeft>0.5in</MarginLeft>" +
-                "  <MarginRight>0.3in</MarginRight>" +
-                "  <MarginBottom>0.3in</MarginBottom>" +
-                "</DeviceInfo>";
+                string deviceInfo = "<DeviceInfo>" +
+                    "  <OutputFormat>PDF</OutputFormat>" +
+                    "  <PageWidth>15in</PageWidth>" +
+                    "  <PageHeight>8.5in</PageHeight>" +
+                    "  <MarginTop>0.3in</MarginTop>" +
+                    "  <MarginLeft>0.5in</MarginLeft>" +
+                    "  <MarginRight>0.3in</MarginRight>" +
+                    "  <MarginBottom>0.3in</MarginBottom>" +
+                    "</DeviceInfo>";
 
-            Warning[] warnings;
-            string[] streams;
-            byte[] renderedBytes;
+                Warning[] warnings;
+                string[] streams;
+                byte[] renderedBytes;
 
-            renderedBytes = localReport.Render(
-                reportType,
-                deviceInfo,
-                out mimeType,
-                out encoding,
-                out fileNameExtension,
-                out streams,
-                out warnings);
+                renderedBytes = localReport.Render(
+                    reportType,
+                    deviceInfo,
+                    out mimeType,
+                    out encoding,
+                    out fileNameExtension,
+                    out streams,
+                    out warnings);
 
-            return File(renderedBytes, mimeType);
+                return File(renderedBytes, mimeType);
+            }
+            return RedirectToAction("DefaultResult");
         }
         #endregion
 
 
-        #region Data Entry Sheet - Employees Wise
+        #region Data Entry Sheet - Employees Wise (O) 
         public ActionResult DataEntrySheetEmployeesWiseModel()
         {
             var model = new VW_DataEntryEmployeesWiseModel
@@ -1656,46 +1723,190 @@ namespace WOPHRMSystem.Controllers
 
             // Load data
             var data = new ReportServices().GetAllDataEntrySheetEmployeesWise(model.FkFromEmployeeId, model.FkToEmployeeId);
-            ReportDataSource reportDataSource = new ReportDataSource("DataSet1", data);
-            localReport.DataSources.Add(reportDataSource);
+            if (data.Count > 0)
+            {
+                ReportDataSource reportDataSource = new ReportDataSource("DataSet1", data);
+                localReport.DataSources.Add(reportDataSource);
 
-            localReport.SetParameters(new ReportParameter("PrintDate", (new CommonResources().LocalDatetime().Date).ToString("yyyy-MMM-dd")));
+                localReport.SetParameters(new ReportParameter("PrintDate", (new CommonResources().LocalDatetime().Date).ToString("yyyy-MMM-dd")));
+                //localReport.SetParameters(new ReportParameter("fromdate", (model.fro.value.tostring("yyyy-mmm-dd"))));
+                //localReport.SetParameters(new ReportParameter("todate", (model.todate.value.tostring("yyyy-mmm-dd"))));
+                //localReport.SetParameters(new ReportParameter("ToJobNo", Convert.ToString(data.Last().JobCode)));
+                //localReport.SetParameters(new ReportParameter("FromJobNo", Convert.ToString(data.First().JobCode)));
 
-            //localReport.SetParameters(new ReportParameter("ToJobNo", Convert.ToString(data.Last().JobCode)));
-            //localReport.SetParameters(new ReportParameter("FromJobNo", Convert.ToString(data.First().JobCode)));
 
+                // Render report
+                string reportType = "PDF";
+                string mimeType;
+                string encoding;
+                string fileNameExtension = "sddssdsdsddsdsd";
 
-            // Render report
-            string reportType = "PDF";
-            string mimeType;
-            string encoding;
-            string fileNameExtension = "sddssdsdsddsdsd";
+                string deviceInfo = "<DeviceInfo>" +
+                    "  <OutputFormat>PDF</OutputFormat>" +
+                    "  <PageWidth>15in</PageWidth>" +
+                    "  <PageHeight>8.5in</PageHeight>" +
+                    "  <MarginTop>0.3in</MarginTop>" +
+                    "  <MarginLeft>0.5in</MarginLeft>" +
+                    "  <MarginRight>0.3in</MarginRight>" +
+                    "  <MarginBottom>0.3in</MarginBottom>" +
+                    "</DeviceInfo>";
 
-            string deviceInfo = "<DeviceInfo>" +
-                "  <OutputFormat>PDF</OutputFormat>" +
-                "  <PageWidth>15in</PageWidth>" +
-                "  <PageHeight>8.5in</PageHeight>" +
-                "  <MarginTop>0.3in</MarginTop>" +
-                "  <MarginLeft>0.5in</MarginLeft>" +
-                "  <MarginRight>0.3in</MarginRight>" +
-                "  <MarginBottom>0.3in</MarginBottom>" +
-                "</DeviceInfo>";
+                Warning[] warnings;
+                string[] streams;
+                byte[] renderedBytes;
 
-            Warning[] warnings;
-            string[] streams;
-            byte[] renderedBytes;
+                renderedBytes = localReport.Render(
+                    reportType,
+                    deviceInfo,
+                    out mimeType,
+                    out encoding,
+                    out fileNameExtension,
+                    out streams,
+                    out warnings);
 
-            renderedBytes = localReport.Render(
-                reportType,
-                deviceInfo,
-                out mimeType,
-                out encoding,
-                out fileNameExtension,
-                out streams,
-                out warnings);
-
-            return File(renderedBytes, mimeType);
+                return File(renderedBytes, mimeType);
+            }
+            return RedirectToAction("DefaultResult");
         }
+
+
+        #endregion
+
+        #region  Data EntrySheet Manager Wise
+        [HttpGet]
+        public ActionResult DataEntrySheetManagerWise()
+        {
+            LocalReport localReport = new LocalReport();
+            string path = "";
+
+            path = Server.MapPath("~/Reports/ReportDataEntrySheetManagerWise.rdlc");
+
+            if (System.IO.File.Exists(path))
+            {
+                localReport.ReportPath = path;
+            }
+            else
+            {
+                return View("Error");
+            }
+
+            // Load data
+            var data = new ReportServices().GetAllDataEntrySheetUserWise(5);
+            if (data.Count > 0)
+            {
+                ReportDataSource reportDataSource = new ReportDataSource("DataSet1", data);
+                localReport.DataSources.Add(reportDataSource);
+
+                localReport.SetParameters(new ReportParameter("PrintDate", (new CommonResources().LocalDatetime().Date).ToString("yyyy-MMM-dd")));
+                //localReport.SetParameters(new ReportParameter("fromdate", (model.fro.value.tostring("yyyy-mmm-dd"))));
+                //localReport.SetParameters(new ReportParameter("todate", (model.todate.value.tostring("yyyy-mmm-dd"))));
+                //localReport.SetParameters(new ReportParameter("ToJobNo", Convert.ToString(data.Last().JobCode)));
+                //localReport.SetParameters(new ReportParameter("FromJobNo", Convert.ToString(data.First().JobCode)));
+
+
+                // Render report
+                string reportType = "PDF";
+                string mimeType;
+                string encoding;
+                string fileNameExtension = "sddssdsdsddsdsd";
+
+                string deviceInfo = "<DeviceInfo>" +
+                    "  <OutputFormat>PDF</OutputFormat>" +
+                    "  <PageWidth>15in</PageWidth>" +
+                    "  <PageHeight>8.5in</PageHeight>" +
+                    "  <MarginTop>0.3in</MarginTop>" +
+                    "  <MarginLeft>0.5in</MarginLeft>" +
+                    "  <MarginRight>0.3in</MarginRight>" +
+                    "  <MarginBottom>0.3in</MarginBottom>" +
+                    "</DeviceInfo>";
+
+                Warning[] warnings;
+                string[] streams;
+                byte[] renderedBytes;
+
+                renderedBytes = localReport.Render(
+                    reportType,
+                    deviceInfo,
+                    out mimeType,
+                    out encoding,
+                    out fileNameExtension,
+                    out streams,
+                    out warnings);
+
+                return File(renderedBytes, mimeType);
+            }
+            return RedirectToAction("DefaultResult");
+        }
+
+        #endregion
+
+
+        #region  Data EntrySheet Manager Wise
+        [HttpGet]
+        public ActionResult DataEntrySheetPartnerWise()
+        {
+            LocalReport localReport = new LocalReport();
+            string path = "";
+
+            path = Server.MapPath("~/Reports/ReportDataEntrySheetPartnerWise.rdlc");
+
+            if (System.IO.File.Exists(path))
+            {
+                localReport.ReportPath = path;
+            }
+            else
+            {
+                return View("Error");
+            }
+
+            // Load data
+            var data = new ReportServices().GetAllDataEntrySheetUserWise(5);
+            if (data.Count > 0)
+            {
+                ReportDataSource reportDataSource = new ReportDataSource("DataSet1", data);
+                localReport.DataSources.Add(reportDataSource);
+
+                localReport.SetParameters(new ReportParameter("PrintDate", (new CommonResources().LocalDatetime().Date).ToString("yyyy-MMM-dd")));
+                //localReport.SetParameters(new ReportParameter("fromdate", (model.fro.value.tostring("yyyy-mmm-dd"))));
+                //localReport.SetParameters(new ReportParameter("todate", (model.todate.value.tostring("yyyy-mmm-dd"))));
+                //localReport.SetParameters(new ReportParameter("ToJobNo", Convert.ToString(data.Last().JobCode)));
+                //localReport.SetParameters(new ReportParameter("FromJobNo", Convert.ToString(data.First().JobCode)));
+
+
+                // Render report
+                string reportType = "PDF";
+                string mimeType;
+                string encoding;
+                string fileNameExtension = "sddssdsdsddsdsd";
+
+                string deviceInfo = "<DeviceInfo>" +
+                    "  <OutputFormat>PDF</OutputFormat>" +
+                    "  <PageWidth>15in</PageWidth>" +
+                    "  <PageHeight>8.5in</PageHeight>" +
+                    "  <MarginTop>0.3in</MarginTop>" +
+                    "  <MarginLeft>0.5in</MarginLeft>" +
+                    "  <MarginRight>0.3in</MarginRight>" +
+                    "  <MarginBottom>0.3in</MarginBottom>" +
+                    "</DeviceInfo>";
+
+                Warning[] warnings;
+                string[] streams;
+                byte[] renderedBytes;
+
+                renderedBytes = localReport.Render(
+                    reportType,
+                    deviceInfo,
+                    out mimeType,
+                    out encoding,
+                    out fileNameExtension,
+                    out streams,
+                    out warnings);
+
+                return File(renderedBytes, mimeType);
+            }
+            return RedirectToAction("DefaultResult");
+        }
+
         #endregion
 
 
@@ -1724,46 +1935,50 @@ namespace WOPHRMSystem.Controllers
 
             // Load data
             var data = new ReportServices().GetAllDataEntryDetailsPendingAsatDate(model.FromDate.Value.ToString("yyyy/MM/dd"), model.IsPartner);
-            ReportDataSource reportDataSource = new ReportDataSource("DataSet1", data);
-            localReport.DataSources.Add(reportDataSource);
+            if (data.Count > 0)
+            {
+                ReportDataSource reportDataSource = new ReportDataSource("DataSet1", data);
+                localReport.DataSources.Add(reportDataSource);
 
-            localReport.SetParameters(new ReportParameter("PrintDate", (new CommonResources().LocalDatetime().Date).ToString("yyyy-MMM-dd")));
-            localReport.SetParameters(new ReportParameter("FromDate", (model.FromDate.Value.ToString("yyyy-MMM-dd"))));
-            localReport.SetParameters(new ReportParameter("IsPartnerOrManager", model.IsPartner == true ? "Partners Wise" : "Manager Wise"));
-            //localReport.SetParameters(new ReportParameter("ToJobNo", Convert.ToString(data.Last().JobCode)));
-            //localReport.SetParameters(new ReportParameter("FromJobNo", Convert.ToString(data.First().JobCode)));
+                localReport.SetParameters(new ReportParameter("PrintDate", (new CommonResources().LocalDatetime().Date).ToString("yyyy-MMM-dd")));
+                localReport.SetParameters(new ReportParameter("FromDate", (model.FromDate.Value.ToString("yyyy-MMM-dd"))));
+                localReport.SetParameters(new ReportParameter("IsPartnerOrManager", model.IsPartner == true ? "Partners Wise" : "Manager Wise"));
+                //localReport.SetParameters(new ReportParameter("ToJobNo", Convert.ToString(data.Last().JobCode)));
+                //localReport.SetParameters(new ReportParameter("FromJobNo", Convert.ToString(data.First().JobCode)));
 
 
-            // Render report
-            string reportType = "PDF";
-            string mimeType;
-            string encoding;
-            string fileNameExtension = "sddssdsdsddsdsd";
+                // Render report
+                string reportType = "PDF";
+                string mimeType;
+                string encoding;
+                string fileNameExtension = "sddssdsdsddsdsd";
 
-            string deviceInfo = "<DeviceInfo>" +
-                "  <OutputFormat>PDF</OutputFormat>" +
-                "  <PageWidth>15in</PageWidth>" +
-                "  <PageHeight>8.5in</PageHeight>" +
-                "  <MarginTop>0.3in</MarginTop>" +
-                "  <MarginLeft>0.5in</MarginLeft>" +
-                "  <MarginRight>0.3in</MarginRight>" +
-                "  <MarginBottom>0.3in</MarginBottom>" +
-                "</DeviceInfo>";
+                string deviceInfo = "<DeviceInfo>" +
+                    "  <OutputFormat>PDF</OutputFormat>" +
+                    "  <PageWidth>15in</PageWidth>" +
+                    "  <PageHeight>8.5in</PageHeight>" +
+                    "  <MarginTop>0.3in</MarginTop>" +
+                    "  <MarginLeft>0.5in</MarginLeft>" +
+                    "  <MarginRight>0.3in</MarginRight>" +
+                    "  <MarginBottom>0.3in</MarginBottom>" +
+                    "</DeviceInfo>";
 
-            Warning[] warnings;
-            string[] streams;
-            byte[] renderedBytes;
+                Warning[] warnings;
+                string[] streams;
+                byte[] renderedBytes;
 
-            renderedBytes = localReport.Render(
-                reportType,
-                deviceInfo,
-                out mimeType,
-                out encoding,
-                out fileNameExtension,
-                out streams,
-                out warnings);
+                renderedBytes = localReport.Render(
+                    reportType,
+                    deviceInfo,
+                    out mimeType,
+                    out encoding,
+                    out fileNameExtension,
+                    out streams,
+                    out warnings);
 
-            return File(renderedBytes, mimeType);
+                return File(renderedBytes, mimeType);
+            }
+            return RedirectToAction("DefaultResult");
         }
         #endregion
 
@@ -1793,47 +2008,51 @@ namespace WOPHRMSystem.Controllers
 
             // Load data
             var data = new ReportServices().GetAllDataEntryDetails(model.FromDate.Value.ToString("yyyy/MM/dd"), model.ToDate.Value.ToString("yyyy/MM/dd"), model.IsPartner);
-            ReportDataSource reportDataSource = new ReportDataSource("DataSet1", data);
-            localReport.DataSources.Add(reportDataSource);
+            if (data.Count > 0)
+            {
+                ReportDataSource reportDataSource = new ReportDataSource("DataSet1", data);
+                localReport.DataSources.Add(reportDataSource);
 
-            localReport.SetParameters(new ReportParameter("PrintDate", (new CommonResources().LocalDatetime().Date).ToString("yyyy-MMM-dd")));
-            localReport.SetParameters(new ReportParameter("FromDate", (model.FromDate.Value.ToString("yyyy-MMM-dd"))));
-            localReport.SetParameters(new ReportParameter("ToDate", (model.ToDate.Value.ToString("yyyy-MMM-dd"))));
-            localReport.SetParameters(new ReportParameter("IsPartnerOrManager", model.IsPartner == true ? "Partners Wise" : "Manager Wise"));
-            //localReport.SetParameters(new ReportParameter("ToJobNo", Convert.ToString(data.Last().JobCode)));
-            //localReport.SetParameters(new ReportParameter("FromJobNo", Convert.ToString(data.First().JobCode)));
+                localReport.SetParameters(new ReportParameter("PrintDate", (new CommonResources().LocalDatetime().Date).ToString("yyyy-MMM-dd")));
+                localReport.SetParameters(new ReportParameter("FromDate", (model.FromDate.Value.ToString("yyyy-MMM-dd"))));
+                localReport.SetParameters(new ReportParameter("ToDate", (model.ToDate.Value.ToString("yyyy-MMM-dd"))));
+                localReport.SetParameters(new ReportParameter("IsPartnerOrManager", model.IsPartner == true ? "Partners Wise" : "Manager Wise"));
+                //localReport.SetParameters(new ReportParameter("ToJobNo", Convert.ToString(data.Last().JobCode)));
+                //localReport.SetParameters(new ReportParameter("FromJobNo", Convert.ToString(data.First().JobCode)));
 
 
-            // Render report
-            string reportType = "PDF";
-            string mimeType;
-            string encoding;
-            string fileNameExtension = "sddssdsdsddsdsd";
+                // Render report
+                string reportType = "PDF";
+                string mimeType;
+                string encoding;
+                string fileNameExtension = "sddssdsdsddsdsd";
 
-            string deviceInfo = "<DeviceInfo>" +
-                "  <OutputFormat>PDF</OutputFormat>" +
-                "  <PageWidth>15in</PageWidth>" +
-                "  <PageHeight>8.5in</PageHeight>" +
-                "  <MarginTop>0.3in</MarginTop>" +
-                "  <MarginLeft>0.5in</MarginLeft>" +
-                "  <MarginRight>0.3in</MarginRight>" +
-                "  <MarginBottom>0.3in</MarginBottom>" +
-                "</DeviceInfo>";
+                string deviceInfo = "<DeviceInfo>" +
+                    "  <OutputFormat>PDF</OutputFormat>" +
+                    "  <PageWidth>15in</PageWidth>" +
+                    "  <PageHeight>8.5in</PageHeight>" +
+                    "  <MarginTop>0.3in</MarginTop>" +
+                    "  <MarginLeft>0.5in</MarginLeft>" +
+                    "  <MarginRight>0.3in</MarginRight>" +
+                    "  <MarginBottom>0.3in</MarginBottom>" +
+                    "</DeviceInfo>";
 
-            Warning[] warnings;
-            string[] streams;
-            byte[] renderedBytes;
+                Warning[] warnings;
+                string[] streams;
+                byte[] renderedBytes;
 
-            renderedBytes = localReport.Render(
-                reportType,
-                deviceInfo,
-                out mimeType,
-                out encoding,
-                out fileNameExtension,
-                out streams,
-                out warnings);
+                renderedBytes = localReport.Render(
+                    reportType,
+                    deviceInfo,
+                    out mimeType,
+                    out encoding,
+                    out fileNameExtension,
+                    out streams,
+                    out warnings);
 
-            return File(renderedBytes, mimeType);
+                return File(renderedBytes, mimeType);
+            }
+            return RedirectToAction("DefaultResult");
         }
         #endregion
 
@@ -2040,7 +2259,7 @@ namespace WOPHRMSystem.Controllers
         #endregion
 
 
-        #region Employee Daily Job Details
+        #region Employee Daily Job Details (M)
         public ActionResult EmployeeDailyJobDetailsModel()
         {
             var model = new LaberUtilizationStatementWorkTypeAndGroupReportModel
@@ -2070,54 +2289,68 @@ namespace WOPHRMSystem.Controllers
 
             // Load data
             var data = new ReportServices().GetAllSummaryEmployeeWiseSelectdDate(model.FromDate.Value.ToString("yyyy/MM/dd"), model.ToDate.Value.ToString("yyyy/MM/dd"), model.FkFromEmployeeId, model.FkToEmployeeId);
-            ReportDataSource reportDataSource = new ReportDataSource("DataSet1", data);
-            localReport.DataSources.Add(reportDataSource);
+            if (data.Count > 0)
+            {
+                ReportDataSource reportDataSource = new ReportDataSource("DataSet1", data);
+                localReport.DataSources.Add(reportDataSource);
 
-            localReport.SetParameters(new ReportParameter("PrintDate", (new CommonResources().LocalDatetime().Date).ToString("yyyy-MMM-dd")));
-            localReport.SetParameters(new ReportParameter("FromDate", (model.FromDate.Value.ToString("yyyy-MMM-dd"))));
-            localReport.SetParameters(new ReportParameter("ToDate", (model.ToDate.Value.ToString("yyyy-MMM-dd"))));
-            localReport.SetParameters(new ReportParameter("ToJobNo", Convert.ToString(data.Last().JobCode)));
-            localReport.SetParameters(new ReportParameter("FromJobNo", Convert.ToString(data.First().JobCode)));
+                localReport.SetParameters(new ReportParameter("PrintDate", (new CommonResources().LocalDatetime().Date).ToString("yyyy-MMM-dd")));
+                localReport.SetParameters(new ReportParameter("FromDate", (model.FromDate.Value.ToString("yyyy-MMM-dd"))));
+                localReport.SetParameters(new ReportParameter("ToDate", (model.ToDate.Value.ToString("yyyy-MMM-dd"))));
+                localReport.SetParameters(new ReportParameter("ToEmployee", Convert.ToString(data.Last().EmployeeName)));
+                localReport.SetParameters(new ReportParameter("FromEmployee", Convert.ToString(data.First().EmployeeName)));
 
 
-            // Render report
-            string reportType = "PDF";
-            string mimeType;
-            string encoding;
-            string fileNameExtension = "sddssdsdsddsdsd";
+                // Render report
+                string reportType = "PDF";
+                string mimeType;
+                string encoding;
+                string fileNameExtension = "sddssdsdsddsdsd";
 
-            string deviceInfo = "<DeviceInfo>" +
-                "  <OutputFormat>PDF</OutputFormat>" +
-                "  <PageWidth>15in</PageWidth>" +
-                "  <PageHeight>8.5in</PageHeight>" +
-                "  <MarginTop>0.3in</MarginTop>" +
-                "  <MarginLeft>0.5in</MarginLeft>" +
-                "  <MarginRight>0.3in</MarginRight>" +
-                "  <MarginBottom>0.3in</MarginBottom>" +
-                "</DeviceInfo>";
+                string deviceInfo = "<DeviceInfo>" +
+                    "  <OutputFormat>PDF</OutputFormat>" +
+                    "  <PageWidth>15in</PageWidth>" +
+                    "  <PageHeight>8.5in</PageHeight>" +
+                    "  <MarginTop>0.3in</MarginTop>" +
+                    "  <MarginLeft>0.5in</MarginLeft>" +
+                    "  <MarginRight>0.3in</MarginRight>" +
+                    "  <MarginBottom>0.3in</MarginBottom>" +
+                    "</DeviceInfo>";
 
-            Warning[] warnings;
-            string[] streams;
-            byte[] renderedBytes;
+                Warning[] warnings;
+                string[] streams;
+                byte[] renderedBytes;
 
-            renderedBytes = localReport.Render(
-                reportType,
-                deviceInfo,
-                out mimeType,
-                out encoding,
-                out fileNameExtension,
-                out streams,
-                out warnings);
+                renderedBytes = localReport.Render(
+                    reportType,
+                    deviceInfo,
+                    out mimeType,
+                    out encoding,
+                    out fileNameExtension,
+                    out streams,
+                    out warnings);
 
-            return File(renderedBytes, mimeType);
+                return File(renderedBytes, mimeType);
+            }
+            return RedirectToAction("DefaultResult");
         }
-        #endregion
 
-        #region Job Master
-        public ActionResult PrintJobMaster()
+
+        //Current User Manager Wise (MM)
+        public ActionResult EmployeeDailyJobDetailsCurrentUSerManagerWiseModel()
+        {
+            return View();
+        }
+
+        [HttpGet]
+        public ActionResult PrintEmployeeDailyJobDetailsCurrentUSerManagerWise(LaberUtilizationStatementWorkTypeAndGroupReportModel model)
         {
             LocalReport localReport = new LocalReport();
-            string path = Server.MapPath("~/Reports/ReportJobMaster.rdlc");
+            string path = "";
+
+            path = Server.MapPath("~/Reports/ReportLaberDailyDetailsCurrentUSerManagerWise.rdlc");
+
+
             if (System.IO.File.Exists(path))
             {
                 localReport.ReportPath = path;
@@ -2128,50 +2361,482 @@ namespace WOPHRMSystem.Controllers
             }
 
             // Load data
-            var data = new ReportServices().GetAllJobMaster();
-            ReportDataSource reportDataSource = new ReportDataSource("DataSet1", data);
-            localReport.DataSources.Add(reportDataSource);
+            var data = new ReportServices().GetAllSummaryEmployeeWiseSelectdDateCurrentUSerWise(model.FromDate.Value.ToString("yyyy/MM/dd"), model.ToDate.Value.ToString("yyyy/MM/dd"), 0);
+            if (data.Count > 0)
+            {
+                ReportDataSource reportDataSource = new ReportDataSource("DataSet1", data);
+                localReport.DataSources.Add(reportDataSource);
 
-            ReportParameter[] parameters = new ReportParameter[1];
-            parameters[0] = new ReportParameter("PrintDate", (new CommonResources().LocalDatetime().Date).ToString("yyyy-MMM-dd")); // Name of the parameter in the RDLC file
-            localReport.SetParameters(parameters);
+                localReport.SetParameters(new ReportParameter("PrintDate", (new CommonResources().LocalDatetime().Date).ToString("yyyy-MMM-dd")));
+                localReport.SetParameters(new ReportParameter("FromDate", (model.FromDate.Value.ToString("yyyy-MMM-dd"))));
+                localReport.SetParameters(new ReportParameter("ToDate", (model.ToDate.Value.ToString("yyyy-MMM-dd"))));
 
-            // Render report
-            string reportType = "PDF";
-            string mimeType;
-            string encoding;
-            string fileNameExtension = "sddssdsdsddsdsd";
+                // Render report
+                string reportType = "PDF";
+                string mimeType;
+                string encoding;
+                string fileNameExtension = "sddssdsdsddsdsd";
 
-            string deviceInfo = "<DeviceInfo>" +
-                "  <OutputFormat>PDF</OutputFormat>" +
-                "  <PageWidth>11in</PageWidth>" +
-                "  <PageHeight>8.5in</PageHeight>" +
-                "  <MarginTop>0.5in</MarginTop>" +
-                "  <MarginLeft>0.5in</MarginLeft>" +
-                "  <MarginRight>0.5in</MarginRight>" +
-                "  <MarginBottom>0.5in</MarginBottom>" +
-                "</DeviceInfo>";
+                string deviceInfo = "<DeviceInfo>" +
+                    "  <OutputFormat>PDF</OutputFormat>" +
+                    "  <PageWidth>15in</PageWidth>" +
+                    "  <PageHeight>8.5in</PageHeight>" +
+                    "  <MarginTop>0.3in</MarginTop>" +
+                    "  <MarginLeft>0.5in</MarginLeft>" +
+                    "  <MarginRight>0.3in</MarginRight>" +
+                    "  <MarginBottom>0.3in</MarginBottom>" +
+                    "</DeviceInfo>";
 
-            Warning[] warnings;
-            string[] streams;
-            byte[] renderedBytes;
+                Warning[] warnings;
+                string[] streams;
+                byte[] renderedBytes;
 
-            renderedBytes = localReport.Render(
-                reportType,
-                deviceInfo,
-                out mimeType,
-                out encoding,
-                out fileNameExtension,
-                out streams,
-                out warnings);
+                renderedBytes = localReport.Render(
+                    reportType,
+                    deviceInfo,
+                    out mimeType,
+                    out encoding,
+                    out fileNameExtension,
+                    out streams,
+                    out warnings);
 
-            return File(renderedBytes, mimeType);
+                return File(renderedBytes, mimeType);
+            }
+            return RedirectToAction("DefaultResult");
+        }
+
+
+        //Current User Partner Wise (MP)
+        public ActionResult EmployeeDailyJobDetailsCurrentUSerPartnerWiseModel()
+        {
+            return View();
+        }
+
+        [HttpGet]
+        public ActionResult PrintEmployeeDailyJobDetailsCurrentUSerPartnerWise(LaberUtilizationStatementWorkTypeAndGroupReportModel model)
+        {
+            LocalReport localReport = new LocalReport();
+            string path = "";
+
+            path = Server.MapPath("~/Reports/ReportLaberDailyDetailsCurrentUSerPartnerWise.rdlc");
+
+
+            if (System.IO.File.Exists(path))
+            {
+                localReport.ReportPath = path;
+            }
+            else
+            {
+                return View("Error");
+            }
+
+            // Load data
+            var data = new ReportServices().GetAllSummaryEmployeeWiseSelectdDateCurrentUSerWise(model.FromDate.Value.ToString("yyyy/MM/dd"), model.ToDate.Value.ToString("yyyy/MM/dd"), 0);
+            if (data.Count > 0)
+            {
+                ReportDataSource reportDataSource = new ReportDataSource("DataSet1", data);
+                localReport.DataSources.Add(reportDataSource);
+
+                localReport.SetParameters(new ReportParameter("PrintDate", (new CommonResources().LocalDatetime().Date).ToString("yyyy-MMM-dd")));
+                localReport.SetParameters(new ReportParameter("FromDate", (model.FromDate.Value.ToString("yyyy-MMM-dd"))));
+                localReport.SetParameters(new ReportParameter("ToDate", (model.ToDate.Value.ToString("yyyy-MMM-dd"))));
+
+                // Render report
+                string reportType = "PDF";
+                string mimeType;
+                string encoding;
+                string fileNameExtension = "sddssdsdsddsdsd";
+
+                string deviceInfo = "<DeviceInfo>" +
+                    "  <OutputFormat>PDF</OutputFormat>" +
+                    "  <PageWidth>15in</PageWidth>" +
+                    "  <PageHeight>8.5in</PageHeight>" +
+                    "  <MarginTop>0.3in</MarginTop>" +
+                    "  <MarginLeft>0.5in</MarginLeft>" +
+                    "  <MarginRight>0.3in</MarginRight>" +
+                    "  <MarginBottom>0.3in</MarginBottom>" +
+                    "</DeviceInfo>";
+
+                Warning[] warnings;
+                string[] streams;
+                byte[] renderedBytes;
+
+                renderedBytes = localReport.Render(
+                    reportType,
+                    deviceInfo,
+                    out mimeType,
+                    out encoding,
+                    out fileNameExtension,
+                    out streams,
+                    out warnings);
+
+                return File(renderedBytes, mimeType);
+            }
+            return RedirectToAction("DefaultResult");
+        }
+
+
+        #endregion
+
+        #region Job Master 
+
+        public ActionResult PrintJobMasterManagerWise()
+        {
+            LocalReport localReport = new LocalReport();
+            string path = Server.MapPath("~/Reports/ReportJobMasterManagerWise.rdlc");
+            if (System.IO.File.Exists(path))
+            {
+                localReport.ReportPath = path;
+            }
+            else
+            {
+                return View("Error");
+            }
+
+            // Load data
+            var data = new ReportServices().GetAllJobMasterManagerWise(0); // need to apply Current User Id 
+            if (data.Count > 0)
+            {
+                ReportDataSource reportDataSource = new ReportDataSource("DataSet1", data);
+                localReport.DataSources.Add(reportDataSource);
+
+                ReportParameter[] parameters = new ReportParameter[1];
+                parameters[0] = new ReportParameter("PrintDate", (new CommonResources().LocalDatetime().Date).ToString("yyyy-MMM-dd")); // Name of the parameter in the RDLC file
+                localReport.SetParameters(parameters);
+
+                // Render report
+                string reportType = "PDF";
+                string mimeType;
+                string encoding;
+                string fileNameExtension = "sddssdsdsddsdsd";
+
+                string deviceInfo = "<DeviceInfo>" +
+                    "  <OutputFormat>PDF</OutputFormat>" +
+                    "  <PageWidth>11in</PageWidth>" +
+                    "  <PageHeight>8.5in</PageHeight>" +
+                    "  <MarginTop>0.5in</MarginTop>" +
+                    "  <MarginLeft>0.5in</MarginLeft>" +
+                    "  <MarginRight>0.5in</MarginRight>" +
+                    "  <MarginBottom>0.5in</MarginBottom>" +
+                    "</DeviceInfo>";
+
+                Warning[] warnings;
+                string[] streams;
+                byte[] renderedBytes;
+
+                renderedBytes = localReport.Render(
+                    reportType,
+                    deviceInfo,
+                    out mimeType,
+                    out encoding,
+                    out fileNameExtension,
+                    out streams,
+                    out warnings);
+
+                return File(renderedBytes, mimeType);
+            }
+            return RedirectToAction("DefaultResult");
+        }
+
+        public ActionResult PrintJobMasterPartnerWise()
+        {
+            LocalReport localReport = new LocalReport();
+            string path = Server.MapPath("~/Reports/ReportJobMasterPartnerWise.rdlc");
+            if (System.IO.File.Exists(path))
+            {
+                localReport.ReportPath = path;
+            }
+            else
+            {
+                return View("Error");
+            }
+
+            // Load data
+            var data = new ReportServices().GetAllJobMasterPartnerWise(0); // need to apply Current User Id 
+            if (data.Count > 0)
+            {
+                ReportDataSource reportDataSource = new ReportDataSource("DataSet1", data);
+                localReport.DataSources.Add(reportDataSource);
+
+                ReportParameter[] parameters = new ReportParameter[1];
+                parameters[0] = new ReportParameter("PrintDate", (new CommonResources().LocalDatetime().Date).ToString("yyyy-MMM-dd")); // Name of the parameter in the RDLC file
+                localReport.SetParameters(parameters);
+
+                // Render report
+                string reportType = "PDF";
+                string mimeType;
+                string encoding;
+                string fileNameExtension = "sddssdsdsddsdsd";
+
+                string deviceInfo = "<DeviceInfo>" +
+                    "  <OutputFormat>PDF</OutputFormat>" +
+                    "  <PageWidth>11in</PageWidth>" +
+                    "  <PageHeight>8.5in</PageHeight>" +
+                    "  <MarginTop>0.5in</MarginTop>" +
+                    "  <MarginLeft>0.5in</MarginLeft>" +
+                    "  <MarginRight>0.5in</MarginRight>" +
+                    "  <MarginBottom>0.5in</MarginBottom>" +
+                    "</DeviceInfo>";
+
+                Warning[] warnings;
+                string[] streams;
+                byte[] renderedBytes;
+
+                renderedBytes = localReport.Render(
+                    reportType,
+                    deviceInfo,
+                    out mimeType,
+                    out encoding,
+                    out fileNameExtension,
+                    out streams,
+                    out warnings);
+
+                return File(renderedBytes, mimeType);
+            }
+            return RedirectToAction("DefaultResult");
         }
 
 
         #endregion
 
 
-       
+
+        #region (HM) Costing Detail Report Manager Wise
+
+        public ActionResult JobWiseAssignEmployeesAndDetailCostManagerWiseModel()
+        {
+            return View();
+        }
+
+        [HttpGet]
+        public ActionResult JobWiseAssignEmployeesAndDetailCostManagerWise(JObWiseCositingDetailsWithAssignEmployeeModel model)
+        {
+            LocalReport localReport = new LocalReport();
+            string path = Server.MapPath("~/Reports/ReportJObWiseCositingDetailsWithAssignEmployeeManagerWise.rdlc");
+            if (System.IO.File.Exists(path))
+            {
+                localReport.ReportPath = path;
+            }
+            else
+            {
+                return View("Error");
+            }
+
+            // Load data
+            var data = new ReportServices().GetJObWiseCositingDetailsWithAssignEmployeeCurrentUSerWise(model.FromDate.Value.ToString("yyyy/MM/dd"), 5); // need to set current User Id
+
+            if (data.Count > 0)
+            {
+
+                ReportDataSource reportDataSource = new ReportDataSource("DataSet1", data);
+                localReport.DataSources.Add(reportDataSource);
+
+                var firstItem = data.FirstOrDefault();
+                DateTime? completedDate = firstItem?.CompletedDate;
+
+                localReport.SetParameters(new ReportParameter("CompletedDate",
+                    completedDate.HasValue
+                    ? completedDate.Value.ToString("yyyy-MMM-dd")
+                    : null));
+
+                localReport.SetParameters(new ReportParameter("PrintDate", (new CommonResources().LocalDatetime().Date).ToString("yyyy-MMM-dd")));
+
+                localReport.SetParameters(new ReportParameter("ProjectStatus", (data.FirstOrDefault().IsCompleted == false ? "Pending " : "Completed")));
+                localReport.SetParameters(new ReportParameter("CompanyName", data.FirstOrDefault().CustomerCode + " " + data.FirstOrDefault().CustomerName));
+                localReport.SetParameters(new ReportParameter("commencedDate", (data.FirstOrDefault().StartDate.Value.ToString("yyyy-MMM-dd"))));
+                localReport.SetParameters(new ReportParameter("JObNum", data.FirstOrDefault().JobCode));
+
+
+
+                // Render report
+                string reportType = "PDF";
+                string mimeType;
+                string encoding;
+                string fileNameExtension = "sddssdsdsddsdsd";
+
+                string deviceInfo = "<DeviceInfo>" +
+                    "  <OutputFormat>PDF</OutputFormat>" +
+                    "  <PageWidth>11in</PageWidth>" +
+                    "  <PageHeight>8.5in</PageHeight>" +
+                    "  <MarginTop>0.3in</MarginTop>" +
+                    "  <MarginLeft>0.5in</MarginLeft>" +
+                    "  <MarginRight>0.3in</MarginRight>" +
+                    "  <MarginBottom>0.3in</MarginBottom>" +
+                    "</DeviceInfo>";
+
+                Warning[] warnings;
+                string[] streams;
+                byte[] renderedBytes;
+
+                renderedBytes = localReport.Render(
+                    reportType,
+                    deviceInfo,
+                    out mimeType,
+                    out encoding,
+                    out fileNameExtension,
+                    out streams,
+                    out warnings);
+
+                return File(renderedBytes, mimeType);
+            }
+            return RedirectToAction("DefaultResult");
+        }
+
+        #endregion
+
+
+        #region (HP) Costing Detail Report Partner Wise
+
+        public ActionResult JobWiseAssignEmployeesAndDetailCostPartnerWiseModel()
+        {
+            return View();
+        }
+
+        [HttpGet]
+        public ActionResult JobWiseAssignEmployeesAndDetailCostPartnerWise(JObWiseCositingDetailsWithAssignEmployeeModel model)
+        {
+            LocalReport localReport = new LocalReport();
+            string path = Server.MapPath("~/Reports/ReportJObWiseCositingDetailsWithAssignEmployeePartnerWise.rdlc");
+            if (System.IO.File.Exists(path))
+            {
+                localReport.ReportPath = path;
+            }
+            else
+            {
+                return View("Error");
+            }
+
+            // Load data
+            var data = new ReportServices().GetJObWiseCositingDetailsWithAssignEmployeeCurrentUSerWise(model.FromDate.Value.ToString("yyyy/MM/dd"), 5); // need to set current User Id
+
+            if (data.Count > 0)
+            {
+
+                ReportDataSource reportDataSource = new ReportDataSource("DataSet1", data);
+                localReport.DataSources.Add(reportDataSource);
+
+                var firstItem = data.FirstOrDefault();
+                DateTime? completedDate = firstItem?.CompletedDate;
+
+                localReport.SetParameters(new ReportParameter("CompletedDate",
+                    completedDate.HasValue
+                    ? completedDate.Value.ToString("yyyy-MMM-dd")
+                    : null));
+
+                localReport.SetParameters(new ReportParameter("PrintDate", (new CommonResources().LocalDatetime().Date).ToString("yyyy-MMM-dd")));
+
+                localReport.SetParameters(new ReportParameter("ProjectStatus", (data.FirstOrDefault().IsCompleted == false ? "Pending " : "Completed")));
+                localReport.SetParameters(new ReportParameter("CompanyName", data.FirstOrDefault().CustomerCode + " " + data.FirstOrDefault().CustomerName));
+                localReport.SetParameters(new ReportParameter("commencedDate", (data.FirstOrDefault().StartDate.Value.ToString("yyyy-MMM-dd"))));
+                localReport.SetParameters(new ReportParameter("JObNum", data.FirstOrDefault().JobCode));
+
+
+
+                // Render report
+                string reportType = "PDF";
+                string mimeType;
+                string encoding;
+                string fileNameExtension = "sddssdsdsddsdsd";
+
+                string deviceInfo = "<DeviceInfo>" +
+                    "  <OutputFormat>PDF</OutputFormat>" +
+                    "  <PageWidth>11in</PageWidth>" +
+                    "  <PageHeight>8.5in</PageHeight>" +
+                    "  <MarginTop>0.3in</MarginTop>" +
+                    "  <MarginLeft>0.5in</MarginLeft>" +
+                    "  <MarginRight>0.3in</MarginRight>" +
+                    "  <MarginBottom>0.3in</MarginBottom>" +
+                    "</DeviceInfo>";
+
+                Warning[] warnings;
+                string[] streams;
+                byte[] renderedBytes;
+
+                renderedBytes = localReport.Render(
+                    reportType,
+                    deviceInfo,
+                    out mimeType,
+                    out encoding,
+                    out fileNameExtension,
+                    out streams,
+                    out warnings);
+
+                return File(renderedBytes, mimeType);
+            }
+            return RedirectToAction("DefaultResult");
+        }
+
+        #endregion
+
+
+        #region Job Cost Calculator Partner Wise 
+
+        public ActionResult JObCalculatorCostReportPartnerModel()
+        {
+            return View();
+        }
+
+        public ActionResult JObCalculatorCostReportPartnerView()
+        {
+            return View();
+        }
+
+        [HttpGet]
+        public ActionResult JObCalculatorCostReportPartnerViewPDF(JobMasterForCalculatorJobCostModel jobMasterForReportModel)
+        {
+            var dt = _ClientService.GetAllJobCalculatorJobCostPartnerWise(jobMasterForReportModel.StartDate.Value.ToString("yyyy/MM/dd"), jobMasterForReportModel.DueDate.Value.ToString("yyyy/MM/dd"), 5, jobMasterForReportModel.IsReActivate);
+
+            ViewBag.FromDate = jobMasterForReportModel.StartDate.Value.ToShortDateString();
+            ViewBag.ToDate = jobMasterForReportModel.DueDate.Value.ToShortDateString();
+
+            return new ViewAsPdf("JObCalculatorCostReportPartnerView", dt)
+            {
+                CustomSwitches = "--orientation Landscape", // Note: "Landscape" should be uppercase
+                PageSize = Rotativa.Options.Size.A4,
+                PageMargins = new Rotativa.Options.Margins(10, 10, 10, 10)
+            };
+        }
+
+
+        #endregion
+
+
+        #region Job Cost Calculator Manager Wise 
+
+        public ActionResult JObCalculatorCostReportManagerModel()
+        {
+            return View();
+        }
+
+        public ActionResult JObCalculatorCostReportManagerView()
+        {
+            return View();
+        }
+
+        [HttpGet]
+        public ActionResult JObCalculatorCostReportManagerViewPDF(JobMasterForCalculatorJobCostModel jobMasterForReportModel)
+        {
+            var dt = _ClientService.GetAllJobCalculatorJobCostPartnerWise(jobMasterForReportModel.StartDate.Value.ToString("yyyy/MM/dd"), jobMasterForReportModel.DueDate.Value.ToString("yyyy/MM/dd"), 5, jobMasterForReportModel.IsReActivate);
+
+            ViewBag.FromDate = jobMasterForReportModel.StartDate.Value.ToShortDateString();
+            ViewBag.ToDate = jobMasterForReportModel.DueDate.Value.ToShortDateString();
+
+            return new ViewAsPdf("JObCalculatorCostReportManagerView", dt)
+            {
+                CustomSwitches = "--orientation Landscape", // Note: "Landscape" should be uppercase
+                PageSize = Rotativa.Options.Size.A4,
+                PageMargins = new Rotativa.Options.Margins(10, 10, 10, 10)
+            };
+        }
+
+
+        #endregion
+
+
+        [HttpGet]
+        public ActionResult DefaultResult()
+        {
+            return View();
+        }
     }
 }

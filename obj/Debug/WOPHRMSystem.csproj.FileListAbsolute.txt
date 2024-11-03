@@ -396,4 +396,10 @@ E:\Devop Project\SWIS Software\Freelancer Project\Second Project\WOPHRMSystem\bi
 E:\Devop Project\SWIS Software\Freelancer Project\Second Project\WOPHRMSystem\bin\Reports\ReportStaffUtilizationSelectedJobWiseJobs.rdlc
 E:\Devop Project\SWIS Software\Freelancer Project\Second Project\WOPHRMSystem\bin\Reports\ReportStaffUtilizationSelectedJobWiseEmployees.rdlc
 E:\Devop Project\SWIS Software\Freelancer Project\Second Project\WOPHRMSystem\bin\Reports\ReportLaberDailyDetails.rdlc
-E:\Devop Project\SWIS Software\Freelancer Project\Second Project\WOPHRMSystem\bin\Reports\ReportJobMaster.rdlc
+E:\Devop Project\SWIS Software\Freelancer Project\Second Project\WOPHRMSystem\bin\Reports\ReportJobMasterPartnerWise.rdlc
+E:\Devop Project\SWIS Software\Freelancer Project\Second Project\WOPHRMSystem\bin\Reports\ReportJobMasterManagerWise.rdlc
+E:\Devop Project\SWIS Software\Freelancer Project\Second Project\WOPHRMSystem\bin\Reports\ReportLaberDailyDetailsCurrentUSerManagerWise.rdlc
+E:\Devop Project\SWIS Software\Freelancer Project\Second Project\WOPHRMSystem\bin\Reports\ReportJObWiseCositingDetailsWithAssignEmployeeManagerWise.rdlc
+E:\Devop Project\SWIS Software\Freelancer Project\Second Project\WOPHRMSystem\bin\Reports\ReportJObWiseCositingDetailsWithAssignEmployeePartnerWise.rdlc
+E:\Devop Project\SWIS Software\Freelancer Project\Second Project\WOPHRMSystem\bin\Reports\ReportDataEntrySheetPartnerWise.rdlc
+E:\Devop Project\SWIS Software\Freelancer Project\Second Project\WOPHRMSystem\bin\Reports\ReportDataEntrySheetManagerWise.rdlc
